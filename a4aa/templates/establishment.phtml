@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Get Test</title>
+        <title>A4ASpokane</title>
 
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css' />
         <!-- Bootstrap CSS -->
@@ -28,11 +28,6 @@
     <body>
         <div class="header">
             <h1>Access 4 All Spokane</h1>
-<!--            <div class="subtitle">-->
-<!--                <div class="sub-text">-->
-<!--                    Celebrating and Encouraging Accessible and Disability-Friendly Places, Services and Events across Spokane County-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
         <div class="page">
             <div class="section">
@@ -45,10 +40,11 @@
                     <?php
                         foreach ($data as $key) {
                             echo "<div class=\"row\">";
+                            echo "<div class=\"box col-lg-6\">";
                             foreach ($key as $value => $item) {
-                                    echo "<div class=\"col-sm\">$item</div>";
+                                    echo "<div class=\"row\">$item</div>";
                             }
-                            echo "</div>";
+                            echo "</div></div>";
                         }
                     ?>
                 <?php else: ?>
