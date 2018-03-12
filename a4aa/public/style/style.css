@@ -80,12 +80,12 @@ h3 {
 }
 
 .box {
-    margin: 0;
+    margin: 2em;
     padding: 1em;
     min-height: 10em;
     background-color: #3d83b2;
     color: #ffffff;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .row-padding {

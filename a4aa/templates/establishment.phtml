@@ -38,9 +38,10 @@
                         </div>
                     </div>
                     <?php
+                        echo "<br>$data <br>";
                         foreach ($data as $key) {
                             echo "<div class=\"row\">";
-                            echo "<div class=\"box col-lg-6\">";
+                            echo "<div class=\"box col-lg-5\">";
                             foreach ($key as $value => $item) {
                                     echo "<div class=\"row row-padding\">$item</div>";
                             }
