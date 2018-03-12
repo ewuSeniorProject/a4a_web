@@ -17,12 +17,12 @@ return [
         ],
 
         // Database connection settings
-//        'db' => [
-//            'host' => '127.0.0.1',
-//            'dbname' => 'mizesolu_a4aa',
-//            'user' => 'mizesolu_a4aaB',
-//            'pass' => 'QxUP=r@JE10P'
-//        ],
+        'db' => [
+            'host' => '127.0.0.1',
+            'dbname' => 'mizesolu_a4aa',
+            'user' => 'mizesolu_a4aaB',
+            'pass' => 'QxUP=r@JE10P'
+        ],
 
 
     ],
