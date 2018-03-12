@@ -35,8 +35,9 @@ h3 {
     margin: 0;
     position: relative;
     background-color: #4482b6;
-    border-bottom: 1px solid #4371a4;
-    box-shadow: 1px 1px 2px 2px #888888;
+    /*border-bottom: 1px solid #4371a4;*/
+    /*box-shadow: 1px 1px 2px 2px #888888;*/
+    box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-align: center;
     color: #eeeeee;
@@ -76,4 +77,13 @@ h3 {
 .data-table {
     margin-left: 1em;
     padding: 1em;
+}
+
+.box {
+    margin: 0;
+    padding: 1em;
+    min-height: 10em;
+    background-color: #3d83b2;
+    color: #ffffff;
+    border-radius: 3px;
 }
