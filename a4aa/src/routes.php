@@ -14,11 +14,11 @@ use Slim\Http\Response;
 //});
 
 // get all data
-$app->get('/alldata', function (Request $request, Response $response, array $args) {
+$app->get('/establishment', function (Request $request, Response $response, array $args) {
     $sth = $this->db->prepare("SELECT * FROM Establishment");
     $sth->execute();
     $data = $sth->fetchAll();
-    return $this->renderer->render($response, 'alldata.phtml', $data);
+    return $this->renderer->render($response, 'establishment.phtml', $data);
 });
 
 
