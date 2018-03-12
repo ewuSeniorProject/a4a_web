@@ -87,3 +87,8 @@ h3 {
     color: #ffffff;
     border-radius: 3px;
 }
+
+.row-padding {
+    margin: 0;
+    padding: .2em 1em;
+}
