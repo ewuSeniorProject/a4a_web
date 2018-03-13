@@ -36,7 +36,6 @@ h4 {
     font-family: 'Lato', sans-serif;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 0;
 }
 
 .header {
@@ -99,4 +98,9 @@ h4 {
 .box-padding {
     margin: 0;
     padding: .2em 1em;
+}
+
+.white-link {
+    color: #ffffff;
+    font-style: normal;
 }
