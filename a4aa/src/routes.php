@@ -13,6 +13,13 @@ use Slim\Http\Response;
 //    return $this->renderer->render($response, 'index.phtml', $args);
 //});
 
+// home page
+$app->get('/', function (Request $request, Response $response, array $args) {
+    $url = 'http://www.mizesolutions.com/a4a_web/a4aa/public/estab.html';
+    return $response->withRedirect($url, 301);
+});
+
+
 // get all data
 $app->get('/establishment', function (Request $request, Response $response, array $args) {
     $sth = $this->db->prepare("SELECT * FROM Establishment");
