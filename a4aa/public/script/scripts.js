@@ -14,6 +14,7 @@ function EstablishmentModel(data) {
     self.website = data.website;
     self.street = data.street;
     self.city = data.city;
+    self.state = data.state;
     self.zip = data.zip;
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
