@@ -104,3 +104,8 @@ h4 {
     color: #ffffff;
     font-style: normal;
 }
+
+.align-right {
+    margin: 0;
+    align-self: end;
+}
