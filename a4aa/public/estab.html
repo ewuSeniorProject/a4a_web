@@ -32,27 +32,26 @@
         <div class="page">
             <div class="section">
                 <div id="establishment-list-wrapper">
-                    <div class="container">
+                    <!--<div class="container">-->
                         <h3> Establishment </h3>
                         <div class="data-table" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
-                    </div>
+                    <!--</div>-->
                 </div>
             </div>
         </div>
 
         <script type="text/html" id="establishment-list-template">
-            <p data-bind="text:name"></p>
-            <!--<div class="row">-->
-                <!--<div class="box col-lg-5">-->
-                    <!--<div class="row row-padding">-->
-                        <!--<h4 data-bind="text:name"></h4>-->
-                        <!--<p data-bind="text:website"></p>-->
-                        <!--<p data-bind="text:phone"></p>-->
-                        <!--<span data-bind="text:street"></span>,&nbsp;<span data-bind="text:city"></span>,&nbsp;<span data-bind="text:state"></span>&nbsp;<span data-bind="text:zip"></span><br>-->
-                        <!--<p data-bind="text:contact_fname"></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="row">
+                <div class="box col-lg-5">
+                    <div class="row row-padding">
+                        <h4 data-bind="text:name"></h4>
+                        <p data-bind="text:website"></p>
+                        <p data-bind="text:phone"></p>
+                        <span data-bind="text:street"></span>,&nbsp;<span data-bind="text:city"></span>,&nbsp;<span data-bind="text:state"></span>&nbsp;<span data-bind="text:zip"></span><br>
+                        <p data-bind="text:contact_fname"></p>
+                    </div>
+                </div>
+            </div>
         </script>
     </body>
 </html>
