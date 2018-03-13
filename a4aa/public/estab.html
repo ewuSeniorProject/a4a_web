@@ -32,9 +32,7 @@
         <div class="page">
             <div class="section">
                 <div id="establishment-list-wrapper">
-                    <!--<div class="container">-->
-                        <div class="data-table" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
-                    <!--</div>-->
+                    <div class="data-table" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
                 </div>
             </div>
         </div>
@@ -44,7 +42,7 @@
                 <div class="box col-lg-5">
                     <div class="box-padding">
                         <h4 data-bind="text:name"></h4><br>
-                        <a data-bind="attr: { href: 'http://' + text:website"><span data-bind="text:website"></span></a><br>
+                        <a data-bind="attr: { href: 'http://' + website, text:website"></a><br>
                         <span data-bind="text:phone"></span><br>
                         <span data-bind="text:street"></span>,&nbsp;<span data-bind="text:city"></span>,&nbsp;<span data-bind="text:state"></span>&nbsp;<span data-bind="text:zip"></span><br>
                         <span data-bind="text:contact_fname"></span><br>
