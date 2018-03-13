@@ -23,7 +23,7 @@ $app->get('/establishment', function (Request $request, Response $response, arra
 
 
 // get establishment data
-$app->get('/estab', function (Request $request, Response $response, array $args) {
+$app->get('/estab', function () {
     $sth = $this->db->prepare("SELECT * FROM Establishment");
     $sth->execute();
     $data = $sth->fetchAll();

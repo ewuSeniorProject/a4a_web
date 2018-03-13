@@ -11,7 +11,7 @@ function EstablishmentModel(data) {
 
     var self = this;
     self.name = data.name;
-    self.date = data.website;
+    self.website = data.website;
     self.street = data.street;
     self.city = data.city;
     self.zip = data.zip;
