@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>A4ASpokane</title>
+
+        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css' />
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+        <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="./style/style.css" rel="stylesheet" type="text/css" />
+
+        <!-- Optional JavaScript -->
+        <script
+                src="https://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
+        <script src="./script/scripts.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Access 4 All Spokane</h1>
+        </div>
+        <div class="page">
+            <div class="section">
+                <div id="establishment-list-wrapper">
+                    <div class="container">
+                        <h3> Establishment </h3>
+                        <div class="data-table" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/html" id="establishment-list-template">
+            <div class="row">
+                <div class="box col-lg-5">
+                    <div class="row row-padding">
+                        <h4 data-bind="text:name"></h4>
+                        <p data-bind="text:website"></p>
+                        <p data-bind="text:phone"></p>
+                        <span data-bind="text:street"></span>,&nbsp;<span data-bind="text:city"></span>,&nbsp;<span data-bind="text:state"></span>&nbsp;<span data-bind="text:zip"></span><br>
+                        <p data-bind="text:contact_fname"></p>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </body>
+</html>
