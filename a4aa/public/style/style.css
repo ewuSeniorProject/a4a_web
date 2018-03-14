@@ -95,7 +95,7 @@ h4 {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: baseline;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .box {
