@@ -22,7 +22,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
 // get all data
 $app->get('/establishment', function (Request $request, Response $response, array $args) {
-    $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY Establishment.name ASC");
+    $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->renderer->render($response, 'establishment.phtml', $data);
@@ -31,7 +31,7 @@ $app->get('/establishment', function (Request $request, Response $response, arra
 
 // get establishment data
 $app->get('/estab', function () {
-    $sth = $this->db->prepare("SELECT * FROM Establishment");
+    $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
