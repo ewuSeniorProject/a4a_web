@@ -22,7 +22,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 
 // get all data
 $app->get('/establishment', function (Request $request, Response $response, array $args) {
-    $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name");
+    $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY 'name'");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->renderer->render($response, 'establishment.phtml', $data);
