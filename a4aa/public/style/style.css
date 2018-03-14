@@ -113,8 +113,6 @@ h4 {
 .box-title {
     margin: 0;
     padding: .5em;
-    width: auto;
-    height: 1em;
     display: flow;
     flex-flow: row nowrap;
     justify-content: space-between;
