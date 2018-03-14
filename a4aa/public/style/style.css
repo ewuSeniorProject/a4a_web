@@ -108,6 +108,7 @@ h4 {
     flex-grow: 1;
     flex-shrink: 0;
     align-content: space-around;
+    justify-content: flex-start;
 }
 
 .box-title {
