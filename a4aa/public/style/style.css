@@ -99,7 +99,7 @@ h4 {
 .box-title {
     margin: 0;
     padding: 1em 0 .2em 1em;
-    position: relative;
+    /*position: relative;*/
     width: 100%;
     display: flex;
     flex-direction: row;
