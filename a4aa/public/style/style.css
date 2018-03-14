@@ -109,3 +109,15 @@ h4 {
     margin: 0;
     align-self: end;
 }
+
+.box-title {
+    margin: 0;
+    padding: .5em;
+    width: auto;
+    height: 1em;
+    display: flow;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightslategrey;
+}
