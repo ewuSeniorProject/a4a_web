@@ -101,7 +101,7 @@ h4 {
     padding: 1em;
     position: relative;
     width: 100%;
-    display: flow;
+    display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
