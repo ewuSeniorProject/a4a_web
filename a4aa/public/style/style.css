@@ -90,6 +90,7 @@ h4 {
 .box {
     margin: 0;
     padding: 1em;
+    position: relative;
     background-color: #3d83b2;
     color: #ffffff;
     border-radius: 5px;
@@ -113,6 +114,7 @@ h4 {
 .box-title {
     margin: 0;
     padding: .5em;
+    position: absolute;
     display: flow;
     flex-flow: row nowrap;
     justify-content: space-between;
