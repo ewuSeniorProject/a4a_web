@@ -96,6 +96,7 @@ h4 {
     flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-evenly;
+    justify-content: flex-start;
 }
 
 .box {
@@ -108,7 +109,6 @@ h4 {
     flex-grow: 1;
     flex-shrink: 0;
     align-content: space-around;
-    justify-content: flex-start;
 }
 
 .box-title {
@@ -116,11 +116,11 @@ h4 {
     padding: 1em 0 .2em 1em;
     /*position: relative;*/
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: baseline;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*flex-wrap: nowrap;*/
+    /*justify-content: space-between;*/
+    /*align-items: baseline;*/
     /*align-content: space-between;*/
     background-color: lightslategrey;
     border-radius: 5px;
