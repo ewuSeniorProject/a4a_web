@@ -105,6 +105,9 @@ h4 {
     background-color: #3d83b2;
     color: #ffffff;
     border-radius: 5px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 33.3333%;
 }
 
 .box-title {
