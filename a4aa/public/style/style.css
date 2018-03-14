@@ -96,6 +96,19 @@ h4 {
     border-radius: 5px;
 }
 
+.box-title {
+    margin: 0;
+    padding: .5em;
+    position: relative;
+    width: 100%;
+    display: flow;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: lightslategrey;
+    border-radius: 5px;
+}
+
 .box-padding {
     margin: 0;
     padding: .2em 1em;
@@ -111,14 +124,4 @@ h4 {
     align-self: end;
 }
 
-.box-title {
-    margin: 0;
-    padding: .5em;
-    position: absolute;
-    width: 100%;
-    display: flow;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-    background-color: lightslategrey;
-}
+
