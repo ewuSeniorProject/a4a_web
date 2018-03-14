@@ -105,7 +105,8 @@ h4 {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    align-content: space-between;
     background-color: lightslategrey;
     border-radius: 5px;
 }
