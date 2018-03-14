@@ -99,7 +99,7 @@ h4 {
 }
 
 .box {
-    margin: 0 1em 0 1em;
+    margin: 1em;
     padding: 0;
     position: relative;
     background-color: #3d83b2;
