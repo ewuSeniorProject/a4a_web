@@ -107,6 +107,7 @@ h4 {
     border-radius: 5px;
     flex-grow: 1;
     flex-shrink: 0;
+    align-content: space-around;
 }
 
 .box-title {
