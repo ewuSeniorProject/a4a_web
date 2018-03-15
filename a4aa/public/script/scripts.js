@@ -19,7 +19,7 @@ function EstablishmentModel(data) {
     self.zip = data.zip;
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
-    self.baseUrl = ("/update/");
+    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update/");
 }
 
 
@@ -38,7 +38,7 @@ function EstablishmentViewModel() {
     };
 
     self.onLoad = function () {
-        self.getEstablishmentList("/estab");
+        self.getEstablishmentList("http://www.mizesolutions.com/a4a_web/a4aa/public/estab");
     };
 
     self.onLoad();
