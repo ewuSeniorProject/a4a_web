@@ -32,26 +32,15 @@
         </div>
         <div class="page">
             <div class="section">
-                <div id="establishment-list-wrapper">
-                    <div class="box-section" data-bind="template: {name: 'update-list-template',  foreach: updateList}"></div>
+                <div id="update-list-wrapper">
+                    <div class="box-section" data-bind="template: {name: 'update-list-template',  foreach: obsList}"></div>
                 </div>
             </div>
         </div>
 
         <!-- Template -->
         <script type="text/html" id="update-list-template">
-            <div class="box col-lg-3">
-                <div class="box-title">
-                    <h4 class="col-sm-10" data-bind="text:name"></h4>&nbsp;<a class="col-sm-2" data-bind="attr: { href: 'http://www.mizesolutions.com/a4a_web/a4aa/public/edit.html' }" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></a><br>
-                </div>
-                <div class="box-padding">
-                    <a class="white-link" data-bind="text:website, attr: { href: 'http://'+website }" target="_new"></a><br>
-                    <span data-bind="text:phone"></span><br>
-                    <span data-bind="text:street"></span><br>
-                    <span data-bind="text:city"></span>,&nbsp;<span data-bind="text:state"></span>&nbsp;<span data-bind="text:zip"></span><br>
-                    <span data-bind="text:contact_fname"></span><br>
-                </div>
-            </div>
+            <div data-bind="text: text_value"></div>
         </script>
         <!-- End Template -->
     </body>
