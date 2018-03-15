@@ -10,6 +10,7 @@ function start() {
 function EstablishmentModel(data) {
 
     var self = this;
+    self.id = data.id;
     self.name = data.name;
     self.website = data.website;
     self.street = data.street;
