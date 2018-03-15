@@ -1,5 +1,6 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const SESSIONID = getSessionID();
+console.log("est_id: " + SESSIONID);
 
 $(document).ready(function () {
     function Model(data) {
