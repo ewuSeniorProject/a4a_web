@@ -19,6 +19,7 @@ function EstablishmentModel(data) {
     self.zip = data.zip;
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
+    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update/");
 }
 
 
@@ -26,7 +27,6 @@ function EstablishmentViewModel() {
 
     var self = this;
     self.establishmentList = ko.observableArray([]);
-    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update/");
 
     self.getEstablishmentList = function (uri) {
         $.getJSON(uri, function(data) {
