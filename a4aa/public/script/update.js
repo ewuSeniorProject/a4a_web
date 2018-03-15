@@ -60,7 +60,7 @@ $(document).ready(function () {
 });
 
 function getSessionID() {
-    return $.get("http://www.mizesolutions.com/a4a_web/a4aa/public/session.php");
+     return JSON.stringify($.get("http://www.mizesolutions.com/a4a_web/a4aa/public/session.php"));
 }
 
 function removeRequest(uri, record) {
