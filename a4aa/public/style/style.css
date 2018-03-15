@@ -109,6 +109,7 @@ h4 {
     flex-grow: 1;
     flex-shrink: 0;
     align-content: space-around;
+    box-shadow: 0 4px 6px 0 hsla(0,0%,0%,0.2);
 }
 
 .box-title {
