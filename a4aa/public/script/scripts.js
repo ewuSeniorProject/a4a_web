@@ -4,6 +4,7 @@ $(document).ready(start);
 
 function start() {
     ko.applyBindings(EVM.viewModel, document.getElementById('establishment-list-wrapper'));
+    sessionStorage.setItem('id', EVM.viewModel.data.est_id);
 }
 
 
@@ -19,7 +20,7 @@ function EstablishmentModel(data) {
     self.zip = data.zip;
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
-    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update/");
+    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update.html");
 }
 
 
