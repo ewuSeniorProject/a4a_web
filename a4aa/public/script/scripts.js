@@ -10,7 +10,7 @@ function start() {
 function EstablishmentModel(data) {
 
     var self = this;
-    self.est_id = data.id;
+    self.est_id = data.est_id;
     self.name = data.name;
     self.website = data.website;
     self.street = data.street;
@@ -26,6 +26,7 @@ function EstablishmentViewModel() {
 
     var self = this;
     self.establishmentList = ko.observableArray([]);
+    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update/");
 
     self.getEstablishmentList = function (uri) {
         $.getJSON(uri, function(data) {
