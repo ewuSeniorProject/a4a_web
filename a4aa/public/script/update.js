@@ -1,5 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const SESSIONID = "<?php echo json_encode($_SESSION['id']) ?>";
+const SESSIONID = "<?php echo $_SESSION['id'] ?>";
 
 $(document).ready(function () {
 
@@ -61,6 +61,7 @@ $(document).ready(function () {
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
 
 });
+
 
 function removeRequest(uri, record) {
     $.ajax({
