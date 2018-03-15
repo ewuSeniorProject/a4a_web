@@ -50,7 +50,6 @@ $app->get('/estab/[{id}]', function (Request $request, Response $response, array
 // get establishment data
 $app->get('/get/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
-    $_SESSION["id"] = $id;
     $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
