@@ -88,7 +88,7 @@ h4 {
 }
 
 .box-section {
-    margin: 0 2em;
+    margin: 0;
     padding: 0;
     width: 97%;
     display: flex;
