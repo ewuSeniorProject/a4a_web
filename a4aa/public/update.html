@@ -24,7 +24,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-        <script src="./script/scripts.js"></script>
+        <script src="./script/update.js"></script>
     </head>
     <body>
         <div class="header">
@@ -33,13 +33,13 @@
         <div class="page">
             <div class="section">
                 <div id="establishment-list-wrapper">
-                    <div class="box-section" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
+                    <div class="box-section" data-bind="template: {name: 'update-list-template',  foreach: updateList}"></div>
                 </div>
             </div>
         </div>
 
         <!-- Template -->
-        <script type="text/html" id="establishment-list-template">
+        <script type="text/html" id="update-list-template">
             <div class="box col-lg-3">
                 <div class="box-title">
                     <h4 class="col-sm-10" data-bind="text:name"></h4>&nbsp;<a class="col-sm-2" data-bind="attr: { href: 'http://www.mizesolutions.com/a4a_web/a4aa/public/edit.html' }" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></a><br>
