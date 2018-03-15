@@ -1,4 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
+const SESSIONID = "<?php echo json_encode($_SESSION['id']) ?>";
 
 $(document).ready(function () {
 
@@ -50,7 +51,7 @@ $(document).ready(function () {
         };
     }
 
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/' + id), document.getElementById('update-list-wrapper'));
+    ko.applyBindings(new ViewModel(API_ROOT + 'get/' + SESSIONID), document.getElementById('update-list-wrapper'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/classes', API_ROOT + 'delete/class', API_ROOT + 'post/class', API_ROOT + 'put/class'), document.getElementById('classes-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/components', API_ROOT + 'delete/component', API_ROOT + 'post/component', API_ROOT + 'put/component'), document.getElementById('components-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/durations', API_ROOT + 'delete/duration', API_ROOT + 'post/duration', API_ROOT + 'put/duration'), document.getElementById('durations-view'));
