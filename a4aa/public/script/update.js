@@ -1,5 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const SESSIONID = "<?php echo $_SESSION['id'] ?>";
+const SESSIONID = <?php echo $_SESSION['id'] ?>;
 
 $(document).ready(function () {
 
