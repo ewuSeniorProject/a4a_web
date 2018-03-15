@@ -3,5 +3,5 @@ $sessionID = "";
 if (isset($_POST)) {
     $sessionID = $_POST['id'];
 } else  {
-    return $sessionID;
+    return json_encode($sessionID);
 }
