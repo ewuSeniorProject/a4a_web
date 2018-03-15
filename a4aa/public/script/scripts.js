@@ -45,5 +45,5 @@ function EstablishmentViewModel() {
 }
 
 function setSessionId(value) {
-    $.post("http://www.mizesolutions.com/a4a_web/a4aa/public/session.php", {"id": value});
+    sessionStorage.setItem('id', value);
 }
