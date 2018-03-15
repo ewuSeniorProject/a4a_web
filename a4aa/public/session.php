@@ -1,3 +1,7 @@
 <?php
-
-$_SESSION['id'] = $_POST['id'];
+$sessionID = "";
+if (isset($_POST)) {
+    $sessionID = $_POST['id'];
+} else  {
+    return $sessionID;
+}

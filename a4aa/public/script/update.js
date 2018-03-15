@@ -1,10 +1,7 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const SESSIONID = '<%= Session["id"] %>';
+const SESSIONID = getSessionID();
 
 $(document).ready(function () {
-
-    var id = sessionStorage.getItem('id');
-
     function Model(data) {
         this.postUri = data.postUri;
         this.putUri = data.putUri;
@@ -62,6 +59,9 @@ $(document).ready(function () {
 
 });
 
+function getSessionID() {
+    return $.get("http://www.mizesolutions.com/a4a_web/a4aa/public/session.php");
+}
 
 function removeRequest(uri, record) {
     $.ajax({
