@@ -4,6 +4,7 @@ console.log("est_id: " + SESSIONID);
 
 $(document).ready(function () {
     function Model(data) {
+        console.log(JSON.stringify(data));
         this.postUri = data.postUri;
         this.putUri = data.putUri;
         this._oldVal = "";
