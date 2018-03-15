@@ -1,6 +1,9 @@
-const API_ROOT = '/';
+const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 
 $(document).ready(function () {
+
+    var id = sessionStorage.getItem('id');
+
     function Model(data) {
         this.postUri = data.postUri;
         this.putUri = data.putUri;
@@ -47,14 +50,14 @@ $(document).ready(function () {
         };
     }
 
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/cast_times', API_ROOT+ 'delete/cast_time', API_ROOT + 'post/cast_time', API_ROOT + 'put/cast_time'), document.getElementById('casttimes-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/classes', API_ROOT + 'delete/class', API_ROOT + 'post/class', API_ROOT + 'put/class'), document.getElementById('classes-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/components', API_ROOT + 'delete/component', API_ROOT + 'post/component', API_ROOT + 'put/component'), document.getElementById('components-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/durations', API_ROOT + 'delete/duration', API_ROOT + 'post/duration', API_ROOT + 'put/duration'), document.getElementById('durations-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/ranges', API_ROOT + 'delete/range', API_ROOT + 'post/range', API_ROOT + 'put/range'), document.getElementById('ranges-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/schools', API_ROOT + 'delete/school', API_ROOT + 'post/school' , API_ROOT + 'put/school'), document.getElementById('schools-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/tags', API_ROOT + 'delete/tag', API_ROOT + 'post/tag', API_ROOT + 'put/tag'), document.getElementById('tags-view'));
-    ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
+    ko.applyBindings(new ViewModel(API_ROOT + 'get/' + id), document.getElementById('update-list-wrapper'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/classes', API_ROOT + 'delete/class', API_ROOT + 'post/class', API_ROOT + 'put/class'), document.getElementById('classes-view'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/components', API_ROOT + 'delete/component', API_ROOT + 'post/component', API_ROOT + 'put/component'), document.getElementById('components-view'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/durations', API_ROOT + 'delete/duration', API_ROOT + 'post/duration', API_ROOT + 'put/duration'), document.getElementById('durations-view'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/ranges', API_ROOT + 'delete/range', API_ROOT + 'post/range', API_ROOT + 'put/range'), document.getElementById('ranges-view'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/schools', API_ROOT + 'delete/school', API_ROOT + 'post/school' , API_ROOT + 'put/school'), document.getElementById('schools-view'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/tags', API_ROOT + 'delete/tag', API_ROOT + 'post/tag', API_ROOT + 'put/tag'), document.getElementById('tags-view'));
+    // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
 
 });
 
