@@ -90,7 +90,7 @@ h4 {
 .box-section {
     margin: 0;
     padding: 0;
-    width: 97%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -116,11 +116,11 @@ h4 {
     padding: 1em 0 .2em 1em;
     /*position: relative;*/
     width: 100%;
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*flex-wrap: nowrap;*/
-    /*justify-content: space-between;*/
-    /*align-items: baseline;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: baseline;
     /*align-content: space-between;*/
     background-color: lightslategrey;
     border-radius: 5px;
