@@ -50,7 +50,7 @@ $app->get('/estab/[{id}]', function (Request $request, Response $response, array
 // get establishment data
 $app->get('/update/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
-    $sth = $this->db->prepare("SELECT * FROM Establishment WHERE id=$id");
+    $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
