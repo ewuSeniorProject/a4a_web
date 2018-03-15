@@ -4,7 +4,7 @@ $(document).ready(start);
 
 function start() {
     ko.applyBindings(EVM.viewModel, document.getElementById('establishment-list-wrapper'));
-    sessionStorage.setItem('id', EVM.viewModel.data.est_id);
+    sessionStorage.setItem('id', EVM.data.est_id);
 }
 
 
