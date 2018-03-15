@@ -45,5 +45,5 @@ function EstablishmentViewModel() {
 }
 
 function setSessionId(value) {
-    sessionStorage.setItem('id', value);
+    localStorage.setItem('id', value);
 }

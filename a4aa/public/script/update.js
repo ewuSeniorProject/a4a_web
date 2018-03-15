@@ -60,7 +60,7 @@ $(document).ready(function () {
 });
 
 function getSessionID() {
-     return sessionStorage.getItem("id");
+     return localStorage.getItem("id");
 }
 
 function removeRequest(uri, record) {
