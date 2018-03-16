@@ -50,13 +50,14 @@ $app->get('/estab/[{id}]', function (Request $request, Response $response, array
 // get establishment data by id
 $app->get('/get/establishment/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
-    $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
+    $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id UNION SELECT * FROM Category UNION SELECT * FROM Configuration UNION SELECT * FROM USER");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+//SELECT b.*, a.name FROM tableB AS b INNER JOIN tableA as A ON (b.id=a.id);
 
 // delete establishment data by id
 $app->delete('/delete/establishment/[{id}]', function (Request $request, Response $response, array $args){
