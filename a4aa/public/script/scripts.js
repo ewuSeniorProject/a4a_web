@@ -19,6 +19,7 @@ function EstablishmentModel(data) {
     self.zip = data.zip;
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
+    self.contact_lname = data.contact_lname;
     self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update.html");
 }
 
