@@ -121,7 +121,7 @@ h4 {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: baseline;
-    /*align-content: space-between;*/
+    align-self: center;
     background-color: lightslategrey;
     border-radius: 5px;
 }
