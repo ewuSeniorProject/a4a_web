@@ -39,27 +39,25 @@
             <table id="establishment-view" class="table table-striped table-hover">
                 <thead class="thead-dark clickable" data-toggle="collapse" data-target="#tier-table-body">
                 <tr>
-                    <th colspan="12"><span class="mr-3"><i data-bind="click: $root.addItem" class="fas fa-plus-square clickable fa-lg hover-green" aria-hidden="true"></i></span>Establishment</th>
+                    <th colspan="10"><span class="mr-3"><i data-bind="click: $root.addItem" class="fas fa-plus-square clickable fa-lg hover-green" aria-hidden="true"></i></span>Establishment</th>
                 </tr>
                 </thead>
                 <tbody data-bind="foreach: obsList" class="collapse" id="tier-table-body">
                     <tr>
-                        <td><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></td>
-                        <td>&nbsp;</td>
-                        <td><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></td>
+                        <td colspan="5"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></td>
+                        <td colspan="5"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></td>
                     </tr>
                     <tr>
-                        <td><label for="category"> Category: </label><input class="form-control" id="category" data-bind="value: cat_id, hasfocus: cat_id.focused"></td>
-                        <td>&nbsp;</td>
-                        <td><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></td>
+                        <td colspan="5"><label for="category"> Category: </label><input class="form-control" id="category" data-bind="value: cat_id, hasfocus: cat_id.focused"></td>
+                        <td colspan="5"><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></td>
                     </tr>
                     <tr>
-                        <td colspan="12"><label for="street"> Street: </label><input class="form-control" id="street" data-bind="value: street, hasfocus: street.focused"></td>
+                        <td colspan="10"><label for="street"> Street: </label><input class="form-control" id="street" data-bind="value: street, hasfocus: street.focused"></td>
                     </tr>
                     <tr>
-                        <td><label for="city"> City: </label><input class="form-control" id="city" data-bind="value: city, hasfocus: city.focused"></td>
-                        <td><label for="state"> State: </label><input class="form-control" id="state" data-bind="value: state, hasfocus: state.focused"></td>
-                        <td><label for="zip"> Zip: </label><input class="form-control" id="zip" data-bind="value: zip, hasfocus: zip.focused"></td>
+                        <td colspan="4"><label for="city"> City: </label><input class="form-control" id="city" data-bind="value: city, hasfocus: city.focused"></td>
+                        <td colspan="4"><label for="state"> State: </label><input class="form-control" id="state" data-bind="value: state, hasfocus: state.focused"></td>
+                        <td colspan="2"><label for="zip"> Zip: </label><input class="form-control" id="zip" data-bind="value: zip, hasfocus: zip.focused"></td>
                     </tr>
                 </tbody>
             </table>
