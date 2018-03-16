@@ -47,13 +47,41 @@ $app->get('/estab/[{id}]', function (Request $request, Response $response, array
 });
 
 
-// get establishment data
-$app->get('/get/[{id}]', function (Request $request, Response $response, array $args){
+// get establishment data by id
+$app->get('/get/establishment/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// delete establishment data by id
+$app->delete('/delete/establishment/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $sth = $this->db->prepare("DELETE FROM Establishment WHERE est_id=$id");
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// post establishment data
+$app->post('/post/establishment/', function (Request $request, Response $response, array $args){
+//    $sth = $this->db->prepare("INSERT INTO Establishment );
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// post establishment data
+$app->put('/put/establishment/', function (Request $request, Response $response, array $args){
+//    $sth = $this->db->prepare("INSERT INTO Establishment );
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
