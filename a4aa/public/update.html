@@ -32,9 +32,9 @@
         </div>
         <div class="page">
             <div class="section">
-                <div class="box-section">
+                <div class="container">
                     <table id="establishment-view" class="table table-striped table-hover">
-                        <thead class="bg-info text-white clickable" data-toggle="collapse" data-target="#tier-table-body">
+                        <thead class="thead-dark clickable" data-toggle="collapse" data-target="#tier-table-body">
                         <tr>
                             <th colspan="2"><span class="mr-3"><i data-bind="click: $root.addItem" class="fa fa-plus-square clickable fa-lg hover-green" aria-hidden="true"></i></span>Tiers</th>
                         </tr>
@@ -42,7 +42,7 @@
                         <tbody data-bind="foreach: obsList" class="collapse" id="tier-table-body">
                         <tr>
                             <td><input class="form-control" data-bind="value: text_value, hasfocus: text_value.focused"></td>
-                            <td><i data-bind="click: $parent.removeItem" class="fa fa-trash-o fa-lg float-right clickable hover-red"></i></td>
+                            <td><i data-bind="click: $parent.removeItem" class="fas fa-trash fa-lg float-right clickable hover-red"></i></td>
                         </tr>
                         </tbody>
                     </table>
