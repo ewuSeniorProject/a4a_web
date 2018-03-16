@@ -9,17 +9,17 @@ $(document).ready(function () {
         this.putUri = data.putUri;
         this._oldVal = "";
         this.name = ko.observable(data.name);
-        this.text_value.focused = ko.observable(false);
+        this.name.focused = ko.observable(false);
         var self = this;
-        this.text_value.subscribe(function (oldVal) {
+        this.name.subscribe(function (oldVal) {
             self._oldVal = oldVal;
         }, this, "beforeChange");
-        this.text_value.focused.subscribe(function (newValue) {
+        this.name.focused.subscribe(function (newValue) {
             if(!newValue){
                 if(self._oldVal === undefined){
-                    newRecordRequest(self.postUri, self.text_value());
-                }else if(self._oldVal !== self.text_value() && self._oldVal !== ""){
-                    editRequest(self.putUri, self._oldVal, self.text_value());
+                    newRecordRequest(self.postUri, self.name());
+                }else if(self._oldVal !== self.name() && self._oldVal !== ""){
+                    editRequest(self.putUri, self._oldVal, self.name());
                 }
             }
         });
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         $.getJSON(getUri, function (data) {
             self.obsList($.map(data, function (item) {
-                return new Model({text_value:item, postUri:postUri, putUri:putUri});
+                return new Model({name:item, postUri:postUri, putUri:putUri});
             }));
         });
 
@@ -39,12 +39,12 @@ $(document).ready(function () {
             var con = confirm("Delete this record?");
             if (con){
                 self.obsList.remove(item);
-                removeRequest(deleteUri, item.text_value());
+                removeRequest(deleteUri, item.name());
             }
         };
 
         self.addItem = function () {
-            self.obsList.push(new Model({text_value: "", postUri:postUri, putUri:putUri}));
+            self.obsList.push(new Model({name: "", postUri:postUri, putUri:putUri}));
         };
     }
 
