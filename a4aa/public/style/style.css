@@ -146,4 +146,8 @@ h4 {
     align-self: end;
 }
 
+.table-row-color {
+    background-color: #4095c7;
+    color: #ffffff;
+}
 
