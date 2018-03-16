@@ -7,22 +7,42 @@ $(document).ready(function () {
         console.log(JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
-        this._oldVal = "";
         this.name = ko.observable(parm.data.name);
         this.name.focused = ko.observable(false);
-        var self = this;
-        this.name.subscribe(function (oldVal) {
-            self._oldVal = oldVal;
-        }, this, "beforeChange");
-        this.name.focused.subscribe(function (newValue) {
-            if(!newValue){
-                if(self._oldVal === undefined){
-                    newRecordRequest(self.postUri, self.name());
-                }else if(self._oldVal !== self.name() && self._oldVal !== ""){
-                    editRequest(self.putUri, self._oldVal, self.name());
-                }
-            }
-        });
+        this.website = ko.observable(parm.data.website);
+        this.website.focused = ko.observable(false);
+        this.cat_id = ko.observable(parm.data.cat_id);
+        this.cat_id.focused = ko.observable(false);
+        this.subtype = ko.observable(parm.data.subtype);
+        this.subtype.focused = ko.observable(false);
+        this.config_id = ko.observable(parm.data.config_id);
+        this.config_id.focused = ko.observable(false);
+        this.street = ko.observable(parm.data.street);
+        this.street.focused = ko.observable(false);
+        this.city = ko.observable(parm.data.city);
+        this.city.focused = ko.observable(false);
+        this.state = ko.observable(parm.data.state);
+        this.state.focused = ko.observable(false);
+        this.zip = ko.observable(parm.data.zip);
+        this.zip.focused = ko.observable(false);
+        this.phone = ko.observable(parm.data.phone);
+        this.website.focused = ko.observable(false);
+        this.phone = ko.observable(parm.data.cat_id);
+        this.phone.focused = ko.observable(false);
+        this.phone_type = ko.observable(parm.data.phone_type);
+        this.phone_type.focused = ko.observable(false);
+        this.contact_fname = ko.observable(parm.data.contact_fname);
+        this.contact_fname.focused = ko.observable(false);
+        this.contact_lname = ko.observable(parm.data.contact_lname);
+        this.contact_lname.focused = ko.observable(false);
+        this.contact_title = ko.observable(parm.data.contact_title);
+        this.contact_title.focused = ko.observable(false);
+        this.contact_email = ko.observable(parm.data.contact_email);
+        this.contact_email.focused = ko.observable(false);
+        this.date = ko.observable(parm.data.date);
+        this.date.focused = ko.observable(false);
+        this.user_id = ko.observable(parm.data.user_id);
+        this.user_id.focused = ko.observable(false);
     }
 
     function ViewModel(getUri, deleteUri, postUri, putUri) {
