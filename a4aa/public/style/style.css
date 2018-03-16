@@ -55,8 +55,14 @@ h4 {
 }
 
 .section {
-    margin: 5em;
-    padding: 5em;
+    margin-top: 2em;
+    margin-right: 5em;
+    margin-left: 5em;
+    margin-bottom: 2em;
+    padding-top: 1em;
+    padding-right: 5em;
+    padding-left: 5em;
+    padding-bottom: 1em;
 }
 
 .subtitle {
