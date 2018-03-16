@@ -85,7 +85,7 @@ h4 {
 }
 
 .box-section {
-    margin: 1em;
+    margin: 1em 0;
     padding: 0;
     width: 100%;
     display: flex;
@@ -96,7 +96,7 @@ h4 {
 }
 
 .box {
-    margin: 1em 2em;
+    margin: 1em 3em;
     padding: 0;
     position: relative;
     background-color: #4095c7;
