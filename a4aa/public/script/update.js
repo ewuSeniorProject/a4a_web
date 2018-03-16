@@ -3,12 +3,12 @@ const SESSIONID = getSessionID();
 console.log("est_id: " + SESSIONID);
 
 $(document).ready(function () {
-    function Model(data) {
+    function Model(parm) {
         console.log(JSON.stringify(data));
         this.postUri = data.postUri;
         this.putUri = data.putUri;
         this._oldVal = "";
-        this.name = ko.observable(data.name);
+        this.name = ko.observable(parm.data.name);
         this.name.focused = ko.observable(false);
         var self = this;
         this.name.subscribe(function (oldVal) {
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         $.getJSON(getUri, function (data) {
             self.obsList($.map(data, function (item) {
-                return new Model({name:item, postUri:postUri, putUri:putUri});
+                return new Model({data:item, postUri:postUri, putUri:putUri});
             }));
         });
 
