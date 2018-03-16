@@ -5,8 +5,8 @@ console.log("est_id: " + SESSIONID);
 $(document).ready(function () {
     function Model(parm) {
         console.log(JSON.stringify(parm));
-        this.postUri = data.postUri;
-        this.putUri = data.putUri;
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
         this._oldVal = "";
         this.name = ko.observable(parm.data.name);
         this.name.focused = ko.observable(false);
