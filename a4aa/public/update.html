@@ -44,12 +44,15 @@
                 </thead>
                 <tbody data-bind="foreach: obsList" class="collapse" id="tier-table-body">
                 <tr>
-                    <td><input class="form-control" data-bind="value: name, hasfocus: name.focused"></td>
-                    <td><i data-bind="click: $parent.removeItem" class="fas fa-trash fa-lg float-right clickable hover-red"></i></td>
+                    <td><label for="name">Name: </label></td>
+                    <td><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></td>
+                    <td><label for="website">Website: </label></td>
+                    <td><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></td>
                 </tr>
                 </tbody>
             </table>
         </script>
     <!-- End Establishment Template -->
+        <!--<td><i data-bind="click: $parent.removeItem" class="fas fa-trash fa-lg float-right clickable hover-red"></i></td>-->
     </body>
 </html>
