@@ -8,7 +8,7 @@ $(document).ready(function () {
         this.postUri = data.postUri;
         this.putUri = data.putUri;
         this._oldVal = "";
-        this.text_value = ko.observable(data.text_value);
+        this.name = ko.observable(data.name);
         this.text_value.focused = ko.observable(false);
         var self = this;
         this.text_value.subscribe(function (oldVal) {
@@ -28,7 +28,6 @@ $(document).ready(function () {
     function ViewModel(getUri, deleteUri, postUri, putUri) {
         var self = this;
         self.obsList = ko.observableArray([]);
-        self.text = ko.observable();
 
         $.getJSON(getUri, function (data) {
             self.obsList($.map(data, function (item) {
@@ -45,8 +44,7 @@ $(document).ready(function () {
         };
 
         self.addItem = function () {
-            self.obsList.push(new Model({text_value: self.text(), postUri:postUri, putUri:putUri}));
-            self.text("");
+            self.obsList.push(new Model({text_value: "", postUri:postUri, putUri:putUri}));
         };
     }
 
