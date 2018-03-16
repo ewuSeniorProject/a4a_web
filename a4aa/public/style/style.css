@@ -105,6 +105,8 @@ h4 {
     background-color: #4095c7;
     color: #ffffff;
     border-radius: 5px;
+    /*flex-grow: 0;*/
+    /*flex-shrink: 0;*/
     align-content: space-around;
     align-self: flex-start;
 }
