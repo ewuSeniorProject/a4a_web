@@ -26,8 +26,6 @@ $(document).ready(function () {
         this.zip = ko.observable(parm.data.zip);
         this.zip.focused = ko.observable(false);
         this.phone = ko.observable(parm.data.phone);
-        this.website.focused = ko.observable(false);
-        this.phone = ko.observable(parm.data.cat_id);
         this.phone.focused = ko.observable(false);
         this.phone_type = ko.observable(parm.data.phone_type);
         this.phone_type.focused = ko.observable(false);

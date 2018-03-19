@@ -53,6 +53,9 @@ $app->get('/get/establishment/[{id}]', function (Request $request, Response $res
     $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
+    $sth = $this->db->prepare("SELECT * FROM Category");
+    $sth->execute();
+    $data += $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
