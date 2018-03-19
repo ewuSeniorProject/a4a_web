@@ -56,6 +56,8 @@ $app->get('/get/establishment/[{id}]', function (Request $request, Response $res
     $sth = $this->db->prepare("SELECT * FROM Category");
     $sth->execute();
     $data += $sth->fetchAll();
+    vardump($data);
+    die($data);
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
