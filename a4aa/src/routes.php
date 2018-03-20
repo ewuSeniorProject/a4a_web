@@ -30,7 +30,7 @@ $app->get('/establishment', function (Request $request, Response $response, arra
 
 
 // get establishment data
-$app->get('/estab', function (Request $request, Response $response, array $args) {
+$app->get('/establishment/', function (Request $request, Response $response, array $args) {
     $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -78,9 +78,59 @@ $app->post('/post/establishment/', function (Request $request, Response $respons
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// post establishment data
+// put establishment data
 $app->put('/put/establishment/', function (Request $request, Response $response, array $args){
 //    $sth = $this->db->prepare("INSERT INTO Establishment );
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get all category
+$app->get('/get/category/', function (Request $request, Response $response, array $args){
+    $sth = $this->db->prepare("SELECT * FROM Category");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get category data by id
+$app->get('/get/category/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $sth = $this->db->prepare("SELECT * FROM Category WHERE cat_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+//SELECT b.*, a.name FROM tableB AS b INNER JOIN tableA as A ON (b.id=a.id);
+
+// delete category data by id
+$app->delete('/delete/category/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $sth = $this->db->prepare("DELETE FROM Category WHERE cat_id=$id");
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// post category data
+$app->post('/post/category/', function (Request $request, Response $response, array $args){
+//    $sth = $this->db->prepare("INSERT INTO Category );
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put category data
+$app->put('/put/category/', function (Request $request, Response $response, array $args){
+//    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
