@@ -39,7 +39,7 @@ function EstablishmentViewModel() {
     };
 
     self.onLoad = function () {
-        self.getEstablishmentList("http://www.mizesolutions.com/a4a_web/a4aa/public/estab");
+        self.getEstablishmentList("http://www.mizesolutions.com/a4a_web/a4aa/public/establishment/");
     };
 
     self.onLoad();
