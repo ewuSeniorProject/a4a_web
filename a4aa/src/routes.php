@@ -88,7 +88,7 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
 });
 
 // get all category
-$app->get('/get/category/', function (Request $request, Response $response, array $args){
+$app->get('/category/', function (Request $request, Response $response, array $args){
     $sth = $this->db->prepare("SELECT * FROM Category");
     $sth->execute();
     $data = $sth->fetchAll();
