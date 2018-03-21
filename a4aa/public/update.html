@@ -48,7 +48,11 @@
                         <span colspan="6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></span>
                     </div>
                     <div class="table-row-color" >
-                        <span data-bind="template: {name: 'category-list-template' }"></span>
+                        <span colspan="6"><label for="category"> Category: </label>
+                            <select class="form-control" id="category" data-bind="foreach: categoryList">
+                                <option data-bind="id: category_id, value: name"></option>
+                            </select>
+                        </span>
                         <span colspan="6"><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></span>
                     </div>
                     <div class="table-row-color">
@@ -79,14 +83,7 @@
             </div>
         </script>
     <!-- End Establishment Template -->
-    <!-- Category List Template -->
-        <script type="text/html" id="category-list-template">
-            <span colspan="6" id="category-view"><label for="category"> Category: </label>
-                <select class="form-control" id="category" data-bind="foreach: categoryList">
-                    <option data-bind="id: category_id, value: name"></option>
-                </select>
-            </span>
-        </script>
+
     <!-- Category List Template -->
 
     </body>
