@@ -42,14 +42,14 @@
                     <div colspan="12"><span class="mr-3"><i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i></span>Establishment</div>
                 </div>
                 </div>
-                <div data-bind="foreach: establishmentList" class="collapse" id="tier-table-body">
+                <div data-bind="foreach: establishmentVM.establishmentList" class="collapse" id="tier-table-body">
                     <div class="table-row-color" colspan="12">
                         <span colspan="6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></span>
                         <span colspan="6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></span>
                     </div>
                     <div class="table-row-color" colspan="12" id="categoryVM">
                         <span colspan="6"><label for="category"> Category: </label>
-                            <select class="form-control" id="category" data-bind="foreach: categoryList">
+                            <select class="form-control" id="category" data-bind="foreach: categoryVM.categoryList">
                                 <option data-bind="value: name"></option>
                             </select>
                         </span>
