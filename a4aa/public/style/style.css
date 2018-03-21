@@ -147,6 +147,7 @@ h4 {
 }
 
 .thead-color {
+    padding: 2em;
     background-color: lightslategrey;
     color: #ffffff;
 }
