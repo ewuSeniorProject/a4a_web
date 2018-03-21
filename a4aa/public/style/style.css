@@ -155,7 +155,7 @@ h4 {
 .table-row-color {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-content: flex-start;
     background-color: #4095c7;
     color: #ffffff;
