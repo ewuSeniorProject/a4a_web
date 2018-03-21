@@ -48,6 +48,7 @@ $(document).ready(function () {
     function EstablishmentViewModel(getUri, deleteUri, postUri, putUri) {
         var self = this;
         self.establishmentList = ko.observableArray([]);
+        self.categoryList  = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
             self.establishmentList($.map(data, function (item) {

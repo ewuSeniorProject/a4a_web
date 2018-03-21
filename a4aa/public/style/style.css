@@ -147,12 +147,14 @@ h4 {
 }
 
 .thead-color {
-    padding: 2em;
+    padding: 1em;
     background-color: lightslategrey;
     color: #ffffff;
 }
 
 .table-row-color {
+    display: flex;
+    flex-direction: row;
     background-color: #4095c7;
     color: #ffffff;
 }
