@@ -48,15 +48,12 @@ $(document).ready(function () {
     function EstablishmentViewModel(getUri, deleteUri, postUri, putUri) {
         var self = this;
         self.establishmentList = ko.observableArray([]);
-        self.categoryList  = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
             self.establishmentList($.map(data, function (item) {
                 return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
             }));
         });
-
-        self.categoryList = new CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/');
 
         self.removeItem = function (item) {
             var con = confirm("Delete this record?");
@@ -104,9 +101,15 @@ $(document).ready(function () {
         // };
     }
 
+    var myParentVM = {
+        establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID),
+        categoryVM : new CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+    }
 
-    ko.applyBindings(new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID), document.getElementById('establishment-view'));
-    //ko.applyBindings(new CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'), document.getElementById('category-view'));
+    ko.applyBindings(myParentVM);
+
+    // ko.applyBindings(new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID), document.getElementById('establishment-view'));
+    // ko.applyBindings(new CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'), document.getElementById('category-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/components', API_ROOT + 'delete/component', API_ROOT + 'post/component', API_ROOT + 'put/component'), document.getElementById('components-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/durations', API_ROOT + 'delete/duration', API_ROOT + 'post/duration', API_ROOT + 'put/duration'), document.getElementById('durations-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/ranges', API_ROOT + 'delete/range', API_ROOT + 'post/range', API_ROOT + 'put/range'), document.getElementById('ranges-view'));

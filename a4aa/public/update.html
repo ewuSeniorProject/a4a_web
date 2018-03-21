@@ -36,7 +36,7 @@
         </div>
     <!-- Establishment Template -->
         <script type="text/html" id="establishment-table-template">
-            <div id="establishment-view" class="table">
+            <div id="establishmentVM" class="table">
                 <div class="thead thead-color" data-toggle="collapse" data-target="#tier-table-body">
                 <div>
                     <div colspan="12"><span class="mr-3"><i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i></span>Establishment</div>
@@ -47,7 +47,7 @@
                         <span colspan="6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></span>
                         <span colspan="6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></span>
                     </div>
-                    <div class="table-row-color" colspan="12">
+                    <div class="table-row-color" colspan="12" id="categoryVM">
                         <span colspan="6"><label for="category"> Category: </label>
                             <select class="form-control" id="category" data-bind="foreach: categoryList">
                                 <option data-bind="value: name"></option>
