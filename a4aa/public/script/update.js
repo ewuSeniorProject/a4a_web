@@ -55,7 +55,7 @@ $(document).ready(function () {
             }));
         });
 
-        self.categoryList = CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/');
+        self.categoryList = new CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/');
 
         self.removeItem = function (item) {
             var con = confirm("Delete this record?");
