@@ -48,7 +48,11 @@
                         <td colspan="6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></td>
                     </tr>
                     <tr class="table-row-color">
-                        <td colspan="6"><label for="category"> Category: </label><input class="form-control" id="category" data-bind="value: cat_id, hasfocus: cat_id.focused"></td>
+                        <td colspan="6"><label for="category"> Category: </label>
+                            <select class="form-control" id="category" data-bind="foreach: categoryList">
+                                <option data-bind="id: category_id, value: name"></option>
+                            </select>
+                        </td>
                         <td colspan="6"><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></td>
                     </tr>
                     <tr class="table-row-color">
