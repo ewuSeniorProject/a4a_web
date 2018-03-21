@@ -8,7 +8,7 @@ $(document).ready(function () {
         console.log(JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
-        this.est_id = ok.observable(parm.data.est_id);
+        this.est_id = ko.observable(parm.data.est_id);
         this.name = ko.observable(parm.data.name);
         this.name.focused = ko.observable(false);
         this.website = ko.observable(parm.data.website);
