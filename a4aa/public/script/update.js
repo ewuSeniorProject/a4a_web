@@ -69,7 +69,7 @@ $(document).ready(function () {
     }
 
     function CategoryModel(parm) {
-        console.log(JSON.stringify(parm));
+        console.log("CategoryModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.category_id = ko.observable(parm.data.cat_id);
@@ -83,6 +83,7 @@ $(document).ready(function () {
         self.categoryList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
+            console.log("Get Category: " + JSON.stringify(data));
             self.categoryList($.map(data, function (item) {
                 return new CategoryModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -103,7 +104,7 @@ $(document).ready(function () {
 
     var myParentVM = {
         establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID),
-        categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+        categoryVM : new CategoryViewModel(API_ROOT + ' category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
     }
 
     ko.applyBindings(myParentVM);
