@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     var myParentVM = {
         establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID),
-        categoryVM : new CategoryViewModel(API_ROOT + '/category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+        categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
     }
 
     ko.applyBindings(myParentVM);
