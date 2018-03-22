@@ -72,13 +72,14 @@ $(document).ready(function () {
         //console.log("CategoryModel(data): " + JSON.stringify(data));
         this.category_id = ko.observable(data.cat_id);
         this.category_id.focused = ko.observable(false);
-        this.name = ko.observable(data.name);
-        this.name.focused = ko.observable(false);
+        this.category_name = ko.observable(data.name);
+        this.category_name.focused = ko.observable(false);
     }
 
     function CategoryViewModel(getUri, deleteUri, postUri, putUri) {
         var self = this;
         self.categoryList = ko.observableArray([]);
+        selectedCategory : ko.observable()
 
         $.getJSON(getUri, function (data) {
             console.log("Get Category: " + JSON.stringify(data));
