@@ -55,7 +55,8 @@
                     <div class="table-row-color" id="categoryVM">
                         <div class="col-lg-6"><label for="category"> Category: </label>
                             <select class="form-control" id="category" data-bind="options: categoryVM.categoryList,
-                                                                                  optionsText: 'name',
+                                                                                  optionsText: 'category_name',
+                                                                                  value: selectedCategory,
                                                                                   optionsCaption: 'Choose...'">
                             </select>
                         </div>
