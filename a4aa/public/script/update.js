@@ -68,13 +68,11 @@ $(document).ready(function () {
         };
     }
 
-    function CategoryModel(parm) {
-        console.log("CategoryModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.category_id = ko.observable(parm.data.cat_id);
+    function CategoryModel(data) {
+        console.log("CategoryModel(data): " + JSON.stringify(data));
+        this.category_id = ko.observable(data.cat_id);
         this.category_id.focused = ko.observable(false);
-        this.name = ko.observable(parm.data.name);
+        this.name = ko.observable(data.name);
         this.name.focused = ko.observable(false);
     }
 
@@ -85,7 +83,7 @@ $(document).ready(function () {
         $.getJSON(getUri, function (data) {
             console.log("Get Category: " + JSON.stringify(data));
             self.categoryList($.map(data, function (item) {
-                return new CategoryModel({data:item, postUri:postUri, putUri:putUri});
+                return new CategoryModel(item);
             }));
         });
 
