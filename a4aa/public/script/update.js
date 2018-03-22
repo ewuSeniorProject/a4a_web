@@ -79,7 +79,6 @@ $(document).ready(function () {
     function CategoryViewModel(getUri, deleteUri, postUri, putUri) {
         var self = this;
         self.categoryList = ko.observableArray([]);
-        self.selectedCategory = ko.observable();
 
         $.getJSON(getUri, function (data) {
             console.log("Get Category: " + JSON.stringify(data));
