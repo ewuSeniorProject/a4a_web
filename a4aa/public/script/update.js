@@ -69,7 +69,7 @@ $(document).ready(function () {
     }
 
     function CategoryModel(data) {
-        console.log("CategoryModel(data): " + JSON.stringify(data));
+        //console.log("CategoryModel(data): " + JSON.stringify(data));
         this.category_id = ko.observable(data.cat_id);
         this.category_id.focused = ko.observable(false);
         this.name = ko.observable(data.name);
