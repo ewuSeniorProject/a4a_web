@@ -52,10 +52,12 @@
                         <div class="col-lg-6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></div>
                         <div class="col-lg-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
                     </div>
-                    <div class="table-row-color">
+                    <div class="table-row-color" id="categoryVM">
                         <div class="col-lg-6"><label for="category"> Category: </label>
-                            <select class="form-control" id="category" data-bind="foreach: categoryVM.categoryList">
-                                <option data-bind="value: name">Over-write this</option>
+                            <select class="form-control" id="category" data-bind="options: categoryVM.categoryList,
+                                                                                  optionsText: 'name',
+                                                                                  value: selectedCategory,
+                                                                                  optionsCaption: 'Choose...'">
                             </select>
                         </div>
                         <div class="col-lg-6"><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></div>
