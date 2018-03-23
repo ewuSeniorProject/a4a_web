@@ -56,8 +56,8 @@
                         <div class="col-lg-6"><label for="category"> Category: </label>
                             <select class="form-control" id="category" data-bind="options: categoryVM.categoryList,
                                                                                   optionsText: categoryVM.categoryList.category_name,
-                                                                                  value: categoryVM.selectedCategory,
-                                                                                  optionsCaption: 'Choose...'">
+                                                                                  value: categoryVM.categoryList.category_id,
+                                                                                  optionsCaption: 'Select One'">
                             </select>
                         </div>
                         <div class="col-lg-6"><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></div>
