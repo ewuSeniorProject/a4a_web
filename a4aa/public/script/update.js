@@ -5,7 +5,7 @@ console.log("est_id: " + SESSIONID);
 $(document).ready(function () {
 
     function EstablishmentModel(parm) {
-        console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
+        //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.est_id = ko.observable(parm.data.est_id);
@@ -66,10 +66,12 @@ $(document).ready(function () {
         self.addItem = function () {
             self.establishmentList.push(new EstablishmentModel({name: "", postUri:postUri, putUri:putUri}));
         };
+
+        console.log("establishmentList: " + JSON.stringify(establishmentList));
     }
 
     function CategoryModel(data) {
-        console.log("CategoryModel(data): " + JSON.stringify(data));
+        // console.log("CategoryModel(data): " + JSON.stringify(data));
         this.category_id = ko.observable(data.cat_id);
         this.category_id.focused = ko.observable(false);
         this.category_name = ko.observable(data.name);
@@ -97,10 +99,12 @@ $(document).ready(function () {
         // self.addItem = function () {
         //     self.obsList.push(new Model({name: "", postUri:postUri, putUri:putUri}));
         // };
+
+        console.log("categoryList: " + JSON.stringify(categoryList));
     }
 
     function ParkingModel(parm) {
-        console.log("ParkingModel(parm): " + JSON.stringify(parm));
+        //console.log("ParkingModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.park_id = ko.observable(parm.data.park_id);
@@ -153,6 +157,8 @@ $(document).ready(function () {
         // self.addItem = function () {
         //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
         // };
+
+        console.log("parkingList: " + JSON.stringify(parkingList));
     }
 
     var myParentVM = {
