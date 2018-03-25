@@ -5,7 +5,7 @@ console.log("est_id: " + SESSIONID);
 $(document).ready(function () {
 
     function EstablishmentModel(parm) {
-        console.log("CEstablishmentModel(parm) : " + JSON.stringify(parm));
+        console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.est_id = ko.observable(parm.data.est_id);
@@ -81,7 +81,6 @@ $(document).ready(function () {
         self.categoryList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            console.log("Get Category: " + JSON.stringify(data));
             self.categoryList($.map(data, function (item) {
                 return new CategoryModel(item);
             }));
