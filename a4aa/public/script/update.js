@@ -52,6 +52,7 @@ $(document).ready(function () {
         $.getJSON(getUri, function (data) {
             self.establishmentList($.map(data, function (item) {
                 return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
+                console.log("establishmentList: " + JSON.stringify(self.establishmentList));
             }));
         });
 
@@ -66,8 +67,6 @@ $(document).ready(function () {
         self.addItem = function () {
             self.establishmentList.push(new EstablishmentModel({name: "", postUri:postUri, putUri:putUri}));
         };
-
-        console.log("establishmentList: " + JSON.stringify(self.establishmentList));
     }
 
     function CategoryModel(data) {
@@ -99,8 +98,6 @@ $(document).ready(function () {
         // self.addItem = function () {
         //     self.obsList.push(new Model({name: "", postUri:postUri, putUri:putUri}));
         // };
-
-        console.log("categoryList: " + JSON.stringify(self.categoryList));
     }
 
     function ParkingModel(parm) {
@@ -157,8 +154,6 @@ $(document).ready(function () {
         // self.addItem = function () {
         //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
         // };
-
-        console.log("parkingList: " + JSON.stringify(self.parkingList));
     }
 
     var myParentVM = {
