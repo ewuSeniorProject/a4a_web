@@ -150,6 +150,7 @@ h4 {
     padding: 1em;
     background-color: lightslategrey;
     color: #ffffff;
+    border: 1px solid #ffffff;
 }
 
 .table-row-color {
