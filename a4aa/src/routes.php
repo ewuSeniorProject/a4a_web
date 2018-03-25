@@ -11,14 +11,6 @@ $app->get('/', function (Request $request, Response $response, array $args) {
     return $response->withRedirect($url, 301);
 });
 
-//// get all data
-//$app->get('/establishment', function (Request $request, Response $response, array $args) {
-//    $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
-//    $sth->execute();
-//    $data = $sth->fetchAll();
-//    return $this->renderer->render($response, 'establishment.phtml', $data);
-//});
-
 
 /**
  * ESTABLISHMENT ROUTES
@@ -32,12 +24,6 @@ $app->get('/establishment/', function (Request $request, Response $response, arr
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
-
-//// get establishment data by {id}
-//$app->get('/estab/[{id}]', function (Request $request, Response $response, array $args) {
-//    $url = 'http://www.mizesolutions.com/a4a_web/a4aa/public/update.html';
-//    return $response->withRedirect($url, 301);
-//});
 
 // get establishment data by id
 $app->get('/get/establishment/[{id}]', function (Request $request, Response $response, array $args){
@@ -279,7 +265,7 @@ $app->delete('/delete/parking/[{id}]', function (Request $request, Response $res
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// delete parking data by id
+// delete parking data by establishment id
 $app->delete('/delete/parking/est/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE est_id=$id");
@@ -298,9 +284,10 @@ $app->post('/post/parking/', function (Request $request, Response $response, arr
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// put parking data
-$app->put('/put/parking/', function (Request $request, Response $response, array $args){
-//    $sth = $this->db->prepare("INSERT INTO Parking );
+// put parking data by establishment id
+$app->put('/put/parking/est/[{id}]', function (Request $request, Response $response, array $args){
+//    $id = $args['id'];
+//    $sth = $this->db->prepare("INSERT INTO Parking WHERE est_id=$id");
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
