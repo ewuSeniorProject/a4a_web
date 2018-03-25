@@ -1,5 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const SESSIONID = getSessionID();
+const SESSIONID = Number(getSessionID());
 console.log("est_id: " + SESSIONID);
 
 $(document).ready(function () {
@@ -100,9 +100,66 @@ $(document).ready(function () {
         // };
     }
 
+    function ParkingModel(parm) {
+        console.log(JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.park_id = ko.observable(parm.data.park_id);
+        this.lot_free = ko.observable(parm.data.lot_free);
+        this.lot_free.focused = ko.observable(false);
+        this.street_metered = ko.observable(parm.data.street_metered);
+        this.street_metered.focused = ko.observable(false);
+        this.parking_type = ko.observable(parm.data.parking_type);
+        this.parking_type.focused = ko.observable(false);
+        this.total_num_spaces = ko.observable(parm.data.total_num_spaces);
+        this.total_num_spaces.focused = ko.observable(false);
+        this.num_reserved_spaces = ko.observable(parm.data.num_reserved_spaces);
+        this.num_reserved_spaces.focused = ko.observable(false);
+        this.num_accessable_space = ko.observable(parm.data.num_accessable_space);
+        this.num_accessable_space.focused = ko.observable(false);
+        this.num_van_accessible = ko.observable(parm.data.num_van_accessible);
+        this.num_van_accessible.focused = ko.observable(false);
+        this.reserve_space_sign = ko.observable(parm.data.reserve_space_sign);
+        this.reserve_space_sign.focused = ko.observable(false);
+        this.reserve_space_obstacles = ko.observable(parm.data.reserve_space_obstacles);
+        this.reserve_space_obstacles.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+
+        localStorage.setItem('parkID', this.park_id);
+    }
+
+    function ParkingViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.parkingList = ko.observableArray([]);
+
+        $.getJSON(getUri, function (data) {
+            self.parkingList($.map(data, function (item) {
+                return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
+            }));
+        });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
     var myParentVM = {
         establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID),
-        categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+             categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+              parkingVM : new ParkingViewModel(API_ROOT + '/get/parking/est/' + SESSIONID, API_ROOT + 'delete/parking/est/' + SESSIONID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + SESSIONID),
     }
 
     ko.applyBindings(myParentVM);
@@ -120,6 +177,10 @@ $(document).ready(function () {
 
 function getSessionID() {
      return localStorage.getItem("id");
+}
+
+function getParkingID() {
+    return localStorage.getItem("parkID");
 }
 
 function removeRequest(uri, record) {
