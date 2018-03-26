@@ -73,8 +73,12 @@
                                     <div class="table-row-color">
                                         <div class="col-lg-12"><label for="contact_email"> Email: </label><input class="form-control" id="contact_email" data-bind="value: contact_email, hasfocus: contact_email.focused"></div>
                                     </div>
-                                    <div class="table-row-color">
-                                        <div class="col-lg-6"><label for="user_id"> Surveyor: </label><input class="form-control" id="user_id" data-bind="value: user_id, hasfocus: user_id.focused"></div>
+                                    <div class="table-row-color" id="userVM">
+                                        <div class="col-lg-6"><label for="user_id"> Surveyor: </label>
+                                            <select class="form-control" id="user_id" data-bind="options: $parent.userVM.userList,
+                                                                                  optionsText: 'name',
+                                                                                  optionsCaption: 'Select One'">
+                                            </select>
                                         <div class="col-lg-6"><label for="date"> Survey Date: </label><input class="form-control" id="date" data-bind="value: date, hasfocus: date.focused"></div>
                                     </div>
                                 </div>
