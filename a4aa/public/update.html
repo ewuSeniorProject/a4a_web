@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: establishmentVM.establishmentList">
+                                <div class="card-body" data-bind="foreach: $parent.establishmentVM.establishmentList">
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></div>
                                         <div class="col-lg-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
