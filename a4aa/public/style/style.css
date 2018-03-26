@@ -118,6 +118,18 @@ h4 {
     align-self: flex-start;
 }
 
+.box-blank {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: #ffffff;
+    color: #ffffff;
+    border-radius: 5px;
+    flex-grow: 0;
+    align-content: space-around;
+    align-self: flex-start;
+}
+
 .box-title {
     margin: 0;
     padding: 1em 0;
