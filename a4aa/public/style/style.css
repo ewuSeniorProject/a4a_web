@@ -81,6 +81,7 @@ h4 {
 
 .pointer {
     cursor: pointer;
+    text-decoration: none;
 }
 
 .data-table {
