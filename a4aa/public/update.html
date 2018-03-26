@@ -94,11 +94,11 @@
     <!-- Parking Template -->
         <script type="text/html" id="parking-template">
             <div class="panel-heading phead-color" role="tab" id="headingTwo">
-                <div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Parking
                 </div>
             </div>
-            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                 <div class="panel-body" data-bind="foreach: parkingVM.parkingList">
                     <div class="table-row-color">
                         <div class="col-lg-4"><label for="lot_free"> Lot Parking: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: name.focused" value="Yes"></div>
