@@ -39,7 +39,7 @@
 
     <!-- Template -->
         <script type="text/html" id="establishment-list-template">
-            <div class="box col-lg-6">
+            <div class="box col-lg-5">
                 <div class="box-title">
                     <h4 class="col-lg-10" data-bind="text:name"></h4>&nbsp;<a class="col-lg-2" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></a><br>
                 </div>
@@ -51,6 +51,8 @@
                     <span data-bind="text:contact_fname +' ' + contact_lname"></span><br>
                 </div>
             </div>
+            <div class="box col-lg-5">&emsp;</div>
+
         </script>
     <!-- End Template -->
         <!--,&nbsp;<span data-bind="text:state"></span>&nbsp;<span data-bind="text:zip"></span>-->
