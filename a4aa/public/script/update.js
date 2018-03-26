@@ -49,8 +49,8 @@ $(document).ready(function () {
         self.establishmentList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('categoryID', data.cat_id);
-            localStorage.setItem('userID', data.user_id);
+            setParkingID(data.cat_id);
+            setParkingID(data.user_id);
             console.log("LocalStorage cat_id: " + getCategoryID());
             console.log("LocalStorage user_id: " + getUserID());
             self.establishmentList($.map(data, function (item) {
@@ -138,7 +138,7 @@ $(document).ready(function () {
         self.parkingList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('parkID', data.park_id);
+            setParkingID(data.park_id);
             console.log("LocalStorage park_id: " + getParkingID());
             self.parkingList($.map(data, function (item) {
                 return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
@@ -284,12 +284,24 @@ function getParkingID() {
     return localStorage.getItem("parkID");
 }
 
+function setParkingID(value) {
+    return localStorage.setItem('parkID', value);
+}
+
 function getCategoryID() {
     return localStorage.getItem("categoryID");
 }
 
+function setCategoryID(value) {
+    return localStorage.setItem('categoryID', value);
+}
+
 function getUserID() {
     return localStorage.getItem("userID");
+}
+
+function setUserID(value) {
+    return localStorage.setItem('userID', value);
 }
 
 function removeRequest(uri, record) {
