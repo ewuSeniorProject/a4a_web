@@ -45,6 +45,6 @@ function EstablishmentViewModel() {
     self.onLoad();
 }
 
-function setEstablishmentId(value) {
+function setEestablishmentId(value) {
     localStorage.setItem('establishmentID', value);
 }
