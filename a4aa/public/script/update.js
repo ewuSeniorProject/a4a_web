@@ -185,7 +185,7 @@ $(document).ready(function () {
         this.park_id.focused = ko.observable(false);
     }
 
-    function RouteFromParkinkViewModel(getUri, deleteUri, postUri, putUri) {
+    function RouteFromParkingViewModel(getUri, deleteUri, postUri, putUri) {
         var self = this;
         self.routeFromParkingList = ko.observableArray([]);
 
@@ -252,7 +252,7 @@ $(document).ready(function () {
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
                  parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + est_id, API_ROOT + 'delete/parking/est/' + est_id, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + est_id),
-        routeFromParkingVM : new RouteFromParkinkViewModel(API_ROOT + 'get/parking/est/' + park_id, API_ROOT + 'delete/parking/est/' + park_id, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + park_id),
+        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + park_id, API_ROOT + 'delete/route_from_parking/park/' + park_id, API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + park_id),
     }
 
     console.log("myParentVM: " + JSON.stringify(myParentVM));
