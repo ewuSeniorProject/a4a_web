@@ -41,9 +41,9 @@
         <script type="text/html" id="establishment-list-template">
             <div class="box-blank col-lg-1">&nbsp;</div>
             <div class="box col-lg-4">
-                <div class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
+                <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
                     <h4 class="col-lg-10" data-bind="text:name"></h4>&nbsp;<div class="col-lg-2" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></div><br>
-                </div>
+                </a>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: 'http://'+website }" target="_new"></a><br>
                     <span data-bind="text:phone"></span><br>
