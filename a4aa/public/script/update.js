@@ -156,6 +156,61 @@ $(document).ready(function () {
         // };
     }
 
+    function RouteFromParkingModel(parm) {
+        //console.log("ParkingModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.route_park_id = ko.observable(parm.data.route_park_id);
+        this.distance = ko.observable(parm.data.distance);
+        this.distance.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.route_surface = ko.observable(parm.data.route_surface);
+        this.route_surface.focused = ko.observable(false);
+        this.route_curbs = ko.observable(parm.data.route_curbs);
+        this.route_curbs.focused = ko.observable(false);
+        this.tactile_warning = ko.observable(parm.data.tactile_warning);
+        this.tactile_warning.focused = ko.observable(false);
+        this.covered = ko.observable(parm.data.covered);
+        this.covered.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.park_id = ko.observable(parm.data.park_id);
+        this.park_id.focused = ko.observable(false);
+    }
+
+    function RouteFromParkinkViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.routeFromParkingList = ko.observableArray([]);
+
+        $.getJSON(getUri, function (data) {
+            localStorage.setItem('parkID', data.park_id);
+            self.routeFromParkingList($.map(data, function (item) {
+                return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+            }));
+        });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
     function UserModel(parm) {
         //console.log("UserModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
@@ -190,10 +245,11 @@ $(document).ready(function () {
     }
 
     var myParentVM = {
-        establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + ESTABLISHMENTID, API_ROOT + 'delete/establishment/' + ESTABLISHMENTID, API_ROOT + 'post/establishment/' + ESTABLISHMENTID, API_ROOT + 'put/establishment/' + ESTABLISHMENTID),
-             categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
-                 userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-              parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID),
+           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + ESTABLISHMENTID, API_ROOT + 'delete/establishment/' + ESTABLISHMENTID, API_ROOT + 'post/establishment/' + ESTABLISHMENTID, API_ROOT + 'put/establishment/' + ESTABLISHMENTID),
+                categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+                    userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
+                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID),
+        routeFromParkingVM : new RouteFromParkinkViewModel(API_ROOT + 'get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID),
     }
 
     console.log("myParentVM: " + JSON.stringify(myParentVM));
