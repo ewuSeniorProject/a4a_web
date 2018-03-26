@@ -2,6 +2,34 @@ const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 
 $(document).ready(function () {
 
+    function getEstablishmentID() {
+        return localStorage.getItem("establishmentID");
+    }
+
+    function getParkingID() {
+        $.getJSON(API_ROOT + 'get/parking/est/' + getEstablishmentID(), function (data) {
+            return new data.park_id;
+        });
+    }
+
+    function getCategoryID() {
+        $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
+            return new data.cat_id;
+        });
+    }
+
+    function getConfigurationID() {
+        $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
+            return new data.config_id;
+        });
+    }
+
+    function getUserID() {
+        $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
+            return new data.user_id;
+        });
+    }
+
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
