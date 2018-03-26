@@ -38,6 +38,11 @@ h4 {
     font-weight: bold;
 }
 
+a {
+    text-decoration: none;
+    -moz-text-decoration-line: none;
+}
+
 .header {
     padding: .5em;
     margin: 0;
@@ -81,13 +86,7 @@ h4 {
 
 .pointer {
     cursor: pointer;
-    text-decoration: none;
 }
-
-.pointer a{
-    text-decoration: none;
-}
-
 
 .data-table {
     margin-left: 1em;
