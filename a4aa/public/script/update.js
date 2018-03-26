@@ -1,6 +1,4 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const ESTABLISHMENTID = Number(getEstablishmentID());
-console.log("est_id: " + ESTABLISHMENTID);
 
 $(document).ready(function () {
 
@@ -245,11 +243,11 @@ $(document).ready(function () {
     }
 
     var myParentVM = {
-           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + ESTABLISHMENTID, API_ROOT + 'delete/establishment/' + ESTABLISHMENTID, API_ROOT + 'post/establishment/' + ESTABLISHMENTID, API_ROOT + 'put/establishment/' + ESTABLISHMENTID),
+           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + getEstablishmentID(), API_ROOT + 'delete/establishment/' + getEstablishmentID(), API_ROOT + 'post/establishment/' + getEstablishmentID(), API_ROOT + 'put/establishment/' + getEstablishmentID()),
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID),
-        routeFromParkingVM : new RouteFromParkinkViewModel(API_ROOT + 'get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID),
+                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + getEstablishmentID(), API_ROOT + 'delete/parking/est/' + getEstablishmentID(), API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + getEstablishmentID()),
+        routeFromParkingVM : new RouteFromParkinkViewModel(API_ROOT + 'get/parking/est/' + getParkingID(), API_ROOT + 'delete/parking/est/' + getParkingID(), API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + getParkingID()),
     }
 
     console.log("myParentVM: " + JSON.stringify(myParentVM));
