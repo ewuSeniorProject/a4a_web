@@ -1,4 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
+console.log("LocalStorage: " + getEstablishmentID());
 
 $(document).ready(function () {
 
@@ -50,6 +51,8 @@ $(document).ready(function () {
         $.getJSON(getUri, function (data) {
             localStorage.setItem('categoryID', data.cat_id);
             localStorage.setItem('userID', data.user_id);
+            console.log("LocalStorage: " + getCategoryID());
+            console.log("LocalStorage: " + getUserID());
             self.establishmentList($.map(data, function (item) {
                 return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -136,6 +139,7 @@ $(document).ready(function () {
 
         $.getJSON(getUri, function (data) {
             localStorage.setItem('parkID', data.park_id);
+            console.log("LocalStorage: " + getParkingID());
             self.parkingList($.map(data, function (item) {
                 return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -190,8 +194,7 @@ $(document).ready(function () {
         self.routeFromParkingList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('parkID', data.park_id);
-            self.routeFromParkingList($.map(data, function (item) {
+                self.routeFromParkingList($.map(data, function (item) {
                 return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
             }));
         });
@@ -223,7 +226,6 @@ $(document).ready(function () {
         self.userList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('parkID', data.park_id);
             self.userList($.map(data, function (item) {
                 return new UserModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -243,9 +245,13 @@ $(document).ready(function () {
     }
 
     var est_id = getEstablishmentID();
+    console.log("est_id: " + est_id);
     var cat_id = getCategoryID();
+    console.log("cat_id: " + cat_id);
     var user_id = getUserID();
+    console.log("user_id: " + user_id);
     var park_id = getParkingID();
+    console.log("park_id: " + park_id);
 
     var myParentVM = {
            establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + est_id, API_ROOT + 'delete/establishment/' + est_id, API_ROOT + 'post/establishment/' + est_id, API_ROOT + 'put/establishment/' + est_id),
