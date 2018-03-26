@@ -29,16 +29,16 @@
         <div class="page">
             <div class="section">
                 <div class="container">
-                    <div class="accordion">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <!-- Establishment / Premises Information -->
-                        <div class="card">
-                            <div class="card-header phead-color" id="headingOne">
-                                <div class="mb-0 non-link btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <div class="panel panel-default">
+                            <div class="panel-heading phead-color" role="tab" id="headingOne">
+                                <div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Premises Information
                                 </div>
                             </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: $parent.establishmentVM.establishmentList">
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body" data-bind="foreach: establishmentVM.establishmentList">
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></div>
                                         <div class="col-lg-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
@@ -85,14 +85,14 @@
                             </div>
                         </div>
                         <!-- Parking -->
-                        <div class="card">
-                            <div class="card-header phead-color" id="headingTwo">
-                                <div class="mb-0 non-link btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <div class="panel panel-default">
+                            <div class="panel-heading phead-color" role="tab" id="headingTwo">
+                                <div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Parking
                                 </div>
                             </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: parkingVM.parkingList">
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body" data-bind="foreach: parkingVM.parkingList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="lot_free"> Lot Parking: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: lot_free.focused"></div>
                                         <div class="col-lg-4"><label for="street_metered"> Street Parking: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: street_metered.focused"></div>
@@ -120,14 +120,14 @@
                             </div>
                         </div>
                         <!-- Route From Accessible Parking -->
-                        <div class="card">
-                            <div class="card-header phead-color" id="headingThree">
-                                <div class="mb-0 non-link btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <div class="panel panel-default">
+                            <div class="panel-heading phead-color" role="tab" id="headingThree">
+                                <div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Route From Accessible Parking
                                 </div>
                             </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: routeFromParkingVM.routeFromParkingList">
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body" data-bind="foreach: routeFromParkingVM.routeFromParkingList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="distance"> Distance Reserved Parking To Accessible Entrance: </label> <input class="form-control" id="distance" data-bind="value: distance,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-4"><label for="street_metered"> Route Is Minimum Width And Free of Obstacles: </label><input class="form-control" id="min_width" data-bind="value: min_width, hasfocus: min_width.focused"></div>
@@ -187,13 +187,13 @@
 
     <!-- Establishment Template -->
         <!--<script type="text/html" id="establishment-template">-->
-            <!--<div class="card-header phead-color" role="tab" id="headingOne">-->
-                <!--<div class="mb-0 non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
+            <!--<div class="panel-heading phead-color" role="tab" id="headingOne">-->
+                <!--<div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">-->
                     <!--<i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Premises Information-->
                 <!--</div>-->
             <!--</div>-->
             <!--<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">-->
-                <!--<div class="card-body" data-bind="foreach: establishmentVM.establishmentList">-->
+                <!--<div class="panel-body" data-bind="foreach: establishmentVM.establishmentList">-->
                     <!--<div class="table-row-color">-->
                         <!--<div class="col-lg-6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></div>-->
                         <!--<div class="col-lg-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>-->
@@ -238,13 +238,13 @@
 
     <!-- Parking Template -->
         <!--<script type="text/html" id="parking-template">-->
-            <!--<div class="card-header phead-color" role="tab" id="headingTwo">-->
-                <!--<div class="mb-0 non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
+            <!--<div class="panel-heading phead-color" role="tab" id="headingTwo">-->
+                <!--<div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">-->
                     <!--<i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Parking-->
                 <!--</div>-->
             <!--</div>-->
             <!--<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">-->
-                <!--<div class="card-body" data-bind="foreach: parkingVM.parkingList">-->
+                <!--<div class="panel-body" data-bind="foreach: parkingVM.parkingList">-->
                     <!--<div class="table-row-color">-->
                         <!--<div class="col-lg-4"><label for="lot_free"> Lot Parking: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: name.focused" value="Yes"></div>-->
                         <!--<div class="col-lg-4"><label for="street_metered"> Street Parking: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: website.focused"></div>-->
