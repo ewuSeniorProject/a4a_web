@@ -38,7 +38,13 @@ h4 {
     font-weight: bold;
 }
 
-a {
+a:hover {
+    text-decoration: none;
+    -moz-text-decoration-line: none;
+}
+
+.box-title a,
+.pointer a {
     text-decoration: none;
     -moz-text-decoration-line: none;
 }
