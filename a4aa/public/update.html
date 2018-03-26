@@ -48,14 +48,14 @@
                 </div>
             </div>
             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                <div class="panel-body" data-bind="foreach: establishmentList">
+                <div class="panel-body" data-bind="foreach: $parent.esstablishmentVM.establishmentList">
                     <div class="table-row-color">
                         <div class="col-lg-6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></div>
                         <div class="col-lg-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
                     </div>
                     <div class="table-row-color" id="categoryVM">
                         <div class="col-lg-6"><label for="category"> Category: </label>
-                            <select class="form-control" id="category" data-bind="options: categoryList,
+                            <select class="form-control" id="category" data-bind="options: $parent.categoryVM.categoryList,
                                                                                   optionsText: 'category_name',
                                                                                   optionsCaption: 'Select One'">
                             </select>
@@ -91,7 +91,7 @@
         </script>
     <!-- End Establishment Template -->
 
-        <!-- Establishment Template -->
+    <!-- Parking Template -->
         <script type="text/html" id="parking-template">
             <div class="panel-heading phead-color" role="tab" id="headingTwo">
                 <div class="panel-title non-link" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -99,7 +99,7 @@
                 </div>
             </div>
             <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body" data-bind="foreach: parkingList">
+                <div class="panel-body" data-bind="foreach: $parent.parkingVM.parkingList">
                     <div class="table-row-color">
                         <div class="col-lg-4"><label for="lot_free"> Lot Parking: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: name.focused" value="Yes"></div>
                         <div class="col-lg-4"><label for="street_metered"> Street Parking: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: website.focused"></div>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </script>
-        <!-- End Establishment Template -->
+    <!-- End Establishment Template -->
 
     </body>
 </html>
