@@ -84,6 +84,11 @@ h4 {
     text-decoration: none;
 }
 
+.pointer a:hover{
+    text-decoration: none;
+}
+
+
 .data-table {
     margin-left: 1em;
     padding: 1em;
