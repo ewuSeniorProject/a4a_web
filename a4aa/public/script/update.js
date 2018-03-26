@@ -29,7 +29,7 @@ $(document).ready(function () {
         this.zip.focused = ko.observable(false);
         this.phone = ko.observable(parm.data.phone);
         this.phone.focused = ko.observable(false);
-        this.phone_tty = ko.observable(parm.data.TTY-TTD);
+        this.phone_tty = ko.observable(parm.data.tty);
         this.phone_tty.focused = ko.observable(false);
         this.contact_fname = ko.observable(parm.data.contact_fname);
         this.contact_fname.focused = ko.observable(false);
