@@ -49,10 +49,6 @@ $(document).ready(function () {
         self.establishmentList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            setParkingID(data.cat_id);
-            setParkingID(data.user_id);
-            console.log("LocalStorage cat_id: " + getCategoryID());
-            console.log("LocalStorage user_id: " + getUserID());
             self.establishmentList($.map(data, function (item) {
                 return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -138,8 +134,6 @@ $(document).ready(function () {
         self.parkingList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            setParkingID(data.park_id);
-            console.log("LocalStorage park_id: " + getParkingID());
             self.parkingList($.map(data, function (item) {
                 return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -245,13 +239,10 @@ $(document).ready(function () {
     }
 
     var est_id = getEstablishmentID();
-    console.log("est_id: " + est_id);
     var cat_id = getCategoryID();
-    console.log("cat_id: " + cat_id);
+    var config_id = getConfigurationID();
     var user_id = getUserID();
-    console.log("user_id: " + user_id);
     var park_id = getParkingID();
-    console.log("park_id: " + park_id);
 
     var myParentVM = {
            establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + est_id, API_ROOT + 'delete/establishment/' + est_id, API_ROOT + 'post/establishment/' + est_id, API_ROOT + 'put/establishment/' + est_id),
@@ -281,27 +272,27 @@ function getEstablishmentID() {
 }
 
 function getParkingID() {
-    return localStorage.getItem("parkID");
-}
-
-function setParkingID(value) {
-    return localStorage.setItem('parkID', value);
+    $.getJSON(API_ROOT + 'get/parking/est/' + est_id, function (data) {
+            return new data.park_id;
+    });
 }
 
 function getCategoryID() {
-    return localStorage.getItem("categoryID");
+    $.getJSON(API_ROOT + 'get/establishment/' + est_id, function (data) {
+        return new data.cat_id;
+    });
 }
 
-function setCategoryID(value) {
-    return localStorage.setItem('categoryID', value);
+function getConfigurationID() {
+    $.getJSON(API_ROOT + 'get/establishment/' + est_id, function (data) {
+        return new data.config_id;
+    });
 }
 
 function getUserID() {
-    return localStorage.getItem("userID");
-}
-
-function setUserID(value) {
-    return localStorage.setItem('userID', value);
+    $.getJSON(API_ROOT + 'get/establishment/' + est_id, function (data) {
+        return new data.user_id;
+    });
 }
 
 function removeRequest(uri, record) {
