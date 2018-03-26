@@ -154,20 +154,19 @@ $(document).ready(function () {
         // };
     }
 
-    // var myParentVM = {
-    //     establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID),
-    //          categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
-    //           parkingVM : new ParkingViewModel(API_ROOT + '/get/parking/est/' + SESSIONID, API_ROOT + 'delete/parking/est/' + SESSIONID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + SESSIONID),
-    // }
-    //
-    // console.log("myParentVM: " + JSON.stringify(myParentVM));
-    //
-    // ko.applyBindings(myParentVM);
+    var myParentVM = {
+        establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID),
+             categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+              parkingVM : new ParkingViewModel(API_ROOT + '/get/parking/est/' + SESSIONID, API_ROOT + 'delete/parking/est/' + SESSIONID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + SESSIONID),
+    }
 
-    ko.applyBindings(new ParkingViewModel(API_ROOT + '/get/parking/est/' + SESSIONID, API_ROOT + 'delete/parking/est/' + SESSIONID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + SESSIONID), document.getElementById('collapseTwo'));
-    ko.applyBindings(new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID), document.getElementById('collapseOne'));
-    ko.applyBindings(new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'), document.getElementById('categoryVM'));
+    console.log("myParentVM: " + JSON.stringify(myParentVM));
 
+    ko.applyBindings(myParentVM);
+
+    // ko.applyBindings(new EstablishmentViewModel(API_ROOT + 'get/establishment/' + SESSIONID, API_ROOT + 'delete/establishment/' + SESSIONID, API_ROOT + 'post/establishment/' + SESSIONID, API_ROOT + 'put/establishment/' + SESSIONID), document.getElementById('collapseOne'));
+    // ko.applyBindings(new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'), document.getElementById('categoryVM'));
+    // ko.applyBindings(new ParkingViewModel(API_ROOT + '/get/parking/est/' + SESSIONID, API_ROOT + 'delete/parking/est/' + SESSIONID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + SESSIONID), document.getElementById('collapseTwo'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/durations', API_ROOT + 'delete/duration', API_ROOT + 'post/duration', API_ROOT + 'put/duration'), document.getElementById('durations-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/ranges', API_ROOT + 'delete/range', API_ROOT + 'post/range', API_ROOT + 'put/range'), document.getElementById('ranges-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/schools', API_ROOT + 'delete/school', API_ROOT + 'post/school' , API_ROOT + 'put/school'), document.getElementById('schools-view'));
