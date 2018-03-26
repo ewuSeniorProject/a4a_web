@@ -1,6 +1,4 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-var est_id = getEstablishmentID();
-console.log("LocalStorage est_id: " + getEstablishmentID());
 
 $(document).ready(function () {
 
@@ -239,18 +237,12 @@ $(document).ready(function () {
         // };
     }
 
-
-    var cat_id = getCategoryID();
-    var config_id = getConfigurationID();
-    var user_id = getUserID();
-    var park_id = getParkingID();
-
     var myParentVM = {
-           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + est_id, API_ROOT + 'delete/establishment/' + est_id, API_ROOT + 'post/establishment/' + est_id, API_ROOT + 'put/establishment/' + est_id),
+           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + getEstablishmentID(), API_ROOT + 'delete/establishment/' + getEstablishmentID(), API_ROOT + 'post/establishment/' + getEstablishmentID(), API_ROOT + 'put/establishment/' + getEstablishmentID()),
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + est_id, API_ROOT + 'delete/parking/est/' + est_id, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + est_id),
-        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + park_id, API_ROOT + 'delete/route_from_parking/park/' + park_id, API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + park_id),
+                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + getEstablishmentID(), API_ROOT + 'delete/parking/est/' + getEstablishmentID(), API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + getEstablishmentID()),
+        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + getParkingID(), API_ROOT + 'delete/route_from_parking/park/' + getParkingID(), API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + getParkingID()),
     };
 
     ko.applyBindings(myParentVM);
@@ -271,25 +263,25 @@ function getEstablishmentID() {
 }
 
 function getParkingID() {
-    $.getJSON(API_ROOT + 'get/parking/est/' + est_id, function (data) {
+    $.getJSON(API_ROOT + 'get/parking/est/' + getEstablishmentID(), function (data) {
             return new data.park_id;
     });
 }
 
 function getCategoryID() {
-    $.getJSON(API_ROOT + 'get/establishment/' + est_id, function (data) {
+    $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
         return new data.cat_id;
     });
 }
 
 function getConfigurationID() {
-    $.getJSON(API_ROOT + 'get/establishment/' + est_id, function (data) {
+    $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
         return new data.config_id;
     });
 }
 
 function getUserID() {
-    $.getJSON(API_ROOT + 'get/establishment/' + est_id, function (data) {
+    $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
         return new data.user_id;
     });
 }
