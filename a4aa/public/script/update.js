@@ -1,4 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
+var est_id = getEstablishmentID();
 console.log("LocalStorage est_id: " + getEstablishmentID());
 
 $(document).ready(function () {
@@ -238,7 +239,7 @@ $(document).ready(function () {
         // };
     }
 
-    var est_id = getEstablishmentID();
+
     var cat_id = getCategoryID();
     var config_id = getConfigurationID();
     var user_id = getUserID();
@@ -250,9 +251,7 @@ $(document).ready(function () {
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
                  parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + est_id, API_ROOT + 'delete/parking/est/' + est_id, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + est_id),
         routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + park_id, API_ROOT + 'delete/route_from_parking/park/' + park_id, API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + park_id),
-    }
-
-    console.log("myParentVM: " + JSON.stringify(myParentVM));
+    };
 
     ko.applyBindings(myParentVM);
 
