@@ -1,5 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-console.log("LocalStorage: " + getEstablishmentID());
+console.log("LocalStorage est_id: " + getEstablishmentID());
 
 $(document).ready(function () {
 
@@ -51,8 +51,8 @@ $(document).ready(function () {
         $.getJSON(getUri, function (data) {
             localStorage.setItem('categoryID', data.cat_id);
             localStorage.setItem('userID', data.user_id);
-            console.log("LocalStorage: " + getCategoryID());
-            console.log("LocalStorage: " + getUserID());
+            console.log("LocalStorage cat_id: " + getCategoryID());
+            console.log("LocalStorage user_id: " + getUserID());
             self.establishmentList($.map(data, function (item) {
                 return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -139,7 +139,7 @@ $(document).ready(function () {
 
         $.getJSON(getUri, function (data) {
             localStorage.setItem('parkID', data.park_id);
-            console.log("LocalStorage: " + getParkingID());
+            console.log("LocalStorage park_id: " + getParkingID());
             self.parkingList($.map(data, function (item) {
                 return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
             }));
