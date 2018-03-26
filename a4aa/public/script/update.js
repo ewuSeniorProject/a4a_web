@@ -242,12 +242,17 @@ $(document).ready(function () {
         // };
     }
 
+    var est_id = getEstablishmentID();
+    var cat_id = getCategoryID();
+    var user_id = getUserID();
+    var park_id = getParkingID();
+
     var myParentVM = {
-           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + getEstablishmentID(), API_ROOT + 'delete/establishment/' + getEstablishmentID(), API_ROOT + 'post/establishment/' + getEstablishmentID(), API_ROOT + 'put/establishment/' + getEstablishmentID()),
+           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + est_id, API_ROOT + 'delete/establishment/' + est_id, API_ROOT + 'post/establishment/' + est_id, API_ROOT + 'put/establishment/' + est_id),
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + getEstablishmentID(), API_ROOT + 'delete/parking/est/' + getEstablishmentID(), API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + getEstablishmentID()),
-        routeFromParkingVM : new RouteFromParkinkViewModel(API_ROOT + 'get/parking/est/' + getParkingID(), API_ROOT + 'delete/parking/est/' + getParkingID(), API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + getParkingID()),
+                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + est_id, API_ROOT + 'delete/parking/est/' + est_id, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + est_id),
+        routeFromParkingVM : new RouteFromParkinkViewModel(API_ROOT + 'get/parking/est/' + park_id, API_ROOT + 'delete/parking/est/' + park_id, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + park_id),
     }
 
     console.log("myParentVM: " + JSON.stringify(myParentVM));
