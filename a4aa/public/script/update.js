@@ -1,5 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const ESTABLISHMENTID = Number(getEstablishmentID());
+const ESTABLISHMENTID = localStorage.getItem("establishmentID");
 console.log("est_id: " + ESTABLISHMENTID);
 
 $(document).ready(function () {
@@ -211,9 +211,7 @@ $(document).ready(function () {
 
 });
 
-function getEstablishmentID() {
-     return localStorage.getItem("establishmentID");
-}
+
 
 function getParkingID() {
     return localStorage.getItem("parkID");
