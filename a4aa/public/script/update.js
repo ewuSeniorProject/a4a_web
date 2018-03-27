@@ -1,5 +1,5 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const EST_ID = localStorage.getItem('establishmentID');
+const EST_ID = localStorage.getItem("establishmentID");
 console.log("EST_ID: " + EST_ID);
 
 $(document).ready(function () {
@@ -283,6 +283,21 @@ $(document).ready(function () {
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
     
 });
+
+
+
+
+function getParkingID() {
+    return localStorage.getItem("parkID");
+}
+
+function getCategoryID() {
+    return localStorage.getItem("categoryID");
+}
+
+function getUserID() {
+    return localStorage.getItem("userID");
+}
 
 
 function removeRequest(uri, record) {
