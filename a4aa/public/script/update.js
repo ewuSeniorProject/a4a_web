@@ -1,31 +1,28 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
+const EST_ID = localStorage.getItem("establishmentID");
 
 $(document).ready(function () {
 
-    function getEstablishmentID() {
-        return localStorage.getItem("establishmentID");
-    }
-
     function getParkingID() {
-        $.getJSON(API_ROOT + 'get/parking/est/' + getEstablishmentID(), function (data) {
+        $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) {
             return new data.park_id;
         });
     }
 
     function getCategoryID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
             return new data.cat_id;
         });
     }
 
     function getConfigurationID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
             return new data.config_id;
         });
     }
 
     function getUserID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
             return new data.user_id;
         });
     }
@@ -266,10 +263,10 @@ $(document).ready(function () {
     }
 
     var myParentVM = {
-           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + getEstablishmentID(), API_ROOT + 'delete/establishment/' + getEstablishmentID(), API_ROOT + 'post/establishment/' + getEstablishmentID(), API_ROOT + 'put/establishment/' + getEstablishmentID()),
+           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + EST_ID, API_ROOT + 'delete/establishment/' + EST_ID, API_ROOT + 'post/establishment/' + EST_ID, API_ROOT + 'put/establishment/' + EST_ID),
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + getEstablishmentID(), API_ROOT + 'delete/parking/est/' + getEstablishmentID(), API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + getEstablishmentID()),
+                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + EST_ID, API_ROOT + 'delete/parking/est/' + EST_ID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + EST_ID),
         routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + getParkingID(), API_ROOT + 'delete/route_from_parking/park/' + getParkingID(), API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + getParkingID()),
     };
 
@@ -283,36 +280,9 @@ $(document).ready(function () {
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/schools', API_ROOT + 'delete/school', API_ROOT + 'post/school' , API_ROOT + 'put/school'), document.getElementById('schools-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tags', API_ROOT + 'delete/tag', API_ROOT + 'post/tag', API_ROOT + 'put/tag'), document.getElementById('tags-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
-
+    
 });
 
-function getEstablishmentID() {
-     return localStorage.getItem("establishmentID");
-}
-
-function getParkingID() {
-    $.getJSON(API_ROOT + 'get/parking/est/' + getEstablishmentID(), function (data) {
-            return new data.park_id;
-    });
-}
-
-function getCategoryID() {
-    $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
-        return new data.cat_id;
-    });
-}
-
-function getConfigurationID() {
-    $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
-        return new data.config_id;
-    });
-}
-
-function getUserID() {
-    $.getJSON(API_ROOT + 'get/establishment/' + getEstablishmentID(), function (data) {
-        return new data.user_id;
-    });
-}
 
 function removeRequest(uri, record) {
     $.ajax({
