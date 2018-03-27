@@ -1,31 +1,30 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
 console.log("EST_ID: " + EST_ID);
+const PARK_ID = function() { $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) { return data.park_id; }); };
+console.log("PARK_ID: " + PARK_ID);
+const infoArray = function() { $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return [ data.cat_id, data.config_id, data.user_id ]; }); };
+const CAT_ID = infoArray[0];
+console.log("CAT_ID: " + CAT_ID);
+const CONFIG_ID = infoArray[1];
+console.log("CONFIG_ID: " + CONFIG_ID);
+const USER_ID = infoArray[2];
+console.log("USER_ID: " + USER_ID);
+
+
 
 $(document).ready(function () {
 
-    function getParkingID() {
-        $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) {
-            return data.park_id;
-        });
-    }
-
     function getCategoryID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
-            return data.cat_id;
-        });
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return data.cat_id; });
     }
 
     function getConfigurationID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
-            return data.config_id;
-        });
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return data.config_id; });
     }
 
     function getUserID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
-            return data.user_id;
-        });
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return data.user_id; });
     }
 
     function EstablishmentModel(parm) {
@@ -268,7 +267,7 @@ $(document).ready(function () {
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
                  parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + EST_ID, API_ROOT + 'delete/parking/est/' + EST_ID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + EST_ID),
-        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + getParkingID(), API_ROOT + 'delete/route_from_parking/park/' + getParkingID(), API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + getParkingID()),
+        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + PARK_ID, API_ROOT + 'delete/route_from_parking/park/' + PARK_ID, API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + PARK_ID),
     };
 
     ko.applyBindings(myParentVM);
@@ -287,7 +286,7 @@ $(document).ready(function () {
 
 
 
-function getParkingID() {
+function PARK_ID {
     return localStorage.getItem("parkID");
 }
 
