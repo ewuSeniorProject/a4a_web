@@ -15,18 +15,6 @@ console.log("USER_ID: " + USER_ID);
 
 $(document).ready(function () {
 
-    function getCategoryID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return data.cat_id; });
-    }
-
-    function getConfigurationID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return data.config_id; });
-    }
-
-    function getUserID() {
-        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return data.user_id; });
-    }
-
     function EstablishmentModel(parm) {
         console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
@@ -282,21 +270,6 @@ $(document).ready(function () {
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
     
 });
-
-
-
-
-function PARK_ID {
-    return localStorage.getItem("parkID");
-}
-
-function getCategoryID() {
-    return localStorage.getItem("categoryID");
-}
-
-function getUserID() {
-    return localStorage.getItem("userID");
-}
 
 
 function removeRequest(uri, record) {
