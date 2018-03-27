@@ -1,11 +1,35 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
-const ESTABLISHMENTID = localStorage.getItem("establishmentID");
-console.log("est_id: " + ESTABLISHMENTID);
+const EST_ID = localStorage.getItem("establishmentID");
+console.log("EST_ID: " + EST_ID);
 
 $(document).ready(function () {
 
+    function getParkingID() {
+        $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) {
+            return data.park_id;
+        });
+    }
+
+    function getCategoryID() {
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
+            return data.cat_id;
+        });
+    }
+
+    function getConfigurationID() {
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
+            return data.config_id;
+        });
+    }
+
+    function getUserID() {
+        $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
+            return data.user_id;
+        });
+    }
+
     function EstablishmentModel(parm) {
-        //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
+        console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.est_id = ko.observable(parm.data.est_id);
@@ -50,28 +74,26 @@ $(document).ready(function () {
         self.establishmentList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('categoryID', data.cat_id);
-            localStorage.setItem('userID', data.user_id);
             self.establishmentList($.map(data, function (item) {
                 return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
             }));
         });
 
-        self.removeItem = function (item) {
-            var con = confirm("Delete this record?");
-            if (con){
-                self.establishmentList.remove(item);
-                removeRequest(deleteUri, item.est_id());
-            }
-        };
-
-        self.addItem = function () {
-            self.establishmentList.push(new EstablishmentModel({name: "", postUri:postUri, putUri:putUri}));
-        };
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.establishmentList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.establishmentList.push(new EstablishmentModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
     }
 
     function CategoryModel(data) {
-        // console.log("CategoryModel(data): " + JSON.stringify(data));
+        console.log("CategoryModel(data): " + JSON.stringify(data));
         this.category_id = ko.observable(data.cat_id);
         this.category_id.focused = ko.observable(false);
         this.category_name = ko.observable(data.name);
@@ -102,7 +124,7 @@ $(document).ready(function () {
     }
 
     function ParkingModel(parm) {
-        //console.log("ParkingModel(parm): " + JSON.stringify(parm));
+        console.log("ParkingModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.park_id = ko.observable(parm.data.park_id);
@@ -137,7 +159,6 @@ $(document).ready(function () {
         self.parkingList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('parkID', data.park_id);
             self.parkingList($.map(data, function (item) {
                 return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -156,8 +177,62 @@ $(document).ready(function () {
         // };
     }
 
+    function RouteFromParkingModel(parm) {
+        console.log("ParkingModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.route_park_id = ko.observable(parm.data.route_park_id);
+        this.distance = ko.observable(parm.data.distance);
+        this.distance.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.route_surface = ko.observable(parm.data.route_surface);
+        this.route_surface.focused = ko.observable(false);
+        this.route_curbs = ko.observable(parm.data.route_curbs);
+        this.route_curbs.focused = ko.observable(false);
+        this.tactile_warning = ko.observable(parm.data.tactile_warning);
+        this.tactile_warning.focused = ko.observable(false);
+        this.covered = ko.observable(parm.data.covered);
+        this.covered.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.park_id = ko.observable(parm.data.park_id);
+        this.park_id.focused = ko.observable(false);
+    }
+
+    function RouteFromParkingViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.routeFromParkingList = ko.observableArray([]);
+
+        $.getJSON(getUri, function (data) {
+                self.routeFromParkingList($.map(data, function (item) {
+                return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+            }));
+        });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
     function UserModel(parm) {
-        //console.log("UserModel(parm): " + JSON.stringify(parm));
+        console.log("UserModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.user_id = ko.observable(parm.data.user_id);
@@ -170,7 +245,6 @@ $(document).ready(function () {
         self.userList = ko.observableArray([]);
 
         $.getJSON(getUri, function (data) {
-            localStorage.setItem('parkID', data.park_id);
             self.userList($.map(data, function (item) {
                 return new UserModel({data:item, postUri:postUri, putUri:putUri});
             }));
@@ -190,13 +264,12 @@ $(document).ready(function () {
     }
 
     var myParentVM = {
-        establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + ESTABLISHMENTID, API_ROOT + 'delete/establishment/' + ESTABLISHMENTID, API_ROOT + 'post/establishment/' + ESTABLISHMENTID, API_ROOT + 'put/establishment/' + ESTABLISHMENTID),
-             categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
-                 userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-              parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID),
-    }
-
-    console.log("myParentVM: " + JSON.stringify(myParentVM));
+           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + EST_ID, API_ROOT + 'delete/establishment/' + EST_ID, API_ROOT + 'post/establishment/' + EST_ID, API_ROOT + 'put/establishment/' + EST_ID),
+                categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
+                    userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
+                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + EST_ID, API_ROOT + 'delete/parking/est/' + EST_ID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + EST_ID),
+        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + getParkingID(), API_ROOT + 'delete/route_from_parking/park/' + getParkingID(), API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + getParkingID()),
+    };
 
     ko.applyBindings(myParentVM);
 
@@ -208,8 +281,9 @@ $(document).ready(function () {
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/schools', API_ROOT + 'delete/school', API_ROOT + 'post/school' , API_ROOT + 'put/school'), document.getElementById('schools-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tags', API_ROOT + 'delete/tag', API_ROOT + 'post/tag', API_ROOT + 'put/tag'), document.getElementById('tags-view'));
     // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
-
+    
 });
+
 
 
 
@@ -224,6 +298,7 @@ function getCategoryID() {
 function getUserID() {
     return localStorage.getItem("userID");
 }
+
 
 function removeRequest(uri, record) {
     $.ajax({
