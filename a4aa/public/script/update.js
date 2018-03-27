@@ -1,5 +1,6 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
+const TEMP_ID = 2;
 console.log("EST_ID: " + EST_ID);
 const PARK_ID = $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) { return JSON.stringify(data.park_id); });
 console.log("PARK_ID: " + PARK_ID);
@@ -255,7 +256,7 @@ $(document).ready(function () {
                 categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
                     userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
                  parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + EST_ID, API_ROOT + 'delete/parking/est/' + EST_ID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + EST_ID),
-        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + PARK_ID, API_ROOT + 'delete/route_from_parking/park/' + PARK_ID, API_ROOT + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + PARK_ID),
+        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + TEMP_ID, API_ROOT + 'delete/route_from_parking/park/' + PARK_ID, TEMP_ID + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + TEMP_ID),
     };
 
     ko.applyBindings(myParentVM);
