@@ -6,25 +6,25 @@ $(document).ready(function () {
 
     function getParkingID() {
         $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) {
-            return new data.park_id;
+            return data.park_id;
         });
     }
 
     function getCategoryID() {
         $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
-            return new data.cat_id;
+            return data.cat_id;
         });
     }
 
     function getConfigurationID() {
         $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
-            return new data.config_id;
+            return data.config_id;
         });
     }
 
     function getUserID() {
         $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) {
-            return new data.user_id;
+            return data.user_id;
         });
     }
 
