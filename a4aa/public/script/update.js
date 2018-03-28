@@ -1,6 +1,6 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
-const TEMP_ID = 1;
+const TEMP_ID = 2;
 console.log("EST_ID: " + EST_ID);
 const PARK_ID = $.getJSON(API_ROOT + 'get/parking/est/' + EST_ID, function (data) { return JSON.stringify(data.park_id); });
 console.log("PARK_ID: " + PARK_ID);
