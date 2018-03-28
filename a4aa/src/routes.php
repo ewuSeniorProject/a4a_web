@@ -7,7 +7,7 @@ use Slim\Http\Response;
 
 // home page
 $app->get('/', function (Request $request, Response $response, array $args) {
-    $url = 'http://www.mizesolutions.com/a4a_web/a4aa/public/index.html';
+    $url = 'index.html';
     return $response->withRedirect($url, 301);
 });
 
