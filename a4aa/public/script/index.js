@@ -20,7 +20,7 @@ function EstablishmentModel(data) {
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
     self.contact_lname = data.contact_lname;
-    self.baseUrl = ("http://www.mizesolutions.com/a4a_web/a4aa/public/update.html");
+    self.baseUrl = ("update.html");
 }
 
 
@@ -39,7 +39,7 @@ function EstablishmentViewModel() {
     };
 
     self.onLoad = function () {
-        self.getEstablishmentList("http://www.mizesolutions.com/a4a_web/a4aa/public/establishment/");
+        self.getEstablishmentList("establishment/");
     };
 
     self.onLoad();

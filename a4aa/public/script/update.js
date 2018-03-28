@@ -1,25 +1,14 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
-const TEMP_ID = 2;
-const PARK_ID = getParkId(EST_ID);
-const infoArray = $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return [ data[0].cat_id, data[0].config_id, data[0].user_id ]; });
-const CAT_ID = infoArray[0];
-const CONFIG_ID = infoArray[1];
-const USER_ID = infoArray[2];
-
-function getParkId(value) {
-    $.ajax ({
-        dataType: 'json',
-        url: API_ROOT + 'get/park_id/est/' + value,
-        success: function (data) {
-            console.log("getParkId data: " + JSON.stringify(data));
-            console.log("data[0].park_id : " + data[0].park_id);
-            return data[0].park_id;
-        }
-    });
-}
+var PARK_ID;
+var CAT_ID;
+var CONFIG_ID;
+var USER_ID;
 
 $(document).ready(function () {
+
+    getParkId(EST_ID);
+    getIds(EST_ID);
 
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
@@ -257,23 +246,23 @@ $(document).ready(function () {
     }
 
     var myParentVM = {
-           establishmentVM : new EstablishmentViewModel(API_ROOT + 'get/establishment/' + EST_ID, API_ROOT + 'delete/establishment/' + EST_ID, API_ROOT + 'post/establishment/' + EST_ID, API_ROOT + 'put/establishment/' + EST_ID),
-                categoryVM : new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'),
-                    userVM : new UserViewModel(API_ROOT + 'user/', API_ROOT + 'delete/user/', API_ROOT + 'post/user/', API_ROOT + 'put/user/'),
-                 parkingVM : new ParkingViewModel(API_ROOT + 'get/parking/est/' + EST_ID, API_ROOT + 'delete/parking/est/' + EST_ID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + EST_ID),
-        routeFromParkingVM : new RouteFromParkingViewModel(API_ROOT + 'get/route_from_parking/park/' + TEMP_ID, API_ROOT + 'delete/route_from_parking/park/' + PARK_ID, TEMP_ID + 'post/route_from_parking/', API_ROOT + 'put/route_from_parking/park/' + TEMP_ID),
+           establishmentVM : new EstablishmentViewModel('get/establishment/' + EST_ID, 'delete/establishment/' + EST_ID, 'post/establishment/' + EST_ID, 'put/establishment/' + EST_ID),
+                categoryVM : new CategoryViewModel('category/', 'delete/category/', 'post/category/', 'put/category/'),
+                    userVM : new UserViewModel('user/', 'delete/user/', 'post/user/', 'put/user/'),
+                 parkingVM : new ParkingViewModel('get/parking/est/' + EST_ID, 'delete/parking/est/' + EST_ID, 'post/parking/', 'put/parking/est/' + EST_ID),
+        routeFromParkingVM : new RouteFromParkingViewModel('get/route_from_parking/park/' + PARK_ID, 'delete/route_from_parking/park/' + PARK_ID, 'post/route_from_parking/', 'put/route_from_parking/park/' + PARK_ID),
     };
 
     ko.applyBindings(myParentVM);
 
-    // ko.applyBindings(new EstablishmentViewModel(API_ROOT + 'get/establishment/' + ESTABLISHMENTID, API_ROOT + 'delete/establishment/' + ESTABLISHMENTID, API_ROOT + 'post/establishment/' + ESTABLISHMENTID, API_ROOT + 'put/establishment/' + ESTABLISHMENTID), document.getElementById('collapseOne'));
-    // ko.applyBindings(new CategoryViewModel(API_ROOT + 'category/', API_ROOT + 'delete/category/', API_ROOT + 'post/category/', API_ROOT + 'put/category/'), document.getElementById('categoryVM'));
-    // ko.applyBindings(new ParkingViewModel(API_ROOT + '/get/parking/est/' + ESTABLISHMENTID, API_ROOT + 'delete/parking/est/' + ESTABLISHMENTID, API_ROOT + 'post/parking/', API_ROOT + 'put/parking/est/' + ESTABLISHMENTID), document.getElementById('collapseTwo'));
-    // ko.applyBindings(new ViewModel(API_ROOT + 'get/durations', API_ROOT + 'delete/duration', API_ROOT + 'post/duration', API_ROOT + 'put/duration'), document.getElementById('durations-view'));
-    // ko.applyBindings(new ViewModel(API_ROOT + 'get/ranges', API_ROOT + 'delete/range', API_ROOT + 'post/range', API_ROOT + 'put/range'), document.getElementById('ranges-view'));
-    // ko.applyBindings(new ViewModel(API_ROOT + 'get/schools', API_ROOT + 'delete/school', API_ROOT + 'post/school' , API_ROOT + 'put/school'), document.getElementById('schools-view'));
-    // ko.applyBindings(new ViewModel(API_ROOT + 'get/tags', API_ROOT + 'delete/tag', API_ROOT + 'post/tag', API_ROOT + 'put/tag'), document.getElementById('tags-view'));
-    // ko.applyBindings(new ViewModel(API_ROOT + 'get/tiers', API_ROOT + 'delete/tier', API_ROOT + 'post/tier', API_ROOT + 'put/tier'), document.getElementById('tiers-view'));
+    // ko.applyBindings(new EstablishmentViewModel('get/establishment/' + ESTABLISHMENTID, 'delete/establishment/' + ESTABLISHMENTID, 'post/establishment/' + ESTABLISHMENTID, 'put/establishment/' + ESTABLISHMENTID), document.getElementById('collapseOne'));
+    // ko.applyBindings(new CategoryViewModel('category/', 'delete/category/', 'post/category/', 'put/category/'), document.getElementById('categoryVM'));
+    // ko.applyBindings(new ParkingViewModel('/get/parking/est/' + ESTABLISHMENTID, 'delete/parking/est/' + ESTABLISHMENTID, 'post/parking/', 'put/parking/est/' + ESTABLISHMENTID), document.getElementById('collapseTwo'));
+    // ko.applyBindings(new ViewModel('get/durations', 'delete/duration', 'post/duration', 'put/duration'), document.getElementById('durations-view'));
+    // ko.applyBindings(new ViewModel('get/ranges', 'delete/range', 'post/range', 'put/range'), document.getElementById('ranges-view'));
+    // ko.applyBindings(new ViewModel('get/schools', 'delete/school', 'post/school' , 'put/school'), document.getElementById('schools-view'));
+    // ko.applyBindings(new ViewModel('get/tags', 'delete/tag', 'post/tag', 'put/tag'), document.getElementById('tags-view'));
+    // ko.applyBindings(new ViewModel('get/tiers', 'delete/tier', 'post/tier', 'put/tier'), document.getElementById('tiers-view'));
 
     console.log("EST_ID: " + EST_ID);
     console.log("PARK_ID: " + PARK_ID);
@@ -282,6 +271,31 @@ $(document).ready(function () {
     console.log("USER_ID: " + USER_ID);
 });
 
+function getParkId(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/park_id/est/' + value,
+        success: function (data) {
+            // console.log("getParkId data: " + JSON.stringify(data));
+            // console.log("data[0].park_id : " + data[0].park_id);
+            PARK_ID = data[0].park_id;
+        }
+    });
+}
+
+function getIds(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/establishment/' + value,
+        success: function (data) {
+            CAT_ID = data[0].cat_id;
+            CONFIG_ID = data[0].config_id;
+            USER_ID = data[0].user_id;
+        }
+    });
+}
 
 function removeRequest(uri, record) {
     $.ajax({
