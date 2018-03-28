@@ -1,24 +1,25 @@
 const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
 const TEMP_ID = 2;
+const PARK_ID = getParkId(EST_ID);
+const infoArray = $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return [ data.cat_id, data.config_id, data.user_id ]; });
+const CAT_ID = infoArray[0];
+const CONFIG_ID = infoArray[1];
+const USER_ID = infoArray[2];
 
 console.log("EST_ID: " + EST_ID);
-const PARK_ID = getParkId(EST_ID);
 console.log("PARK_ID: " + PARK_ID);
-const infoArray = $.getJSON(API_ROOT + 'get/establishment/' + EST_ID, function (data) { return JSON.stringify([ data.cat_id, data.config_id, data.user_id ]); });
-const CAT_ID = infoArray[0];
 console.log("CAT_ID: " + CAT_ID);
-const CONFIG_ID = infoArray[1];
 console.log("CONFIG_ID: " + CONFIG_ID);
-const USER_ID = infoArray[2];
 console.log("USER_ID: " + USER_ID);
 
 function getParkId(value) {
-    $.get(API_ROOT + 'get/park_id/est/' + value, function (data) {
-        console.log("getParkId data: " + JSON.stringify(data));
-        $.each(data, function(index) {
-            return data[index];
-        });
+    $.ajax ({
+        dataType: 'json',
+        url: API_ROOT + 'get/park_id/est/' + value,
+        success: function (data) {
+            console.log("getParkId data: " + data);
+        }
     });
 }
 
