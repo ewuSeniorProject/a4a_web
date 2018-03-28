@@ -14,7 +14,7 @@ const USER_ID = infoArray[2];
 console.log("USER_ID: " + USER_ID);
 
 function getParkId(value) {
-    $.getJSON(API_ROOT + 'get/park_id/est/' + value, function (data) {
+    $.getJSON(API_ROOT + 'get/parking/est/' + value, function (data) {
         console.log("getParkId data: " + JSON.stringify(data));
         var pid = JSON.parse(data.park_id);
         console.log("pid = : " + pid);
