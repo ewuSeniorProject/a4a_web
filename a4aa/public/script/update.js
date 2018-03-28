@@ -16,8 +16,8 @@ console.log("USER_ID: " + USER_ID);
 function getParkId(value) {
     $.get(API_ROOT + 'get/park_id/est/' + value, function (data) {
         console.log("getParkId data: " + JSON.stringify(data));
-        var pid = JSON.stringify(data.park_id);
-        console.log("pid = : " + JSON.stringify(pid));
+        var pid = data.park_id;
+        console.log("pid = : " + pid);
         return pid;
     });
 }
