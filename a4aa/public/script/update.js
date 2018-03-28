@@ -17,7 +17,7 @@ function getParkId(value) {
     $.get(API_ROOT + 'get/park_id/est/' + value, function (data) {
         console.log("getParkId data: " + JSON.stringify(data));
         var pid = JSON.stringify(data.park_id);
-        console.log("pid = : " + JSON.stringify(data));
+        console.log("pid = : " + JSON.stringify(pid));
         return pid;
     });
 }
