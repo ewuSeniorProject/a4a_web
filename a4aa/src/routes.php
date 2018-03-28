@@ -255,6 +255,17 @@ $app->get('/get/parking/est/[{id}]', function (Request $request, Response $respo
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// get parking id by establishment id
+$app->get('/get/park_id/est/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $sth = $this->db->prepare("SELECT park_id FROM Parking WHERE est_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // delete parking data by id
 $app->delete('/delete/parking/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
