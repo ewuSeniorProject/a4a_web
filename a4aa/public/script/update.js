@@ -16,7 +16,7 @@ console.log("USER_ID: " + USER_ID);
 function getParkId(value) {
     $.get(API_ROOT + 'get/park_id/est/' + value, function (data) {
         console.log("getParkId data: " + JSON.stringify(data));
-        var pid = data.park_id;
+        var pid = data["park_id"];
         console.log("pid = : " + pid);
         return pid;
     });
@@ -25,7 +25,7 @@ function getParkId(value) {
 $(document).ready(function () {
 
     function EstablishmentModel(parm) {
-        console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
+        //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.est_id = ko.observable(parm.data.est_id);
@@ -89,7 +89,7 @@ $(document).ready(function () {
     }
 
     function CategoryModel(data) {
-        console.log("CategoryModel(data): " + JSON.stringify(data));
+        // console.log("CategoryModel(data): " + JSON.stringify(data));
         this.category_id = ko.observable(data.cat_id);
         this.category_id.focused = ko.observable(false);
         this.category_name = ko.observable(data.name);
@@ -120,7 +120,7 @@ $(document).ready(function () {
     }
 
     function ParkingModel(parm) {
-        console.log("ParkingModel(parm): " + JSON.stringify(parm));
+        // console.log("ParkingModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.park_id = ko.observable(parm.data.park_id);
@@ -174,7 +174,7 @@ $(document).ready(function () {
     }
 
     function RouteFromParkingModel(parm) {
-        console.log("ParkingModel(parm): " + JSON.stringify(parm));
+        // console.log("ParkingModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.route_park_id = ko.observable(parm.data.route_park_id);
@@ -228,7 +228,7 @@ $(document).ready(function () {
     }
 
     function UserModel(parm) {
-        console.log("UserModel(parm): " + JSON.stringify(parm));
+        // console.log("UserModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.user_id = ko.observable(parm.data.user_id);
