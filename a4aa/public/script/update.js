@@ -18,7 +18,7 @@ function getParkId(value) {
         dataType: 'json',
         url: API_ROOT + 'get/park_id/est/' + value,
         success: function (data) {
-            console.log("getParkId data: " + data);
+            console.log("getParkId data: " + JSON.stringify(data));
         }
     });
 }
