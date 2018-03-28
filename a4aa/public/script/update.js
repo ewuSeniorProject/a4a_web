@@ -14,9 +14,9 @@ const USER_ID = infoArray[2];
 console.log("USER_ID: " + USER_ID);
 
 function getParkId(value) {
-    $.getJSON(API_ROOT + 'get/parking/est/' + value, function (data) {
+    $.get(API_ROOT + 'get/parking/est/' + value, function (data) {
         console.log("parking data: " + data);
-        var tid = JSON.stringify(data.park_id);
+        var tid = data.park_id;
         return tid;
     });
 }
