@@ -19,6 +19,8 @@ function getParkId(value) {
         url: API_ROOT + 'get/park_id/est/' + value,
         success: function (data) {
             console.log("getParkId data: " + JSON.stringify(data));
+            console.log("data[0].park_id : " + data[0].park_id);
+            return data[0].park_id;
         }
     });
 }
