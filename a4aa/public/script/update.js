@@ -55,11 +55,22 @@ $(document).ready(function () {
         var self = this;
         self.establishmentList = ko.observableArray([]);
 
-        $.getJSON(getUri, function (data) {
-            self.establishmentList($.map(data, function (item) {
-                return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
-            }));
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.establishmentList($.map(data, function (item) {
+                    return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
         });
+
+        // $.getJSON(getUri, function (data) {
+        //     self.establishmentList($.map(data, function (item) {
+        //         return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
 
         // self.removeItem = function (item) {
         //     var con = confirm("Delete this record?");
@@ -86,11 +97,22 @@ $(document).ready(function () {
         var self = this;
         self.categoryList = ko.observableArray([]);
 
-        $.getJSON(getUri, function (data) {
-            self.categoryList($.map(data, function (item) {
-                return new CategoryModel(item);
-            }));
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.categoryList($.map(data, function (item) {
+                    return new CategoryModel(item);
+                }));
+            }
         });
+
+        // $.getJSON(getUri, function (data) {
+        //     self.categoryList($.map(data, function (item) {
+        //         return new CategoryModel(item);
+        //     }));
+        // });
 
         // self.removeItem = function (item) {
         //     var con = confirm("Delete this record?");
@@ -140,11 +162,22 @@ $(document).ready(function () {
         var self = this;
         self.parkingList = ko.observableArray([]);
 
-        $.getJSON(getUri, function (data) {
-            self.parkingList($.map(data, function (item) {
-                return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
-            }));
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.parkingList($.map(data, function (item) {
+                    return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
         });
+
+        // $.getJSON(getUri, function (data) {
+        //     self.parkingList($.map(data, function (item) {
+        //         return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
 
         // self.removeItem = function (item) {
         //     var con = confirm("Delete this record?");
@@ -194,11 +227,22 @@ $(document).ready(function () {
         var self = this;
         self.routeFromParkingList = ko.observableArray([]);
 
-        $.getJSON(getUri, function (data) {
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
                 self.routeFromParkingList($.map(data, function (item) {
-                return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-            }));
+                    return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
         });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
 
         // self.removeItem = function (item) {
         //     var con = confirm("Delete this record?");
@@ -226,11 +270,22 @@ $(document).ready(function () {
         var self = this;
         self.userList = ko.observableArray([]);
 
-        $.getJSON(getUri, function (data) {
-            self.userList($.map(data, function (item) {
-                return new UserModel({data:item, postUri:postUri, putUri:putUri});
-            }));
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.userList($.map(data, function (item) {
+                    return new UserModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
         });
+
+        // $.getJSON(getUri, function (data) {
+        //     self.userList($.map(data, function (item) {
+        //         return new UserModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
 
         // self.removeItem = function (item) {
         //     var con = confirm("Delete this record?");
