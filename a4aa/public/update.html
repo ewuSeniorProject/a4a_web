@@ -34,12 +34,11 @@
         <script src="script/update.js"></script>
     </head>
     <body>
-
-        <div class="header">
-            <h1>Access 4 All Spokane</h1>
-        </div>
         <div id="page-preloader">
             <span class="spinner"></span>
+        </div>
+        <div class="header">
+            <h1>Access 4 All Spokane</h1>
         </div>
         <div class="page">
             <div class="section">
@@ -292,16 +291,16 @@
                             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
                                 <div class="card-body" data-bind="foreach: exteriorStairsVM.exteriorStairsList">
                                     <div class="table-row-color">
-                                        <div class="col-lg-4"><label for="stairs_required"> Stairs are required : </label> <input class="form-control" id="stairs_required" data-bind="value: stairs_required,hasfocus: distance.focused" ></div>
-                                        <div class="col-lg-4"><label for="stairs_available"> Stairs are available : </label> <input class="form-control" id="stairs_available" data-bind="value: stairs_available,hasfocus: distance.focused" ></div>
-                                        <div class="col-lg-4"><label for="num_stairs"> Number of stairs : </label> <input class="form-control" id="num_stairs" data-bind="value: num_stairs,hasfocus: distance.focused" ></div>
+                                        <div class="col-lg-4"><label for="stairs_required"> Stairs are required: </label> <input class="form-control" id="stairs_required" data-bind="value: stairs_required,hasfocus: distance.focused" ></div>
+                                        <div class="col-lg-4"><label for="stairs_available"> Stairs are available: </label> <input class="form-control" id="stairs_available" data-bind="value: stairs_available,hasfocus: distance.focused" ></div>
+                                        <div class="col-lg-4"><label for="num_stairs"> Number of stairs: </label> <input class="form-control" id="num_stairs" data-bind="value: num_stairs,hasfocus: distance.focused" ></div>
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <input class="form-control" id="handrail_both_sides" data-bind="value: handrail_both_sides,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><input class="form-control" id="handrail_side" data-bind="value: handrail_side, hasfocus: min_width.focused"></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-lg-8"><label for="handrail_requlations_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface.: </label><input class="form-control" id="handrail_requlations_height" data-bind="value: handrail_requlations_height, hasfocus: route_surface.focused"></div>
+                                        <div class="col-lg-8"><label for="handrail_requlations_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><input class="form-control" id="handrail_requlations_height" data-bind="value: handrail_requlations_height, hasfocus: route_surface.focused"></div>
                                         <div class="col-lg-4"><label for="handrail_height"> Handrail height: </label><input class="form-control" id="handrail_height" data-bind="value: handrail_height, hasfocus: shelter_bench.focused"></div>
                                     </div>
                                     <div class="table-row-color">
@@ -332,8 +331,8 @@
                             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
                                 <div class="card-body" data-bind="foreach: exteriorRampsVM.exteriorRampsList">
                                     <div class="table-row-color">
-                                        <div class="col-lg-3"><label for="ramp_required"> Ramps are required : </label> <input class="form-control" id="ramp_required" data-bind="value: ramp_required,hasfocus: distance.focused" ></div>
-                                        <div class="col-lg-3"><label for="ramo_available"> Ramps are available : </label> <input class="form-control" id="ramo_available" data-bind="value: ramo_available,hasfocus: ramo_available.focused" ></div>
+                                        <div class="col-lg-3"><label for="ramp_required"> Ramps are required: </label> <input class="form-control" id="ramp_required" data-bind="value: ramp_required,hasfocus: distance.focused" ></div>
+                                        <div class="col-lg-3"><label for="ramp_available"> Ramps are available: </label> <input class="form-control" id="ramp_available" data-bind="value: ramp_available,hasfocus: ramp_available.focused" ></div>
                                         <div class="col-lg-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <input class="form-control" id="min_widthExteriorRamps" data-bind="value: min_width,hasfocus: min_width.focused" ></div>
                                         <div class="col-lg-3"><label for="width_between_handrails"> Ramps width: </label> <input class="form-control" id="width_between_handrails" data-bind="value: width_between_handrails,hasfocus: width_between_handrails.focused" ></div>
                                     </div>
@@ -351,7 +350,7 @@
                                         <div class="col-lg-6"><label for="handrail_sides"> Handrail sides Left/Right/None: </label><input class="form-control" id="handrail_sides" data-bind="value: handrail_sides, hasfocus: handrail_sides.focused"></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-lg-4"><label for="handrail_requlations_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface.: </label><input class="form-control" id="handrail_requlations_heightExteriorRamps" data-bind="value: handrail_requlations_height, hasfocus: handrail_requlations_height.focused"></div>
+                                        <div class="col-lg-4"><label for="handrail_requlations_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><input class="form-control" id="handrail_requlations_heightExteriorRamps" data-bind="value: handrail_requlations_height, hasfocus: handrail_requlations_height.focused"></div>
                                         <div class="col-lg-4"><label for="handrail_heightExteriorRamps"> Handrail height: </label><input class="form-control" id="handrail_heightExteriorRamps" data-bind="value: handrail_height, hasfocus: handrail_height.focused"></div>
                                         <div class="col-lg-4"><label for="side_guards"> Ramps have adequate side guards: </label><input class="form-control" id="side_guards" data-bind="value: side_guards, hasfocus: side_guards.focused"></div>
                                     </div>
@@ -370,11 +369,153 @@
                             </div>
                         </div>
                         <!-- Main Entrance -->
-
+                        <div class="card">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerNine"  data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                <div>
+                                    <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Main Entrance
+                                </div>
+                            </div>
+                            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+                                <div class="card-body" data-bind="foreach: mainEntranceVM.mainEntranceList">
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input class="form-control" id="total_num_public_entrances" data-bind="value: total_num_public_entrances,hasfocus: total_num_public_entrances.focused" ></div>
+                                        <div class="col-lg-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <input class="form-control" id="main_ent_accessible" data-bind="value: main_ent_accessible,hasfocus: main_ent_accessible.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <input class="form-control" id="alt_ent_accessible" data-bind="value: alt_ent_accessible,hasfocus: alt_ent_accessible.focused" ></div>
+                                        <div class="col-lg-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <input class="form-control" id="accessable_signage" data-bind="value: accessable_signage,hasfocus: accessable_signage.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <input class="form-control" id="ground_level" data-bind="value: ground_level,hasfocus: ground_level.focused" ></div>
+                                        <div class="col-lg-6"><label for="threshold_level"> Threshold of entrance is level: </label><input class="form-control" id="threshold_level" data-bind="value: threshold_level, hasfocus: threshold_level.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <input class="form-control" id="threshold_beveled" data-bind="value: threshold_beveled,hasfocus: threshold_beveled.focused" ></div>
+                                        <div class="col-lg-6"><label for="beveled_height"> Height: </label><input class="form-control" id="beveled_height" data-bind="value: beveled_height, hasfocus: beveled_height.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-4"><label for="door_action"> As you enter the door opens: </label><input class="form-control" id="door_action" data-bind="value: door_action, hasfocus: door_action.focused"></div>
+                                        <div class="col-lg-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <input class="form-control" id="door_open_clearance" data-bind="value: door_open_clearance,hasfocus: door_open_clearance.focused" ></div>
+                                        <div class="col-lg-4"><label for="opening_measurement"> Opening measurement (inches): </label><input class="form-control" id="opening_measurement" data-bind="value: opening_measurement, hasfocus: opening_measurement.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-4"><label for="door_easy_open"> Doors are easy to open: </label><input class="form-control" id="door_easy_open" data-bind="value: door_easy_open, hasfocus: door_easy_open.focused"></div>
+                                        <div class="col-lg-4"><label for="door_open_force"> Actual lbs of force: </label><input class="form-control" id="door_open_force" data-bind="value: door_open_force, hasfocus: door_open_force.focused"></div>
+                                        <div class="col-lg-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><input class="form-control" id="door_use_with_fist" data-bind="value: door_use_with_fist, hasfocus: door_use_with_fist.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><input class="form-control" id="door_auto_open" data-bind="value: door_auto_open, hasfocus: door_auto_open.focused"></div>
+                                        <div class="col-lg-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><input class="form-control" id="second_door_inside" data-bind="value: second_door_inside, hasfocus: second_door_inside.focused"></div>
+                                        <div class="col-lg-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><input class="form-control" id="min_dist_between_doors" data-bind="value: min_dist_between_doors, hasfocus: min_dist_between_doors.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><input class="form-control" id="lightingMainEntrance" data-bind="value: lighting, hasfocus: lighting.focused"></div>
+                                        <div class="col-lg-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><input class="form-control" id="lighting_optionMainEntrance" data-bind="value: lighting_option, hasfocus: lighting_option.focused"></div>
+                                        <div class="col-lg-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><input class="form-control" id="lighting_typeMainEntrance" data-bind="value: lighting_type, hasfocus: lighting_type.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-12"><label for="commentMainEntrance"> Describe accessible entrance: </label><input class="form-control" id="commentMainEntrance" data-bind="value: comment, hasfocus: comment.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-12"><label for="recommendationsMainEntrance"> Recommendations: </label><input class="form-control" id="recommendationsMainEntrance" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Interior -->
-
+                        <div class="card">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerTen"  data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                <div>
+                                    <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Interior
+                                </div>
+                            </div>
+                            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+                                <div class="card-body" data-bind="foreach: interiorVM.interiorList">
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <input class="form-control" id="int_door_open_clearance" data-bind="value: int_door_open_clearance,hasfocus: int_door_open_clearance.focused" ></div>
+                                        <div class="col-lg-6"><label for="int_opening_measurement"> Opening measurement (inches): </label> <input class="form-control" id="int_opening_measurement" data-bind="value: int_opening_measurement,hasfocus: int_opening_measurement.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <input class="form-control" id="int_door_easy_open" data-bind="value: int_door_easy_open,hasfocus: int_door_easy_open.focused" ></div>
+                                        <div class="col-lg-6"><label for="int_door_open_force"> Actual lbs of force: </label> <input class="form-control" id="int_door_open_force" data-bind="value: int_door_open_force,hasfocus: int_door_open_force.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <input class="form-control" id="int_door_use_with_fist" data-bind="value: int_door_use_with_fist,hasfocus: int_door_use_with_fist.focused" ></div>
+                                        <div class="col-lg-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><input class="form-control" id="five_second_close" data-bind="value: five_second_close, hasfocus: five_second_close.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <input class="form-control" id="hallway_width" data-bind="value: hallway_width,hasfocus: hallway_width.focused" ></div>
+                                        <div class="col-lg-6"><label for="narrowest_width"> Narrowest width (inches): </label><input class="form-control" id="narrowest_width" data-bind="value: narrowest_width, hasfocus: narrowest_width.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><input class="form-control" id="wheelchair_turnaround" data-bind="value: wheelchair_turnaround, hasfocus: wheelchair_turnaround.focused"></div>
+                                        <div class="col-lg-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <input class="form-control" id="hallway_obstacles" data-bind="value: hallway_obstacles,hasfocus: hallway_obstacles.focused" ></div>
+                                        <div class="col-lg-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><input class="form-control" id="hallway_clear" data-bind="value: hallway_clear, hasfocus: hallway_clear.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="lightingInterior"> Lighting is adequate: </label><input class="form-control" id="lightingInterior" data-bind="value: lighting, hasfocus: lighting.focused"></div>
+                                        <div class="col-lg-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><input class="form-control" id="lighting_typeInterior" data-bind="value: lighting_type, hasfocus: lighting_type.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><input class="form-control" id="service_counter" data-bind="value: service_counter, hasfocus: service_counter.focused"></div>
+                                        <div class="col-lg-3"><label for="counter_height"> Service counter height (inches): </label><input class="form-control" id="counter_height" data-bind="value: counter_height, hasfocus: counter_height.focused"></div>
+                                        <div class="col-lg-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input class="form-control" id="writing_surface_height" data-bind="value: writing_surface_height, hasfocus: writing_surface_height.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><input class="form-control" id="drinking_fountain" data-bind="value: drinking_fountain, hasfocus: drinking_fountain.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-12"><label for="commentInterior"> Describe accessible entrance: </label><input class="form-control" id="commentInterior" data-bind="value: comment, hasfocus: comment.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-12"><label for="recommendationsInterior"> Recommendations: </label><input class="form-control" id="recommendationsInterior" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Elevator -->
-
+                        <div class="card">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerEleven"  data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                <div>
+                                    <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Elevator
+                                </div>
+                            </div>
+                            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
+                                <div class="card-body" data-bind="foreach: elevatorVM.elevatorList">
+                                    <div class="table-row-color">
+                                        <div class="col-lg-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <input class="form-control" id="is_elevator" data-bind="value: is_elevator,hasfocus: is_elevator.focused" ></div>
+                                        <div class="col-lg-9"><label for="location"> Where is nearest elevator or lift located in relation to the accessible entrance: </label> <input class="form-control" id="location" data-bind="value: location,hasfocus: location.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="works"> The elevator or lift works properly: </label> <input class="form-control" id="works" data-bind="value: works,hasfocus: works.focused" ></div>
+                                        <div class="col-lg-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <input class="form-control" id="no_assist" data-bind="value: no_assist,hasfocus: no_assist.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <input class="form-control" id="button_height" data-bind="value: button_height,hasfocus: button_height.focused" ></div>
+                                        <div class="col-lg-3"><label for="outside_btn_height"> Outside button height (inches): </label><input class="form-control" id="outside_btn_height" data-bind="value: outside_btn_height, hasfocus: outside_btn_height.focused"></div>
+                                        <div class="col-lg-3"><label for="inside_btn_height"> Inside button height (inches): </label> <input class="form-control" id="inside_btn_height" data-bind="value: inside_btn_height,hasfocus: inside_btn_height.focused" ></div>
+                                        <div class="col-lg-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><input class="form-control" id="button_use_fist" data-bind="value: button_use_fist, hasfocus: button_use_fist.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><input class="form-control" id="braille" data-bind="value: braille, hasfocus: braille.focused"></div>
+                                        <div class="col-lg-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <input class="form-control" id="audible_tones" data-bind="value: audible_tones,hasfocus: audible_tones.focused" ></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="lightingElevator"> Lighting is adequate: </label><input class="form-control" id="lightingElevator" data-bind="value: lighting, hasfocus: lighting.focused"></div>
+                                        <div class="col-lg-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><input class="form-control" id="lighting_typeElevator" data-bind="value: lighting_type, hasfocus: lighting_type.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​ ​from door to the back : </label><input class="form-control" id="elevator_depth" data-bind="value: elevator_depth, hasfocus: elevator_depth.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-12"><label for="commentElevator"> Describe accessible entrance: </label><input class="form-control" id="commentElevator" data-bind="value: comment, hasfocus: comment.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-lg-12"><label for="recommendationsElevator"> Recommendations: </label><input class="form-control" id="recommendationsElevator" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Signage -->
 
                         <!-- Emergency Preparedness -->
