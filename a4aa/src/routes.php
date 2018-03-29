@@ -451,6 +451,16 @@ $app->put('/put/passenger_loading/', function (Request $request, Response $respo
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put passenger_loading data by parkrk id
+$app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
+//    $id = $args['id'];
+//    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * STA BUS ROUTES
  */
@@ -475,16 +485,6 @@ $app->get('/get/sta_bus/[{id}]', function (Request $request, Response $response,
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// delete sta_bus data by  id
-$app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    $id = $args['id'];
-    $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE sta_id=$id");
-    $sth->execute();
-    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-});
-
 // get sta_bus data by parking id
 $app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
@@ -492,6 +492,27 @@ $app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $resp
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get sta_bus id by parking id
+$app->get('/get/sta_bus_id/park/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $sth = $this->db->prepare("SELECT sta_id FROM STA_Bus WHERE park_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// delete sta_bus data by  id
+$app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE sta_id=$id");
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
@@ -517,6 +538,16 @@ $app->post('/post/sta_bus/', function (Request $request, Response $response, arr
 
 // put sta_bus data
 $app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){
+//    $sth = $this->db->prepare("INSERT INTO STA_Bus );
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put sta_bus data by park id
+$app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
+//    $id = $args['id'];
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')

@@ -21,11 +21,27 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+        <script type="text/javascript">
+            $(window).on('load', function () {
+                var $preloader = $('#page-preloader'),
+                    $spinner   = $preloader.find('.spinner');
+
+                $spinner.fadeOut();
+                $preloader.delay(350).fadeOut('slow');
+            });
+        </script>
+
         <script src="script/index.js"></script>
     </head>
     <body>
+
         <div class="header">
             <h1>Access 4 All Spokane</h1>
+        </div>
+        <div id="page-preloader">
+            <span class="spinner"></span>
         </div>
         <div class="page">
             <div class="section">
