@@ -4,11 +4,13 @@ var PARK_ID;
 var CAT_ID;
 var CONFIG_ID;
 var USER_ID;
+var STA_ID;
 
 $(document).ready(function () {
 
     getParkId(EST_ID);
     getIds(EST_ID);
+    getStaBusId(PARK_ID);
 
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
@@ -257,6 +259,479 @@ $(document).ready(function () {
         // };
     }
 
+    function PassengerLoadingModel(parm) {
+        //console.log("PassengerLoadingModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.passenger_id = ko.observable(parm.data.passenger_id);
+        this.designated_zone = ko.observable(parm.data.designated_zone);
+        this.designated_zone.focused = ko.observable(false);
+        this.distance = ko.observable(parm.data.distance);
+        this.distance.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.passenger_surface = ko.observable(parm.data.passenger_surface);
+        this.passenger_surface.focused = ko.observable(false);
+        this.tactile_warning_strips = ko.observable(parm.data.tactile_warning_strips);
+        this.tactile_warning_strips.focused = ko.observable(false);
+        this.covered = ko.observable(parm.data.covered);
+        this.covered.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.park_id = ko.observable(parm.data.park_id);
+        this.park_id.focused = ko.observable(false);
+    }
+
+    function PassengerLoadingViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.passengerLoadingList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.passengerLoadingList($.map(data, function (item) {
+                    return new PassengerLoadingModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function StaBusModel(parm) {
+        // console.log("StaBusModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.sta_id = ko.observable(parm.data.sta_id);
+        this.sta_service_area = ko.observable(parm.data.sta_service_area);
+        this.sta_service_area.focused = ko.observable(false);
+        this.distance = ko.observable(parm.data.distance);
+        this.distance.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.route_surface = ko.observable(parm.data.route_surface);
+        this.route_surface.focused = ko.observable(false);
+        this.tactile_warning_strips = ko.observable(parm.data.tactile_warning_strips);
+        this.tactile_warning_strips.focused = ko.observable(false);
+        this.curb_cuts = ko.observable(parm.data.curb_cuts);
+        this.curb_cuts.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.shelter_bench = ko.observable(parm.data.shelter_bench);
+        this.shelter_bench.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.park_id = ko.observable(parm.data.park_id);
+        this.park_id.focused = ko.observable(false);
+    }
+
+    function StaBusViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.staBusList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.staBusList($.map(data, function (item) {
+                    return new StaBusModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function StaBusRouteModel(parm) {
+        //console.log("StaBusRouteModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.sta_route_id = ko.observable(parm.data.sta_route_id);
+        this.route_num = ko.observable(parm.data.route_num);
+        this.route_num.focused = ko.observable(false);
+        this.north_bound_stop = ko.observable(parm.data.north_bound_stop);
+        this.north_bound_stop.focused = ko.observable(false);
+        this.south_bound_stop = ko.observable(parm.data.south_bound_stop);
+        this.south_bound_stop.focused = ko.observable(false);
+        this.east_bound_stop = ko.observable(parm.data.east_bound_stop);
+        this.east_bound_stop.focused = ko.observable(false);
+        this.west_bound_stop = ko.observable(parm.data.west_bound_stop);
+        this.west_bound_stop.focused = ko.observable(false);
+        this.sta_bus_id = ko.observable(parm.data.sta_bus_id);
+        this.sta_bus_id.focused = ko.observable(false);
+    }
+
+    function StaBusRouteViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.staBusRouteList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.staBusRouteList($.map(data, function (item) {
+                    return new StaBusRouteModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function StaBusModel(parm) {
+        console.log("StaBusModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.sta_id = ko.observable(parm.data.sta_id);
+        this.sta_service_area = ko.observable(parm.data.sta_service_area);
+        this.sta_service_area.focused = ko.observable(false);
+        this.distance = ko.observable(parm.data.distance);
+        this.distance.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.route_surface = ko.observable(parm.data.route_surface);
+        this.route_surface.focused = ko.observable(false);
+        this.tactile_warning_strips = ko.observable(parm.data.tactile_warning_strips);
+        this.tactile_warning_strips.focused = ko.observable(false);
+        this.curb_cuts = ko.observable(parm.data.curb_cuts);
+        this.curb_cuts.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.shelter_bench = ko.observable(parm.data.shelter_bench);
+        this.shelter_bench.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.park_id = ko.observable(parm.data.park_id);
+        this.park_id.focused = ko.observable(false);
+    }
+
+    function StaBusViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.staBusList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.staBusList($.map(data, function (item) {
+                    return new StaBusModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function ExteriorPathwayModel(parm) {
+        //console.log("ExteriorPathwayModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.ext_path_id = ko.observable(parm.data.ext_path_id);
+        this.service_animal = ko.observable(parm.data.service_animal);
+        this.service_animal.focused = ko.observable(false);
+        this.service_animal_location = ko.observable(parm.data.service_animal_location);
+        this.service_animal_location.focused = ko.observable(false);
+        this.has_exterior_path = ko.observable(parm.data.has_exterior_path);
+        this.has_exterior_path.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.pathway_surface = ko.observable(parm.data.pathway_surface);
+        this.pathway_surface.focused = ko.observable(false);
+        this.pathway_curbs = ko.observable(parm.data.pathway_curbs);
+        this.pathway_curbs.focused = ko.observable(false);
+        this.tactile_warning = ko.observable(parm.data.tactile_warning);
+        this.tactile_warning.focused = ko.observable(false);
+        this.slope = ko.observable(parm.data.slope);
+        this.slope.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function ExteriorPathwayViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.exteriorPathwayList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.exteriorPathwayList($.map(data, function (item) {
+                    return new ExteriorPathwayModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function ExteriorStairsModel(parm) {
+        //console.log("ExteriorStairsModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.ext_stair_id = ko.observable(parm.data.ext_stair_id);
+        this.stairs_required = ko.observable(parm.data.stairs_required);
+        this.stairs_required.focused = ko.observable(false);
+        this.stairs_available = ko.observable(parm.data.stairs_available);
+        this.stairs_available.focused = ko.observable(false);
+        this.num_stairs = ko.observable(parm.data.num_stairs);
+        this.num_stairs.focused = ko.observable(false);
+        this.handrail_both_sides = ko.observable(parm.data.handrail_both_sides);
+        this.handrail_both_sides.focused = ko.observable(false);
+        this.handrail_side = ko.observable(parm.data.handrail_side);
+        this.handrail_side.focused = ko.observable(false);
+        this.handrail_requlations_height = ko.observable(parm.data.handrail_requlations_height);
+        this.handrail_requlations_height.focused = ko.observable(false);
+        this.handrail_height = ko.observable(parm.data.handrail_height);
+        this.handrail_height.focused = ko.observable(false);
+        this.obstacles = ko.observable(parm.data.obstacles);
+        this.obstacles.focused = ko.observable(false);
+        this.clearly_marked = ko.observable(parm.data.clearly_marked);
+        this.clearly_marked.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function ExteriorStairsViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.exteriorStairsList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.exteriorStairsList($.map(data, function (item) {
+                    return new ExteriorStairsModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function ExteriorRampsModel(parm) {
+        console.log("ExteriorRampsModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.ext_ramp_id = ko.observable(parm.data.ext_ramp_id);
+        this.ramp_required = ko.observable(parm.data.ramp_required);
+        this.ramp_required.focused = ko.observable(false);
+        this.ramo_available = ko.observable(parm.data.ramo_available);
+        this.ramo_available.focused = ko.observable(false);
+        this.min_width = ko.observable(parm.data.min_width);
+        this.min_width.focused = ko.observable(false);
+        this.width_between_handrails = ko.observable(parm.data.width_between_handrails);
+        this.width_between_handrails.focused = ko.observable(false);
+        this.min_slope = ko.observable(parm.data.min_slope);
+        this.min_slope.focused = ko.observable(false);
+        this.slope = ko.observable(parm.data.slope);
+        this.slope.focused = ko.observable(false);
+        this.level_landing_both = ko.observable(parm.data.level_landing_both);
+        this.level_landing_both.focused = ko.observable(false);
+        this.level_landing_location = ko.observable(parm.data.level_landing_location);
+        this.level_landing_location.focused = ko.observable(false);
+        this.obstacles = ko.observable(parm.data.obstacles);
+        this.obstacles.focused = ko.observable(false);
+        this.handrails_both_sides = ko.observable(parm.data.handrails_both_sides);
+        this.handrails_both_sides.focused = ko.observable(false);
+        this.handrail_sides = ko.observable(parm.data.handrail_sides);
+        this.handrail_sides.focused = ko.observable(false);
+        this.handrail_requlations_height = ko.observable(parm.data.handrail_requlations_height);
+        this.handrail_requlations_height.focused = ko.observable(false);
+        this.handrail_height = ko.observable(parm.data.handrail_height);
+        this.handrail_height.focused = ko.observable(false);
+        this.side_guards = ko.observable(parm.data.side_guards);
+        this.side_guards.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function ExteriorRampsViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.exteriorRampsList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.exteriorRampsList($.map(data, function (item) {
+                    return new ExteriorRampsModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
     function UserModel(parm) {
         // console.log("UserModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
@@ -306,6 +781,12 @@ $(document).ready(function () {
                     userVM : new UserViewModel('user/', 'delete/user/', 'post/user/', 'put/user/'),
                  parkingVM : new ParkingViewModel('get/parking/est/' + EST_ID, 'delete/parking/est/' + EST_ID, 'post/parking/', 'put/parking/est/' + EST_ID),
         routeFromParkingVM : new RouteFromParkingViewModel('get/route_from_parking/park/' + PARK_ID, 'delete/route_from_parking/park/' + PARK_ID, 'post/route_from_parking/', 'put/route_from_parking/park/' + PARK_ID),
+        passengerLoadingVM : new PassengerLoadingViewModel('get/passenger_loading/park/' + PARK_ID, 'delete/passenger_loading/park/' + PARK_ID, 'post/passenger_loading/', 'put/passenger_loading/park/' + PARK_ID),
+                  staBusVM : new StaBusViewModel('get/sta_bus/park/' + PARK_ID, 'delete/sta_bus/park/' + PARK_ID, 'post/sta_bus/', 'put/sta_bus/park/' + PARK_ID),
+             staBusRouteVM : new StaBusRouteViewModel('get/sta_route/sta_bus/' + STA_ID, 'delete/sta_route/sta_bus/' + STA_ID, 'post/sta_route/', 'put/sta_route/sta_bus/' + STA_ID),
+         exteriorPathwayVM : new ExteriorPathwayViewModel('get/exterior_pathways/est/' + EST_ID, 'delete/exterior_pathways/est/' + EST_ID, 'post/exterior_pathways/', 'put/exterior_pathways/est/' + EST_ID),
+          exteriorStairsVM : new ExteriorStairsViewModel('get/exterior_stairs/est/' + EST_ID, 'delete/exterior_stairs/est/' + EST_ID, 'post/exterior_stairs/', 'put/exterior_stairs/est/' + EST_ID),
+           exteriorRampsVM : new ExteriorRampsViewModel('get/exterior_ramps/est/' + EST_ID, 'delete/exterior_ramps/est/' + EST_ID, 'post/exterior_ramps/', 'put/exterior_ramps/est/' + EST_ID),
     };
 
     ko.applyBindings(myParentVM);
@@ -348,6 +829,17 @@ function getIds(value) {
             CAT_ID = data[0].cat_id;
             CONFIG_ID = data[0].config_id;
             USER_ID = data[0].user_id;
+        }
+    });
+}
+
+function getStaBusId(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/sta_bus_id/park/' + value,
+        success: function (data) {
+            STA_ID = data[0].sta_id;
         }
     });
 }
