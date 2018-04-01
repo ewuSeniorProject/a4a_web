@@ -11,6 +11,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="./style/css-loader/dist/css-loader.css">
         <link href="./style/style.css" rel="stylesheet" type="text/css" />
 
         <!-- Optional JavaScript -->
@@ -40,19 +41,43 @@
         <div class="header">
             <h1>Access 4 All Spokane</h1>
         </div>
-        <div class="page">
-            <div class="section">
+        <div class="page page-row">
+            <div class="left-sidebar">
+                <div class="left-sidebar-header" data-bind="foreach: establishmentVM.establishmentList">
+                    <h5>
+                        <p>Viewing/Editing:</p>
+                        <span class="pad" data-bind="text: name"></span>
+                    </h5>
+                </div>
+                <ul class="nav nav-pills flex-column">
+                    <span class="spacer"></span>
+                    <li class="nav-item">
+                        <span class="nav-link pointer left-sidebar-row" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Premises Information</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link pointer left-sidebar-row" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Parking</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link pointer left-sidebar-row" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Route From Accessible Parking</span>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link pointer left-sidebar-row" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Passenger Loading Zones</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="section col-9">
+
                 <div class="container">
                     <div id="accordion">
                         <!-- Establishment / Premises Information -->
                         <div class="card">
-                            <div class="card-header phead-color pointer non-link" id="headerOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <div class="card-header phead-color pointer non-link collapsed" id="headerOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <div>
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Premises Information
                                 </div>
                             </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: establishmentVM.establishmentList">
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body card-body-color" data-bind="foreach: establishmentVM.establishmentList">
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="name"> Name: </label><input class="form-control" id="name" data-bind="value: name, hasfocus: name.focused"></div>
                                         <div class="col-lg-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
@@ -106,7 +131,7 @@
                                 </div>
                             </div>
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: parkingVM.parkingList">
+                                <div class="card-body card-body-color" data-bind="foreach: parkingVM.parkingList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="lot_free"> Lot parking free/paid: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: lot_free.focused"></div>
                                         <div class="col-lg-4"><label for="street_metered"> Street parking metered/not metered: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: street_metered.focused"></div>
@@ -141,7 +166,7 @@
                                 </div>
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: routeFromParkingVM.routeFromParkingList">
+                                <div class="card-body card-body-color" data-bind="foreach: routeFromParkingVM.routeFromParkingList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input class="form-control" id="distance" data-bind="value: distance,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><input class="form-control" id="min_width" data-bind="value: min_width, hasfocus: min_width.focused"></div>
@@ -174,7 +199,7 @@
                                 </div>
                             </div>
                             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: passengerLoadingVM.passengerLoadingList">
+                                <div class="card-body card-body-color" data-bind="foreach: passengerLoadingVM.passengerLoadingList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <input class="form-control" id="designated_zonePassengerLoading" data-bind="value: designated_zone,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input class="form-control" id="distancePassengerLoading" data-bind="value: distance,hasfocus: distance.focused" ></div>
@@ -207,7 +232,7 @@
                                 </div>
                             </div>
                             <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: staBusVM.staBusList">
+                                <div class="card-body card-body-color" data-bind="foreach: staBusVM.staBusList">
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <input class="form-control" id="sta_service_area" data-bind="value: sta_service_area,hasfocus: distance.focused" ></div>
                                     </div>
@@ -252,7 +277,7 @@
                                 </div>
                             </div>
                             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: exteriorPathwayVM.exteriorPathwayList">
+                                <div class="card-body card-body-color" data-bind="foreach: exteriorPathwayVM.exteriorPathwayList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <input class="form-control" id="service_animal" data-bind="value: service_animal,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-8"><label for="service_animal_location"> Location of service animal relief: </label> <input class="form-control" id="service_animal_location" data-bind="value: service_animal_location,hasfocus: distance.focused" ></div>
@@ -289,7 +314,7 @@
                                 </div>
                             </div>
                             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: exteriorStairsVM.exteriorStairsList">
+                                <div class="card-body card-body-color" data-bind="foreach: exteriorStairsVM.exteriorStairsList">
                                     <div class="table-row-color">
                                         <div class="col-lg-4"><label for="stairs_required"> Stairs are required: </label> <input class="form-control" id="stairs_required" data-bind="value: stairs_required,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-4"><label for="stairs_available"> Stairs are available: </label> <input class="form-control" id="stairs_available" data-bind="value: stairs_available,hasfocus: distance.focused" ></div>
@@ -329,7 +354,7 @@
                                 </div>
                             </div>
                             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: exteriorRampsVM.exteriorRampsList">
+                                <div class="card-body card-body-color" data-bind="foreach: exteriorRampsVM.exteriorRampsList">
                                     <div class="table-row-color">
                                         <div class="col-lg-3"><label for="ramp_required"> Ramps are required: </label> <input class="form-control" id="ramp_required" data-bind="value: ramp_required,hasfocus: distance.focused" ></div>
                                         <div class="col-lg-3"><label for="ramp_available"> Ramps are available: </label> <input class="form-control" id="ramp_available" data-bind="value: ramp_available,hasfocus: ramp_available.focused" ></div>
@@ -376,7 +401,7 @@
                                 </div>
                             </div>
                             <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: mainEntranceVM.mainEntranceList">
+                                <div class="card-body card-body-color" data-bind="foreach: mainEntranceVM.mainEntranceList">
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input class="form-control" id="total_num_public_entrances" data-bind="value: total_num_public_entrances,hasfocus: total_num_public_entrances.focused" ></div>
                                         <div class="col-lg-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <input class="form-control" id="main_ent_accessible" data-bind="value: main_ent_accessible,hasfocus: main_ent_accessible.focused" ></div>
@@ -430,7 +455,7 @@
                                 </div>
                             </div>
                             <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: interiorVM.interiorList">
+                                <div class="card-body card-body-color" data-bind="foreach: interiorVM.interiorList">
                                     <div class="table-row-color">
                                         <div class="col-lg-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <input class="form-control" id="int_door_open_clearance" data-bind="value: int_door_open_clearance,hasfocus: int_door_open_clearance.focused" ></div>
                                         <div class="col-lg-6"><label for="int_opening_measurement"> Opening measurement (inches): </label> <input class="form-control" id="int_opening_measurement" data-bind="value: int_opening_measurement,hasfocus: int_opening_measurement.focused" ></div>
@@ -481,7 +506,7 @@
                                 </div>
                             </div>
                             <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion">
-                                <div class="card-body" data-bind="foreach: elevatorVM.elevatorList">
+                                <div class="card-body card-body-color" data-bind="foreach: elevatorVM.elevatorList">
                                     <div class="table-row-color">
                                         <div class="col-lg-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <input class="form-control" id="is_elevator" data-bind="value: is_elevator,hasfocus: is_elevator.focused" ></div>
                                         <div class="col-lg-9"><label for="location"> Where is nearest elevator or lift located in relation to the accessible entrance: </label> <input class="form-control" id="location" data-bind="value: location,hasfocus: location.focused" ></div>
