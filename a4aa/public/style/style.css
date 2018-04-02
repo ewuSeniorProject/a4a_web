@@ -7,7 +7,7 @@ body {
 h1 {
     color: #bfff57;
     font-family: 'Lato', sans-serif;
-    font-size: 3.5em;
+    font-size: 3em;
     font-weight: 200;
     margin-bottom: 0;
 }
@@ -277,7 +277,7 @@ a:hover {
 
 .left-sidebar-row {
     margin: 0;
-    padding: .5em 1em;
+    padding: .25em 1em;
     background-color: #8095a9;
     color: #ffffff;
 }
