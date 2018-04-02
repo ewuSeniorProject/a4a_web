@@ -823,7 +823,7 @@ $(document).ready(function () {
         //console.log("InteriorModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
-        this.elevator_id = ko.observable(parm.data.elevator_id);
+        this.interior_id = ko.observable(parm.data.interior_id);
         this.int_door_open_clearance = ko.observable(parm.data.int_door_open_clearance);
         this.int_door_open_clearance.focused = ko.observable(false);
         this.int_opening_measurement = ko.observable(parm.data.int_opening_measurement);
@@ -901,10 +901,10 @@ $(document).ready(function () {
     }
 
     function ElevatorModel(parm) {
-        console.log("ElevatorModel(parm): " + JSON.stringify(parm));
+        //console.log("ElevatorModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
-        this.interior_id = ko.observable(parm.data.interior_id);
+        this.elevator_id = ko.observable(parm.data.elevator_id);
         this.is_elevator = ko.observable(parm.data.is_elevator);
         this.is_elevator.focused = ko.observable(false);
         this.location = ko.observable(parm.data.location);
@@ -950,6 +950,142 @@ $(document).ready(function () {
             success: function (data) {
                 self.elevatorList($.map(data, function (item) {
                     return new ElevatorModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function SignageModel(parm) {
+        console.log("SignageModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.sign_id = ko.observable(parm.data.sign_id);
+        this.is_directory = ko.observable(parm.data.is_directory);
+        this.is_directory.focused = ko.observable(false);
+        this.door_signs = ko.observable(parm.data.door_signs);
+        this.door_signs.focused = ko.observable(false);
+        this.sign_height = ko.observable(parm.data.sign_height);
+        this.sign_height.focused = ko.observable(false);
+        this.pub_sign_braile = ko.observable(parm.data.pub_sign_braile);
+        this.pub_sign_braile.focused = ko.observable(false);
+        this.sign_high_contrast = ko.observable(parm.data.sign_high_contrast);
+        this.sign_high_contrast.focused = ko.observable(false);
+        this.sign_images = ko.observable(parm.data.sign_images);
+        this.sign_images.focused = ko.observable(false);
+        this.written_material_images = ko.observable(parm.data.written_material_images);
+        this.written_material_images.focused = ko.observable(false);
+        this.menu_access = ko.observable(parm.data.menu_access);
+        this.menu_access.focused = ko.observable(false);
+        this.alt_info = ko.observable(parm.data.alt_info);
+        this.alt_info.focused = ko.observable(false);
+        this.alt_info_type = ko.observable(parm.data.alt_info_type);
+        this.alt_info_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function SignageViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.signageList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.signageList($.map(data, function (item) {
+                    return new SignageModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function EmergencyModel(parm) {
+        console.log("EmergencyModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.emergency_id = ko.observable(parm.data.emergency_id);
+        this.evac_info = ko.observable(parm.data.evac_info);
+        this.evac_info.focused = ko.observable(false);
+        this.alt_evac_info = ko.observable(parm.data.alt_evac_info);
+        this.alt_evac_info.focused = ko.observable(false);
+        this.evac_info_format = ko.observable(parm.data.evac_info_format);
+        this.evac_info_format.focused = ko.observable(false);
+        this.alarms = ko.observable(parm.data.alarms);
+        this.alarms.focused = ko.observable(false);
+        this.location_no_flash = ko.observable(parm.data.location_no_flash);
+        this.location_no_flash.focused = ko.observable(false);
+        this.shelter = ko.observable(parm.data.shelter);
+        this.shelter.focused = ko.observable(false);
+        this.signs_to_exit = ko.observable(parm.data.signs_to_exit);
+        this.signs_to_exit.focused = ko.observable(false);
+        this.wheelchair_plan = ko.observable(parm.data.wheelchair_plan);
+        this.wheelchair_plan.focused = ko.observable(false);
+        this.floor_plan_routes = ko.observable(parm.data.floor_plan_routes);
+        this.floor_plan_routes.focused = ko.observable(false);
+        this.fire_alarm_height = ko.observable(parm.data.fire_alarm_height);
+        this.fire_alarm_height.focused = ko.observable(false);
+        this.fire_extinguisher_height = ko.observable(parm.data.fire_extinguisher_height);
+        this.fire_extinguisher_height.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function EmergencyViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.emergencyList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.emergencyList($.map(data, function (item) {
+                    return new EmergencyModel({data:item, postUri:postUri, putUri:putUri});
                 }));
             }
         });
@@ -1030,7 +1166,9 @@ $(document).ready(function () {
            exteriorRampsVM : new ExteriorRampsViewModel('get/exterior_ramps/est/' + EST_ID, 'delete/exterior_ramps/est/' + EST_ID, 'post/exterior_ramps/', 'put/exterior_ramps/est/' + EST_ID),
             mainEntranceVM : new MainEntranceViewModel('get/main_entrance/est/' + EST_ID, 'delete/main_entrance/est/' + EST_ID, 'post/main_entrance/', 'put/main_entrance/est/' + EST_ID),
                 interiorVM : new InteriorViewModel('get/interior/est/' + EST_ID, 'delete/interior/est/' + EST_ID, 'post/interior/', 'put/interior/est/' + EST_ID),
-        elevatorVM : new ElevatorViewModel('get/elevator/est/' + EST_ID, 'delete/elevator/est/' + EST_ID, 'post/elevator/', 'put/elevator/est/' + EST_ID),
+                elevatorVM : new ElevatorViewModel('get/elevator/est/' + EST_ID, 'delete/elevator/est/' + EST_ID, 'post/elevator/', 'put/elevator/est/' + EST_ID),
+                 signageVM : new SignageViewModel('get/signage/est/' + EST_ID, 'delete/signage/est/' + EST_ID, 'post/signage/', 'put/signage/est/' + EST_ID),
+               emergencyVM : new EmergencyViewModel('get/emergency/est/' + EST_ID, 'delete/emergency/est/' + EST_ID, 'post/emergency/', 'put/emergency/est/' + EST_ID),
     };
 
     ko.applyBindings(myParentVM);

@@ -7,7 +7,7 @@ body {
 h1 {
     color: #bfff57;
     font-family: 'Lato', sans-serif;
-    font-size: 4em;
+    font-size: 3.5em;
     font-weight: 200;
     margin-bottom: 0;
 }
@@ -46,6 +46,16 @@ h5 {
     font-weight: bold;
 }
 
+h6 {
+    margin: 0;
+    padding: 1.5em 1em .5em 1em;
+    color: #bfff57;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
 a:hover {
     text-decoration: none;
     -moz-text-decoration-line: none;
@@ -58,12 +68,12 @@ a:hover {
 }
 
 .header {
-    padding: .5em;
+    padding: 1em;
     margin: 0;
     position: relative;
     background-color: #4482b6;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
+    text-align: left;
     color: #eeeeee;
     font-size: 18px;
 }
@@ -255,13 +265,14 @@ a:hover {
     margin: 0;
     padding: 2em 1em;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #e3edf4;
     color: #000000;
+    box-shadow: -1px 3px 5px 0 hsla(0,0%,0%,0.2);
 }
 
 .left-sidebar-header-row {
     margin: 0;
-    padding: 2em 1em;
+    padding: 1em 1em;
 }
 
 .left-sidebar-row {
