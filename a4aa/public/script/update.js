@@ -5,12 +5,14 @@ var CAT_ID;
 var CONFIG_ID;
 var USER_ID;
 var STA_ID;
+var REST_ID;
 
 $(document).ready(function () {
 
     getParkId(EST_ID);
     getIds(EST_ID);
     getStaBusId(PARK_ID);
+    getRestroomId(EST_ID);
 
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
@@ -445,7 +447,7 @@ $(document).ready(function () {
     }
 
     function StaBusModel(parm) {
-        console.log("StaBusModel(parm): " + JSON.stringify(parm));
+        //console.log("StaBusModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.sta_id = ko.observable(parm.data.sta_id);
@@ -974,7 +976,7 @@ $(document).ready(function () {
     }
 
     function SignageModel(parm) {
-        console.log("SignageModel(parm): " + JSON.stringify(parm));
+        //console.log("SignageModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.sign_id = ko.observable(parm.data.sign_id);
@@ -1041,7 +1043,7 @@ $(document).ready(function () {
     }
 
     function EmergencyModel(parm) {
-        console.log("EmergencyModel(parm): " + JSON.stringify(parm));
+        //console.log("EmergencyModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.emergency_id = ko.observable(parm.data.emergency_id);
@@ -1086,6 +1088,402 @@ $(document).ready(function () {
             success: function (data) {
                 self.emergencyList($.map(data, function (item) {
                     return new EmergencyModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function SeatingModel(parm) {
+        //console.log("SeatingModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.seating_id = ko.observable(parm.data.seating_id);
+        this.seating_no_step = ko.observable(parm.data.seating_no_step);
+        this.seating_no_step.focused = ko.observable(false);
+        this.table_aisles = ko.observable(parm.data.table_aisles);
+        this.table_aisles.focused = ko.observable(false);
+        this.legroom = ko.observable(parm.data.legroom);
+        this.legroom.focused = ko.observable(false);
+        this.num_legroom = ko.observable(parm.data.num_legroom);
+        this.num_legroom.focused = ko.observable(false);
+        this.rearranged = ko.observable(parm.data.rearranged);
+        this.rearranged.focused = ko.observable(false);
+        this.num_table_rearranged = ko.observable(parm.data.num_table_rearranged);
+        this.num_table_rearranged.focused = ko.observable(false);
+        this.num_chair_rearranged = ko.observable(parm.data.num_chair_rearranged);
+        this.num_chair_rearranged.focused = ko.observable(false);
+        this.round_tables = ko.observable(parm.data.round_tables);
+        this.round_tables.focused = ko.observable(false);
+        this.num_round_tables = ko.observable(parm.data.num_round_tables);
+        this.num_round_tables.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_option = ko.observable(parm.data.lighting_option);
+        this.lighting_option.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.adjustable_lighting = ko.observable(parm.data.adjustable_lighting);
+        this.adjustable_lighting.focused = ko.observable(false);
+        this.low_visual_slim = ko.observable(parm.data.low_visual_slim);
+        this.low_visual_slim.focused = ko.observable(false);
+        this.quiet_table = ko.observable(parm.data.quiet_table);
+        this.quiet_table.focused = ko.observable(false);
+        this.low_sound = ko.observable(parm.data.low_sound);
+        this.low_sound.focused = ko.observable(false);
+        this.designated_space = ko.observable(parm.data.designated_space);
+        this.designated_space.focused = ko.observable(false);
+        this.num_desig_space = ko.observable(parm.data.num_desig_space);
+        this.num_desig_space.focused = ko.observable(false);
+        this.companion_space = ko.observable(parm.data.companion_space);
+        this.companion_space.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function SeatingViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.seatingList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.seatingList($.map(data, function (item) {
+                    return new SeatingModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function RestroomModel(parm) {
+        //console.log("RestroomModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.restroom_id = ko.observable(parm.data.restroom_id);
+        this.public_restroom = ko.observable(parm.data.public_restroom);
+        this.public_restroom.focused = ko.observable(false);
+        this.total_num = ko.observable(parm.data.total_num);
+        this.total_num.focused = ko.observable(false);
+        this.designated_number = ko.observable(parm.data.designated_number);
+        this.designated_number.focused = ko.observable(false);
+        this.num_wheelchair_sign = ko.observable(parm.data.num_wheelchair_sign);
+        this.num_wheelchair_sign.focused = ko.observable(false);
+        this.sign_accessable = ko.observable(parm.data.sign_accessable);
+        this.sign_accessable.focused = ko.observable(false);
+        this.sign_location = ko.observable(parm.data.sign_location);
+        this.sign_location.focused = ko.observable(false);
+        this.key_needed = ko.observable(parm.data.key_needed);
+        this.key_needed.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.est_id = ko.observable(parm.data.est_id);
+        this.est_id.focused = ko.observable(false);
+    }
+
+    function RestroomViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.restroomList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.restroomList($.map(data, function (item) {
+                    return new RestroomModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function RestroomInfoModel(parm) {
+        //console.log("RestroomInfoModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.rest_info_id = ko.observable(parm.data.rest_info_id);
+        this.restroom_desc = ko.observable(parm.data.restroom_desc);
+        this.restroom_desc.focused = ko.observable(false);
+        this.easy_open = ko.observable(parm.data.easy_open);
+        this.easy_open.focused = ko.observable(false);
+        this.lbs_force = ko.observable(parm.data.lbs_force);
+        this.lbs_force.focused = ko.observable(false);
+        this.clearance = ko.observable(parm.data.clearance);
+        this.clearance.focused = ko.observable(false);
+        this.opening = ko.observable(parm.data.opening);
+        this.opening.focused = ko.observable(false);
+        this.opens_out = ko.observable(parm.data.opens_out);
+        this.opens_out.focused = ko.observable(false);
+        this.use_fist = ko.observable(parm.data.use_fist);
+        this.use_fist.focused = ko.observable(false);
+        this.can_turn_around = ko.observable(parm.data.can_turn_around);
+        this.can_turn_around.focused = ko.observable(false);
+        this.turn_width = ko.observable(parm.data.turn_width);
+        this.turn_width.focused = ko.observable(false);
+        this.turn_depth = ko.observable(parm.data.turn_depth);
+        this.turn_depth.focused = ko.observable(false);
+        this.close_chair_inside = ko.observable(parm.data.close_chair_inside);
+        this.close_chair_inside.focused = ko.observable(false);
+        this.grab_bars = ko.observable(parm.data.grab_bars);
+        this.grab_bars.focused = ko.observable(false);
+        this.seat_height_req = ko.observable(parm.data.seat_height_req);
+        this.seat_height_req.focused = ko.observable(false);
+        this.seat_height = ko.observable(parm.data.seat_height);
+        this.seat_height.focused = ko.observable(false);
+        this.flush_auto_fist = ko.observable(parm.data.flush_auto_fist);
+        this.flush_auto_fist.focused = ko.observable(false);
+        this.ambulatory_accessible = ko.observable(parm.data.ambulatory_accessible);
+        this.ambulatory_accessible.focused = ko.observable(false);
+        this.bar_height = ko.observable(parm.data.bar_height);
+        this.bar_height.focused = ko.observable(false);
+        this.coat_hook = ko.observable(parm.data.coat_hook);
+        this.coat_hook.focused = ko.observable(false);
+        this.hook_height = ko.observable(parm.data.hook_height);
+        this.hook_height.focused = ko.observable(false);
+        this.sink = ko.observable(parm.data.sink);
+        this.sink.focused = ko.observable(false);
+        this.sink_height = ko.observable(parm.data.sink_height);
+        this.sink_height.focused = ko.observable(false);
+        this.faucet = ko.observable(parm.data.faucet);
+        this.faucet.focused = ko.observable(false);
+        this.faucet_depth = ko.observable(parm.data.faucet_depth);
+        this.faucet_depth.focused = ko.observable(false);
+        this.faucet_auto_fist = ko.observable(parm.data.faucet_auto_fist);
+        this.faucet_auto_fist.focused = ko.observable(false);
+        this.sink_clearance = ko.observable(parm.data.sink_clearance);
+        this.sink_clearance.focused = ko.observable(false);
+        this.sink_clearance_height = ko.observable(parm.data.sink_clearance_height);
+        this.sink_clearance_height.focused = ko.observable(false);
+        this.sink_pipes = ko.observable(parm.data.sink_pipes);
+        this.sink_pipes.focused = ko.observable(false);
+        this.soap_dispenser = ko.observable(parm.data.soap_dispenser);
+        this.soap_dispenser.focused = ko.observable(false);
+        this.dry_first = ko.observable(parm.data.dry_first);
+        this.dry_first.focused = ko.observable(false);
+        this.dry_first_type = ko.observable(parm.data.dry_first_type);
+        this.dry_first_type.focused = ko.observable(false);
+        this.dry_controls = ko.observable(parm.data.dry_controls);
+        this.dry_controls.focused = ko.observable(false);
+        this.dry_control_height = ko.observable(parm.data.dry_control_height);
+        this.dry_control_height.focused = ko.observable(false);
+        this.mirror = ko.observable(parm.data.mirror);
+        this.mirror.focused = ko.observable(false);
+        this.mirror_height = ko.observable(parm.data.mirror_height);
+        this.mirror_height.focused = ko.observable(false);
+        this.shelves = ko.observable(parm.data.shelves);
+        this.shelves.focused = ko.observable(false);
+        this.shelf_height = ko.observable(parm.data.shelf_height);
+        this.shelf_height.focused = ko.observable(false);
+        this.trash_receptacles = ko.observable(parm.data.trash_receptacles);
+        this.trash_receptacles.focused = ko.observable(false);
+        this.hygiene_seat_cover = ko.observable(parm.data.hygiene_seat_cover);
+        this.hygiene_seat_cover.focused = ko.observable(false);
+        this.hygiene_cover_height = ko.observable(parm.data.hygiene_cover_height);
+        this.hygiene_cover_height.focused = ko.observable(false);
+        this.lighting = ko.observable(parm.data.lighting);
+        this.lighting.focused = ko.observable(false);
+        this.lighting_type = ko.observable(parm.data.lighting_type);
+        this.lighting_type.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.rest_id = ko.observable(parm.data.est_id);
+        this.rest_id.focused = ko.observable(false);
+    }
+
+    function RestroomInfoViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.restroomInfoList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.restroomInfoList($.map(data, function (item) {
+                    return new RestroomInfoModel({data:item, postUri:postUri, putUri:putUri});
+                }));
+            }
+        });
+
+        // $.getJSON(getUri, function (data) {
+        //         self.routeFromParkingList($.map(data, function (item) {
+        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
+        //     }));
+        // });
+
+        // self.removeItem = function (item) {
+        //     var con = confirm("Delete this record?");
+        //     if (con){
+        //         self.parkingList.remove(item);
+        //         removeRequest(deleteUri, item.est_id());
+        //     }
+        // };
+        //
+        // self.addItem = function () {
+        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
+        // };
+    }
+
+    function CommunicationModel(parm) {
+        console.log("CommunicationModel(parm): " + JSON.stringify(parm));
+        this.postUri = parm.postUri;
+        this.putUri = parm.putUri;
+        this.communication_id = ko.observable(parm.data.communication_id);
+        this.public_phone = ko.observable(parm.data.public_phone);
+        this.public_phone.focused = ko.observable(false);
+        this.phone_clearance = ko.observable(parm.data.phone_clearance);
+        this.phone_clearance.focused = ko.observable(false);
+        this.num_phone = ko.observable(parm.data.num_phone);
+        this.num_phone.focused = ko.observable(false);
+        this.tty = ko.observable(parm.data.tty);
+        this.tty.focused = ko.observable(false);
+        this.staff_tty = ko.observable(parm.data.staff_tty);
+        this.staff_tty.focused = ko.observable(false);
+        this.assisted_listening = ko.observable(parm.data.assisted_listening);
+        this.assisted_listening.focused = ko.observable(false);
+        this.assisted_listen_type = ko.observable(parm.data.assisted_listen_type);
+        this.assisted_listen_type.focused = ko.observable(false);
+        this.assisted_listen_receiver = ko.observable(parm.data.assisted_listen_receiver);
+        this.assisted_listen_receiver.focused = ko.observable(false);
+        this.listening_signage = ko.observable(parm.data.listening_signage);
+        this.listening_signage.focused = ko.observable(false);
+        this.staff_listening = ko.observable(parm.data.staff_listening);
+        this.staff_listening.focused = ko.observable(false);
+        this.acoustics = ko.observable(parm.data.acoustics);
+        this.acoustics.focused = ko.observable(false);
+        this.acoustics_level = ko.observable(parm.data.acoustics_level);
+        this.acoustics_level.focused = ko.observable(false);
+        this.alt_comm_methods = ko.observable(parm.data.alt_comm_methods);
+        this.alt_comm_methods.focused = ko.observable(false);
+        this.alt_comm_type = ko.observable(parm.data.alt_comm_type);
+        this.alt_comm_type.focused = ko.observable(false);
+        this.staff_ASL = ko.observable(parm.data.staff_ASL);
+        this.staff_ASL.focused = ko.observable(false);
+        this.captioning_default = ko.observable(parm.data.captioning_default);
+        this.captioning_default.focused = ko.observable(false);
+        this.theater_captioning = ko.observable(parm.data.theater_captioning);
+        this.theater_captioning.focused = ko.observable(false);
+        this.theater_capt_type = ko.observable(parm.data.theater_capt_type);
+        this.theater_capt_type.focused = ko.observable(false);
+        this.auditory_info_visual = ko.observable(parm.data.auditory_info_visual);
+        this.auditory_info_visual.focused = ko.observable(false);
+        this.visual_info_auditory = ko.observable(parm.data.visual_info_auditory);
+        this.visual_info_auditory.focused = ko.observable(false);
+        this.website_text_reader = ko.observable(parm.data.website_text_reader);
+        this.website_text_reader.focused = ko.observable(false);
+        this.alt_contact = ko.observable(parm.data.alt_contact);
+        this.alt_contact.focused = ko.observable(false);
+        this.alt_contact_type = ko.observable(parm.data.alt_contact_type);
+        this.alt_contact_type.focused = ko.observable(false);
+        this.shopping_assist = ko.observable(parm.data.shopping_assist);
+        this.shopping_assist.focused = ko.observable(false);
+        this.assist_service = ko.observable(parm.data.assist_service);
+        this.assist_service.focused = ko.observable(false);
+        this.assist_fee = ko.observable(parm.data.assist_fee);
+        this.assist_fee.focused = ko.observable(false);
+        this.store_scooter = ko.observable(parm.data.store_scooter);
+        this.store_scooter.focused = ko.observable(false);
+        this.scooter_fee = ko.observable(parm.data.scooter_fee);
+        this.scooter_fee.focused = ko.observable(false);
+        this.scooter_location = ko.observable(parm.data.scooter_location);
+        this.scooter_location.focused = ko.observable(false);
+        this.restaurant_allergies = ko.observable(parm.data.restaurant_allergies);
+        this.restaurant_allergies.focused = ko.observable(false);
+        this.staff_disable_trained = ko.observable(parm.data.staff_disable_trained);
+        this.staff_disable_trained.focused = ko.observable(false);
+        this.staff_disable_trained_desc = ko.observable(parm.data.staff_disable_trained_desc);
+        this.staff_disable_trained_desc.focused = ko.observable(false);
+        this.items_reach = ko.observable(parm.data.items_reach);
+        this.items_reach.focused = ko.observable(false);
+        this.service_alt_manner = ko.observable(parm.data.service_alt_manner);
+        this.service_alt_manner.focused = ko.observable(false);
+        this.senior_discount = ko.observable(parm.data.senior_discount);
+        this.senior_discount.focused = ko.observable(false);
+        this.senior_age = ko.observable(parm.data.senior_age);
+        this.senior_age.focused = ko.observable(false);
+        this.annual_A4A_review = ko.observable(parm.data.annual_A4A_review);
+        this.annual_A4A_review.focused = ko.observable(false);
+        this.comment = ko.observable(parm.data.comment);
+        this.comment.focused = ko.observable(false);
+        this.recommendations = ko.observable(parm.data.recommendations);
+        this.recommendations.focused = ko.observable(false);
+        this.rest_id = ko.observable(parm.data.est_id);
+        this.rest_id.focused = ko.observable(false);
+    }
+
+    function CommunicationViewModel(getUri, deleteUri, postUri, putUri) {
+        var self = this;
+        self.communicationList = ko.observableArray([]);
+
+        $.ajax ({
+            async: false,
+            dataType: 'json',
+            url: getUri,
+            success: function (data) {
+                self.communicationList($.map(data, function (item) {
+                    return new CommunicationModel({data:item, postUri:postUri, putUri:putUri});
                 }));
             }
         });
@@ -1169,6 +1567,10 @@ $(document).ready(function () {
                 elevatorVM : new ElevatorViewModel('get/elevator/est/' + EST_ID, 'delete/elevator/est/' + EST_ID, 'post/elevator/', 'put/elevator/est/' + EST_ID),
                  signageVM : new SignageViewModel('get/signage/est/' + EST_ID, 'delete/signage/est/' + EST_ID, 'post/signage/', 'put/signage/est/' + EST_ID),
                emergencyVM : new EmergencyViewModel('get/emergency/est/' + EST_ID, 'delete/emergency/est/' + EST_ID, 'post/emergency/', 'put/emergency/est/' + EST_ID),
+                 seatingVM : new SeatingViewModel('get/seating/est/' + EST_ID, 'delete/seating/est/' + EST_ID, 'post/seating/', 'put/seating/est/' + EST_ID),
+                restroomVM : new RestroomViewModel('get/restroom/est/' + EST_ID, 'delete/restroom/est/' + EST_ID, 'post/restroom/', 'put/restroom/est/' + EST_ID),
+            restroomInfoVM : new RestroomInfoViewModel('get/restroom_info/rest/' + REST_ID, 'delete/restroom_info/rest/' + REST_ID, 'post/restroom_info/', 'put/restroom_info/rest/' + REST_ID),
+           communicationVM : new CommunicationViewModel('get/communication/est/' + EST_ID, 'delete/communication/est/' + EST_ID, 'post/communication/', 'put/communication/est/' + EST_ID),
     };
 
     ko.applyBindings(myParentVM);
@@ -1187,6 +1589,8 @@ $(document).ready(function () {
     console.log("CAT_ID: " + CAT_ID);
     console.log("CONFIG_ID: " + CONFIG_ID);
     console.log("USER_ID: " + USER_ID);
+    console.log("STA_ID: " + STA_ID);
+    console.log("REST_ID: " + REST_ID);
 });
 
 function getParkId(value) {
@@ -1222,6 +1626,17 @@ function getStaBusId(value) {
         url: 'get/sta_bus_id/park/' + value,
         success: function (data) {
             STA_ID = data[0].sta_id;
+        }
+    });
+}
+
+function getRestroomId(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/restroom/est/' + value,
+        success: function (data) {
+            REST_ID = data[0].restroom_id;
         }
     });
 }
