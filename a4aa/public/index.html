@@ -11,7 +11,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="./style/css-loader/dist/css-loader.css">
+        <!--<link rel="stylesheet" href="./style/css-loader/dist/css-loader.css">-->
         <link href="./style/style.css" rel="stylesheet" type="text/css" />
 
         <!-- Optional JavaScript -->
@@ -44,22 +44,33 @@
         <div class="header">
             <h1>Access 4 All Spokane</h1>
         </div>
-        <div class="page">
+        <div class="page page-row">
+            <div class="left-sidebar">
+                <div class="left-sidebar-header">
+                    <h5>
+                        <p>Information Here</p>
+                        <span class="pad" > Maybe stuff here?</span>
+                    </h5>
+                </div>
+                <span>
+                    <h6>Here Is A Title:</h6>
+                </span>
+            </div>
             <div class="section">
-                <div class="container">
-                    <div class="box-section" id="establishment-list-wrapper">
-                        <div class="box-container col-lg-12" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
-                    </div>
+                <div class="container" id="establishment-list-wrapper">
+                    <!--<div class="box-section" id="establishment-list-wrapper">-->
+                        <div class="box-container col-12" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
+                    <!--</div>-->
                 </div>
             </div>
         </div>
 
     <!-- Template -->
         <script type="text/html" id="establishment-list-template">
-            <div class="box-blank col-lg-1">&nbsp;</div>
-            <div class="box col-lg-4">
+            <div class="box-blank col-1">&nbsp;</div>
+            <div class="box col-4">
                 <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
-                    <h4 class="col-lg-10" data-bind="text:name"></h4>&nbsp;<div class="col-lg-2" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></div><br>
+                    <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="col-2" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></div><br>
                 </a>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: 'http://'+website }" target="_new"></a><br>
@@ -69,7 +80,7 @@
                     <span data-bind="text:contact_fname +' ' + contact_lname"></span><br>
                 </div>
             </div>
-            <div class="box-blank col-lg-1">&emsp;</div>
+            <div class="box-blank col-1">&emsp;</div>
 
         </script>
     <!-- End Template -->
