@@ -29,7 +29,6 @@
             $(window).on('load', function () {
                 var $preloader = $('#page-preloader'),
                     $spinner   = $preloader.find('.spinner');
-
                 $spinner.fadeOut();
                 $preloader.delay(350).fadeOut('slow');
             });
@@ -60,9 +59,7 @@
             </div>
             <div class="section">
                 <div class="container" id="establishment-list-wrapper">
-                    <!--<div class="box-section" id="establishment-list-wrapper">-->
-                        <div class="box-container col-12" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
-                    <!--</div>-->
+                    <div class="box-container col-12" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
                 </div>
             </div>
         </div>
@@ -70,9 +67,9 @@
     <!-- Template -->
         <script type="text/html" id="establishment-list-template">
             <div class="box-blank col-1">&nbsp;</div>
-            <div class="box col-4">
+            <div class="box col-5">
                 <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
-                    <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="col-2" ><i style="color: white" class="fas fa-chevron-circle-right fa-lg"></i></div><br>
+                    <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="icon col-2"><i class="fas fa-chevron-circle-right fa-lg"></i></div><br>
                 </a>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: 'http://'+website }" target="_new"></a><br>
@@ -82,7 +79,7 @@
                     <span data-bind="text:contact_fname +' ' + contact_lname"></span><br>
                 </div>
             </div>
-            <div class="box-blank col-1">&emsp;</div>
+            <!--<div class="box-blank col-1">&emsp;</div>-->
 
         </script>
     <!-- End Template -->
