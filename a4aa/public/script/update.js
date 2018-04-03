@@ -14,6 +14,14 @@ $(document).ready(function () {
     getStaBusId(PARK_ID);
     getRestroomId(EST_ID);
 
+    // Scrolls selected accordion card to the top of the page
+    $('.collapse').on('shown.bs.collapse', function(e) {
+        var $card = $(this).closest('.card');
+        $('html,body').animate({
+            scrollTop: $card.offset().top - 112
+        }, 500);
+    });
+
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
         this.postUri = parm.postUri;
