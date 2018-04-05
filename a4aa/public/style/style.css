@@ -278,15 +278,18 @@ a:hover {
 .left-sidebar {
     margin: 0;
     padding: 0;
-    height: 100%;
     position: fixed;
     z-index: 2;
     top: 6.24em;
     left: 0;
-    overflow-x: hidden;
+    bottom: 0;
+    height: available;
     background-color: #8095a9;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: flex-start;
     justify-content: flex-start;
 }
@@ -298,6 +301,13 @@ a:hover {
     background-color: #e3edf4;
     color: #000000;
     box-shadow: -1px 3px 5px 0 hsla(0,0%,0%,0.2);
+}
+
+.left-sidebar-container {
+    margin: 0;
+    padding: 0;
+    position:relative;
+    width: 100%;
 }
 
 .left-sidebar-header-row {
