@@ -11,7 +11,6 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <!--<link rel="stylesheet" href="./style/css-loader/dist/css-loader.css">-->
         <link href="./style/style.css" rel="stylesheet" type="text/css" />
 
         <!-- Optional JavaScript -->
@@ -51,62 +50,65 @@
                         <span class="pad" data-bind="text: name"></span>
                     </h5>
                 </div>
-                <ul class="nav nav-pills flex-column">
-                    <span>
-                        <h6>Quick Access Shortcuts:</h6>
-                    </span>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#premises-information" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Premises Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#parking" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Parking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#route-from-accessible-parking" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Route From Accessible Parking</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#passenger-loading-zones" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Passenger Loading Zones</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#sta-bus-information" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">STA Bus Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#exterior-pathways" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">Exterior Pathways</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#exterior-stairs" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Exterior Stairs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#exterior_ramps" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">Exterior Ramps</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#main-entrance" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">Main Entrance</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#interior" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">Interior</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#elevator" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">Elevator</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#signage" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">Signage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#emergency_preparedness" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">Emergency Preparedness</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#seating" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">Seating</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#restroom" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">Restroom</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#restroom_info" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">Restroom Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#communication" data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">Communication Technologies</a>
-                    </li>
-                </ul>
+                <div class="left-sidebar-container">
+                    <ul class="nav nav-pills flex-column">
+                        <span>
+                            <h6>Quick Access Shortcuts:</h6>
+                        </span>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#premises-information" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Premises Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#parking" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Parking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#route-from-accessible-parking" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Route From Accessible Parking</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#passenger-loading-zones" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Passenger Loading Zones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#sta-bus-information" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">STA Bus Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#exterior-pathways" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">Exterior Pathways</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#exterior-stairs" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Exterior Stairs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#exterior_ramps" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">Exterior Ramps</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#main-entrance" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">Main Entrance</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#interior" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">Interior</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#elevator" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">Elevator</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#signage" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">Signage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#emergency_preparedness" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">Emergency Preparedness</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#seating" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">Seating</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#restroom" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">Restroom</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#restroom_info" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">Restroom Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#communication" data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">Communication Technologies</a>
+                        </li>
+                    </ul>
+                    <div class="pad">&nbsp;</div>
+                </div>
             </div>
             <div class="section col-9">
 
@@ -117,7 +119,7 @@
                             <div class="card-header phead-color pointer non-link collapsed" id="headerOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <div>
                                     <a name="premises-information"></a>
-                                    <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Premises Information
+                                    <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg" aria-hidden="true"></i>&emsp;Premises Information
                                 </div>
                             </div>
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
@@ -163,6 +165,11 @@
                                             </select>
                                         </div>
                                         <div class="col-6"><label for="date"> Survey Date: </label><input class="form-control" id="date" data-bind="value: date, hasfocus: date.focused"></div>
+                                    </div>
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save</button>
+                                        </div>
                                     </div>
                                     <div class="table-row-spacer">
                                         &nbsp;

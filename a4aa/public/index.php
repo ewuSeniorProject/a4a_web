@@ -32,3 +32,6 @@ $_SESSION["id"] = 0;
 
 // Run app
 $app->run();
+
+
+
