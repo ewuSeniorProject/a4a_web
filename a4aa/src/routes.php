@@ -64,6 +64,18 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put establishment data by est id
+$app->post('/post/establishment/est/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+    print_r("ID: "+ $id + " , Data: "+ $data);
+//    $sth = $this->db->prepare("UPDATE Establishment SET  WHERE est_id=$id");
+//    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * CATEGORY ROUTES
  */
