@@ -2,8 +2,11 @@ const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
 var PARK_ID;
 var CAT_ID;
+var CAT_NAME;
 var CONFIG_ID;
+var CONFIG_NAME;
 var USER_ID;
+var USER_NAME;
 var STA_ID;
 var REST_ID;
 
@@ -13,6 +16,9 @@ $(document).ready(function () {
     getIds(EST_ID);
     getStaBusId(PARK_ID);
     getRestroomId(EST_ID);
+    getCategoryName(CAT_ID);
+    getConfigName(CONFIG_ID);
+    getUserName(USER_ID);
 
     // Scrolls selected accordion card to the top of the page
     $('.collapse').on('shown.bs.collapse', function(e) {
@@ -21,6 +27,8 @@ $(document).ready(function () {
             scrollTop: $card.offset().top - 112
         }, 500);
     });
+
+    $('#save_establishment').click(updateEstablishment);
 
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
@@ -33,10 +41,14 @@ $(document).ready(function () {
         this.website.focused = ko.observable(false);
         this.cat_id = ko.observable(parm.data.cat_id);
         this.cat_id.focused = ko.observable(false);
+        this.cat_name = ko.observable(CAT_NAME);
+        this.cat_name.focused = ko.observable(false);
         this.subtype = ko.observable(parm.data.subtype);
         this.subtype.focused = ko.observable(false);
         this.config_id = ko.observable(parm.data.config_id);
         this.config_id.focused = ko.observable(false);
+        this.config_name = ko.observable(CONFIG_NAME);
+        this.config_name.focused = ko.observable(false);
         this.street = ko.observable(parm.data.street);
         this.street.focused = ko.observable(false);
         this.city = ko.observable(parm.data.city);
@@ -61,6 +73,8 @@ $(document).ready(function () {
         this.date.focused = ko.observable(false);
         this.user_id = ko.observable(parm.data.user_id);
         this.user_id.focused = ko.observable(false);
+        this.user_name = ko.observable(USER_NAME);
+        this.user_name.focused = ko.observable(false);
     }
 
     function EstablishmentViewModel(getUri, deleteUri, postUri, putUri) {
@@ -77,6 +91,58 @@ $(document).ready(function () {
                 }));
             }
         });
+
+        // $("#collapseOne").validate({
+        //     // Specify validation rules
+        //     rules: {
+        //         name: {
+        //             required: true,
+        //             max: 255
+        //         },
+        //         website: {
+        //             required: true,
+        //             max: 255
+        //         },
+        //         category: {
+        //             required: true
+        //         },
+        //         street: {
+        //             required: true,
+        //             max: 255
+        //         },
+        //         date: {
+        //             required: true,
+        //             dateISO: true
+        //         },
+        //         overview: {
+        //             required: true,
+        //             minlength: 2
+        //         },
+        //         studio: {
+        //             required: true,
+        //             minlength: 2,
+        //             maxlength: 100
+        //         },
+        //         price: {
+        //             required: true,
+        //             number: true,
+        //             minlength: 1,
+        //             maxlength: 20
+        //         }
+        //     },
+        //     // Specify validation error messages
+        //     messages: {
+        //         name: " Establishment name must be less than 256 characters long.",
+        //         website: " Website must be less than 256 characters long.",
+        //         date: " Date (yyyy-mm-dd)",
+        //         overview: " Overview at least 2 characters",
+        //         studio: " Studio at least 2 characters",
+        //         price: " Price at least 0"
+        //     },
+        //     submitHandler: function(form) {
+        //         updateEstablishment();
+        //     },
+        // });
 
         // $.getJSON(getUri, function (data) {
         //     self.establishmentList($.map(data, function (item) {
@@ -1395,7 +1461,7 @@ $(document).ready(function () {
     }
 
     function CommunicationModel(parm) {
-        console.log("CommunicationModel(parm): " + JSON.stringify(parm));
+        //console.log("CommunicationModel(parm): " + JSON.stringify(parm));
         this.postUri = parm.postUri;
         this.putUri = parm.putUri;
         this.communication_id = ko.observable(parm.data.communication_id);
@@ -1583,20 +1649,14 @@ $(document).ready(function () {
 
     ko.applyBindings(myParentVM);
 
-    // ko.applyBindings(new EstablishmentViewModel('get/establishment/' + ESTABLISHMENTID, 'delete/establishment/' + ESTABLISHMENTID, 'post/establishment/' + ESTABLISHMENTID, 'put/establishment/' + ESTABLISHMENTID), document.getElementById('collapseOne'));
-    // ko.applyBindings(new CategoryViewModel('category/', 'delete/category/', 'post/category/', 'put/category/'), document.getElementById('categoryVM'));
-    // ko.applyBindings(new ParkingViewModel('/get/parking/est/' + ESTABLISHMENTID, 'delete/parking/est/' + ESTABLISHMENTID, 'post/parking/', 'put/parking/est/' + ESTABLISHMENTID), document.getElementById('collapseTwo'));
-    // ko.applyBindings(new ViewModel('get/durations', 'delete/duration', 'post/duration', 'put/duration'), document.getElementById('durations-view'));
-    // ko.applyBindings(new ViewModel('get/ranges', 'delete/range', 'post/range', 'put/range'), document.getElementById('ranges-view'));
-    // ko.applyBindings(new ViewModel('get/schools', 'delete/school', 'post/school' , 'put/school'), document.getElementById('schools-view'));
-    // ko.applyBindings(new ViewModel('get/tags', 'delete/tag', 'post/tag', 'put/tag'), document.getElementById('tags-view'));
-    // ko.applyBindings(new ViewModel('get/tiers', 'delete/tier', 'post/tier', 'put/tier'), document.getElementById('tiers-view'));
-
     console.log("EST_ID: " + EST_ID);
     console.log("PARK_ID: " + PARK_ID);
     console.log("CAT_ID: " + CAT_ID);
+    console.log("CAT_NAME: " + CAT_NAME);
     console.log("CONFIG_ID: " + CONFIG_ID);
+    console.log("CONFIG_NAME: " + CONFIG_NAME);
     console.log("USER_ID: " + USER_ID);
+    console.log("USER_NAME: " + USER_NAME);
     console.log("STA_ID: " + STA_ID);
     console.log("REST_ID: " + REST_ID);
 });
@@ -1627,6 +1687,39 @@ function getIds(value) {
     });
 }
 
+function getCategoryName(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/category/' + value,
+        success: function (data) {
+            CAT_NAME = data[0].name;
+        }
+    });
+}
+
+function getConfigName(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/configuration/' + value,
+        success: function (data) {
+            CONFIG_NAME = data[0].name;
+        }
+    });
+}
+
+function getUserName(value) {
+    $.ajax ({
+        async: false,
+        dataType: 'json',
+        url: 'get/user/' + value,
+        success: function (data) {
+            USER_NAME = data[0].fname +" "+ data[0].lname;
+        }
+    });
+}
+
 function getStaBusId(value) {
     $.ajax ({
         async: false,
@@ -1646,6 +1739,37 @@ function getRestroomId(value) {
         success: function (data) {
             REST_ID = data[0].restroom_id;
         }
+    });
+}
+
+function updateEstablishment() {
+    var name = document.getElementById("name").value;
+    var website = document.getElementById("website").value;
+    var subtype = document.getElementById("subtype").value;
+    var street = document.getElementById("street").value;
+    var city = document.getElementById("city").value;
+    var state = document.getElementById("state").value;
+    var zip = document.getElementById("zip").value;
+    var phone = document.getElementById("phone").value;
+    var phone_tty = document.getElementById("phone_tty").value;
+    var contact_fname = document.getElementById("contact_fname").value;
+    var contact_lname = document.getElementById("contact_lname").value;
+    var contact_title = document.getElementById("contact_title").value;
+    var contact_email = document.getElementById("contact_email").value;
+    var date = document.getElementById("date").value;
+    var arrdata = [EST_ID, name, website, CAT_ID, subtype, CONFIG_ID, street, city, state, zip, phone, phone_tty, contact_fname, contact_lname, contact_title, contact_email, USER_ID, date];
+
+    $("#save_establishment_result").append('&emsp; Updating Premises Information');
+
+    console.log(arrdata);
+
+    $.ajax({
+        method: "POST",
+        dataType: "json",
+        url: 'post/establishment/est/' + EST_ID,
+        data: {'data' : arrdata},
+        success: console.log("Updated"),
+        complete: $("#save_establishment_result").empty()
     });
 }
 
