@@ -1969,6 +1969,86 @@ function updateSTABus() {
     });
 }
 
+function editSTARoute(route_id, bus_id) {
+    var self = this;
+    self.staBusRouteEditList = ko.observableArray([]);
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        contentType: "application/json; charset=utf-8",
+        url: "get/sta_route/single/sta_bus/" + bus_id,
+        data: JSON.stringify({
+            "sta_route_id": route_id
+        }),
+        success: function (data) {
+            sta_route_id = data.sta_route_id;
+            route_num = data.route_num;
+            north_bound_stop = data.north_bound_stop;
+            south_bound_stop = data.south_bound_stop;
+            east_bound_stop = data.east_bound_stop;
+            west_bound_stop = data.west_bound_stop;
+            sta_bus_id = data.sta_bus_id;
+            $("#sta-body").html(
+                '<div class="table-row-color form-group">\n' +
+                '   <div class="col-2"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'" ></div>\n' +
+                '   <div class="col-2"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stopEdit+'" ></div>\n' +
+                '   <div class="col-2"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stopEdit+'" ></div>\n' +
+                '   <div class="col-2"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stopEdit+'" ></div>\n' +
+                '   <div class="col-2"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stopEdit+'" ></div>\n' +
+                '</div>'
+            );
+            $("#sta-footer").html(
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
+                '&nbsp;\n' +
+                '<button type="button" class="btn btn-success" onclick="updateSTARoute('+sta_route_id+','+sta_bus_id+')"><i class="fas fa-save"></i>&nbsp; Save</button>'
+            );
+            $("#sta-route-modal").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateSTARoute(route_id, bus_id) {
+    $("#sta-route-modal").modal('toggle');
+
+    var sta_route_id = route_id;
+    var route_num = document.getElementById("route_numEdit").value;
+    var north_bound_stop = document.getElementById("north_bound_stopEdit").value;
+    var south_bound_stop = document.getElementById("south_bound_stopEdit").value;
+    var east_bound_stop = document.getElementById("east_bound_stopEdit").value;
+    var west_bound_stop = document.getElementById("west_bound_stopEdit").value;
+    var sta_bus_id = bus_id;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/sta_route/sta_bus/" + sta_bus_id,
+        data: JSON.stringify({
+            "sta_route_id" : sta_route_id,
+            "route_num" : route_num,
+            "north_bound_stop" : north_bound_stop,
+            "south_bound_stop" : south_bound_stop,
+            "east_bound_stop" : east_bound_stop,
+            "west_bound_stop" : west_bound_stop
+        }),
+        success: function () {
+            $("#success-body").html('STA Route Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
 
 function removeRequest(uri, record) {
     $.ajax({
