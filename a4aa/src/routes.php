@@ -858,7 +858,7 @@ $app->get('/sta_route/', function (Request $request, Response $response, array $
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// get sta_route data by sta_bus id
+// get all sta_route data id
 $app->get('/get/sta_route/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$id");
@@ -869,10 +869,25 @@ $app->get('/get/sta_route/[{id}]', function (Request $request, Response $respons
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// get sta_route data by sta_bus id
+// get all sta_route data by sta_bus id
 $app->get('/get/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
+
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_bus_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get single sta_route record by sta_route id and sta_bus id
+$app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+    $sta_route_id = $data["sta_route_id"];
+
+    $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$sta_route_id AND sta_bus_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
@@ -913,6 +928,45 @@ $app->post('/post/sta_route/', function (Request $request, Response $response, a
 $app->put('/put/sta_route/', function (Request $request, Response $response, array $args){
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put sta_route data by sta_bus id
+$app->put('/put/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "sta_route_id" : sta_route_id,
+    "route_num" : route_num,
+    "north_bound_stop" : north_bound_stop,
+    "south_bound_stop" : south_bound_stop,
+    "east_bound_stop" : east_bound_stop,
+    "west_bound_stop" : west_bound_stop
+     */
+    $sta_route_id = $data["sta_route_id"];
+    $route_num = $data["route_num"];
+    $north_bound_stop = $data["north_bound_stop"];
+    $south_bound_stop = $data["south_bound_stop"];
+    $east_bound_stop = $data["east_bound_stop"];
+    $west_bound_stop = $data["west_bound_stop"];
+
+    $sth = $this->db->prepare("UPDATE STA_Route SET route_num = :Route_num,
+                                                     north_bound_stop = :North_bound_stop,
+                                                     south_bound_stop = :South_bound_stop,
+                                                     east_bound_stop = :East_bound_stop,
+                                                     west_bound_stop = :West_bound_stop
+                                                     WHERE sta_route_id=$sta_route_id AND sta_bus_id=$id");
+
+    $sth->bindParam(':Route_num', $route_num, PDO::PARAM_STR);
+    $sth->bindParam(':North_bound_stop', $north_bound_stop, PDO::PARAM_INT);
+    $sth->bindParam(':South_bound_stop', $south_bound_stop, PDO::PARAM_INT);
+    $sth->bindParam(':East_bound_stop', $east_bound_stop, PDO::PARAM_INT);
+    $sth->bindParam(':West_bound_stop', $west_bound_stop, PDO::PARAM_INT);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');

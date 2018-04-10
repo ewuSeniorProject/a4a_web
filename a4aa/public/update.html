@@ -314,15 +314,15 @@
                                     </div>
                                     <div id="staBusRouteVM" data-bind="foreach: $parent.staBusRouteVM.staBusRouteList" class="form-group">
                                         <div class="table-row-color">
-                                            <div class="col-2"><label for="route_num"> Route Number: </label><input class="form-control" id="route_num" data-bind="value: route_num,hasfocus: route_num.focused" ></div>
-                                            <div class="col-2"><label for="north_bound_stop"> North Bound Stop: </label><input class="form-control" id="north_bound_stop" data-bind="value: north_bound_stop,hasfocus: north_bound_stop.focused" ></div>
-                                            <div class="col-2"><label for="south_bound_stop"> South Bound Stop: </label><input class="form-control" id="south_bound_stop" data-bind="value: south_bound_stop,hasfocus: south_bound_stop.focused" ></div>
-                                            <div class="col-2"><label for="east_bound_stop"> East Bound Stop: </label><input class="form-control" id="east_bound_stop" data-bind="value: east_bound_stop,hasfocus: east_bound_stop.focused" ></div>
-                                            <div class="col-2"><label for="west_bound_stop"> West Bound Stop: </label><input class="form-control" id="west_bound_stop" data-bind="value: west_bound_stop,hasfocus: west_bound_stop.focused" ></div>
-                                            <input type="hidden" class="form-control" data-bind="attr:{id: 'edit_route_'+($index() + 1) }, value: sta_route_id">
-                                            <input type="hidden" class="form-control" data-bind="attr:{id: 'sta_bus_'+($index() + 1) }, value: sta_bus_id">
+                                            <div class="col-2"><label for="route_num"> Route Number: </label><input class="form-control" id="route_num" data-bind="value: route_num,hasfocus: route_num.focused" readonly></div>
+                                            <div class="col-2"><label for="north_bound_stop"> North Bound Stop: </label><input class="form-control" id="north_bound_stop" data-bind="value: north_bound_stop,hasfocus: north_bound_stop.focused" readonly></div>
+                                            <div class="col-2"><label for="south_bound_stop"> South Bound Stop: </label><input class="form-control" id="south_bound_stop" data-bind="value: south_bound_stop,hasfocus: south_bound_stop.focused" readonly></div>
+                                            <div class="col-2"><label for="east_bound_stop"> East Bound Stop: </label><input class="form-control" id="east_bound_stop" data-bind="value: east_bound_stop,hasfocus: east_bound_stop.focused" readonly></div>
+                                            <div class="col-2"><label for="west_bound_stop"> West Bound Stop: </label><input class="form-control" id="west_bound_stop" data-bind="value: west_bound_stop,hasfocus: west_bound_stop.focused" readonly></div>
+                                            <!--<input type="hidden" class="form-control" data-bind="attr:{id: 'edit_route_'+($index() + 1) }, value: sta_route_id">-->
+                                            <!--<input type="hidden" class="form-control" data-bind="attr:{id: 'sta_bus_'+($index() + 1) }, value: sta_bus_id">-->
                                             <div class="col-2">
-                                                <span data-bind="attr:{id: 'edit_route_'+($index() + 1) }" class="edit-text" data-toggle="modal" data-target="#STARouteModal"><i class="fas fa-edit"></i>&nbsp; Edit Route</span>
+                                                <span data-bind="attr:{id: 'edit_route_'+($index() + 1) }, click: editSTARoute.bind(sta_route_id, sta_bus_id)" class="edit-text pointer" data-toggle="modal" data-target="#sta-route-modal"><i class="fas fa-edit"></i>&nbsp; Edit Route</span>
                                             </div>
                                         </div>
                                     </div>
@@ -1041,7 +1041,21 @@
                 </div>
             </div>
         </div>
-
+    <!-- STA MODAL -->
+        <div class="modal fade bd-example-modal-lg" id="sta-route-modal" tabindex="-1" role="dialog" aria-labelledby="sta-route-modal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-sta-header">
+                        <h5 class="modal-title modal-sta-title" id="staTitle">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div id="sta-body" class="modal-body modal-sta-body"></div>
+                    <div id="sta-footer" class="modal-footer"> </div>
+                </div>
+            </div>
+        </div>
     <!-- CATEGORY MODAL -->
         <!--<select class="form-control" id="category" data-bind="options: $parent.categoryVM.categoryList,-->
                                                               <!--optionsText: 'category_name',-->
