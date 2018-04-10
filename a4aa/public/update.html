@@ -132,10 +132,10 @@
                                             <div class="col-6"><label for="website"> Website: </label><input class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
                                         </div>
                                         <div class="table-row-color">
-                                            <input type="hidden" class="form-control" id="cat_id" value="cat_id">
+                                            <input type="hidden" class="form-control" id="cat_id" data-bind="value: cat_id">
                                             <div class="col-4"><label for="cat_name"> Category: </label><input class="form-control" id="cat_name" data-bind="value: cat_name, hasfocus: cat_name.focused" readonly></div>
                                             <div class="col-4"><label for="subtype"> Subtype: </label><input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused"></div>
-                                            <input type="hidden" class="form-control" id="config_id" value="config_id">
+                                            <input type="hidden" class="form-control" id="config_id" data-bind="value: config_id">
                                             <div class="col-4"><label for="config_name"> Configuration: </label><input class="form-control" id="config_name" data-bind="value: config_name, hasfocus: config_name.focused" readonly></div>
                                         </div>
                                         <div class="table-row-color">
@@ -156,19 +156,19 @@
                                             <div class="col-4"><label for="contact_title"> Title: </label><input class="form-control" id="contact_title" data-bind="value: contact_title, hasfocus: contact_title.focused"></div>
                                         </div>
                                         <div class="table-row-color">
-                                            <div class="col-12"><label for="contact_email"> Email: </label><input class="form-control" id="contact_email" data-bind="value: contact_email, hasfocus: contact_email.focused"></div>
+                                            <div class="col-4"><label for="contact_email"> Email: </label><input class="form-control" id="contact_email" data-bind="value: contact_email, hasfocus: contact_email.focused"></div>
+                                            <input type="hidden" class="form-control" id="user_id" data-bind="value: user_id">
+                                            <div class="col-4"><label for="user_name"> Surveyor: </label><input class="form-control" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly></div>
+                                            <div class="col-4"><label for="date"> Survey Date: </label><input class="form-control" id="date" data-bind="value: date, hasfocus: date.focused"></div>
                                         </div>
                                         <div class="table-row-color">
-                                            <input type="hidden" class="form-control" id="user_id" value="user_id">
-                                            <div class="col-6"><label for="user_name"> Surveyor: </label><input class="form-control" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly></div>
-                                            <div class="col-6"><label for="date"> Survey Date: </label><input class="form-control" id="date" data-bind="value: date, hasfocus: date.focused"></div>
+                                            <div class="col-12"><label for="commentEstablishment"> Comment: </label><input class="form-control" id="commentEstablishment" data-bind="value: config_comment, hasfocus: config_comment.focused"></div>
+                                            <input type="hidden" class="form-control" id="est_id" data-bind="value: est_id">
                                         </div>
                                         <div class="table-row-color">
-                                            <input type="hidden" id="establishment_est_id" name="establishment_est_id" value="establishment_est_id" >
                                             <div class="col-4">
                                                 <button  type="button" id="save_establishment" class="btn btn-success" onclick="updateEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>
                                             </div>
-                                            <div class="col-8" id="save_establishment_result"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +182,7 @@
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Parking
                                 </div>
                             </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div id="collapseTwo" class="collapse form-group" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: parkingVM.parkingList">
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="lot_free"> Lot parking free/paid: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: lot_free.focused"></div>
@@ -206,9 +206,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendations"> Recommendations: </label><input class="form-control" id="recommendations" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="park_id" data-bind="value: park_id">
+                                        <input type="hidden" class="form-control" id="park_est_id" data-bind="value: est_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_parking" class="btn btn-success" onclick="updateParking()"><i class="fas fa-save"></i>&nbsp; Save Parking</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -221,7 +225,7 @@
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Route From Accessible Parking
                                 </div>
                             </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div id="collapseThree" class="collapse form-group" aria-labelledby="headingThree" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: routeFromParkingVM.routeFromParkingList">
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input class="form-control" id="distance" data-bind="value: distance,hasfocus: distance.focused" ></div>
@@ -243,9 +247,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsRouteFromParking"> Recommendations: </label><input class="form-control" id="recommendationsRouteFromParking" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="route_park_id" data-bind="value: park_id">
+                                        <input type="hidden" class="form-control" id="route_from_park_id" data-bind="value: route_park_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_route_from_parking" class="btn btn-success" onclick="updateRouteFromParking()"><i class="fas fa-save"></i>&nbsp; Save Route From Parking</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -258,16 +266,16 @@
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Passenger Loading Zones
                                 </div>
                             </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div id="collapseFour" class="collapse form-group" aria-labelledby="headingFour" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: passengerLoadingVM.passengerLoadingList">
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <input class="form-control" id="designated_zonePassengerLoading" data-bind="value: designated_zone,hasfocus: distance.focused" ></div>
+                                        <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <input class="form-control" id="designated_zonePassengerLoading" data-bind="value: designated_zone,hasfocus: designated_zone.focused" ></div>
                                         <div class="col-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input class="form-control" id="distancePassengerLoading" data-bind="value: distance,hasfocus: distance.focused" ></div>
                                         <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><input class="form-control" id="min_widthPassengerLoading" data-bind="value: min_width, hasfocus: min_width.focused"></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><input class="form-control" id="passenger_surfacePassengerLoading" data-bind="value: passenger_surface, hasfocus: route_surface.focused"></div>
-                                        <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><input class="form-control" id="tactile_warning_stripsPassengerLoading" data-bind="value: tactile_warning_strips, hasfocus: tactile_warning.focused"></div>
+                                        <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><input class="form-control" id="passenger_surfacePassengerLoading" data-bind="value: passenger_surface, hasfocus: passenger_surface.focused"></div>
+                                        <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><input class="form-control" id="tactile_warning_stripsPassengerLoading" data-bind="value: tactile_warning_strips, hasfocus: tactile_warning_strips.focused"></div>
                                         <div class="col-4"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><input class="form-control" id="coveredPassengerLoading" data-bind="value: covered, hasfocus: covered.focused"></div>
                                     </div>
                                     <div class="table-row-color">
@@ -280,9 +288,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsPassengerLoading"> Recommendations: </label><input class="form-control" id="recommendationsPassengerLoading" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="passenger_park_id" data-bind="value: park_id">
+                                        <input type="hidden" class="form-control" id="passenger_id" data-bind="value: passenger_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_passenger_loading" class="btn btn-success" onclick="updatePassengerLoading()"><i class="fas fa-save"></i>&nbsp; Save Passenger Loading Zones</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -295,18 +307,23 @@
                                     <i data-bind="click: $root.addItem" class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;STA Bus Information
                                 </div>
                             </div>
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div id="collapseFive" class="collapse form-group" aria-labelledby="headingFive" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: staBusVM.staBusList">
                                     <div class="table-row-color">
-                                        <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <input class="form-control" id="sta_service_area" data-bind="value: sta_service_area,hasfocus: distance.focused" ></div>
+                                        <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <input class="form-control" id="sta_service_area" data-bind="value: sta_service_area,hasfocus: sta_service_area.focused" ></div>
                                     </div>
-                                    <div id="staBusRouteVM" data-bind="foreach: $parent.staBusRouteVM.staBusRouteList">
+                                    <div id="staBusRouteVM" data-bind="foreach: $parent.staBusRouteVM.staBusRouteList" class="form-group">
                                         <div class="table-row-color">
-                                            <div class="col-4"><label for="route_num"> Route Number: </label><input class="form-control" id="route_num" data-bind="value: route_num,hasfocus: distance.focused" ></div>
-                                            <div class="col-2"><label for="north_bound_stop"> North Bound Stop: </label><input class="form-control" id="north_bound_stop" data-bind="value: north_bound_stop,hasfocus: distance.focused" ></div>
-                                            <div class="col-2"><label for="south_bound_stop"> South Bound Stop: </label><input class="form-control" id="south_bound_stop" data-bind="value: south_bound_stop,hasfocus: distance.focused" ></div>
-                                            <div class="col-2"><label for="east_bound_stop"> East Bound Stop: </label><input class="form-control" id="east_bound_stop" data-bind="value: east_bound_stop,hasfocus: distance.focused" ></div>
-                                            <div class="col-2"><label for="west_bound_stop"> West Bound Stop: </label><input class="form-control" id="west_bound_stop" data-bind="value: west_bound_stop,hasfocus: distance.focused" ></div>
+                                            <div class="col-2"><label for="route_num"> Route Number: </label><input class="form-control" id="route_num" data-bind="value: route_num,hasfocus: route_num.focused" ></div>
+                                            <div class="col-2"><label for="north_bound_stop"> North Bound Stop: </label><input class="form-control" id="north_bound_stop" data-bind="value: north_bound_stop,hasfocus: north_bound_stop.focused" ></div>
+                                            <div class="col-2"><label for="south_bound_stop"> South Bound Stop: </label><input class="form-control" id="south_bound_stop" data-bind="value: south_bound_stop,hasfocus: south_bound_stop.focused" ></div>
+                                            <div class="col-2"><label for="east_bound_stop"> East Bound Stop: </label><input class="form-control" id="east_bound_stop" data-bind="value: east_bound_stop,hasfocus: east_bound_stop.focused" ></div>
+                                            <div class="col-2"><label for="west_bound_stop"> West Bound Stop: </label><input class="form-control" id="west_bound_stop" data-bind="value: west_bound_stop,hasfocus: west_bound_stop.focused" ></div>
+                                            <input type="hidden" class="form-control" data-bind="attr:{id: 'edit_route_'+($index() + 1) }, value: sta_route_id">
+                                            <input type="hidden" class="form-control" data-bind="attr:{id: 'sta_bus_'+($index() + 1) }, value: sta_bus_id">
+                                            <div class="col-2">
+                                                <span data-bind="attr:{id: 'edit_route_'+($index() + 1) }" class="edit-text" data-toggle="modal" data-target="#STARouteModal"><i class="fas fa-edit"></i>&nbsp; Edit Route</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="table-row-color">
@@ -315,23 +332,27 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><input class="form-control" id="route_surfaceStaBus" data-bind="value: route_surface, hasfocus: route_surface.focused"></div>
-                                        <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><input class="form-control" id="tactile_warning_stripsStaBus" data-bind="value: tactile_warning_strips, hasfocus: tactile_warning.focused"></div>
+                                        <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><input class="form-control" id="tactile_warning_stripsStaBus" data-bind="value: tactile_warning_strips, hasfocus: tactile_warning_strips.focused"></div>
                                         <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><input class="form-control" id="curb_cutsStaBus" data-bind="value: curb_cuts, hasfocus: covered.focused"></div>
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><input class="form-control" id="lightingStaBus" data-bind="value: lighting, hasfocus: lighting.focused"></div>
                                         <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><input class="form-control" id="lighting_optionStaBus" data-bind="value: lighting_option, hasfocus: lighting_option.focused"></div>
                                         <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><input class="form-control" id="lighting_typeStaBus" data-bind="value: lighting_type, hasfocus: lighting_type.focused"></div>
-                                        <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><input class="form-control" id="shelter_bench" data-bind="value: lighting_type, hasfocus: shelter_bench.focused"></div>
+                                        <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><input class="form-control" id="shelter_bench" data-bind="value: shelter_bench, hasfocus: shelter_bench.focused"></div>
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="commentStaBus"> Describe the route: </label><input class="form-control" id="commentStaBus" data-bind="value: comment, hasfocus: comment.focused"></div>
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsStaBus"> Recommendations: </label><input class="form-control" id="recommendationsStaBus" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="sta_park_id" data-bind="value: park_id">
+                                        <input type="hidden" class="form-control" id="sta_id" data-bind="value: sta_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_sta_bus" class="btn btn-success" onclick="updateSTABus()"><i class="fas fa-save"></i>&nbsp; Save STA Bus Information</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -347,18 +368,18 @@
                             <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: exteriorPathwayVM.exteriorPathwayList">
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <input class="form-control" id="service_animal" data-bind="value: service_animal,hasfocus: distance.focused" ></div>
-                                        <div class="col-8"><label for="service_animal_location"> Location of service animal relief: </label> <input class="form-control" id="service_animal_location" data-bind="value: service_animal_location,hasfocus: distance.focused" ></div>
+                                        <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <input class="form-control" id="service_animal" data-bind="value: service_animal,hasfocus: service_animal.focused" ></div>
+                                        <div class="col-8"><label for="service_animal_location"> Location of service animal relief: </label> <input class="form-control" id="service_animal_location" data-bind="value: service_animal_location,hasfocus: service_animal_location.focused" ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <input class="form-control" id="has_exterior_path" data-bind="value: has_exterior_path,hasfocus: distance.focused" ></div>
+                                        <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <input class="form-control" id="has_exterior_path" data-bind="value: has_exterior_path,hasfocus: has_exterior_path.focused" ></div>
                                         <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><input class="form-control" id="min_widthExteriorPathway" data-bind="value: min_width, hasfocus: min_width.focused"></div>
-                                        <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><input class="form-control" id="pathway_surface" data-bind="value: pathway_surface, hasfocus: route_surface.focused"></div>
+                                        <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><input class="form-control" id="pathway_surface" data-bind="value: pathway_surface, hasfocus: pathway_surface.focused"></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><input class="form-control" id="pathway_curbs" data-bind="value: pathway_curbs, hasfocus: shelter_bench.focused"></div>
+                                        <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><input class="form-control" id="pathway_curbs" data-bind="value: pathway_curbs, hasfocus: pathway_curbs.focused"></div>
                                         <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><input class="form-control" id="tactile_warningExteriorPathway" data-bind="value: tactile_warning, hasfocus: tactile_warning.focused"></div>
-                                        <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><input class="form-control" id="slope" data-bind="value: slope, hasfocus: covered.focused"></div>
+                                        <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><input class="form-control" id="slope" data-bind="value: slope, hasfocus: slope.focused"></div>
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><input class="form-control" id="lightingExteriorPathway" data-bind="value: lighting, hasfocus: lighting.focused"></div>
@@ -388,21 +409,21 @@
                             <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: exteriorStairsVM.exteriorStairsList">
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <input class="form-control" id="stairs_required" data-bind="value: stairs_required,hasfocus: distance.focused" ></div>
-                                        <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <input class="form-control" id="stairs_available" data-bind="value: stairs_available,hasfocus: distance.focused" ></div>
-                                        <div class="col-4"><label for="num_stairs"> Number of stairs: </label> <input class="form-control" id="num_stairs" data-bind="value: num_stairs,hasfocus: distance.focused" ></div>
+                                        <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <input class="form-control" id="stairs_required" data-bind="value: stairs_required,hasfocus: stairs_required.focused" ></div>
+                                        <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <input class="form-control" id="stairs_available" data-bind="value: stairs_available,hasfocus: stairs_available.focused" ></div>
+                                        <div class="col-4"><label for="num_stairs"> Number of stairs: </label> <input class="form-control" id="num_stairs" data-bind="value: num_stairs,hasfocus: num_stairs.focused" ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <input class="form-control" id="handrail_both_sides" data-bind="value: handrail_both_sides,hasfocus: distance.focused" ></div>
-                                        <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><input class="form-control" id="handrail_side" data-bind="value: handrail_side, hasfocus: min_width.focused"></div>
+                                        <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <input class="form-control" id="handrail_both_sides" data-bind="value: handrail_both_sides,hasfocus: handrail_both_sides.focused" ></div>
+                                        <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><input class="form-control" id="handrail_side" data-bind="value: handrail_side, hasfocus: handrail_side.focused"></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-8"><label for="handrail_requlations_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><input class="form-control" id="handrail_requlations_height" data-bind="value: handrail_requlations_height, hasfocus: route_surface.focused"></div>
-                                        <div class="col-4"><label for="handrail_height"> Handrail height: </label><input class="form-control" id="handrail_height" data-bind="value: handrail_height, hasfocus: shelter_bench.focused"></div>
+                                        <div class="col-8"><label for="handrail_requlations_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><input class="form-control" id="handrail_requlations_height" data-bind="value: handrail_requlations_height, hasfocus: handrail_requlations_height.focused"></div>
+                                        <div class="col-4"><label for="handrail_height"> Handrail height: </label><input class="form-control" id="handrail_height" data-bind="value: handrail_height, hasfocus: handrail_height.focused"></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><input class="form-control" id="obstacles" data-bind="value: obstacles, hasfocus: tactile_warning.focused"></div>
-                                        <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><input class="form-control" id="clearly_marked" data-bind="value: clearly_marked, hasfocus: covered.focused"></div>
+                                        <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><input class="form-control" id="obstacles" data-bind="value: obstacles, hasfocus: obstacles.focused"></div>
+                                        <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><input class="form-control" id="clearly_marked" data-bind="value: clearly_marked, hasfocus: clearly_marked.focused"></div>
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><input class="form-control" id="lightingExteriorStairs" data-bind="value: lighting, hasfocus: lighting.focused"></div>
@@ -432,7 +453,7 @@
                             <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: exteriorRampsVM.exteriorRampsList">
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <input class="form-control" id="ramp_required" data-bind="value: ramp_required,hasfocus: distance.focused" ></div>
+                                        <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <input class="form-control" id="ramp_required" data-bind="value: ramp_required,hasfocus: ramp_required.focused" ></div>
                                         <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <input class="form-control" id="ramp_available" data-bind="value: ramp_available,hasfocus: ramp_available.focused" ></div>
                                         <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <input class="form-control" id="min_widthExteriorRamps" data-bind="value: min_width,hasfocus: min_width.focused" ></div>
                                         <div class="col-3"><label for="width_between_handrails"> Ramps width: </label> <input class="form-control" id="width_between_handrails" data-bind="value: width_between_handrails,hasfocus: width_between_handrails.focused" ></div>
@@ -985,6 +1006,42 @@
                 <!-- End Container Section -->
             </div>
         </div>
+
+    <!-- ALERT MODAL -->
+        <div class="modal fade bd-example-modal-lg" id="alert" tabindex="-1" role="dialog" aria-labelledby="alert" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-alert-header">
+                        <h5 class="modal-title modal-alert-title" id="alertTitle">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div id="alert-body" class="modal-body modal-alert-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- SUCCESS MODAL -->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="success" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-success-header">
+                        <h5 class="modal-title modal-success-title" id="successTitle">Success</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div id="success-body" class="modal-body modal-success-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <!-- CATEGORY MODAL -->
         <!--<select class="form-control" id="category" data-bind="options: $parent.categoryVM.categoryList,-->
                                                               <!--optionsText: 'category_name',-->

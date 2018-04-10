@@ -65,12 +65,69 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
 });
 
 // put establishment data by est id
-$app->post('/post/establishment/est/[{id}]', function (Request $request, Response $response, array $args){
+$app->put('/put/establishment/est/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
     $data = $request->getParsedBody();
-    print_r("ID: "+ $id + " , Data: "+ $data);
-//    $sth = $this->db->prepare("UPDATE Establishment SET  WHERE est_id=$id");
-//    $sth->execute();
+
+    $name = $data["name"];
+    $website = $data["website"];
+    $cat_id = $data["cat_id"];
+    $subtype = $data["subtype"];
+    $config_id = $data["config_id"];
+    $street = $data["street"];
+    $city = $data["city"];
+    $state = $data["state"];
+    $zip = $data["zip"];
+    $phone = $data["phone"];
+    $phone_tty = $data["phone_tty"];
+    $contact_fname = $data["contact_fname"];
+    $contact_lname = $data["contact_lname"];
+    $contact_title = $data["contact_title"];
+    $contact_email = $data["contact_email"];
+    $user_id = $data["user_id"];
+    $date = $data["date"];
+    $config_comment = $data["config_comment"];
+
+//    $res = array("name" => $name, "website" => $website, "cat_id" => $cat_id, "subtype" => $subtype, "config_id" => $config_id, "street" => $street, "city" => $city, "state" => $state, "zip" => $zip, "phone" => $phone, "phone_tty" => $phone_tty, "contact_fname" => $contact_fname, "contact_lname" => $contact_lname, "contact_title" => $contact_title, "contact_email" => $contact_email, "user_id" => $user_id, "date" => $date, "config_comment" => $config_comment);
+
+    $sth = $this->db->prepare("UPDATE Establishment SET  name = :Name,
+                                                         website = :Website,
+                                                         subtype = :Subtype,
+                                                         street = :Street,
+                                                         city = :City,
+                                                         state = :State,
+                                                         zip = :Zip,
+                                                         phone = :Phone,
+                                                         tty = :Phone_tty,
+                                                         contact_fname = :Contact_fname,
+                                                         contact_lname = :Contact_lname,
+                                                         contact_title = :Contact_title,
+                                                         contact_email = :Contact_email,
+                                                         user_id = :User_id,
+                                                         cat_id = :Cat_id,
+                                                         config_id = :Config_id,
+                                                         config_comment = :Config_comment,
+                                                         date = :Date
+                                                         WHERE est_id=$id");
+    $sth->bindParam(':Name', $name, PDO::PARAM_STR);
+    $sth->bindParam(':Website', $website, PDO::PARAM_STR);
+    $sth->bindParam(':Subtype', $subtype, PDO::PARAM_STR);
+    $sth->bindParam(':Street', $street, PDO::PARAM_STR);
+    $sth->bindParam(':City', $city, PDO::PARAM_STR);
+    $sth->bindParam(':State', $state, PDO::PARAM_STR);
+    $sth->bindParam(':Zip', $zip, PDO::PARAM_INT);
+    $sth->bindParam(':Phone', $phone, PDO::PARAM_STR);
+    $sth->bindParam(':Phone_tty', $phone_tty, PDO::PARAM_STR);
+    $sth->bindParam(':Contact_fname', $contact_fname, PDO::PARAM_STR);
+    $sth->bindParam(':Contact_lname', $contact_lname, PDO::PARAM_STR);
+    $sth->bindParam(':Contact_title', $contact_title, PDO::PARAM_STR);
+    $sth->bindParam(':Contact_email', $contact_email, PDO::PARAM_STR);
+    $sth->bindParam(':User_id', $user_id, PDO::PARAM_STR);
+    $sth->bindParam(':Cat_id', $cat_id, PDO::PARAM_STR);
+    $sth->bindParam(':Config_id', $config_id, PDO::PARAM_STR);
+    $sth->bindParam(':Config_comment', $config_comment, PDO::PARAM_STR);
+    $sth->bindParam(':Date', $date, PDO::PARAM_STR);
+    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -259,12 +316,21 @@ $app->get('/get/parking/[{id}]', function (Request $request, Response $response,
 // get parking data by establishment id
 $app->get('/get/parking/est/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
-    $sth = $this->db->prepare("SELECT * FROM Parking WHERE est_id=$id");
-    $sth->execute();
-    $data = $sth->fetchAll();
-    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    if (($this->db->prepare("SELECT * FROM Parking WHERE est_id=$id")) == null) {
+        $data = array('success' => false, 'message' => "No record associated with current establishment.");
+        return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+    else {
+        $sth = $this->db->prepare("SELECT * FROM Parking WHERE est_id=$id");
+        $sth->execute();
+        $data = $sth->fetchAll();
+        return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+
 });
 
 // get parking id by establishment id
@@ -276,6 +342,7 @@ $app->get('/get/park_id/est/[{id}]', function (Request $request, Response $respo
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+
 });
 
 // delete parking data by id
@@ -307,11 +374,50 @@ $app->post('/post/parking/', function (Request $request, Response $response, arr
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// put parking data by establishment id
+// put parking data by est id
 $app->put('/put/parking/est/[{id}]', function (Request $request, Response $response, array $args){
-//    $id = $args['id'];
-//    $sth = $this->db->prepare("INSERT INTO Parking WHERE est_id=$id");
-//    $sth->execute();
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $park_id = $data["park_id"];
+    $lot_free = $data["lot_free"];
+    $street_metered = $data["street_metered"];
+    $parking_type = $data["parking_type"];
+    $total_num_spaces = $data["total_num_spaces"];
+    $num_reserved_spaces = $data["num_reserved_spaces"];
+    $num_accessable_space = $data["num_accessable_space"];
+    $num_van_accessible = $data["num_van_accessible"];
+    $reserve_space_sign = $data["reserve_space_sign"];
+    $reserve_space_obstacles = $data["reserve_space_obstacles"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Parking SET    lot_free = :Lot_free,
+                                                     street_metered = :Street_metered,
+                                                     parking_type = :Parking_type,
+                                                     total_num_spaces = :Total_num_spaces,
+                                                     num_reserved_spaces = :Num_reserved_spaces,
+                                                     num_accessable_space = :Num_accessable_space,
+                                                     num_van_accessible = :Num_van_accessible,
+                                                     reserve_space_sign = :Reserve_space_sign,
+                                                     reserve_space_obstacles = :Reserve_space_obstacles,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE park_id=$park_id AND est_id=$id");
+
+    $sth->bindParam(':Lot_free', $lot_free, PDO::PARAM_STR);
+    $sth->bindParam(':Street_metered', $street_metered, PDO::PARAM_STR);
+    $sth->bindParam(':Parking_type', $parking_type, PDO::PARAM_STR);
+    $sth->bindParam(':Total_num_spaces', $total_num_spaces, PDO::PARAM_INT);
+    $sth->bindParam(':Num_reserved_spaces', $num_reserved_spaces, PDO::PARAM_INT);
+    $sth->bindParam(':Num_accessable_space', $num_accessable_space, PDO::PARAM_INT);
+    $sth->bindParam(':Num_van_accessible', $num_van_accessible, PDO::PARAM_INT);
+    $sth->bindParam(':Reserve_space_sign', $reserve_space_sign, PDO::PARAM_STR);
+    $sth->bindParam(':Reserve_space_obstacles', $reserve_space_obstacles, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -390,6 +496,68 @@ $app->put('/put/route_from_parking/', function (Request $request, Response $resp
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put route_from_parking data by park id
+$app->put('/put/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+/**
+        "distance" : distance,
+        "min_width" : min_width,
+        "route_surface" : route_surface,
+        "route_curbs" : route_curbs,
+        "tactile_warning" : tactile_warning,
+        "covered" : covered,
+        "lighting" : lighting,
+        "lighting_option" : lighting_option,
+        "lighting_type" : lighting_type,
+        "comment" : comment,
+        "recommendations" : recommendations
+*/
+    $route_park_id = $data["route_park_id"];
+    $distance = $data["distance"];
+    $min_width = $data["min_width"];
+    $route_surface = $data["route_surface"];
+    $route_curbs = $data["route_curbs"];
+    $tactile_warning = $data["tactile_warning"];
+    $covered = $data["covered"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Route_From_Parking SET distance = :Distance,
+                                                     min_width = :Min_width,
+                                                     route_surface = :Route_surface,
+                                                     route_curbs = :Route_curbs,
+                                                     tactile_warning = :Tactile_warning,
+                                                     covered = :Covered,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE route_park_id=$route_park_id AND park_id=$id");
+
+    $sth->bindParam(':Distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
+    $sth->bindParam(':Route_surface', $route_surface, PDO::PARAM_STR);
+    $sth->bindParam(':Route_curbs', $route_curbs, PDO::PARAM_INT);
+    $sth->bindParam(':Tactile_warning', $tactile_warning, PDO::PARAM_INT);
+    $sth->bindParam(':Covered', $covered, PDO::PARAM_INT);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * PASSENGER LOADING ROUTES
  */
@@ -463,11 +631,64 @@ $app->put('/put/passenger_loading/', function (Request $request, Response $respo
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// put passenger_loading data by parkrk id
+// put passenger_loading data by park id
 $app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
-//    $id = $args['id'];
-//    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
-//    $sth->execute();
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "passenger_id" : passenger_id,
+    "designated_zone" : designated_zone,
+    "distance" : distance,
+    "min_width" : min_width,
+    "passenger_surface" : passenger_surface,
+    "tactile_warning_strips" : tactile_warning_strips,
+    "covered" : covered,
+    "lighting" : lighting,
+    "lighting_option" : lighting_option,
+    "lighting_type" : lighting_type,
+    "comment" : comment,
+    "recommendations" : recommendations
+     */
+    $passenger_id = $data["passenger_id"];
+    $designated_zone= $data["designated_zone"];
+    $distance = $data["distance"];
+    $min_width = $data["min_width"];
+    $passenger_surface = $data["passenger_surface"];
+    $tactile_warning_strips = $data["tactile_warning_strips"];
+    $covered = $data["covered"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Passenger_Loading SET designated_zone = :Designated_zone,
+                                                     distance = :Distance,
+                                                     min_width = :Min_width,
+                                                     passenger_surface = :Passenger_surface,
+                                                     tactile_warning_strips = :Tactile_warning_strips,
+                                                     covered = :Covered,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE passenger_id=$passenger_id AND park_id=$id");
+
+    $sth->bindParam(':Designated_zone', $designated_zone, PDO::PARAM_STR);
+    $sth->bindParam(':Distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
+    $sth->bindParam(':Passenger_surface', $passenger_surface, PDO::PARAM_INT);
+    $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_INT);
+    $sth->bindParam(':Covered', $covered, PDO::PARAM_INT);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -559,9 +780,66 @@ $app->put('/put/sta_bus/', function (Request $request, Response $response, array
 
 // put sta_bus data by park id
 $app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
-//    $id = $args['id'];
-//    $sth = $this->db->prepare("INSERT INTO STA_Bus );
-//    $sth->execute();
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "sta_id" : sta_id,
+    "sta_service_area" : sta_service_area,
+    "distance" : distance,
+    "min_width" : min_width,
+    "route_surface" : route_surface,
+    "tactile_warning_strips" : tactile_warning_strips,
+    "curb_cuts" : curb_cuts,
+    "lighting" : lighting,
+    "lighting_option" : lighting_option,
+    "lighting_type" : lighting_type,
+    "shelter_bench" : shelter_bench,
+    "comment" : comment,
+    "recommendations" : recommendations
+     */
+    $sta_id = $data["sta_id"];
+    $sta_service_area = $data["sta_service_area"];
+    $distance = $data["distance"];
+    $min_width = $data["min_width"];
+    $route_surface = $data["route_surface"];
+    $tactile_warning_strips = $data["tactile_warning_strips"];
+    $curb_cuts = $data["curb_cuts"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $shelter_bench = $data["shelter_bench"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE STA_Bus SET sta_service_area = :Sta_service_area,
+                                                     distance = :Distance,
+                                                     min_width = :Min_width,
+                                                     route_surface = :Route_surface,
+                                                     tactile_warning_strips = :Tactile_warning_strips,
+                                                     curb_cuts = :Curb_cuts,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     shelter_bench = :Shelter_bench,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE sta_id=$sta_id AND park_id=$id");
+
+    $sth->bindParam(':Sta_service_area', $sta_service_area, PDO::PARAM_STR);
+    $sth->bindParam(':Distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
+    $sth->bindParam(':Route_surface', $route_surface, PDO::PARAM_INT);
+    $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_INT);
+    $sth->bindParam(':Curb_cuts', $curb_cuts, PDO::PARAM_INT);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Shelter_bench', $shelter_bench, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
