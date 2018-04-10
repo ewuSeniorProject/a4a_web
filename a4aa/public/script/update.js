@@ -1,14 +1,13 @@
-const API_ROOT = 'http://www.mizesolutions.com/a4a_web/a4aa/public/';
 const EST_ID = localStorage.getItem("establishmentID");
-var PARK_ID;
-var CAT_ID;
-var CAT_NAME;
-var CONFIG_ID;
-var CONFIG_NAME;
-var USER_ID;
-var USER_NAME;
-var STA_ID;
-var REST_ID;
+var PARK_ID = 0;
+var CAT_ID = 0;
+var CAT_NAME = "";
+var CONFIG_ID = 0;
+var CONFIG_NAME = "";
+var USER_ID = 0;
+var USER_NAME = "";
+var STA_ID = 0;
+var REST_ID = 0;
 
 $(document).ready(function () {
 
@@ -28,7 +27,6 @@ $(document).ready(function () {
         }, 500);
     });
 
-    $('#save_establishment').click(updateEstablishment);
 
     function EstablishmentModel(parm) {
         //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
@@ -75,6 +73,8 @@ $(document).ready(function () {
         this.user_id.focused = ko.observable(false);
         this.user_name = ko.observable(USER_NAME);
         this.user_name.focused = ko.observable(false);
+        this.config_comment = ko.observable(parm.data.config_comment);
+        this.config_comment.focused = ko.observable(false);
     }
 
     function EstablishmentViewModel(getUri, deleteUri, postUri, putUri) {
@@ -363,7 +363,6 @@ $(document).ready(function () {
         this.recommendations = ko.observable(parm.data.recommendations);
         this.recommendations.focused = ko.observable(false);
         this.park_id = ko.observable(parm.data.park_id);
-        this.park_id.focused = ko.observable(false);
     }
 
     function PassengerLoadingViewModel(getUri, deleteUri, postUri, putUri) {
@@ -483,7 +482,6 @@ $(document).ready(function () {
         this.west_bound_stop = ko.observable(parm.data.west_bound_stop);
         this.west_bound_stop.focused = ko.observable(false);
         this.sta_bus_id = ko.observable(parm.data.sta_bus_id);
-        this.sta_bus_id.focused = ko.observable(false);
     }
 
     function StaBusRouteViewModel(getUri, deleteUri, postUri, putUri) {
@@ -497,73 +495,6 @@ $(document).ready(function () {
             success: function (data) {
                 self.staBusRouteList($.map(data, function (item) {
                     return new StaBusRouteModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
-    }
-
-    function StaBusModel(parm) {
-        //console.log("StaBusModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.sta_id = ko.observable(parm.data.sta_id);
-        this.sta_service_area = ko.observable(parm.data.sta_service_area);
-        this.sta_service_area.focused = ko.observable(false);
-        this.distance = ko.observable(parm.data.distance);
-        this.distance.focused = ko.observable(false);
-        this.min_width = ko.observable(parm.data.min_width);
-        this.min_width.focused = ko.observable(false);
-        this.route_surface = ko.observable(parm.data.route_surface);
-        this.route_surface.focused = ko.observable(false);
-        this.tactile_warning_strips = ko.observable(parm.data.tactile_warning_strips);
-        this.tactile_warning_strips.focused = ko.observable(false);
-        this.curb_cuts = ko.observable(parm.data.curb_cuts);
-        this.curb_cuts.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.shelter_bench = ko.observable(parm.data.shelter_bench);
-        this.shelter_bench.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.park_id = ko.observable(parm.data.park_id);
-        this.park_id.focused = ko.observable(false);
-    }
-
-    function StaBusViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.staBusList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.staBusList($.map(data, function (item) {
-                    return new StaBusModel({data:item, postUri:postUri, putUri:putUri});
                 }));
             }
         });
@@ -1661,21 +1592,27 @@ $(document).ready(function () {
     console.log("REST_ID: " + REST_ID);
 });
 
+
+// value is EST_ID
 function getParkId(value) {
-    $.ajax ({
+    $.ajax({
         async: false,
         dataType: 'json',
         url: 'get/park_id/est/' + value,
         success: function (data) {
-            // console.log("getParkId data: " + JSON.stringify(data));
-            // console.log("data[0].park_id : " + data[0].park_id);
-            PARK_ID = data[0].park_id;
+            if (data[0] !== undefined)
+                PARK_ID = data[0].park_id;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
         }
     });
 }
 
+// value is EST_ID
 function getIds(value) {
-    $.ajax ({
+    $.ajax({
         async: false,
         dataType: 'json',
         url: 'get/establishment/' + value,
@@ -1683,69 +1620,111 @@ function getIds(value) {
             CAT_ID = data[0].cat_id;
             CONFIG_ID = data[0].config_id;
             USER_ID = data[0].user_id;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
         }
     });
 }
 
+// value is CAT_ID
 function getCategoryName(value) {
-    $.ajax ({
-        async: false,
-        dataType: 'json',
-        url: 'get/category/' + value,
-        success: function (data) {
-            CAT_NAME = data[0].name;
-        }
-    });
+    if(value != 0) {
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            url: 'get/category/' + value,
+            success: function (data) {
+                CAT_NAME = data[0].name;
+            },
+            error: function(data) {
+                $("#alert-body").html(JSON.stringify(data));
+                $("#alert").modal('toggle');
+            }
+        });
+    }
 }
 
+// value is CONFIG_ID
 function getConfigName(value) {
-    $.ajax ({
-        async: false,
-        dataType: 'json',
-        url: 'get/configuration/' + value,
-        success: function (data) {
-            CONFIG_NAME = data[0].name;
-        }
-    });
+    if(value != 0) {
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            url: 'get/configuration/' + value,
+            success: function (data) {
+                CONFIG_NAME = data[0].name;
+            },
+            error: function(data) {
+                $("#alert-body").html(JSON.stringify(data));
+                $("#alert").modal('toggle');
+            }
+        });
+    }
 }
 
+// value is USER_ID
 function getUserName(value) {
-    $.ajax ({
-        async: false,
-        dataType: 'json',
-        url: 'get/user/' + value,
-        success: function (data) {
-            USER_NAME = data[0].fname +" "+ data[0].lname;
-        }
-    });
+    if(value != 0) {
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            url: 'get/user/' + value,
+            success: function (data) {
+                USER_NAME = data[0].fname + " " + data[0].lname;
+            },
+            error: function(data) {
+                $("#alert-body").html(JSON.stringify(data));
+                $("#alert").modal('toggle');
+            }
+        });
+    }
 }
 
+// value is PARK_ID
 function getStaBusId(value) {
-    $.ajax ({
-        async: false,
-        dataType: 'json',
-        url: 'get/sta_bus_id/park/' + value,
-        success: function (data) {
-            STA_ID = data[0].sta_id;
-        }
-    });
+    if(value != 0) {
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            url: 'get/sta_bus_id/park/' + value,
+            success: function (data) {
+                STA_ID = data[0].sta_id;
+            },
+            error: function(data) {
+                $("#alert-body").html(JSON.stringify(data));
+                $("#alert").modal('toggle');
+            }
+        });
+    }
 }
 
+// value is EST_ID
 function getRestroomId(value) {
-    $.ajax ({
+    $.ajax({
         async: false,
         dataType: 'json',
         url: 'get/restroom/est/' + value,
         success: function (data) {
-            REST_ID = data[0].restroom_id;
+            if (data[0] !== undefined)
+                REST_ID = data[0].restroom_id;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
         }
     });
 }
 
+
 function updateEstablishment() {
+    var est_id = document.getElementById("est_id").value;
     var name = document.getElementById("name").value;
     var website = document.getElementById("website").value;
+    var cat_id = document.getElementById("cat_id").value;
     var subtype = document.getElementById("subtype").value;
+    var config_id = document.getElementById("config_id").value;
     var street = document.getElementById("street").value;
     var city = document.getElementById("city").value;
     var state = document.getElementById("state").value;
@@ -1756,22 +1735,240 @@ function updateEstablishment() {
     var contact_lname = document.getElementById("contact_lname").value;
     var contact_title = document.getElementById("contact_title").value;
     var contact_email = document.getElementById("contact_email").value;
+    var user_id = document.getElementById("user_id").value;
     var date = document.getElementById("date").value;
-    var arrdata = [EST_ID, name, website, CAT_ID, subtype, CONFIG_ID, street, city, state, zip, phone, phone_tty, contact_fname, contact_lname, contact_title, contact_email, USER_ID, date];
+    var config_comment = document.getElementById("commentEstablishment").value;
+    // var arrdata = [EST_ID, name, website, CAT_ID, subtype, CONFIG_ID, street, city, state, zip, phone, phone_tty, contact_fname, contact_lname, contact_title, contact_email, USER_ID, date, config_comment];
 
-    $("#save_establishment_result").append('&emsp; Updating Premises Information');
-
-    console.log(arrdata);
+    console.log("update.js:");
 
     $.ajax({
-        method: "POST",
-        dataType: "json",
-        url: 'post/establishment/est/' + EST_ID,
-        data: {'data' : arrdata},
-        success: console.log("Updated"),
-        complete: $("#save_establishment_result").empty()
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/establishment/est/" + est_id,
+        data: JSON.stringify({
+                "est_id": est_id,
+                "name" : name,
+                "website" : website,
+                "cat_id" : cat_id,
+                "subtype" : subtype,
+                "config_id" : config_id,
+                "street" : street,
+                "city" : city,
+                "state" : state,
+                "zip" : zip,
+                "phone" : phone,
+                "phone_tty" : phone_tty,
+                "contact_fname" : contact_fname,
+                "contact_lname" : contact_lname,
+                "contact_title" : contact_title,
+                "contact_email" : contact_email,
+                "user_id" : user_id,
+                "date" : date,
+                "config_comment" : config_comment
+            }),
+        success: function () {
+            $("#success-body").html('Premises Information Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
     });
 }
+
+function updateParking() {
+    var est_id = document.getElementById("park_est_id").value;
+    var park_id = document.getElementById("park_id").value;
+    var lot_free = document.getElementById("lot_free").value;
+    var street_metered = document.getElementById("street_metered").value;
+    var parking_type = document.getElementById("parking_type").value;
+    var total_num_spaces = document.getElementById("total_num_spaces").value;
+    var num_reserved_spaces = document.getElementById("num_reserved_spaces").value;
+    var num_accessable_space = document.getElementById("num_accessable_space").value;
+    var num_van_accessible = document.getElementById("num_van_accessible").value;
+    var reserve_space_sign = document.getElementById("reserve_space_sign").value;
+    var reserve_space_obstacles = document.getElementById("reserve_space_obstacles").value;
+    var comment = document.getElementById("comment").value;
+    var recommendations = document.getElementById("recommendations").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/parking/est/" + est_id,
+        data: JSON.stringify({
+            "park_id" : park_id,
+            "lot_free" : lot_free,
+            "street_metered" : street_metered,
+            "parking_type" : parking_type,
+            "total_num_spaces" : total_num_spaces,
+            "num_reserved_spaces" : num_reserved_spaces,
+            "num_accessable_space" : num_accessable_space,
+            "num_van_accessible" : num_van_accessible,
+            "reserve_space_sign" : reserve_space_sign,
+            "reserve_space_obstacles" : reserve_space_obstacles,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Parking Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateRouteFromParking() {
+    var route_park_id = document.getElementById("route_from_park_id").value;
+    var distance = document.getElementById("distance").value;
+    var min_width = document.getElementById("min_width").value;
+    var route_surface = document.getElementById("route_surface").value;
+    var route_curbs = document.getElementById("route_curbs").value;
+    var tactile_warning = document.getElementById("tactile_warning").value;
+    var covered = document.getElementById("covered").value;
+    var lighting = document.getElementById("lighting").value;
+    var lighting_option = document.getElementById("lighting_option").value;
+    var lighting_type = document.getElementById("lighting_type").value;
+    var comment = document.getElementById("commentRouteFromParking").value;
+    var recommendations = document.getElementById("recommendationsRouteFromParking").value;
+    var park_id = document.getElementById("route_park_id").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/route_from_parking/park/" + park_id,
+        data: JSON.stringify({
+            "route_park_id" : route_park_id,
+            "distance" : distance,
+            "min_width" : min_width,
+            "route_surface" : route_surface,
+            "route_curbs" : route_curbs,
+            "tactile_warning" : tactile_warning,
+            "covered" : covered,
+            "lighting" : lighting,
+            "lighting_option" : lighting_option,
+            "lighting_type" : lighting_type,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Route From Parking Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updatePassengerLoading() {
+    var passenger_id = document.getElementById("passenger_id").value;
+    var designated_zone = document.getElementById("designated_zonePassengerLoading").value;
+    var distance = document.getElementById("distancePassengerLoading").value;
+    var min_width = document.getElementById("min_widthPassengerLoading").value;
+    var passenger_surface = document.getElementById("passenger_surfacePassengerLoading").value;
+    var tactile_warning_strips = document.getElementById("tactile_warning_stripsPassengerLoading").value;
+    var covered = document.getElementById("coveredPassengerLoading").value;
+    var lighting = document.getElementById("lightingPassengerLoading").value;
+    var lighting_option = document.getElementById("lighting_optionPassengerLoading").value;
+    var lighting_type = document.getElementById("lighting_typePassengerLoading").value;
+    var comment = document.getElementById("commentPassengerLoading").value;
+    var recommendations = document.getElementById("recommendationsPassengerLoading").value;
+    var park_id = document.getElementById("passenger_park_id").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/passenger_loading/park/" + park_id,
+        data: JSON.stringify({
+            "passenger_id" : passenger_id,
+            "designated_zone" : designated_zone,
+            "distance" : distance,
+            "min_width" : min_width,
+            "passenger_surface" : passenger_surface,
+            "tactile_warning_strips" : tactile_warning_strips,
+            "covered" : covered,
+            "lighting" : lighting,
+            "lighting_option" : lighting_option,
+            "lighting_type" : lighting_type,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Passenger Loading Zones Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateSTABus() {
+    var sta_id = document.getElementById("sta_id").value;
+    var sta_service_area = document.getElementById("sta_service_area").value;
+    var distance = document.getElementById("distanceStaBus").value;
+    var min_width = document.getElementById("min_widthStaBus").value;
+    var route_surface = document.getElementById("route_surfaceStaBus").value;
+    var tactile_warning_strips = document.getElementById("tactile_warning_stripsStaBus").value;
+    var curb_cuts = document.getElementById("curb_cutsStaBus").value;
+    var lighting = document.getElementById("lightingStaBus").value;
+    var lighting_option = document.getElementById("lighting_optionStaBus").value;
+    var lighting_type = document.getElementById("lighting_typeStaBus").value;
+    var shelter_bench = document.getElementById("shelter_bench").value;
+    var comment = document.getElementById("commentStaBus").value;
+    var recommendations = document.getElementById("recommendationsStaBus").value;
+    var park_id = document.getElementById("sta_park_id").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/sta_bus/park/" + park_id,
+        data: JSON.stringify({
+            "sta_id" : sta_id,
+            "sta_service_area" : sta_service_area,
+            "distance" : distance,
+            "min_width" : min_width,
+            "route_surface" : route_surface,
+            "tactile_warning_strips" : tactile_warning_strips,
+            "curb_cuts" : curb_cuts,
+            "lighting" : lighting,
+            "lighting_option" : lighting_option,
+            "lighting_type" : lighting_type,
+            "shelter_bench" : shelter_bench,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('STA Bus Information Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
 
 function removeRequest(uri, record) {
     $.ajax({
