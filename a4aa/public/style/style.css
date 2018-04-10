@@ -341,3 +341,45 @@ a:hover {
     margin: 1em;
     padding: 0;
 }
+
+.modal-success-header {
+    background-color: #4482b6;
+    border-radius: 1px;
+}
+
+.modal-success-title {
+    color: #bfff57;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-success-body {
+    color: #000000;
+    font-family: 'Lato', sans-serif;
+    font-size: 21px;
+}
+
+.modal-alert-header {
+    background-color: #b64649;
+    border-radius: 1px;
+}
+
+.modal-alert-title {
+    color: #fff10d;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-alert-body {
+    color: #000000;
+    font-family: 'Lato', sans-serif;
+    font-size: 21px;
+}
+
+.edit-text {
+    color: #bfff57;
+    font-family: 'Lato', sans-serif;
+    font-size: 22px;
+}
