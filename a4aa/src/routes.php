@@ -887,7 +887,7 @@ $app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Re
     $data = $request->getParsedBody();
     $sta_route_id = $data["sta_route_id"];
 
-    $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$sta_route_id AND sta_bus_id=$id");
+    $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$sta_route_id");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')

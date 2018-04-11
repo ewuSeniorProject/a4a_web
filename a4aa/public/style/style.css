@@ -218,7 +218,7 @@ a:hover {
 
 .phead-color {
     padding: .7em 1em;
-    background-color: lightslategrey;
+    background-color: #778899;
     color: #ffffff;
 }
 
@@ -255,6 +255,12 @@ a:hover {
     font-weight: bold;
     font-style: normal;
     text-transform: uppercase;
+}
+
+.edit-text {
+    color: rgb(35, 55, 81);
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
 }
 
 #page-preloader {
@@ -378,8 +384,20 @@ a:hover {
     font-size: 21px;
 }
 
-.edit-text {
-    color: #bfff57;
+.modal-sta-header {
+    background-color: #778899;
+    border-radius: 1px;
+}
+
+.modal-sta-title {
+    color: #ffffff;
     font-family: 'Lato', sans-serif;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-sta-body {
+    color: #ffffff;
+    background-color: rgb(68, 143, 195);
+    font-family: 'Lato', sans-serif;
 }
