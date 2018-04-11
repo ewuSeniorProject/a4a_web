@@ -314,15 +314,15 @@
                                     </div>
                                     <div id="staBusRouteVM" data-bind="foreach: $parent.staBusRouteVM.staBusRouteList" class="form-group">
                                         <div class="table-row-color">
-                                            <div class="col-2"><label for="route_num"> Route Number: </label><input class="form-control" id="route_num" data-bind="value: route_num,hasfocus: route_num.focused" readonly></div>
-                                            <div class="col-2"><label for="north_bound_stop"> North Bound Stop: </label><input class="form-control" id="north_bound_stop" data-bind="value: north_bound_stop,hasfocus: north_bound_stop.focused" readonly></div>
-                                            <div class="col-2"><label for="south_bound_stop"> South Bound Stop: </label><input class="form-control" id="south_bound_stop" data-bind="value: south_bound_stop,hasfocus: south_bound_stop.focused" readonly></div>
-                                            <div class="col-2"><label for="east_bound_stop"> East Bound Stop: </label><input class="form-control" id="east_bound_stop" data-bind="value: east_bound_stop,hasfocus: east_bound_stop.focused" readonly></div>
-                                            <div class="col-2"><label for="west_bound_stop"> West Bound Stop: </label><input class="form-control" id="west_bound_stop" data-bind="value: west_bound_stop,hasfocus: west_bound_stop.focused" readonly></div>
-                                            <!--<input type="hidden" class="form-control" data-bind="attr:{id: 'edit_route_'+($index() + 1) }, value: sta_route_id">-->
-                                            <!--<input type="hidden" class="form-control" data-bind="attr:{id: 'sta_bus_'+($index() + 1) }, value: sta_bus_id">-->
+                                            <div class="col-2"><label data-bind="attr:{for: 'route_num_'+($index() + 1) }"> Route Number: </label><input class="form-control" data-bind="value: route_num,hasfocus: route_num.focused, attr:{id: 'route_num_'+($index() + 1) }" readonly></div>
+                                            <div class="col-2"><label data-bind="attr:{for: 'north_bound_stop_'+($index() + 1) }"> North Bound Stop: </label><input class="form-control" data-bind="value: north_bound_stop,hasfocus: north_bound_stop.focused, attr:{id: 'north_bound_stop_'+($index() + 1) }" readonly></div>
+                                            <div class="col-2"><label data-bind="attr:{for: 'south_bound_stop_'+($index() + 1) }"> South Bound Stop: </label><input class="form-control" data-bind="value: south_bound_stop,hasfocus: south_bound_stop.focused, attr:{id: 'south_bound_stop_'+($index() + 1) }" readonly></div>
+                                            <div class="col-2"><label data-bind="attr:{for: 'east_bound_stop_'+($index() + 1) }"> East Bound Stop: </label><input class="form-control" data-bind="value: east_bound_stop,hasfocus: east_bound_stop.focused, attr:{id: 'east_bound_stop_'+($index() + 1) }" readonly></div>
+                                            <div class="col-2"><label data-bind="attr:{for: 'west_bound_stop_'+($index() + 1) }"> West Bound Stop: </label><input class="form-control" data-bind="value: west_bound_stop,hasfocus: west_bound_stop.focused, attr:{id: 'west_bound_stop_'+($index() + 1) }" readonly></div>
+                                            <input type="hidden" class="form-control" data-bind="attr:{id : 'sta_route_id_'+($index() + 1)}, value: sta_route_id">
+                                            <input type="hidden" class="form-control" data-bind="attr:{id : 'sta_bus_id_'+($index() + 1)}, value: sta_bus_id">
                                             <div class="col-2">
-                                                <span data-bind="attr:{id: 'edit_route_'+($index() + 1) }, click: editSTARoute.bind(sta_route_id, sta_bus_id)" class="edit-text pointer" data-toggle="modal" data-target="#sta-route-modal"><i class="fas fa-edit"></i>&nbsp; Edit Route</span>
+                                                <button data-bind="attr:{id: 'edit_route_'+($index() + 1) }, click: editSTARoute.bind($data, $index() + 1)" class="btn btn-warning edit-text pointer"><i class="fas fa-edit"></i>&nbsp; Edit Route</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1046,12 +1046,12 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-sta-header">
-                        <h5 class="modal-title modal-sta-title" id="staTitle">Error</h5>
+                        <h5 class="modal-title modal-sta-title" id="staTitle">Edit STA Route</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
                     </div>
-                    <div id="sta-body" class="modal-body modal-sta-body"></div>
+                    <div id="sta-body" class="modal-body modal-sta-body col-12"></div>
                     <div id="sta-footer" class="modal-footer"> </div>
                 </div>
             </div>

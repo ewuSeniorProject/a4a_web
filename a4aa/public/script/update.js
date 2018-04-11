@@ -8,6 +8,7 @@ var USER_ID = 0;
 var USER_NAME = "";
 var STA_ID = 0;
 var REST_ID = 0;
+var INDEX = 0;
 
 $(document).ready(function () {
 
@@ -1580,16 +1581,16 @@ $(document).ready(function () {
 
     ko.applyBindings(myParentVM);
 
-    console.log("EST_ID: " + EST_ID);
-    console.log("PARK_ID: " + PARK_ID);
-    console.log("CAT_ID: " + CAT_ID);
-    console.log("CAT_NAME: " + CAT_NAME);
-    console.log("CONFIG_ID: " + CONFIG_ID);
-    console.log("CONFIG_NAME: " + CONFIG_NAME);
-    console.log("USER_ID: " + USER_ID);
-    console.log("USER_NAME: " + USER_NAME);
-    console.log("STA_ID: " + STA_ID);
-    console.log("REST_ID: " + REST_ID);
+    // console.log("EST_ID: " + EST_ID);
+    // console.log("PARK_ID: " + PARK_ID);
+    // console.log("CAT_ID: " + CAT_ID);
+    // console.log("CAT_NAME: " + CAT_NAME);
+    // console.log("CONFIG_ID: " + CONFIG_ID);
+    // console.log("CONFIG_NAME: " + CONFIG_NAME);
+    // console.log("USER_ID: " + USER_ID);
+    // console.log("USER_NAME: " + USER_NAME);
+    // console.log("STA_ID: " + STA_ID);
+    // console.log("REST_ID: " + REST_ID);
 });
 
 
@@ -1969,41 +1970,60 @@ function updateSTABus() {
     });
 }
 
-function editSTARoute(route_id, bus_id) {
-    var self = this;
-    self.staBusRouteEditList = ko.observableArray([]);
+function editSTARoute(index) {
+    console.log("index: " + index);
+    INDEX = index;
+    var route_id = document.getElementById("sta_route_id_"+index).value;
+
+    console.log("route_id: " + route_id);
+    console.log("INDEX: " + INDEX);
 
     $.ajax({
         async: false,
         accepts: "application/json",
         method: "GET",
+        dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        url: "get/sta_route/single/sta_bus/" + bus_id,
-        data: JSON.stringify({
-            "sta_route_id": route_id
-        }),
+        url: "get/sta_route/" + route_id,
         success: function (data) {
-            sta_route_id = data.sta_route_id;
-            route_num = data.route_num;
-            north_bound_stop = data.north_bound_stop;
-            south_bound_stop = data.south_bound_stop;
-            east_bound_stop = data.east_bound_stop;
-            west_bound_stop = data.west_bound_stop;
-            sta_bus_id = data.sta_bus_id;
+            console.log(JSON.stringify(data));
+            var sta_route_id = data[0].sta_route_id;
+            var route_num = data[0].route_num;
+            var north_bound_stop = data[0].north_bound_stop;
+            var south_bound_stop = data[0].south_bound_stop;
+            var east_bound_stop = data[0].east_bound_stop;
+            var west_bound_stop = data[0].west_bound_stop;
+            var sta_bus_id = data[0].sta_bus_id;
+
+            console.log("sta_route_id: " + sta_route_id);
+            console.log("route_num: " + route_num);
+            console.log("north_bound_stop: " + north_bound_stop);
+            console.log("south_bound_stop: " + south_bound_stop);
+            console.log("east_bound_stop: " + east_bound_stop);
+            console.log("west_bound_stop: " + west_bound_stop);
+            console.log("sta_bus_id: " + sta_bus_id);
+
+
             $("#sta-body").html(
                 '<div class="table-row-color form-group">\n' +
-                '   <div class="col-2"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'" ></div>\n' +
-                '   <div class="col-2"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stopEdit+'" ></div>\n' +
-                '   <div class="col-2"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stopEdit+'" ></div>\n' +
-                '   <div class="col-2"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stopEdit+'" ></div>\n' +
-                '   <div class="col-2"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stopEdit+'" ></div>\n' +
+                '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
+                '</div>\n'+
+                '<div class="table-row-color">\n' +
+                '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
+                '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
+                '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
+                '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stop+'"></div>\n' +
+                '   <input type="hidden" class="form-control" id="sta_route_idEdit" value="'+sta_route_id+'">\n'+
+                '   <input type="hidden" class="form-control" id="sta_bus_idEdit" value="'+sta_bus_id+'">\n'+
                 '</div>'
             );
+
             $("#sta-footer").html(
                 '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
                 '&nbsp;\n' +
-                '<button type="button" class="btn btn-success" onclick="updateSTARoute('+sta_route_id+','+sta_bus_id+')"><i class="fas fa-save"></i>&nbsp; Save</button>'
+                '<button type="button" class="btn btn-success" onclick="updateSTARoute()"><i class="fas fa-save"></i>&nbsp; Save</button>'
             );
+
             $("#sta-route-modal").modal('toggle');
         },
         error: function (data) {
@@ -2013,16 +2033,16 @@ function editSTARoute(route_id, bus_id) {
     });
 }
 
-function updateSTARoute(route_id, bus_id) {
+function updateSTARoute() {
     $("#sta-route-modal").modal('toggle');
 
-    var sta_route_id = route_id;
+    var sta_route_id = document.getElementById("sta_route_idEdit").value;
     var route_num = document.getElementById("route_numEdit").value;
     var north_bound_stop = document.getElementById("north_bound_stopEdit").value;
     var south_bound_stop = document.getElementById("south_bound_stopEdit").value;
     var east_bound_stop = document.getElementById("east_bound_stopEdit").value;
     var west_bound_stop = document.getElementById("west_bound_stopEdit").value;
-    var sta_bus_id = bus_id;
+    var sta_bus_id = document.getElementById("sta_bus_idEdit").value;
 
     console.log("update.js:");
 
@@ -2042,6 +2062,12 @@ function updateSTARoute(route_id, bus_id) {
         success: function () {
             $("#success-body").html('STA Route Updated');
             $("#success").modal('toggle');
+
+            document.getElementById("route_num_" + INDEX).value = route_num;
+            document.getElementById("north_bound_stop_" + INDEX).value = north_bound_stop;
+            document.getElementById("south_bound_stop_" + INDEX).value = south_bound_stop;
+            document.getElementById("east_bound_stop_" + INDEX).value = east_bound_stop;
+            document.getElementById("west_bound_stop_" + INDEX).value = west_bound_stop;
         },
         error: function(data) {
             $("#alert-body").html(JSON.stringify(data));
