@@ -831,7 +831,7 @@
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Restroom
                                 </div>
                             </div>
-                            <div id="collapseFifteen" class="collapse" aria-labelledby="headingFifteen" data-parent="#accordion">
+                            <div id="collapseFifteen" class="collapse form-group" aria-labelledby="headingFifteen" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: restroomVM.restroomList">
                                     <div class="table-row-color">
                                         <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <input class="form-control" id="public_restroom" data-bind="value: public_restroom,hasfocus: public_restroom.focused" ></div>
@@ -851,9 +851,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsRestroom"> Recommendations: </label><input class="form-control" id="recommendationsRestroom" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="restroom_id" data-bind="value: restroom_id">
+                                        <input type="hidden" class="form-control" id="est_idRestroom" data-bind="value: est_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_restroom" class="btn btn-success" onclick="updateRestroom()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -863,87 +867,99 @@
                             <div class="card-header phead-color pointer  non-link collapsed" id="headerSixteen"  data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
                                 <div>
                                     <a name="restroom_info"></a>
-                                    <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Restroom Info
+                                    <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Restroom Information
                                 </div>
                             </div>
-                            <div id="collapseSixteen" class="collapse" aria-labelledby="headingSixteen" data-parent="#accordion">
+                            <div id="collapseSixteen" class="collapse form-group" aria-labelledby="headingSixteen" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: restroomInfoVM.restroomInfoList">
                                     <div class="table-row-color">
-                                        <div class="col-2"><label for="restroom_number"> Restroom Number: </label> <input class="form-control" id="restroom_number" data-bind="value: ($index() + 1)" readonly></div>
+                                        <input type="hidden" class="form-control" data-bind="attr:{id : 'rest_info_id_'+($index() + 1)}, value: rest_info_id">
+                                        <input type="hidden" class="form-control" data-bind="attr:{id : 'rest_id_'+($index() + 1)}, value: rest_id">
+                                        <div class="col-2">
+                                            <label for="restroom_number"> Restroom Number: </label> 
+                                            <input class="form-control" id="restroom_number" data-bind="value: ($index() + 1)" readonly>
+                                        </div>
+                                        <div class="col-10">
+                                            <!--, click: editRestroomInfo.bind($data, $index() + 1)-->
+                                            <button data-bind="attr:{id: 'edit_restroom_'+($index() + 1) }" class="btn btn-warning edit-text pointer"><i class="fas fa-edit"></i>&nbsp; Edit Restroom</button>
+                                        </div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="restroom_desc"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input class="form-control" id="restroom_desc" data-bind="value: restroom_desc,hasfocus: restroom_desc.focused" ></div>
-                                        <div class="col-4"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <input class="form-control" id="easy_open" data-bind="value: easy_open,hasfocus: easy_open.focused" ></div>
-                                        <div class="col-4"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input class="form-control" id="lbs_force" data-bind="value: lbs_force,hasfocus: lbs_force.focused" ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'restroom_desc_'+($index() + 1) }"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input class="form-control" data-bind="attr:{id: 'restroom_desc_'+($index() + 1) }, value: restroom_desc,hasfocus: restroom_desc.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'easy_open_'+($index() + 1) }">  Room door is easy to open, requiring 5 lb. or less force: </label> <input class="form-control" data-bind="attr:{id: 'easy_open_'+($index() + 1) }, value: easy_open,hasfocus: easy_open.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'lbs_force_'+($index() + 1) }"> Actual force - lbs. or light/ med/ heavy: </label> <input class="form-control" data-bind="attr:{id: 'lbs_force_'+($index() + 1) }, value: lbs_force,hasfocus: lbs_force.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <input class="form-control" id="clearance" data-bind="value: clearance,hasfocus: clearance.focused" ></div>
-                                        <div class="col-3"><label for="opening"> Opening measurement (inches): </label> <input class="form-control" id="opening" data-bind="value: opening,hasfocus: opening.focused" ></div>
-                                        <div class="col-3"><label for="opens_out"> The stall door opens to the outside: </label><input class="form-control" id="opens_out" data-bind="value: opens_out, hasfocus: opens_out.focused"></div>
-                                        <div class="col-3"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><input class="form-control" id="use_fist" data-bind="value: use_fist, hasfocus: use_fist.focused"></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'clearance_'+($index() + 1) }"> Stall/Room door has at least 32” clearance when the door is open: </label> <input class="form-control" data-bind="attr:{id: 'clearance_'+($index() + 1) }, value: clearance,hasfocus: clearance.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'opening_'+($index() + 1) }"> Opening measurement (inches): </label> <input class="form-control" data-bind="attr:{id: 'opening_'+($index() + 1) }, value: opening,hasfocus: opening.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'opens_out_'+($index() + 1) }"> The stall door opens to the outside: </label><input class="form-control" data-bind="attr:{id: 'opens_out_'+($index() + 1) }, value: opens_out, hasfocus: opens_out.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'use_fist_'+($index() + 1) }"> The stall door can be opened, closed, and latched with a closed fist: </label><input class="form-control" data-bind="attr:{id: 'use_fist_'+($index() + 1) }, value: use_fist, hasfocus: use_fist.focused" readonly></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <input class="form-control" id="can_turn_around" data-bind="value: can_turn_around,hasfocus: can_turn_around.focused" ></div>
-                                        <div class="col-3"><label for="turn_width"> Stall/Room width (inches)​: </label> <input class="form-control" id="turn_width" data-bind="value: turn_width,hasfocus: turn_width.focused" ></div>
-                                        <div class="col-3"><label for="turn_depth"> Stall/Room depth (inches)​: </label> <input class="form-control" id="turn_depth" data-bind="value: turn_depth,hasfocus: turn_depth.focused" ></div>
-                                        <div class="col-3"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <input class="form-control" id="close_chair_inside" data-bind="value: close_chair_inside,hasfocus: close_chair_inside.focused" ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'can_turn_around_'+($index() + 1) }"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <input class="form-control" data-bind="attr:{id: 'can_turn_around_'+($index() + 1) }, value: can_turn_around,hasfocus: can_turn_around.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'turn_width_'+($index() + 1) }"> Stall/Room width (inches)​: </label> <input class="form-control" data-bind="attr:{id: 'turn_width_'+($index() + 1) }, value: turn_width,hasfocus: turn_width.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'turn_depth_'+($index() + 1) }"> Stall/Room depth (inches)​: </label> <input class="form-control" data-bind="attr:{id: 'turn_depth_'+($index() + 1) }, value: turn_depth,hasfocus: turn_depth.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'close_chair_inside_'+($index() + 1) }"> The stall/room door can be closed once a wheelchair is inside: </label> <input class="form-control" data-bind="attr:{id: 'close_chair_inside_'+($index() + 1) }, value: close_chair_inside,hasfocus: close_chair_inside.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <input class="form-control" id="grab_bars" data-bind="value: grab_bars,hasfocus: grab_bars.focused" ></div>
-                                        <div class="col-3"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><input class="form-control" id="seat_height_req" data-bind="value: seat_height_req, hasfocus: seat_height_req.focused"></div>
-                                        <div class="col-3"><label for="seat_height"> Seat height (inches): </label><input class="form-control" id="seat_height" data-bind="value: seat_height, hasfocus: seat_height.focused"></div>
-                                        <div class="col-3"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><input class="form-control" id="flush_auto_fist" data-bind="value: flush_auto_fist, hasfocus: flush_auto_fist.focused"></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'grab_bars_'+($index() + 1) }"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <input class="form-control" data-bind="attr:{id: 'grab_bars_'+($index() + 1) }, value: grab_bars,hasfocus: grab_bars.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'seat_height_req_'+($index() + 1) }"> The height of the toilet seat is at least 17” from the floor: </label><input class="form-control" data-bind="attr:{id: 'seat_height_req_'+($index() + 1) }, value: seat_height_req, hasfocus: seat_height_req.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'seat_height_'+($index() + 1) }"> Seat height (inches): </label><input class="form-control" data-bind="attr:{id: 'seat_height_'+($index() + 1) }, value: seat_height, hasfocus: seat_height.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'flush_auto_fist_'+($index() + 1) }"> The toilet flushes automatically, or can be operated with a closed fist: </label><input class="form-control" data-bind="attr:{id: 'flush_auto_fist_'+($index() + 1) }, value: flush_auto_fist, hasfocus: flush_auto_fist.focused" readonly></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <input class="form-control" id="ambulatory_accessible" data-bind="value: ambulatory_accessible,hasfocus: ambulatory_accessible.focused" ></div>
-                                        <div class="col-3"><label for="bar_height"> Toilet height (inches): </label><input class="form-control" id="bar_height" data-bind="value: bar_height, hasfocus: bar_height.focused"></div>
-                                        <div class="col-3"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><input class="form-control" id="coat_hook" data-bind="value: coat_hook, hasfocus: coat_hook.focused"></div>
-                                        <div class="col-3"><label for="hook_height"> Hook height (inches): </label> <input class="form-control" id="hook_height" data-bind="value: hook_height,hasfocus: hook_height.focused" ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'ambulatory_accessible_'+($index() + 1) }"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <input class="form-control" data-bind="attr:{id: 'ambulatory_accessible_'+($index() + 1) }, value: ambulatory_accessible,hasfocus: ambulatory_accessible.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'bar_height_'+($index() + 1) }"> Toilet height (inches): </label><input class="form-control" data-bind="attr:{id: 'bar_height_'+($index() + 1) }, value: bar_height, hasfocus: bar_height.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'coat_hook_'+($index() + 1) }"> If there is a coat hook, it is between 35” and 48” from the floor: </label><input class="form-control" data-bind="attr:{id: 'coat_hook_'+($index() + 1) }, value: coat_hook, hasfocus: coat_hook.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'hook_height_'+($index() + 1) }"> Hook height (inches): </label> <input class="form-control" data-bind="attr:{id: 'hook_height_'+($index() + 1) }, value: hook_height,hasfocus: hook_height.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><input class="form-control" id="sink" data-bind="value: sink, hasfocus: sink.focused"></div>
-                                        <div class="col-3"><label for="sink_height"> Sink/Countertop height (inches): </label> <input class="form-control" id="sink_height" data-bind="value: sink_height,hasfocus: sink_height.focused" ></div>
-                                        <div class="col-3"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><input class="form-control" id="faucet" data-bind="value: faucet, hasfocus: faucet.focused"></div>
-                                        <div class="col-3"><label for="faucet_depth"> Faucet depth (inches): </label> <input class="form-control" id="faucet_depth" data-bind="value: faucet_depth,hasfocus: faucet_depth.focused" ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'sink_'+($index() + 1) }"> The height of the sink/countertop is 34” or less from the floor: </label><input class="form-control" data-bind="attr:{id: 'sink_'+($index() + 1) }, value: sink, hasfocus: sink.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'sink_height_'+($index() + 1) }"> Sink/Countertop height (inches): </label> <input class="form-control" data-bind="attr:{id: 'sink_height_'+($index() + 1) }, value: sink_height,hasfocus: sink_height.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'faucet_'+($index() + 1) }"> The faucet control is 17” or less from the front edge of the sink counter: </label><input class="form-control" data-bind="attr:{id: 'faucet_'+($index() + 1) }, value: faucet, hasfocus: faucet.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'faucet_depth_'+($index() + 1) }"> Faucet depth (inches): </label> <input class="form-control" data-bind="attr:{id: 'faucet_depth_'+($index() + 1) }, value: faucet_depth,hasfocus: faucet_depth.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <input class="form-control" id="faucet_auto_fist" data-bind="value: faucet_auto_fist,hasfocus: faucet_auto_fist.focused" ></div>
-                                        <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><input class="form-control" id="sink_clearance" data-bind="value: sink_clearance, hasfocus: sink_clearance.focused"></div>
-                                        <div class="col-4"><label for="sink_clearance_height"> Measurement (inches): </label> <input class="form-control" id="sink_clearance_height" data-bind="value: sink_clearance_height,hasfocus: sink_clearance_height.focused" ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'faucet_auto_fist_'+($index() + 1) }"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <input class="form-control" data-bind="attr:{id: 'faucet_auto_fist_'+($index() + 1) }, value: faucet_auto_fist,hasfocus: faucet_auto_fist.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'sink_clearance_'+($index() + 1) }"> There is room for a wheelchair to roll under the sink ​: </label><input class="form-control" data-bind="attr:{id: 'sink_clearance_'+($index() + 1) }, value: sink_clearance, hasfocus: sink_clearance.focused" readonly></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'sink_clearance_height_'+($index() + 1) }"> Measurement (inches): </label> <input class="form-control" data-bind="attr:{id: 'sink_clearance_height_'+($index() + 1) }, value: sink_clearance_height,hasfocus: sink_clearance_height.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" id="sink_pipes" data-bind="value: sink_pipes,hasfocus: sink_pipes.focused" ></div>
-                                        <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" id="soap_dispenser" data-bind="value: soap_dispenser,hasfocus: soap_dispenser.focused" ></div>
-                                        <div class="col-4"><label for="dry_first">  Soap dispenser height (inches): </label> <input class="form-control" id="dry_first" data-bind="value: dry_first,hasfocus: dry_first.focused" ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'sink_pipes_'+($index() + 1) }"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" data-bind="attr:{id: 'sink_pipes_'+($index() + 1) }, value: sink_pipes,hasfocus: sink_pipes.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'soap_dispenser_'+($index() + 1) }"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" data-bind="attr:{id: 'soap_dispenser_'+($index() + 1) }, value: soap_dispenser,hasfocus: soap_dispenser.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'dry_first_'+($index() + 1) }">  Soap dispenser height (inches): </label> <input class="form-control" data-bind="attr:{id: 'dry_first_'+($index() + 1) }, value: dry_first,hasfocus: dry_first.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="dry_first_type"> Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" id="dry_first_type" data-bind="value: dry_first_type,hasfocus: dry_first_type.focused" ></div>
-                                        <div class="col-4"><label for="dry_controls"> Operation type - automatic/closed fist: </label> <input class="form-control" id="dry_controls" data-bind="value: dry_controls,hasfocus: dry_controls.focused" ></div>
-                                        <div class="col-4"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" id="dry_control_height" data-bind="value: dry_control_height,hasfocus: clearance.focused" ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'dry_first_type_'+($index() + 1) }"> Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" data-bind="attr:{id: 'dry_first_type_'+($index() + 1) }, value: dry_first_type,hasfocus: dry_first_type.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'dry_controls_'+($index() + 1) }"> Operation type - automatic/closed fist: </label> <input class="form-control" data-bind="attr:{id: 'dry_controls_'+($index() + 1) }, value: dry_controls,hasfocus: dry_controls.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'dry_control_height_'+($index() + 1) }"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" data-bind="attr:{id: 'dry_control_height_'+($index() + 1) }, value: dry_control_height,hasfocus: clearance.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-3"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <input class="form-control" id="mirror" data-bind="value: mirror,hasfocus: mirror.focused" ></div>
-                                        <div class="col-3"><label for="mirror_height"> Mirror height (inches): </label><input class="form-control" id="mirror_height" data-bind="value: mirror_height, hasfocus: mirror_height.focused"></div>
-                                        <div class="col-3"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><input class="form-control" id="shelves" data-bind="value: shelves, hasfocus: shelves.focused"></div>
-                                        <div class="col-3"><label for="shelf_height"> Shelf height (inches): </label> <input class="form-control" id="shelf_height" data-bind="value: shelf_height,hasfocus: shelf_height.focused" ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'mirror_'+($index() + 1) }"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <input class="form-control" data-bind="attr:{id: 'mirror_'+($index() + 1) }, value: mirror,hasfocus: mirror.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'mirror_height_'+($index() + 1) }"> Mirror height (inches): </label><input class="form-control" data-bind="attr:{id: 'mirror_height_'+($index() + 1) }, value: mirror_height, hasfocus: mirror_height.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'shelves_'+($index() + 1) }"> If there are shelves to set items, they are 48” or less from the floor: </label><input class="form-control" data-bind="attr:{id: 'shelves_'+($index() + 1) }, value: shelves, hasfocus: shelves.focused" readonly></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'shelf_height_'+($index() + 1) }"> Shelf height (inches): </label> <input class="form-control" data-bind="attr:{id: 'shelf_height_'+($index() + 1) }, value: shelf_height,hasfocus: shelf_height.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-4"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <input class="form-control" id="trash_receptacles" data-bind="value: trash_receptacles,hasfocus: trash_receptacles.focused" ></div>
-                                        <div class="col-4"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <input class="form-control" id="hygiene_seat_cover" data-bind="value: hygiene_seat_cover,hasfocus: hygiene_seat_cover.focused" ></div>
-                                        <div class="col-4"><label for="hygiene_cover_height"> Height (inches): </label> <input class="form-control" id="hygiene_cover_height" data-bind="value: hygiene_cover_height,hasfocus: hygiene_cover_height.focused" ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'trash_receptacles_'+($index() + 1) }"> Trash receptacles are positioned so they do not block the route to the door​: </label> <input class="form-control" data-bind="attr:{id: 'trash_receptacles_'+($index() + 1) }, value: trash_receptacles,hasfocus: trash_receptacles.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'hygiene_seat_cover_'+($index() + 1) }"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <input class="form-control" data-bind="attr:{id: 'hygiene_seat_cover_'+($index() + 1) }, value: hygiene_seat_cover,hasfocus: hygiene_seat_cover.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'hygiene_cover_height_'+($index() + 1) }"> Height (inches): </label> <input class="form-control" data-bind="attr:{id: 'hygiene_cover_height_'+($index() + 1) }, value: hygiene_cover_height,hasfocus: hygiene_cover_height.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-6"><label for="lightingRestroomInfo"> Lighting is adequate: </label><input class="form-control" id="lightingRestroomInfo" data-bind="value: lighting, hasfocus: lighting.focused"></div>
-                                        <div class="col-6"><label for="lighting_typeRestroomInfo"> Lighting level day/night: </label><input class="form-control" id="lighting_typeRestroomInfo" data-bind="value: lighting_type, hasfocus: lighting_type.focused"></div>
+                                        <div class="col-6"><label data-bind="attr:{for: 'lightingRestroomInfo_'+($index() + 1) }"> Lighting is adequate: </label><input class="form-control" data-bind="attr:{id: 'lightingRestroomInfo_'+($index() + 1) }, value: lighting, hasfocus: lighting.focused" readonly ></div>
+                                        <div class="col-6"><label data-bind="attr:{for: 'lighting_typeRestroomInfo_'+($index() + 1) }"> Lighting level day/night: </label><input class="form-control" data-bind="attr:{id: 'lighting_typeRestroomInfo_'+($index() + 1) }, value: lighting_type, hasfocus: lighting_type.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-12"><label for="commentRestroomInfo"> Additional notes: </label><input class="form-control" id="commentRestroomInfo" data-bind="value: comment, hasfocus: comment.focused"></div>
+                                        <div class="col-12"><label data-bind="attr:{for: 'commentRestroomInfo_'+($index() + 1) }"> Additional notes: </label><input class="form-control" data-bind="attr:{id: 'commentRestroomInfo_'+($index() + 1) }, value: comment, hasfocus: comment.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-color">
-                                        <div class="col-12"><label for="recommendationsRestroomInfo"> Recommendations: </label><input class="form-control" id="recommendationsRestroomInfo" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <div class="col-12"><label data-bind="attr:{for: 'recommendationsRestroomInfo_'+($index() + 1) }"> Recommendations: </label><input class="form-control" data-bind="attr:{id: 'recommendationsRestroomInfo_'+($index() + 1) }, value: recommendations, hasfocus: recommendations.focused" readonly ></div>
                                     </div>
                                     <div class="table-row-spacer">
                                         &nbsp;
+                                    </div>
+                                    <div data-bind="if: ($index()+1)%2 != 0">
+                                        <hr>
                                     </div>
                                 </div>
                             </div>
@@ -955,7 +971,7 @@
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Communication Technologies & Customer Service
                                 </div>
                             </div>
-                            <div id="collapseSeventeen" class="collapse" aria-labelledby="headingSeventeen" data-parent="#accordion">
+                            <div id="collapseSeventeen" class="collapse form-group" aria-labelledby="headingSeventeen" data-parent="#accordion">
                                 <div d="communication" class="card-body card-body-color" data-bind="foreach: communicationVM.communicationList">
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <input class="form-control" id="public_phone" data-bind="value: public_phone,hasfocus: public_phone.focused" ></div>
@@ -1027,9 +1043,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsCommunication"> Recommendations: </label><input class="form-control" id="recommendationsCommunication" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="communication_id" data-bind="value: communication_id">
+                                        <input type="hidden" class="form-control" id="est_idCommunication" data-bind="value: est_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_communication" class="btn btn-success" onclick="updateCommunication()"><i class="fas fa-save"></i>&nbsp; Save Communication Technologies & Customer Service</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -2455,6 +2455,61 @@ $app->put('/put/restroom/', function (Request $request, Response $response, arra
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put restroom data by restroom id and est id
+$app->put('/put/restroom/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "restroom_id": restroom_id,
+    "public_restroom": public_restroom,
+    "total_num": total_num,
+    "designated_number": designated_number,
+    "num_wheelchair_sign": num_wheelchair_sign,
+    "sign_accessable": sign_accessable,
+    "sign_location": sign_location,
+    "key_needed": key_needed,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $restroom_id = $data["restroom_id"];
+    $public_restroom = $data["public_restroom"];
+    $total_num = $data["total_num"];
+    $designated_number = $data["designated_number"];
+    $num_wheelchair_sign = $data["num_wheelchair_sign"];
+    $sign_accessable = $data["sign_accessable"];
+    $sign_location = $data["sign_location"];
+    $key_needed = $data["key_needed"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Restroom SET public_restroom = :public_restroom,
+                                                     total_num = :total_num,
+                                                     designated_number = :designated_number,
+                                                     num_wheelchair_sign = :num_wheelchair_sign,
+                                                     sign_accessable = :sign_accessable,
+                                                     sign_location = :sign_location,
+                                                     key_needed = :key_needed,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE restroom_id=$restroom_id AND est_id=$id");
+
+    $sth->bindParam(':public_restroom', $public_restroom, PDO::PARAM_STR);
+    $sth->bindParam(':total_num', $total_num, PDO::PARAM_STR);
+    $sth->bindParam(':designated_number', $designated_number, PDO::PARAM_STR);
+    $sth->bindParam(':num_wheelchair_sign', $num_wheelchair_sign, PDO::PARAM_STR);
+    $sth->bindParam(':sign_accessable', $sign_accessable, PDO::PARAM_STR);
+    $sth->bindParam(':sign_location', $sign_location, PDO::PARAM_STR);
+    $sth->bindParam(':key_needed', $key_needed, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * RESTROOM INFO ROUTES
  */
@@ -2596,6 +2651,181 @@ $app->post('/post/communication/', function (Request $request, Response $respons
 $app->put('/put/communication/', function (Request $request, Response $response, array $args){
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put restroom data by restroom id and est id
+$app->put('/put/communication/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "communication_id": communication_id,
+    "public_phone": public_phone,
+    "phone_clearance": phone_clearance,
+    "num_phone": num_phone,
+    "tty": tty,
+    "staff_tty": staff_tty,
+    "assisted_listening": assisted_listening,
+    "assisted_listen_type": assisted_listen_type,
+    "assisted_listen_receiver": assisted_listen_receiver,
+    "listening_signage": listening_signage,
+    "staff_listening": staff_listening,
+    "acoustics": acoustics,
+    "acoustics_level": acoustics_level,
+    "alt_comm_methods": alt_comm_methods,
+    "alt_comm_type": alt_comm_type,
+    "staff_ASL": staff_ASL,
+    "captioning_default": captioning_default,
+    "theater_captioning": theater_captioning,
+    "theater_capt_type": theater_capt_type,
+    "auditory_info_visual": auditory_info_visual,
+    "visual_info_auditory": visual_info_auditory,
+    "website_text_reader": website_text_reader,
+    "alt_contact": alt_contact,
+    "alt_contact_type": alt_contact_type,
+    "shopping_assist": shopping_assist,
+    "assist_service": assist_service,
+    "assist_fee": assist_fee,
+    "store_scooter": store_scooter,
+    "scooter_fee": scooter_fee,
+    "scooter_location": scooter_location,
+    "restaurant_allergies": restaurant_allergies,
+    "staff_disable_trained": staff_disable_trained,
+    "staff_disable_trained_desc": staff_disable_trained_desc,
+    "items_reach": items_reach,
+    "service_alt_manner": service_alt_manner,
+    "senior_discount": senior_discount,
+    "senior_age": senior_age,
+    "annual_A4A_review": annual_A4A_review,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $communication_id = $data["communication_id"];
+    $public_phone = $data["public_phone"];
+    $phone_clearance = $data["phone_clearance"];
+    $num_phone = $data["num_phone"];
+    $tty = $data["tty"];
+    $staff_tty = $data["staff_tty"];
+    $assisted_listening = $data["assisted_listening"];
+    $assisted_listen_type = $data["assisted_listen_type"];
+    $assisted_listen_receiver = $data["assisted_listen_receiver"];
+    $listening_signage = $data["listening_signage"];
+    $staff_listening = $data["staff_listening"];
+    $acoustics = $data["acoustics"];
+    $acoustics_level = $data["acoustics_level"];
+    $alt_comm_methods = $data["alt_comm_methods"];
+    $alt_comm_type = $data["alt_comm_type"];
+    $staff_ASL = $data["staff_ASL"];
+    $captioning_default = $data["captioning_default"];
+    $theater_captioning = $data["theater_captioning"];
+    $theater_capt_type = $data["theater_capt_type"];
+    $auditory_info_visual = $data["auditory_info_visual"];
+    $visual_info_auditory = $data["visual_info_auditory"];
+    $website_text_reader = $data["website_text_reader"];
+    $alt_contact = $data["alt_contact"];
+    $alt_contact_type = $data["alt_contact_type"];
+    $shopping_assist = $data["shopping_assist"];
+    $assist_service = $data["assist_service"];
+    $assist_fee = $data["assist_fee"];
+    $store_scooter = $data["store_scooter"];
+    $scooter_fee = $data["scooter_fee"];
+    $scooter_location = $data["scooter_location"];
+    $restaurant_allergies = $data["restaurant_allergies"];
+    $staff_disable_trained = $data["staff_disable_trained"];
+    $staff_disable_trained_desc = $data["staff_disable_trained_desc"];
+    $items_reach = $data["items_reach"];
+    $service_alt_manner = $data["service_alt_manner"];
+    $senior_discount = $data["senior_discount"];
+    $senior_age = $data["senior_age"];
+    $annual_A4A_review = $data["annual_A4A_review"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Communication SET public_phone = :public_phone,
+                                                     phone_clearance = :phone_clearance,
+                                                     num_phone = :num_phone,
+                                                     tty = :tty,
+                                                     staff_tty = :staff_tty,
+                                                     assisted_listening = :assisted_listening,
+                                                     assisted_listen_type = :assisted_listen_type,
+                                                     assisted_listen_receiver = :assisted_listen_receiver,
+                                                     listening_signage = :listening_signage,
+                                                     staff_listening = :staff_listening,
+                                                     acoustics = :acoustics,
+                                                     acoustics_level = :acoustics_level,
+                                                     alt_comm_methods = :alt_comm_methods,
+                                                     alt_comm_type = :alt_comm_type,
+                                                     staff_ASL = :staff_ASL,
+                                                     captioning_default = :captioning_default,
+                                                     theater_captioning = :theater_captioning,
+                                                     theater_capt_type = :theater_capt_type,
+                                                     auditory_info_visual = :auditory_info_visual,
+                                                     visual_info_auditory = :visual_info_auditory,
+                                                     website_text_reader = :website_text_reader,
+                                                     alt_contact = :alt_contact,
+                                                     alt_contact_type = :alt_contact_type,
+                                                     shopping_assist = :shopping_assist,
+                                                     assist_service = :assist_service,
+                                                     assist_fee = :assist_fee,
+                                                     store_scooter = :store_scooter,
+                                                     scooter_fee = :scooter_fee,
+                                                     scooter_location = :scooter_location,
+                                                     restaurant_allergies = :restaurant_allergies,
+                                                     staff_disable_trained = :staff_disable_trained,
+                                                     staff_disable_trained_desc = :staff_disable_trained_desc,
+                                                     items_reach = :items_reach,
+                                                     service_alt_manner = :service_alt_manner,
+                                                     senior_discount = :senior_discount,
+                                                     senior_age = :senior_age,
+                                                     annual_A4A_review = :annual_A4A_review,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE communication_id=$communication_id AND est_id=$id");
+
+    $sth->bindParam(':public_phone', $public_phone, PDO::PARAM_STR);
+    $sth->bindParam(':phone_clearance', $phone_clearance, PDO::PARAM_STR);
+    $sth->bindParam(':num_phone', $num_phone, PDO::PARAM_STR);
+    $sth->bindParam(':tty', $tty, PDO::PARAM_STR);
+    $sth->bindParam(':staff_tty', $staff_tty, PDO::PARAM_STR);
+    $sth->bindParam(':assisted_listening', $assisted_listening, PDO::PARAM_STR);
+    $sth->bindParam(':assisted_listen_type', $assisted_listen_type, PDO::PARAM_STR);
+    $sth->bindParam(':assisted_listen_receiver', $assisted_listen_receiver, PDO::PARAM_STR);
+    $sth->bindParam(':listening_signage', $listening_signage, PDO::PARAM_STR);
+    $sth->bindParam(':staff_listening', $staff_listening, PDO::PARAM_STR);
+    $sth->bindParam(':acoustics', $acoustics, PDO::PARAM_STR);
+    $sth->bindParam(':acoustics_level', $acoustics_level, PDO::PARAM_STR);
+    $sth->bindParam(':alt_comm_methods', $alt_comm_methods, PDO::PARAM_STR);
+    $sth->bindParam(':alt_comm_type', $alt_comm_type, PDO::PARAM_STR);
+    $sth->bindParam(':staff_ASL', $staff_ASL, PDO::PARAM_STR);
+    $sth->bindParam(':captioning_default', $captioning_default, PDO::PARAM_STR);
+    $sth->bindParam(':theater_captioning', $theater_captioning, PDO::PARAM_STR);
+    $sth->bindParam(':theater_capt_type', $theater_capt_type, PDO::PARAM_STR);
+    $sth->bindParam(':auditory_info_visual', $auditory_info_visual, PDO::PARAM_STR);
+    $sth->bindParam(':visual_info_auditory', $visual_info_auditory, PDO::PARAM_STR);
+    $sth->bindParam(':website_text_reader', $website_text_reader, PDO::PARAM_STR);
+    $sth->bindParam(':alt_contact', $alt_contact, PDO::PARAM_STR);
+    $sth->bindParam(':alt_contact_type', $alt_contact_type, PDO::PARAM_STR);
+    $sth->bindParam(':shopping_assist', $shopping_assist, PDO::PARAM_STR);
+    $sth->bindParam(':assist_service', $assist_service, PDO::PARAM_STR);
+    $sth->bindParam(':assist_fee', $assist_fee, PDO::PARAM_STR);
+    $sth->bindParam(':store_scooter', $store_scooter, PDO::PARAM_STR);
+    $sth->bindParam(':scooter_fee', $scooter_fee, PDO::PARAM_STR);
+    $sth->bindParam(':scooter_location', $scooter_location, PDO::PARAM_STR);
+    $sth->bindParam(':restaurant_allergies', $restaurant_allergies, PDO::PARAM_STR);
+    $sth->bindParam(':staff_disable_trained', $staff_disable_trained, PDO::PARAM_STR);
+    $sth->bindParam(':staff_disable_trained_desc', $staff_disable_trained_desc, PDO::PARAM_STR);
+    $sth->bindParam(':items_reach', $items_reach, PDO::PARAM_STR);
+    $sth->bindParam(':service_alt_manner', $service_alt_manner, PDO::PARAM_STR);
+    $sth->bindParam(':senior_discount', $senior_discount, PDO::PARAM_STR);
+    $sth->bindParam(':senior_age', $senior_age, PDO::PARAM_STR);
+    $sth->bindParam(':annual_A4A_review', $annual_A4A_review, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');

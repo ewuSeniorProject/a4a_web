@@ -2597,10 +2597,258 @@ function updateSeating() {
     });
 }
 
+function updateRestroom() {
+    var restroom_id = document.getElementById("restroom_id").value;
+    var public_restroom = document.getElementById("public_restroom").value;
+    var total_num = document.getElementById("total_num").value;
+    var designated_number = document.getElementById("designated_number").value;
+    var num_wheelchair_sign = document.getElementById("num_wheelchair_sign").value;
+    var sign_accessable = document.getElementById("sign_accessable").value;
+    var sign_location = document.getElementById("sign_location").value;
+    var key_needed = document.getElementById("key_needed").value;
+    var comment = document.getElementById("commentRestroom").value;
+    var recommendations = document.getElementById("recommendationsRestroom").value;
+    var est_id = document.getElementById("est_idSeating").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/restroom/est/" + est_id,
+        data: JSON.stringify({
+            "restroom_id": restroom_id,
+            "public_restroom": public_restroom,
+            "total_num": total_num,
+            "designated_number": designated_number,
+            "num_wheelchair_sign": num_wheelchair_sign,
+            "sign_accessable": sign_accessable,
+            "sign_location": sign_location,
+            "key_needed": key_needed,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Restroom Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function editRestroomInfo(index) {
+    console.log("index: " + index);
+    INDEX = index;
+    var rest_info_id = document.getElementById("rest_info_id_"+index).value;
+
+    console.log("rest_info_id: " + rest_info_id);
+    console.log("INDEX: " + INDEX);
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/restroom_info/" + rest_info_id,
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            var sta_route_id = data[0].sta_route_id;
+            var route_num = data[0].route_num;
+            var north_bound_stop = data[0].north_bound_stop;
+            var south_bound_stop = data[0].south_bound_stop;
+            var east_bound_stop = data[0].east_bound_stop;
+            var west_bound_stop = data[0].west_bound_stop;
+            var sta_bus_id = data[0].sta_bus_id;
+
+            console.log("sta_route_id: " + sta_route_id);
+            console.log("route_num: " + route_num);
+            console.log("north_bound_stop: " + north_bound_stop);
+            console.log("south_bound_stop: " + south_bound_stop);
+            console.log("east_bound_stop: " + east_bound_stop);
+            console.log("west_bound_stop: " + west_bound_stop);
+            console.log("sta_bus_id: " + sta_bus_id);
 
 
+            $("#sta-body").html(
+                '<div class="table-row-color form-group">\n' +
+                '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
+                '</div>\n'+
+                '<div class="table-row-color">\n' +
+                '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
+                '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
+                '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
+                '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stop+'"></div>\n' +
+                '   <input type="hidden" class="form-control" id="sta_route_idEdit" value="'+sta_route_id+'">\n'+
+                '   <input type="hidden" class="form-control" id="sta_bus_idEdit" value="'+sta_bus_id+'">\n'+
+                '</div>'
+            );
+
+            $("#sta-footer").html(
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
+                '&nbsp;\n' +
+                '<button type="button" class="btn btn-success" onclick="updateRestroomInfo()"><i class="fas fa-save"></i>&nbsp; Save</button>'
+            );
+
+            $("#restroom-modal").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateRestroomInfo() {
+    $("#restoorm-modal").modal('toggle');
+
+    var sta_route_id = document.getElementById("sta_route_idEdit").value;
+    var route_num = document.getElementById("route_numEdit").value;
+    var north_bound_stop = document.getElementById("north_bound_stopEdit").value;
+    var south_bound_stop = document.getElementById("south_bound_stopEdit").value;
+    var east_bound_stop = document.getElementById("east_bound_stopEdit").value;
+    var west_bound_stop = document.getElementById("west_bound_stopEdit").value;
+    var sta_bus_id = document.getElementById("sta_bus_idEdit").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/sta_route/sta_bus/" + sta_bus_id,
+        data: JSON.stringify({
+            "sta_route_id" : sta_route_id,
+            "route_num" : route_num,
+            "north_bound_stop" : north_bound_stop,
+            "south_bound_stop" : south_bound_stop,
+            "east_bound_stop" : east_bound_stop,
+            "west_bound_stop" : west_bound_stop
+        }),
+        success: function () {
+            $("#success-body").html('STA Route Updated');
+            $("#success").modal('toggle');
+
+            document.getElementById("route_num_" + INDEX).value = route_num;
+            document.getElementById("north_bound_stop_" + INDEX).value = north_bound_stop;
+            document.getElementById("south_bound_stop_" + INDEX).value = south_bound_stop;
+            document.getElementById("east_bound_stop_" + INDEX).value = east_bound_stop;
+            document.getElementById("west_bound_stop_" + INDEX).value = west_bound_stop;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
 
 
+function updateCommunication() {
+    var communication_id = document.getElementById("communication_id").value;
+    var public_phone = document.getElementById("public_phone").value;
+    var phone_clearance = document.getElementById("phone_clearance").value;
+    var num_phone = document.getElementById("num_phone").value;
+    var tty = document.getElementById("tty").value;
+    var staff_tty = document.getElementById("staff_tty").value;
+    var assisted_listening = document.getElementById("assisted_listening").value;
+    var assisted_listen_type = document.getElementById("assisted_listen_type").value;
+    var assisted_listen_receiver = document.getElementById("assisted_listen_receiver").value;
+    var listening_signage = document.getElementById("listening_signage").value;
+    var staff_listening = document.getElementById("staff_listening").value;
+    var acoustics = document.getElementById("acoustics").value;
+    var acoustics_level = document.getElementById("acoustics_level").value;
+    var alt_comm_methods = document.getElementById("alt_comm_methods").value;
+    var alt_comm_type = document.getElementById("alt_comm_type").value;
+    var staff_ASL = document.getElementById("staff_ASL").value;
+    var captioning_default = document.getElementById("captioning_default").value;
+    var theater_captioning = document.getElementById("theater_captioning").value;
+    var theater_capt_type = document.getElementById("theater_capt_type").value;
+    var auditory_info_visual = document.getElementById("auditory_info_visual").value;
+    var visual_info_auditory = document.getElementById("visual_info_auditory").value;
+    var website_text_reader = document.getElementById("website_text_reader").value;
+    var alt_contact = document.getElementById("alt_contact").value;
+    var alt_contact_type = document.getElementById("alt_contact_type").value;
+    var shopping_assist = document.getElementById("shopping_assist").value;
+    var assist_service = document.getElementById("assist_service").value;
+    var assist_fee = document.getElementById("assist_fee").value;
+    var store_scooter = document.getElementById("store_scooter").value;
+    var scooter_fee = document.getElementById("scooter_fee").value;
+    var scooter_location = document.getElementById("scooter_location").value;
+    var restaurant_allergies = document.getElementById("restaurant_allergies").value;
+    var staff_disable_trained = document.getElementById("staff_disable_trained").value;
+    var staff_disable_trained_desc = document.getElementById("staff_disable_trained_desc").value;
+    var items_reach = document.getElementById("items_reach").value;
+    var service_alt_manner = document.getElementById("service_alt_manner").value;
+    var senior_discount = document.getElementById("senior_discount").value;
+    var senior_age = document.getElementById("senior_age").value;
+    var annual_A4A_review = document.getElementById("annual_A4A_review").value;
+    var comment = document.getElementById("commentCommunication").value;
+    var recommendations = document.getElementById("recommendationsCommunication").value;
+    var est_id = document.getElementById("est_idSeating").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/communication/est/" + est_id,
+        data: JSON.stringify({
+            "communication_id": communication_id,
+            "public_phone": public_phone,
+            "phone_clearance": phone_clearance,
+            "num_phone": num_phone,
+            "tty": tty,
+            "staff_tty": staff_tty,
+            "assisted_listening": assisted_listening,
+            "assisted_listen_type": assisted_listen_type,
+            "assisted_listen_receiver": assisted_listen_receiver,
+            "listening_signage": listening_signage,
+            "staff_listening": staff_listening,
+            "acoustics": acoustics,
+            "acoustics_level": acoustics_level,
+            "alt_comm_methods": alt_comm_methods,
+            "alt_comm_type": alt_comm_type,
+            "staff_ASL": staff_ASL,
+            "captioning_default": captioning_default,
+            "theater_captioning": theater_captioning,
+            "theater_capt_type": theater_capt_type,
+            "auditory_info_visual": auditory_info_visual,
+            "visual_info_auditory": visual_info_auditory,
+            "website_text_reader": website_text_reader,
+            "alt_contact": alt_contact,
+            "alt_contact_type": alt_contact_type,
+            "shopping_assist": shopping_assist,
+            "assist_service": assist_service,
+            "assist_fee": assist_fee,
+            "store_scooter": store_scooter,
+            "scooter_fee": scooter_fee,
+            "scooter_location": scooter_location,
+            "restaurant_allergies": restaurant_allergies,
+            "staff_disable_trained": staff_disable_trained,
+            "staff_disable_trained_desc": staff_disable_trained_desc,
+            "items_reach": items_reach,
+            "service_alt_manner": service_alt_manner,
+            "senior_discount": senior_discount,
+            "senior_age": senior_age,
+            "annual_A4A_review": annual_A4A_review,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Communication Technologies & Customer Service Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
 
 
 
