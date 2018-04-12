@@ -2479,6 +2479,132 @@ function updateSignage() {
     });
 }
 
+function updateEmergencyPreparedness() {
+    var emergency_id = document.getElementById("emergency_id").value;
+    var evac_info = document.getElementById("evac_info").value;
+    var alt_evac_info = document.getElementById("alt_evac_info").value;
+    var evac_info_format = document.getElementById("evac_info_format").value;
+    var alarms = document.getElementById("alarms").value;
+    var location_no_flash = document.getElementById("location_no_flash").value;
+    var shelter = document.getElementById("shelter").value;
+    var signs_to_exit = document.getElementById("signs_to_exit").value;
+    var wheelchair_plan = document.getElementById("wheelchair_plan").value;
+    var floor_plan_routes = document.getElementById("floor_plan_routes").value;
+    var fire_alarm_height = document.getElementById("fire_alarm_height").value;
+    var fire_extinguisher_height = document.getElementById("fire_extinguisher_height").value;
+    var comment = document.getElementById("commentEmergency_Preparedness").value;
+    var recommendations = document.getElementById("recommendationsEmergency_Preparedness").value;
+    var est_id = document.getElementById("est_idEmergency_Preparedness").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/emergency/est/" + est_id,
+        data: JSON.stringify({
+            "emergency_id": emergency_id,
+            "evac_info": evac_info,
+            "alt_evac_info": alt_evac_info,
+            "evac_info_format": evac_info_format,
+            "alarms": alarms,
+            "location_no_flash": location_no_flash,
+            "shelter": shelter,
+            "signs_to_exit": signs_to_exit,
+            "wheelchair_plan": wheelchair_plan,
+            "floor_plan_routes": floor_plan_routes,
+            "fire_alarm_height": fire_alarm_height,
+            "fire_extinguisher_height": fire_extinguisher_height,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Emergency Preparedness Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateSeating() {
+    var seating_id = document.getElementById("seating_id").value;
+    var seating_no_step = document.getElementById("seating_no_step").value;
+    var table_aisles = document.getElementById("table_aisles").value;
+    var legroom = document.getElementById("legroom").value;
+    var num_legroom = document.getElementById("num_legroom").value;
+    var rearranged = document.getElementById("rearranged").value;
+    var num_table_rearranged = document.getElementById("num_table_rearranged").value;
+    var num_chair_rearranged = document.getElementById("num_chair_rearranged").value;
+    var round_tables = document.getElementById("round_tables").value;
+    var num_round_tables = document.getElementById("num_round_tables").value;
+    var lighting = document.getElementById("lightingSeating").value;
+    var lighting_option = document.getElementById("lighting_optionSeating").value;
+    var lighting_type = document.getElementById("lighting_typeSeating").value;
+    var adjustable_lighting = document.getElementById("adjustable_lighting").value;
+    var low_visual_slim = document.getElementById("low_visual_slim").value;
+    var quiet_table = document.getElementById("quiet_table").value;
+    var low_sound = document.getElementById("low_sound").value;
+    var designated_space = document.getElementById("designated_space").value;
+    var num_desig_space = document.getElementById("num_desig_space").value;
+    var companion_space = document.getElementById("companion_space").value;
+    var comment = document.getElementById("commentSeating").value;
+    var recommendations = document.getElementById("recommendationsSeating").value;
+    var est_id = document.getElementById("est_idSeating").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/seating/est/" + est_id,
+        data: JSON.stringify({
+            "seating_id": seating_id,
+            "seating_no_step": seating_no_step,
+            "table_aisles": table_aisles,
+            "legroom": legroom,
+            "num_legroom": num_legroom,
+            "rearranged": rearranged,
+            "num_table_rearranged": num_table_rearranged,
+            "num_chair_rearranged": num_chair_rearranged,
+            "round_tables": round_tables,
+            "num_round_tables": num_round_tables,
+            "lighting": lighting,
+            "lighting_option": lighting_option,
+            "lighting_type": lighting_type,
+            "adjustable_lighting": adjustable_lighting,
+            "low_visual_slim": low_visual_slim,
+            "quiet_table": quiet_table,
+            "low_sound": low_sound,
+            "designated_space": designated_space,
+            "num_desig_space": num_desig_space,
+            "companion_space": companion_space,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Seating Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
 /**
  *
  * DELETE AT SOME POINT
