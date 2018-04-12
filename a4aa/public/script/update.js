@@ -2430,6 +2430,55 @@ function updateElevator() {
     });
 }
 
+function updateSignage() {
+    var sign_id = document.getElementById("sign_id").value;
+    var is_directory = document.getElementById("is_directory").value;
+    var door_signs = document.getElementById("door_signs").value;
+    var sign_height = document.getElementById("sign_height").value;
+    var pub_sign_braile = document.getElementById("pub_sign_braile").value;
+    var sign_high_contrast = document.getElementById("sign_high_contrast").value;
+    var sign_images = document.getElementById("sign_images").value;
+    var written_material_images = document.getElementById("written_material_images").value;
+    var menu_access = document.getElementById("menu_access").value;
+    var alt_info = document.getElementById("alt_info").value;
+    var alt_info_type = document.getElementById("alt_info_type").value;
+    var comment = document.getElementById("commentSignage").value;
+    var recommendations = document.getElementById("recommendationsSignage").value;
+    var est_id = document.getElementById("est_idSignage").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/signage/est/" + est_id,
+        data: JSON.stringify({
+            "sign_id": sign_id,
+            "is_directory": is_directory,
+            "door_signs": door_signs,
+            "sign_height": sign_height,
+            "pub_sign_braile": pub_sign_braile,
+            "sign_high_contrast": sign_high_contrast,
+            "sign_images": sign_images,
+            "written_material_images": written_material_images,
+            "menu_access": menu_access,
+            "alt_info": alt_info,
+            "alt_info_type": alt_info_type,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Signage Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
 /**
  *
  * DELETE AT SOME POINT

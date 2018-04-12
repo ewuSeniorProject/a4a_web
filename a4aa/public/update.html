@@ -681,7 +681,7 @@
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Signage
                                 </div>
                             </div>
-                            <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion">
+                            <div id="collapseTwelve" class="collapse form-group" aria-labelledby="headingTwelve" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: signageVM.signageList">
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <input class="form-control" id="is_directory" data-bind="value: is_directory,hasfocus: is_directory.focused" ></div>
@@ -706,9 +706,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsSignage"> Recommendations: </label><input class="form-control" id="recommendationsSignage" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="sign_id" data-bind="value: sign_id">
+                                        <input type="hidden" class="form-control" id="est_idSignage" data-bind="value: est_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_signage" class="btn btn-success" onclick="updateSignage()"><i class="fas fa-save"></i>&nbsp; Save Signage</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
