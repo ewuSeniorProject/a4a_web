@@ -725,7 +725,7 @@
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Emergency Preparedness
                                 </div>
                             </div>
-                            <div id="collapseThirteen" class="collapse" aria-labelledby="headingThirteen" data-parent="#accordion">
+                            <div id="collapseThirteen" class="collapse form-group" aria-labelledby="headingThirteen" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: emergencyVM.emergencyList">
                                     <div class="table-row-color">
                                         <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <input class="form-control" id="evac_info" data-bind="value: evac_info,hasfocus: evac_info.focused" ></div>
@@ -751,9 +751,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsEmergency_Preparedness"> Recommendations: </label><input class="form-control" id="recommendationsEmergency_Preparedness" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="emergency_id" data-bind="value: emergency_id">
+                                        <input type="hidden" class="form-control" id="est_idEmergency_Preparedness" data-bind="value: est_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_emergency_preparedness" class="btn btn-success" onclick="updateEmergencyPreparedness()"><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -766,7 +770,7 @@
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Seating
                                 </div>
                             </div>
-                            <div id="collapseFourteen" class="collapse" aria-labelledby="headingFourteen" data-parent="#accordion">
+                            <div id="collapseFourteen" class="collapse form-group" aria-labelledby="headingFourteen" data-parent="#accordion">
                                 <div class="card-body card-body-color" data-bind="foreach: seatingVM.seatingList">
                                     <div class="table-row-color">
                                         <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <input class="form-control" id="seating_no_step" data-bind="value: seating_no_step,hasfocus: seating_no_step.focused" ></div>
@@ -808,9 +812,13 @@
                                     </div>
                                     <div class="table-row-color">
                                         <div class="col-12"><label for="recommendationsSeating"> Recommendations: </label><input class="form-control" id="recommendationsSeating" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
+                                        <input type="hidden" class="form-control" id="seating_id" data-bind="value: seating_id">
+                                        <input type="hidden" class="form-control" id="est_idSeating" data-bind="value: est_id">
                                     </div>
-                                    <div class="table-row-spacer">
-                                        &nbsp;
+                                    <div class="table-row-color">
+                                        <div class="col-4">
+                                            <button  type="button" id="save_seating" class="btn btn-success" onclick="updateSeating()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
