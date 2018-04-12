@@ -1995,6 +1995,73 @@ $app->put('/put/signage/', function (Request $request, Response $response, array
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put signage data by signage id and est id
+$app->put('/put/signage/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "sign_id": sign_id,
+    "is_directory": is_directory,
+    "door_signs": door_signs,
+    "sign_height": sign_height,
+    "pub_sign_braile": pub_sign_braile,
+    "sign_high_contrast": sign_high_contrast,
+    "sign_images": sign_images,
+    "written_material_images": written_material_images,
+    "menu_access": menu_access,
+    "alt_info": alt_info,
+    "alt_info_type": alt_info_type,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $sign_id = $data["sign_id"];
+    $is_directory = $data["is_directory"];
+    $door_signs = $data["door_signs"];
+    $sign_height = $data["sign_height"];
+    $pub_sign_braile = $data["pub_sign_braile"];
+    $sign_high_contrast = $data["sign_high_contrast"];
+    $sign_images = $data["sign_images"];
+    $written_material_images = $data["written_material_images"];
+    $menu_access = $data["menu_access"];
+    $alt_info = $data["alt_info"];
+    $alt_info_type = $data["alt_info_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Signage SET is_directory = :is_directory,
+                                                     door_signs = :door_signs,
+                                                     sign_height = :sign_height,
+                                                     pub_sign_braile = :pub_sign_braile,
+                                                     sign_high_contrast = :sign_high_contrast,
+                                                     sign_images = :sign_images,
+                                                     written_material_images = :written_material_images,
+                                                     menu_access = :menu_access,
+                                                     alt_info = :alt_info,
+                                                     alt_info_type = :alt_info_type,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE sign_id=$sign_id AND est_id=$id");
+
+    $sth->bindParam(':is_directory', $is_directory, PDO::PARAM_STR);
+    $sth->bindParam(':door_signs', $door_signs, PDO::PARAM_STR);
+    $sth->bindParam(':sign_height', $sign_height, PDO::PARAM_STR);
+    $sth->bindParam(':pub_sign_braile', $pub_sign_braile, PDO::PARAM_STR);
+    $sth->bindParam(':sign_high_contrast', $sign_high_contrast, PDO::PARAM_STR);
+    $sth->bindParam(':sign_images', $sign_images, PDO::PARAM_STR);
+    $sth->bindParam(':written_material_images', $written_material_images, PDO::PARAM_STR);
+    $sth->bindParam(':menu_access', $menu_access, PDO::PARAM_STR);
+    $sth->bindParam(':alt_info', $alt_info, PDO::PARAM_STR);
+    $sth->bindParam(':alt_info_type', $alt_info_type, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * EMERGENCY ROUTES
  */
