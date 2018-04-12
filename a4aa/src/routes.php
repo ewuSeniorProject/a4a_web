@@ -2135,6 +2135,77 @@ $app->put('/put/emergency/', function (Request $request, Response $response, arr
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put emergency data by emergency id and est id
+$app->put('/put/emergency/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "emergency_id": emergency_id,
+    "evac_info": evac_info,
+    "alt_evac_info": alt_evac_info,
+    "evac_info_format": evac_info_format,
+    "alarms": alarms,
+    "location_no_flash": location_no_flash,
+    "shelter": shelter,
+    "signs_to_exit": signs_to_exit,
+    "wheelchair_plan": wheelchair_plan,
+    "floor_plan_routes": floor_plan_routes,
+    "fire_alarm_height": fire_alarm_height,
+    "fire_extinguisher_height": fire_extinguisher_height,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $emergency_id = $data["emergency_id"];
+    $evac_info = $data["evac_info"];
+    $alt_evac_info = $data["alt_evac_info"];
+    $evac_info_format = $data["evac_info_format"];
+    $alarms = $data["alarms"];
+    $location_no_flash = $data["location_no_flash"];
+    $shelter = $data["shelter"];
+    $signs_to_exit = $data["signs_to_exit"];
+    $wheelchair_plan = $data["wheelchair_plan"];
+    $floor_plan_routes = $data["floor_plan_routes"];
+    $fire_alarm_height = $data["fire_alarm_height"];
+    $fire_extinguisher_height = $data["fire_extinguisher_height"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Emergency SET evac_info = :evac_info,
+                                                     alt_evac_info = :alt_evac_info,
+                                                     evac_info_format = :evac_info_format,
+                                                     alarms = :alarms,
+                                                     location_no_flash = :location_no_flash,
+                                                     shelter = :shelter,
+                                                     signs_to_exit = :signs_to_exit,
+                                                     wheelchair_plan = :wheelchair_plan,
+                                                     floor_plan_routes = :floor_plan_routes,
+                                                     fire_alarm_height = :fire_alarm_height,
+                                                     fire_extinguisher_height = :fire_extinguisher_height,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE emergency_id=$emergency_id AND est_id=$id");
+
+    $sth->bindParam(':evac_info', $evac_info, PDO::PARAM_STR);
+    $sth->bindParam(':alt_evac_info', $alt_evac_info, PDO::PARAM_STR);
+    $sth->bindParam(':evac_info_format', $evac_info_format, PDO::PARAM_STR);
+    $sth->bindParam(':alarms', $alarms, PDO::PARAM_STR);
+    $sth->bindParam(':location_no_flash', $location_no_flash, PDO::PARAM_STR);
+    $sth->bindParam(':shelter', $shelter, PDO::PARAM_STR);
+    $sth->bindParam(':signs_to_exit', $signs_to_exit, PDO::PARAM_STR);
+    $sth->bindParam(':wheelchair_plan', $wheelchair_plan, PDO::PARAM_STR);
+    $sth->bindParam(':floor_plan_routes', $floor_plan_routes, PDO::PARAM_STR);
+    $sth->bindParam(':fire_alarm_height', $fire_alarm_height, PDO::PARAM_STR);
+    $sth->bindParam(':fire_extinguisher_height', $fire_extinguisher_height, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * SEATING ROUTES
  */
@@ -2203,6 +2274,109 @@ $app->post('/post/seating/', function (Request $request, Response $response, arr
 $app->put('/put/seating/', function (Request $request, Response $response, array $args){
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put seating data by seating id and est id
+$app->put('/put/seating/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "seating_id": seating_id,
+    "seating_no_step": seating_no_step,
+    "table_aisles": table_aisles,
+    "legroom": legroom,
+    "num_legroom": num_legroom,
+    "rearranged": rearranged,
+    "num_table_rearranged": num_table_rearranged,
+    "num_chair_rearranged": num_chair_rearranged,
+    "round_tables": round_tables,
+    "num_round_tables": num_round_tables,
+    "lighting": lighting,
+    "lighting_option": lighting_option,
+    "lighting_type": lighting_type,
+    "adjustable_lighting": adjustable_lighting,
+    "low_visual_slim": low_visual_slim,
+    "quiet_table": quiet_table,
+    "low_sound": low_sound,
+    "designated_space": designated_space,
+    "num_desig_space": num_desig_space,
+    "companion_space": companion_space,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $seating_id = $data["seating_id"];
+    $seating_no_step = $data["seating_no_step"];
+    $table_aisles = $data["table_aisles"];
+    $legroom = $data["legroom"];
+    $num_legroom = $data["num_legroom"];
+    $rearranged = $data["rearranged"];
+    $num_table_rearranged = $data["num_table_rearranged"];
+    $num_chair_rearranged = $data["num_chair_rearranged"];
+    $round_tables = $data["round_tables"];
+    $num_round_tables = $data["num_round_tables"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $adjustable_lighting = $data["adjustable_lighting"];
+    $low_visual_slim = $data["low_visual_slim"];
+    $quiet_table = $data["quiet_table"];
+    $low_sound = $data["low_sound"];
+    $designated_space = $data["designated_space"];
+    $num_desig_space = $data["num_desig_space"];
+    $companion_space = $data["companion_space"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Seating SET seating_no_step = :seating_no_step,
+                                                     table_aisles = :table_aisles,
+                                                     legroom = :legroom,
+                                                     num_legroom = :num_legroom,
+                                                     rearranged = :rearranged,
+                                                     num_table_rearranged = :num_table_rearranged,
+                                                     num_chair_rearranged = :num_chair_rearranged,
+                                                     round_tables = :round_tables,
+                                                     num_round_tables = :num_round_tables,
+                                                     lighting = :lighting,
+                                                     lighting_option = :lighting_option,
+                                                     lighting_type = :lighting_type,
+                                                     adjustable_lighting = :adjustable_lighting,
+                                                     low_visual_slim = :low_visual_slim,
+                                                     quiet_table = :quiet_table,
+                                                     low_sound = :low_sound,
+                                                     designated_space = :designated_space,
+                                                     num_desig_space = :num_desig_space,
+                                                     companion_space = :companion_space,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE seating_id=$seating_id AND est_id=$id");
+
+    $sth->bindParam(':seating_no_step', $seating_no_step, PDO::PARAM_STR);
+    $sth->bindParam(':table_aisles', $table_aisles, PDO::PARAM_STR);
+    $sth->bindParam(':legroom', $legroom, PDO::PARAM_STR);
+    $sth->bindParam(':num_legroom', $num_legroom, PDO::PARAM_STR);
+    $sth->bindParam(':rearranged', $rearranged, PDO::PARAM_STR);
+    $sth->bindParam(':num_table_rearranged', $num_table_rearranged, PDO::PARAM_STR);
+    $sth->bindParam(':num_chair_rearranged', $num_chair_rearranged, PDO::PARAM_STR);
+    $sth->bindParam(':round_tables', $round_tables, PDO::PARAM_STR);
+    $sth->bindParam(':num_round_tables', $num_round_tables, PDO::PARAM_STR);
+    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':adjustable_lighting', $adjustable_lighting, PDO::PARAM_STR);
+    $sth->bindParam(':low_visual_slim', $low_visual_slim, PDO::PARAM_STR);
+    $sth->bindParam(':quiet_table', $quiet_table, PDO::PARAM_STR);
+    $sth->bindParam(':low_sound', $low_sound, PDO::PARAM_STR);
+    $sth->bindParam(':designated_space', $designated_space, PDO::PARAM_STR);
+    $sth->bindParam(':num_desig_space', $num_desig_space, PDO::PARAM_STR);
+    $sth->bindParam(':companion_space', $companion_space, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
