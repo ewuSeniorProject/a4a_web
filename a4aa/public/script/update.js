@@ -603,8 +603,8 @@ $(document).ready(function () {
         this.handrail_both_sides.focused = ko.observable(false);
         this.handrail_side = ko.observable(parm.data.handrail_side);
         this.handrail_side.focused = ko.observable(false);
-        this.handrail_requlations_height = ko.observable(parm.data.handrail_requlations_height);
-        this.handrail_requlations_height.focused = ko.observable(false);
+        this.handrail_regulation_height = ko.observable(parm.data.handrail_regulation_height);
+        this.handrail_regulation_height.focused = ko.observable(false);
         this.handrail_height = ko.observable(parm.data.handrail_height);
         this.handrail_height.focused = ko.observable(false);
         this.obstacles = ko.observable(parm.data.obstacles);
@@ -686,8 +686,8 @@ $(document).ready(function () {
         this.handrails_both_sides.focused = ko.observable(false);
         this.handrail_sides = ko.observable(parm.data.handrail_sides);
         this.handrail_sides.focused = ko.observable(false);
-        this.handrail_requlations_height = ko.observable(parm.data.handrail_requlations_height);
-        this.handrail_requlations_height.focused = ko.observable(false);
+        this.handrail_regulation_height = ko.observable(parm.data.handrail_regulation_height);
+        this.handrail_regulation_height.focused = ko.observable(false);
         this.handrail_height = ko.observable(parm.data.handrail_height);
         this.handrail_height.focused = ko.observable(false);
         this.side_guards = ko.observable(parm.data.side_guards);
@@ -2076,6 +2076,364 @@ function updateSTARoute() {
     });
 }
 
+function updateExteriorPathways() {
+    var ext_path_id = document.getElementById("ext_path_id").value;
+    var service_animal = document.getElementById("service_animal").value;
+    var service_animal_location = document.getElementById("service_animal_location").value;
+    var has_exterior_path = document.getElementById("has_exterior_path").value;
+    var min_width = document.getElementById("min_widthExteriorPathway").value;
+    var pathway_surface = document.getElementById("pathway_surface").value;
+    var pathway_curbs = document.getElementById("pathway_curbs").value;
+    var tactile_warning = document.getElementById("tactile_warningExteriorPathway").value;
+    var slope = document.getElementById("slope").value;
+    var lighting = document.getElementById("lightingExteriorPathway").value;
+    var lighting_option = document.getElementById("lighting_optionExteriorPathway").value;
+    var lighting_type = document.getElementById("lighting_typeExteriorPathway").value;
+    var comment = document.getElementById("commentExteriorPathway").value;
+    var recommendations = document.getElementById("recommendationsExteriorPathway").value;
+    var est_id = document.getElementById("est_idExteriorPathway").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/exterior_pathways/est/" + est_id,
+        data: JSON.stringify({
+            "ext_path_id" : ext_path_id,
+            "service_animal" : service_animal,
+            "service_animal_location" : service_animal_location,
+            "has_exterior_path" : has_exterior_path,
+            "min_width" : min_width,
+            "pathway_surface" : pathway_surface,
+            "pathway_curbs" : pathway_curbs,
+            "tactile_warning" : tactile_warning,
+            "slope" : slope,
+            "lighting" : lighting,
+            "lighting_option" : lighting_option,
+            "lighting_type" : lighting_type,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Exterior Pathways Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateExteriorStairs() {
+    var ext_stair_id = document.getElementById("ext_stair_id").value;
+    var stairs_required = document.getElementById("stairs_required").value;
+    var stairs_available = document.getElementById("stairs_available").value;
+    var num_stairs = document.getElementById("num_stairs").value;
+    var handrail_both_sides = document.getElementById("handrail_both_sides").value;
+    var handrail_side = document.getElementById("handrail_side").value;
+    var handrail_regulation_height = document.getElementById("handrail_regulation_height").value;
+    var handrail_height = document.getElementById("handrail_height").value;
+    var obstacles = document.getElementById("obstacles").value;
+    var clearly_marked = document.getElementById("clearly_marked").value;
+    var lighting = document.getElementById("lightingExteriorStairs").value;
+    var lighting_option = document.getElementById("lighting_optionExteriorStairs").value;
+    var lighting_type = document.getElementById("lighting_typeExteriorStairs").value;
+    var comment = document.getElementById("commentExteriorStairs").value;
+    var recommendations = document.getElementById("recommendationsExteriorStairs").value;
+    var est_id = document.getElementById("est_idExteriorStairs").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/exterior_stairs/est/" + est_id,
+        data: JSON.stringify({
+            "ext_stair_id" : ext_stair_id,
+            "stairs_required" : stairs_required,
+            "stairs_available" : stairs_available,
+            "num_stairs" : num_stairs,
+            "handrail_both_sides" : handrail_both_sides,
+            "handrail_side" : handrail_side,
+            "handrail_regulation_height" : handrail_regulation_height,
+            "handrail_height" : handrail_height,
+            "obstacles" : obstacles,
+            "clearly_marked" : clearly_marked,
+            "lighting" : lighting,
+            "lighting_option" : lighting_option,
+            "lighting_type" : lighting_type,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Exterior Stairs Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateExteriorRamps() {
+    var ext_ramp_id = document.getElementById("ext_ramp_id").value;
+    var ramp_required = document.getElementById("ramp_required").value;
+    var ramp_available = document.getElementById("ramp_available").value;
+    var min_width = document.getElementById("min_widthExteriorRamps").value;
+    var width_between_handrails = document.getElementById("width_between_handrails").value;
+    var min_slope = document.getElementById("min_slope").value;
+    var slope = document.getElementById("slopeExteriorRamps").value;
+    var level_landing_both = document.getElementById("level_landing_both").value;
+    var level_landing_location = document.getElementById("level_landing_location").value;
+    var obstacles = document.getElementById("obstaclesExteriorRamps").value;
+    var handrails_both_sides = document.getElementById("handrails_both_sides").value;
+    var handrail_sides = document.getElementById("handrail_sides").value;
+    var handrail_regulation_height = document.getElementById("handrail_regulation_height").value;
+    var handrail_height = document.getElementById("handrail_heightExteriorRamps").value;
+    var side_guards = document.getElementById("side_guards").value;
+    var lighting = document.getElementById("lightingExteriorRamps").value;
+    var lighting_option = document.getElementById("lighting_optionExteriorRamps").value;
+    var lighting_type = document.getElementById("lighting_typeExteriorRamps").value;
+    var comment = document.getElementById("commentExteriorRamps").value;
+    var recommendations = document.getElementById("recommendationsExteriorRamps").value;
+    var est_id = document.getElementById("est_idExteriorRamps").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/exterior_ramps/est/" + est_id,
+        data: JSON.stringify({
+            "ext_ramp_id": ext_ramp_id,
+            "ramp_required": ramp_required,
+            "ramp_available": ramp_available,
+            "min_width": min_width,
+            "width_between_handrails": width_between_handrails,
+            "min_slope": min_slope,
+            "slope": slope,
+            "level_landing_both": level_landing_both,
+            "level_landing_location": level_landing_location,
+            "obstacles": obstacles,
+            "handrails_both_sides": handrails_both_sides,
+            "handrail_sides": handrail_sides,
+            "handrail_regulation_height": handrail_regulation_height,
+            "handrail_height": handrail_height,
+            "side_guards": side_guards,
+            "lighting": lighting,
+            "lighting_option": lighting_option,
+            "lighting_type": lighting_type,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Exterior Ramps Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateMainEntrance() {
+    var main_ent_id = document.getElementById("main_ent_id").value;
+    var total_num_public_entrances = document.getElementById("total_num_public_entrances").value;
+    var main_ent_accessible = document.getElementById("main_ent_accessible").value;
+    var alt_ent_accessible = document.getElementById("alt_ent_accessible").value;
+    var accessable_signage = document.getElementById("accessable_signage").value;
+    var ground_level = document.getElementById("ground_level").value;
+    var threshold_level = document.getElementById("threshold_level").value;
+    var threshold_beveled = document.getElementById("threshold_beveled").value;
+    var beveled_height = document.getElementById("beveled_height").value;
+    var door_action = document.getElementById("door_action").value;
+    var door_open_clearance = document.getElementById("door_open_clearance").value;
+    var opening_measurement = document.getElementById("opening_measurement").value;
+    var door_easy_open = document.getElementById("door_easy_open").value;
+    var door_open_force = document.getElementById("door_open_force").value;
+    var door_use_with_fist = document.getElementById("door_use_with_fist").value;
+    var door_auto_open = document.getElementById("door_auto_open").value;
+    var second_door_inside = document.getElementById("second_door_inside").value;
+    var min_dist_between_doors = document.getElementById("min_dist_between_doors").value;
+    var lighting = document.getElementById("lightingMainEntrance").value;
+    var lighting_option = document.getElementById("lighting_optionMainEntrance").value;
+    var lighting_type = document.getElementById("lighting_typeMainEntrance").value;
+    var comment = document.getElementById("commentMainEntrance").value;
+    var recommendations = document.getElementById("recommendationsMainEntrance").value;
+    var est_id = document.getElementById("est_idMainEntrance").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/main_entrance/est/" + est_id,
+        data: JSON.stringify({
+            "main_ent_id": main_ent_id,
+            "total_num_public_entrances": total_num_public_entrances,
+            "main_ent_accessible": main_ent_accessible,
+            "alt_ent_accessible": alt_ent_accessible,
+            "accessable_signage": accessable_signage,
+            "ground_level": ground_level,
+            "threshold_level": threshold_level,
+            "threshold_beveled": threshold_beveled,
+            "beveled_height": beveled_height,
+            "door_action": door_action,
+            "door_open_clearance": door_open_clearance,
+            "opening_measurement": opening_measurement,
+            "door_easy_open": door_easy_open,
+            "door_open_force": door_open_force,
+            "door_use_with_fist": door_use_with_fist,
+            "door_auto_open": door_auto_open,
+            "second_door_inside": second_door_inside,
+            "min_dist_between_doors": min_dist_between_doors,
+            "lighting": lighting,
+            "lighting_option": lighting_option,
+            "lighting_type": lighting_type,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Exterior Main Entrance Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateInterior() {
+    var interior_id = document.getElementById("interior_id").value;
+    var int_door_open_clearance = document.getElementById("int_door_open_clearance").value;
+    var int_opening_measurement = document.getElementById("int_opening_measurement").value;
+    var int_door_easy_open = document.getElementById("int_door_easy_open").value;
+    var int_door_open_force = document.getElementById("int_door_open_force").value;
+    var int_door_use_with_fist = document.getElementById("int_door_use_with_fist").value;
+    var five_second_close = document.getElementById("five_second_close").value;
+    var hallway_width = document.getElementById("hallway_width").value;
+    var narrowest_width = document.getElementById("narrowest_width").value;
+    var wheelchair_turnaround = document.getElementById("wheelchair_turnaround").value;
+    var hallway_obstacles = document.getElementById("hallway_obstacles").value;
+    var hallway_clear = document.getElementById("hallway_clear").value;
+    var lighting = document.getElementById("lightingInterior").value;
+    var lighting_type = document.getElementById("lighting_typeInterior").value;
+    var service_counter = document.getElementById("service_counter").value;
+    var counter_height = document.getElementById("counter_height").value;
+    var writing_surface_height = document.getElementById("writing_surface_height").value;
+    var drinking_fountain = document.getElementById("drinking_fountain").value;
+    var comment = document.getElementById("commentInterior").value;
+    var recommendations = document.getElementById("recommendationsInterior").value;
+    var est_id = document.getElementById("est_idInterior").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/interior/est/" + est_id,
+        data: JSON.stringify({
+            "interior_id": interior_id,
+            "int_door_open_clearance": int_door_open_clearance,
+            "int_opening_measurement": int_opening_measurement,
+            "int_door_easy_open": int_door_easy_open,
+            "int_door_open_force": int_door_open_force,
+            "int_door_use_with_fist": int_door_use_with_fist,
+            "five_second_close": five_second_close,
+            "hallway_width": hallway_width,
+            "narrowest_width": narrowest_width,
+            "wheelchair_turnaround": wheelchair_turnaround,
+            "hallway_obstacles": hallway_obstacles,
+            "hallway_clear": hallway_clear,
+            "lighting": lighting,
+            "lighting_type": lighting_type,
+            "service_counter": service_counter,
+            "counter_height": counter_height,
+            "writing_surface_height": writing_surface_height,
+            "drinking_fountain": drinking_fountain,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Interior Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateElevator() {
+    var elevator_id = document.getElementById("elevator_id").value;
+    var is_elevator = document.getElementById("is_elevator").value;
+    var location = document.getElementById("location").value;
+    var works = document.getElementById("works").value;
+    var no_assist = document.getElementById("no_assist").value;
+    var button_height = document.getElementById("button_height").value;
+    var outside_btn_height = document.getElementById("outside_btn_height").value;
+    var inside_btn_height = document.getElementById("inside_btn_height").value;
+    var button_use_fist = document.getElementById("button_use_fist").value;
+    var braille = document.getElementById("braille").value;
+    var audible_tones = document.getElementById("audible_tones").value;
+    var lighting = document.getElementById("lightingElevator").value;
+    var lighting_type = document.getElementById("lighting_typeElevator").value;
+    var elevator_depth = document.getElementById("elevator_depth").value;
+    var comment = document.getElementById("commentElevator").value;
+    var recommendations = document.getElementById("recommendationsElevator").value;
+    var est_id = document.getElementById("est_idElevator").value;
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/elevator/est/" + est_id,
+        data: JSON.stringify({
+            "elevator_id": elevator_id,
+            "is_elevator": is_elevator,
+            "location": location,
+            "works": works,
+            "no_assist": no_assist,
+            "button_height": button_height,
+            "outside_btn_height": outside_btn_height,
+            "inside_btn_height": inside_btn_height,
+            "button_use_fist": button_use_fist,
+            "braille": braille,
+            "audible_tones": audible_tones,
+            "lighting": lighting,
+            "lighting_type": lighting_type,
+            "elevator_depth": elevator_depth,
+            "comment": comment,
+            "recommendations": recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Elevator Updated');
+            $("#success").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+/**
+ *
+ * DELETE AT SOME POINT
+ */
 function removeRequest(uri, record) {
     $.ajax({
         method:"DELETE",

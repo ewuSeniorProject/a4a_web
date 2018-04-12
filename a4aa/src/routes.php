@@ -1036,10 +1036,71 @@ $app->post('/post/exterior_pathways/', function (Request $request, Response $res
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// put exterior_pathways data
-$app->put('/put/exterior_pathways/', function (Request $request, Response $response, array $args){
-//    $sth = $this->db->prepare("INSERT INTO Exterior_Pathways );
-//    $sth->execute();
+// put exterior_pathways data by ext_path id and est id
+$app->put('/put/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "ext_path_id" : ext_path_id,
+    "service_animal" : service_animal,
+    "service_animal_location" : service_animal_location,
+    "has_exterior_path" : has_exterior_path,
+    "min_width" : min_width,
+    "pathway_surface" : pathway_surface,
+    "pathway_curbs" : pathway_curbs,
+    "tactile_warning" : tactile_warning,
+    "lighting" : lighting,
+    "lighting_option" : lighting_option,
+    "lighting_type" : lighting_type,
+    "comment" : comment,
+    "recommendations" : recommendations
+     */
+    $ext_path_id = $data["ext_path_id"];
+    $service_animal = $data["service_animal"];
+    $service_animal_location = $data["service_animal_location"];
+    $has_exterior_path = $data["has_exterior_path"];
+    $min_width = $data["min_width"];
+    $pathway_surface = $data["pathway_surface"];
+    $pathway_curbs = $data["pathway_curbs"];
+    $tactile_warning = $data["tactile_warning"];
+    $slope = $data["slope"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Exterior_Pathways SET service_animal = :Service_animal,
+                                                     service_animal_location = :Service_animal_location,
+                                                     has_exterior_path = :Has_exterior_path,
+                                                     min_width = :Min_width,
+                                                     pathway_surface = :Pathway_surface,
+                                                     pathway_curbs = :Pathway_curbs,
+                                                     tactile_warning = :Tactile_warning,
+                                                     slope = :Slope,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE ext_path_id=$ext_path_id AND est_id=$id");
+
+    $sth->bindParam(':Service_animal', $service_animal, PDO::PARAM_STR);
+    $sth->bindParam(':Service_animal_location', $service_animal_location, PDO::PARAM_STR);
+    $sth->bindParam(':Has_exterior_path', $has_exterior_path, PDO::PARAM_STR);
+    $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
+    $sth->bindParam(':Pathway_surface', $pathway_surface, PDO::PARAM_STR);
+    $sth->bindParam(':Pathway_curbs', $pathway_curbs, PDO::PARAM_STR);
+    $sth->bindParam(':Tactile_warning', $tactile_warning, PDO::PARAM_STR);
+    $sth->bindParam(':Slope', $slope, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -1118,6 +1179,81 @@ $app->put('/put/exterior_stairs/', function (Request $request, Response $respons
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put exterior_stairs data by ext_stair id and est id
+$app->put('/put/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "ext_stair_id" : ext_stair_id,
+    "stairs_required" : stairs_required,
+    "stairs_available" : stairs_available,
+    "num_stairs" : num_stairs,
+    "handrail_both_sides" : handrail_both_sides,
+    "handrail_side" : handrail_side,
+    "handrail_regulation_height" : handrail_regulation_height,
+    "handrail_height" : handrail_height,
+    "obstacles" : obstacles,
+    "clearly_marked" : clearly_marked,
+    "lighting" : lighting,
+    "lighting_option" : lighting_option,
+    "lighting_type" : lighting_type,
+    "comment" : comment,
+    "recommendations" : recommendations
+     */
+    $ext_stair_id = $data["ext_stair_id"];
+    $stairs_required = $data["stairs_required"];
+    $stairs_available = $data["stairs_available"];
+    $num_stairs = $data["num_stairs"];
+    $handrail_both_sides = $data["handrail_both_sides"];
+    $handrail_side = $data["handrail_side"];
+    $handrail_regulation_height = $data["handrail_regulation_height"];
+    $handrail_height = $data["handrail_height"];
+    $obstacles = $data["obstacles"];
+    $clearly_marked = $data["clearly_marked"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Exterior_Stairs SET stairs_required = :Stairs_required,
+                                                     stairs_available = :Stairs_available,
+                                                     num_stairs = :Num_stairs,
+                                                     handrail_both_sides = :Handrail_both_sides,
+                                                     handrail_side = :Handrail_side,
+                                                     handrail_regulation_height = :Handrail_regulation_height,
+                                                     handrail_height = :Handrail_height,
+                                                     obstacles = :Obstacles,
+                                                     clearly_marked = :Clearly_marked,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE ext_stair_id=$ext_stair_id AND est_id=$id");
+
+    $sth->bindParam(':Stairs_required', $stairs_required, PDO::PARAM_STR);
+    $sth->bindParam(':Stairs_available', $stairs_available, PDO::PARAM_STR);
+    $sth->bindParam(':Num_stairs', $num_stairs, PDO::PARAM_INT);
+    $sth->bindParam(':Handrail_both_sides', $handrail_both_sides, PDO::PARAM_STR);
+    $sth->bindParam(':Handrail_side', $handrail_side, PDO::PARAM_STR);
+    $sth->bindParam(':Handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
+    $sth->bindParam(':Handrail_height', $handrail_height, PDO::PARAM_STR);
+    $sth->bindParam(':Obstacles', $obstacles, PDO::PARAM_STR);
+    $sth->bindParam(':Clearly_marked', $clearly_marked, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * EXTERIOR RAMPS ROUTES
  */
@@ -1186,6 +1322,101 @@ $app->post('/post/exterior_ramps/', function (Request $request, Response $respon
 $app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put exterior_ramps data by ext_ramp id and est id
+$app->put('/put/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "ext_ramp_id": ext_ramp_id,
+    "ramp_required": ramp_required,
+    "ramp_available": ramp_available,
+    "min_width": min_width,
+    "width_between_handrails": width_between_handrails,
+    "min_slope": min_slope,
+    "slope": slope,
+    "level_landing_both": level_landing_both,
+    "level_landing_location": level_landing_location,
+    "obstacles": obstacles,
+    "handrails_both_sides": handrails_both_sides,
+    "handrail_sides": handrail_sides,
+    "handrail_regulation_height": handrail_regulation_height,
+    "handrail_height": handrail_height,
+    "side_guards": side_guards,
+    "lighting": lighting,
+    "lighting_option": lighting_option,
+    "lighting_type": lighting_type,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $ext_ramp_id = $data["ext_ramp_id"];
+    $ramp_required = $data["ramp_required"];
+    $ramp_available = $data["ramp_available"];
+    $min_width = $data["min_width"];
+    $width_between_handrails = $data["width_between_handrails"];
+    $min_slope = $data["min_slope"];
+    $slope = $data["slope"];
+    $level_landing_both = $data["level_landing_both"];
+    $level_landing_location = $data["level_landing_location"];
+    $obstacles = $data["obstacles"];
+    $handrails_both_sides = $data["handrails_both_sides"];
+    $handrail_sides = $data["handrail_sides"];
+    $handrail_regulation_height = $data["handrail_regulation_height"];
+    $handrail_height = $data["handrail_height"];
+    $side_guards = $data["side_guards"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Exterior_Ramps SET ramp_required = :Ramp_required,
+                                                     ramp_available = :Ramp_available,
+                                                     min_width = :Min_width,
+                                                     width_between_handrails = :Width_between_handrails,
+                                                     min_slope = :Min_slope,
+                                                     slope = :Slope,
+                                                     level_landing_both = :Level_landing_both,
+                                                     level_landing_location = :Level_landing_location,
+                                                     obstacles = :Obstacles,
+                                                     handrails_both_sides = :Handrails_both_sides,
+                                                     handrail_sides = :Handrail_sides,
+                                                     handrail_regulation_height = :Handrail_regulation_height,
+                                                     handrail_height = :Handrail_height,
+                                                     side_guards = :Side_guards,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE ext_ramp_id=$ext_ramp_id AND est_id=$id");
+
+    $sth->bindParam(':Ramp_required', $ramp_required, PDO::PARAM_STR);
+    $sth->bindParam(':Ramp_available', $ramp_available, PDO::PARAM_STR);
+    $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
+    $sth->bindParam(':Width_between_handrails', $width_between_handrails, PDO::PARAM_STR);
+    $sth->bindParam(':Min_slope', $min_slope, PDO::PARAM_STR);
+    $sth->bindParam(':Slope', $slope, PDO::PARAM_STR);
+    $sth->bindParam(':Level_landing_both', $level_landing_both, PDO::PARAM_STR);
+    $sth->bindParam(':Level_landing_location', $level_landing_location, PDO::PARAM_STR);
+    $sth->bindParam(':Obstacles', $obstacles, PDO::PARAM_STR);
+    $sth->bindParam(':Handrails_both_sides', $handrails_both_sides, PDO::PARAM_STR);
+    $sth->bindParam(':Handrail_sides', $handrail_sides, PDO::PARAM_STR);
+    $sth->bindParam(':Handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
+    $sth->bindParam(':Handrail_height', $handrail_height, PDO::PARAM_STR);
+    $sth->bindParam(':Side_guards', $side_guards, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -1264,6 +1495,113 @@ $app->put('/put/main_entrance/', function (Request $request, Response $response,
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put exterior_ramps data by ext_ramp id and est id
+$app->put('/put/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "main_ent_id": main_ent_id,
+    "total_num_public_entrances": total_num_public_entrances,
+    "main_ent_accessible": main_ent_accessible,
+    "alt_ent_accessible": alt_ent_accessible,
+    "accessable_signage": accessable_signage,
+    "ground_level": ground_level,
+    "threshold_level": threshold_level,
+    "threshold_beveled": threshold_beveled,
+    "beveled_height": beveled_height,
+    "door_action": door_action,
+    "door_open_clearance": door_open_clearance,
+    "opening_measurement": opening_measurement,
+    "door_easy_open": door_easy_open,
+    "door_open_force": door_open_force,
+    "door_use_with_fist": door_use_with_fist,
+    "door_auto_open": door_auto_open,
+    "second_door_inside": second_door_inside,
+    "min_dist_between_doors": min_dist_between_doors,
+    "lighting": lighting,
+    "lighting_option": lighting_option,
+    "lighting_type": lighting_type,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $main_ent_id = $data["main_ent_id"];
+    $total_num_public_entrances = $data["total_num_public_entrances"];
+    $main_ent_accessible = $data["main_ent_accessible"];
+    $alt_ent_accessible = $data["alt_ent_accessible"];
+    $accessable_signage = $data["accessable_signage"];
+    $ground_level = $data["ground_level"];
+    $threshold_level = $data["threshold_level"];
+    $threshold_beveled = $data["threshold_beveled"];
+    $beveled_height = $data["beveled_height"];
+    $door_action = $data["door_action"];
+    $door_open_clearance = $data["door_open_clearance"];
+    $opening_measurement = $data["opening_measurement"];
+    $door_easy_open = $data["door_easy_open"];
+    $door_open_force = $data["door_open_force"];
+    $door_use_with_fist = $data["door_use_with_fist"];
+    $door_auto_open = $data["door_auto_open"];
+    $second_door_inside = $data["second_door_inside"];
+    $min_dist_between_doors = $data["min_dist_between_doors"];
+    $lighting = $data["lighting"];
+    $lighting_option = $data["lighting_option"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Main_Entrance SET total_num_public_entrances = :total_num_public_entrances,
+                                                     main_ent_accessible = :main_ent_accessible,
+                                                     alt_ent_accessible = :alt_ent_accessible,
+                                                     accessable_signage = :accessable_signage,
+                                                     ground_level = :ground_level,
+                                                     threshold_level = :threshold_level,
+                                                     threshold_beveled = :threshold_beveled,
+                                                     beveled_height = :beveled_height,
+                                                     door_action = :door_action,
+                                                     door_open_clearance = :door_open_clearance,
+                                                     opening_measurement = :opening_measurement,
+                                                     door_easy_open = :door_easy_open,
+                                                     door_open_force = :door_open_force,
+                                                     door_use_with_fist = :door_use_with_fist,
+                                                     door_auto_open = :door_auto_open,
+                                                     second_door_inside = :second_door_inside,
+                                                     min_dist_between_doors = :min_dist_between_doors,
+                                                     lighting = :Lighting,
+                                                     lighting_option = :Lighting_option,
+                                                     lighting_type = :Lighting_type,
+                                                     comment = :Comment,
+                                                     recommendations = :Recommendations
+                                                     WHERE main_ent_id=$main_ent_id AND est_id=$id");
+
+    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_STR);
+    $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
+    $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
+    $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
+    $sth->bindParam(':ground_level', $ground_level, PDO::PARAM_STR);
+    $sth->bindParam(':threshold_level', $threshold_level, PDO::PARAM_STR);
+    $sth->bindParam(':threshold_beveled', $threshold_beveled, PDO::PARAM_STR);
+    $sth->bindParam(':beveled_height', $beveled_height, PDO::PARAM_STR);
+    $sth->bindParam(':door_action', $door_action, PDO::PARAM_STR);
+    $sth->bindParam(':door_open_clearance', $door_open_clearance, PDO::PARAM_STR);
+    $sth->bindParam(':opening_measurement', $opening_measurement, PDO::PARAM_STR);
+    $sth->bindParam(':door_easy_open', $door_easy_open, PDO::PARAM_STR);
+    $sth->bindParam(':door_open_force', $door_open_force, PDO::PARAM_STR);
+    $sth->bindParam(':door_use_with_fist', $door_use_with_fist, PDO::PARAM_STR);
+    $sth->bindParam(':door_auto_open', $door_auto_open, PDO::PARAM_STR);
+    $sth->bindParam(':second_door_inside', $second_door_inside, PDO::PARAM_STR);
+    $sth->bindParam(':min_dist_between_doors', $min_dist_between_doors, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':Recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * INTERIOR ROUTES
  */
@@ -1337,6 +1675,101 @@ $app->put('/put/interior/', function (Request $request, Response $response, arra
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put interior data by interior id and est id
+$app->put('/put/interior/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "interior_id": interior_id,
+    "int_door_open_clearance": int_door_open_clearance,
+    "int_opening_measurement": int_opening_measurement,
+    "int_door_easy_open": int_door_easy_open,
+    "int_door_open_force": int_door_open_force,
+    "int_door_use_with_fist": int_door_use_with_fist,
+    "five_second_close": five_second_close,
+    "hallway_width": hallway_width,
+    "narrowest_width": narrowest_width,
+    "wheelchair_turnaround": wheelchair_turnaround,
+    "hallway_obstacles": hallway_obstacles,
+    "hallway_clear": hallway_clear,
+    "lighting": lighting,
+    "lighting_type": lighting_type,
+    "service_counter": service_counter,
+    "counter_height": counter_height,
+    "writing_surface_height": writing_surface_height,
+    "drinking_fountain": drinking_fountain,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $interior_id = $data["interior_id"];
+    $int_door_open_clearance = $data["int_door_open_clearance"];
+    $int_opening_measurement = $data["int_opening_measurement"];
+    $int_door_easy_open = $data["int_door_easy_open"];
+    $int_door_open_force = $data["int_door_open_force"];
+    $int_door_use_with_fist = $data["int_door_use_with_fist"];
+    $five_second_close = $data["five_second_close"];
+    $hallway_width = $data["hallway_width"];
+    $narrowest_width = $data["narrowest_width"];
+    $wheelchair_turnaround = $data["wheelchair_turnaround"];
+    $hallway_obstacles = $data["hallway_obstacles"];
+    $hallway_clear = $data["hallway_clear"];
+    $lighting = $data["lighting"];
+    $lighting_type = $data["lighting_type"];
+    $service_counter = $data["service_counter"];
+    $counter_height = $data["counter_height"];
+    $writing_surface_height = $data["writing_surface_height"];
+    $drinking_fountain = $data["drinking_fountain"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Interior SET int_door_open_clearance = :int_door_open_clearance,
+                                                     int_opening_measurement = :int_opening_measurement,
+                                                     int_door_easy_open = :int_door_easy_open,
+                                                     int_door_open_force = :int_door_open_force,
+                                                     int_door_use_with_fist = :int_door_use_with_fist,
+                                                     five_second_close = :five_second_close,
+                                                     hallway_width = :hallway_width,
+                                                     narrowest_width = :narrowest_width,
+                                                     wheelchair_turnaround = :wheelchair_turnaround,
+                                                     hallway_obstacles = :hallway_obstacles,
+                                                     hallway_clear = :hallway_clear,
+                                                     lighting = :lighting,
+                                                     lighting_type = :lighting_type,
+                                                     service_counter = :service_counter,
+                                                     counter_height = :counter_height,
+                                                     writing_surface_height = :writing_surface_height,
+                                                     drinking_fountain = :drinking_fountain,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE interior_id=$interior_id AND est_id=$id");
+
+    $sth->bindParam(':int_door_open_clearance', $int_door_open_clearance, PDO::PARAM_STR);
+    $sth->bindParam(':int_opening_measurement', $int_opening_measurement, PDO::PARAM_STR);
+    $sth->bindParam(':int_door_easy_open', $int_door_easy_open, PDO::PARAM_STR);
+    $sth->bindParam(':int_door_open_force', $int_door_open_force, PDO::PARAM_STR);
+    $sth->bindParam(':int_door_use_with_fist', $int_door_use_with_fist, PDO::PARAM_STR);
+    $sth->bindParam(':five_second_close', $five_second_close, PDO::PARAM_STR);
+    $sth->bindParam(':hallway_width', $hallway_width, PDO::PARAM_STR);
+    $sth->bindParam(':narrowest_width', $narrowest_width, PDO::PARAM_STR);
+    $sth->bindParam(':wheelchair_turnaround', $wheelchair_turnaround, PDO::PARAM_STR);
+    $sth->bindParam(':hallway_obstacles', $hallway_obstacles, PDO::PARAM_STR);
+    $sth->bindParam(':hallway_clear', $hallway_clear, PDO::PARAM_STR);
+    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':service_counter', $service_counter, PDO::PARAM_STR);
+    $sth->bindParam(':counter_height', $counter_height, PDO::PARAM_STR);
+    $sth->bindParam(':writing_surface_height', $writing_surface_height, PDO::PARAM_STR);
+    $sth->bindParam(':drinking_fountain', $drinking_fountain, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 /**
  * ELEVATOR ROUTES
  */
@@ -1405,6 +1838,85 @@ $app->post('/post/elevator/', function (Request $request, Response $response, ar
 $app->put('/put/elevator/', function (Request $request, Response $response, array $args){
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put elevator data by elevator id and est id
+$app->put('/put/elevator/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    /**
+    "elevator_id": elevator_id,
+    "is_elevator": is_elevator,
+    "location": location,
+    "works": works,
+    "no_assist": no_assist,
+    "button_height": button_height,
+    "outside_btn_height": outside_btn_height,
+    "inside_btn_height": inside_btn_height,
+    "button_use_fist": button_use_fist,
+    "braille": braille,
+    "audible_tones": audible_tones,
+    "lighting": lighting,
+    "lighting_type": lighting_type,
+    "elevator_depth": elevator_depth,
+    "comment": comment,
+    "recommendations": recommendations
+     */
+    $elevator_id = $data["elevator_id"];
+    $is_elevator = $data["is_elevator"];
+    $location = $data["location"];
+    $works = $data["works"];
+    $no_assist = $data["no_assist"];
+    $button_height = $data["button_height"];
+    $outside_btn_height = $data["outside_btn_height"];
+    $inside_btn_height = $data["inside_btn_height"];
+    $button_use_fist = $data["button_use_fist"];
+    $braille = $data["braille"];
+    $audible_tones = $data["audible_tones"];
+    $lighting = $data["lighting"];
+    $lighting_type = $data["lighting_type"];
+    $elevator_depth = $data["elevator_depth"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+    $sth = $this->db->prepare("UPDATE Elevator SET is_elevator = :is_elevator,
+                                                     location = :location,
+                                                     works = :works,
+                                                     no_assist = :no_assist,
+                                                     button_height = :button_height,
+                                                     outside_btn_height = :outside_btn_height,
+                                                     inside_btn_height = :inside_btn_height,
+                                                     button_use_fist = :button_use_fist,
+                                                     braille = :braille,
+                                                     audible_tones = :audible_tones,
+                                                     lighting = :lighting,
+                                                     lighting_type = :lighting_type,
+                                                     elevator_depth = :elevator_depth,
+                                                     comment = :comment,
+                                                     recommendations = :recommendations
+                                                     WHERE elevator_id=$elevator_id AND est_id=$id");
+
+    $sth->bindParam(':is_elevator', $is_elevator, PDO::PARAM_STR);
+    $sth->bindParam(':location', $location, PDO::PARAM_STR);
+    $sth->bindParam(':works', $works, PDO::PARAM_STR);
+    $sth->bindParam(':no_assist', $no_assist, PDO::PARAM_STR);
+    $sth->bindParam(':button_height', $button_height, PDO::PARAM_STR);
+    $sth->bindParam(':outside_btn_height', $outside_btn_height, PDO::PARAM_STR);
+    $sth->bindParam(':inside_btn_height', $inside_btn_height, PDO::PARAM_STR);
+    $sth->bindParam(':button_use_fist', $button_use_fist, PDO::PARAM_STR);
+    $sth->bindParam(':braille', $braille, PDO::PARAM_STR);
+    $sth->bindParam(':audible_tones', $audible_tones, PDO::PARAM_STR);
+    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':elevator_depth', $elevator_depth, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
