@@ -1,3 +1,13 @@
+<?php
+// Initialize the session
+session_start();
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
+    header("location: login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,17 +41,28 @@
             });
         </script>
 
-        <script src="script/index.js"></script>
+        <script src="script/home.js"></script>
     </head>
     <body>
         <div id="page-preloader">
             <span class="spinner"></span>
         </div>
-        <div class="header">
-            <a href="index.html">
-                <h1>Access 4 All Spokane</h1>
+        <nav class="navbar navbar-light bg-header">
+            <span class="navbar-brand mb-0 pointer">
+                <a href="home.php">
+                    <h1>Access 4 All Spokane</h1>
+                </a>
+            </span>
+            <a class="nav-link white-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
+                <i class="fas fa-bars fa-lg"></i>
             </a>
-        </div>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="logout.php">Log Out</a>
+            </div>
+        </nav>
         <div class="page page-row">
             <div class="left-sidebar">
                 <div class="left-sidebar-header">

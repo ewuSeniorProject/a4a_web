@@ -7,9 +7,9 @@ use Slim\Http\Response;
 
 // home page
 $app->get('/', function (Request $request, Response $response, array $args) {
-    $url = 'index.html';
+    $url = 'home.php';
     return $response->withRedirect($url, 301);
-});
+})->setname("root");
 
 
 /**
@@ -17,6 +17,7 @@ $app->get('/', function (Request $request, Response $response, array $args) {
  */
 // get establishment data
 $app->get('/establishment/', function (Request $request, Response $response, array $args) {
+    
     $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -27,6 +28,7 @@ $app->get('/establishment/', function (Request $request, Response $response, arr
 
 // get establishment data by id
 $app->get('/get/establishment/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
     $sth->execute();
@@ -38,6 +40,7 @@ $app->get('/get/establishment/[{id}]', function (Request $request, Response $res
 
 // delete establishment data by id
 $app->delete('/delete/establishment/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Establishment WHERE est_id=$id");
     $sth->execute();
@@ -48,7 +51,8 @@ $app->delete('/delete/establishment/[{id}]', function (Request $request, Respons
 
 // post establishment data
 $app->post('/post/establishment/', function (Request $request, Response $response, array $args){
-//    $sth = $this->db->prepare("INSERT INTO Establishment );
+    
+    //    $sth = $this->db->prepare("INSERT INTO Establishment );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
@@ -57,6 +61,7 @@ $app->post('/post/establishment/', function (Request $request, Response $respons
 
 // put establishment data
 $app->put('/put/establishment/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Establishment );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -66,6 +71,7 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
 
 // put category data by cat id
 $app->put('/put/establishment/category/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -82,6 +88,7 @@ $app->put('/put/establishment/category/est/[{id}]', function (Request $request, 
 
 // put config data by config id
 $app->put('/put/establishment/config/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -98,6 +105,7 @@ $app->put('/put/establishment/config/est/[{id}]', function (Request $request, Re
 
 // put user data by user id
 $app->put('/put/establishment/user/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -114,6 +122,7 @@ $app->put('/put/establishment/user/est/[{id}]', function (Request $request, Resp
 
 // put establishment data by est id
 $app->put('/put/establishment/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -186,6 +195,7 @@ $app->put('/put/establishment/est/[{id}]', function (Request $request, Response 
  */
 // get all category
 $app->get('/category/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Category");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -196,6 +206,7 @@ $app->get('/category/', function (Request $request, Response $response, array $a
 
 // get category data by id
 $app->get('/get/category/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Category WHERE cat_id=$id");
     $sth->execute();
@@ -207,6 +218,7 @@ $app->get('/get/category/[{id}]', function (Request $request, Response $response
 
 // delete category data by id
 $app->delete('/delete/category/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Category WHERE cat_id=$id");
     $sth->execute();
@@ -217,6 +229,7 @@ $app->delete('/delete/category/[{id}]', function (Request $request, Response $re
 
 // post category data
 $app->post('/post/category/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -226,6 +239,7 @@ $app->post('/post/category/', function (Request $request, Response $response, ar
 
 // put category data
 $app->put('/put/category/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -238,6 +252,7 @@ $app->put('/put/category/', function (Request $request, Response $response, arra
  */
 // get all configuration
 $app->get('/configuration/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Configuration");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -248,6 +263,7 @@ $app->get('/configuration/', function (Request $request, Response $response, arr
 
 // get configuration data by id
 $app->get('/get/configuration/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Configuration WHERE config_id=$id");
     $sth->execute();
@@ -259,6 +275,7 @@ $app->get('/get/configuration/[{id}]', function (Request $request, Response $res
 
 // delete configuration data by id
 $app->delete('/delete/configuration/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Configuration WHERE config_id=$id");
     $sth->execute();
@@ -269,6 +286,7 @@ $app->delete('/delete/configuration/[{id}]', function (Request $request, Respons
 
 // post configuration data
 $app->post('/post/configuration/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -278,6 +296,7 @@ $app->post('/post/configuration/', function (Request $request, Response $respons
 
 // put configuration data
 $app->put('/put/configuration/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -290,6 +309,7 @@ $app->put('/put/configuration/', function (Request $request, Response $response,
  */
 // get all user
 $app->get('/user/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM User");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -300,7 +320,21 @@ $app->get('/user/', function (Request $request, Response $response, array $args)
 
 // get user data by id
 $app->get('/get/user/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
+    $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get user data by user name
+$app->get('/get/user/name/', function (Request $request, Response $response, array $args){
+    
+    $data = $request->getParsedBody();
+
     $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -311,6 +345,7 @@ $app->get('/get/user/[{id}]', function (Request $request, Response $response, ar
 
 // delete user data by id
 $app->delete('/delete/user/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM User WHERE user_id=$id");
     $sth->execute();
@@ -321,6 +356,7 @@ $app->delete('/delete/user/[{id}]', function (Request $request, Response $respon
 
 // post user data
 $app->post('/post/user/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO User );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -330,6 +366,7 @@ $app->post('/post/user/', function (Request $request, Response $response, array 
 
 // put user data
 $app->put('/put/user/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO User );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -342,6 +379,7 @@ $app->put('/put/user/', function (Request $request, Response $response, array $a
  */
 // get all parking
 $app->get('/parking/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Parking");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -352,6 +390,7 @@ $app->get('/parking/', function (Request $request, Response $response, array $ar
 
 // get parking data by parking id
 $app->get('/get/parking/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Parking WHERE park_id=$id");
     $sth->execute();
@@ -363,6 +402,7 @@ $app->get('/get/parking/[{id}]', function (Request $request, Response $response,
 
 // get parking data by establishment id
 $app->get('/get/parking/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     if (($this->db->prepare("SELECT * FROM Parking WHERE est_id=$id")) == null) {
         $data = array('success' => false, 'message' => "No record associated with current establishment.");
@@ -383,6 +423,7 @@ $app->get('/get/parking/est/[{id}]', function (Request $request, Response $respo
 
 // get parking id by establishment id
 $app->get('/get/park_id/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT park_id FROM Parking WHERE est_id=$id");
     $sth->execute();
@@ -395,6 +436,7 @@ $app->get('/get/park_id/est/[{id}]', function (Request $request, Response $respo
 
 // delete parking data by id
 $app->delete('/delete/parking/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE park_id=$id");
     $sth->execute();
@@ -405,6 +447,7 @@ $app->delete('/delete/parking/[{id}]', function (Request $request, Response $res
 
 // delete parking data by establishment id
 $app->delete('/delete/parking/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE est_id=$id");
     $sth->execute();
@@ -415,6 +458,7 @@ $app->delete('/delete/parking/est/[{id}]', function (Request $request, Response 
 
 // post parking data
 $app->post('/post/parking/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Parking );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -424,6 +468,7 @@ $app->post('/post/parking/', function (Request $request, Response $response, arr
 
 // put parking data by est id
 $app->put('/put/parking/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -476,6 +521,7 @@ $app->put('/put/parking/est/[{id}]', function (Request $request, Response $respo
  */
 // get all route_from_parking
 $app->get('/route_from_parking/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -486,6 +532,7 @@ $app->get('/route_from_parking/', function (Request $request, Response $response
 
 // get route_from_parking data by route_from_parking id
 $app->get('/get/route_from_parking/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE route_park_id=$id");
     $sth->execute();
@@ -497,6 +544,7 @@ $app->get('/get/route_from_parking/[{id}]', function (Request $request, Response
 
 // get route_from_parking data by parking id
 $app->get('/get/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE park_id=$id");
     $sth->execute();
@@ -508,6 +556,7 @@ $app->get('/get/route_from_parking/park/[{id}]', function (Request $request, Res
 
 // delete route_from_parking data by id
 $app->delete('/delete/route_from_parking/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE route_park_id=$id");
     $sth->execute();
@@ -518,6 +567,7 @@ $app->delete('/delete/route_from_parking/[{id}]', function (Request $request, Re
 
 // delete route_from_parking data by parking id
 $app->delete('/delete/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE park_id=$id");
     $sth->execute();
@@ -528,6 +578,7 @@ $app->delete('/delete/route_from_parking/park/[{id}]', function (Request $reques
 
 // post route_from_parking data
 $app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Route_From_Parking );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -537,6 +588,7 @@ $app->post('/post/route_from_parking/', function (Request $request, Response $re
 
 // put route_from_parking data
 $app->put('/put/route_from_parking/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Route_From_Parking );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -546,6 +598,7 @@ $app->put('/put/route_from_parking/', function (Request $request, Response $resp
 
 // put route_from_parking data by park id
 $app->put('/put/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -611,6 +664,7 @@ $app->put('/put/route_from_parking/park/[{id}]', function (Request $request, Res
  */
 // get all passenger_loading
 $app->get('/passenger_loading/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -621,6 +675,7 @@ $app->get('/passenger_loading/', function (Request $request, Response $response,
 
 // get passenger_loading data by passenger_loading id
 $app->get('/get/passenger_loading/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE passenger_id=$id");
     $sth->execute();
@@ -632,6 +687,7 @@ $app->get('/get/passenger_loading/[{id}]', function (Request $request, Response 
 
 // get passenger_loading data by parking id
 $app->get('/get/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE park_id=$id");
     $sth->execute();
@@ -643,6 +699,7 @@ $app->get('/get/passenger_loading/park/[{id}]', function (Request $request, Resp
 
 // delete passenger_loading data by id
 $app->delete('/delete/passenger_loading/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE passenger_id=$id");
     $sth->execute();
@@ -653,6 +710,7 @@ $app->delete('/delete/passenger_loading/[{id}]', function (Request $request, Res
 
 // delete passenger_loading data by parking id
 $app->delete('/delete/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE park_id=$id");
     $sth->execute();
@@ -663,6 +721,7 @@ $app->delete('/delete/passenger_loading/park/[{id}]', function (Request $request
 
 // post passenger_loading data
 $app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -672,6 +731,7 @@ $app->post('/post/passenger_loading/', function (Request $request, Response $res
 
 // put passenger_loading data
 $app->put('/put/passenger_loading/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -681,6 +741,7 @@ $app->put('/put/passenger_loading/', function (Request $request, Response $respo
 
 // put passenger_loading data by park id
 $app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -747,6 +808,7 @@ $app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Resp
  */
 // get all sta_bus
 $app->get('/sta_bus/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM STA_Bus");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -757,6 +819,7 @@ $app->get('/sta_bus/', function (Request $request, Response $response, array $ar
 
 // get sta_bus data by sta_bus id
 $app->get('/get/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE sta_id=$id");
     $sth->execute();
@@ -768,6 +831,7 @@ $app->get('/get/sta_bus/[{id}]', function (Request $request, Response $response,
 
 // get sta_bus data by parking id
 $app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE park_id=$id");
     $sth->execute();
@@ -779,6 +843,7 @@ $app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $resp
 
 // get sta_bus id by parking id
 $app->get('/get/sta_bus_id/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT sta_id FROM STA_Bus WHERE park_id=$id");
     $sth->execute();
@@ -790,6 +855,7 @@ $app->get('/get/sta_bus_id/park/[{id}]', function (Request $request, Response $r
 
 // delete sta_bus data by  id
 $app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE sta_id=$id");
     $sth->execute();
@@ -800,6 +866,7 @@ $app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $res
 
 // delete sta_bus data by parking id
 $app->delete('/delete/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE park_id=$id");
     $sth->execute();
@@ -810,6 +877,7 @@ $app->delete('/delete/sta_bus/park/[{id}]', function (Request $request, Response
 
 // post sta_bus data
 $app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -819,6 +887,7 @@ $app->post('/post/sta_bus/', function (Request $request, Response $response, arr
 
 // put sta_bus data
 $app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -828,6 +897,7 @@ $app->put('/put/sta_bus/', function (Request $request, Response $response, array
 
 // put sta_bus data by park id
 $app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -898,6 +968,7 @@ $app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $resp
  */
 // get all sta_route
 $app->get('/sta_route/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM STA_Route");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -908,6 +979,7 @@ $app->get('/sta_route/', function (Request $request, Response $response, array $
 
 // get all sta_route data id
 $app->get('/get/sta_route/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$id");
     $sth->execute();
@@ -919,6 +991,7 @@ $app->get('/get/sta_route/[{id}]', function (Request $request, Response $respons
 
 // get all sta_route data by sta_bus id
 $app->get('/get/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
 
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_bus_id=$id");
@@ -931,6 +1004,7 @@ $app->get('/get/sta_route/sta_bus/[{id}]', function (Request $request, Response 
 
 // get single sta_route record by sta_route id and sta_bus id
 $app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
     $sta_route_id = $data["sta_route_id"];
@@ -945,6 +1019,7 @@ $app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Re
 
 // delete sta_route data by id
 $app->delete('/delete/sta_route/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_route_id=$id");
     $sth->execute();
@@ -955,6 +1030,7 @@ $app->delete('/delete/sta_route/[{id}]', function (Request $request, Response $r
 
 // delete sta_route data by sta_bus id
 $app->delete('/delete/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_bus_id=$id");
     $sth->execute();
@@ -965,6 +1041,7 @@ $app->delete('/delete/sta_route/sta_bus/[{id}]', function (Request $request, Res
 
 // post sta_route data
 $app->post('/post/sta_route/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -974,6 +1051,7 @@ $app->post('/post/sta_route/', function (Request $request, Response $response, a
 
 // put sta_route data
 $app->put('/put/sta_route/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -983,6 +1061,7 @@ $app->put('/put/sta_route/', function (Request $request, Response $response, arr
 
 // put sta_route data by sta_bus id
 $app->put('/put/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1025,6 +1104,7 @@ $app->put('/put/sta_route/sta_bus/[{id}]', function (Request $request, Response 
  */
 // get all exterior_pathways
 $app->get('/exterior_pathways/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1035,6 +1115,7 @@ $app->get('/exterior_pathways/', function (Request $request, Response $response,
 
 // get exterior_pathways data by id
 $app->get('/get/exterior_pathways/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE ext_path_id=$id");
     $sth->execute();
@@ -1046,6 +1127,7 @@ $app->get('/get/exterior_pathways/[{id}]', function (Request $request, Response 
 
 // get exterior_pathways data by establishment id
 $app->get('/get/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE est_id=$id");
     $sth->execute();
@@ -1057,6 +1139,7 @@ $app->get('/get/exterior_pathways/est/[{id}]', function (Request $request, Respo
 
 // delete exterior_pathways data by id
 $app->delete('/delete/exterior_pathways/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE exterior_pathways_id=$id");
     $sth->execute();
@@ -1067,6 +1150,7 @@ $app->delete('/delete/exterior_pathways/[{id}]', function (Request $request, Res
 
 // delete exterior_pathways data by establishment id
 $app->delete('/delete/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE est_id=$id");
     $sth->execute();
@@ -1077,6 +1161,7 @@ $app->delete('/delete/exterior_pathways/est/[{id}]', function (Request $request,
 
 // post exterior_pathways data
 $app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Pathways );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1086,6 +1171,7 @@ $app->post('/post/exterior_pathways/', function (Request $request, Response $res
 
 // put exterior_pathways data by ext_path id and est id
 $app->put('/put/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1159,6 +1245,7 @@ $app->put('/put/exterior_pathways/est/[{id}]', function (Request $request, Respo
  */
 // get all exterior_stairs
 $app->get('/exterior_stairs/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1169,6 +1256,7 @@ $app->get('/exterior_stairs/', function (Request $request, Response $response, a
 
 // get exterior_stairs data by id
 $app->get('/get/exterior_stairs/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE ext_stair_id=$id");
     $sth->execute();
@@ -1180,6 +1268,7 @@ $app->get('/get/exterior_stairs/[{id}]', function (Request $request, Response $r
 
 // get exterior_stairs data by establishment id
 $app->get('/get/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE est_id=$id");
     $sth->execute();
@@ -1191,6 +1280,7 @@ $app->get('/get/exterior_stairs/est/[{id}]', function (Request $request, Respons
 
 // delete exterior_stairs data by id
 $app->delete('/delete/exterior_stairs/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE ext_stair_id=$id");
     $sth->execute();
@@ -1201,6 +1291,7 @@ $app->delete('/delete/exterior_stairs/[{id}]', function (Request $request, Respo
 
 // delete exterior_stairs data by establishment id
 $app->delete('/delete/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE est_id=$id");
     $sth->execute();
@@ -1211,6 +1302,7 @@ $app->delete('/delete/exterior_stairs/est/[{id}]', function (Request $request, R
 
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1220,6 +1312,7 @@ $app->post('/post/exterior_stairs/', function (Request $request, Response $respo
 
 // put exterior_stairs data
 $app->put('/put/exterior_stairs/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1229,6 +1322,7 @@ $app->put('/put/exterior_stairs/', function (Request $request, Response $respons
 
 // put exterior_stairs data by ext_stair id and est id
 $app->put('/put/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1307,6 +1401,7 @@ $app->put('/put/exterior_stairs/est/[{id}]', function (Request $request, Respons
  */
 // get all exterior_ramps
 $app->get('/exterior_ramps/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1317,6 +1412,7 @@ $app->get('/exterior_ramps/', function (Request $request, Response $response, ar
 
 // get exterior_ramps data by id
 $app->get('/get/exterior_ramps/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE ext_ramp_id=$id");
     $sth->execute();
@@ -1328,6 +1424,7 @@ $app->get('/get/exterior_ramps/[{id}]', function (Request $request, Response $re
 
 // get exterior_ramps data by establishment id
 $app->get('/get/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE est_id=$id");
     $sth->execute();
@@ -1339,6 +1436,7 @@ $app->get('/get/exterior_ramps/est/[{id}]', function (Request $request, Response
 
 // delete exterior_ramps data by id
 $app->delete('/delete/exterior_ramps/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE ext_ramp_id=$id");
     $sth->execute();
@@ -1349,6 +1447,7 @@ $app->delete('/delete/exterior_ramps/[{id}]', function (Request $request, Respon
 
 // delete exterior_ramps data by establishment id
 $app->delete('/delete/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE est_id=$id");
     $sth->execute();
@@ -1359,6 +1458,7 @@ $app->delete('/delete/exterior_ramps/est/[{id}]', function (Request $request, Re
 
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1368,6 +1468,7 @@ $app->post('/post/exterior_ramps/', function (Request $request, Response $respon
 
 // put exterior_ramps data
 $app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1377,6 +1478,7 @@ $app->put('/put/exterior_ramps/', function (Request $request, Response $response
 
 // put exterior_ramps data by ext_ramp id and est id
 $app->put('/put/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1475,6 +1577,7 @@ $app->put('/put/exterior_ramps/est/[{id}]', function (Request $request, Response
  */
 // get all main_entrance
 $app->get('/main_entrance/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1485,6 +1588,7 @@ $app->get('/main_entrance/', function (Request $request, Response $response, arr
 
 // get main_entrance data by id
 $app->get('/get/main_entrance/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE main_ent_id=$id");
     $sth->execute();
@@ -1496,6 +1600,7 @@ $app->get('/get/main_entrance/[{id}]', function (Request $request, Response $res
 
 // get main_entrance data by establishment id
 $app->get('/get/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE est_id=$id");
     $sth->execute();
@@ -1507,6 +1612,7 @@ $app->get('/get/main_entrance/est/[{id}]', function (Request $request, Response 
 
 // delete main_entrance data by id
 $app->delete('/delete/main_entrance/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE main_ent_id=$id");
     $sth->execute();
@@ -1517,6 +1623,7 @@ $app->delete('/delete/main_entrance/[{id}]', function (Request $request, Respons
 
 // delete main_entrance data by establishment id
 $app->delete('/delete/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE est_id=$id");
     $sth->execute();
@@ -1527,6 +1634,7 @@ $app->delete('/delete/main_entrance/est/[{id}]', function (Request $request, Res
 
 // post main_entrance data
 $app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Main_Entrance );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1536,6 +1644,7 @@ $app->post('/post/main_entrance/', function (Request $request, Response $respons
 
 // put main_entrance data
 $app->put('/put/main_entrance/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Main_Entrance );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1545,6 +1654,7 @@ $app->put('/put/main_entrance/', function (Request $request, Response $response,
 
 // put exterior_ramps data by ext_ramp id and est id
 $app->put('/put/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1655,6 +1765,7 @@ $app->put('/put/main_entrance/est/[{id}]', function (Request $request, Response 
  */
 // get all interior
 $app->get('/interior/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Interior");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1665,6 +1776,7 @@ $app->get('/interior/', function (Request $request, Response $response, array $a
 
 // get interior data by id
 $app->get('/get/interior/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE interior_id=$id");
     $sth->execute();
@@ -1676,6 +1788,7 @@ $app->get('/get/interior/[{id}]', function (Request $request, Response $response
 
 // get interior data by establishment id
 $app->get('/get/interior/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE est_id=$id");
     $sth->execute();
@@ -1687,6 +1800,7 @@ $app->get('/get/interior/est/[{id}]', function (Request $request, Response $resp
 
 // delete interior data by id
 $app->delete('/delete/interior/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE interior_id=$id");
     $sth->execute();
@@ -1697,6 +1811,7 @@ $app->delete('/delete/interior/[{id}]', function (Request $request, Response $re
 
 // delete interior data by establishment id
 $app->delete('/delete/interior/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE est_id=$id");
     $sth->execute();
@@ -1707,6 +1822,7 @@ $app->delete('/delete/interior/est/[{id}]', function (Request $request, Response
 
 // post interior data
 $app->post('/post/interior/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1716,6 +1832,7 @@ $app->post('/post/interior/', function (Request $request, Response $response, ar
 
 // put interior data
 $app->put('/put/interior/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1725,6 +1842,7 @@ $app->put('/put/interior/', function (Request $request, Response $response, arra
 
 // put interior data by interior id and est id
 $app->put('/put/interior/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1823,6 +1941,7 @@ $app->put('/put/interior/est/[{id}]', function (Request $request, Response $resp
  */
 // get all elevator
 $app->get('/elevator/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Elevator");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1833,6 +1952,7 @@ $app->get('/elevator/', function (Request $request, Response $response, array $a
 
 // get elevator data by id
 $app->get('/get/elevator/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE elevator_id=$id");
     $sth->execute();
@@ -1844,6 +1964,7 @@ $app->get('/get/elevator/[{id}]', function (Request $request, Response $response
 
 // get elevator data by establishment id
 $app->get('/get/elevator/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE est_id=$id");
     $sth->execute();
@@ -1855,6 +1976,7 @@ $app->get('/get/elevator/est/[{id}]', function (Request $request, Response $resp
 
 // delete elevator data by id
 $app->delete('/delete/elevator/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE elevator_id=$id");
     $sth->execute();
@@ -1865,6 +1987,7 @@ $app->delete('/delete/elevator/[{id}]', function (Request $request, Response $re
 
 // delete elevator data by establishment id
 $app->delete('/delete/elevator/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE est_id=$id");
     $sth->execute();
@@ -1875,6 +1998,7 @@ $app->delete('/delete/elevator/est/[{id}]', function (Request $request, Response
 
 // post elevator data
 $app->post('/post/elevator/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1884,6 +2008,7 @@ $app->post('/post/elevator/', function (Request $request, Response $response, ar
 
 // put elevator data
 $app->put('/put/elevator/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1893,6 +2018,7 @@ $app->put('/put/elevator/', function (Request $request, Response $response, arra
 
 // put elevator data by elevator id and est id
 $app->put('/put/elevator/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -1975,6 +2101,7 @@ $app->put('/put/elevator/est/[{id}]', function (Request $request, Response $resp
  */
 // get all signage
 $app->get('/signage/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Signage");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1985,6 +2112,7 @@ $app->get('/signage/', function (Request $request, Response $response, array $ar
 
 // get signage data by id
 $app->get('/get/signage/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE sign_id=$id");
     $sth->execute();
@@ -1996,6 +2124,7 @@ $app->get('/get/signage/[{id}]', function (Request $request, Response $response,
 
 // get signage data by establishment id
 $app->get('/get/signage/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE est_id=$id");
     $sth->execute();
@@ -2007,6 +2136,7 @@ $app->get('/get/signage/est/[{id}]', function (Request $request, Response $respo
 
 // delete signage data by id
 $app->delete('/delete/signage/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE sign_id=$id");
     $sth->execute();
@@ -2017,6 +2147,7 @@ $app->delete('/delete/signage/[{id}]', function (Request $request, Response $res
 
 // delete signage data by establishment id
 $app->delete('/delete/signage/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE est_id=$id");
     $sth->execute();
@@ -2027,6 +2158,7 @@ $app->delete('/delete/signage/est/[{id}]', function (Request $request, Response 
 
 // post signage data
 $app->post('/post/signage/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Signage );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2036,6 +2168,7 @@ $app->post('/post/signage/', function (Request $request, Response $response, arr
 
 // put signage data
 $app->put('/put/signage/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Signage );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2045,6 +2178,7 @@ $app->put('/put/signage/', function (Request $request, Response $response, array
 
 // put signage data by signage id and est id
 $app->put('/put/signage/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -2115,6 +2249,7 @@ $app->put('/put/signage/est/[{id}]', function (Request $request, Response $respo
  */
 // get all emergency
 $app->get('/emergency/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Emergency");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2125,6 +2260,7 @@ $app->get('/emergency/', function (Request $request, Response $response, array $
 
 // get emergency data by id
 $app->get('/get/emergency/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE emergency_id=$id");
     $sth->execute();
@@ -2136,6 +2272,7 @@ $app->get('/get/emergency/[{id}]', function (Request $request, Response $respons
 
 // get emergency data by establishment id
 $app->get('/get/emergency/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE est_id=$id");
     $sth->execute();
@@ -2147,6 +2284,7 @@ $app->get('/get/emergency/est/[{id}]', function (Request $request, Response $res
 
 // delete emergency data by id
 $app->delete('/delete/emergency/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE emergency_id=$id");
     $sth->execute();
@@ -2157,6 +2295,7 @@ $app->delete('/delete/emergency/[{id}]', function (Request $request, Response $r
 
 // delete emergency data by establishment id
 $app->delete('/delete/emergency/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE est_id=$id");
     $sth->execute();
@@ -2167,6 +2306,7 @@ $app->delete('/delete/emergency/est/[{id}]', function (Request $request, Respons
 
 // post emergency data
 $app->post('/post/emergency/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Emergency );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2176,6 +2316,7 @@ $app->post('/post/emergency/', function (Request $request, Response $response, a
 
 // put emergency data
 $app->put('/put/emergency/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Emergency );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2185,6 +2326,7 @@ $app->put('/put/emergency/', function (Request $request, Response $response, arr
 
 // put emergency data by emergency id and est id
 $app->put('/put/emergency/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -2259,6 +2401,7 @@ $app->put('/put/emergency/est/[{id}]', function (Request $request, Response $res
  */
 // get all seating
 $app->get('/seating/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Seating");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2269,6 +2412,7 @@ $app->get('/seating/', function (Request $request, Response $response, array $ar
 
 // get seating data by id
 $app->get('/get/seating/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE seating_id=$id");
     $sth->execute();
@@ -2280,6 +2424,7 @@ $app->get('/get/seating/[{id}]', function (Request $request, Response $response,
 
 // get seating data by establishment id
 $app->get('/get/seating/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE est_id=$id");
     $sth->execute();
@@ -2291,6 +2436,7 @@ $app->get('/get/seating/est/[{id}]', function (Request $request, Response $respo
 
 // delete seating data by id
 $app->delete('/delete/seating/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE seating_id=$id");
     $sth->execute();
@@ -2301,6 +2447,7 @@ $app->delete('/delete/seating/[{id}]', function (Request $request, Response $res
 
 // delete seating data by establishment id
 $app->delete('/delete/seating/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE est_id=$id");
     $sth->execute();
@@ -2311,6 +2458,7 @@ $app->delete('/delete/seating/est/[{id}]', function (Request $request, Response 
 
 // post seating data
 $app->post('/post/seating/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2320,6 +2468,7 @@ $app->post('/post/seating/', function (Request $request, Response $response, arr
 
 // put seating data
 $app->put('/put/seating/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2329,6 +2478,7 @@ $app->put('/put/seating/', function (Request $request, Response $response, array
 
 // put seating data by seating id and est id
 $app->put('/put/seating/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -2435,6 +2585,7 @@ $app->put('/put/seating/est/[{id}]', function (Request $request, Response $respo
  */
 // get all restroom
 $app->get('/restroom/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Restroom");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2445,6 +2596,7 @@ $app->get('/restroom/', function (Request $request, Response $response, array $a
 
 // get restroom data by id
 $app->get('/get/restroom/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE restroom_id=$id");
     $sth->execute();
@@ -2456,6 +2608,7 @@ $app->get('/get/restroom/[{id}]', function (Request $request, Response $response
 
 // get restroom data by establishment id
 $app->get('/get/restroom/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE est_id=$id");
     $sth->execute();
@@ -2467,6 +2620,7 @@ $app->get('/get/restroom/est/[{id}]', function (Request $request, Response $resp
 
 // delete restroom data by id
 $app->delete('/delete/restroom/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE restroom_id=$id");
     $sth->execute();
@@ -2477,6 +2631,7 @@ $app->delete('/delete/restroom/[{id}]', function (Request $request, Response $re
 
 // delete restroom data by establishment id
 $app->delete('/delete/restroom/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE est_id=$id");
     $sth->execute();
@@ -2487,6 +2642,7 @@ $app->delete('/delete/restroom/est/[{id}]', function (Request $request, Response
 
 // post restroom data
 $app->post('/post/restroom/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Restroom );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2496,6 +2652,7 @@ $app->post('/post/restroom/', function (Request $request, Response $response, ar
 
 // put restroom data
 $app->put('/put/restroom/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Restroom );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2505,6 +2662,7 @@ $app->put('/put/restroom/', function (Request $request, Response $response, arra
 
 // put restroom data by restroom id and est id
 $app->put('/put/restroom/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -2563,6 +2721,7 @@ $app->put('/put/restroom/est/[{id}]', function (Request $request, Response $resp
  */
 // get all restroom_info
 $app->get('/restroom_info/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2573,6 +2732,7 @@ $app->get('/restroom_info/', function (Request $request, Response $response, arr
 
 // get restroom_info data by id
 $app->get('/get/restroom_info/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_info_id=$id");
     $sth->execute();
@@ -2584,6 +2744,7 @@ $app->get('/get/restroom_info/[{id}]', function (Request $request, Response $res
 
 // get restroom_info data by restroom id
 $app->get('/get/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_id=$id");
     $sth->execute();
@@ -2595,6 +2756,7 @@ $app->get('/get/restroom_info/rest/[{id}]', function (Request $request, Response
 
 // delete restroom_info data by id
 $app->delete('/delete/restroom_info/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_info_id=$id");
     $sth->execute();
@@ -2605,6 +2767,7 @@ $app->delete('/delete/restroom_info/[{id}]', function (Request $request, Respons
 
 // delete restroom_info data by restroom id
 $app->delete('/delete/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_id=$id");
     $sth->execute();
@@ -2615,6 +2778,7 @@ $app->delete('/delete/restroom_info/rest/[{id}]', function (Request $request, Re
 
 // post restroom_info data
 $app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Restroom_Info );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2624,6 +2788,7 @@ $app->post('/post/restroom_info/', function (Request $request, Response $respons
 
 // put restroom_info data
 $app->put('/put/restroom_info/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Restroom_Info );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2633,6 +2798,7 @@ $app->put('/put/restroom_info/', function (Request $request, Response $response,
 
 // put restroom data by restroom id and rest id
 $app->put('/put/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -2782,6 +2948,7 @@ $app->put('/put/restroom_info/rest/[{id}]', function (Request $request, Response
  */
 // get all communication
 $app->get('/communication/', function (Request $request, Response $response, array $args){
+    
     $sth = $this->db->prepare("SELECT * FROM Communication");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2792,6 +2959,7 @@ $app->get('/communication/', function (Request $request, Response $response, arr
 
 // get communication data by id
 $app->get('/get/communication/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE communication_id=$id");
     $sth->execute();
@@ -2803,6 +2971,7 @@ $app->get('/get/communication/[{id}]', function (Request $request, Response $res
 
 // get communication data by establishment id
 $app->get('/get/communication/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE est_id=$id");
     $sth->execute();
@@ -2814,6 +2983,7 @@ $app->get('/get/communication/est/[{id}]', function (Request $request, Response 
 
 // delete communication data by id
 $app->delete('/delete/communication/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE communication_id=$id");
     $sth->execute();
@@ -2824,6 +2994,7 @@ $app->delete('/delete/communication/[{id}]', function (Request $request, Respons
 
 // delete communication data by establishment id
 $app->delete('/delete/communication/est/[{id}]', function (Request $request, Response $response, array $args){
+    
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE est_id=$id");
     $sth->execute();
@@ -2834,6 +3005,7 @@ $app->delete('/delete/communication/est/[{id}]', function (Request $request, Res
 
 // post communication data
 $app->post('/post/communication/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2843,6 +3015,7 @@ $app->post('/post/communication/', function (Request $request, Response $respons
 
 // put communication data
 $app->put('/put/communication/', function (Request $request, Response $response, array $args){
+    
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2852,6 +3025,7 @@ $app->put('/put/communication/', function (Request $request, Response $response,
 
 // put communication data by communication id and est id
 $app->put('/put/communication/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    
     $id = $args['id'];
     $data = $request->getParsedBody();
 
