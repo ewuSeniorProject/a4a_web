@@ -34,17 +34,19 @@
             });
         </script>
 
-        <script src="script/update.js"></script>
+        <script src="script/add.js"></script>
     </head>
     <body>
         <div id="page-preloader">
             <span class="spinner"></span>
         </div>
-        <div class="header">
-            <a href="index.html">
-                <h1>Access 4 All Spokane</h1>
-            </a>
-        </div>
+        <nav class="navbar navbar-light bg-header">
+            <span class="navbar-brand mb-0 pointer">
+                <a href="home.php">
+                    <h1>Access 4 All Spokane</h1>
+                </a>
+            </span>
+        </nav>
         <div class="page page-row">
             <!-- LEFT SIDEBAR -->
             <div class="left-sidebar">
@@ -896,7 +898,7 @@
                                         <input type="hidden" class="form-control" data-bind="attr:{id : 'rest_info_id_'+($index() + 1)}, value: rest_info_id">
                                         <input type="hidden" class="form-control" data-bind="attr:{id : 'rest_id_'+($index() + 1)}, value: rest_id">
                                         <div class="col-2">
-                                            <label for="restroom_number"> Restroom Number: </label> 
+                                            <label for="restroom_number"> Restroom Number: </label>
                                             <input class="form-control" id="restroom_number" data-bind="value: ($index() + 1)" readonly>
                                         </div>
                                         <div class="col-10">
@@ -1081,7 +1083,7 @@
             </div>
         </div>
 
-    <!-- ALERT MODAL -->
+        <!-- ALERT MODAL -->
         <div class="modal fade bd-example-modal-lg" id="alert" tabindex="-1" role="dialog" aria-labelledby="alert" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -1098,7 +1100,7 @@
                 </div>
             </div>
         </div>
-    <!-- SUCCESS MODAL -->
+        <!-- SUCCESS MODAL -->
         <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="success" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -1115,7 +1117,7 @@
                 </div>
             </div>
         </div>
-    <!-- STA MODAL -->
+        <!-- STA MODAL -->
         <div class="modal fade bd-example-modal-lg" id="sta-route-modal" tabindex="-1" role="dialog" aria-labelledby="sta-route-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -1130,7 +1132,7 @@
                 </div>
             </div>
         </div>
-    <!-- RESTROOM MODAL -->
+        <!-- RESTROOM MODAL -->
         <div class="modal fade bd-example-modal-lg" id="restroom-modal" tabindex="-1" role="dialog" aria-labelledby="restroom-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -1145,7 +1147,7 @@
                 </div>
             </div>
         </div>
-    <!-- GENERAL MODAL -->
+        <!-- GENERAL MODAL -->
         <div class="modal fade" id="gen-modal" tabindex="-1" role="dialog" aria-labelledby="gen-modal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
