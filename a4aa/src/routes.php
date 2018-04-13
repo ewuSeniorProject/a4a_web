@@ -64,6 +64,54 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put category data by cat id
+$app->put('/put/establishment/category/est/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $cat_id = $data["cat_id"];
+
+    $sth = $this->db->prepare("UPDATE Establishment SET cat_id = :cat_id WHERE est_id=$id");
+
+    $sth->bindParam(':cat_id', $cat_id, PDO::PARAM_STR);
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put config data by config id
+$app->put('/put/establishment/config/est/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $config_id = $data["config_id"];
+
+    $sth = $this->db->prepare("UPDATE Establishment SET config_id = :config_id WHERE est_id=$id");
+
+    $sth->bindParam(':config_id', $config_id, PDO::PARAM_STR);
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put user data by user id
+$app->put('/put/establishment/user/est/[{id}]', function (Request $request, Response $response, array $args){
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $user_id = $data["user_id"];
+
+    $sth = $this->db->prepare("UPDATE Establishment SET user_id = :user_id WHERE est_id=$id");
+
+    $sth->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // put establishment data by est id
 $app->put('/put/establishment/est/[{id}]', function (Request $request, Response $response, array $args){
     $id = $args['id'];
@@ -2583,6 +2631,152 @@ $app->put('/put/restroom_info/', function (Request $request, Response $response,
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// put restroom data by restroom id and rest id
+$app->put('/put/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $rest_info_id = $data["rest_info_id"];
+    $restroom_desc = $data["restroom_desc"];
+    $easy_open = $data["easy_open"];
+    $lbs_force = $data["lbs_force"];
+    $clearance = $data["clearance"];
+    $opening = $data["opening"];
+    $opens_out = $data["opens_out"];
+    $use_fist = $data["use_fist"];
+    $can_turn_around = $data["can_turn_around"];
+    $turn_width = $data["turn_width"];
+    $turn_depth = $data["turn_depth"];
+    $close_chair_inside = $data["close_chair_inside"];
+    $grab_bars = $data["grab_bars"];
+    $seat_height_req = $data["seat_height_req"];
+    $seat_height = $data["seat_height"];
+    $flush_auto_fist = $data["flush_auto_fist"];
+    $ambulatory_accessible = $data["ambulatory_accessible"];
+    $bar_height = $data["bar_height"];
+    $coat_hook = $data["coat_hook"];
+    $hook_height = $data["hook_height"];
+    $sink = $data["sink"];
+    $sink_height = $data["sink_height"];
+    $faucet = $data["faucet"];
+    $faucet_depth = $data["faucet_depth"];
+    $faucet_auto_fist = $data["faucet_auto_fist"];
+    $sink_clearance = $data["sink_clearance"];
+    $sink_clearance_height = $data["sink_clearance_height"];
+    $sink_pipes = $data["sink_pipes"];
+    $soap_dispenser = $data["soap_dispenser"];
+    $dry_fist = $data["dry_fist"];
+    $dry_fist_type = $data["dry_fist_type"];
+    $dry_controls = $data["dry_controls"];
+    $dry_control_height = $data["dry_control_height"];
+    $mirror = $data["mirror"];
+    $mirror_height = $data["mirror_height"];
+    $shelves = $data["shelves"];
+    $shelf_height = $data["shelf_height"];
+    $trash_receptacles = $data["trash_receptacles"];
+    $hygiene_seat_cover = $data["hygiene_seat_cover"];
+    $hygiene_cover_height = $data["hygiene_cover_height"];
+    $lighting = $data["lighting"];
+    $lighting_type = $data["lighting_type"];
+    $comment = $data["comment"];
+    $recommendations = $data["recommendations"];
+
+
+    $sth = $this->db->prepare("UPDATE Restroom_Info SET restroom_desc = :restroom_desc,
+                                                        easy_open = :easy_open,
+                                                        lbs_force = :lbs_force,
+                                                        clearance = :clearance,
+                                                        opening = :opening,
+                                                        opens_out = :opens_out,
+                                                        use_fist = :use_fist,
+                                                        can_turn_around = :can_turn_around,
+                                                        turn_width = :turn_width,
+                                                        turn_depth = :turn_depth,
+                                                        close_chair_inside = :close_chair_inside,
+                                                        grab_bars = :grab_bars,
+                                                        seat_height_req = :seat_height_req,
+                                                        seat_height = :seat_height,
+                                                        flush_auto_fist = :flush_auto_fist,
+                                                        ambulatory_accessible = :ambulatory_accessible,
+                                                        bar_height = :bar_height,
+                                                        coat_hook = :coat_hook,
+                                                        hook_height = :hook_height,
+                                                        sink = :sink,
+                                                        sink_height = :sink_height,
+                                                        faucet = :faucet,
+                                                        faucet_depth = :faucet_depth,
+                                                        faucet_auto_fist = :faucet_auto_fist,
+                                                        sink_clearance = :sink_clearance,
+                                                        sink_clearance_height = :sink_clearance_height,
+                                                        sink_pipes = :sink_pipes,
+                                                        soap_dispenser = :soap_dispenser,
+                                                        dry_fist = :dry_fist,
+                                                        dry_fist_type = :dry_fist_type,
+                                                        dry_controls = :dry_controls,
+                                                        dry_control_height = :dry_control_height,
+                                                        mirror = :mirror,
+                                                        mirror_height = :mirror_height,
+                                                        shelves = :shelves,
+                                                        shelf_height = :shelf_height,
+                                                        trash_receptacles = :trash_receptacles,
+                                                        hygiene_seat_cover = :hygiene_seat_cover,
+                                                        hygiene_cover_height = :hygiene_cover_height,
+                                                        lighting = :lighting,
+                                                        lighting_type = :lighting_type,
+                                                        comment = :comment,
+                                                        recommendations = :recommendations
+                                                     WHERE rest_info_id=$rest_info_id AND rest_id=$id");
+    $sth->bindParam(':restroom_desc', $restroom_desc, PDO::PARAM_STR);
+    $sth->bindParam(':easy_open', $easy_open, PDO::PARAM_STR);
+    $sth->bindParam(':lbs_force', $lbs_force, PDO::PARAM_STR);
+    $sth->bindParam(':clearance', $clearance, PDO::PARAM_STR);
+    $sth->bindParam(':opening', $opening, PDO::PARAM_STR);
+    $sth->bindParam(':opens_out', $opens_out, PDO::PARAM_STR);
+    $sth->bindParam(':use_fist', $use_fist, PDO::PARAM_STR);
+    $sth->bindParam(':can_turn_around', $can_turn_around, PDO::PARAM_STR);
+    $sth->bindParam(':turn_width', $turn_width, PDO::PARAM_STR);
+    $sth->bindParam(':turn_depth', $turn_depth, PDO::PARAM_STR);
+    $sth->bindParam(':close_chair_inside', $close_chair_inside, PDO::PARAM_STR);
+    $sth->bindParam(':grab_bars', $grab_bars, PDO::PARAM_STR);
+    $sth->bindParam(':seat_height_req', $seat_height_req, PDO::PARAM_STR);
+    $sth->bindParam(':seat_height', $seat_height, PDO::PARAM_STR);
+    $sth->bindParam(':flush_auto_fist', $flush_auto_fist, PDO::PARAM_STR);
+    $sth->bindParam(':ambulatory_accessible', $ambulatory_accessible, PDO::PARAM_STR);
+    $sth->bindParam(':bar_height', $bar_height, PDO::PARAM_STR);
+    $sth->bindParam(':coat_hook', $coat_hook, PDO::PARAM_STR);
+    $sth->bindParam(':hook_height', $hook_height, PDO::PARAM_STR);
+    $sth->bindParam(':sink', $sink, PDO::PARAM_STR);
+    $sth->bindParam(':sink_height', $sink_height, PDO::PARAM_STR);
+    $sth->bindParam(':faucet', $faucet, PDO::PARAM_STR);
+    $sth->bindParam(':faucet_depth', $faucet_depth, PDO::PARAM_STR);
+    $sth->bindParam(':faucet_auto_fist', $faucet_auto_fist, PDO::PARAM_STR);
+    $sth->bindParam(':sink_clearance', $sink_clearance, PDO::PARAM_STR);
+    $sth->bindParam(':sink_clearance_height', $sink_clearance_height, PDO::PARAM_STR);
+    $sth->bindParam(':sink_pipes', $sink_pipes, PDO::PARAM_STR);
+    $sth->bindParam(':soap_dispenser', $soap_dispenser, PDO::PARAM_STR);
+    $sth->bindParam(':dry_fist', $dry_fist, PDO::PARAM_STR);
+    $sth->bindParam(':dry_fist_type', $dry_fist_type, PDO::PARAM_STR);
+    $sth->bindParam(':dry_controls', $dry_controls, PDO::PARAM_STR);
+    $sth->bindParam(':dry_control_height', $dry_control_height, PDO::PARAM_STR);
+    $sth->bindParam(':mirror', $mirror, PDO::PARAM_STR);
+    $sth->bindParam(':mirror_height', $mirror_height, PDO::PARAM_STR);
+    $sth->bindParam(':shelves', $shelves, PDO::PARAM_STR);
+    $sth->bindParam(':shelf_height', $shelf_height, PDO::PARAM_STR);
+    $sth->bindParam(':trash_receptacles', $trash_receptacles, PDO::PARAM_STR);
+    $sth->bindParam(':hygiene_seat_cover', $hygiene_seat_cover, PDO::PARAM_STR);
+    $sth->bindParam(':hygiene_cover_height', $hygiene_cover_height, PDO::PARAM_STR);
+    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+
 /**
  * COMMUNICATION ROUTES
  */
@@ -2656,7 +2850,7 @@ $app->put('/put/communication/', function (Request $request, Response $response,
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// put restroom data by restroom id and est id
+// put communication data by communication id and est id
 $app->put('/put/communication/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
     $id = $args['id'];
     $data = $request->getParsedBody();
