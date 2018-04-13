@@ -407,3 +407,39 @@ a:hover {
     background-color: rgb(68, 143, 195);
     font-family: 'Lato', sans-serif;
 }
+
+.modal-restroom-header {
+     background-color: #778899;
+     border-radius: 1px;
+ }
+
+.modal-restroom-title {
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-restroom-body {
+    color: #ffffff;
+    background-color: rgb(68, 143, 195);
+    font-family: 'Lato', sans-serif;
+}
+
+.modal-gen-header {
+    background-color: #778899;
+    border-radius: 1px;
+}
+
+.modal-gen-title {
+    color: #ffffff;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal-gen-body {
+    color: #ffffff;
+    background-color: rgb(68, 143, 195);
+    font-family: 'Lato', sans-serif;
+}

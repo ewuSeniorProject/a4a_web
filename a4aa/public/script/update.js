@@ -1324,10 +1324,10 @@ $(document).ready(function () {
         this.sink_pipes.focused = ko.observable(false);
         this.soap_dispenser = ko.observable(parm.data.soap_dispenser);
         this.soap_dispenser.focused = ko.observable(false);
-        this.dry_first = ko.observable(parm.data.dry_first);
-        this.dry_first.focused = ko.observable(false);
-        this.dry_first_type = ko.observable(parm.data.dry_first_type);
-        this.dry_first_type.focused = ko.observable(false);
+        this.dry_fist = ko.observable(parm.data.dry_fist);
+        this.dry_fist.focused = ko.observable(false);
+        this.dry_fist_type = ko.observable(parm.data.dry_fist_type);
+        this.dry_fist_type.focused = ko.observable(false);
         this.dry_controls = ko.observable(parm.data.dry_controls);
         this.dry_controls.focused = ko.observable(false);
         this.dry_control_height = ko.observable(parm.data.dry_control_height);
@@ -1780,6 +1780,250 @@ function updateEstablishment() {
     });
 }
 
+function editCategory() {
+    var cat_id = document.getElementById("cat_id").value;
+
+    console.log("cat_id: " + cat_id);
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "category/",
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            var category_select = "";
+
+            category_select += '<div class="table-row-color">\n' +
+                               '   <select name="category" id="category">\n';
+
+            for (var i = 0; i < data.length; i ++) {
+                if (data[i].cat_id === cat_id ){
+                    category_select += '<option value="'+data[i].cat_id+'_'+data[i].name+'" selected="selected">&nbsp;'+ data[i].name +'</option>';
+                }
+                else {
+                    category_select += '<option value="'+data[i].cat_id+'_'+data[i].name+'">&nbsp;'+ data[i].name +'</option>';
+                }
+            }
+
+            category_select += '</select>\n' +
+                                '</div>';
+
+            $("#gen-title").html("Edit Category");
+
+            $("#gen-body").html(category_select);
+
+            $("#gen-footer").html(
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
+                '&nbsp;\n' +
+                '<button type="button" class="btn btn-success" onclick="updateCategory()"><i class="fas fa-save"></i>&nbsp; Save</button>'
+            );
+
+            $("#gen-modal").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateCategory() {
+    $("#gen-modal").modal('toggle');
+
+    var temp = document.getElementById("category").value;
+    var cat_id = temp.split("_")[0];
+    var cat_name = temp.split("_")[1];
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/establishment/category/est/" + EST_ID,
+        data: JSON.stringify({
+            "cat_id" : cat_id
+        }),
+        success: function () {
+            $("#success-body").html('Category Updated');
+            $("#success").modal('toggle');
+
+            document.getElementById("cat_id").value = cat_id;
+            document.getElementById("cat_name").value = cat_name;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function editConfig() {
+    var config_id = document.getElementById("config_id").value;
+
+    console.log("config_id: " + config_id);
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "configuration/",
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            var config_select = "";
+
+            config_select += '<div class="table-row-color">\n' +
+                '   <select name="config" id="config">\n';
+
+            for (var i = 0; i < data.length; i ++) {
+                if (data[i].config_id === config_id ){
+                    config_select += '<option value="'+data[i].config_id+'_'+data[i].name+'" selected="selected">&nbsp;'+ data[i].name +'</option>';
+                }
+                else {
+                    config_select += '<option value="'+data[i].config_id+'_'+data[i].name+'">&nbsp;'+ data[i].name +'</option>';
+                }
+
+            }
+
+            config_select += '</select>\n' +
+                '</div>';
+
+            $("#gen-title").html("Edit Configuration");
+
+            $("#gen-body").html(config_select);
+
+            $("#gen-footer").html(
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
+                '&nbsp;\n' +
+                '<button type="button" class="btn btn-success" onclick="updateConfig()"><i class="fas fa-save"></i>&nbsp; Save</button>'
+            );
+
+            $("#gen-modal").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateConfig() {
+    $("#gen-modal").modal('toggle');
+
+    var temp = document.getElementById("config").value;
+    var config_id = temp.split("_")[0];
+    var config_name = temp.split("_")[1];
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/establishment/config/est/" + EST_ID,
+        data: JSON.stringify({
+            "config_id" : config_id
+        }),
+        success: function () {
+            $("#success-body").html('Configuration Updated');
+            $("#success").modal('toggle');
+
+            document.getElementById("config_id").value = config_id;
+            document.getElementById("config_name").value = config_name;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function editUser() {
+    var user_id = document.getElementById("user_id").value;
+
+    console.log("user_id: " + user_id);
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "user/",
+        success: function (data) {
+            console.log(JSON.stringify(data));
+            var user_select = "";
+
+            user_select += '<div class="table-row-color">\n' +
+                '   <select name="user" id="user">\n';
+
+            for (var i = 0; i < data.length; i ++) {
+                if (data[i].user_id === user_id ){
+                    user_select += '<option value="'+data[i].user_id+'_'+data[i].fname+' '+data[i].lname +'" selected="selected">&nbsp;'+data[i].fname+' '+data[i].lname +'</option>';
+                }
+                else {
+                    user_select += '<option value="'+data[i].user_id+'_'+data[i].fname+' '+data[i].lname +'">&nbsp;'+data[i].fname+' '+data[i].lname +'</option>';
+                }
+            }
+
+            user_select += '</select>\n' +
+                '</div>';
+
+            $("#gen-title").html("Edit Surveyor");
+
+            $("#gen-body").html(user_select);
+
+            $("#gen-footer").html(
+                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
+                '&nbsp;\n' +
+                '<button type="button" class="btn btn-success" onclick="updateUser()"><i class="fas fa-save"></i>&nbsp; Save</button>'
+            );
+
+            $("#gen-modal").modal('toggle');
+        },
+        error: function (data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function updateUser() {
+    $("#gen-modal").modal('toggle');
+
+    var temp = document.getElementById("user").value;
+    var user_id = temp.split("_")[0];
+    var user_name = temp.split("_")[1];
+
+    console.log("update.js:");
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/establishment/user/est/" + EST_ID,
+        data: JSON.stringify({
+            "user_id" : user_id
+        }),
+        success: function () {
+            $("#success-body").html('Surveyor Updated');
+            $("#success").modal('toggle');
+
+            document.getElementById("user_id").value = user_id;
+            document.getElementById("user_name").value = user_name;
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
 function updateParking() {
     var est_id = document.getElementById("park_est_id").value;
     var park_id = document.getElementById("park_id").value;
@@ -2005,7 +2249,7 @@ function editSTARoute(index) {
 
 
             $("#sta-body").html(
-                '<div class="table-row-color form-group">\n' +
+                '<div class="table-row-color">\n' +
                 '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
                 '</div>\n'+
                 '<div class="table-row-color">\n' +
@@ -2657,38 +2901,168 @@ function editRestroomInfo(index) {
         url: "get/restroom_info/" + rest_info_id,
         success: function (data) {
             console.log(JSON.stringify(data));
-            var sta_route_id = data[0].sta_route_id;
-            var route_num = data[0].route_num;
-            var north_bound_stop = data[0].north_bound_stop;
-            var south_bound_stop = data[0].south_bound_stop;
-            var east_bound_stop = data[0].east_bound_stop;
-            var west_bound_stop = data[0].west_bound_stop;
-            var sta_bus_id = data[0].sta_bus_id;
+            var rest_info_id = data[0].rest_info_id;
+            var restroom_desc = data[0].restroom_desc;
+            var easy_open = data[0].easy_open;
+            var lbs_force = data[0].lbs_force;
+            var clearance = data[0].clearance;
+            var opening = data[0].opening;
+            var opens_out = data[0].opens_out;
+            var use_fist = data[0].use_fist;
+            var can_turn_around = data[0].can_turn_around;
+            var turn_width = data[0].turn_width;
+            var turn_depth = data[0].turn_depth;
+            var close_chair_inside = data[0].close_chair_inside;
+            var grab_bars = data[0].grab_bars;
+            var seat_height_req = data[0].seat_height_req;
+            var seat_height = data[0].seat_height;
+            var flush_auto_fist = data[0].flush_auto_fist;
+            var ambulatory_accessible = data[0].ambulatory_accessible;
+            var bar_height = data[0].bar_height;
+            var coat_hook = data[0].coat_hook;
+            var hook_height = data[0].hook_height;
+            var sink = data[0].sink;
+            var sink_height = data[0].sink_height;
+            var faucet = data[0].faucet;
+            var faucet_depth = data[0].faucet_depth;
+            var faucet_auto_fist = data[0].faucet_auto_fist;
+            var sink_clearance = data[0].sink_clearance;
+            var sink_clearance_height = data[0].sink_clearance_height;
+            var sink_pipes = data[0].sink_pipes;
+            var soap_dispenser = data[0].soap_dispenser;
+            var dry_fist = data[0].dry_fist;
+            var dry_fist_type = data[0].dry_fist_type;
+            var dry_controls = data[0].dry_controls;
+            var dry_control_height = data[0].dry_control_height;
+            var mirror = data[0].mirror;
+            var mirror_height = data[0].mirror_height;
+            var shelves = data[0].shelves;
+            var shelf_height = data[0].shelf_height;
+            var trash_receptacles = data[0].trash_receptacles;
+            var hygiene_seat_cover = data[0].hygiene_seat_cover;
+            var hygiene_cover_height = data[0].hygiene_cover_height;
+            var lighting = data[0].lighting;
+            var lighting_type = data[0].lighting_type;
+            var comment = data[0].comment;
+            var recommendations = data[0].recommendations;
+            var rest_id = data[0].rest_id;
 
-            console.log("sta_route_id: " + sta_route_id);
-            console.log("route_num: " + route_num);
-            console.log("north_bound_stop: " + north_bound_stop);
-            console.log("south_bound_stop: " + south_bound_stop);
-            console.log("east_bound_stop: " + east_bound_stop);
-            console.log("west_bound_stop: " + west_bound_stop);
-            console.log("sta_bus_id: " + sta_bus_id);
-
-
-            $("#sta-body").html(
-                '<div class="table-row-color form-group">\n' +
-                '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
-                '</div>\n'+
+            $("#restroom-body").html(
                 '<div class="table-row-color">\n' +
-                '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
-                '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
-                '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
-                '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stop+'"></div>\n' +
-                '   <input type="hidden" class="form-control" id="sta_route_idEdit" value="'+sta_route_id+'">\n'+
-                '   <input type="hidden" class="form-control" id="sta_bus_idEdit" value="'+sta_bus_id+'">\n'+
+                '   <div class="col-6"><label for="restroom_descEdit"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input class="form-control" id="restroom_descEdit" value="'+restroom_desc+'" ></div>\n' +
+                '   <div class="col-6"><label for="easy_openEdit">  Room door is easy to open, requiring 5 lb. or less force: </label> <input class="form-control" id="easy_openEdit" value="'+easy_open+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="lbs_forceEdit"> Actual force - lbs. or light/ med/ heavy: </label> <input class="form-control" id="lbs_forceEdit" value="'+lbs_force+'" ></div>\n' +
+                '   <div class="col-6"><label for="clearanceEdit"> Stall/Room door has at least 32” clearance when the door is open: </label> <input class="form-control" id="clearanceEdit" value="'+clearance+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="openingEdit"> Opening measurement (inches): </label> <input class="form-control" id="openingEdit" value="'+opening+'" ></div>\n' +
+                '   <div class="col-6"><label for="opens_outEdit"> The stall door opens to the outside: </label><input class="form-control" id="opens_outEdit" value="'+opens_out+'"></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="use_fistEdit"> The stall door can be opened, closed, and latched with a closed fist: </label><input class="form-control" id="use_fistEdit" value="'+use_fist+'"></div>\n' +
+                '   <div class="col-6"><label for="can_turn_aroundEdit"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <input class="form-control" id="can_turn_aroundEdit" value="'+can_turn_around+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="turn_widthEdit"> Stall/Room width (inches)​: </label> <input class="form-control" id="turn_widthEdit" value="'+turn_width+'" ></div>\n' +
+                '   <div class="col-6"><label for="turn_depthEdit"> Stall/Room depth (inches)​: </label> <input class="form-control" id="turn_depthEdit" value="'+turn_depth+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="close_chair_insideEdit"> The stall/room door can be closed once a wheelchair is inside: </label> <input class="form-control" id="close_chair_insideEdit" value="'+close_chair_inside+'" ></div>\n' +
+                '   <div class="col-6"><label for="grab_barsEdit"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <input class="form-control" id="grab_barsEdit" value="'+grab_bars+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="seat_height_reqEdit"> The height of the toilet seat is at least 17” from the floor: </label><input class="form-control" id="seat_height_reqEdit" value="'+seat_height_req+'"></div>\n' +
+                '   <div class="col-6"><label for="seat_heightEdit"> Seat height (inches): </label><input class="form-control" id="seat_heightEdit" value="'+seat_height+'"></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="flush_auto_fistEdit"> The toilet flushes automatically, or can be operated with a closed fist: </label><input class="form-control" id="flush_auto_fistEdit" value="'+flush_auto_fist+'"></div>\n' +
+                '   <div class="col-6"><label for="ambulatory_accessibleEdit"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <input class="form-control" id="ambulatory_accessibleEdit" value="'+ambulatory_accessible+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="bar_heightEdit"> Toilet height (inches): </label><input class="form-control" id="bar_heightEdit" value="'+bar_height+'"></div>\n' +
+                '   <div class="col-6"><label for="coat_hookEdit"> If there is a coat hook, it is between 35” and 48” from the floor: </label><input class="form-control" id="coat_hookEdit" value="'+coat_hook+'"></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="hook_heightEdit"> Hook height (inches): </label> <input class="form-control" id="hook_heightEdit" value="'+hook_height+'" ></div>\n' +
+                '   <div class="col-6"><label for="sinkEdit"> The height of the sink/countertop is 34” or less from the floor: </label><input class="form-control" id="sinkEdit" value="'+sink+'"></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="sink_heightEdit"> Sink/Countertop height (inches): </label> <input class="form-control" id="sink_heightEdit" value="'+sink_height+'" ></div>\n' +
+                '   <div class="col-6"><label for="faucetEdit"> The faucet control is 17” or less from the front edge of the sink counter: </label><input class="form-control" id="faucetEdit" value="'+faucet+'"></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="faucet_depthEdit"> Faucet depth (inches): </label> <input class="form-control" id="faucet_depthEdit" value="'+faucet_depth+'" ></div>\n' +
+                '   <div class="col-6"><label for="faucet_auto_fistEdit"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <input class="form-control" id="faucet_auto_fistEdit" value="'+faucet_auto_fist+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="sink_clearanceEdit"> There is room for a wheelchair to roll under the sink ​: </label><input class="form-control" id="sink_clearanceEdit" value="'+sink_clearance+'"></div>\n' +
+                '   <div class="col-6"><label for="sink_clearance_heightEdit"> Measurement (inches): </label> <input class="form-control" id="sink_clearance_heightEdit" value="'+sink_clearance_height+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="sink_pipesEdit"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" id="sink_pipesEdit" value="'+sink_pipes+'" ></div>\n' +
+                '   <div class="col-6"><label for="soap_dispenserEdit"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" id="soap_dispenserEdit" value="'+soap_dispenser+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="dry_fistEdit">  Soap dispenser height (inches): </label> <input class="form-control" id="dry_fistEdit" value="'+dry_fist+'" ></div>\n' +
+                '   <div class="col-6"><label for="dry_fist_typeEdit"> Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" id="dry_fist_typeEdit" value="'+dry_fist_type+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="dry_controlsEdit"> Operation type - automatic/closed fist: </label> <input class="form-control" id="dry_controlsEdit" value="'+dry_controls+'" ></div>\n' +
+                '   <div class="col-6"><label for="dry_control_heightEdit"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" id="dry_control_heightEdit" value="'+dry_control_height+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="mirrorEdit"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <input class="form-control" id="mirrorEdit" value="'+mirror+'" ></div>\n' +
+                '   <div class="col-6"><label for="mirror_heightEdit"> Mirror height (inches): </label><input class="form-control" id="mirror_heightEdit" value="'+mirror_height+'"></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="shelvesEdit"> If there are shelves to set items, they are 48” or less from the floor: </label><input class="form-control" id="shelvesEdit" value="'+shelves+'"></div>\n' +
+                '   <div class="col-6"><label for="shelf_heightEdit"> Shelf height (inches): </label> <input class="form-control" id="shelf_heightEdit" value="'+shelf_height+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-6"><label for="trash_receptaclesEdit"> Trash receptacles are positioned so they do not block the route to the door​: </label> <input class="form-control" id="trash_receptaclesEdit" value="'+trash_receptacles+'" ></div>\n' +
+                '   <div class="col-6"><label for="hygiene_seat_coverEdit"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <input class="form-control" id="hygiene_seat_coverEdit" value="'+hygiene_seat_cover+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '   <div class="col-4"><label for="hygiene_cover_heightEdit"> Height (inches): </label> <input class="form-control" id="hygiene_cover_heightEdit" value="'+hygiene_cover_height+'" ></div>\n' +
+                '   <div class="col-4"><label for="lightingRestroomInfoEdit"> Lighting is adequate: </label><input class="form-control" id="lightingRestroomInfoEdit" value="'+lighting+'" ></div>\n' +
+                '   <div class="col-4"><label for="lighting_typeRestroomInfoEdit"> Lighting level day/night: </label><input class="form-control" id="lighting_typeRestroomInfoEdit" value="'+lighting_type+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '    <div class="col-12"><label for="commentRestroomInfoEdit"> Additional notes: </label><input class="form-control" id="commentRestroomInfoEdit" value="'+comment+'" ></div>\n' +
+                '</div>\n' +
+                '<div class="table-row-color">\n' +
+                '    <div class="col-12"><label for="recommendationsRestroomInfoEdit"> Recommendations: </label><input class="form-control" id="recommendationsRestroomInfoEdit" value="'+recommendations+'" ></div>\n' +
+                '   <input type="hidden" class="form-control" id="rest_info_idEdit" value="'+rest_info_id+'">\n'+
+                '   <input type="hidden" class="form-control" id="rest_idEdit" value="'+rest_id+'">\n'+
                 '</div>'
             );
 
-            $("#sta-footer").html(
+
+            // $("#sta-body").html(
+            //     '<div class="table-row-color">\n' +
+            //     '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
+            //     '</div>\n'+
+            //     '<div class="table-row-color">\n' +
+            //     '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
+            //     '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
+            //     '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
+            //     '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stop+'"></div>\n' +
+            //     '   <input type="hidden" class="form-control" id="sta_route_idEdit" value="'+sta_route_id+'">\n'+
+            //     '   <input type="hidden" class="form-control" id="sta_bus_idEdit" value="'+sta_bus_id+'">\n'+
+            //     '</div>'
+            // );
+            //
+            // $("#sta-footer").html(
+            //     '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
+            //     '&nbsp;\n' +
+            //     '<button type="button" class="btn btn-success" onclick="updateSTARoute()"><i class="fas fa-save"></i>&nbsp; Save</button>'
+            // );
+            //
+            // $("#sta-route-modal").modal('toggle');
+
+            $("#restroom-footer").html(
                 '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
                 '&nbsp;\n' +
                 '<button type="button" class="btn btn-success" onclick="updateRestroomInfo()"><i class="fas fa-save"></i>&nbsp; Save</button>'
@@ -2704,40 +3078,155 @@ function editRestroomInfo(index) {
 }
 
 function updateRestroomInfo() {
-    $("#restoorm-modal").modal('toggle');
+    $("#restroom-modal").modal('toggle');
 
-    var sta_route_id = document.getElementById("sta_route_idEdit").value;
-    var route_num = document.getElementById("route_numEdit").value;
-    var north_bound_stop = document.getElementById("north_bound_stopEdit").value;
-    var south_bound_stop = document.getElementById("south_bound_stopEdit").value;
-    var east_bound_stop = document.getElementById("east_bound_stopEdit").value;
-    var west_bound_stop = document.getElementById("west_bound_stopEdit").value;
-    var sta_bus_id = document.getElementById("sta_bus_idEdit").value;
+    var rest_info_id = document.getElementById("rest_info_idEdit").value;
+    var restroom_desc = document.getElementById("restroom_descEdit").value;
+    var easy_open = document.getElementById("easy_openEdit").value;
+    var lbs_force = document.getElementById("lbs_forceEdit").value;
+    var clearance = document.getElementById("clearanceEdit").value;
+    var opening = document.getElementById("openingEdit").value;
+    var opens_out = document.getElementById("opens_outEdit").value;
+    var use_fist = document.getElementById("use_fistEdit").value;
+    var can_turn_around = document.getElementById("can_turn_aroundEdit").value;
+    var turn_width = document.getElementById("turn_widthEdit").value;
+    var turn_depth = document.getElementById("turn_depthEdit").value;
+    var close_chair_inside = document.getElementById("close_chair_insideEdit").value;
+    var grab_bars = document.getElementById("grab_barsEdit").value;
+    var seat_height_req = document.getElementById("seat_height_reqEdit").value;
+    var seat_height = document.getElementById("seat_heightEdit").value;
+    var flush_auto_fist = document.getElementById("flush_auto_fistEdit").value;
+    var ambulatory_accessible = document.getElementById("ambulatory_accessibleEdit").value;
+    var bar_height = document.getElementById("bar_heightEdit").value;
+    var coat_hook = document.getElementById("coat_hookEdit").value;
+    var hook_height = document.getElementById("hook_heightEdit").value;
+    var sink = document.getElementById("sinkEdit").value;
+    var sink_height = document.getElementById("sink_heightEdit").value;
+    var faucet = document.getElementById("faucetEdit").value;
+    var faucet_depth = document.getElementById("faucet_depthEdit").value;
+    var faucet_auto_fist = document.getElementById("faucet_auto_fistEdit").value;
+    var sink_clearance = document.getElementById("sink_clearanceEdit").value;
+    var sink_clearance_height = document.getElementById("sink_clearance_heightEdit").value;
+    var sink_pipes = document.getElementById("sink_pipesEdit").value;
+    var soap_dispenser = document.getElementById("soap_dispenserEdit").value;
+    var dry_fist = document.getElementById("dry_fistEdit").value;
+    var dry_fist_type = document.getElementById("dry_fist_typeEdit").value;
+    var dry_controls = document.getElementById("dry_controlsEdit").value;
+    var dry_control_height = document.getElementById("dry_control_heightEdit").value;
+    var mirror = document.getElementById("mirrorEdit").value;
+    var mirror_height = document.getElementById("mirror_heightEdit").value;
+    var shelves = document.getElementById("shelvesEdit").value;
+    var shelf_height = document.getElementById("shelf_heightEdit").value;
+    var trash_receptacles = document.getElementById("trash_receptaclesEdit").value;
+    var hygiene_seat_cover = document.getElementById("hygiene_seat_coverEdit").value;
+    var hygiene_cover_height = document.getElementById("hygiene_cover_heightEdit").value;
+    var lighting = document.getElementById("lightingRestroomInfoEdit").value;
+    var lighting_type = document.getElementById("lighting_typeRestroomInfoEdit").value;
+    var comment = document.getElementById("commentRestroomInfoEdit").value;
+    var recommendations = document.getElementById("recommendationsRestroomInfoEdit").value;
+    var rest_id = document.getElementById("rest_idEdit").value;
 
     console.log("update.js:");
+    console.log("rest_id: " + rest_id);
 
     $.ajax({
         accepts: "application/json",
         method: "PUT",
         contentType: "application/json; charset=utf-8",
-        url: "put/sta_route/sta_bus/" + sta_bus_id,
+        url: "put/restroom_info/rest/" + rest_id,
         data: JSON.stringify({
-            "sta_route_id" : sta_route_id,
-            "route_num" : route_num,
-            "north_bound_stop" : north_bound_stop,
-            "south_bound_stop" : south_bound_stop,
-            "east_bound_stop" : east_bound_stop,
-            "west_bound_stop" : west_bound_stop
+            "rest_info_id" : rest_info_id,
+            "restroom_desc" : restroom_desc,
+            "easy_open" : easy_open,
+            "lbs_force" : lbs_force,
+            "clearance" : clearance,
+            "opening" : opening,
+            "opens_out" : opens_out,
+            "use_fist" : use_fist,
+            "can_turn_around" : can_turn_around,
+            "turn_width" : turn_width,
+            "turn_depth" : turn_depth,
+            "close_chair_inside" : close_chair_inside,
+            "grab_bars" : grab_bars,
+            "seat_height_req" : seat_height_req,
+            "seat_height" : seat_height,
+            "flush_auto_fist" : flush_auto_fist,
+            "ambulatory_accessible" : ambulatory_accessible,
+            "bar_height" : bar_height,
+            "coat_hook" : coat_hook,
+            "hook_height" : hook_height,
+            "sink" : sink,
+            "sink_height" : sink_height,
+            "faucet" : faucet,
+            "faucet_depth" : faucet_depth,
+            "faucet_auto_fist" : faucet_auto_fist,
+            "sink_clearance" : sink_clearance,
+            "sink_clearance_height" : sink_clearance_height,
+            "sink_pipes" : sink_pipes,
+            "soap_dispenser" : soap_dispenser,
+            "dry_fist" : dry_fist,
+            "dry_fist_type" : dry_fist_type,
+            "dry_controls" : dry_controls,
+            "dry_control_height" : dry_control_height,
+            "mirror" : mirror,
+            "mirror_height" : mirror_height,
+            "shelves" : shelves,
+            "shelf_height" : shelf_height,
+            "trash_receptacles" : trash_receptacles,
+            "hygiene_seat_cover" : hygiene_seat_cover,
+            "hygiene_cover_height" : hygiene_cover_height,
+            "lighting" : lighting,
+            "lighting_type" : lighting_type,
+            "comment" : comment,
+            "recommendations" : recommendations
         }),
         success: function () {
-            $("#success-body").html('STA Route Updated');
+            $("#success-body").html('Restroom Information Updated');
             $("#success").modal('toggle');
 
-            document.getElementById("route_num_" + INDEX).value = route_num;
-            document.getElementById("north_bound_stop_" + INDEX).value = north_bound_stop;
-            document.getElementById("south_bound_stop_" + INDEX).value = south_bound_stop;
-            document.getElementById("east_bound_stop_" + INDEX).value = east_bound_stop;
-            document.getElementById("west_bound_stop_" + INDEX).value = west_bound_stop;
+            document.getElementById("restroom_desc_" + INDEX).value = restroom_desc;
+            document.getElementById("easy_open_" + INDEX).value = easy_open;
+            document.getElementById("lbs_force_" + INDEX).value = lbs_force;
+            document.getElementById("clearance_" + INDEX).value = clearance;
+            document.getElementById("opening_" + INDEX).value = opening;
+            document.getElementById("opens_out_" + INDEX).value = opens_out;
+            document.getElementById("use_fist_" + INDEX).value = use_fist;
+            document.getElementById("can_turn_around_" + INDEX).value = can_turn_around;
+            document.getElementById("turn_width_" + INDEX).value = turn_width;
+            document.getElementById("turn_depth_" + INDEX).value = turn_depth;
+            document.getElementById("close_chair_inside_" + INDEX).value = close_chair_inside;
+            document.getElementById("grab_bars_" + INDEX).value = grab_bars;
+            document.getElementById("seat_height_req_" + INDEX).value = seat_height_req;
+            document.getElementById("seat_height_" + INDEX).value = seat_height;
+            document.getElementById("flush_auto_fist_" + INDEX).value = flush_auto_fist;
+            document.getElementById("ambulatory_accessible_" + INDEX).value = ambulatory_accessible;
+            document.getElementById("bar_height_" + INDEX).value = bar_height;
+            document.getElementById("coat_hook_" + INDEX).value = coat_hook;
+            document.getElementById("hook_height_" + INDEX).value = hook_height;
+            document.getElementById("sink_" + INDEX).value = sink;
+            document.getElementById("sink_height_" + INDEX).value = sink_height;
+            document.getElementById("faucet_" + INDEX).value = faucet;
+            document.getElementById("faucet_depth_" + INDEX).value = faucet_depth;
+            document.getElementById("faucet_auto_fist_" + INDEX).value = faucet_auto_fist;
+            document.getElementById("sink_clearance_" + INDEX).value = sink_clearance;
+            document.getElementById("sink_clearance_height_" + INDEX).value = sink_clearance_height;
+            document.getElementById("sink_pipes_" + INDEX).value = sink_pipes;
+            document.getElementById("soap_dispenser_" + INDEX).value = soap_dispenser;
+            document.getElementById("dry_fist_" + INDEX).value = dry_fist;
+            document.getElementById("dry_fist_type_" + INDEX).value = dry_fist_type;
+            document.getElementById("dry_controls_" + INDEX).value = dry_controls;
+            document.getElementById("dry_control_height_" + INDEX).value = dry_control_height;
+            document.getElementById("mirror_" + INDEX).value = mirror;
+            document.getElementById("mirror_height_" + INDEX).value = mirror_height;
+            document.getElementById("shelves_" + INDEX).value = shelves;
+            document.getElementById("shelf_height_" + INDEX).value = shelf_height;
+            document.getElementById("trash_receptacles_" + INDEX).value = trash_receptacles;
+            document.getElementById("hygiene_seat_cover_" + INDEX).value = hygiene_seat_cover;
+            document.getElementById("hygiene_cover_height_" + INDEX).value = hygiene_cover_height;
+            document.getElementById("lightingRestroomInfo_" + INDEX).value = lighting;
+            document.getElementById("lighting_typeRestroomInfo_" + INDEX).value = lighting_type;
+            document.getElementById("commentRestroomInfo_" + INDEX).value = comment;
+            document.getElementById("recommendationsRestroomInfo_" + INDEX).value = recommendations;
         },
         error: function(data) {
             $("#alert-body").html(JSON.stringify(data));
