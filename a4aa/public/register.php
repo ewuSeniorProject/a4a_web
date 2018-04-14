@@ -115,9 +115,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 $_SESSION['role'] = $role;
-                $success = "Success! Redirecting to login page where you will log in.";
+                $success = "Success! Redirecting you to the home page.";
                 // Redirect to login page
-                header( "Refresh:5; url=login.php", true, 303);
+                header( "Refresh:3; url=login.php", true, 303);
             } else{
                 $message = "Something went wrong. Please try again later.";
             }
