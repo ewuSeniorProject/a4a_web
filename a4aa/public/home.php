@@ -3,7 +3,7 @@
 session_start();
 
 // If session variable is not set it will redirect to login page
-if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
+if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
     header("location: login.php");
     exit;
 }
@@ -53,14 +53,14 @@ if(!isset($_SESSION['user_name']) || empty($_SESSION['user_name'])){
                     <h1>Access 4 All Spokane</h1>
                 </a>
             </span>
-            <a class="nav-link white-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
+            <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
                 <i class="fas fa-bars fa-lg"></i>
-            </a>
+            </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="logout.php">Log Out</a>
+                <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
             </div>
         </nav>
         <div class="page page-row">

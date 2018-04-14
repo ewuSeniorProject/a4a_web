@@ -4,8 +4,8 @@ body {
     background-color: #F1F1F1;
 }
 hr {
-    border-width: 2px;
-    border-style: outset;
+    border-width: 6px;
+    border-style: groove;
 }
 
 h1 {
@@ -70,6 +70,13 @@ h6 {
 .error {
     color: #ff0000;
 }
+.success {
+    color: darkgreen;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+}
 
 a:hover {
     text-decoration: none;
@@ -87,7 +94,7 @@ a:hover {
     margin: 0;
     width: 100%;
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     top: 0;
     left: 0;
     background-color: #4482b6;
@@ -103,7 +110,7 @@ a:hover {
     margin: 0;
     width: 100%;
     position: fixed;
-    z-index: 1;
+    z-index: 75;
     top: 0;
     left: 0;
     background-color: #4482b6;
@@ -130,6 +137,32 @@ a:hover {
     position: relative;
     top: 5.24em;
     left: 15em;
+}
+
+.login {
+    margin: 1em;
+    padding: 0;
+    position: absolute;
+    top: 8em;
+    left: 5em;
+}
+
+.register {
+    margin: 1em;
+    padding: 0;
+    width: 70em;
+    position: absolute;
+    top: 8em;
+    left: 5em;
+}
+
+.register-row {
+    padding: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-content: flex-start;
 }
 
 .subtitle {
@@ -193,6 +226,7 @@ a:hover {
     flex-grow: 0;
     align-content: space-around;
     align-self: flex-start;
+    box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.4);
 }
 
 .card-box {
@@ -204,6 +238,11 @@ a:hover {
     flex-grow: 0;
     align-content: space-between;
     align-self: flex-start;
+}
+
+.card-fx {
+    border-radius: 5px;
+    box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.4);
 }
 
 .box-blank {
@@ -320,7 +359,7 @@ a:hover {
     margin: 0;
     padding: 0;
     position: fixed;
-    z-index: 2;
+    z-index: 85;
     top: 5em;
     left: 0;
     bottom: 0;
