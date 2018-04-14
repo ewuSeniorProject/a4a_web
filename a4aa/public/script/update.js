@@ -1593,6 +1593,10 @@ $(document).ready(function () {
     // console.log("REST_ID: " + REST_ID);
 });
 
+function logout() {
+    localStorage.clear();
+    location.href = "logout.php";
+}
 
 // value is EST_ID
 function getParkId(value) {
@@ -1741,7 +1745,7 @@ function updateEstablishment() {
     var config_comment = document.getElementById("commentEstablishment").value;
     // var arrdata = [EST_ID, name, website, CAT_ID, subtype, CONFIG_ID, street, city, state, zip, phone, phone_tty, contact_fname, contact_lname, contact_title, contact_email, USER_ID, date, config_comment];
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -1783,7 +1787,7 @@ function updateEstablishment() {
 function editCategory() {
     var cat_id = document.getElementById("cat_id").value;
 
-    console.log("cat_id: " + cat_id);
+    // console.log("cat_id: " + cat_id);
 
     $.ajax({
         async: false,
@@ -1793,7 +1797,7 @@ function editCategory() {
         contentType: "application/json; charset=utf-8",
         url: "category/",
         success: function (data) {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             var category_select = "";
 
             category_select += '<div class="table-row-color">\n' +
@@ -1837,7 +1841,7 @@ function updateCategory() {
     var cat_id = temp.split("_")[0];
     var cat_name = temp.split("_")[1];
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -1864,7 +1868,7 @@ function updateCategory() {
 function editConfig() {
     var config_id = document.getElementById("config_id").value;
 
-    console.log("config_id: " + config_id);
+    // console.log("config_id: " + config_id);
 
     $.ajax({
         async: false,
@@ -1874,7 +1878,7 @@ function editConfig() {
         contentType: "application/json; charset=utf-8",
         url: "configuration/",
         success: function (data) {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             var config_select = "";
 
             config_select += '<div class="table-row-color">\n' +
@@ -1919,7 +1923,7 @@ function updateConfig() {
     var config_id = temp.split("_")[0];
     var config_name = temp.split("_")[1];
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -1946,7 +1950,7 @@ function updateConfig() {
 function editUser() {
     var user_id = document.getElementById("user_id").value;
 
-    console.log("user_id: " + user_id);
+    // console.log("user_id: " + user_id);
 
     $.ajax({
         async: false,
@@ -1956,7 +1960,7 @@ function editUser() {
         contentType: "application/json; charset=utf-8",
         url: "user/",
         success: function (data) {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             var user_select = "";
 
             user_select += '<div class="table-row-color">\n' +
@@ -2000,7 +2004,7 @@ function updateUser() {
     var user_id = temp.split("_")[0];
     var user_name = temp.split("_")[1];
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2039,7 +2043,7 @@ function updateParking() {
     var comment = document.getElementById("comment").value;
     var recommendations = document.getElementById("recommendations").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2086,7 +2090,7 @@ function updateRouteFromParking() {
     var recommendations = document.getElementById("recommendationsRouteFromParking").value;
     var park_id = document.getElementById("route_park_id").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2181,7 +2185,7 @@ function updateSTABus() {
     var recommendations = document.getElementById("recommendationsStaBus").value;
     var park_id = document.getElementById("sta_park_id").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2215,12 +2219,12 @@ function updateSTABus() {
 }
 
 function editSTARoute(index) {
-    console.log("index: " + index);
+    // console.log("index: " + index);
     INDEX = index;
     var route_id = document.getElementById("sta_route_id_"+index).value;
 
-    console.log("route_id: " + route_id);
-    console.log("INDEX: " + INDEX);
+    // console.log("route_id: " + route_id);
+    // console.log("INDEX: " + INDEX);
 
     $.ajax({
         async: false,
@@ -2230,7 +2234,7 @@ function editSTARoute(index) {
         contentType: "application/json; charset=utf-8",
         url: "get/sta_route/" + route_id,
         success: function (data) {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             var sta_route_id = data[0].sta_route_id;
             var route_num = data[0].route_num;
             var north_bound_stop = data[0].north_bound_stop;
@@ -2239,13 +2243,13 @@ function editSTARoute(index) {
             var west_bound_stop = data[0].west_bound_stop;
             var sta_bus_id = data[0].sta_bus_id;
 
-            console.log("sta_route_id: " + sta_route_id);
-            console.log("route_num: " + route_num);
-            console.log("north_bound_stop: " + north_bound_stop);
-            console.log("south_bound_stop: " + south_bound_stop);
-            console.log("east_bound_stop: " + east_bound_stop);
-            console.log("west_bound_stop: " + west_bound_stop);
-            console.log("sta_bus_id: " + sta_bus_id);
+            // console.log("sta_route_id: " + sta_route_id);
+            // console.log("route_num: " + route_num);
+            // console.log("north_bound_stop: " + north_bound_stop);
+            // console.log("south_bound_stop: " + south_bound_stop);
+            // console.log("east_bound_stop: " + east_bound_stop);
+            // console.log("west_bound_stop: " + west_bound_stop);
+            // console.log("sta_bus_id: " + sta_bus_id);
 
 
             $("#sta-body").html(
@@ -2288,7 +2292,7 @@ function updateSTARoute() {
     var west_bound_stop = document.getElementById("west_bound_stopEdit").value;
     var sta_bus_id = document.getElementById("sta_bus_idEdit").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2337,7 +2341,7 @@ function updateExteriorPathways() {
     var recommendations = document.getElementById("recommendationsExteriorPathway").value;
     var est_id = document.getElementById("est_idExteriorPathway").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2389,7 +2393,7 @@ function updateExteriorStairs() {
     var recommendations = document.getElementById("recommendationsExteriorStairs").value;
     var est_id = document.getElementById("est_idExteriorStairs").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2447,7 +2451,7 @@ function updateExteriorRamps() {
     var recommendations = document.getElementById("recommendationsExteriorRamps").value;
     var est_id = document.getElementById("est_idExteriorRamps").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2513,7 +2517,7 @@ function updateMainEntrance() {
     var recommendations = document.getElementById("recommendationsMainEntrance").value;
     var est_id = document.getElementById("est_idMainEntrance").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2579,7 +2583,7 @@ function updateInterior() {
     var recommendations = document.getElementById("recommendationsInterior").value;
     var est_id = document.getElementById("est_idInterior").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2638,7 +2642,7 @@ function updateElevator() {
     var recommendations = document.getElementById("recommendationsElevator").value;
     var est_id = document.getElementById("est_idElevator").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2690,7 +2694,7 @@ function updateSignage() {
     var recommendations = document.getElementById("recommendationsSignage").value;
     var est_id = document.getElementById("est_idSignage").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2740,7 +2744,7 @@ function updateEmergencyPreparedness() {
     var recommendations = document.getElementById("recommendationsEmergency_Preparedness").value;
     var est_id = document.getElementById("est_idEmergency_Preparedness").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2799,7 +2803,7 @@ function updateSeating() {
     var recommendations = document.getElementById("recommendationsSeating").value;
     var est_id = document.getElementById("est_idSeating").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2854,7 +2858,7 @@ function updateRestroom() {
     var recommendations = document.getElementById("recommendationsRestroom").value;
     var est_id = document.getElementById("est_idSeating").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2885,12 +2889,12 @@ function updateRestroom() {
 }
 
 function editRestroomInfo(index) {
-    console.log("index: " + index);
+    // console.log("index: " + index);
     INDEX = index;
     var rest_info_id = document.getElementById("rest_info_id_"+index).value;
 
-    console.log("rest_info_id: " + rest_info_id);
-    console.log("INDEX: " + INDEX);
+    // console.log("rest_info_id: " + rest_info_id);
+    // console.log("INDEX: " + INDEX);
 
     $.ajax({
         async: false,
@@ -2900,7 +2904,7 @@ function editRestroomInfo(index) {
         contentType: "application/json; charset=utf-8",
         url: "get/restroom_info/" + rest_info_id,
         success: function (data) {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
             var rest_info_id = data[0].rest_info_id;
             var restroom_desc = data[0].restroom_desc;
             var easy_open = data[0].easy_open;
@@ -3126,8 +3130,8 @@ function updateRestroomInfo() {
     var recommendations = document.getElementById("recommendationsRestroomInfoEdit").value;
     var rest_id = document.getElementById("rest_idEdit").value;
 
-    console.log("update.js:");
-    console.log("rest_id: " + rest_id);
+    // console.log("update.js:");
+    // console.log("rest_id: " + rest_id);
 
     $.ajax({
         accepts: "application/json",
@@ -3279,7 +3283,7 @@ function updateCommunication() {
     var recommendations = document.getElementById("recommendationsCommunication").value;
     var est_id = document.getElementById("est_idSeating").value;
 
-    console.log("update.js:");
+    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -3352,7 +3356,7 @@ function removeRequest(uri, record) {
         url:uri,
         data:{data:record}
     }).done(function (data) {
-        //console.log(data);
+        // console.log(data);
     }).fail(function (data) {
         console.error(data);
     });
