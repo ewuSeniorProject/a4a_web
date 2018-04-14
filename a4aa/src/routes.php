@@ -6,7 +6,7 @@ use Slim\Http\Response;
 // Routes
 
 // home page
-$app->get('/', function (Request $request, Response $response, array $args) {
+$app->get('/', function (Request $request, Response $response, array $args){
     $url = 'home.php';
     return $response->withRedirect($url, 301);
 })->setname("root");
@@ -16,8 +16,16 @@ $app->get('/', function (Request $request, Response $response, array $args) {
  * ESTABLISHMENT ROUTES
  */
 // get establishment data
-$app->get('/establishment/', function (Request $request, Response $response, array $args) {
-    
+$app->get('/establishment/', function (Request $request, Response $response, array $args){
+    // Initialize the session
+    session_start();
+
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
+
     $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -28,7 +36,14 @@ $app->get('/establishment/', function (Request $request, Response $response, arr
 
 // get establishment data by id
 $app->get('/get/establishment/[{id}]', function (Request $request, Response $response, array $args){
-    
+    // Initialize the session
+    session_start();
+
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
     $sth->execute();
@@ -40,7 +55,14 @@ $app->get('/get/establishment/[{id}]', function (Request $request, Response $res
 
 // delete establishment data by id
 $app->delete('/delete/establishment/[{id}]', function (Request $request, Response $response, array $args){
-    
+    // Initialize the session
+    session_start();
+
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Establishment WHERE est_id=$id");
     $sth->execute();
@@ -50,18 +72,32 @@ $app->delete('/delete/establishment/[{id}]', function (Request $request, Respons
 });
 
 // post establishment data
-$app->post('/post/establishment/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/establishment/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     //    $sth = $this->db->prepare("INSERT INTO Establishment );
-//    $sth->execute();
+    //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
 // put establishment data
-$app->put('/put/establishment/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/establishment/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Establishment );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -70,8 +106,15 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
 });
 
 // put category data by cat id
-$app->put('/put/establishment/category/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/establishment/category/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -87,8 +130,15 @@ $app->put('/put/establishment/category/est/[{id}]', function (Request $request, 
 });
 
 // put config data by config id
-$app->put('/put/establishment/config/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/establishment/config/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -104,8 +154,15 @@ $app->put('/put/establishment/config/est/[{id}]', function (Request $request, Re
 });
 
 // put user data by user id
-$app->put('/put/establishment/user/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/establishment/user/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -121,8 +178,15 @@ $app->put('/put/establishment/user/est/[{id}]', function (Request $request, Resp
 });
 
 // put establishment data by est id
-$app->put('/put/establishment/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/establishment/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -144,8 +208,6 @@ $app->put('/put/establishment/est/[{id}]', function (Request $request, Response 
     $user_id = $data["user_id"];
     $date = $data["date"];
     $config_comment = $data["config_comment"];
-
-//    $res = array("name" => $name, "website" => $website, "cat_id" => $cat_id, "subtype" => $subtype, "config_id" => $config_id, "street" => $street, "city" => $city, "state" => $state, "zip" => $zip, "phone" => $phone, "phone_tty" => $phone_tty, "contact_fname" => $contact_fname, "contact_lname" => $contact_lname, "contact_title" => $contact_title, "contact_email" => $contact_email, "user_id" => $user_id, "date" => $date, "config_comment" => $config_comment);
 
     $sth = $this->db->prepare("UPDATE Establishment SET  name = :Name,
                                                          website = :Website,
@@ -194,8 +256,15 @@ $app->put('/put/establishment/est/[{id}]', function (Request $request, Response 
  * CATEGORY ROUTES
  */
 // get all category
-$app->get('/category/', function (Request $request, Response $response, array $args){
-    
+$app->get('/category/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Category");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -205,8 +274,15 @@ $app->get('/category/', function (Request $request, Response $response, array $a
 });
 
 // get category data by id
-$app->get('/get/category/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/category/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Category WHERE cat_id=$id");
     $sth->execute();
@@ -217,8 +293,15 @@ $app->get('/get/category/[{id}]', function (Request $request, Response $response
 });
 
 // delete category data by id
-$app->delete('/delete/category/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/category/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Category WHERE cat_id=$id");
     $sth->execute();
@@ -228,8 +311,15 @@ $app->delete('/delete/category/[{id}]', function (Request $request, Response $re
 });
 
 // post category data
-$app->post('/post/category/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/category/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -238,8 +328,15 @@ $app->post('/post/category/', function (Request $request, Response $response, ar
 });
 
 // put category data
-$app->put('/put/category/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/category/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -251,8 +348,15 @@ $app->put('/put/category/', function (Request $request, Response $response, arra
  * CONFIGURATION ROUTES
  */
 // get all configuration
-$app->get('/configuration/', function (Request $request, Response $response, array $args){
-    
+$app->get('/configuration/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Configuration");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -262,8 +366,15 @@ $app->get('/configuration/', function (Request $request, Response $response, arr
 });
 
 // get configuration data by id
-$app->get('/get/configuration/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/configuration/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Configuration WHERE config_id=$id");
     $sth->execute();
@@ -274,8 +385,15 @@ $app->get('/get/configuration/[{id}]', function (Request $request, Response $res
 });
 
 // delete configuration data by id
-$app->delete('/delete/configuration/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/configuration/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Configuration WHERE config_id=$id");
     $sth->execute();
@@ -285,8 +403,15 @@ $app->delete('/delete/configuration/[{id}]', function (Request $request, Respons
 });
 
 // post configuration data
-$app->post('/post/configuration/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/configuration/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -295,8 +420,15 @@ $app->post('/post/configuration/', function (Request $request, Response $respons
 });
 
 // put configuration data
-$app->put('/put/configuration/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/configuration/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -308,8 +440,15 @@ $app->put('/put/configuration/', function (Request $request, Response $response,
  * USER ROUTES
  */
 // get all user
-$app->get('/user/', function (Request $request, Response $response, array $args){
-    
+$app->get('/user/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM User");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -319,8 +458,15 @@ $app->get('/user/', function (Request $request, Response $response, array $args)
 });
 
 // get user data by id
-$app->get('/get/user/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/user/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
     $sth->execute();
@@ -331,9 +477,17 @@ $app->get('/get/user/[{id}]', function (Request $request, Response $response, ar
 });
 
 // get user data by user name
-$app->get('/get/user/name/', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/user/name/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $data = $request->getParsedBody();
+    $id = $data["user_id"];
 
     $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
     $sth->execute();
@@ -344,8 +498,15 @@ $app->get('/get/user/name/', function (Request $request, Response $response, arr
 });
 
 // delete user data by id
-$app->delete('/delete/user/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/user/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM User WHERE user_id=$id");
     $sth->execute();
@@ -355,8 +516,15 @@ $app->delete('/delete/user/[{id}]', function (Request $request, Response $respon
 });
 
 // post user data
-$app->post('/post/user/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/user/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO User );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -365,8 +533,15 @@ $app->post('/post/user/', function (Request $request, Response $response, array 
 });
 
 // put user data
-$app->put('/put/user/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/user/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO User );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -378,8 +553,15 @@ $app->put('/put/user/', function (Request $request, Response $response, array $a
  * PARKING ROUTES
  */
 // get all parking
-$app->get('/parking/', function (Request $request, Response $response, array $args){
-    
+$app->get('/parking/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Parking");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -389,8 +571,15 @@ $app->get('/parking/', function (Request $request, Response $response, array $ar
 });
 
 // get parking data by parking id
-$app->get('/get/parking/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/parking/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Parking WHERE park_id=$id");
     $sth->execute();
@@ -401,8 +590,15 @@ $app->get('/get/parking/[{id}]', function (Request $request, Response $response,
 });
 
 // get parking data by establishment id
-$app->get('/get/parking/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/parking/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     if (($this->db->prepare("SELECT * FROM Parking WHERE est_id=$id")) == null) {
         $data = array('success' => false, 'message' => "No record associated with current establishment.");
@@ -422,8 +618,15 @@ $app->get('/get/parking/est/[{id}]', function (Request $request, Response $respo
 });
 
 // get parking id by establishment id
-$app->get('/get/park_id/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/park_id/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT park_id FROM Parking WHERE est_id=$id");
     $sth->execute();
@@ -435,8 +638,15 @@ $app->get('/get/park_id/est/[{id}]', function (Request $request, Response $respo
 });
 
 // delete parking data by id
-$app->delete('/delete/parking/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/parking/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE park_id=$id");
     $sth->execute();
@@ -446,8 +656,15 @@ $app->delete('/delete/parking/[{id}]', function (Request $request, Response $res
 });
 
 // delete parking data by establishment id
-$app->delete('/delete/parking/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/parking/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE est_id=$id");
     $sth->execute();
@@ -457,8 +674,15 @@ $app->delete('/delete/parking/est/[{id}]', function (Request $request, Response 
 });
 
 // post parking data
-$app->post('/post/parking/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/parking/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Parking );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -467,8 +691,15 @@ $app->post('/post/parking/', function (Request $request, Response $response, arr
 });
 
 // put parking data by est id
-$app->put('/put/parking/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/parking/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -520,8 +751,15 @@ $app->put('/put/parking/est/[{id}]', function (Request $request, Response $respo
  * ROUTE FROM PARKING ROUTES
  */
 // get all route_from_parking
-$app->get('/route_from_parking/', function (Request $request, Response $response, array $args){
-    
+$app->get('/route_from_parking/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -531,8 +769,15 @@ $app->get('/route_from_parking/', function (Request $request, Response $response
 });
 
 // get route_from_parking data by route_from_parking id
-$app->get('/get/route_from_parking/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/route_from_parking/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE route_park_id=$id");
     $sth->execute();
@@ -543,8 +788,15 @@ $app->get('/get/route_from_parking/[{id}]', function (Request $request, Response
 });
 
 // get route_from_parking data by parking id
-$app->get('/get/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE park_id=$id");
     $sth->execute();
@@ -555,8 +807,15 @@ $app->get('/get/route_from_parking/park/[{id}]', function (Request $request, Res
 });
 
 // delete route_from_parking data by id
-$app->delete('/delete/route_from_parking/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/route_from_parking/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE route_park_id=$id");
     $sth->execute();
@@ -566,8 +825,15 @@ $app->delete('/delete/route_from_parking/[{id}]', function (Request $request, Re
 });
 
 // delete route_from_parking data by parking id
-$app->delete('/delete/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE park_id=$id");
     $sth->execute();
@@ -577,8 +843,15 @@ $app->delete('/delete/route_from_parking/park/[{id}]', function (Request $reques
 });
 
 // post route_from_parking data
-$app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Route_From_Parking );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -587,8 +860,15 @@ $app->post('/post/route_from_parking/', function (Request $request, Response $re
 });
 
 // put route_from_parking data
-$app->put('/put/route_from_parking/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/route_from_parking/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Route_From_Parking );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -597,24 +877,18 @@ $app->put('/put/route_from_parking/', function (Request $request, Response $resp
 });
 
 // put route_from_parking data by park id
-$app->put('/put/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/route_from_parking/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-/**
-        "distance" : distance,
-        "min_width" : min_width,
-        "route_surface" : route_surface,
-        "route_curbs" : route_curbs,
-        "tactile_warning" : tactile_warning,
-        "covered" : covered,
-        "lighting" : lighting,
-        "lighting_option" : lighting_option,
-        "lighting_type" : lighting_type,
-        "comment" : comment,
-        "recommendations" : recommendations
-*/
     $route_park_id = $data["route_park_id"];
     $distance = $data["distance"];
     $min_width = $data["min_width"];
@@ -663,8 +937,15 @@ $app->put('/put/route_from_parking/park/[{id}]', function (Request $request, Res
  * PASSENGER LOADING ROUTES
  */
 // get all passenger_loading
-$app->get('/passenger_loading/', function (Request $request, Response $response, array $args){
-    
+$app->get('/passenger_loading/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -674,8 +955,15 @@ $app->get('/passenger_loading/', function (Request $request, Response $response,
 });
 
 // get passenger_loading data by passenger_loading id
-$app->get('/get/passenger_loading/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/passenger_loading/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE passenger_id=$id");
     $sth->execute();
@@ -686,8 +974,15 @@ $app->get('/get/passenger_loading/[{id}]', function (Request $request, Response 
 });
 
 // get passenger_loading data by parking id
-$app->get('/get/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE park_id=$id");
     $sth->execute();
@@ -698,8 +993,15 @@ $app->get('/get/passenger_loading/park/[{id}]', function (Request $request, Resp
 });
 
 // delete passenger_loading data by id
-$app->delete('/delete/passenger_loading/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/passenger_loading/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE passenger_id=$id");
     $sth->execute();
@@ -709,8 +1011,15 @@ $app->delete('/delete/passenger_loading/[{id}]', function (Request $request, Res
 });
 
 // delete passenger_loading data by parking id
-$app->delete('/delete/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE park_id=$id");
     $sth->execute();
@@ -720,8 +1029,15 @@ $app->delete('/delete/passenger_loading/park/[{id}]', function (Request $request
 });
 
 // post passenger_loading data
-$app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -730,8 +1046,15 @@ $app->post('/post/passenger_loading/', function (Request $request, Response $res
 });
 
 // put passenger_loading data
-$app->put('/put/passenger_loading/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/passenger_loading/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -740,25 +1063,18 @@ $app->put('/put/passenger_loading/', function (Request $request, Response $respo
 });
 
 // put passenger_loading data by park id
-$app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "passenger_id" : passenger_id,
-    "designated_zone" : designated_zone,
-    "distance" : distance,
-    "min_width" : min_width,
-    "passenger_surface" : passenger_surface,
-    "tactile_warning_strips" : tactile_warning_strips,
-    "covered" : covered,
-    "lighting" : lighting,
-    "lighting_option" : lighting_option,
-    "lighting_type" : lighting_type,
-    "comment" : comment,
-    "recommendations" : recommendations
-     */
     $passenger_id = $data["passenger_id"];
     $designated_zone= $data["designated_zone"];
     $distance = $data["distance"];
@@ -807,8 +1123,15 @@ $app->put('/put/passenger_loading/park/[{id}]', function (Request $request, Resp
  * STA BUS ROUTES
  */
 // get all sta_bus
-$app->get('/sta_bus/', function (Request $request, Response $response, array $args){
-    
+$app->get('/sta_bus/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM STA_Bus");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -818,8 +1141,15 @@ $app->get('/sta_bus/', function (Request $request, Response $response, array $ar
 });
 
 // get sta_bus data by sta_bus id
-$app->get('/get/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/sta_bus/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE sta_id=$id");
     $sth->execute();
@@ -830,8 +1160,15 @@ $app->get('/get/sta_bus/[{id}]', function (Request $request, Response $response,
 });
 
 // get sta_bus data by parking id
-$app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE park_id=$id");
     $sth->execute();
@@ -842,8 +1179,15 @@ $app->get('/get/sta_bus/park/[{id}]', function (Request $request, Response $resp
 });
 
 // get sta_bus id by parking id
-$app->get('/get/sta_bus_id/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/sta_bus_id/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT sta_id FROM STA_Bus WHERE park_id=$id");
     $sth->execute();
@@ -854,8 +1198,15 @@ $app->get('/get/sta_bus_id/park/[{id}]', function (Request $request, Response $r
 });
 
 // delete sta_bus data by  id
-$app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE sta_id=$id");
     $sth->execute();
@@ -865,8 +1216,15 @@ $app->delete('/delete/sta_bus/[{id}]', function (Request $request, Response $res
 });
 
 // delete sta_bus data by parking id
-$app->delete('/delete/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE park_id=$id");
     $sth->execute();
@@ -876,8 +1234,15 @@ $app->delete('/delete/sta_bus/park/[{id}]', function (Request $request, Response
 });
 
 // post sta_bus data
-$app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -886,8 +1251,15 @@ $app->post('/post/sta_bus/', function (Request $request, Response $response, arr
 });
 
 // put sta_bus data
-$app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -896,26 +1268,18 @@ $app->put('/put/sta_bus/', function (Request $request, Response $response, array
 });
 
 // put sta_bus data by park id
-$app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "sta_id" : sta_id,
-    "sta_service_area" : sta_service_area,
-    "distance" : distance,
-    "min_width" : min_width,
-    "route_surface" : route_surface,
-    "tactile_warning_strips" : tactile_warning_strips,
-    "curb_cuts" : curb_cuts,
-    "lighting" : lighting,
-    "lighting_option" : lighting_option,
-    "lighting_type" : lighting_type,
-    "shelter_bench" : shelter_bench,
-    "comment" : comment,
-    "recommendations" : recommendations
-     */
     $sta_id = $data["sta_id"];
     $sta_service_area = $data["sta_service_area"];
     $distance = $data["distance"];
@@ -967,8 +1331,15 @@ $app->put('/put/sta_bus/park/[{id}]', function (Request $request, Response $resp
  * STA ROUTE ROUTES
  */
 // get all sta_route
-$app->get('/sta_route/', function (Request $request, Response $response, array $args){
-    
+$app->get('/sta_route/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM STA_Route");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -978,8 +1349,15 @@ $app->get('/sta_route/', function (Request $request, Response $response, array $
 });
 
 // get all sta_route data id
-$app->get('/get/sta_route/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/sta_route/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$id");
     $sth->execute();
@@ -990,8 +1368,15 @@ $app->get('/get/sta_route/[{id}]', function (Request $request, Response $respons
 });
 
 // get all sta_route data by sta_bus id
-$app->get('/get/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
 
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_bus_id=$id");
@@ -1003,8 +1388,15 @@ $app->get('/get/sta_route/sta_bus/[{id}]', function (Request $request, Response 
 });
 
 // get single sta_route record by sta_route id and sta_bus id
-$app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
     $sta_route_id = $data["sta_route_id"];
@@ -1018,8 +1410,15 @@ $app->get('/get/sta_route/single/sta_bus/[{id}]', function (Request $request, Re
 });
 
 // delete sta_route data by id
-$app->delete('/delete/sta_route/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/sta_route/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_route_id=$id");
     $sth->execute();
@@ -1029,8 +1428,15 @@ $app->delete('/delete/sta_route/[{id}]', function (Request $request, Response $r
 });
 
 // delete sta_route data by sta_bus id
-$app->delete('/delete/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_bus_id=$id");
     $sth->execute();
@@ -1040,8 +1446,15 @@ $app->delete('/delete/sta_route/sta_bus/[{id}]', function (Request $request, Res
 });
 
 // post sta_route data
-$app->post('/post/sta_route/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/sta_route/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1050,8 +1463,15 @@ $app->post('/post/sta_route/', function (Request $request, Response $response, a
 });
 
 // put sta_route data
-$app->put('/put/sta_route/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/sta_route/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1060,19 +1480,18 @@ $app->put('/put/sta_route/', function (Request $request, Response $response, arr
 });
 
 // put sta_route data by sta_bus id
-$app->put('/put/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/sta_route/sta_bus/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "sta_route_id" : sta_route_id,
-    "route_num" : route_num,
-    "north_bound_stop" : north_bound_stop,
-    "south_bound_stop" : south_bound_stop,
-    "east_bound_stop" : east_bound_stop,
-    "west_bound_stop" : west_bound_stop
-     */
     $sta_route_id = $data["sta_route_id"];
     $route_num = $data["route_num"];
     $north_bound_stop = $data["north_bound_stop"];
@@ -1103,8 +1522,15 @@ $app->put('/put/sta_route/sta_bus/[{id}]', function (Request $request, Response 
  * EXTERIOR PATHWAYS ROUTES
  */
 // get all exterior_pathways
-$app->get('/exterior_pathways/', function (Request $request, Response $response, array $args){
-    
+$app->get('/exterior_pathways/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1114,8 +1540,15 @@ $app->get('/exterior_pathways/', function (Request $request, Response $response,
 });
 
 // get exterior_pathways data by id
-$app->get('/get/exterior_pathways/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/exterior_pathways/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE ext_path_id=$id");
     $sth->execute();
@@ -1126,8 +1559,15 @@ $app->get('/get/exterior_pathways/[{id}]', function (Request $request, Response 
 });
 
 // get exterior_pathways data by establishment id
-$app->get('/get/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE est_id=$id");
     $sth->execute();
@@ -1138,8 +1578,15 @@ $app->get('/get/exterior_pathways/est/[{id}]', function (Request $request, Respo
 });
 
 // delete exterior_pathways data by id
-$app->delete('/delete/exterior_pathways/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/exterior_pathways/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE exterior_pathways_id=$id");
     $sth->execute();
@@ -1149,8 +1596,15 @@ $app->delete('/delete/exterior_pathways/[{id}]', function (Request $request, Res
 });
 
 // delete exterior_pathways data by establishment id
-$app->delete('/delete/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE est_id=$id");
     $sth->execute();
@@ -1160,8 +1614,15 @@ $app->delete('/delete/exterior_pathways/est/[{id}]', function (Request $request,
 });
 
 // post exterior_pathways data
-$app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Pathways );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1171,25 +1632,17 @@ $app->post('/post/exterior_pathways/', function (Request $request, Response $res
 
 // put exterior_pathways data by ext_path id and est id
 $app->put('/put/exterior_pathways/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "ext_path_id" : ext_path_id,
-    "service_animal" : service_animal,
-    "service_animal_location" : service_animal_location,
-    "has_exterior_path" : has_exterior_path,
-    "min_width" : min_width,
-    "pathway_surface" : pathway_surface,
-    "pathway_curbs" : pathway_curbs,
-    "tactile_warning" : tactile_warning,
-    "lighting" : lighting,
-    "lighting_option" : lighting_option,
-    "lighting_type" : lighting_type,
-    "comment" : comment,
-    "recommendations" : recommendations
-     */
     $ext_path_id = $data["ext_path_id"];
     $service_animal = $data["service_animal"];
     $service_animal_location = $data["service_animal_location"];
@@ -1244,8 +1697,15 @@ $app->put('/put/exterior_pathways/est/[{id}]', function (Request $request, Respo
  * EXTERIOR STAIRS ROUTES
  */
 // get all exterior_stairs
-$app->get('/exterior_stairs/', function (Request $request, Response $response, array $args){
-    
+$app->get('/exterior_stairs/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1255,8 +1715,15 @@ $app->get('/exterior_stairs/', function (Request $request, Response $response, a
 });
 
 // get exterior_stairs data by id
-$app->get('/get/exterior_stairs/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/exterior_stairs/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE ext_stair_id=$id");
     $sth->execute();
@@ -1267,8 +1734,15 @@ $app->get('/get/exterior_stairs/[{id}]', function (Request $request, Response $r
 });
 
 // get exterior_stairs data by establishment id
-$app->get('/get/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE est_id=$id");
     $sth->execute();
@@ -1279,8 +1753,15 @@ $app->get('/get/exterior_stairs/est/[{id}]', function (Request $request, Respons
 });
 
 // delete exterior_stairs data by id
-$app->delete('/delete/exterior_stairs/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/exterior_stairs/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE ext_stair_id=$id");
     $sth->execute();
@@ -1290,8 +1771,15 @@ $app->delete('/delete/exterior_stairs/[{id}]', function (Request $request, Respo
 });
 
 // delete exterior_stairs data by establishment id
-$app->delete('/delete/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE est_id=$id");
     $sth->execute();
@@ -1301,8 +1789,15 @@ $app->delete('/delete/exterior_stairs/est/[{id}]', function (Request $request, R
 });
 
 // post exterior_stairs data
-$app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1311,8 +1806,15 @@ $app->post('/post/exterior_stairs/', function (Request $request, Response $respo
 });
 
 // put exterior_stairs data
-$app->put('/put/exterior_stairs/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/exterior_stairs/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1322,27 +1824,17 @@ $app->put('/put/exterior_stairs/', function (Request $request, Response $respons
 
 // put exterior_stairs data by ext_stair id and est id
 $app->put('/put/exterior_stairs/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "ext_stair_id" : ext_stair_id,
-    "stairs_required" : stairs_required,
-    "stairs_available" : stairs_available,
-    "num_stairs" : num_stairs,
-    "handrail_both_sides" : handrail_both_sides,
-    "handrail_side" : handrail_side,
-    "handrail_regulation_height" : handrail_regulation_height,
-    "handrail_height" : handrail_height,
-    "obstacles" : obstacles,
-    "clearly_marked" : clearly_marked,
-    "lighting" : lighting,
-    "lighting_option" : lighting_option,
-    "lighting_type" : lighting_type,
-    "comment" : comment,
-    "recommendations" : recommendations
-     */
     $ext_stair_id = $data["ext_stair_id"];
     $stairs_required = $data["stairs_required"];
     $stairs_available = $data["stairs_available"];
@@ -1400,8 +1892,15 @@ $app->put('/put/exterior_stairs/est/[{id}]', function (Request $request, Respons
  * EXTERIOR RAMPS ROUTES
  */
 // get all exterior_ramps
-$app->get('/exterior_ramps/', function (Request $request, Response $response, array $args){
-    
+$app->get('/exterior_ramps/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1411,8 +1910,15 @@ $app->get('/exterior_ramps/', function (Request $request, Response $response, ar
 });
 
 // get exterior_ramps data by id
-$app->get('/get/exterior_ramps/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/exterior_ramps/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE ext_ramp_id=$id");
     $sth->execute();
@@ -1423,8 +1929,15 @@ $app->get('/get/exterior_ramps/[{id}]', function (Request $request, Response $re
 });
 
 // get exterior_ramps data by establishment id
-$app->get('/get/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE est_id=$id");
     $sth->execute();
@@ -1435,8 +1948,15 @@ $app->get('/get/exterior_ramps/est/[{id}]', function (Request $request, Response
 });
 
 // delete exterior_ramps data by id
-$app->delete('/delete/exterior_ramps/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/exterior_ramps/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE ext_ramp_id=$id");
     $sth->execute();
@@ -1446,8 +1966,15 @@ $app->delete('/delete/exterior_ramps/[{id}]', function (Request $request, Respon
 });
 
 // delete exterior_ramps data by establishment id
-$app->delete('/delete/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE est_id=$id");
     $sth->execute();
@@ -1457,8 +1984,15 @@ $app->delete('/delete/exterior_ramps/est/[{id}]', function (Request $request, Re
 });
 
 // post exterior_ramps data
-$app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1467,8 +2001,15 @@ $app->post('/post/exterior_ramps/', function (Request $request, Response $respon
 });
 
 // put exterior_ramps data
-$app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1478,32 +2019,17 @@ $app->put('/put/exterior_ramps/', function (Request $request, Response $response
 
 // put exterior_ramps data by ext_ramp id and est id
 $app->put('/put/exterior_ramps/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "ext_ramp_id": ext_ramp_id,
-    "ramp_required": ramp_required,
-    "ramp_available": ramp_available,
-    "min_width": min_width,
-    "width_between_handrails": width_between_handrails,
-    "min_slope": min_slope,
-    "slope": slope,
-    "level_landing_both": level_landing_both,
-    "level_landing_location": level_landing_location,
-    "obstacles": obstacles,
-    "handrails_both_sides": handrails_both_sides,
-    "handrail_sides": handrail_sides,
-    "handrail_regulation_height": handrail_regulation_height,
-    "handrail_height": handrail_height,
-    "side_guards": side_guards,
-    "lighting": lighting,
-    "lighting_option": lighting_option,
-    "lighting_type": lighting_type,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $ext_ramp_id = $data["ext_ramp_id"];
     $ramp_required = $data["ramp_required"];
     $ramp_available = $data["ramp_available"];
@@ -1576,8 +2102,15 @@ $app->put('/put/exterior_ramps/est/[{id}]', function (Request $request, Response
  * MAIN ENTRANCE ROUTES
  */
 // get all main_entrance
-$app->get('/main_entrance/', function (Request $request, Response $response, array $args){
-    
+$app->get('/main_entrance/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1587,8 +2120,15 @@ $app->get('/main_entrance/', function (Request $request, Response $response, arr
 });
 
 // get main_entrance data by id
-$app->get('/get/main_entrance/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/main_entrance/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE main_ent_id=$id");
     $sth->execute();
@@ -1599,8 +2139,15 @@ $app->get('/get/main_entrance/[{id}]', function (Request $request, Response $res
 });
 
 // get main_entrance data by establishment id
-$app->get('/get/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE est_id=$id");
     $sth->execute();
@@ -1611,8 +2158,15 @@ $app->get('/get/main_entrance/est/[{id}]', function (Request $request, Response 
 });
 
 // delete main_entrance data by id
-$app->delete('/delete/main_entrance/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/main_entrance/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE main_ent_id=$id");
     $sth->execute();
@@ -1622,8 +2176,15 @@ $app->delete('/delete/main_entrance/[{id}]', function (Request $request, Respons
 });
 
 // delete main_entrance data by establishment id
-$app->delete('/delete/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE est_id=$id");
     $sth->execute();
@@ -1633,8 +2194,15 @@ $app->delete('/delete/main_entrance/est/[{id}]', function (Request $request, Res
 });
 
 // post main_entrance data
-$app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Main_Entrance );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1643,8 +2211,15 @@ $app->post('/post/main_entrance/', function (Request $request, Response $respons
 });
 
 // put main_entrance data
-$app->put('/put/main_entrance/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/main_entrance/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Main_Entrance );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1654,35 +2229,17 @@ $app->put('/put/main_entrance/', function (Request $request, Response $response,
 
 // put exterior_ramps data by ext_ramp id and est id
 $app->put('/put/main_entrance/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "main_ent_id": main_ent_id,
-    "total_num_public_entrances": total_num_public_entrances,
-    "main_ent_accessible": main_ent_accessible,
-    "alt_ent_accessible": alt_ent_accessible,
-    "accessable_signage": accessable_signage,
-    "ground_level": ground_level,
-    "threshold_level": threshold_level,
-    "threshold_beveled": threshold_beveled,
-    "beveled_height": beveled_height,
-    "door_action": door_action,
-    "door_open_clearance": door_open_clearance,
-    "opening_measurement": opening_measurement,
-    "door_easy_open": door_easy_open,
-    "door_open_force": door_open_force,
-    "door_use_with_fist": door_use_with_fist,
-    "door_auto_open": door_auto_open,
-    "second_door_inside": second_door_inside,
-    "min_dist_between_doors": min_dist_between_doors,
-    "lighting": lighting,
-    "lighting_option": lighting_option,
-    "lighting_type": lighting_type,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $main_ent_id = $data["main_ent_id"];
     $total_num_public_entrances = $data["total_num_public_entrances"];
     $main_ent_accessible = $data["main_ent_accessible"];
@@ -1764,8 +2321,15 @@ $app->put('/put/main_entrance/est/[{id}]', function (Request $request, Response 
  * INTERIOR ROUTES
  */
 // get all interior
-$app->get('/interior/', function (Request $request, Response $response, array $args){
-    
+$app->get('/interior/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Interior");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1775,8 +2339,15 @@ $app->get('/interior/', function (Request $request, Response $response, array $a
 });
 
 // get interior data by id
-$app->get('/get/interior/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/interior/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE interior_id=$id");
     $sth->execute();
@@ -1787,8 +2358,15 @@ $app->get('/get/interior/[{id}]', function (Request $request, Response $response
 });
 
 // get interior data by establishment id
-$app->get('/get/interior/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/interior/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE est_id=$id");
     $sth->execute();
@@ -1799,8 +2377,15 @@ $app->get('/get/interior/est/[{id}]', function (Request $request, Response $resp
 });
 
 // delete interior data by id
-$app->delete('/delete/interior/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/interior/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE interior_id=$id");
     $sth->execute();
@@ -1810,8 +2395,15 @@ $app->delete('/delete/interior/[{id}]', function (Request $request, Response $re
 });
 
 // delete interior data by establishment id
-$app->delete('/delete/interior/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/interior/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE est_id=$id");
     $sth->execute();
@@ -1821,8 +2413,15 @@ $app->delete('/delete/interior/est/[{id}]', function (Request $request, Response
 });
 
 // post interior data
-$app->post('/post/interior/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/interior/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1831,8 +2430,15 @@ $app->post('/post/interior/', function (Request $request, Response $response, ar
 });
 
 // put interior data
-$app->put('/put/interior/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/interior/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1842,32 +2448,17 @@ $app->put('/put/interior/', function (Request $request, Response $response, arra
 
 // put interior data by interior id and est id
 $app->put('/put/interior/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "interior_id": interior_id,
-    "int_door_open_clearance": int_door_open_clearance,
-    "int_opening_measurement": int_opening_measurement,
-    "int_door_easy_open": int_door_easy_open,
-    "int_door_open_force": int_door_open_force,
-    "int_door_use_with_fist": int_door_use_with_fist,
-    "five_second_close": five_second_close,
-    "hallway_width": hallway_width,
-    "narrowest_width": narrowest_width,
-    "wheelchair_turnaround": wheelchair_turnaround,
-    "hallway_obstacles": hallway_obstacles,
-    "hallway_clear": hallway_clear,
-    "lighting": lighting,
-    "lighting_type": lighting_type,
-    "service_counter": service_counter,
-    "counter_height": counter_height,
-    "writing_surface_height": writing_surface_height,
-    "drinking_fountain": drinking_fountain,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $interior_id = $data["interior_id"];
     $int_door_open_clearance = $data["int_door_open_clearance"];
     $int_opening_measurement = $data["int_opening_measurement"];
@@ -1940,8 +2531,15 @@ $app->put('/put/interior/est/[{id}]', function (Request $request, Response $resp
  * ELEVATOR ROUTES
  */
 // get all elevator
-$app->get('/elevator/', function (Request $request, Response $response, array $args){
-    
+$app->get('/elevator/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Elevator");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -1951,8 +2549,15 @@ $app->get('/elevator/', function (Request $request, Response $response, array $a
 });
 
 // get elevator data by id
-$app->get('/get/elevator/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/elevator/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE elevator_id=$id");
     $sth->execute();
@@ -1963,8 +2568,15 @@ $app->get('/get/elevator/[{id}]', function (Request $request, Response $response
 });
 
 // get elevator data by establishment id
-$app->get('/get/elevator/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/elevator/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE est_id=$id");
     $sth->execute();
@@ -1975,8 +2587,15 @@ $app->get('/get/elevator/est/[{id}]', function (Request $request, Response $resp
 });
 
 // delete elevator data by id
-$app->delete('/delete/elevator/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/elevator/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE elevator_id=$id");
     $sth->execute();
@@ -1986,8 +2605,15 @@ $app->delete('/delete/elevator/[{id}]', function (Request $request, Response $re
 });
 
 // delete elevator data by establishment id
-$app->delete('/delete/elevator/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/elevator/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE est_id=$id");
     $sth->execute();
@@ -1997,8 +2623,15 @@ $app->delete('/delete/elevator/est/[{id}]', function (Request $request, Response
 });
 
 // post elevator data
-$app->post('/post/elevator/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/elevator/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2007,8 +2640,15 @@ $app->post('/post/elevator/', function (Request $request, Response $response, ar
 });
 
 // put elevator data
-$app->put('/put/elevator/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/elevator/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2018,28 +2658,17 @@ $app->put('/put/elevator/', function (Request $request, Response $response, arra
 
 // put elevator data by elevator id and est id
 $app->put('/put/elevator/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "elevator_id": elevator_id,
-    "is_elevator": is_elevator,
-    "location": location,
-    "works": works,
-    "no_assist": no_assist,
-    "button_height": button_height,
-    "outside_btn_height": outside_btn_height,
-    "inside_btn_height": inside_btn_height,
-    "button_use_fist": button_use_fist,
-    "braille": braille,
-    "audible_tones": audible_tones,
-    "lighting": lighting,
-    "lighting_type": lighting_type,
-    "elevator_depth": elevator_depth,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $elevator_id = $data["elevator_id"];
     $is_elevator = $data["is_elevator"];
     $location = $data["location"];
@@ -2100,8 +2729,15 @@ $app->put('/put/elevator/est/[{id}]', function (Request $request, Response $resp
  * SIGNAGE ROUTES
  */
 // get all signage
-$app->get('/signage/', function (Request $request, Response $response, array $args){
-    
+$app->get('/signage/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Signage");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2111,8 +2747,15 @@ $app->get('/signage/', function (Request $request, Response $response, array $ar
 });
 
 // get signage data by id
-$app->get('/get/signage/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/signage/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE sign_id=$id");
     $sth->execute();
@@ -2123,8 +2766,15 @@ $app->get('/get/signage/[{id}]', function (Request $request, Response $response,
 });
 
 // get signage data by establishment id
-$app->get('/get/signage/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/signage/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE est_id=$id");
     $sth->execute();
@@ -2135,8 +2785,15 @@ $app->get('/get/signage/est/[{id}]', function (Request $request, Response $respo
 });
 
 // delete signage data by id
-$app->delete('/delete/signage/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/signage/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE sign_id=$id");
     $sth->execute();
@@ -2146,8 +2803,15 @@ $app->delete('/delete/signage/[{id}]', function (Request $request, Response $res
 });
 
 // delete signage data by establishment id
-$app->delete('/delete/signage/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/signage/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE est_id=$id");
     $sth->execute();
@@ -2157,8 +2821,15 @@ $app->delete('/delete/signage/est/[{id}]', function (Request $request, Response 
 });
 
 // post signage data
-$app->post('/post/signage/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/signage/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Signage );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2167,8 +2838,15 @@ $app->post('/post/signage/', function (Request $request, Response $response, arr
 });
 
 // put signage data
-$app->put('/put/signage/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/signage/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Signage );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2178,25 +2856,17 @@ $app->put('/put/signage/', function (Request $request, Response $response, array
 
 // put signage data by signage id and est id
 $app->put('/put/signage/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "sign_id": sign_id,
-    "is_directory": is_directory,
-    "door_signs": door_signs,
-    "sign_height": sign_height,
-    "pub_sign_braile": pub_sign_braile,
-    "sign_high_contrast": sign_high_contrast,
-    "sign_images": sign_images,
-    "written_material_images": written_material_images,
-    "menu_access": menu_access,
-    "alt_info": alt_info,
-    "alt_info_type": alt_info_type,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $sign_id = $data["sign_id"];
     $is_directory = $data["is_directory"];
     $door_signs = $data["door_signs"];
@@ -2248,8 +2918,15 @@ $app->put('/put/signage/est/[{id}]', function (Request $request, Response $respo
  * EMERGENCY ROUTES
  */
 // get all emergency
-$app->get('/emergency/', function (Request $request, Response $response, array $args){
-    
+$app->get('/emergency/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Emergency");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2259,8 +2936,15 @@ $app->get('/emergency/', function (Request $request, Response $response, array $
 });
 
 // get emergency data by id
-$app->get('/get/emergency/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/emergency/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE emergency_id=$id");
     $sth->execute();
@@ -2271,8 +2955,15 @@ $app->get('/get/emergency/[{id}]', function (Request $request, Response $respons
 });
 
 // get emergency data by establishment id
-$app->get('/get/emergency/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/emergency/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE est_id=$id");
     $sth->execute();
@@ -2283,8 +2974,15 @@ $app->get('/get/emergency/est/[{id}]', function (Request $request, Response $res
 });
 
 // delete emergency data by id
-$app->delete('/delete/emergency/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/emergency/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE emergency_id=$id");
     $sth->execute();
@@ -2294,8 +2992,15 @@ $app->delete('/delete/emergency/[{id}]', function (Request $request, Response $r
 });
 
 // delete emergency data by establishment id
-$app->delete('/delete/emergency/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/emergency/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE est_id=$id");
     $sth->execute();
@@ -2305,8 +3010,15 @@ $app->delete('/delete/emergency/est/[{id}]', function (Request $request, Respons
 });
 
 // post emergency data
-$app->post('/post/emergency/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/emergency/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Emergency );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2315,8 +3027,15 @@ $app->post('/post/emergency/', function (Request $request, Response $response, a
 });
 
 // put emergency data
-$app->put('/put/emergency/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/emergency/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Emergency );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2326,26 +3045,17 @@ $app->put('/put/emergency/', function (Request $request, Response $response, arr
 
 // put emergency data by emergency id and est id
 $app->put('/put/emergency/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "emergency_id": emergency_id,
-    "evac_info": evac_info,
-    "alt_evac_info": alt_evac_info,
-    "evac_info_format": evac_info_format,
-    "alarms": alarms,
-    "location_no_flash": location_no_flash,
-    "shelter": shelter,
-    "signs_to_exit": signs_to_exit,
-    "wheelchair_plan": wheelchair_plan,
-    "floor_plan_routes": floor_plan_routes,
-    "fire_alarm_height": fire_alarm_height,
-    "fire_extinguisher_height": fire_extinguisher_height,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $emergency_id = $data["emergency_id"];
     $evac_info = $data["evac_info"];
     $alt_evac_info = $data["alt_evac_info"];
@@ -2400,8 +3110,15 @@ $app->put('/put/emergency/est/[{id}]', function (Request $request, Response $res
  * SEATING ROUTES
  */
 // get all seating
-$app->get('/seating/', function (Request $request, Response $response, array $args){
-    
+$app->get('/seating/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Seating");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2411,8 +3128,15 @@ $app->get('/seating/', function (Request $request, Response $response, array $ar
 });
 
 // get seating data by id
-$app->get('/get/seating/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/seating/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE seating_id=$id");
     $sth->execute();
@@ -2423,8 +3147,15 @@ $app->get('/get/seating/[{id}]', function (Request $request, Response $response,
 });
 
 // get seating data by establishment id
-$app->get('/get/seating/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/seating/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE est_id=$id");
     $sth->execute();
@@ -2435,8 +3166,15 @@ $app->get('/get/seating/est/[{id}]', function (Request $request, Response $respo
 });
 
 // delete seating data by id
-$app->delete('/delete/seating/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/seating/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE seating_id=$id");
     $sth->execute();
@@ -2446,8 +3184,15 @@ $app->delete('/delete/seating/[{id}]', function (Request $request, Response $res
 });
 
 // delete seating data by establishment id
-$app->delete('/delete/seating/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/seating/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE est_id=$id");
     $sth->execute();
@@ -2457,8 +3202,15 @@ $app->delete('/delete/seating/est/[{id}]', function (Request $request, Response 
 });
 
 // post seating data
-$app->post('/post/seating/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/seating/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2467,8 +3219,15 @@ $app->post('/post/seating/', function (Request $request, Response $response, arr
 });
 
 // put seating data
-$app->put('/put/seating/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/seating/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2478,34 +3237,17 @@ $app->put('/put/seating/', function (Request $request, Response $response, array
 
 // put seating data by seating id and est id
 $app->put('/put/seating/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "seating_id": seating_id,
-    "seating_no_step": seating_no_step,
-    "table_aisles": table_aisles,
-    "legroom": legroom,
-    "num_legroom": num_legroom,
-    "rearranged": rearranged,
-    "num_table_rearranged": num_table_rearranged,
-    "num_chair_rearranged": num_chair_rearranged,
-    "round_tables": round_tables,
-    "num_round_tables": num_round_tables,
-    "lighting": lighting,
-    "lighting_option": lighting_option,
-    "lighting_type": lighting_type,
-    "adjustable_lighting": adjustable_lighting,
-    "low_visual_slim": low_visual_slim,
-    "quiet_table": quiet_table,
-    "low_sound": low_sound,
-    "designated_space": designated_space,
-    "num_desig_space": num_desig_space,
-    "companion_space": companion_space,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $seating_id = $data["seating_id"];
     $seating_no_step = $data["seating_no_step"];
     $table_aisles = $data["table_aisles"];
@@ -2584,8 +3326,15 @@ $app->put('/put/seating/est/[{id}]', function (Request $request, Response $respo
  * RESTROOM ROUTES
  */
 // get all restroom
-$app->get('/restroom/', function (Request $request, Response $response, array $args){
-    
+$app->get('/restroom/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Restroom");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2595,8 +3344,15 @@ $app->get('/restroom/', function (Request $request, Response $response, array $a
 });
 
 // get restroom data by id
-$app->get('/get/restroom/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/restroom/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE restroom_id=$id");
     $sth->execute();
@@ -2607,8 +3363,15 @@ $app->get('/get/restroom/[{id}]', function (Request $request, Response $response
 });
 
 // get restroom data by establishment id
-$app->get('/get/restroom/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/restroom/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE est_id=$id");
     $sth->execute();
@@ -2619,8 +3382,15 @@ $app->get('/get/restroom/est/[{id}]', function (Request $request, Response $resp
 });
 
 // delete restroom data by id
-$app->delete('/delete/restroom/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/restroom/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE restroom_id=$id");
     $sth->execute();
@@ -2630,8 +3400,15 @@ $app->delete('/delete/restroom/[{id}]', function (Request $request, Response $re
 });
 
 // delete restroom data by establishment id
-$app->delete('/delete/restroom/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/restroom/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE est_id=$id");
     $sth->execute();
@@ -2641,8 +3418,15 @@ $app->delete('/delete/restroom/est/[{id}]', function (Request $request, Response
 });
 
 // post restroom data
-$app->post('/post/restroom/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/restroom/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Restroom );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2651,8 +3435,15 @@ $app->post('/post/restroom/', function (Request $request, Response $response, ar
 });
 
 // put restroom data
-$app->put('/put/restroom/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/restroom/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Restroom );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2662,22 +3453,17 @@ $app->put('/put/restroom/', function (Request $request, Response $response, arra
 
 // put restroom data by restroom id and est id
 $app->put('/put/restroom/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "restroom_id": restroom_id,
-    "public_restroom": public_restroom,
-    "total_num": total_num,
-    "designated_number": designated_number,
-    "num_wheelchair_sign": num_wheelchair_sign,
-    "sign_accessable": sign_accessable,
-    "sign_location": sign_location,
-    "key_needed": key_needed,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $restroom_id = $data["restroom_id"];
     $public_restroom = $data["public_restroom"];
     $total_num = $data["total_num"];
@@ -2720,8 +3506,15 @@ $app->put('/put/restroom/est/[{id}]', function (Request $request, Response $resp
  * RESTROOM INFO ROUTES
  */
 // get all restroom_info
-$app->get('/restroom_info/', function (Request $request, Response $response, array $args){
-    
+$app->get('/restroom_info/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2731,8 +3524,15 @@ $app->get('/restroom_info/', function (Request $request, Response $response, arr
 });
 
 // get restroom_info data by id
-$app->get('/get/restroom_info/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/restroom_info/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_info_id=$id");
     $sth->execute();
@@ -2743,8 +3543,15 @@ $app->get('/get/restroom_info/[{id}]', function (Request $request, Response $res
 });
 
 // get restroom_info data by restroom id
-$app->get('/get/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_id=$id");
     $sth->execute();
@@ -2755,8 +3562,15 @@ $app->get('/get/restroom_info/rest/[{id}]', function (Request $request, Response
 });
 
 // delete restroom_info data by id
-$app->delete('/delete/restroom_info/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/restroom_info/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_info_id=$id");
     $sth->execute();
@@ -2766,8 +3580,15 @@ $app->delete('/delete/restroom_info/[{id}]', function (Request $request, Respons
 });
 
 // delete restroom_info data by restroom id
-$app->delete('/delete/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_id=$id");
     $sth->execute();
@@ -2777,8 +3598,15 @@ $app->delete('/delete/restroom_info/rest/[{id}]', function (Request $request, Re
 });
 
 // post restroom_info data
-$app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Restroom_Info );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2787,8 +3615,15 @@ $app->post('/post/restroom_info/', function (Request $request, Response $respons
 });
 
 // put restroom_info data
-$app->put('/put/restroom_info/', function (Request $request, Response $response, array $args){
-    
+$app->put('/put/restroom_info/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Restroom_Info );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -2798,7 +3633,14 @@ $app->put('/put/restroom_info/', function (Request $request, Response $response,
 
 // put restroom data by restroom id and rest id
 $app->put('/put/restroom_info/rest/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
-    
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $data = $request->getParsedBody();
 
@@ -2947,8 +3789,15 @@ $app->put('/put/restroom_info/rest/[{id}]', function (Request $request, Response
  * COMMUNICATION ROUTES
  */
 // get all communication
-$app->get('/communication/', function (Request $request, Response $response, array $args){
-    
+$app->get('/communication/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $sth = $this->db->prepare("SELECT * FROM Communication");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -2958,8 +3807,15 @@ $app->get('/communication/', function (Request $request, Response $response, arr
 });
 
 // get communication data by id
-$app->get('/get/communication/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/communication/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE communication_id=$id");
     $sth->execute();
@@ -2970,8 +3826,15 @@ $app->get('/get/communication/[{id}]', function (Request $request, Response $res
 });
 
 // get communication data by establishment id
-$app->get('/get/communication/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->get('/get/communication/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE est_id=$id");
     $sth->execute();
@@ -2982,8 +3845,15 @@ $app->get('/get/communication/est/[{id}]', function (Request $request, Response 
 });
 
 // delete communication data by id
-$app->delete('/delete/communication/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/communication/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE communication_id=$id");
     $sth->execute();
@@ -2993,8 +3863,15 @@ $app->delete('/delete/communication/[{id}]', function (Request $request, Respons
 });
 
 // delete communication data by establishment id
-$app->delete('/delete/communication/est/[{id}]', function (Request $request, Response $response, array $args){
-    
+$app->delete('/delete/communication/est/[{id}]', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE est_id=$id");
     $sth->execute();
@@ -3004,8 +3881,15 @@ $app->delete('/delete/communication/est/[{id}]', function (Request $request, Res
 });
 
 // post communication data
-$app->post('/post/communication/', function (Request $request, Response $response, array $args){
-    
+$app->post('/post/communication/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -3014,7 +3898,14 @@ $app->post('/post/communication/', function (Request $request, Response $respons
 });
 
 // put communication data
-$app->put('/put/communication/', function (Request $request, Response $response, array $args){
+$app->put('/put/communication/', function (Request $request, Response $response, array $args){ 
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
     
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
@@ -3025,52 +3916,17 @@ $app->put('/put/communication/', function (Request $request, Response $response,
 
 // put communication data by communication id and est id
 $app->put('/put/communication/est/[{id}]', function (Request $request, Response $response, array $args) use ($recommendations) {
+// Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
     
     $id = $args['id'];
     $data = $request->getParsedBody();
 
-    /**
-    "communication_id": communication_id,
-    "public_phone": public_phone,
-    "phone_clearance": phone_clearance,
-    "num_phone": num_phone,
-    "tty": tty,
-    "staff_tty": staff_tty,
-    "assisted_listening": assisted_listening,
-    "assisted_listen_type": assisted_listen_type,
-    "assisted_listen_receiver": assisted_listen_receiver,
-    "listening_signage": listening_signage,
-    "staff_listening": staff_listening,
-    "acoustics": acoustics,
-    "acoustics_level": acoustics_level,
-    "alt_comm_methods": alt_comm_methods,
-    "alt_comm_type": alt_comm_type,
-    "staff_ASL": staff_ASL,
-    "captioning_default": captioning_default,
-    "theater_captioning": theater_captioning,
-    "theater_capt_type": theater_capt_type,
-    "auditory_info_visual": auditory_info_visual,
-    "visual_info_auditory": visual_info_auditory,
-    "website_text_reader": website_text_reader,
-    "alt_contact": alt_contact,
-    "alt_contact_type": alt_contact_type,
-    "shopping_assist": shopping_assist,
-    "assist_service": assist_service,
-    "assist_fee": assist_fee,
-    "store_scooter": store_scooter,
-    "scooter_fee": scooter_fee,
-    "scooter_location": scooter_location,
-    "restaurant_allergies": restaurant_allergies,
-    "staff_disable_trained": staff_disable_trained,
-    "staff_disable_trained_desc": staff_disable_trained_desc,
-    "items_reach": items_reach,
-    "service_alt_manner": service_alt_manner,
-    "senior_discount": senior_discount,
-    "senior_age": senior_age,
-    "annual_A4A_review": annual_A4A_review,
-    "comment": comment,
-    "recommendations": recommendations
-     */
     $communication_id = $data["communication_id"];
     $public_phone = $data["public_phone"];
     $phone_clearance = $data["phone_clearance"];

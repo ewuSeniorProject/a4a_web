@@ -2,12 +2,43 @@
 // Include config file
 require_once 'config.php';
 
+session_start();
+
+if (isset($_SESSION['role'])){
+    header("location: home.php");
+}
+
+
 // Define variables and initialize with empty values
-$user_name = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$fname = $lname = $email = $user_name = $password = $confirm_password = "";
+$fname_err = $lname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
+$role = "user";
+$active = "yes";
+$success = $message = "";
 
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Validate first name
+    if(empty(trim($_POST["fname"]))){
+        $fname_err = "Please enter your first name.";
+    } else{
+        $fname = trim($_POST["fname"]);
+    }
+
+    // Validate last name
+    if(empty(trim($_POST["lname"]))){
+        $lname_err = "Please enter your last name.";
+    } else{
+        $lname = trim($_POST["lname"]);
+    }
+
+    // Validate email
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter a vaild email address.";
+    } else{
+        $email = trim($_POST["email"]);
+    }
 
     // Validate username
     if(empty(trim($_POST["user_name"]))){
@@ -29,12 +60,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already taken.";
+                    $username_err = "Error, please contact the admin.";
                 } else{
                     $user_name = trim($_POST["user_name"]);
                 }
             } else{
-                echo "Oops! Something went wrong. Please try again later.";
+                $message = "Oops! Something went wrong. Please try again later.";
             }
         }
 
@@ -62,25 +93,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($fname_err) && empty($lname_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+
 
         // Prepare an insert statement
-        $sql = "INSERT INTO User (user_name, password) VALUES (?, ?)";
+        $sql = "INSERT INTO User (fname, lname, user_name, email, password, role, active) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_fname, $param_lname, $param_username, $param_email, $param_password, $param_role, $param_active);
 
             // Set parameters
+            $param_fname = $fname;
+            $param_lname = $lname;
             $param_username = $user_name;
+            $param_email = $email;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_role = $role;
+            $param_active = $active;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
+                $_SESSION['role'] = $role;
+                $success = "Success! Redirecting to login page where you will log in.";
                 // Redirect to login page
-                header("location: login.php");
+                header( "Refresh:5; url=login.php", true, 303);
             } else{
-                echo "Something went wrong. Please try again later.";
+                $message = "Something went wrong. Please try again later.";
             }
         }
 
@@ -115,21 +154,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-
-<!--        <script type="text/javascript">-->
-<!--            $(window).on('load', function () {-->
-<!--                var $preloader = $('#page-preloader'),-->
-<!--                    $spinner   = $preloader.find('.spinner');-->
-<!--                $spinner.fadeOut();-->
-<!--                $preloader.delay(350).fadeOut('slow');-->
-<!--            });-->
-<!--        </script>-->
     </head>
     <body>
-<!--        <div id="page-preloader">-->
-<!--            <span class="spinner"></span>-->
-<!--        </div>-->
         <nav class="navbar navbar-light bg-header">
             <span class="navbar-brand mb-0 pointer">
                 <a href="home.php">
@@ -137,44 +163,68 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </a>
             </span>
         </nav>
-        <div class="page page-row">
-            <div class="left-sidebar">
-                <div class="left-sidebar-header">
-                    <h5>
-                        <p>Information Here</p>
-                        <span class="pad" > Maybe stuff here?</span>
-                    </h5>
-                </div>
-                <span>
-                    <h6>Here Is A Title:</h6>
-                </span>
-            </div>
-            <div class="section">
-                <div class="container">
-                    <h2>Sign Up</h2>
-                    <p>Please fill this form to create an account.</p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                            <label>Username</label>
-                            <input type="text" name="user_name" class="form-control" value="<?php echo $user_name; ?>">
-                            <span class="form-text error"><?php echo $username_err; ?></span>
+        <div class="register">
+            <div class="container">
+                <div class="card card-fx">
+                    <div class="card-header col-12">
+                        <div>
+                            <h2>Register</h2>
+                            <p>Please fill this form to create an account.</p>
                         </div>
-                        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                            <span class="form-text error"><?php echo $password_err; ?></span>
-                        </div>
-                        <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
-                            <label>Confirm Password</label>
-                            <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                            <span class="form-text error"><?php echo $confirm_password_err; ?></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Submit">
-                            <input type="reset" class="btn btn-default" value="Reset">
-                        </div>
-                        <p>Already have an account? <a href="login.php">Login here</a>.</p>
-                    </form>
+                    </div>
+                    <div class="card-body">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <div class="register-row">
+                                <div class="form-group col-6 <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required>
+                                    <span class="form-text error"><?php echo $fname_err; ?></span>
+                                </div>
+                                <div class="form-group col-6 <?php echo (!empty($lname_err)) ? 'has-error' : ''; ?>">
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" autocomplete="family-name" name="lname" class="form-control" value="<?php echo $lname; ?>" required>
+                                    <span class="form-text error"><?php echo $lname_err; ?></span>
+                                </div>
+                            </div>
+                            <div class="register-row">
+                                <div class="form-group col-4<?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                                    <label for="user_name">Username</label>
+                                    <input type="text" autocomplete="username" name="user_name" class="form-control" value="<?php echo $user_name; ?>" required>
+                                    <span class="form-text error"><?php echo $username_err; ?></span>
+                                </div>
+                                <div class="form-group col-8 <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" autocomplete="email" name="email" class="form-control" value="<?php echo $email; ?>">
+                                    <span class="form-text error"><?php echo $email_err; ?></span>
+                                </div>
+                            </div>
+                            <div class="register-row">
+                                <div class="form-group col-6 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                    <label for="password">Password</label>
+                                    <input type="password" autocomplete="new-password" name="password" class="form-control" value="<?php echo $password; ?>" required>
+                                    <span class="form-text error"><?php echo $password_err; ?></span>
+                                </div>
+                                <div class="form-group col-6 <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
+                                    <label for="confirm_password">Confirm Password</label>
+                                    <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>" required>
+                                    <span class="form-text error"><?php echo $confirm_password_err; ?></span>
+                                </div>
+                            </div>
+                            <div class="register-row">
+                                <span class="form-text error"><?php echo $message; ?></span>
+                            </div>
+                            <div class="register-row">
+                                <span class="form-text success"><?php echo $success; ?></span>
+                            </div>
+                    </div>
+                    <div class="card-footer">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary col-2" value="Submit">
+                                <input type="reset" class="btn btn-secondary col-2" value="Reset">
+                            </div>
+                            <p>Already have an account? <a href="login.php">Login here</a>.</p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

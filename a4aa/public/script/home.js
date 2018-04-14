@@ -48,3 +48,8 @@ function EstablishmentViewModel() {
 function setEstablishmentId(value) {
     localStorage.setItem('establishmentID', value);
 }
+
+function logout() {
+    localStorage.clear();
+    location.href = "logout.php";
+}

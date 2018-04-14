@@ -2,6 +2,12 @@
 // Include config file
 require_once 'config.php';
 
+session_start();
+
+if (isset($_SESSION['role'])){
+    header("location: home.php");
+}
+
 // Define variables and initialize with empty values
 $user_name = $password = "";
 $username_err = $password_err = $cred_err = "";
@@ -26,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT user_name, password FROM User WHERE user_name = ?";
+        $sql = "SELECT user_name, password, role FROM User WHERE user_name = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -43,13 +49,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_name, $hashed_password);
+                    mysqli_stmt_bind_result($stmt, $user_name, $hashed_password, $role);
+
                     if(mysqli_stmt_fetch($stmt)){
+
                         if(password_verify($password, $hashed_password)){
                             /* Password is correct, so start a new session and
                             save the username to the session */
-                            session_start();
-                            $_SESSION['user_name'] = $user_name;
+
+//                            session_start();
+                            $_SESSION['role'] = $role;
                             header("location: home.php");
                         } else{
                             // Display an error message if password is not valid
@@ -96,21 +105,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-
-<!--        <script type="text/javascript">-->
-<!--            $(window).on('load', function () {-->
-<!--                var $preloader = $('#page-preloader'),-->
-<!--                    $spinner   = $preloader.find('.spinner');-->
-<!--                $spinner.fadeOut();-->
-<!--                $preloader.delay(350).fadeOut('slow');-->
-<!--            });-->
-<!--        </script>-->
     </head>
     <body>
-<!--        <div id="page-preloader">-->
-<!--            <span class="spinner"></span>-->
-<!--        </div>-->
         <nav class="navbar navbar-light bg-header">
             <span class="navbar-brand mb-0 pointer">
                 <a href="home.php">
@@ -118,37 +114,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </a>
             </span>
         </nav>
-        <div class="page page-row">
-            <div class="left-sidebar">
-                <div class="left-sidebar-header">
-                    <h5>
-                        <p>Information Here</p>
-                        <span class="pad" > Maybe stuff here?</span>
-                    </h5>
-                </div>
-                <span>
-                    <h6>Here Is A Title:</h6>
-                </span>
-            </div>
-            <div class="section">
-                <div class="container">
-                    <h2>Login</h2>
-                    <p>Please fill in your credentials to login.</p>
-                    <p class="form-text error"><?php echo $cred_err; ?></p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                            <label>Username</label>
-                            <input type="text" name="user_name" class="form-control" value="<?php echo $user_name; ?>">
+        <div class="login">
+            <div class="container">
+                <div class="card card-fx">
+                    <div class="card-header">
+                        <div>
+                            <h2>Login</h2>
+                            <p>Please fill in your credentials to login.</p>
+                            <p class="form-text error"><?php echo $cred_err; ?></p>
                         </div>
-                        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                            <label>Password</label>
-                            <input type="password" name="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary" value="Login">
-                        </div>
-                        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
-                    </form>
+                    </div>
+                    <div class="card-body">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                                <label>Username</label>
+                                <input type="text" name="user_name" autocomplete="username" class="form-control" value="<?php echo $user_name; ?>">
+                            </div>
+                            <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                <label>Password</label>
+                                <input type="password" autocomplete="current-password" name="password" class="form-control">
+                            </div>
+                    </div>
+                    <div class="card-footer">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary col-4" value="Login">
+                            </div>
+                            <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
