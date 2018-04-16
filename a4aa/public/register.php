@@ -117,7 +117,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['role'] = $role;
                 $success = "Success! Redirecting you to the home page.";
                 // Redirect to login page
-                header( "Refresh:3; url=login.php", true, 303);
+                header( "Refresh:2; url=login.php", true, 303);
             } else{
                 $message = "Something went wrong. Please try again later.";
             }
@@ -177,12 +177,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="register-row">
                                 <div class="form-group col-6 <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
                                     <label for="fname">First Name</label>
-                                    <input type="text" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required>
+                                    <input type="name" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required>
                                     <span class="form-text error"><?php echo $fname_err; ?></span>
                                 </div>
                                 <div class="form-group col-6 <?php echo (!empty($lname_err)) ? 'has-error' : ''; ?>">
                                     <label for="lname">Last Name</label>
-                                    <input type="text" autocomplete="family-name" name="lname" class="form-control" value="<?php echo $lname; ?>" required>
+                                    <input type="name" autocomplete="family-name" name="lname" class="form-control" value="<?php echo $lname; ?>" required>
                                     <span class="form-text error"><?php echo $lname_err; ?></span>
                                 </div>
                             </div>
