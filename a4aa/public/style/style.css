@@ -133,15 +133,22 @@ a:hover {
 
 .section {
     margin: 1em;
-    padding: 0;
+    padding-left: 15em;
     position: relative;
     top: 5.24em;
-    left: 15em;
+    left: 0;
 }
 
-.add-section {
+.section-update {
     margin: 1em;
-    padding: 0;
+    position: relative;
+    top: 6em;
+    left: 0;
+}
+
+.section-add {
+    margin: 1em;
+    padding-left: 10em;
     position: relative;
     top: 5.3em;
 }
@@ -236,6 +243,30 @@ a:hover {
     box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.4);
 }
 
+.box-blank {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    flex-grow: 0;
+    align-content: space-around;
+    align-self: flex-start;
+}
+
+.box-title {
+    margin: 0;
+    padding: 1em 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: lightslategrey;
+    border-radius: 5px;
+}
+
+.box-padding {
+    margin: 0;
+    padding: .2em 1em 1em 1em;
+}
+
 .card-box {
     margin: 0;
     padding: 0;
@@ -300,30 +331,6 @@ a:hover {
 .card-body-color {
     padding: 0;
     background-color: rgb(68, 143, 195);
-}
-
-.box-blank {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    flex-grow: 0;
-    align-content: space-around;
-    align-self: flex-start;
-}
-
-.box-title {
-    margin: 0;
-    padding: 1em 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    background-color: lightslategrey;
-    border-radius: 5px;
-}
-
-.box-padding {
-    margin: 0;
-    padding: .2em 1em 1em 1em;
 }
 
 .white-link {

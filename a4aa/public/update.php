@@ -66,7 +66,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                 <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
             </div>
         </nav>
-        <div class="page page-row">
+        <div class="page">
             <!-- LEFT SIDEBAR -->
             <div class="left-sidebar">
                 <div class="left-sidebar-header" data-bind="foreach: establishmentVM.establishmentList">
@@ -137,7 +137,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                     <div class="pad">&nbsp;</div>
                 </div>
             </div>
-            <div class="section col-9">
+            <div class="section-update">
                 <div class="container">
                     <!-- ACCORDION TABLE SECTION -->
                     <div id="accordion">
