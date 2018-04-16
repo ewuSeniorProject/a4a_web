@@ -35,6 +35,27 @@ $app->get('/establishment/', function (Request $request, Response $response, arr
 });
 
 // get establishment id by name and date
+$app->get('/get/establishment/{id}', function (Request $request, Response $response, array $args){
+    // Initialize the session
+    session_start();
+
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+        return $response->withRedirect($this->router->pathFor('root'));
+    }
+
+    $id = $args['id'];
+
+    $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get establishment id by name and date
 $app->get('/get/establishment/{user_id}/{cat_id}/{config_id}/{year}/{month}/{day}/', function (Request $request, Response $response, array $args){
     // Initialize the session
     session_start();
