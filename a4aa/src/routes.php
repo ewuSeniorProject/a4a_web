@@ -34,20 +34,28 @@ $app->get('/establishment/', function (Request $request, Response $response, arr
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
-// get establishment data by id
-$app->get('/get/establishment/[{id}]', function (Request $request, Response $response, array $args){
+// get establishment id by name and date
+$app->get('/get/establishment/{user_id}/{cat_id}/{config_id}/{year}/{month}/{day}/', function (Request $request, Response $response, array $args){
     // Initialize the session
     session_start();
 
-// If session variable is not set it will redirect to login page
+    // If session variable is not set it will redirect to login page
     if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         return $response->withRedirect($this->router->pathFor('root'));
     }
 
-    $id = $args['id'];
-    $sth = $this->db->prepare("SELECT * FROM Establishment WHERE est_id=$id");
+    $user_id = $args['user_id'];
+    $cat_id = $args['cat_id'];
+    $config_id = $args['config_id'];
+    $year = $args['year'];
+    $month = $args['month'];
+    $day = $args['day'];
+    $date = $year.$month.$day;
+
+    $sth = $this->db->prepare("SELECT est_id FROM Establishment WHERE user_id=$user_id AND cat_id=$cat_id AND config_id=$config_id AND date=$date");
     $sth->execute();
     $data = $sth->fetchAll();
+
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -72,7 +80,7 @@ $app->delete('/delete/establishment/[{id}]', function (Request $request, Respons
 });
 
 // post establishment data
-$app->post('/post/establishment/', function (Request $request, Response $response, array $args){ 
+$app->post('/post/establishment/', function (Request $request, Response $response, array $args){
 // Initialize the session
     session_start();
 
@@ -81,8 +89,50 @@ $app->post('/post/establishment/', function (Request $request, Response $respons
         return $response->withRedirect($this->router->pathFor('root'));
     }
 
-    //    $sth = $this->db->prepare("INSERT INTO Establishment );
-    //    $sth->execute();
+    $data = $request->getParsedBody();
+
+    $name = $data["name"];
+    $website = $data["website"];
+    $cat_id = $data["cat_id"];
+    $subtype = $data["subtype"];
+    $config_id = $data["config_id"];
+    $street = $data["street"];
+    $city = $data["city"];
+    $state = $data["state"];
+    $zip = $data["zip"];
+    $phone = $data["phone"];
+    $phone_tty = $data["phone_tty"];
+    $contact_fname = $data["contact_fname"];
+    $contact_lname = $data["contact_lname"];
+    $contact_title = $data["contact_title"];
+    $contact_email = $data["contact_email"];
+    $user_id = $data["user_id"];
+    $date = $data["date"];
+    $config_comment = $data["config_comment"];
+
+    $sth = $this->db->prepare("INSERT INTO Establishment (name, website, subtype, street, city, state, zip, phone, tty, contact_fname, contact_lname, contact_title, contact_email, user_id, cat_id, config_id, config_comment, date)
+                               VALUES (:name, :website, :subtype, :street, :city, :state, :zip, :phone, :tty, :contact_fname, :contact_lname, :contact_title, :contact_email, :user_id, :cat_id, :config_id, :config_comment, :date)");
+
+    $sth->bindParam(':name', $name, PDO::PARAM_STR);
+    $sth->bindParam(':website', $website, PDO::PARAM_STR);
+    $sth->bindParam(':subtype', $subtype, PDO::PARAM_STR);
+    $sth->bindParam(':street', $street, PDO::PARAM_STR);
+    $sth->bindParam(':city', $city, PDO::PARAM_STR);
+    $sth->bindParam(':state', $state, PDO::PARAM_STR);
+    $sth->bindParam(':zip', $zip, PDO::PARAM_INT);
+    $sth->bindParam(':phone', $phone, PDO::PARAM_STR);
+    $sth->bindParam(':tty', $phone_tty, PDO::PARAM_STR);
+    $sth->bindParam(':contact_fname', $contact_fname, PDO::PARAM_STR);
+    $sth->bindParam(':contact_lname', $contact_lname, PDO::PARAM_STR);
+    $sth->bindParam(':contact_title', $contact_title, PDO::PARAM_STR);
+    $sth->bindParam(':contact_email', $contact_email, PDO::PARAM_STR);
+    $sth->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+    $sth->bindParam(':cat_id', $cat_id, PDO::PARAM_STR);
+    $sth->bindParam(':config_id', $config_id, PDO::PARAM_STR);
+    $sth->bindParam(':config_comment', $config_comment, PDO::PARAM_STR);
+    $sth->bindParam(':date', $date, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');

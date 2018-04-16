@@ -57,7 +57,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                 <i class="fas fa-bars fa-lg"></i>
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="add.php">Add New Survey</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
@@ -71,9 +71,16 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                         <span class="pad" > Maybe stuff here?</span>
                     </h5>
                 </div>
-                <span>
-                    <h6>Here Is A Title:</h6>
-                </span>
+                <div class="left-sidebar-container">
+                    <ul class="nav nav-pills flex-column">
+                        <span>
+                            <h6>Here Is A Title:</h6>
+                        </span>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i>&ensp;Add New Survey</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="section">
                 <div class="container" id="establishment-list-wrapper">
@@ -90,7 +97,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                     <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="icon col-2"><i class="fas fa-chevron-circle-right fa-lg"></i></div><br>
                 </a>
                 <div class="box-padding">
-                    <a class="white-link" data-bind="text:website, attr: { href: 'http://'+website }" target="_new"></a><br>
+                    <a class="white-link" data-bind="text:website, attr: { href: website }" target="_new"></a><br>
                     <span data-bind="text:phone"></span><br>
                     <span data-bind="text:street"></span><br>
                     <span data-bind="text:city +', '+ state +' '+ zip"></span><br>
