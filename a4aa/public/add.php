@@ -67,7 +67,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         </nav>
         <div class="page">
             <div class="add-left card-border card-shadow card-header-text" id="collapseTitle" ></div>
-            <div class="add-section">
+            <div class="section-add">
                 <div class="container">
                     <div class="card card-border card-shadow">
                         <div class="card-header card-header-color card-header-text" id="cardTitle" ></div>
