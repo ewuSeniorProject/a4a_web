@@ -344,6 +344,13 @@ a:hover {
     background-color: rgb(68, 143, 195);
 }
 
+.card-text {
+    padding-left: 1em;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+}
+
 .white-link {
     color: #ffffff;
     font-style: normal;

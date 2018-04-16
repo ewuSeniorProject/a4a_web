@@ -231,7 +231,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                         <div class="col-4"><label for="parking_type"> Other parking: </label><input class="form-control" id="parking_type" data-bind="value: parking_type, hasfocus: parking_type.focused"></div>
                                     </div>
                                     <div class="card-row">
-                                        <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input class="form-control" id="total_num_spaces" data-bind="value: total_num_spaces,hasfocus: total_num_spaces.focused" value="Yes"></div>
+                                        <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input class="form-control" id="total_num_spaces" data-bind="value: total_num_spaces,hasfocus: total_num_spaces.focused"></div>
                                         <div class="col-6"><label for="num_reserved_spaces"> Number of reserved spaces: </label><input class="form-control" id="num_reserved_spaces" data-bind="value: num_reserved_spaces, hasfocus: num_reserved_spaces.focused"></div>
                                     </div>
                                     <div class="card-row">
