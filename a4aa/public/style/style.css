@@ -94,7 +94,7 @@ a:hover {
     margin: 0;
     width: 100%;
     position: fixed;
-    z-index: 100;
+    z-index: 600;
     top: 0;
     left: 0;
     background-color: #4482b6;
@@ -137,6 +137,13 @@ a:hover {
     position: relative;
     top: 5.24em;
     left: 15em;
+}
+
+.add-section {
+    margin: 1em;
+    padding: 0;
+    position: relative;
+    top: 5.3em;
 }
 
 .login {
@@ -245,6 +252,56 @@ a:hover {
     box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.4);
 }
 
+.card-row {
+    padding: 1em;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-content: flex-start;
+}
+
+.card-row-spacer {
+    background-color: rgb(255, 255, 255);
+}
+
+.card-row:hover {
+    background-color: rgba(227, 239, 252, 0.44);
+    color: #000000;
+}
+
+.card-border {
+    /*border-radius: 3px;*/
+    border-left: 10px solid rgb(68, 143, 195);
+}
+
+.card-header-color {
+    background-color: rgba(76, 134, 195, 0.21);
+}
+
+.card-header-text {
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.card-shadow {
+    box-shadow: -1px 3px 5px 0 hsla(0,0%,0%,0.2);
+}
+
+.card-body-color-add {
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+}
+
+.card-body-color {
+    padding: 0;
+    background-color: rgb(68, 143, 195);
+}
+
 .box-blank {
     margin: 0;
     padding: 0;
@@ -316,11 +373,6 @@ a:hover {
     color: #000000;
 }
 
-.card-body-color {
-    padding: 0;
-    background-color: rgb(68, 143, 195);
-}
-
 .non-link {
     color: #ffffff;
     letter-spacing: normal;
@@ -353,6 +405,16 @@ a:hover {
     position: absolute;
     background: url('../img/loader-64x/Preloader_3.gif') no-repeat 50% 50%;
     margin: -16px 0 0 -16px;
+}
+
+.add-left {
+    margin: 0;
+    padding: .8em;
+    position: fixed;
+    z-index: 100;
+    top: 4.45em;
+    left: .8em;
+    background-color: #ffffff;
 }
 
 .left-sidebar {
