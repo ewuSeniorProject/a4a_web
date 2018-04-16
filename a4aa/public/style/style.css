@@ -141,6 +141,7 @@ a:hover {
 
 .section-update {
     margin: 1em;
+    padding-left: 15em;
     position: relative;
     top: 6em;
     left: 0;
@@ -148,9 +149,19 @@ a:hover {
 
 .section-add {
     margin: 1em;
-    padding-left: 10em;
+    padding-left: 5em;
     position: relative;
     top: 5.3em;
+}
+
+.add-left {
+    margin: 0;
+    padding: .8em;
+    position: fixed;
+    z-index: 100;
+    top: 4.45em;
+    left: .8em;
+    background-color: #ffffff;
 }
 
 .login {
@@ -412,16 +423,6 @@ a:hover {
     position: absolute;
     background: url('../img/loader-64x/Preloader_3.gif') no-repeat 50% 50%;
     margin: -16px 0 0 -16px;
-}
-
-.add-left {
-    margin: 0;
-    padding: .8em;
-    position: fixed;
-    z-index: 100;
-    top: 4.45em;
-    left: .8em;
-    background-color: #ffffff;
 }
 
 .left-sidebar {
