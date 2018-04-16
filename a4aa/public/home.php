@@ -63,7 +63,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                 <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
             </div>
         </nav>
-        <div class="page page-row">
+        <div class="page">
             <div class="left-sidebar">
                 <div class="left-sidebar-header">
                     <h5>
@@ -84,14 +84,13 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             </div>
             <div class="section">
                 <div class="container" id="establishment-list-wrapper">
-                    <div class="box-container col-12" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
+                    <div class="box-container" data-bind="template: {name: 'establishment-list-template',  foreach: establishmentList}"></div>
                 </div>
             </div>
         </div>
 
     <!-- Template -->
         <script type="text/html" id="establishment-list-template">
-            <div class="box-blank col-1">&nbsp;</div>
             <div class="box col-5">
                 <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
                     <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="icon col-2"><i class="fas fa-chevron-circle-right fa-lg"></i></div><br>
@@ -104,6 +103,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                     <span data-bind="text:contact_fname +' ' + contact_lname"></span><br>
                 </div>
             </div>
+            <div class="box-blank col-1"></div>
             <!--<div class="box-blank col-1">&emsp;</div>-->
 
         </script>

@@ -75,8 +75,8 @@ function addEstablishmentView() {
     });
 
 
-    $('#collapseTitle').html('Premises Information');
-    $('#cardTitle').html('Premises Information');
+    $('#collapseTitle').html('New Premises Information');
+    $('#cardTitle').html('New Premises Information');
 
     bodyHtml = '<div class="card-row">\n' +
     '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="name" class="form-control" id="name" required></div>\n' +
