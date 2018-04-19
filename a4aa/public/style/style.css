@@ -35,6 +35,8 @@ h3 {
 }
 
 h4 {
+    margin: .5em 0 0 0;
+    padding: 0;
     color: #ffffff;
     letter-spacing: normal;
     font-weight: bold;
@@ -53,7 +55,8 @@ h5 {
 h6 {
     margin: 0;
     padding: 1.5em 1em .5em 1em;
-    color: #bfff57;
+    /*color: #bfff57;*/
+    color: #2b4f27;
     letter-spacing: normal;
     font-weight: bolder;
     font-size: 17px;
@@ -285,6 +288,7 @@ a:hover {
     border-top-right-radius: 2px;
     background-color: lightslategrey;
     flex-wrap: nowrap;
+    align-items: flex-start;
 }
 
 .box-padding {
@@ -454,6 +458,7 @@ a:hover {
 .white-link {
     color: #ffffff;
     font-style: normal;
+    align-self: flex-end;
 }
 
 .dropdown-menu-right {
@@ -545,8 +550,10 @@ a:hover {
     margin: 0;
     padding: 0;
     height: available;
-    border-right: 1px solid #dde7ee;
-    background-color: #8095a9;
+    /*border-right: 1px solid #dde7ee;*/
+    /*background-color: #8095a9;*/
+    border-right: 1px solid #d3dde4;
+    background-color: #ffffff;
     align-items: flex-start;
     flex-wrap: nowrap;
     justify-content: flex-start;
@@ -554,10 +561,11 @@ a:hover {
 
 .left-sidebar-header {
     margin: 0;
-    padding: 1em 1em 1em 1em;
+    padding: 1.2em 1.3em 1em 1.3em;
     width: 100%;
     background-color: #e3edf4;
-    box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.2);
+    /*border-bottom: 1px solid #dde7ee;*/
+    /*box-shadow: -2px 2px 3px 0 hsla(0,0%,0%,0.15);*/
     color: #000000;
 }
 
@@ -574,19 +582,26 @@ a:hover {
 }
 
 .left-sidebar-row {
-    margin: 0;
+    margin: 0 .3em .4em .3em;
     padding: .25em 1em;
-    background-color: #8095a9;
-    color: #ffffff;
-}
-
-.left-sidebar-row:hover {
-    background-color: rgb(68, 143, 195);
+    /*background-color: #8095a9;*/
+    /*color: #ffffff;*/
+    background-color: #ffffff;
     color: #000000;
 }
 
+.left-sidebar-row:hover {
+    /*background-color: rgb(68, 143, 195);*/
+    /*color: #000000;*/
+    border-radius: 0;
+    background-color: rgb(219, 227, 232);
+    color: #000000;
+    border-left: 5px solid rgb(68, 143, 195);
+}
+
 .left-sidebar-non-link {
-    color: #ffffff;
+    /*color: #ffffff;*/
+    color: #000000;
     font-style: normal;
 }
 
