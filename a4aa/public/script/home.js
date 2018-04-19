@@ -6,7 +6,6 @@ function start() {
     ko.applyBindings(EVM.viewModel, document.getElementById('establishment-list-wrapper'));
 }
 
-
 function EstablishmentModel(data) {
 
     var self = this;
@@ -22,7 +21,6 @@ function EstablishmentModel(data) {
     self.contact_lname = data.contact_lname;
     self.baseUrl = ("update.php");
 }
-
 
 function EstablishmentViewModel() {
 
