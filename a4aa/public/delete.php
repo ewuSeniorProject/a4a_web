@@ -57,29 +57,25 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                 <i class="fas fa-bars fa-lg"></i>
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="home.php">Home</a>
-                <a class="dropdown-item" href="add.php">Add New Survey</a>
-                <a class="dropdown-item" href="home.php">View/Edit Survey</a>
+                <a class="dropdown-item" href="home.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a class="dropdown-item" href="add.php"><i class="fas fa-clipboard-list"></i> Add New Survey</a>
                 <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
+                <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
         </nav>
         <div class="page">
             <div class="left-sidebar">
                 <div class="left-sidebar-header" aria-label="Delete Survey Title" >
                     <h5>
-                        Delete Survey
+                        <i class="fas fa-trash-alt"></i>&nbsp; Delete Survey
                     </h5>
                 </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column" aria-label="Navigaiton Links">
                         <li>&nbsp;</li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i>&ensp;Add New Survey</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-edit fa-lg"></i>&ensp;View/Edit Survey</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt fa-lg"></i> Dashboard</a>
                         </li>
                     </ul>
                 </div>

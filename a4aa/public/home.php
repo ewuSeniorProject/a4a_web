@@ -57,22 +57,28 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                 <i class="fas fa-bars fa-lg"></i>
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="add.php">Add New Survey</a>
+                <a class="dropdown-item" href="add.php"><i class="fas fa-clipboard-list"></i> Add New Survey</a>
+                <a class="dropdown-item" href="add.php"><i class="fas fa-trash-alt"></i> Delete Survey</a>
                 <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
+                <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
         </nav>
         <div class="page">
             <div class="left-sidebar">
+                <div class="left-sidebar-header" data-bind="foreach: establishmentVM.establishmentList">
+                    <h5>
+                        <i class="fas fa-tachometer-alt"></i>&nbsp; Dashboard
+                    </h5>
+                </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column">
                         <li>&nbsp;</li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i>&ensp;Add New Survey</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i> Add New Survey</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="delete.php" ><i class="fas fa-trash-alt fa-lg"></i>&ensp;Delete Survey</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="delete.php" ><i class="fas fa-trash-alt fa-lg"></i> Delete Survey</a>
                         </li>
                     </ul>
                 </div>
@@ -88,7 +94,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         <script type="text/html" id="establishment-list-template">
             <div class="box col-5">
                 <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
-                    <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="icon col-2"><i class="fas fa-chevron-circle-right fa-lg"></i></div><br>
+                    <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="icon col-2"><i class="fas fa-edit fa-lg"></i></div><br>
                 </a>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: website }" target="_new"></a><br>

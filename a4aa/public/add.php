@@ -59,10 +59,11 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                 <i class="fas fa-bars fa-lg"></i>
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="home.php">Home</a>
+                <a class="dropdown-item" href="home.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <a class="dropdown-item" href="add.php"><i class="fas fa-trash-alt"></i> Delete Survey</a>
                 <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
-                <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
+                <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
         </nav>
         <div class="page">
