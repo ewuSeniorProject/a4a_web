@@ -145,23 +145,6 @@ $(document).ready(function () {
         //     },
         // });
 
-        // $.getJSON(getUri, function (data) {
-        //     self.establishmentList($.map(data, function (item) {
-        //         return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.establishmentList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.establishmentList.push(new EstablishmentModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function CategoryModel(data) {
@@ -186,24 +169,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //     self.categoryList($.map(data, function (item) {
-        //         return new CategoryModel(item);
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.obsList.remove(item);
-        //         removeRequest(deleteUri, item.name());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.obsList.push(new Model({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function ParkingModel(parm) {
@@ -251,24 +216,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //     self.parkingList($.map(data, function (item) {
-        //         return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function RouteFromParkingModel(parm) {
@@ -316,24 +263,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function PassengerLoadingModel(parm) {
@@ -380,24 +309,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function StaBusModel(parm) {
@@ -448,23 +359,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function StaBusRouteModel(parm) {
@@ -499,24 +393,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function ExteriorPathwayModel(parm) {
@@ -569,23 +445,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function ExteriorStairsModel(parm) {
@@ -639,24 +498,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function ExteriorRampsModel(parm) {
@@ -721,23 +562,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function MainEntranceModel(parm) {
@@ -808,23 +632,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function InteriorModel(parm) {
@@ -889,23 +696,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function ElevatorModel(parm) {
@@ -961,24 +751,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function SignageModel(parm) {
@@ -1029,23 +801,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function EmergencyModel(parm) {
@@ -1097,24 +852,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function SeatingModel(parm) {
@@ -1182,24 +919,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function RestroomModel(parm) {
@@ -1244,23 +963,6 @@ $(document).ready(function () {
             }
         });
 
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function RestroomInfoModel(parm) {
@@ -1324,6 +1026,8 @@ $(document).ready(function () {
         this.sink_pipes.focused = ko.observable(false);
         this.soap_dispenser = ko.observable(parm.data.soap_dispenser);
         this.soap_dispenser.focused = ko.observable(false);
+        this.soap_height = ko.observable(parm.data.soap_height);
+        this.soap_height.focused = ko.observable(false);
         this.dry_fist = ko.observable(parm.data.dry_fist);
         this.dry_fist.focused = ko.observable(false);
         this.dry_fist_type = ko.observable(parm.data.dry_fist_type);
@@ -1372,24 +1076,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function CommunicationModel(parm) {
@@ -1493,24 +1179,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //         self.routeFromParkingList($.map(data, function (item) {
-        //         return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     function UserModel(parm) {
@@ -1536,24 +1204,6 @@ $(document).ready(function () {
                 }));
             }
         });
-
-        // $.getJSON(getUri, function (data) {
-        //     self.userList($.map(data, function (item) {
-        //         return new UserModel({data:item, postUri:postUri, putUri:putUri});
-        //     }));
-        // });
-
-        // self.removeItem = function (item) {
-        //     var con = confirm("Delete this record?");
-        //     if (con){
-        //         self.parkingList.remove(item);
-        //         removeRequest(deleteUri, item.est_id());
-        //     }
-        // };
-        //
-        // self.addItem = function () {
-        //     self.parkingList.push(new ParkingModel({name: "", postUri:postUri, putUri:putUri}));
-        // };
     }
 
     var myParentVM = {
@@ -1581,16 +1231,6 @@ $(document).ready(function () {
 
     ko.applyBindings(myParentVM);
 
-    // console.log("EST_ID: " + EST_ID);
-    // console.log("PARK_ID: " + PARK_ID);
-    // console.log("CAT_ID: " + CAT_ID);
-    // console.log("CAT_NAME: " + CAT_NAME);
-    // console.log("CONFIG_ID: " + CONFIG_ID);
-    // console.log("CONFIG_NAME: " + CONFIG_NAME);
-    // console.log("USER_ID: " + USER_ID);
-    // console.log("USER_NAME: " + USER_NAME);
-    // console.log("STA_ID: " + STA_ID);
-    // console.log("REST_ID: " + REST_ID);
 });
 
 function logout() {
@@ -1800,7 +1440,7 @@ function editCategory() {
             // console.log(JSON.stringify(data));
             var category_select = "";
 
-            category_select += '<div class="table-row-color">\n' +
+            category_select += '<div class="card-row">\n' +
                                '   <select name="category" id="category">\n';
 
             for (var i = 0; i < data.length; i ++) {
@@ -1881,7 +1521,7 @@ function editConfig() {
             // console.log(JSON.stringify(data));
             var config_select = "";
 
-            config_select += '<div class="table-row-color">\n' +
+            config_select += '<div class="card-row">\n' +
                 '   <select name="config" id="config">\n';
 
             for (var i = 0; i < data.length; i ++) {
@@ -1963,7 +1603,7 @@ function editUser() {
             // console.log(JSON.stringify(data));
             var user_select = "";
 
-            user_select += '<div class="table-row-color">\n' +
+            user_select += '<div class="card-row">\n' +
                 '   <select name="user" id="user">\n';
 
             for (var i = 0; i < data.length; i ++) {
@@ -2137,7 +1777,7 @@ function updatePassengerLoading() {
     var recommendations = document.getElementById("recommendationsPassengerLoading").value;
     var park_id = document.getElementById("passenger_park_id").value;
 
-    console.log("update.js:");
+    //console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2243,20 +1883,12 @@ function editSTARoute(index) {
             var west_bound_stop = data[0].west_bound_stop;
             var sta_bus_id = data[0].sta_bus_id;
 
-            // console.log("sta_route_id: " + sta_route_id);
-            // console.log("route_num: " + route_num);
-            // console.log("north_bound_stop: " + north_bound_stop);
-            // console.log("south_bound_stop: " + south_bound_stop);
-            // console.log("east_bound_stop: " + east_bound_stop);
-            // console.log("west_bound_stop: " + west_bound_stop);
-            // console.log("sta_bus_id: " + sta_bus_id);
-
 
             $("#sta-body").html(
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
                 '</div>\n'+
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
                 '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
                 '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
@@ -2934,6 +2566,7 @@ function editRestroomInfo(index) {
             var sink_clearance_height = data[0].sink_clearance_height;
             var sink_pipes = data[0].sink_pipes;
             var soap_dispenser = data[0].soap_dispenser;
+            var soap_height = data[0].soap_height;
             var dry_fist = data[0].dry_fist;
             var dry_fist_type = data[0].dry_fist_type;
             var dry_controls = data[0].dry_controls;
@@ -2952,119 +2585,97 @@ function editRestroomInfo(index) {
             var rest_id = data[0].rest_id;
 
             $("#restroom-body").html(
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="restroom_descEdit"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input class="form-control" id="restroom_descEdit" value="'+restroom_desc+'" ></div>\n' +
                 '   <div class="col-6"><label for="easy_openEdit">  Room door is easy to open, requiring 5 lb. or less force: </label> <input class="form-control" id="easy_openEdit" value="'+easy_open+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="lbs_forceEdit"> Actual force - lbs. or light/ med/ heavy: </label> <input class="form-control" id="lbs_forceEdit" value="'+lbs_force+'" ></div>\n' +
                 '   <div class="col-6"><label for="clearanceEdit"> Stall/Room door has at least 32” clearance when the door is open: </label> <input class="form-control" id="clearanceEdit" value="'+clearance+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="openingEdit"> Opening measurement (inches): </label> <input class="form-control" id="openingEdit" value="'+opening+'" ></div>\n' +
                 '   <div class="col-6"><label for="opens_outEdit"> The stall door opens to the outside: </label><input class="form-control" id="opens_outEdit" value="'+opens_out+'"></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="use_fistEdit"> The stall door can be opened, closed, and latched with a closed fist: </label><input class="form-control" id="use_fistEdit" value="'+use_fist+'"></div>\n' +
                 '   <div class="col-6"><label for="can_turn_aroundEdit"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <input class="form-control" id="can_turn_aroundEdit" value="'+can_turn_around+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="turn_widthEdit"> Stall/Room width (inches)​: </label> <input class="form-control" id="turn_widthEdit" value="'+turn_width+'" ></div>\n' +
                 '   <div class="col-6"><label for="turn_depthEdit"> Stall/Room depth (inches)​: </label> <input class="form-control" id="turn_depthEdit" value="'+turn_depth+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="close_chair_insideEdit"> The stall/room door can be closed once a wheelchair is inside: </label> <input class="form-control" id="close_chair_insideEdit" value="'+close_chair_inside+'" ></div>\n' +
                 '   <div class="col-6"><label for="grab_barsEdit"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <input class="form-control" id="grab_barsEdit" value="'+grab_bars+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="seat_height_reqEdit"> The height of the toilet seat is at least 17” from the floor: </label><input class="form-control" id="seat_height_reqEdit" value="'+seat_height_req+'"></div>\n' +
                 '   <div class="col-6"><label for="seat_heightEdit"> Seat height (inches): </label><input class="form-control" id="seat_heightEdit" value="'+seat_height+'"></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="flush_auto_fistEdit"> The toilet flushes automatically, or can be operated with a closed fist: </label><input class="form-control" id="flush_auto_fistEdit" value="'+flush_auto_fist+'"></div>\n' +
                 '   <div class="col-6"><label for="ambulatory_accessibleEdit"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <input class="form-control" id="ambulatory_accessibleEdit" value="'+ambulatory_accessible+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="bar_heightEdit"> Toilet height (inches): </label><input class="form-control" id="bar_heightEdit" value="'+bar_height+'"></div>\n' +
                 '   <div class="col-6"><label for="coat_hookEdit"> If there is a coat hook, it is between 35” and 48” from the floor: </label><input class="form-control" id="coat_hookEdit" value="'+coat_hook+'"></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="hook_heightEdit"> Hook height (inches): </label> <input class="form-control" id="hook_heightEdit" value="'+hook_height+'" ></div>\n' +
                 '   <div class="col-6"><label for="sinkEdit"> The height of the sink/countertop is 34” or less from the floor: </label><input class="form-control" id="sinkEdit" value="'+sink+'"></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="sink_heightEdit"> Sink/Countertop height (inches): </label> <input class="form-control" id="sink_heightEdit" value="'+sink_height+'" ></div>\n' +
                 '   <div class="col-6"><label for="faucetEdit"> The faucet control is 17” or less from the front edge of the sink counter: </label><input class="form-control" id="faucetEdit" value="'+faucet+'"></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="faucet_depthEdit"> Faucet depth (inches): </label> <input class="form-control" id="faucet_depthEdit" value="'+faucet_depth+'" ></div>\n' +
                 '   <div class="col-6"><label for="faucet_auto_fistEdit"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <input class="form-control" id="faucet_auto_fistEdit" value="'+faucet_auto_fist+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="sink_clearanceEdit"> There is room for a wheelchair to roll under the sink ​: </label><input class="form-control" id="sink_clearanceEdit" value="'+sink_clearance+'"></div>\n' +
                 '   <div class="col-6"><label for="sink_clearance_heightEdit"> Measurement (inches): </label> <input class="form-control" id="sink_clearance_heightEdit" value="'+sink_clearance_height+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
-                '   <div class="col-6"><label for="sink_pipesEdit"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" id="sink_pipesEdit" value="'+sink_pipes+'" ></div>\n' +
-                '   <div class="col-6"><label for="soap_dispenserEdit"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" id="soap_dispenserEdit" value="'+soap_dispenser+'" ></div>\n' +
+                '<div class="card-row">\n' +
+                '   <div class="col-4"><label for="sink_pipesEdit"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" id="sink_pipesEdit" value="'+sink_pipes+'" ></div>\n' +
+                '   <div class="col-4"><label for="soap_dispenserEdit"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" id="soap_dispenserEdit" value="'+soap_dispenser+'" ></div>\n' +
+                '   <div class="col-4"><label for="soap_heightEdit">  Soap dispenser height (inches): </label> <input class="form-control" id="soap_heightEdit" value="'+soap_height+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
-                '   <div class="col-6"><label for="dry_fistEdit">  Soap dispenser height (inches): </label> <input class="form-control" id="dry_fistEdit" value="'+dry_fist+'" ></div>\n' +
-                '   <div class="col-6"><label for="dry_fist_typeEdit"> Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" id="dry_fist_typeEdit" value="'+dry_fist_type+'" ></div>\n' +
+                '<div class="card-row">\n' +
+                '   <div class="col-6"><label for="dry_fistEdit">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" id="dry_fistEdit" value="'+dry_fist+'" ></div>\n' +
+                '   <div class="col-6"><label for="dry_fist_typeEdit"> Type Hand dryer/Towel dispenser: </label> <input class="form-control" id="dry_fist_typeEdit" value="'+dry_fist_type+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="dry_controlsEdit"> Operation type - automatic/closed fist: </label> <input class="form-control" id="dry_controlsEdit" value="'+dry_controls+'" ></div>\n' +
                 '   <div class="col-6"><label for="dry_control_heightEdit"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" id="dry_control_heightEdit" value="'+dry_control_height+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="mirrorEdit"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <input class="form-control" id="mirrorEdit" value="'+mirror+'" ></div>\n' +
                 '   <div class="col-6"><label for="mirror_heightEdit"> Mirror height (inches): </label><input class="form-control" id="mirror_heightEdit" value="'+mirror_height+'"></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="shelvesEdit"> If there are shelves to set items, they are 48” or less from the floor: </label><input class="form-control" id="shelvesEdit" value="'+shelves+'"></div>\n' +
                 '   <div class="col-6"><label for="shelf_heightEdit"> Shelf height (inches): </label> <input class="form-control" id="shelf_heightEdit" value="'+shelf_height+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-6"><label for="trash_receptaclesEdit"> Trash receptacles are positioned so they do not block the route to the door​: </label> <input class="form-control" id="trash_receptaclesEdit" value="'+trash_receptacles+'" ></div>\n' +
                 '   <div class="col-6"><label for="hygiene_seat_coverEdit"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <input class="form-control" id="hygiene_seat_coverEdit" value="'+hygiene_seat_cover+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '   <div class="col-4"><label for="hygiene_cover_heightEdit"> Height (inches): </label> <input class="form-control" id="hygiene_cover_heightEdit" value="'+hygiene_cover_height+'" ></div>\n' +
                 '   <div class="col-4"><label for="lightingRestroomInfoEdit"> Lighting is adequate: </label><input class="form-control" id="lightingRestroomInfoEdit" value="'+lighting+'" ></div>\n' +
-                '   <div class="col-4"><label for="lighting_typeRestroomInfoEdit"> Lighting level day/night: </label><input class="form-control" id="lighting_typeRestroomInfoEdit" value="'+lighting_type+'" ></div>\n' +
+                '   <div class="col-4"><label for="lighting_typeRestroomInfoEdit"> Lighting level low/medium/bright: </label><input class="form-control" id="lighting_typeRestroomInfoEdit" value="'+lighting_type+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '    <div class="col-12"><label for="commentRestroomInfoEdit"> Additional notes: </label><input class="form-control" id="commentRestroomInfoEdit" value="'+comment+'" ></div>\n' +
                 '</div>\n' +
-                '<div class="table-row-color">\n' +
+                '<div class="card-row">\n' +
                 '    <div class="col-12"><label for="recommendationsRestroomInfoEdit"> Recommendations: </label><input class="form-control" id="recommendationsRestroomInfoEdit" value="'+recommendations+'" ></div>\n' +
                 '   <input type="hidden" class="form-control" id="rest_info_idEdit" value="'+rest_info_id+'">\n'+
                 '   <input type="hidden" class="form-control" id="rest_idEdit" value="'+rest_id+'">\n'+
                 '</div>'
             );
-
-
-            // $("#sta-body").html(
-            //     '<div class="table-row-color">\n' +
-            //     '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
-            //     '</div>\n'+
-            //     '<div class="table-row-color">\n' +
-            //     '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
-            //     '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
-            //     '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
-            //     '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stop+'"></div>\n' +
-            //     '   <input type="hidden" class="form-control" id="sta_route_idEdit" value="'+sta_route_id+'">\n'+
-            //     '   <input type="hidden" class="form-control" id="sta_bus_idEdit" value="'+sta_bus_id+'">\n'+
-            //     '</div>'
-            // );
-            //
-            // $("#sta-footer").html(
-            //     '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
-            //     '&nbsp;\n' +
-            //     '<button type="button" class="btn btn-success" onclick="updateSTARoute()"><i class="fas fa-save"></i>&nbsp; Save</button>'
-            // );
-            //
-            // $("#sta-route-modal").modal('toggle');
 
             $("#restroom-footer").html(
                 '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
@@ -3129,9 +2740,6 @@ function updateRestroomInfo() {
     var comment = document.getElementById("commentRestroomInfoEdit").value;
     var recommendations = document.getElementById("recommendationsRestroomInfoEdit").value;
     var rest_id = document.getElementById("rest_idEdit").value;
-
-    // console.log("update.js:");
-    // console.log("rest_id: " + rest_id);
 
     $.ajax({
         accepts: "application/json",
@@ -3343,52 +2951,4 @@ function updateCommunication() {
     });
 }
 
-
-
-
-/**
- *
- * DELETE AT SOME POINT
- */
-function removeRequest(uri, record) {
-    $.ajax({
-        method:"DELETE",
-        url:uri,
-        data:{data:record}
-    }).done(function (data) {
-        // console.log(data);
-    }).fail(function (data) {
-        console.error(data);
-    });
-}
-
-function editRequest(uri, oldRecord, newRecord) {
-    var json = {
-        oldRecord:oldRecord,
-        newRecord:newRecord
-    };
-
-    var data = JSON.stringify(json);
-    $.ajax({
-        method:"PUT",
-        url:uri,
-        data:{data:data}
-    }).done(function (data) {
-        //console.log(data);
-    }).fail(function (data) {
-        console.error(data);
-    });
-}
-
-function newRecordRequest(uri, record){
-    $.ajax({
-        method:"POST",
-        url:uri,
-        data:{data:record}
-    }).done(function (data) {
-        console.log(data);
-    }).fail(function (data) {
-        console.error(data);
-    });
-}
 
