@@ -58,26 +58,21 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="add.php">Add New Survey</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
             </div>
         </nav>
         <div class="page">
             <div class="left-sidebar">
-                <div class="left-sidebar-header">
-                    <h5>
-                        <p>Information Here</p>
-                        <span class="pad" > Maybe stuff here?</span>
-                    </h5>
-                </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column">
-                        <span>
-                            <h6>Here Is A Title:</h6>
-                        </span>
+                        <li>&nbsp;</li>
                         <li class="nav-item">
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i>&ensp;Add New Survey</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="delete.php" ><i class="fas fa-trash-alt fa-lg"></i>&ensp;Delete Survey</a>
                         </li>
                     </ul>
                 </div>
