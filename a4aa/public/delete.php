@@ -31,8 +31,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-        <!--jQuery Validation Plugin -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
         <script type="text/javascript">
             $(window).on('load', function () {
@@ -43,13 +41,13 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             });
         </script>
 
-        <script src="script/add.js"></script>
+        <script src="script/delete.js"></script>
     </head>
     <body>
         <div id="page-preloader">
             <span class="spinner"></span>
         </div>
-        <nav class="navbar navbar-light bg-header" id="page-header">
+        <nav class="navbar navbar-light bg-header">
                     <span class="navbar-brand mb-0 pointer">
                         <a href="home.php">
                             <h1>Access 4 All Spokane</h1>
@@ -60,87 +58,54 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="home.php">Home</a>
+                <a class="dropdown-item" href="add.php">Add New Survey</a>
+                <a class="dropdown-item" href="home.php">View/Edit Survey</a>
                 <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
             </div>
         </nav>
         <div class="page">
-            <div class="add-left card-border card-shadow card-header-text" id="collapseTitle" ></div>
-            <div class="section-add">
-                <div class="container">
-                    <div class="card card-border card-shadow">
-                        <div class="card-header card-header-color card-header-text" id="cardTitle" ></div>
-                        <div class="card-body card-body-color-add" id="cardBody"></div>
-                        <div class="card-footer card-header-color text-muted" id="cardFooter"></div>
-                    </div>
+            <div class="left-sidebar">
+                <div class="left-sidebar-header" aria-label="Delete Survey Title" >
+                    <h5>
+                        Delete Survey
+                    </h5>
+                </div>
+                <div class="left-sidebar-container">
+                    <ul class="nav nav-pills flex-column" aria-label="Navigaiton Links">
+                        <li>&nbsp;</li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i>&ensp;Add New Survey</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-edit fa-lg"></i>&ensp;View/Edit Survey</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section">
+                <div class="container" id="delete-container">
+                    <div class="box-container" id="delete-view"></div>
                 </div>
             </div>
         </div>
 
-    <!-- GENERAL MODAL -->
-        <div class="modal fade" id="gen-modal" tabindex="-1" role="dialog" aria-labelledby="gen-modal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header modal-gen-header">
-                        <h5 class="modal-title modal-gen-title" id="gen-title"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div id="gen-body" class="modal-body modal-gen-body form-group"></div>
-                    <div id="gen-footer" class="modal-footer"> </div>
-                </div>
-            </div>
-        </div>
-    <!-- ALERT MODAL -->
+        <!-- ALERT MODAL -->
         <div class="modal fade bd-example-modal-lg" id="alert" tabindex="-1" role="dialog" aria-labelledby="alert" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-alert-header">
-                        <h5 class="modal-title modal-alert-title" id="alertTitle">Error</h5>
+                        <h5 class="modal-title modal-alert-title" id="alertTitle"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
                     </div>
                     <div id="alert-body" class="modal-body modal-alert-body"></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
+                    <div class="modal-footer" id="alertFooter"></div>
                 </div>
             </div>
         </div>
-    <!-- SUCCESS MODAL -->
-        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="success" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header modal-success-header">
-                        <h5 class="modal-title modal-success-title" id="successTitle">Success</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div id="success-body" class="modal-body modal-success-body"></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- RESTROOM MODAL -->
-        <div class="modal fade bd-example-modal-lg" id="restroom-modal" tabindex="-1" role="dialog" aria-labelledby="restroom-modal" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header modal-restroom-header">
-                        <h5 class="modal-title modal-restroom-title" id="restroomTitle">New Restroom Information</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
-                        </button>
-                    </div>
-                    <div id="restroom-body" class="modal-body card-border form-group"></div>
-                    <div id="restroom-footer" class="modal-footer"> </div>
-                </div>
-            </div>
-        </div>
+
     </body>
 </html>

@@ -62,6 +62,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="home.php">Home</a>
                 <a class="dropdown-item" href="add.php">Add New Survey</a>
+                <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()">Log Out</div>
             </div>
@@ -226,9 +227,9 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                             <div id="collapseTwo" class="collapse form-group" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div class="card-body card-border card-body-color-add" data-bind="foreach: parkingVM.parkingList">
                                     <div class="card-row">
-                                        <div class="col-4"><label for="lot_free"> Lot parking free/paid: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: lot_free.focused"></div>
-                                        <div class="col-4"><label for="street_metered"> Street parking metered/not metered: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: street_metered.focused"></div>
-                                        <div class="col-4"><label for="parking_type"> Other parking: </label><input class="form-control" id="parking_type" data-bind="value: parking_type, hasfocus: parking_type.focused"></div>
+                                        <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: lot_free.focused"></div>
+                                        <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: street_metered.focused"></div>
+                                        <div class="col-4"><label for="parking_type"> Other type of parking: </label><input class="form-control" id="parking_type" data-bind="value: parking_type, hasfocus: parking_type.focused"></div>
                                     </div>
                                     <div class="card-row">
                                         <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input class="form-control" id="total_num_spaces" data-bind="value: total_num_spaces,hasfocus: total_num_spaces.focused"></div>
@@ -495,8 +496,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                         <div class="card">
                             <div class="card-header phead-color pointer  non-link collapsed" id="headerEight"  data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
                                 <div>
-
-                                    <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Exterior Ramps
+                                    <a name="exterior-ramps"></a>
+                                    <i class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Exterior Ramps
                                 </div>
                             </div>
                             <div id="collapseEight" class="collapse form-group" aria-labelledby="headingEight" data-parent="#accordion">
@@ -970,12 +971,13 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     <div class="card-row">
                                         <div class="col-4"><label data-bind="attr:{for: 'sink_pipes_'+($index() + 1) }"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" data-bind="attr:{id: 'sink_pipes_'+($index() + 1) }, value: sink_pipes,hasfocus: sink_pipes.focused" readonly ></div>
                                         <div class="col-4"><label data-bind="attr:{for: 'soap_dispenser_'+($index() + 1) }"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" data-bind="attr:{id: 'soap_dispenser_'+($index() + 1) }, value: soap_dispenser,hasfocus: soap_dispenser.focused" readonly ></div>
-                                        <div class="col-4"><label data-bind="attr:{for: 'dry_fist_'+($index() + 1) }">  Soap dispenser height (inches): </label> <input class="form-control" data-bind="attr:{id: 'dry_fist_'+($index() + 1) }, value: dry_fist,hasfocus: dry_fist.focused" readonly ></div>
+                                        <div class="col-4"><label data-bind="attr:{for: 'soap_height_'+($index() + 1) }">  Soap dispenser height (inches): </label> <input class="form-control" data-bind="attr:{id: 'soap_height_'+($index() + 1) }, value: soap_height,hasfocus: soap_height.focused" readonly ></div>
                                     </div>
                                     <div class="card-row">
-                                        <div class="col-4"><label data-bind="attr:{for: 'dry_fist_type_'+($index() + 1) }"> Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" data-bind="attr:{id: 'dry_fist_type_'+($index() + 1) }, value: dry_fist_type,hasfocus: dry_fist_type.focused" readonly ></div>
-                                        <div class="col-4"><label data-bind="attr:{for: 'dry_controls_'+($index() + 1) }"> Operation type - automatic/closed fist: </label> <input class="form-control" data-bind="attr:{id: 'dry_controls_'+($index() + 1) }, value: dry_controls,hasfocus: dry_controls.focused" readonly ></div>
-                                        <div class="col-4"><label data-bind="attr:{for: 'dry_control_height_'+($index() + 1) }"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" data-bind="attr:{id: 'dry_control_height_'+($index() + 1) }, value: dry_control_height,hasfocus: clearance.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'dry_fist_'+($index() + 1) }">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" data-bind="attr:{id: 'dry_fist_'+($index() + 1) }, value: dry_fist,hasfocus: dry_fist.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'dry_fist_type_'+($index() + 1) }"> Type Hand dryer/Towel dispenser: </label> <input class="form-control" data-bind="attr:{id: 'dry_fist_type_'+($index() + 1) }, value: dry_fist_type,hasfocus: dry_fist_type.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'dry_controls_'+($index() + 1) }"> Operation type - automatic/closed fist: </label> <input class="form-control" data-bind="attr:{id: 'dry_controls_'+($index() + 1) }, value: dry_controls,hasfocus: dry_controls.focused" readonly ></div>
+                                        <div class="col-3"><label data-bind="attr:{for: 'dry_control_height_'+($index() + 1) }"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" data-bind="attr:{id: 'dry_control_height_'+($index() + 1) }, value: dry_control_height,hasfocus: clearance.focused" readonly ></div>
                                     </div>
                                     <div class="card-row">
                                         <div class="col-3"><label data-bind="attr:{for: 'mirror_'+($index() + 1) }"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <input class="form-control" data-bind="attr:{id: 'mirror_'+($index() + 1) }, value: mirror,hasfocus: mirror.focused" readonly ></div>
@@ -1163,7 +1165,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
                     </div>
-                    <div id="restroom-body" class="modal-body modal-restroom-body col-12 form-group"></div>
+                    <div id="restroom-body" class="modal-body card-border form-group"></div>
                     <div id="restroom-footer" class="modal-footer"> </div>
                 </div>
             </div>
