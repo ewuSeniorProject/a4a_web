@@ -11,6 +11,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,7 +48,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
     </head>
     <body>
         <div id="page-preloader">
-            <span class="spinner"></span>
+            <span class="spinner">&nbsp;</span>
         </div>
         <nav class="navbar navbar-light bg-header" id="page-header">
                     <span class="navbar-brand mb-0 pointer">
