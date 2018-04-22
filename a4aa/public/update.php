@@ -3,7 +3,7 @@
 session_start();
 
 // If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
     exit;
 }
@@ -52,8 +52,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         </div>
         <nav class="navbar navbar-light bg-header">
             <span class="navbar-brand mb-0 pointer">
-                <a href="home.php">
-                    <h1>Access 4 All Spokane</h1>
+                <a href="home.php" class="h1">
+                    Access 4 All Spokane
                 </a>
             </span>
             <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
@@ -71,20 +71,27 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <!-- LEFT SIDEBAR -->
             <div class="left-sidebar">
                 <div class="left-sidebar-header" data-bind="foreach: establishmentVM.establishmentList">
-                    <h7>
-                        <p>Viewing/Editing:</p>
-                    </h7>
-                    <h5>
+                    <span class="h7">
+                        <?php if($_SESSION['role'] == 'admin') {
+                            echo
+                            '<p>Viewing/Editing:</p>';
+                        }
+                        else {
+                            echo
+                            '<p>Viewing:</p>';
+                        } ?>
+                    </span>
+                    <span class="h5">
                         <span class="pad" data-bind="text: name"></span>
-                    </h5>
+                    </span>
                 </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column">
                         <li><p> </p></li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt fa-lg"></i> Dashboard</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                         </li>
-                        <h6>Quick Access Shortcuts:</h6>
+                        <span class="h6">Quick Access Shortcuts:</span>
                         <li class="nav-item">
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Premises Information</a>
                         </li>
@@ -161,10 +168,20 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     <div class="card-row">
                                         <input type="hidden" class="form-control" id="cat_id" data-bind="value: cat_id">
                                         <div class="col-4">
-                                            <label for="cat_name">
-                                                <span onclick="editCategory()" class="pointer" title="Click To Change Category"><i class="fas fa-edit"></i>&nbsp;Category:</span>
-                                            </label>
-                                            <input onclick="editCategory()" class="form-control pointer" title="Click To Change Category" id="cat_name" data-bind="value: cat_name, hasfocus: cat_name.focused" readonly>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<label for="cat_name">
+                                                    <span onclick="editCategory()" class="pointer" title="Click To Change Category"><i class="fas fa-edit"></i>&nbsp;Category:</span>
+                                                </label>
+                                                <input onclick="editCategory()" class="form-control pointer" title="Click To Change Category" id="cat_name" data-bind="value: cat_name, hasfocus: cat_name.focused" readonly>';
+                                            }
+                                            else {
+                                                echo
+                                                '<label for="cat_name">
+                                                    <span title="Click To Change Category">Category:</span>
+                                                </label>
+                                                <input class="form-control" title="Category" id="cat_name" data-bind="value: cat_name, hasfocus: cat_name.focused" readonly>';
+                                            } ?>
                                         </div>
                                         <div class="col-4">
                                             <label for="subtype"> Subtype: </label>
@@ -172,10 +189,20 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                         </div>
                                         <input type="hidden" class="form-control" id="config_id" data-bind="value: config_id">
                                         <div class="col-4">
-                                            <label for="config_name">
-                                                <span onclick="editConfig()" class="pointer" title="Click To Change Configuration"><i class="fas fa-edit"></i>&nbsp;Configuration:</span>
-                                            </label>
-                                            <input onclick="editConfig()" class="form-control pointer" title="Click To Change Category" id="config_name" data-bind="value: config_name, hasfocus: config_name.focused" readonly>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<label for="config_name">
+                                                    <span onclick="editConfig()" class="pointer" title="Click To Change Configuration"><i class="fas fa-edit"></i>&nbsp;Configuration:</span>
+                                                </label>
+                                                <input onclick="editConfig()" class="form-control pointer" title="Click To Change Configuration" id="config_name" data-bind="value: config_name, hasfocus: config_name.focused" readonly>';
+                                            }
+                                            else {
+                                                echo
+                                                '<label for="config_name">
+                                                    <span title="Configuration">Configuration:</span>
+                                                </label>
+                                                <input class="form-control" title="Configuration" id="config_name" data-bind="value: config_name, hasfocus: config_name.focused" readonly>';
+                                            } ?>
                                         </div>
                                     </div>
                                     <div class="card-row">
@@ -199,10 +226,20 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                         <div class="col-4"><label for="contact_email"> Email: </label><input class="form-control" id="contact_email" data-bind="value: contact_email, hasfocus: contact_email.focused"></div>
                                         <input type="hidden" class="form-control" id="user_id" data-bind="value: user_id">
                                         <div class="col-4">
-                                            <label for="user_name">
-                                                <span onclick="editUser()" class="pointer" title="Click To Change Surveyor"><i class="fas fa-edit"></i>&nbsp;Surveyor:</span>
-                                            </label>
-                                            <input onclick="editUser()" class="form-control pointer" title="Click To Change Surveyor" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<label for="user_name">
+                                                    <span onclick="editUser()" class="pointer" title="Click To Change Surveyor"><i class="fas fa-edit"></i>&nbsp;Surveyor:</span>
+                                                </label>
+                                                <input onclick="editUser()" class="form-control pointer" title="Click To Change Surveyor" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly>';
+                                            }
+                                            else {
+                                                echo
+                                                '<label for="user_name">
+                                                    <span title="Surveyor">Surveyor:</span>
+                                                </label>
+                                                <input class="form-control" title="Surveyor" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly>';
+                                            } ?>
                                         </div>
                                         <div class="col-4"><label for="date"> Survey Date: </label><input class="form-control" type="date" id="date" data-bind="value: date, hasfocus: date.focused" required></div>
                                     </div>
@@ -212,7 +249,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_establishment" class="btn btn-success" onclick="updateEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_establishment" class="btn btn-success" onclick="updateEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -255,7 +295,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_parking" class="btn btn-success" onclick="updateParking()"><i class="fas fa-save"></i>&nbsp; Save Parking</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_parking" class="btn btn-success" onclick="updateParking()"><i class="fas fa-save"></i>&nbsp; Save Parking</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -296,7 +339,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_route_from_parking" class="btn btn-success" onclick="updateRouteFromParking()"><i class="fas fa-save"></i>&nbsp; Save Route From Parking</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_route_from_parking" class="btn btn-success" onclick="updateRouteFromParking()"><i class="fas fa-save"></i>&nbsp; Save Route From Parking</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -337,7 +383,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_passenger_loading" class="btn btn-success" onclick="updatePassengerLoading()"><i class="fas fa-save"></i>&nbsp; Save Passenger Loading Zones</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_passenger_loading" class="btn btn-success" onclick="updatePassengerLoading()"><i class="fas fa-save"></i>&nbsp; Save Passenger Loading Zones</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -366,7 +415,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                             <input type="hidden" class="form-control" data-bind="attr:{id : 'sta_route_id_'+($index() + 1)}, value: sta_route_id">
                                             <input type="hidden" class="form-control" data-bind="attr:{id : 'sta_bus_id_'+($index() + 1)}, value: sta_bus_id">
                                             <div class="col-2">
-                                                <button data-bind="attr:{id: 'edit_route_'+($index() + 1) }, click: editSTARoute.bind($data, $index() + 1)" class="btn btn-warning edit-text pointer"><i class="fas fa-edit"></i>&nbsp; Edit Route</button>
+                                                <?php if($_SESSION['role'] == 'admin') {
+                                                    echo
+                                                    '<button data-bind="attr:{id: \'edit_route_\'+($index() + 1) }, click: editSTARoute.bind($data, $index() + 1)" class="btn btn-warning edit-text pointer"><i class="fas fa-edit"></i>&nbsp; Edit Route</button>';
+                                                } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -395,7 +447,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_sta_bus" class="btn btn-success" onclick="updateSTABus()"><i class="fas fa-save"></i>&nbsp; Save STA Bus Information</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_sta_bus" class="btn btn-success" onclick="updateSTABus()"><i class="fas fa-save"></i>&nbsp; Save STA Bus Information</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -440,7 +495,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_exterior_pathways" class="btn btn-success" onclick="updateExteriorPathways()"><i class="fas fa-save"></i>&nbsp; Save Exterior Pathways</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_exterior_pathways" class="btn btn-success" onclick="updateExteriorPathways()"><i class="fas fa-save"></i>&nbsp; Save Exterior Pathways</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -488,7 +546,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_exterior_stairs" class="btn btn-success" onclick="updateExteriorStairs()"><i class="fas fa-save"></i>&nbsp; Save Exterior Stairs</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_exterior_stairs" class="btn btn-success" onclick="updateExteriorStairs()"><i class="fas fa-save"></i>&nbsp; Save Exterior Stairs</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -543,7 +604,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_exterior_ramps" class="btn btn-success" onclick="updateExteriorRamps()"><i class="fas fa-save"></i>&nbsp; Save Exterior Ramps</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_exterior_ramps" class="btn btn-success" onclick="updateExteriorRamps()"><i class="fas fa-save"></i>&nbsp; Save Exterior Ramps</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -604,7 +668,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_main_entrance" class="btn btn-success" onclick="updateMainEntrance()"><i class="fas fa-save"></i>&nbsp; Save Main Entrance</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_main_entrance" class="btn btn-success" onclick="updateMainEntrance()"><i class="fas fa-save"></i>&nbsp; Save Main Entrance</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -662,7 +729,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_interior" class="btn btn-success" onclick="updateInterior()"><i class="fas fa-save"></i>&nbsp; Save Interior</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_interior" class="btn btn-success" onclick="updateInterior()"><i class="fas fa-save"></i>&nbsp; Save Interior</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -713,7 +783,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_elevator" class="btn btn-success" onclick="updateElevator()"><i class="fas fa-save"></i>&nbsp; Save Elevator</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_elevator" class="btn btn-success" onclick="updateElevator()"><i class="fas fa-save"></i>&nbsp; Save Elevator</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -757,7 +830,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_signage" class="btn btn-success" onclick="updateSignage()"><i class="fas fa-save"></i>&nbsp; Save Signage</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_signage" class="btn btn-success" onclick="updateSignage()"><i class="fas fa-save"></i>&nbsp; Save Signage</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -802,7 +878,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_emergency_preparedness" class="btn btn-success" onclick="updateEmergencyPreparedness()"><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_emergency_preparedness" class="btn btn-success" onclick="updateEmergencyPreparedness()"><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -863,7 +942,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_seating" class="btn btn-success" onclick="updateSeating()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_seating" class="btn btn-success" onclick="updateSeating()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -902,7 +984,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_restroom" class="btn btn-success" onclick="updateRestroom()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_restroom" class="btn btn-success" onclick="updateRestroom()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -926,8 +1011,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                             <input class="form-control" id="restroom_number" data-bind="value: ($index() + 1)" readonly>
                                         </div>
                                         <div class="col-10">
-                                            <!-- , click: editRestroomInfo.bind($data, $index() + 1) -->
-                                            <button data-bind="attr:{id: 'edit_restroom_'+($index() + 1) }, click: editRestroomInfo.bind($data, $index() + 1) " class="btn btn-warning edit-text pointer"><i class="fas fa-edit"></i>&nbsp; Edit Restroom</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button data-bind="attr:{id: \'edit_restroom_\'+($index() + 1) }, click: editRestroomInfo.bind($data, $index() + 1) " class="btn btn-warning edit-text pointer"><i class="fas fa-edit"></i>&nbsp; Edit Restroom</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                     <div class="card-row">
@@ -1005,8 +1092,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     <div class="card-row-spacer">
                                         &nbsp;
                                     </div>
-                                    <div data-bind="if: ($index()+1)%2 != 0">
-                                        <hr>
+                                    <div class="card-row" data-bind="if: ($index()+1)%2 != 0">
+                                        <div class="hr-restroom col-12"></div>
                                     </div>
                                 </div>
                             </div>
@@ -1015,7 +1102,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                         <div class="card">
                             <div class="card-header phead-color pointer  non-link collapsed" id="headerSeventeen"  data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
                                 <div>
-                                    <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Communication Technologies & Customer Service
+                                    <i class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Communication Technologies & Customer Service
                                 </div>
                             </div>
                             <div id="collapseSeventeen" class="collapse form-group" aria-labelledby="headingSeventeen" data-parent="#accordion">
@@ -1095,7 +1182,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
                                     </div>
                                     <div class="card-row">
                                         <div class="col-4">
-                                            <button  type="button" id="save_communication" class="btn btn-success" onclick="updateCommunication()"><i class="fas fa-save"></i>&nbsp; Save Communication Technologies & Customer Service</button>
+                                            <?php if($_SESSION['role'] == 'admin') {
+                                                echo
+                                                '<button  type="button" id="save_communication" class="btn btn-success" onclick="updateCommunication()"><i class="fas fa-save"></i>&nbsp; Save Communication Technologies & Customer Service</button>';
+                                            } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -1113,7 +1203,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-alert-header">
-                        <h5 class="modal-title modal-alert-title" id="alertTitle">Error</h5>
+                        <span class="h5 modal-title modal-alert-title" id="alertTitle">Error</span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
@@ -1130,7 +1220,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-success-header">
-                        <h5 class="modal-title modal-success-title" id="successTitle">Success</h5>
+                        <span class="h5 modal-title modal-success-title" id="successTitle">Success</span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
@@ -1147,7 +1237,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-sta-header">
-                        <h5 class="modal-title modal-sta-title" id="staTitle">Edit STA Route</h5>
+                        <span class="h5 modal-title modal-sta-title" id="staTitle">Edit STA Route</span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
@@ -1162,7 +1252,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-restroom-header">
-                        <h5 class="modal-title modal-restroom-title" id="restroomTitle">Edit Restroom Information</h5>
+                        <span class="h5 modal-title modal-restroom-title" id="restroomTitle">Edit Restroom Information</span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>
@@ -1177,7 +1267,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-gen-header">
-                        <h5 class="modal-title modal-gen-title" id="gen-title"></h5>
+                        <span class="h5 modal-title modal-gen-title" id="gen-title"></span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>

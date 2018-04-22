@@ -28,7 +28,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
     exit;
 }
@@ -74,8 +74,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         </div>
         <nav class="navbar navbar-light bg-header">
             <span class="navbar-brand mb-0 pointer">
-                <a href="home.php">
-                    <h1>Access 4 All Spokane</h1>
+                <a href="home.php" class="h1">
+                    Access 4 All Spokane
                 </a>
             </span>
             <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
@@ -83,8 +83,12 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="add.php"><i class="fas fa-clipboard-list"></i> Add New Survey</a>
-                <a class="dropdown-item" href="add.php"><i class="fas fa-trash-alt"></i> Delete Survey</a>
-                <div class="dropdown-item"></div>
+                <?php if($_SESSION['role'] == 'admin') {
+                    echo
+                    '<a class="dropdown-item" href="add.php"><i class="fas fa-trash-alt"></i> Delete Survey</a>
+                     <div class="dropdown-item"></div>
+                    <a class="dropdown-item" href="users.php"><i class="fas fa-users"></i> Edit Users</a>';
+                } ?>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
@@ -92,19 +96,26 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         <div class="page">
             <div class="left-sidebar">
                 <div class="left-sidebar-header" data-bind="foreach: establishmentVM.establishmentList">
-                    <h5>
+                    <span class="h5">
                         <i class="fas fa-tachometer-alt"></i>&nbsp; Dashboard
-                    </h5>
+                    </span>
                 </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column">
                         <li>&nbsp;</li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list fa-lg"></i> Add New Survey</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="add.php" ><i class="fas fa-clipboard-list "></i> Add New Survey</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="delete.php" ><i class="fas fa-trash-alt fa-lg"></i> Delete Survey</a>
-                        </li>
+                        <?php if($_SESSION['role'] == 'admin') {
+                            echo
+                            '<li class="nav-item">
+                                <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="delete.php" ><i class="fas fa-trash-alt "></i> Delete Survey</a>
+                            </li>
+                            <li>&nbsp;</li>
+                            <li class="nav-item">
+                                <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="users.php" ><i class="fas fa-users "></i> Edit Users</a>
+                            </li>';
+                        } ?>
                     </ul>
                 </div>
             </div>
@@ -119,7 +130,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         <script type="text/html" id="establishment-list-template">
             <div class="box col-5">
                 <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
-                    <h4 class="col-10" data-bind="text:name"></h4>&nbsp;<div class="icon col-2"><i class="fas fa-edit fa-lg"></i></div><br>
+                    <span class="col-10 h4" data-bind="text:name"></span>&nbsp;<div class="icon col-2"><i class="fas fa-edit fa-lg"></i></div><br>
                 </a>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: website }" target="_new"></a><br>

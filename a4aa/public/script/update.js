@@ -1,4 +1,4 @@
-const EST_ID = localStorage.getItem("establishmentID");
+var EST_ID = localStorage.getItem("establishmentID");
 var PARK_ID = 0;
 var CAT_ID = 0;
 var CAT_NAME = "";
