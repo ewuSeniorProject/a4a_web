@@ -3,11 +3,18 @@
 session_start();
 
 // If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
     exit;
 }
+
+if($_SESSION['role'] !== 'admin'){
+    header("location: home.php");
+    exit;
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -49,8 +56,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         </div>
         <nav class="navbar navbar-light bg-header">
                     <span class="navbar-brand mb-0 pointer">
-                        <a href="home.php">
-                            <h1>Access 4 All Spokane</h1>
+                        <a href="home.php" class="h1">
+                            Access 4 All Spokane
                         </a>
                     </span>
             <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
@@ -58,7 +65,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="home.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <a class="dropdown-item" href="add.php"><i class="fas fa-clipboard-list"></i> Add New Survey</a>
                 <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
@@ -67,15 +73,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
         <div class="page">
             <div class="left-sidebar">
                 <div class="left-sidebar-header" aria-label="Delete Survey Title" >
-                    <h5>
+                    <span class="h5">
                         <i class="fas fa-trash-alt"></i>&nbsp; Delete Survey
-                    </h5>
+                    </span>
                 </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column" aria-label="Navigaiton Links">
                         <li>&nbsp;</li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt fa-lg"></i> Dashboard</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                         </li>
                     </ul>
                 </div>
@@ -92,7 +98,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header modal-alert-header">
-                        <h5 class="modal-title modal-alert-title" id="alertTitle"></h5>
+                        <span class="h5 modal-title modal-alert-title" id="alertTitle"></span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="fas fa-times"></i></span>
                         </button>

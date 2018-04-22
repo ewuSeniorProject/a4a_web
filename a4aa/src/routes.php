@@ -18,12 +18,38 @@ $app->get('/', function (Request $request, Response $response, array $args){
 // get establishment data
 $app->get('/establishment/', function (Request $request, Response $response, array $args){
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 
     $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
@@ -37,12 +63,38 @@ $app->get('/establishment/', function (Request $request, Response $response, arr
 // get establishment by id
 $app->get('/get/establishment/{id}', function (Request $request, Response $response, array $args){
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
 
@@ -58,12 +110,38 @@ $app->get('/get/establishment/{id}', function (Request $request, Response $respo
 // get establishment id by name and date
 $app->get('/get/establishment/{user_id}/{cat_id}/{config_id}/{year}/{month}/{day}/', function (Request $request, Response $response, array $args){
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $user_id = $args['user_id'];
     $cat_id = $args['cat_id'];
@@ -85,12 +163,38 @@ $app->get('/get/establishment/{user_id}/{cat_id}/{config_id}/{year}/{month}/{day
 // get establishment name by id
 $app->get('/get/establishment/name/{id}', function (Request $request, Response $response, array $args){
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $est_id = $args['id'];
 
@@ -106,12 +210,38 @@ $app->get('/get/establishment/name/{id}', function (Request $request, Response $
 // delete establishment data by id
 $app->delete('/delete/establishment/{id}', function (Request $request, Response $response, array $args){
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Establishment WHERE est_id=$id");
@@ -124,12 +254,38 @@ $app->delete('/delete/establishment/{id}', function (Request $request, Response 
 // post establishment data
 $app->post('/post/establishment/', function (Request $request, Response $response, array $args){
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -183,12 +339,38 @@ $app->post('/post/establishment/', function (Request $request, Response $respons
 // put establishment data
 $app->put('/put/establishment/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Establishment );
 //    $sth->execute();
@@ -200,12 +382,38 @@ $app->put('/put/establishment/', function (Request $request, Response $response,
 // put category data by cat id
 $app->put('/put/establishment/category/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -224,12 +432,38 @@ $app->put('/put/establishment/category/est/{id}', function (Request $request, Re
 // put config data by config id
 $app->put('/put/establishment/config/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -248,12 +482,38 @@ $app->put('/put/establishment/config/est/{id}', function (Request $request, Resp
 // put user data by user id
 $app->put('/put/establishment/user/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -272,12 +532,38 @@ $app->put('/put/establishment/user/est/{id}', function (Request $request, Respon
 // put establishment data by est id
 $app->put('/put/establishment/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -350,12 +636,38 @@ $app->put('/put/establishment/est/{id}', function (Request $request, Response $r
 // get all category
 $app->get('/category/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Category");
     $sth->execute();
@@ -368,12 +680,38 @@ $app->get('/category/', function (Request $request, Response $response, array $a
 // get category data by id
 $app->get('/get/category/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Category WHERE cat_id=$id");
@@ -387,12 +725,38 @@ $app->get('/get/category/{id}', function (Request $request, Response $response, 
 // delete category data by id
 $app->delete('/delete/category/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Category WHERE cat_id=$id");
@@ -405,12 +769,38 @@ $app->delete('/delete/category/{id}', function (Request $request, Response $resp
 // post category data
 $app->post('/post/category/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
@@ -422,12 +812,38 @@ $app->post('/post/category/', function (Request $request, Response $response, ar
 // put category data
 $app->put('/put/category/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
@@ -442,12 +858,38 @@ $app->put('/put/category/', function (Request $request, Response $response, arra
 // get all configuration
 $app->get('/configuration/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Configuration");
     $sth->execute();
@@ -460,12 +902,38 @@ $app->get('/configuration/', function (Request $request, Response $response, arr
 // get configuration data by id
 $app->get('/get/configuration/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Configuration WHERE config_id=$id");
@@ -479,12 +947,38 @@ $app->get('/get/configuration/{id}', function (Request $request, Response $respo
 // delete configuration data by id
 $app->delete('/delete/configuration/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Configuration WHERE config_id=$id");
@@ -497,12 +991,38 @@ $app->delete('/delete/configuration/{id}', function (Request $request, Response 
 // post configuration data
 $app->post('/post/configuration/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
@@ -514,12 +1034,38 @@ $app->post('/post/configuration/', function (Request $request, Response $respons
 // put configuration data
 $app->put('/put/configuration/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
@@ -534,14 +1080,40 @@ $app->put('/put/configuration/', function (Request $request, Response $response,
 // get all user
 $app->get('/user/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
+session_start();
+
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
     session_start();
+}
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
 
-    $sth = $this->db->prepare("SELECT * FROM User");
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
+
+    $sth = $this->db->prepare("SELECT * FROM User ORDER BY lname ASC");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
@@ -552,12 +1124,38 @@ $app->get('/user/', function (Request $request, Response $response, array $args)
 // get user data by id
 $app->get('/get/user/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
@@ -586,12 +1184,38 @@ $app->get('/get/user/mobile/{id}', function (Request $request, Response $respons
 // get user data by user name
 $app->get('/get/user/name/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
     $id = $data["user_id"];
@@ -607,12 +1231,38 @@ $app->get('/get/user/name/', function (Request $request, Response $response, arr
 // delete user data by id
 $app->delete('/delete/user/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM User WHERE user_id=$id");
@@ -625,12 +1275,38 @@ $app->delete('/delete/user/{id}', function (Request $request, Response $response
 // post user data
 $app->post('/post/user/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO User );
 //    $sth->execute();
@@ -670,21 +1346,74 @@ $app->post('/post/user/mobile', function (Request $request, Response $response, 
 });
 
 // put user data
-$app->put('/put/user/', function (Request $request, Response $response, array $args){ 
+$app->put('/put/user/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
+session_start();
+
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
     session_start();
+}
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
 
-//    $sth = $this->db->prepare("INSERT INTO User );
-//    $sth->execute();
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
+
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $fname = $data["fname"];
+    $lname = $data["lname"];
+    $user_name = $data["user_name"];
+    $email = $data["email"];
+    $role = $data["role"];
+    $active = $data["active"];
+
+    $sth = $this->db->prepare("UPDATE User SET fname = :fname,
+                                               lname = :lname,
+                                               user_name = :user_name,
+                                               email = :email,
+                                               role = :role,
+                                               active = :active
+                                               WHERE user_id=$id");
+
+    $sth->bindParam(':fname', $fname, PDO::PARAM_STR);
+    $sth->bindParam(':lname', $lname, PDO::PARAM_STR);
+    $sth->bindParam(':user_name', $user_name, PDO::PARAM_STR);
+    $sth->bindParam(':email', $email, PDO::PARAM_STR);
+    $sth->bindParam(':role', $role, PDO::PARAM_STR);
+    $sth->bindParam(':active', $active, PDO::PARAM_STR);
+    $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * PARKING ROUTES
@@ -692,12 +1421,38 @@ $app->put('/put/user/', function (Request $request, Response $response, array $a
 // get all parking
 $app->get('/parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Parking");
     $sth->execute();
@@ -710,12 +1465,38 @@ $app->get('/parking/', function (Request $request, Response $response, array $ar
 // get parking data by parking id
 $app->get('/get/parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Parking WHERE park_id=$id");
@@ -729,12 +1510,38 @@ $app->get('/get/parking/{id}', function (Request $request, Response $response, a
 // get parking data by establishment id
 $app->get('/get/parking/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     if (($this->db->prepare("SELECT * FROM Parking WHERE est_id=$id")) == null) {
@@ -757,12 +1564,38 @@ $app->get('/get/parking/est/{id}', function (Request $request, Response $respons
 // get parking id by establishment id
 $app->get('/get/park_id/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT park_id FROM Parking WHERE est_id=$id");
@@ -777,12 +1610,38 @@ $app->get('/get/park_id/est/{id}', function (Request $request, Response $respons
 // delete parking data by id
 $app->delete('/delete/parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE park_id=$id");
@@ -795,12 +1654,38 @@ $app->delete('/delete/parking/{id}', function (Request $request, Response $respo
 // delete parking data by establishment id
 $app->delete('/delete/parking/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE est_id=$id");
@@ -812,12 +1697,38 @@ $app->delete('/delete/parking/est/{id}', function (Request $request, Response $r
 // post parking data by est id
 $app->post('/post/parking/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $lot_free = "";
     $street_metered = "";
@@ -857,12 +1768,38 @@ $app->post('/post/parking/est/{id}', function (Request $request, Response $respo
 // post parking data
 $app->post('/post/parking/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -904,12 +1841,38 @@ $app->post('/post/parking/', function (Request $request, Response $response, arr
 // put parking data by est id
 $app->put('/put/parking/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -964,12 +1927,38 @@ $app->put('/put/parking/est/{id}', function (Request $request, Response $respons
 // get all route_from_parking
 $app->get('/route_from_parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking");
     $sth->execute();
@@ -982,12 +1971,38 @@ $app->get('/route_from_parking/', function (Request $request, Response $response
 // get route_from_parking data by route_from_parking id
 $app->get('/get/route_from_parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE route_park_id=$id");
@@ -1001,12 +2016,38 @@ $app->get('/get/route_from_parking/{id}', function (Request $request, Response $
 // get route_from_parking data by parking id
 $app->get('/get/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE park_id=$id");
@@ -1020,12 +2061,38 @@ $app->get('/get/route_from_parking/park/{id}', function (Request $request, Respo
 // delete route_from_parking data by id
 $app->delete('/delete/route_from_parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE route_park_id=$id");
@@ -1038,12 +2105,38 @@ $app->delete('/delete/route_from_parking/{id}', function (Request $request, Resp
 // delete route_from_parking data by parking id
 $app->delete('/delete/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE park_id=$id");
@@ -1056,12 +2149,38 @@ $app->delete('/delete/route_from_parking/park/{id}', function (Request $request,
 // post route_from_parking data
 $app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
     
     $data = $request->getParsedBody();
 
@@ -1103,12 +2222,38 @@ $app->post('/post/route_from_parking/', function (Request $request, Response $re
 // put route_from_parking data
 $app->put('/put/route_from_parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Route_From_Parking );
 //    $sth->execute();
@@ -1120,12 +2265,38 @@ $app->put('/put/route_from_parking/', function (Request $request, Response $resp
 // put route_from_parking data by park id
 $app->put('/put/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1180,12 +2351,38 @@ $app->put('/put/route_from_parking/park/{id}', function (Request $request, Respo
 // get all passenger_loading
 $app->get('/passenger_loading/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading");
     $sth->execute();
@@ -1198,12 +2395,38 @@ $app->get('/passenger_loading/', function (Request $request, Response $response,
 // get passenger_loading data by passenger_loading id
 $app->get('/get/passenger_loading/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE passenger_id=$id");
@@ -1217,12 +2440,38 @@ $app->get('/get/passenger_loading/{id}', function (Request $request, Response $r
 // get passenger_loading data by parking id
 $app->get('/get/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE park_id=$id");
@@ -1236,12 +2485,38 @@ $app->get('/get/passenger_loading/park/{id}', function (Request $request, Respon
 // delete passenger_loading data by id
 $app->delete('/delete/passenger_loading/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE passenger_id=$id");
@@ -1254,12 +2529,38 @@ $app->delete('/delete/passenger_loading/{id}', function (Request $request, Respo
 // delete passenger_loading data by parking id
 $app->delete('/delete/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE park_id=$id");
@@ -1272,12 +2573,38 @@ $app->delete('/delete/passenger_loading/park/{id}', function (Request $request, 
 // post passenger_loading data
 $app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
     
@@ -1319,12 +2646,38 @@ $app->post('/post/passenger_loading/', function (Request $request, Response $res
 // put passenger_loading data
 $app->put('/put/passenger_loading/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
 //    $sth->execute();
@@ -1336,12 +2689,38 @@ $app->put('/put/passenger_loading/', function (Request $request, Response $respo
 // put passenger_loading data by park id
 $app->put('/put/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1396,12 +2775,38 @@ $app->put('/put/passenger_loading/park/{id}', function (Request $request, Respon
 // get all sta_bus
 $app->get('/sta_bus/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM STA_Bus");
     $sth->execute();
@@ -1414,12 +2819,38 @@ $app->get('/sta_bus/', function (Request $request, Response $response, array $ar
 // get sta_bus data by sta_bus id
 $app->get('/get/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE sta_id=$id");
@@ -1433,12 +2864,38 @@ $app->get('/get/sta_bus/{id}', function (Request $request, Response $response, a
 // get sta_bus data by parking id
 $app->get('/get/sta_bus/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE park_id=$id");
@@ -1452,12 +2909,38 @@ $app->get('/get/sta_bus/park/{id}', function (Request $request, Response $respon
 // get sta_bus id by parking id
 $app->get('/get/sta_bus_id/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT sta_id FROM STA_Bus WHERE park_id=$id");
@@ -1471,12 +2954,38 @@ $app->get('/get/sta_bus_id/park/{id}', function (Request $request, Response $res
 // delete sta_bus data by  id
 $app->delete('/delete/sta_bus/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE sta_id=$id");
@@ -1489,12 +2998,38 @@ $app->delete('/delete/sta_bus/{id}', function (Request $request, Response $respo
 // delete sta_bus data by parking id
 $app->delete('/delete/sta_bus/park/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE park_id=$id");
@@ -1507,12 +3042,38 @@ $app->delete('/delete/sta_bus/park/{id}', function (Request $request, Response $
 // post sta_bus data
 $app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -1556,12 +3117,38 @@ $app->post('/post/sta_bus/', function (Request $request, Response $response, arr
 // put sta_bus data
 $app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
@@ -1573,12 +3160,38 @@ $app->put('/put/sta_bus/', function (Request $request, Response $response, array
 // put sta_bus data by park id
 $app->put('/put/sta_bus/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1636,12 +3249,38 @@ $app->put('/put/sta_bus/park/{id}', function (Request $request, Response $respon
 // get all sta_route
 $app->get('/sta_route/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM STA_Route");
     $sth->execute();
@@ -1654,12 +3293,38 @@ $app->get('/sta_route/', function (Request $request, Response $response, array $
 // get all sta_route data id
 $app->get('/get/sta_route/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$id");
@@ -1673,12 +3338,38 @@ $app->get('/get/sta_route/{id}', function (Request $request, Response $response,
 // get all sta_route data by sta_bus id
 $app->get('/get/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
 
@@ -1693,12 +3384,38 @@ $app->get('/get/sta_route/sta_bus/{id}', function (Request $request, Response $r
 // get single sta_route record by sta_route id and sta_bus id
 $app->get('/get/sta_route/single/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1715,12 +3432,38 @@ $app->get('/get/sta_route/single/sta_bus/{id}', function (Request $request, Resp
 // delete sta_route data by id
 $app->delete('/delete/sta_route/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_route_id=$id");
@@ -1733,12 +3476,38 @@ $app->delete('/delete/sta_route/{id}', function (Request $request, Response $res
 // delete sta_route data by sta_bus id
 $app->delete('/delete/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_bus_id=$id");
@@ -1751,12 +3520,38 @@ $app->delete('/delete/sta_route/sta_bus/{id}', function (Request $request, Respo
 // post sta_route data
 $app->post('/post/sta_route/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -1786,12 +3581,38 @@ $app->post('/post/sta_route/', function (Request $request, Response $response, a
 // put sta_route data
 $app->put('/put/sta_route/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
@@ -1803,12 +3624,38 @@ $app->put('/put/sta_route/', function (Request $request, Response $response, arr
 // put sta_route data by sta_bus id
 $app->put('/put/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1845,12 +3692,38 @@ $app->put('/put/sta_route/sta_bus/{id}', function (Request $request, Response $r
 // get all exterior_pathways
 $app->get('/exterior_pathways/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways");
     $sth->execute();
@@ -1863,12 +3736,38 @@ $app->get('/exterior_pathways/', function (Request $request, Response $response,
 // get exterior_pathways data by id
 $app->get('/get/exterior_pathways/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE ext_path_id=$id");
@@ -1882,12 +3781,38 @@ $app->get('/get/exterior_pathways/{id}', function (Request $request, Response $r
 // get exterior_pathways data by establishment id
 $app->get('/get/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE est_id=$id");
@@ -1901,12 +3826,38 @@ $app->get('/get/exterior_pathways/est/{id}', function (Request $request, Respons
 // delete exterior_pathways data by id
 $app->delete('/delete/exterior_pathways/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE exterior_pathways_id=$id");
@@ -1919,12 +3870,38 @@ $app->delete('/delete/exterior_pathways/{id}', function (Request $request, Respo
 // delete exterior_pathways data by establishment id
 $app->delete('/delete/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE est_id=$id");
@@ -1937,12 +3914,38 @@ $app->delete('/delete/exterior_pathways/est/{id}', function (Request $request, R
 // post exterior_pathways data
 $app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -1988,12 +3991,38 @@ $app->post('/post/exterior_pathways/', function (Request $request, Response $res
 // put exterior_pathways data by ext_path id and est id
 $app->put('/put/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2054,12 +4083,38 @@ $app->put('/put/exterior_pathways/est/{id}', function (Request $request, Respons
 // get all exterior_stairs
 $app->get('/exterior_stairs/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs");
     $sth->execute();
@@ -2072,12 +4127,38 @@ $app->get('/exterior_stairs/', function (Request $request, Response $response, a
 // get exterior_stairs data by id
 $app->get('/get/exterior_stairs/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE ext_stair_id=$id");
@@ -2091,12 +4172,38 @@ $app->get('/get/exterior_stairs/{id}', function (Request $request, Response $res
 // get exterior_stairs data by establishment id
 $app->get('/get/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE est_id=$id");
@@ -2110,12 +4217,38 @@ $app->get('/get/exterior_stairs/est/{id}', function (Request $request, Response 
 // delete exterior_stairs data by id
 $app->delete('/delete/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE ext_stair_id=$id");
@@ -2128,12 +4261,38 @@ $app->delete('/delete/exterior_stairs/{id}', function (Request $request, Respons
 // delete exterior_stairs data by establishment id
 $app->delete('/delete/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE est_id=$id");
@@ -2146,12 +4305,38 @@ $app->delete('/delete/exterior_stairs/est/{id}', function (Request $request, Res
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $stairs_required = "No";
     $stairs_available =  "";
@@ -2197,12 +4382,38 @@ $app->post('/post/exterior_stairs/{id}', function (Request $request, Response $r
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -2250,12 +4461,38 @@ $app->post('/post/exterior_stairs/', function (Request $request, Response $respo
 // put exterior_stairs data
 $app->put('/put/exterior_stairs/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs );
 //    $sth->execute();
@@ -2267,12 +4504,38 @@ $app->put('/put/exterior_stairs/', function (Request $request, Response $respons
 // put exterior_stairs data by ext_stair id and est id
 $app->put('/put/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2336,12 +4599,38 @@ $app->put('/put/exterior_stairs/est/{id}', function (Request $request, Response 
 // get all exterior_ramps
 $app->get('/exterior_ramps/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps");
     $sth->execute();
@@ -2354,12 +4643,38 @@ $app->get('/exterior_ramps/', function (Request $request, Response $response, ar
 // get exterior_ramps data by id
 $app->get('/get/exterior_ramps/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE ext_ramp_id=$id");
@@ -2373,12 +4688,38 @@ $app->get('/get/exterior_ramps/{id}', function (Request $request, Response $resp
 // get exterior_ramps data by establishment id
 $app->get('/get/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE est_id=$id");
@@ -2392,12 +4733,38 @@ $app->get('/get/exterior_ramps/est/{id}', function (Request $request, Response $
 // delete exterior_ramps data by id
 $app->delete('/delete/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE ext_ramp_id=$id");
@@ -2410,12 +4777,38 @@ $app->delete('/delete/exterior_ramps/{id}', function (Request $request, Response
 // delete exterior_ramps data by establishment id
 $app->delete('/delete/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE est_id=$id");
@@ -2428,12 +4821,38 @@ $app->delete('/delete/exterior_ramps/est/{id}', function (Request $request, Resp
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $ramp_required = "No";
     $ramp_available = "";
@@ -2489,12 +4908,38 @@ $app->post('/post/exterior_ramps/{id}', function (Request $request, Response $re
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -2552,12 +4997,38 @@ $app->post('/post/exterior_ramps/', function (Request $request, Response $respon
 // put exterior_ramps data
 $app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
@@ -2569,12 +5040,38 @@ $app->put('/put/exterior_ramps/', function (Request $request, Response $response
 // put exterior_ramps data by ext_ramp id and est id
 $app->put('/put/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2653,12 +5150,38 @@ $app->put('/put/exterior_ramps/est/{id}', function (Request $request, Response $
 // get all main_entrance
 $app->get('/main_entrance/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance");
     $sth->execute();
@@ -2671,12 +5194,38 @@ $app->get('/main_entrance/', function (Request $request, Response $response, arr
 // get main_entrance data by id
 $app->get('/get/main_entrance/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE main_ent_id=$id");
@@ -2690,12 +5239,38 @@ $app->get('/get/main_entrance/{id}', function (Request $request, Response $respo
 // get main_entrance data by establishment id
 $app->get('/get/main_entrance/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE est_id=$id");
@@ -2709,12 +5284,38 @@ $app->get('/get/main_entrance/est/{id}', function (Request $request, Response $r
 // delete main_entrance data by id
 $app->delete('/delete/main_entrance/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE main_ent_id=$id");
@@ -2727,12 +5328,38 @@ $app->delete('/delete/main_entrance/{id}', function (Request $request, Response 
 // delete main_entrance data by establishment id
 $app->delete('/delete/main_entrance/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE est_id=$id");
@@ -2745,12 +5372,38 @@ $app->delete('/delete/main_entrance/est/{id}', function (Request $request, Respo
 // post main_entrance data
 $app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -2814,12 +5467,38 @@ $app->post('/post/main_entrance/', function (Request $request, Response $respons
 // put main_entrance data
 $app->put('/put/main_entrance/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Main_Entrance );
 //    $sth->execute();
@@ -2831,12 +5510,38 @@ $app->put('/put/main_entrance/', function (Request $request, Response $response,
 // put main_entrance data by main_entrance id and est id
 $app->put('/put/main_entrance/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2924,12 +5629,38 @@ $app->put('/put/main_entrance/est/{id}', function (Request $request, Response $r
 // get all interior
 $app->get('/interior/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Interior");
     $sth->execute();
@@ -2942,12 +5673,38 @@ $app->get('/interior/', function (Request $request, Response $response, array $a
 // get interior data by id
 $app->get('/get/interior/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE interior_id=$id");
@@ -2961,12 +5718,38 @@ $app->get('/get/interior/{id}', function (Request $request, Response $response, 
 // get interior data by establishment id
 $app->get('/get/interior/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE est_id=$id");
@@ -2980,12 +5763,38 @@ $app->get('/get/interior/est/{id}', function (Request $request, Response $respon
 // delete interior data by id
 $app->delete('/delete/interior/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE interior_id=$id");
@@ -2998,12 +5807,38 @@ $app->delete('/delete/interior/{id}', function (Request $request, Response $resp
 // delete interior data by establishment id
 $app->delete('/delete/interior/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE est_id=$id");
@@ -3080,12 +5915,38 @@ $app->post('/post/interior/', function (Request $request, Response $response, ar
 // put interior data
 $app->put('/put/interior/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
@@ -3097,12 +5958,38 @@ $app->put('/put/interior/', function (Request $request, Response $response, arra
 // put interior data by interior id and est id
 $app->put('/put/interior/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3181,12 +6068,38 @@ $app->put('/put/interior/est/{id}', function (Request $request, Response $respon
 // get all elevator
 $app->get('/elevator/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Elevator");
     $sth->execute();
@@ -3199,12 +6112,38 @@ $app->get('/elevator/', function (Request $request, Response $response, array $a
 // get elevator data by id
 $app->get('/get/elevator/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE elevator_id=$id");
@@ -3218,12 +6157,38 @@ $app->get('/get/elevator/{id}', function (Request $request, Response $response, 
 // get elevator data by establishment id
 $app->get('/get/elevator/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE est_id=$id");
@@ -3237,12 +6202,38 @@ $app->get('/get/elevator/est/{id}', function (Request $request, Response $respon
 // delete elevator data by id
 $app->delete('/delete/elevator/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE elevator_id=$id");
@@ -3255,12 +6246,38 @@ $app->delete('/delete/elevator/{id}', function (Request $request, Response $resp
 // delete elevator data by establishment id
 $app->delete('/delete/elevator/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE est_id=$id");
@@ -3273,12 +6290,38 @@ $app->delete('/delete/elevator/est/{id}', function (Request $request, Response $
 // post elevator data
 $app->post('/post/elevator/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 
     $is_elevator = "";
@@ -3327,12 +6370,38 @@ $app->post('/post/elevator/est/{id}', function (Request $request, Response $resp
 // post elevator data
 $app->post('/post/elevator/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -3382,12 +6451,38 @@ $app->post('/post/elevator/', function (Request $request, Response $response, ar
 // put elevator data
 $app->put('/put/elevator/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
@@ -3399,12 +6494,38 @@ $app->put('/put/elevator/', function (Request $request, Response $response, arra
 // put elevator data by elevator id and est id
 $app->put('/put/elevator/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3471,12 +6592,38 @@ $app->put('/put/elevator/est/{id}', function (Request $request, Response $respon
 // get all signage
 $app->get('/signage/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Signage");
     $sth->execute();
@@ -3489,12 +6636,38 @@ $app->get('/signage/', function (Request $request, Response $response, array $ar
 // get signage data by id
 $app->get('/get/signage/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE sign_id=$id");
@@ -3508,12 +6681,38 @@ $app->get('/get/signage/{id}', function (Request $request, Response $response, a
 // get signage data by establishment id
 $app->get('/get/signage/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE est_id=$id");
@@ -3527,12 +6726,38 @@ $app->get('/get/signage/est/{id}', function (Request $request, Response $respons
 // delete signage data by id
 $app->delete('/delete/signage/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE sign_id=$id");
@@ -3545,12 +6770,38 @@ $app->delete('/delete/signage/{id}', function (Request $request, Response $respo
 // delete signage data by establishment id
 $app->delete('/delete/signage/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE est_id=$id");
@@ -3563,12 +6814,38 @@ $app->delete('/delete/signage/est/{id}', function (Request $request, Response $r
 // post signage data
 $app->post('/post/signage/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -3612,12 +6889,38 @@ $app->post('/post/signage/', function (Request $request, Response $response, arr
 // put signage data
 $app->put('/put/signage/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Signage );
 //    $sth->execute();
@@ -3629,12 +6932,38 @@ $app->put('/put/signage/', function (Request $request, Response $response, array
 // put signage data by signage id and est id
 $app->put('/put/signage/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3692,12 +7021,38 @@ $app->put('/put/signage/est/{id}', function (Request $request, Response $respons
 // get all emergency
 $app->get('/emergency/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Emergency");
     $sth->execute();
@@ -3710,12 +7065,38 @@ $app->get('/emergency/', function (Request $request, Response $response, array $
 // get emergency data by id
 $app->get('/get/emergency/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE emergency_id=$id");
@@ -3729,12 +7110,38 @@ $app->get('/get/emergency/{id}', function (Request $request, Response $response,
 // get emergency data by establishment id
 $app->get('/get/emergency/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE est_id=$id");
@@ -3748,12 +7155,38 @@ $app->get('/get/emergency/est/{id}', function (Request $request, Response $respo
 // delete emergency data by id
 $app->delete('/delete/emergency/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE emergency_id=$id");
@@ -3766,12 +7199,38 @@ $app->delete('/delete/emergency/{id}', function (Request $request, Response $res
 // delete emergency data by establishment id
 $app->delete('/delete/emergency/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE est_id=$id");
@@ -3836,12 +7295,38 @@ $app->post('/post/emergency/', function (Request $request, Response $response, a
 // put emergency data
 $app->put('/put/emergency/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     
 //    $sth = $this->db->prepare("UPDATE Emergency SET evac_info = :evac_info, WHERE ");
@@ -3857,12 +7342,38 @@ $app->put('/put/emergency/', function (Request $request, Response $response, arr
 // put emergency data by emergency id and est id
 $app->put('/put/emergency/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3923,12 +7434,38 @@ $app->put('/put/emergency/est/{id}', function (Request $request, Response $respo
 // get all seating
 $app->get('/seating/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Seating");
     $sth->execute();
@@ -3941,12 +7478,38 @@ $app->get('/seating/', function (Request $request, Response $response, array $ar
 // get seating data by id
 $app->get('/get/seating/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE seating_id=$id");
@@ -3960,12 +7523,38 @@ $app->get('/get/seating/{id}', function (Request $request, Response $response, a
 // get seating data by establishment id
 $app->get('/get/seating/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE est_id=$id");
@@ -3979,12 +7568,38 @@ $app->get('/get/seating/est/{id}', function (Request $request, Response $respons
 // delete seating data by id
 $app->delete('/delete/seating/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE seating_id=$id");
@@ -3997,12 +7612,38 @@ $app->delete('/delete/seating/{id}', function (Request $request, Response $respo
 // delete seating data by establishment id
 $app->delete('/delete/seating/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE est_id=$id");
@@ -4015,12 +7656,38 @@ $app->delete('/delete/seating/est/{id}', function (Request $request, Response $r
 // post seating data
 $app->post('/post/seating/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -4083,12 +7750,38 @@ $app->post('/post/seating/', function (Request $request, Response $response, arr
 // put seating data
 $app->put('/put/seating/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
@@ -4100,12 +7793,38 @@ $app->put('/put/seating/', function (Request $request, Response $response, array
 // put seating data by seating id and est id
 $app->put('/put/seating/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -4190,12 +7909,38 @@ $app->put('/put/seating/est/{id}', function (Request $request, Response $respons
 // get all restroom
 $app->get('/restroom/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Restroom");
     $sth->execute();
@@ -4208,12 +7953,38 @@ $app->get('/restroom/', function (Request $request, Response $response, array $a
 // get restroom data by id
 $app->get('/get/restroom/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE restroom_id=$id");
@@ -4227,12 +7998,38 @@ $app->get('/get/restroom/{id}', function (Request $request, Response $response, 
 // get restroom data by establishment id
 $app->get('/get/restroom/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE est_id=$id");
@@ -4246,12 +8043,38 @@ $app->get('/get/restroom/est/{id}', function (Request $request, Response $respon
 // delete restroom data by id
 $app->delete('/delete/restroom/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE restroom_id=$id");
@@ -4264,12 +8087,38 @@ $app->delete('/delete/restroom/{id}', function (Request $request, Response $resp
 // delete restroom data by establishment id
 $app->delete('/delete/restroom/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE est_id=$id");
@@ -4282,12 +8131,38 @@ $app->delete('/delete/restroom/est/{id}', function (Request $request, Response $
 // post restroom data by est id
 $app->post('/post/restroom/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $public_restroom = "";
     $total_num = "";
@@ -4324,12 +8199,38 @@ $app->post('/post/restroom/est/{id}', function (Request $request, Response $resp
 // post restroom data
 $app->post('/post/restroom/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -4368,12 +8269,38 @@ $app->post('/post/restroom/', function (Request $request, Response $response, ar
 // put restroom data
 $app->put('/put/restroom/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Restroom );
 //    $sth->execute();
@@ -4385,12 +8312,38 @@ $app->put('/put/restroom/', function (Request $request, Response $response, arra
 // put restroom data by restroom id and est id
 $app->put('/put/restroom/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -4439,12 +8392,38 @@ $app->put('/put/restroom/est/{id}', function (Request $request, Response $respon
 // get all restroom_info
 $app->get('/restroom_info/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info");
     $sth->execute();
@@ -4457,12 +8436,38 @@ $app->get('/restroom_info/', function (Request $request, Response $response, arr
 // get restroom_info data by id
 $app->get('/get/restroom_info/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_info_id=$id");
@@ -4476,12 +8481,38 @@ $app->get('/get/restroom_info/{id}', function (Request $request, Response $respo
 // get restroom_info data by restroom id
 $app->get('/get/restroom_info/rest/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_id=$id");
@@ -4495,12 +8526,38 @@ $app->get('/get/restroom_info/rest/{id}', function (Request $request, Response $
 // delete restroom_info data by id
 $app->delete('/delete/restroom_info/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_info_id=$id");
@@ -4513,12 +8570,38 @@ $app->delete('/delete/restroom_info/{id}', function (Request $request, Response 
 // delete restroom_info data by restroom id
 $app->delete('/delete/restroom_info/rest/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_id=$id");
@@ -4531,12 +8614,38 @@ $app->delete('/delete/restroom_info/rest/{id}', function (Request $request, Resp
 // post restroom_info data
 $app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
     
@@ -4661,12 +8770,38 @@ $app->post('/post/restroom_info/', function (Request $request, Response $respons
 // put restroom_info data
 $app->put('/put/restroom_info/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
 //    $sth = $this->db->prepare("INSERT INTO Restroom_Info );
 //    $sth->execute();
@@ -4678,12 +8813,38 @@ $app->put('/put/restroom_info/', function (Request $request, Response $response,
 // put restroom data by restroom id and rest id
 $app->put('/put/restroom_info/rest/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -4839,12 +9000,38 @@ $app->put('/put/restroom_info/rest/{id}', function (Request $request, Response $
 // get all communication
 $app->get('/communication/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $sth = $this->db->prepare("SELECT * FROM Communication");
     $sth->execute();
@@ -4857,12 +9044,38 @@ $app->get('/communication/', function (Request $request, Response $response, arr
 // get communication data by id
 $app->get('/get/communication/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE communication_id=$id");
@@ -4876,12 +9089,38 @@ $app->get('/get/communication/{id}', function (Request $request, Response $respo
 // get communication data by establishment id
 $app->get('/get/communication/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE est_id=$id");
@@ -4895,12 +9134,38 @@ $app->get('/get/communication/est/{id}', function (Request $request, Response $r
 // delete communication data by id
 $app->delete('/delete/communication/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE communication_id=$id");
@@ -4913,12 +9178,38 @@ $app->delete('/delete/communication/{id}', function (Request $request, Response 
 // delete communication data by establishment id
 $app->delete('/delete/communication/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE est_id=$id");
@@ -4931,12 +9222,38 @@ $app->delete('/delete/communication/est/{id}', function (Request $request, Respo
 // post communication data
 $app->post('/post/communication/', function (Request $request, Response $response, array $args){ 
     // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
 
     $data = $request->getParsedBody();
 
@@ -5035,12 +9352,38 @@ $app->post('/post/communication/', function (Request $request, Response $respons
 // put communication data
 $app->put('/put/communication/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
     
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
@@ -5052,12 +9395,38 @@ $app->put('/put/communication/', function (Request $request, Response $response,
 // put communication data by communication id and est id
 $app->put('/put/communication/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
-    session_start();
+session_start();
 
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-        return $response->withRedirect($this->router->pathFor('root'));
-    }
+$time = $_SERVER['REQUEST_TIME'];
+
+/**
+ * for a 30 minute timeout, specified in seconds
+ */
+$timeout_duration = 7200;
+
+/**
+ * Here we look for the user's LAST_ACTIVITY timestamp. If
+ * it's set and indicates our $timeout_duration has passed,
+ * blow away any previous $_SESSION data and start a new one.
+ */
+if (isset($_SESSION['LAST_ACTIVITY']) &&
+    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    session_start();
+}
+
+/**
+ * Finally, update LAST_ACTIVITY so that our timeout
+ * is based on it and not the user's login time.
+ */
+$_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+    header("location: login.php");
+    exit;
+}
     
     $id = $args['id'];
     $data = $request->getParsedBody();
