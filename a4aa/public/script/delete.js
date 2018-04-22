@@ -9,27 +9,6 @@ $(document).ready(function () {
     addEstablishmentCardView();
 });
 
-// function EstablishmentViewModel() {
-//
-//     var self = this;
-//     self.establishmentList = ko.observableArray([]);
-//
-//     self.getEstablishmentList = function (uri) {
-//         $.getJSON(uri, function(data) {
-//             var mappedObjects = $.map(data, function (item) {
-//                 return new EstablishmentModel(item);
-//             });
-//             self.establishmentList(mappedObjects);
-//         })
-//     };
-//
-//     self.onLoad = function () {
-//         self.getEstablishmentList("establishment/");
-//     };
-//
-//     self.onLoad();
-// }
-
 function addEstablishmentCardView() {
 
     $('#delete-view').html('');
@@ -43,7 +22,7 @@ function addEstablishmentCardView() {
             for (var i = 0; i < data.length; i ++) {
                 htmlBody += '<div class="box-delete col-5">\n' +
                     '    <a class="box-title pointer" onclick="deleteEstablishmentId('+data[i].est_id+')" >\n' +
-                    '        <h4 class="col-10">'+data[i].name+'</h4>&nbsp;<div class="icon col-2"><i class="fas fa-trash-alt fa-lg"></i></div><br>\n' +
+                    '        <span class="col-10 h4">'+data[i].name+'</span>&nbsp;<div class="icon col-2"><i class="fas fa-trash-alt fa-lg"></i></div><br>\n' +
                     '    </a>\n' +
                     '    <div class="box-padding">\n' +
                     '        <a class="red-link" href="'+data[i].website+'" target="_new">'+data[i].website+'</a><br>\n' +
@@ -87,12 +66,11 @@ function deleteEstablishmentId(value) {
                 '           </div>\n' +
                 '           <div class="card-body card-body-color-delete" id="cardBody">\n' +
                 '              <div class="card-row">\n' +
-                '                   <span><h5>Are you sure you want to delete the survey for '+EST_NAME+'?<br><br>\n' +
+                '                   <span class="h5">Are you sure you want to delete the survey for '+EST_NAME+'?<br><br>\n' +
                 '                   <span class="alert-text ">\n ' +
                 '                       This action can not be undone. <br>\n' +
                 '                       All data will be permanently removed from the database.\n ' +
                 '                   </span>\n ' +
-                '                   </h5>\n' +
                 '                   </span>\n' +
                 '               </div>\n' +
                 '           </div>\n' +

@@ -4,7 +4,7 @@ require_once 'config.php';
 
 session_start();
 
-if (isset($_SESSION['role'])){
+if (isset($_SESSION['role']) && $_SESSION['active'] === 'yes'){
     header("location: home.php");
 }
 
@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT user_name, password, role FROM User WHERE user_name = ?";
+        $sql = "SELECT user_name, password, role, active FROM User WHERE user_name = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -49,16 +49,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_name, $hashed_password, $role);
+                    mysqli_stmt_bind_result($stmt, $user_name, $hashed_password, $role, $active);
 
                     if(mysqli_stmt_fetch($stmt)){
 
                         if(password_verify($password, $hashed_password)){
                             /* Password is correct, so start a new session and
-                            save the username to the session */
+                            save role and active to the session */
 
-//                            session_start();
+                            session_start();
                             $_SESSION['role'] = $role;
+                            $_SESSION['active'] = $active;
                             header("location: home.php");
                         } else{
                             // Display an error message if password is not valid
@@ -109,8 +110,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <body>
         <nav class="navbar navbar-light bg-header">
             <span class="navbar-brand mb-0 pointer">
-                <a href="home.php">
-                    <h1>Access 4 All Spokane</h1>
+                <a href="home.php" class="h1">
+                    Access 4 All Spokane
                 </a>
             </span>
         </nav>
@@ -119,7 +120,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="card card-fx">
                     <div class="card-header">
                         <div>
-                            <h2>Login</h2>
+                            <span class="h2">Login</span>
                             <p>Please fill in your credentials to login.</p>
                             <p class="form-text error"><?php echo $cred_err; ?></p>
                         </div>

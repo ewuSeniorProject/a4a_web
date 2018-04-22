@@ -6,18 +6,18 @@ var bodyHtml = "";
 
 $(document).ready(function () {
 
-    $('#collapseTitle').hide();
-
-    var entryheight = $('#cardTitle').height();
-
-    $(document).scroll(function () {
-        var y = $(this).scrollTop();
-        if (y > entryheight + 27) {
-            $('#collapseTitle').slideDown('fast');
-        } else {
-            $('#collapseTitle').slideUp('fast');
-        }
-    });
+    // $('#collapseTitle').hide();
+    //
+    // var entryheight = $('#cardTitle').height();
+    //
+    // $(document).scroll(function () {
+    //     var y = $(this).scrollTop();
+    //     if (y > entryheight + 27) {
+    //         $('#collapseTitle').slideDown('fast');
+    //     } else {
+    //         $('#collapseTitle').slideUp('fast');
+    //     }
+    // });
 
     addEstablishmentView();
 
@@ -77,12 +77,12 @@ function addEstablishmentView() {
         }
     });
 
-
     $('#collapseTitle').html('New Premises Information');
     $('#cardTitle').html('New Premises Information');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
+    bodyHtml = '<form name="add_establishment" id="add_establishment">\n ' +
+    '        <div class="card-row">\n' +
     '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="name" class="form-control" id="name" required></div>\n' +
     '            <div class="col-6"><label for="website"> Website: </label><input type="url" placeholder="http://www.website.com" class="form-control" id="website" ></div>\n' +
     '        </div>\n' +
@@ -114,7 +114,61 @@ function addEstablishmentView() {
         '        </div>\n' +
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="city"> City: </label><input type="text" class="form-control" id="city" ></div>\n' +
-        '            <div class="col-2"><label for="state"> State: </label><input type="text" class="form-control" id="state" ></div>\n' +
+        '            <div class="col-2"><label for="state"> State: </label><select class="form-control" id="state">\n' +
+        '               <option value="" disabled >Please select one</option>\n' +
+        '               <option value="AL">Alabama</option>\n' +
+        '               <option value="AK">Alaska</option>\n' +
+        '               <option value="AZ">Arizona</option>\n' +
+        '               <option value="AR">Arkansas</option>\n' +
+        '               <option value="CA">California</option>\n' +
+        '               <option value="CO">Colorado</option>\n' +
+        '               <option value="CT">Connecticut</option>\n' +
+        '               <option value="DE">Delaware</option>\n' +
+        '               <option value="DC">District Of Columbia</option>\n' +
+        '               <option value="FL">Florida</option>\n' +
+        '               <option value="GA">Georgia</option>\n' +
+        '               <option value="HI">Hawaii</option>\n' +
+        '               <option value="ID">Idaho</option>\n' +
+        '               <option value="IL">Illinois</option>\n' +
+        '               <option value="IN">Indiana</option>\n' +
+        '               <option value="IA">Iowa</option>\n' +
+        '               <option value="KS">Kansas</option>\n' +
+        '               <option value="KY">Kentucky</option>\n' +
+        '               <option value="LA">Louisiana</option>\n' +
+        '               <option value="ME">Maine</option>\n' +
+        '               <option value="MD">Maryland</option>\n' +
+        '               <option value="MA">Massachusetts</option>\n' +
+        '               <option value="MI">Michigan</option>\n' +
+        '               <option value="MN">Minnesota</option>\n' +
+        '               <option value="MS">Mississippi</option>\n' +
+        '               <option value="MO">Missouri</option>\n' +
+        '               <option value="MT">Montana</option>\n' +
+        '               <option value="NE">Nebraska</option>\n' +
+        '               <option value="NV">Nevada</option>\n' +
+        '               <option value="NH">New Hampshire</option>\n' +
+        '               <option value="NJ">New Jersey</option>\n' +
+        '               <option value="NM">New Mexico</option>\n' +
+        '               <option value="NY">New York</option>\n' +
+        '               <option value="NC">North Carolina</option>\n' +
+        '               <option value="ND">North Dakota</option>\n' +
+        '               <option value="OH">Ohio</option>\n' +
+        '               <option value="OK">Oklahoma</option>\n' +
+        '               <option value="OR">Oregon</option>\n' +
+        '               <option value="PA">Pennsylvania</option>\n' +
+        '               <option value="RI">Rhode Island</option>\n' +
+        '               <option value="SC">South Carolina</option>\n' +
+        '               <option value="SD">South Dakota</option>\n' +
+        '               <option value="TN">Tennessee</option>\n' +
+        '               <option value="TX">Texas</option>\n' +
+        '               <option value="UT">Utah</option>\n' +
+        '               <option value="VT">Vermont</option>\n' +
+        '               <option value="VA">Virginia</option>\n' +
+        '               <option value="WA" selected>Washington</option>\n' +
+        '               <option value="WV">West Virginia</option>\n' +
+        '               <option value="WI">Wisconsin</option>\n' +
+        '               <option value="WY">Wyoming</option>\n ' +
+        '               </select>\n ' +
+        '               </div>' +
         '            <div class="col-4"><label for="zip"> Zip: </label><input type="text" class="form-control" id="zip" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
@@ -142,14 +196,14 @@ function addEstablishmentView() {
         '        </div>\n' +
         '        <div class="card-row">\n' +
         '            <div class="col-12"><label for="commentEstablishment"> Comment: </label><input type="text" class="form-control" id="commentEstablishment"></div>\n' +
-        '        </div>';
+        '        </div>\n';
 
     $('#cardBody').html(bodyHtml);
     $('#name').focus();
 
     $('#cardFooter').html('<div class="col-4">\n' +
         '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
-        '</div>');
+        '</div></form>');
 }
 
 function addEstablishment() {
@@ -3742,4 +3796,9 @@ function addCommunication() {
         }
     });
 
+}
+
+function logout() {
+    localStorage.clear();
+    location.href = "logout.php";
 }

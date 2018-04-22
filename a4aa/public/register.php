@@ -4,7 +4,7 @@ require_once 'config.php';
 
 session_start();
 
-if (isset($_SESSION['role'])){
+if (isset($_SESSION['role']) && $_SESSION['active'] === 'yes'){
     header("location: home.php");
 }
 
@@ -60,7 +60,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "Error, please contact the admin.";
+                    $username_err = "User name is already in use.";
                 } else{
                     $user_name = trim($_POST["user_name"]);
                 }
@@ -158,8 +158,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <body>
         <nav class="navbar navbar-light bg-header">
             <span class="navbar-brand mb-0 pointer">
-                <a href="home.php">
-                    <h1>Access 4 All Spokane</h1>
+                <a href="home.php" class="h1">
+                    Access 4 All Spokane
                 </a>
             </span>
         </nav>
@@ -168,7 +168,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="card card-fx">
                     <div class="card-header col-12">
                         <div>
-                            <h2>Register</h2>
+                            <span class="h2">Register</span>
                             <p>Please fill this form to create an account.</p>
                         </div>
                     </div>
