@@ -81,9 +81,9 @@ function addEstablishmentView() {
     $('#cardTitle').html('New Premises Information');
     window.scrollTo(0,0);
 
-    bodyHtml = '<form action="" id="add_establishment">\n ' +
+    bodyHtml = '<form id="add_establishment">\n ' +
     '        <div class="card-row">\n' +
-    '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="name" class="form-control" name="eName" id="name" required></div>\n' +
+    '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="name" class="form-control" id="name" required></div>\n' +
     '            <div class="col-6"><label for="website"> Website: </label><input type="url" placeholder="http://www.website.com" class="form-control" id="website" ></div>\n' +
     '        </div>\n' +
     '        <div class="card-row">\n' +
@@ -202,24 +202,24 @@ function addEstablishmentView() {
     $('#name').focus();
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="save_establishment" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
+        '<button  type="button" id="save_establishment" class="btn btn-success"  onclick="addEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
         '</div></form>');
 
-    $("#add_establishment").validate({
-        rules: {
-            eName: {
-                required: true,
-                minlength: 2,
-                maxlength: 255
-            }
-        },
-        messages: {
-            eName: " Establishment name must be less than 256 characters long."
-        },
-        submitHandler: function(form) {
-            addEstablishment();
-        }
-    });
+    // $("#add_establishment").validate({
+    //     rules: {
+    //         eName: {
+    //             required: true,
+    //             minlength: 2,
+    //             maxlength: 255
+    //         }
+    //     },
+    //     messages: {
+    //         eName: " Establishment name must be less than 256 characters long."
+    //     },
+    //     submitHandler: function(form) {
+    //         addEstablishment();
+    //     }
+    // });
 }
 
 // '<button  type="submit" name="Submit" id="save_establishment" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
