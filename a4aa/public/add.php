@@ -58,7 +58,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
         <!--jQuery Validation Plugin -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
 
         <script type="text/javascript">
             $(window).on('load', function () {
@@ -104,6 +104,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                         <li class="nav-item">
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                         </li>
+                        <span class="h6">Currently Adding:</span>
                         <li>
                             <div class="left-sidebar-row-add left-sidebar-non-link" style="font-weight: bold" id="collapseTitle" ></div>
                         </li>
