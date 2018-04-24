@@ -27,7 +27,7 @@ function addEstablishmentCardView() {
                     '    <div class="box-padding">\n' +
                     '        <a class="red-link" href="'+data[i].website+'" target="_new">'+data[i].website+'</a><br>\n' +
                     '        <span>'+data[i].phone+'</span><br>\n' +
-                    '        <span >'+data[i].phone+'</span><br>\n' +
+                    '        <span >'+data[i].street+'</span><br>\n' +
                     '        <span>'+data[i].city+', '+data[i].state+', '+data[i].zip+'</span><br>\n' +
                     '        <span >'+data[i].contact_fname+' '+data[i].contact_lname+'</span><br>\n' +
                     '    </div>\n' +
@@ -59,19 +59,22 @@ function deleteEstablishmentId(value) {
 
             $('#delete-view').html('');
 
-            htmlBody = '<div class="container">\n ' +
+            htmlBody = '<div class="box-container col-12">\n ' +
                 '       <div class="card card-border-delete card-shadow-delete">\n' +
                 '           <div class="card-header card-header-color-delete card-header-text-delete" id="cardTitle" >\n' +
                 '               <span>Confirm Delete</span>' +
                 '           </div>\n' +
-                '           <div class="card-body card-body-color-delete" id="cardBody">\n' +
+                '           <div class="card-body card-body-color-delete col-12" id="cardBody">\n' +
                 '              <div class="card-row">\n' +
                 '                   <span class="h5">Are you sure you want to delete the survey for '+EST_NAME+'?<br><br>\n' +
-                '                   <span class="alert-text ">\n ' +
+                '                   <span class="alert-text">\n ' +
                 '                       This action can not be undone. <br>\n' +
                 '                       All data will be permanently removed from the database.\n ' +
                 '                   </span>\n ' +
                 '                   </span>\n' +
+                '                   <span class="text-white">\n ' +
+                '                       &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;' +
+                '                   </span>\n ' +
                 '               </div>\n' +
                 '           </div>\n' +
                 '           <div class="card-footer card-header-color-delete text-muted" id="cardFooter">\n' +
@@ -97,14 +100,17 @@ function deleteStart() {
 
     $('#delete-view').html('');
 
-    htmlBody = '<div class="container">\n ' +
+    htmlBody = '<div class="box-container col-12">\n ' +
         '       <div class="card card-border-delete card-shadow-delete">\n' +
         '           <div class="card-header card-header-color-delete card-header-text-delete" id="cardTitle" >\n' +
         '               <span>Deleting&nbsp;'+EST_NAME+'</span>' +
         '           </div>\n' +
-        '           <div class="card-body card-body-color-delete" id="cardBody">\n' +
+        '           <div class="card-body card-body-color-delete col-12" id="cardBody">\n' +
         '              <div class="card-row">\n' +
-        '               <span class="h8">The survey for&nbsp;'+EST_NAME+'&nbsp;is being deleted.</span><br>\n' +
+        '               <span class="h8">The survey for&nbsp;'+EST_NAME+'&nbsp;is being deleted. <br> Please wait.</span>\n' +
+        '                   <span class="text-white">\n ' +
+        '                       &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;' +
+        '                   </span>\n ' +
         '           </div>\n' +
         '           </div>\n' +
         '           <div class="card-footer card-header-color-delete text-muted" id="cardFooter">\n' +
@@ -453,16 +459,19 @@ function deleteEstablishment() {
 
             $('#delete-view').html('');
 
-            htmlBody = '<div class="container">\n ' +
+            htmlBody = '<div class="box-container col-12">\n ' +
                 '       <div class="card card-border-delete card-shadow-delete">\n' +
                 '           <div class="card-header card-header-color-delete card-header-text-delete" id="cardTitle" >\n' +
                 '               <span>Deleted</span>' +
                 '           </div>\n' +
-                '           <div class="card-body card-body-color-delete" id="cardBody">\n' +
+                '           <div class="card-body card-body-color-delete col-12" id="cardBody">\n' +
                 '              <div class="card-row">\n' +
                 '               <span class="h8">'+EST_NAME+'&nbsp;survey has been successfully removed.<br>\n' +
                 '                   The delete page will refresh in a few seconds.\n' +
                 '               </span>' +
+                '                   <span class="text-white">\n ' +
+                '                       &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;' +
+                '                   </span>\n ' +
                 '           </div>\n' +
                 '           </div>\n' +
                 '           <div class="card-footer card-header-color-delete text-muted" id="cardFooter">\n' +

@@ -59,6 +59,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
         <!--jQuery Validation Plugin -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 
         <script type="text/javascript">
             $(window).on('load', function () {
@@ -106,7 +107,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                         </li>
                         <span class="h6">Currently Adding:</span>
                         <li>
-                            <div class="left-sidebar-row-add left-sidebar-non-link" style="font-weight: bold" id="collapseTitle" ></div>
+                            <div class="left-sidebar-row-add left-sidebar-non-link" id="collapseTitle" ></div>
                         </li>
                     </ul>
                 </div>
@@ -116,7 +117,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                     <div class="card card-border card-shadow">
                         <div class="card-header card-header-color card-header-text" id="cardTitle" ></div>
                         <div class="card-body card-body-color-add" id="cardBody"></div>
-                        <div class="card-footer card-header-color text-muted" id="cardFooter"></div>
+                        <div class="card-footer card-header-color text-muted" id="cardFooter">&nbsp;</div>
                     </div>
                 </div>
             </div>
