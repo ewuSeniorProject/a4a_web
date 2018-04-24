@@ -22,16 +22,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -39,10 +33,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -67,16 +58,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -84,10 +69,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -114,16 +96,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -131,10 +107,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -167,16 +140,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -184,10 +151,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -214,16 +178,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -231,10 +189,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -258,16 +213,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -275,10 +224,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -343,16 +289,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -360,10 +300,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -386,16 +323,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -403,10 +334,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -436,16 +364,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -453,10 +375,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -486,16 +405,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -503,10 +416,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -536,16 +446,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -553,10 +457,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -640,16 +541,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -657,10 +552,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -684,16 +576,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -701,10 +587,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -729,16 +612,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -746,10 +623,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -773,16 +647,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -790,10 +658,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -816,16 +681,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -833,10 +692,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -862,16 +718,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -879,10 +729,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -906,16 +753,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -923,10 +764,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -951,16 +789,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -968,10 +800,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -995,16 +824,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1012,10 +835,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1038,16 +858,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1055,10 +869,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1084,16 +895,8 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1101,10 +904,6 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1121,6 +920,38 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// get all active users
+$app->get('/user/active/', function (Request $request, Response $response, array $args){
+// Initialize the session
+    session_start();
+
+    $time = $_SERVER['REQUEST_TIME'];
+
+    $timeout_duration = 1800;
+
+    if (isset($_SESSION['LAST_ACTIVITY']) &&
+        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        session_start();
+    }
+
+    $_SESSION['LAST_ACTIVITY'] = $time;
+
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+        header("location: login.php");
+        exit;
+    }
+
+    $sth = $this->db->prepare("SELECT * FROM User WHERE active='yes' ORDER BY lname ASC");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // get user data by id
 $app->get('/get/user/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
@@ -1128,16 +959,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1145,10 +970,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1188,16 +1010,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1205,10 +1021,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1235,16 +1048,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1252,10 +1059,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1279,16 +1083,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1296,10 +1094,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1352,16 +1147,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1369,10 +1158,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1425,16 +1211,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1442,10 +1222,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1469,16 +1246,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1486,10 +1257,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1514,16 +1282,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1531,10 +1293,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1568,16 +1327,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1585,10 +1338,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1614,16 +1364,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1631,10 +1375,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1658,16 +1399,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1675,10 +1410,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1701,16 +1433,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1718,10 +1444,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1772,16 +1495,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1789,10 +1506,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1845,16 +1559,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1862,10 +1570,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1931,16 +1636,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1948,10 +1647,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -1975,16 +1671,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -1992,10 +1682,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2020,16 +1707,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2037,10 +1718,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2065,16 +1743,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2082,10 +1754,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2109,16 +1778,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2126,10 +1789,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2153,16 +1813,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2170,10 +1824,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2226,16 +1877,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2243,10 +1888,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2269,16 +1911,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2286,10 +1922,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2355,16 +1988,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2372,10 +1999,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2399,16 +2023,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2416,10 +2034,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2444,16 +2059,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2461,10 +2070,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2489,16 +2095,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2506,10 +2106,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2533,16 +2130,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2550,10 +2141,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2577,16 +2165,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2594,10 +2176,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2650,16 +2229,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2667,10 +2240,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2693,16 +2263,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2710,10 +2274,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2779,16 +2340,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2796,10 +2351,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2823,16 +2375,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2840,10 +2386,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2868,16 +2411,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2885,10 +2422,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2913,16 +2447,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2930,10 +2458,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -2958,16 +2483,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -2975,10 +2494,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3002,16 +2518,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3019,10 +2529,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3046,16 +2553,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3063,10 +2564,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3121,16 +2619,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3138,10 +2630,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3164,16 +2653,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3181,10 +2664,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3253,16 +2733,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3270,10 +2744,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3297,16 +2768,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3314,10 +2779,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3342,16 +2804,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3359,10 +2815,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3388,16 +2841,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3405,10 +2852,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3436,16 +2880,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3453,10 +2891,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3480,16 +2915,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3497,10 +2926,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3524,16 +2950,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3541,10 +2961,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3585,16 +3002,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3602,10 +3013,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3628,16 +3036,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3645,10 +3047,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3696,16 +3095,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3713,10 +3106,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3740,16 +3130,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3757,10 +3141,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3785,16 +3166,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3802,10 +3177,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3830,16 +3202,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3847,10 +3213,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3874,16 +3237,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3891,10 +3248,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3918,16 +3272,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -3935,10 +3283,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -3995,16 +3340,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4012,10 +3351,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4087,16 +3423,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4104,10 +3434,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4131,16 +3458,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4148,10 +3469,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4176,16 +3494,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4193,10 +3505,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4221,16 +3530,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4238,10 +3541,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4265,16 +3565,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4282,10 +3576,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4309,16 +3600,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4326,10 +3611,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4386,16 +3668,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4403,10 +3679,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4465,16 +3738,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4482,10 +3749,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4508,16 +3772,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4525,10 +3783,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4603,16 +3858,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4620,10 +3869,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4647,16 +3893,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4664,10 +3904,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4692,16 +3929,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4709,10 +3940,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4737,16 +3965,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4754,10 +3976,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4781,16 +4000,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4798,10 +4011,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4825,16 +4035,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4842,10 +4046,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -4912,16 +4113,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -4929,10 +4124,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5001,16 +4193,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5018,10 +4204,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5044,16 +4227,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5061,10 +4238,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5154,16 +4328,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5171,10 +4339,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5198,16 +4363,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5215,10 +4374,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5243,16 +4399,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5260,10 +4410,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5288,16 +4435,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5305,10 +4446,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5332,16 +4470,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5349,10 +4481,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5376,16 +4505,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5393,10 +4516,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5471,16 +4591,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5488,10 +4602,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5514,16 +4625,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5531,10 +4636,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5633,16 +4735,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5650,10 +4746,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5677,16 +4770,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5694,10 +4781,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5722,16 +4806,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5739,10 +4817,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5767,16 +4842,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5784,10 +4853,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5811,16 +4877,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5828,10 +4888,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5919,16 +4976,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5936,10 +4987,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -5962,16 +5010,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -5979,10 +5021,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6072,16 +5111,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6089,10 +5122,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6116,16 +5146,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6133,10 +5157,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6161,16 +5182,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6178,10 +5193,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6206,16 +5218,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6223,10 +5229,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6250,16 +5253,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6267,10 +5264,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6294,16 +5288,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6311,10 +5299,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6374,16 +5359,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6391,10 +5370,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6455,16 +5431,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6472,10 +5442,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6498,16 +5465,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6515,10 +5476,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6596,16 +5554,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6613,10 +5565,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6640,16 +5589,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6657,10 +5600,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6685,16 +5625,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6702,10 +5636,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6730,16 +5661,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6747,10 +5672,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6774,16 +5696,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6791,10 +5707,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6818,16 +5731,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6835,10 +5742,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6893,16 +5797,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6910,10 +5808,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -6936,16 +5831,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -6953,10 +5842,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7025,16 +5911,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7042,10 +5922,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7069,16 +5946,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7086,10 +5957,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7114,16 +5982,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7131,10 +5993,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7159,16 +6018,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7176,10 +6029,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7203,16 +6053,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7220,10 +6064,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7299,16 +6140,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7316,10 +6151,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7346,16 +6178,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7363,10 +6189,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7438,16 +6261,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7455,10 +6272,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7482,16 +6296,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7499,10 +6307,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7527,16 +6332,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7544,10 +6343,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7572,16 +6368,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7589,10 +6379,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7616,16 +6403,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7633,10 +6414,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7660,16 +6438,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7677,10 +6449,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7754,16 +6523,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7771,10 +6534,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7797,16 +6557,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7814,10 +6568,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7913,16 +6664,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7930,10 +6675,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -7957,16 +6699,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -7974,10 +6710,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8002,16 +6735,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8019,10 +6746,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8047,16 +6771,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8064,10 +6782,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8091,16 +6806,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8108,10 +6817,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8135,16 +6841,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8152,10 +6852,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8203,16 +6900,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8220,10 +6911,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8273,16 +6961,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8290,10 +6972,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8316,16 +6995,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8333,10 +7006,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8396,16 +7066,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8413,10 +7077,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8440,16 +7101,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8457,10 +7112,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8485,16 +7137,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8502,10 +7148,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8530,16 +7173,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8547,10 +7184,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8574,16 +7208,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8591,10 +7219,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8618,16 +7243,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8635,10 +7254,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8774,16 +7390,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8791,10 +7401,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -8817,16 +7424,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -8834,10 +7435,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9004,16 +7602,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9021,10 +7613,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9048,16 +7637,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9065,10 +7648,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9093,16 +7673,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9110,10 +7684,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9138,16 +7709,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9155,10 +7720,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9182,16 +7744,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9199,10 +7755,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9226,16 +7779,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9243,10 +7790,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9356,16 +7900,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9373,10 +7911,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page
@@ -9399,16 +7934,10 @@ session_start();
 
 $time = $_SERVER['REQUEST_TIME'];
 
-/**
- * for a 30 minute timeout, specified in seconds
- */
+
 $timeout_duration = 1800;
 
-/**
- * Here we look for the user's LAST_ACTIVITY timestamp. If
- * it's set and indicates our $timeout_duration has passed,
- * blow away any previous $_SESSION data and start a new one.
- */
+
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
@@ -9416,10 +7945,7 @@ if (isset($_SESSION['LAST_ACTIVITY']) &&
     session_start();
 }
 
-/**
- * Finally, update LAST_ACTIVITY so that our timeout
- * is based on it and not the user's login time.
- */
+
 $_SESSION['LAST_ACTIVITY'] = $time;
 
 // If session variable is not set it will redirect to login page

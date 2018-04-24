@@ -718,6 +718,7 @@ a:hover {
 .section-add {
     position: relative;
     top: 5.3em;
+    left: 2em;
     margin: 1em;
     padding-left: 5em;
 }
@@ -745,6 +746,10 @@ a:hover {
 .table-row-color:hover {
     background-color: #96abbf;
     color: #000000;
+}
+
+.text-white {
+    color: #ffffff;
 }
 
 .white-link {

@@ -28,6 +28,7 @@ function addEstablishmentView() {
     var configData = "";
     var userData = "";
 
+    $('#cardBody').empty();
 
     $.ajax({
         async: false,
@@ -67,7 +68,7 @@ function addEstablishmentView() {
         method: "GET",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        url: "user/",
+        url: "user/active/",
         success: function (data) {
             userData = data;
         },
@@ -83,8 +84,8 @@ function addEstablishmentView() {
 
     bodyHtml = '<form id="add_establishment">\n ' +
     '        <div class="card-row">\n' +
-    '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="name" class="form-control" id="name" required></div>\n' +
-    '            <div class="col-6"><label for="website"> Website: </label><input type="url" placeholder="http://www.website.com" class="form-control" id="website" ></div>\n' +
+    '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="text" class="form-control" name="name" id="name" ></div>\n' +
+    '            <div class="col-6"><label for="website"> Website: </label><input type="url" placeholder="http://www.website.com" class="form-control" name="website" id="website" ></div>\n' +
     '        </div>\n' +
     '        <div class="card-row">\n' +
     '           <div class="col-4">\n' +
@@ -97,7 +98,7 @@ function addEstablishmentView() {
 
     bodyHtml += '</select>\n' +
         '</div>\n' +
-        '<div class="col-4"><label for="subtype"> Subtype: </label><input type="text" class="form-control" id="subtype" ></div>\n' +
+        '<div class="col-4"><label for="subtype"> Subtype: </label><input type="text" class="form-control" name="subtype" id="subtype" ></div>\n' +
         '<div class="col-4">\n' +
         '   <label for="config_id"> Configuration: </label><select class="form-control" name="config_id" id="config_id" required>\n' +
         '       <option value="" disabled selected>Please select one</option>\n';
@@ -110,11 +111,11 @@ function addEstablishmentView() {
         '</div>\n' +
         '</div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-12"><label for="street"> Street: </label><input type="text" class="form-control" id="street"></div>\n' +
+        '            <div class="col-12"><label for="street"> Street: </label><input type="text" class="form-control" name="street" id="street"></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-6"><label for="city"> City: </label><input type="text" class="form-control" id="city" ></div>\n' +
-        '            <div class="col-2"><label for="state"> State: </label><select class="form-control" id="state">\n' +
+        '            <div class="col-6"><label for="city"> City: </label><input type="text" class="form-control" name="city" id="city" ></div>\n' +
+        '            <div class="col-2"><label for="state"> State: </label><select class="form-control" name="state" id="state">\n' +
         '               <option value="" disabled >Please select one</option>\n' +
         '               <option value="AL">Alabama</option>\n' +
         '               <option value="AK">Alaska</option>\n' +
@@ -169,21 +170,21 @@ function addEstablishmentView() {
         '               <option value="WY">Wyoming</option>\n ' +
         '               </select>\n ' +
         '               </div>' +
-        '            <div class="col-4"><label for="zip"> Zip: </label><input type="text" class="form-control" id="zip" ></div>\n' +
+        '            <div class="col-4"><label for="zip"> Zip: </label><input class="form-control" name="zip" id="zip" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-6"><label for="phone"> Main Phone: </label><input type="text" placeholder="509-555-1234" class="form-control" id="phone" ></div>\n' +
-        '            <div class="col-6"><label for="phone_tty"> TTY/TTD: </label><input type="text" placeholder="509-555-1234" class="form-control" id="phone_tty" ></div>\n' +
+        '            <div class="col-6"><label for="phone"> Main Phone: </label><input type="tel" placeholder="509-555-1234" class="form-control" name="phone" id="phone" ></div>\n' +
+        '            <div class="col-6"><label for="phone_tty"> TTY/TTD: </label><input type="tel" placeholder="509-555-1234" class="form-control" name="phone_tty" id="phone_tty" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-4"><label for="contact_fname"> Contact First Name: </label><input type="name" class="form-control" id="contact_fname" ></div>\n' +
-        '            <div class="col-4"><label for="contact_lname"> Contact Last Name: </label><input type="name" class="form-control" id="contact_lname" ></div>\n' +
-        '            <div class="col-4"><label for="contact_title"> Contact Title: </label><input type="text" class="form-control" id="contact_title" ></div>\n' +
+        '            <div class="col-4"><label for="contact_fname"> Contact First Name: </label><input type="text" class="form-control" name="contact_fname" id="contact_fname" ></div>\n' +
+        '            <div class="col-4"><label for="contact_lname"> Contact Last Name: </label><input type="text" class="form-control" name="contact_lname" id="contact_lname" ></div>\n' +
+        '            <div class="col-4"><label for="contact_title"> Contact Title: </label><input type="text" class="form-control" name="contact_title" id="contact_title" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-4"><label for="contact_email"> Email: </label><input type="email" class="form-control" id="contact_email" ></div>\n' +
+        '            <div class="col-4"><label for="contact_email"> Email: </label><input type="email" class="form-control" name="contact_email" id="contact_email" ></div>\n' +
         '       <div class="col-4">\n' +
-        '           <label for="user_id"> User: </label><select class="form-control" name="user_id" id="user_id" required>\n' +
+        '           <label for="user_id"> User: </label><select class="form-control" name="user_id" name="user_id" id="user_id" required>\n' +
         '               <option value="" disabled selected>Please select one</option>\n';
 
     for (var i = 0; i < userData.length; i ++) {
@@ -192,37 +193,110 @@ function addEstablishmentView() {
 
     bodyHtml += '</select>\n' +
         '</div>\n' +
-        '            <div class="col-4"><label for="date"> Survey Date: </label><input type="date" min="2010-01-01" class="form-control" id="date" required></div>\n' +
+        '            <div class="col-4"><label for="date"> Survey Date: </label><input type="date" min="2010-01-01" class="form-control"  name="date"  id="date" required></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-12"><label for="commentEstablishment"> Comment: </label><input type="text" class="form-control" id="commentEstablishment"></div>\n' +
-        '        </div>\n';
+        '            <div class="col-12"><label for="commentEstablishment"> Comment: </label><input type="text" class="form-control"  name="commentEstablishment" id="commentEstablishment"></div>\n' +
+        '        </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-4">\n' +
+        '           <button  type="submit" id="save_establishment" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
+        '       </div>\n'+
+        '   </div>\n'+
+        '</form>';
 
-    $('#cardBody').html(bodyHtml);
+    $('#cardBody').append(bodyHtml);
     $('#name').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success"  onclick="addEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
-        '</div></form>');
+    $("#add_establishment").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                maxlength: 255
+            },
+            website: {
+                url: true,
+                maxlength: 255
+            },
+            cat_id: {
+                required: true
+            },
+            subtype: {
+                maxlength: 255
+            },
+            config_id: {
+                required: true
+            },
+            street: {
+                maxlength: 255
+            },
+            city: {
+                maxlength: 255
+            },
+            state: {
+                maxlength: 2
+            },
+            zip: {
+                zipcodeUS: true
+            },
+            phone: {
+                phoneUS: true
+            },
+            phone_tty: {
+                phoneUS: true
+            },
+            contact_fname: {
+                maxlength: 255
+            },
+            contact_lname: {
+                maxlength: 255
+            },
+            contact_title: {
+                maxlength: 255
+            },
+            contact_email: {
+                email: true,
+                maxlength: 255
+            },
+            user_id: {
+                required: true
+            },
+            date: {
+                required: true,
+                dateISO: true
+            },
+            config_comment: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            name: " Must be between 2 and 256 characters long.",
+            website: " Include http:// or https://.",
+            cat_id: " Must select one from the list.",
+            subtype: " Must be less than 256 characters long.",
+            config_id: " Must select one from the list.",
+            street: " Must be less than 256 characters long.",
+            city: " Must be less than 256 characters long.",
+            state: " Must select one from the list.",
+            zip: " US Zip Code: 12345 or 12345-1234.",
+            phone: " US Phone: 1(509)555-1234, (509)555-1234, 1-509-555-1234, 509-555-1234.",
+            phone_tty: " US Phone: 1(509)555-1234, (509)555-1234, 1-509-555-1234, 509-555-1234.",
+            contact_fname: " Must be less than 256 characters long.",
+            contact_lname: " Must be less than 256 characters long.",
+            contact_title: " Must be less than 256 characters long.",
+            contact_email: " Must be a valid email address.",
+            user_id: " Must select one from the list.",
+            date: " Must be a valid date.",
+            config_comment: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addEstablishment();
+        }
+    });
 
-    // $("#add_establishment").validate({
-    //     rules: {
-    //         eName: {
-    //             required: true,
-    //             minlength: 2,
-    //             maxlength: 255
-    //         }
-    //     },
-    //     messages: {
-    //         eName: " Establishment name must be less than 256 characters long."
-    //     },
-    //     submitHandler: function(form) {
-    //         addEstablishment();
-    //     }
-    // });
 }
-
-// '<button  type="submit" name="Submit" id="save_establishment" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
 
 
 function addEstablishment() {
@@ -322,8 +396,8 @@ function isParking() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="is_parking" class="btn btn-success" onclick="addParkingView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="button" id="is_not_parking" class="btn btn-secondary" onclick="addNoParking()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="submit" id="is_parking" class="btn btn-success" onclick="addParkingView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="submit" id="is_not_parking" class="btn btn-secondary" onclick="addNoParking()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_parking').focus();
 }
@@ -373,45 +447,46 @@ function addNoParking() {
 
 function addParkingView() {
 
-
+    $('#cardFooter').html('');
     $('#collapseTitle').html('New Parking');
     $('#cardTitle').html('New Parking');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label><select class="form-control" id="lot_free">\n' +
+    bodyHtml = '<form id="add_parking">\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label><select class="form-control" name="lot_free" id="lot_free">\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Free" >Free</option>\n' +
         '       <option value="Paid" >Paid</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '</div>\n' +
-        '    <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" id="street_metered" >\n' +
+        '    <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" name="street_metered" id="street_metered" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Metered" >Metered</option>\n' +
         '       <option value="Not Metered" >Not Metered</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '</div>\n' +
-        '    <div class="col-4"><label for="parking_type"> Other type of parking: </label><input class="form-control" id="parking_type" ></div>\n' +
+        '    <div class="col-4"><label for="parking_type"> Other type of parking: </label><input type="text" class="form-control" name="parking_type" id="parking_type" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input type="number" min="0" class="form-control" id="total_num_spaces" ></div>\n' +
-        '    <div class="col-6"><label for="num_reserved_spaces"> Number of reserved spaces: </label><input type="number" min="0" class="form-control" id="num_reserved_spaces" ></div>\n' +
+        '    <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input type="number" min="0" class="form-control" name="total_num_spaces" id="total_num_spaces" ></div>\n' +
+        '    <div class="col-6"><label for="num_reserved_spaces"> Number of reserved spaces: </label><input type="number" min="0" class="form-control" name="num_reserved_spaces" id="num_reserved_spaces" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="num_accessable_space"> Number of accessible spaces: </label><input type="number" min="0"  class="form-control" id="num_accessable_space" ></div>\n' +
-        '    <div class="col-6"><label for="num_van_accessible"> Number of van accessible spaces: </label><input type="number" min="0"  class="form-control" id="num_van_accessible" ></div>\n' +
+        '    <div class="col-6"><label for="num_accessable_space"> Number of accessible spaces: </label><input type="number" min="0"  class="form-control" id="num_accessable_space" id="num_accessable_space" ></div>\n' +
+        '    <div class="col-6"><label for="num_van_accessible"> Number of van accessible spaces: </label><input type="number" min="0"  class="form-control" id="num_van_accessible" id="num_van_accessible" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><select class="form-control" id="reserve_space_sign" >\n' +
+        '    <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><select class="form-control" name="reserve_space_sign" id="reserve_space_sign" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '</div>\n' +
-        '    <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><select class="form-control" id="reserve_space_obstacles" >\n' +
+        '    <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><select class="form-control" name="reserve_space_obstacles" id="reserve_space_obstacles" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -420,18 +495,60 @@ function addParkingView() {
         '</div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="comment"> Describe parking area: </label><input class="form-control" id="comment" ></div>\n' +
+        '    <div class="col-12"><label for="comment"> Describe parking area: </label><input class="form-control" name="comment" id="comment" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendations"> Recommendations: </label><input class="form-control" id="recommendations" ></div>\n' +
-        '</div> ';
+        '    <div class="col-12"><label for="recommendations"> Recommendations: </label><input class="form-control" name="recommendations" id="recommendations" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_parking" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Parking</button>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#lot_free').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_parking" class="btn btn-success" onclick="addParking()"><i class="fas fa-save"></i>&nbsp; Save Parking</button>\n' +
-        '</div>');
+    $("#add_parking").validate({
+        rules: {
+            parking_type: {
+                maxlength: 24
+            },
+            total_num_spaces: {
+                number: true
+            },
+            num_reserved_spaces: {
+                number: true
+            },
+            num_accessable_space: {
+                number: true
+            },
+            num_van_accessible: {
+                number: true
+            },
+            comment: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendations: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            parking_type: " Must be less than 25 characters long.",
+            total_num_spaces: " Must be a number.",
+            num_reserved_spaces: " Must be a number.",
+            num_accessable_space: " Must be a number.",
+            num_van_accessible: " Must be a number.",
+            comment:  " Only letters and numbers.",
+            recommendations: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addParking();
+        }
+    });
 }
 
 function addParking() {
@@ -509,16 +626,17 @@ function addRouteFromParkingView() {
     $('#cardTitle').html('New Route From Accessible Parking');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input type="number" min="0" class="form-control" id="distance" ></div>\n' +
-        '    <div class="col-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_width" >\n' +
+    bodyHtml = '<form id="add_route_from_parking">\n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input type="number" min="0" class="form-control" name="distance" id="distance" ></div>\n' +
+        '    <div class="col-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_width" id="min_width" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="route_surface"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="route_surface">\n' +
+        '    <div class="col-4"><label for="route_surface"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="route_surface" id="route_surface">\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -527,21 +645,21 @@ function addRouteFromParkingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="route_curbs"> Route has curb ramps and curb cuts where needed: </label> <select class="form-control" id="route_curbs" >\n' +
+        '    <div class="col-4"><label for="route_curbs"> Route has curb ramps and curb cuts where needed: </label> <select class="form-control" name="route_curbs" id="route_curbs" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warning"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warning" >\n' +
+        '    <div class="col-4"><label for="tactile_warning"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warning" id="tactile_warning" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="covered"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="covered" >\n' +
+        '    <div class="col-4"><label for="covered"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="covered" id="covered" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -550,21 +668,21 @@ function addRouteFromParkingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lighting"> Lighting is adequate: </label><select class="form-control" id="lighting" >\n' +
+        '    <div class="col-4"><label for="lighting"> Lighting is adequate: </label><select class="form-control" name="lighting" id="lighting" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_option"> Lighting level day/night: </label><select class="form-control" id="lighting_option" >\n' +
+        '    <div class="col-4"><label for="lighting_option"> Lighting level day/night: </label><select class="form-control" name="lighting_option" id="lighting_option" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_type"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_type" >\n' +
+        '    <div class="col-4"><label for="lighting_type"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_type" id="lighting_type" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -574,18 +692,44 @@ function addRouteFromParkingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentRouteFromParking"> Describe the route: </label><input class="form-control" id="commentRouteFromParking" ></div>\n' +
+        '    <div class="col-12"><label for="commentRouteFromParking"> Describe the route: </label><input type="text" class="form-control" name="commentRouteFromParking" id="commentRouteFromParking" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsRouteFromParking"> Recommendations: </label><input class="form-control" id="recommendationsRouteFromParking" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsRouteFromParking"> Recommendations: </label><input type="text" class="form-control" name="recommendationsRouteFromParking" id="recommendationsRouteFromParking" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '<div class="col-4">\n' +
+        '<button  type="submit" id="save_establishment" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Route From Accessible Parking</button>\n' +
+        '</div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#distance').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addRouteFromParking()"><i class="fas fa-save"></i>&nbsp; Route From Accessible Parking</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_route_from_parking").validate({
+        rules: {
+            distance: {
+                number: true
+            },
+            commentRouteFromParking: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsRouteFromParking: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentRouteFromParking:  " Only letters and numbers.",
+            recommendationsRouteFromParking: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addRouteFromParking();
+        }
+    });
 
 }
 
@@ -650,16 +794,17 @@ function addPassengerLoadingView() {
     $('#cardTitle').html('New Passenger Loading Zones');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <select class="form-control" id="designated_zonePassengerLoading" >\n' +
+    bodyHtml = '<form id="add_passenger_loading">\n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <select class="form-control" name="designated_zonePassengerLoading" id="designated_zonePassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input type="number" min="0" class="form-control" id="distancePassengerLoading"></div>\n' +
-        '    <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_widthPassengerLoading" >\n' +
+        '    <div class="col-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input type="number" min="0" class="form-control" name="distancePassengerLoading" id="distancePassengerLoading"></div>\n' +
+        '    <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_widthPassengerLoading" id="min_widthPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -668,21 +813,21 @@ function addPassengerLoadingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="passenger_surfacePassengerLoading" >\n' +
+        '    <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="passenger_surfacePassengerLoading" id="passenger_surfacePassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" id="tactile_warning_stripsPassengerLoading" >\n' +
+        '    <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" name="tactile_warning_stripsPassengerLoading" id="tactile_warning_stripsPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="coveredPassengerLoading" >\n' +
+        '    <div class="col-4"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="coveredPassengerLoading" id="coveredPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -691,21 +836,21 @@ function addPassengerLoadingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingPassengerLoading"> Lighting is adequate: </label><select class="form-control" id="lightingPassengerLoading" >\n' +
+        '    <div class="col-4"><label for="lightingPassengerLoading"> Lighting is adequate: </label><select class="form-control" name="lightingPassengerLoading" id="lightingPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionPassengerLoading"> Lighting level day/night: </label><select class="form-control" id="lighting_optionPassengerLoading" >\n' +
+        '    <div class="col-4"><label for="lighting_optionPassengerLoading"> Lighting level day/night: </label><select class="form-control" name="lighting_optionPassengerLoading" id="lighting_optionPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typePassengerLoading"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typePassengerLoading" >\n' +
+        '    <div class="col-4"><label for="lighting_typePassengerLoading"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typePassengerLoading" id="lighting_typePassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -715,18 +860,47 @@ function addPassengerLoadingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentPassengerLoading"> Describe the route: </label><input type="text" class="form-control" id="commentPassengerLoading" ></div>\n' +
+        '    <div class="col-12"><label for="commentPassengerLoading"> Describe the route: </label><input type="text" class="form-control" name="commentPassengerLoading" id="commentPassengerLoading" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsPassengerLoading"> Recommendations: </label><input type="text" class="form-control" id="recommendationsPassengerLoading" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsPassengerLoading"> Recommendations: </label><input type="text" class="form-control" name="recommendationsPassengerLoading" id="recommendationsPassengerLoading" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_establishment" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Passenger Loading Zones</button>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#designated_zonePassengerLoading').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addPassengerLoading()"><i class="fas fa-save"></i>&nbsp; Save Passenger Loading Zones</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_passenger_loading").validate({
+        rules: {
+            distancePassengerLoading: {
+                number: true
+            },
+            min_widthPassengerLoading: {
+                number: true
+            },
+            commentPassengerLoading: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsPassengerLoading: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentPassengerLoading:  " Only letters and numbers.",
+            recommendationsPassengerLoading: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addPassengerLoading();
+        }
+    });
 
 }
 
@@ -791,8 +965,9 @@ function addSTABusView() {
     $('#cardTitle').html('New STA Bus Information');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <select class="form-control" id="sta_service_area"  >\n' +
+    bodyHtml = '<form id="add_sta">\n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <select class="form-control" name="sta_service_area" id="sta_service_area" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -804,8 +979,8 @@ function addSTABusView() {
         '    </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="distanceStaBus"> Distance from nearest bus stop (feet): </label> <input type="number" min="0" class="form-control" id="distanceStaBus" ></div>\n' +
-        '    <div class="col-6"><label for="min_widthStaBus"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_widthStaBus" >\n' +
+        '    <div class="col-6"><label for="distanceStaBus"> Distance from nearest bus stop (feet): </label> <input type="number" min="0" class="form-control" name="distanceStaBus" id="distanceStaBus" ></div>\n' +
+        '    <div class="col-6"><label for="min_widthStaBus"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_widthStaBus" id="min_widthStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -814,21 +989,21 @@ function addSTABusView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="route_surfaceStaBus" >\n' +
+        '    <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="route_surfaceStaBus" id="route_surfaceStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warning_stripsStaBus" >\n' +
+        '    <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warning_stripsStaBus" id="tactile_warning_stripsStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="curb_cutsStaBus" >\n' +
+        '    <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="curb_cutsStaBus" id="curb_cutsStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -837,21 +1012,21 @@ function addSTABusView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><select class="form-control" id="lightingStaBus" >\n' +
+        '    <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><select class="form-control" name="lightingStaBus" id="lightingStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><select class="form-control" id="lighting_optionStaBus" >\n' +
+        '    <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><select class="form-control" name="lighting_optionStaBus" id="lighting_optionStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeStaBus" >\n' +
+        '    <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeStaBus" id="lighting_typeStaBus" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -859,7 +1034,7 @@ function addSTABusView() {
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><select class="form-control" id="shelter_bench" >\n' +
+        '    <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><select class="form-control" name="shelter_bench" id="shelter_bench" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -868,18 +1043,44 @@ function addSTABusView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentStaBus"> Describe the route: </label><input class="form-control" id="commentStaBus" ></div>\n' +
+        '    <div class="col-12"><label for="commentStaBus"> Describe the route: </label><input type="text" class="form-control" name="commentStaBus" id="commentStaBus" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsStaBus"> Recommendations: </label><input class="form-control" id="recommendationsStaBus" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsStaBus"> Recommendations: </label><input type="text" class="form-control" name="recommendationsStaBus" id="recommendationsStaBus" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '<div class="col-4">\n' +
+        '<button  type="submit" id="save_establishment" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save STA Bus Information</button>\n' +
+        '</div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#sta_service_area').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addSTABus()"><i class="fas fa-save"></i>&nbsp; Save STA Bus Information</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_sta").validate({
+        rules: {
+            distanceStaBus: {
+                number: true
+            },
+            commentStaBus: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsStaBus: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentStaBus:  " Only letters and numbers.",
+            recommendationsStaBus: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addSTABus();
+        }
+    });
 
 }
 
@@ -942,7 +1143,6 @@ function addSTABus() {
 
 function isSTARoute() {
 
-
     $('#collapseTitle').html('New STA Route');
     $('#cardTitle').html('New STA Route');
     window.scrollTo(0,0);
@@ -954,8 +1154,8 @@ function isSTARoute() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="is_sta_route" class="btn btn-success" onclick="addSTARouteView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="button" id="is_not_sta_route" class="btn btn-secondary" onclick="addExteriorPathwaysView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="submit" id="is_sta_route" class="btn btn-success" onclick="addSTARouteView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="submit" id="is_not_sta_route" class="btn btn-secondary" onclick="addExteriorPathwaysView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_sta_route').focus();
 }
@@ -966,24 +1166,48 @@ function addSTARouteView() {
     $('#cardTitle').html('New STA Route');
     window.scrollTo(0,0);
 
-    $('#cardBody').html(
+    $('#cardBody').append( '<form id="add_sta_route">\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input type="number" min="0" class="form-control" id="route_numEdit"></div>\n' +
+        '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input type="number" min="0" class="form-control" name="route_numEdit" id="route_numEdit" ></div>\n' +
         '</div>\n'+
         '<div class="card-row">\n' +
-        '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input type="number" min="0" class="form-control" id="north_bound_stopEdit" ></div>\n' +
-        '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input type="number" min="0" class="form-control" id="south_bound_stopEdit" ></div>\n' +
-        '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input type="number" min="0" class="form-control" id="east_bound_stopEdit" ></div>\n' +
-        '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input type="number" min="0" class="form-control" id="west_bound_stopEdit" ></div>\n' +
-        '</div>'
+        '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input type="number" min="0" class="form-control" name="north_bound_stopEdit" id="north_bound_stopEdit" ></div>\n' +
+        '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input type="number" min="0" class="form-control" name="south_bound_stopEdit" id="south_bound_stopEdit" ></div>\n' +
+        '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input type="number" min="0" class="form-control" name="east_bound_stopEdit" id="east_bound_stopEdit" ></div>\n' +
+        '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input type="number" min="0" class="form-control" name="west_bound_stopEdit" id="west_bound_stopEdit" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '<button type="submit" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save STA Route</button>\n' +
+        '&nbsp;\n' +
+        '<button type="submit" class="btn btn-secondary" onclick="addExteriorPathwaysView()">Cancel</button>\n ' +
+        '</div>\n ' +
+        '</form>'
     );
     $('#route_numEdit').focus();
 
-    $("#cardFooter").html(
-        '<button type="button" class="btn btn-success" onclick="addSTARoute()"><i class="fas fa-save"></i>&nbsp; Save STA Route</button>\n' +
-        '&nbsp;\n' +
-        '<button type="button" class="btn btn-secondary" onclick="addExteriorPathwaysView()">Cancel</button>'
-    );
+    $('#cardFooter').html('');
+    $("#add_sta_route").validate({
+        rules: {
+            route_numEdit: {
+                number: true
+            },
+            north_bound_stopEdit: {
+                number: true
+            },
+            south_bound_stopEdit: {
+                number: true
+            },
+            east_bound_stopEdit: {
+                number: true
+            },
+            west_bound_stopEdit: {
+                number: true
+            }
+        },
+        submitHandler: function(form) {
+            addSTARoute();
+        }
+    });
 
 }
 
@@ -1031,8 +1255,8 @@ function addSTARoute() {
             $('#cardBody').html(bodyHtml);
 
             $('#cardFooter').html('<div class="col-4">\n' +
-                '<button  type="button" id="is_another_sta" class="btn btn-success" onclick="addSTARouteView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-                '<button  type="button" id="is_not_another_sta" class="btn btn-secondary" onclick="addExteriorPathwaysView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+                '<button  type="submit" id="is_another_sta" class="btn btn-success" onclick="addSTARouteView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+                '<button  type="submit" id="is_not_another_sta" class="btn btn-secondary" onclick="addExteriorPathwaysView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
                 '</div>');
             $('#is_another_sta').focus();
 
@@ -1050,55 +1274,33 @@ function addExteriorPathwaysView() {
     $('#cardTitle').html('New Exterior Pathways');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <select class="form-control" id="service_animal" >\n' +
+    bodyHtml = '<form id="add_exterior_pathways">\n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <select class="form-control" name="service_animal" id="service_animal" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-8"><label for="service_animal_location"> Location of service animal relief: </label> <input type="text" class="form-control" id="service_animal_location" ></div>\n' +
+        '    <div class="col-8"><label for="service_animal_location"> Location of service animal relief: </label> <input type="text" class="form-control" name="service_animal_location" id="service_animal_location" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <select class="form-control" id="has_exterior_path" >\n' +
+        '    <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <select class="form-control" name="has_exterior_path" id="has_exterior_path" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><select class="form-control" id="min_widthExteriorPathway" >\n' +
+        '    <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><select class="form-control" name="min_widthExteriorPathway" id="min_widthExteriorPathway" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="pathway_surface" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="pathway_curbs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warningExteriorPathway" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><select class="form-control" id="slope" >\n' +
+        '    <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="pathway_surface" id="pathway_surface" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1107,21 +1309,44 @@ function addExteriorPathwaysView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorPathway" >\n' +
+        '    <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="pathway_curbs" id="pathway_curbs" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionExteriorPathway"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorPathway" >\n' +
+        '    <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warningExteriorPathway" id="tactile_warningExteriorPathway" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><select class="form-control" name="slope" id="slope" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorPathway" id="lightingExteriorPathway" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="lighting_optionExteriorPathway"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorPathway" id="lighting_optionExteriorPathway" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeExteriorPathway"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorPathway" >\n' +
+        '    <div class="col-4"><label for="lighting_typeExteriorPathway"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorPathway" id="lighting_typeExteriorPathway" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -1131,18 +1356,45 @@ function addExteriorPathwaysView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentExteriorPathway"> Describe the route: </label><input type="text" class="form-control" id="commentExteriorPathway" ></div>\n' +
+        '    <div class="col-12"><label for="commentExteriorPathway"> Describe the route: </label><input type="text" class="form-control" name="commentExteriorPathway" id="commentExteriorPathway" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsExteriorPathway"> Recommendations: </label><input type="text" class="form-control" id="recommendationsExteriorPathway" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsExteriorPathway"> Recommendations: </label><input type="text" class="form-control" name="recommendationsExteriorPathway" id="recommendationsExteriorPathway" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_establishment" class="btn btn-success" onclick="addExteriorPathways()"><i class="fas fa-save"></i>&nbsp; Save Exterior Pathways</button>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#service_animal').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addExteriorPathways()"><i class="fas fa-save"></i>&nbsp; Save Exterior Pathways</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_exterior_pathways").validate({
+        rules: {
+            service_animal_location: {
+                alphanumeric: true,
+                maxlength: 255
+            },
+            commentExteriorPathway: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsExteriorPathway: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentExteriorPathway:  " Only letters and numbers.",
+            recommendationsExteriorPathway: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addExteriorPathways();
+        }
+    });
 }
 
 function addExteriorPathways() {
@@ -1218,8 +1470,8 @@ function isExteriorStairs() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="is_stairs" class="btn btn-success" onclick="addExteriorStairsView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="button" id="is__not_stairs" class="btn btn-secondary" onclick="addNoExteriorStairs()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="submit" id="is_stairs" class="btn btn-success" onclick="addExteriorStairsView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="submit" id="is__not_stairs" class="btn btn-secondary" onclick="addNoExteriorStairs()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_stairs').focus();
 }
@@ -1259,32 +1511,33 @@ function addExteriorStairsView() {
     $('#cardTitle').html('New Exterior Stairs');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <select class="form-control" id="stairs_required" >\n' +
+    bodyHtml = '<form id="add_exterior_stairs">\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <select class="form-control" name="stairs_required" id="stairs_required" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <select class="form-control" id="stairs_available" >\n' +
+        '    <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <select class="form-control" name="stairs_available" id="stairs_available" >\n' +
         '       <option value="" disabled>Please select one</option>\n' +
         '       <option value="Yes" selected>Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="num_stairs"> Number of stairs: </label> <input type="number" min="0" class="form-control" id="num_stairs" ></div>\n' +
+        '    <div class="col-4"><label for="num_stairs"> Number of stairs: </label> <input type="number" min="0" class="form-control" name="num_stairs" id="num_stairs" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" id="handrail_both_sides" >\n' +
+        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" name="handrail_both_sides" id="handrail_both_sides" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><select class="form-control" id="handrail_side" >\n' +
+        '    <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><select class="form-control" name="handrail_side" id="handrail_side" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Left" >Left</option>\n' +
         '       <option value="Right" >Right</option>\n' +
@@ -1293,24 +1546,24 @@ function addExteriorStairsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-8"><label for="handrail_regulation_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" id="handrail_regulation_height" >\n' +
+        '    <div class="col-8"><label for="handrail_regulation_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" name="handrail_regulation_height" id="handrail_regulation_height" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="handrail_height"> Handrail height: </label><input type="number" min="0" class="form-control" id="handrail_height" ></div>\n' +
+        '    <div class="col-4"><label for="handrail_height"> Handrail height: </label><input type="number" min="0" class="form-control" name="handrail_height" id="handrail_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><select class="form-control" id="obstacles" >\n' +
+        '    <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><select class="form-control" name="obstacles" id="obstacles" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><select class="form-control" id="clearly_marked" >\n' +
+        '    <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><select class="form-control" name="clearly_marked" id="clearly_marked" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1319,21 +1572,21 @@ function addExteriorStairsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorStairs" >\n' +
+        '    <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorStairs" id="lightingExteriorStairs" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionExteriorStairs"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorStairs" >\n' +
+        '    <div class="col-4"><label for="lighting_optionExteriorStairs"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorStairs" id="lighting_optionExteriorStairs" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeExteriorStairs"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorStairs" >\n' +
+        '    <div class="col-4"><label for="lighting_typeExteriorStairs"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorStairs" id="lighting_typeExteriorStairs" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -1343,18 +1596,47 @@ function addExteriorStairsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentExteriorStairs"> Describe the route: </label><input type="text" class="form-control" id="commentExteriorStairs" ></div>\n' +
+        '    <div class="col-12"><label for="commentExteriorStairs"> Describe the route: </label><input type="text" class="form-control" name="commentExteriorStairs" id="commentExteriorStairs" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsExteriorStairs"> Recommendations: </label><input type="text" class="form-control" id="recommendationsExteriorStairs" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsExteriorStairs"> Recommendations: </label><input type="text" class="form-control" name="recommendationsExteriorStairs" id="recommendationsExteriorStairs" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_establishment" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Exterior Stairs</button>\n' +
+        '   </div>\n' +
+        '</div> \n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#stairs_required').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addExteriorStairs()"><i class="fas fa-save"></i>&nbsp; Save Exterior Stairs</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_exterior_stairs").validate({
+        rules: {
+            num_stairs: {
+                number: true
+            },
+            handrail_height: {
+                number: true
+            },
+            commentExteriorStairs: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsExteriorStairs: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentExteriorStairs:  " Only letters and numbers.",
+            recommendationsExteriorStairs: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addExteriorStairs();
+        }
+    });
 }
 
 function addExteriorStairs() {
@@ -1434,8 +1716,8 @@ function isExteriorRamps() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="is_ramps" class="btn btn-success" onclick="addExteriorRampsView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="button" id="is_not_ramps" class="btn btn-secondary" onclick="addNoExteriorRamps()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="submit" id="is_ramps" class="btn btn-success" onclick="addExteriorRampsView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="submit" id="is_not_ramps" class="btn btn-secondary" onclick="addNoExteriorRamps()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_ramps').focus();
 }
@@ -1475,56 +1757,57 @@ function addExteriorRampsView() {
     $('#cardTitle').html('New Exterior Ramps');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <select class="form-control" id="ramp_required" >\n' +
+    bodyHtml = '<form id="add_exterior_ramps">\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <select class="form-control" name="ramp_required" id="ramp_required" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <select class="form-control" id="ramp_available" >\n' +
+        '    <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <select class="form-control" name="ramp_available" id="ramp_available" >\n' +
         '       <option value="" disabled >Please select one</option>\n' +
         '       <option value="Yes" selected>Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <select class="form-control" id="min_widthExteriorRamps" >\n' +
+        '    <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <select class="form-control" name="min_widthExteriorRamps" id="min_widthExteriorRamps" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="width_between_handrails"> Ramps width: </label> <input type="number" min="0" class="form-control" id="width_between_handrails" ></div>\n' +
+        '    <div class="col-3"><label for="width_between_handrails"> Ramps width: </label> <input type="number" min="0" class="form-control" name="width_between_handrails" id="width_between_handrails" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="min_slope"> For each section of ramp, the RUNNING SLOPE is no greater than 1:12: </label> <select class="form-control" id="min_slope" >\n' +
+        '    <div class="col-6"><label for="min_slope"> For each section of ramp, the RUNNING SLOPE is no greater than 1:12: </label> <select class="form-control" name="min_slope" id="min_slope" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="slopeExteriorRamps"> Alternatively, the slope is less than 2 percent grade (%): </label><input type="number" min="0"  class="form-control" id="slopeExteriorRamps" ></div>\n' +
+        '    <div class="col-6"><label for="slopeExteriorRamps"> Alternatively, the slope is less than 2 percent grade (%): </label><input type="number" min="0"  class="form-control" name="slopeExteriorRamps" id="slopeExteriorRamps" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="level_landing_both"> There is a level landing at the top and bottom of the ramp: </label> <select class="form-control" id="level_landing_both" >\n' +
+        '    <div class="col-4"><label for="level_landing_both"> There is a level landing at the top and bottom of the ramp: </label> <select class="form-control" name="level_landing_both" id="level_landing_both" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="level_landing_location"> Landing location Top/Bottom: </label><select class="form-control" id="level_landing_location" >\n' +
+        '    <div class="col-4"><label for="level_landing_location"> Landing location Top/Bottom: </label><select class="form-control" name="level_landing_location" id="level_landing_location" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Top" >Top</option>\n' +
         '       <option value="Bottom" >Bottom</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="obstaclesExteriorRamps"> Ramps are clear of obstacles or protrusions: </label><select class="form-control" id="obstaclesExteriorRamps" >\n' +
+        '    <div class="col-4"><label for="obstaclesExteriorRamps"> Ramps are clear of obstacles or protrusions: </label><select class="form-control" name="obstaclesExteriorRamps" id="obstaclesExteriorRamps" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1533,14 +1816,14 @@ function addExteriorRampsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" id="handrails_both_sides" >\n' +
+        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" name="handrails_both_sides" id="handrails_both_sides" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="handrail_sides"> Handrail sides Left/Right/None: </label><select class="form-control" id="handrail_sides" >\n' +
+        '    <div class="col-6"><label for="handrail_sides"> Handrail sides Left/Right/None: </label><select class="form-control" name="handrail_sides" id="handrail_sides" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Left" >Left</option>\n' +
         '       <option value="Right" >Right</option>\n' +
@@ -1549,15 +1832,15 @@ function addExteriorRampsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="handrail_regulation_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" id="handrail_regulation_heightExteriorRamps" >\n' +
+        '    <div class="col-4"><label for="handrail_regulation_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" name="handrail_regulation_heightExteriorRamps" id="handrail_regulation_heightExteriorRamps" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="handrail_heightExteriorRamps"> Handrail height: </label><input type="number" min="0" class="form-control" id="handrail_heightExteriorRamps" ></div>\n' +
-        '    <div class="col-4"><label for="side_guards"> Ramps have adequate side guards: </label><select class="form-control" id="side_guards" >\n' +
+        '    <div class="col-4"><label for="handrail_heightExteriorRamps"> Handrail height: </label><input type="number" min="0" class="form-control" name="handrail_heightExteriorRamps" id="handrail_heightExteriorRamps" ></div>\n' +
+        '    <div class="col-4"><label for="side_guards"> Ramps have adequate side guards: </label><select class="form-control" name="side_guards" id="side_guards" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1566,21 +1849,21 @@ function addExteriorRampsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingExteriorRamps"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorRamps" >\n' +
+        '    <div class="col-4"><label for="lightingExteriorRamps"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorRamps" id="lightingExteriorRamps" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionExteriorRamps"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorRamps" >\n' +
+        '    <div class="col-4"><label for="lighting_optionExteriorRamps"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorRamps" id="lighting_optionExteriorRamps" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeExteriorRamps"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorRamps" >\n' +
+        '    <div class="col-4"><label for="lighting_typeExteriorRamps"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorRamps" id="lighting_typeExteriorRamps" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -1590,18 +1873,50 @@ function addExteriorRampsView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentExteriorRamps"> Describe the route: </label><input type="text" class="form-control" id="commentExteriorRamps" ></div>\n' +
+        '    <div class="col-12"><label for="commentExteriorRamps"> Describe the route: </label><input type="text" class="form-control" name="commentExteriorRamps" id="commentExteriorRamps" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsExteriorRamps"> Recommendations: </label><input type="text" class="form-control" id="recommendationsExteriorRamps" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsExteriorRamps"> Recommendations: </label><input type="text" class="form-control" name="recommendationsExteriorRamps" id="recommendationsExteriorRamps" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_exterior_ramps" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Exterior Ramps</button>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#ramp_required').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addExteriorRamps()"><i class="fas fa-save"></i>&nbsp; Save Exterior Ramps</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_exterior_ramps").validate({
+        rules: {
+            width_between_handrails: {
+                number: true
+            },
+            slopeExteriorRamps: {
+                number: true
+            },
+            handrail_heightExteriorRamps: {
+                number: true
+            },
+            commentExteriorRamps: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsExteriorRamps: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentExteriorRamps:  " Only letters and numbers.",
+            recommendationsExteriorRamps: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addExteriorRamps();
+        }
+    });
 }
 
 function addExteriorRamps() {
@@ -1681,9 +1996,10 @@ function addMainEntranceView() {
     $('#cardTitle').html('New Main Entrance');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input type="number" min="0" class="form-control" id="total_num_public_entrances"></div>\n' +
-        '    <div class="col-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <select class="form-control" id="main_ent_accessible" >\n' +
+    bodyHtml = '<form id="add_main_entrance"\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input type="number" min="0" class="form-control" name="total_num_public_entrances" id="total_num_public_entrances" ></div>\n' +
+        '    <div class="col-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <select class="form-control" name="main_ent_accessible" id="main_ent_accessible" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1692,30 +2008,14 @@ function addMainEntranceView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <select class="form-control" id="alt_ent_accessible" >\n' +
+        '    <div class="col-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <select class="form-control" name="alt_ent_accessible" id="alt_ent_accessible" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <select class="form-control" id="accessable_signage" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <select class="form-control" id="ground_level" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-6"><label for="threshold_level"> Threshold of entrance is level: </label><select class="form-control" id="threshold_level" >\n' +
+        '    <div class="col-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <select class="form-control" name="accessable_signage" id="accessable_signage" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1724,17 +2024,33 @@ function addMainEntranceView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <select class="form-control" id="threshold_beveled">\n' +
+        '    <div class="col-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <select class="form-control" name="ground_level" id="ground_level" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="beveled_height"> Height: </label><input type="number" min="0.00" step=".01" placeholder="0.5" class="form-control" id="beveled_height" ></div>\n' +
+        '    <div class="col-6"><label for="threshold_level"> Threshold of entrance is level: </label><select class="form-control" name="threshold_level" id="threshold_level" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="door_action"> As you enter the door opens: </label><select class="form-control" id="door_action" >\n' +
+        '    <div class="col-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <select class="form-control" name="threshold_beveled" id="threshold_beveled" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-6"><label for="beveled_height"> Height: </label><input type="number" min="0.00" step=".01" placeholder="0.5" class="form-control" name="beveled_height" id="beveled_height" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="door_action"> As you enter the door opens: </label><select class="form-control" name="door_action" id="door_action" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Slide To Side" >Slide To Side</option>\n' +
         '       <option value="Open Out" >Open Out</option>\n' +
@@ -1742,48 +2058,25 @@ function addMainEntranceView() {
         '       <option value="Other" >Other</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" id="door_open_clearance" >\n' +
+        '    <div class="col-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" name="door_open_clearance" id="door_open_clearance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="opening_measurement"> Opening measurement (inches): </label><input type="number" min="0" class="form-control" id="opening_measurement"></div>\n' +
+        '    <div class="col-4"><label for="opening_measurement"> Opening measurement (inches): </label><input type="number" min="0" class="form-control" name="opening_measurement" id="opening_measurement" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="door_easy_open"> Doors are easy to open: </label><select class="form-control" id="door_easy_open" >\n' +
+        '    <div class="col-4"><label for="door_easy_open"> Doors are easy to open: </label><select class="form-control" name="door_easy_open" id="door_easy_open" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="door_open_force"> Actual lbs of force: </label><input type="number" min="0" class="form-control" id="door_open_force"></div>\n' +
-        '    <div class="col-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><select class="form-control" id="door_use_with_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><select class="form-control" id="door_auto_open" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><select class="form-control" id="second_door_inside" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><select class="form-control" id="min_dist_between_doors" >\n' +
+        '    <div class="col-4"><label for="door_open_force"> Actual lbs of force: </label><input type="number" min="0" class="form-control" name="door_open_force" id="door_open_force" ></div>\n' +
+        '    <div class="col-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><select class="form-control" name="door_use_with_fist" id="door_use_with_fist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1792,21 +2085,44 @@ function addMainEntranceView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><select class="form-control" id="lightingMainEntrance" >\n' +
+        '    <div class="col-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><select class="form-control" name="door_auto_open" id="door_auto_open" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><select class="form-control" id="lighting_optionMainEntrance" >\n' +
+        '    <div class="col-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><select class="form-control" name="second_door_inside" id="second_door_inside" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><select class="form-control" name="min_dist_between_doors" id="min_dist_between_doors" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><select class="form-control" name="lightingMainEntrance" id="lightingMainEntrance" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><select class="form-control" name="lighting_optionMainEntrance" id="lighting_optionMainEntrance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeMainEntrance" >\n' +
+        '    <div class="col-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeMainEntrance" id="lighting_typeMainEntrance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -1816,18 +2132,56 @@ function addMainEntranceView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentMainEntrance"> Describe accessible entrance: </label><input class="form-control" id="commentMainEntrance" ></div>\n' +
+        '    <div class="col-12"><label for="commentMainEntrance"> Describe accessible entrance: </label><input class="form-control" name="commentMainEntrance" id="commentMainEntrance" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsMainEntrance"> Recommendations: </label><input class="form-control" id="recommendationsMainEntrance" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsMainEntrance"> Recommendations: </label><input class="form-control" name="recommendationsMainEntrance" id="recommendationsMainEntrance" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_establishment" class="btn btn-success" onclick="addMainEntrance()"><i class="fas fa-save"></i>&nbsp; Save Main Entrance</button>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#total_num_public_entrances').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_establishment" class="btn btn-success" onclick="addMainEntrance()"><i class="fas fa-save"></i>&nbsp; Save Main Entrance</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_main_entrance").validate({
+        rules: {
+            total_num_public_entrances: {
+                number: true
+            },
+            main_ent_accessible: {
+                number: true
+            },
+            beveled_height: {
+                number: true
+            },
+            opening_measurement: {
+                number: true
+            },
+            door_open_force: {
+                number: true
+            },
+            commentMainEntrance: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsMainEntrance: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentMainEntrance:  " Only letters and numbers.",
+            recommendationsMainEntrance: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addMainEntrance();
+        }
+    });
 }
 
 function addMainEntrance() {
@@ -1913,68 +2267,36 @@ function addInteriorView() {
     $('#cardTitle').html('New Interior');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" id="int_door_open_clearance" >\n' +
+    bodyHtml = '<form id="add_interior">\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" name="int_door_open_clearance" id="int_door_open_clearance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="int_opening_measurement"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" id="int_opening_measurement" ></div>\n' +
+        '    <div class="col-6"><label for="int_opening_measurement"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" name="int_opening_measurement" id="int_opening_measurement" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <select class="form-control" id="int_door_easy_open" >\n' +
+        '    <div class="col-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <select class="form-control" name="int_door_easy_open" id="int_door_easy_open" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="int_door_open_force"> Actual lbs of force: </label> <input type="number" min="0" class="form-control" id="int_door_open_force" ></div>\n' +
+        '    <div class="col-6"><label for="int_door_open_force"> Actual lbs of force: </label> <input type="number" min="0" class="form-control" name="int_door_open_force" id="int_door_open_force" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <select class="form-control" id="int_door_use_with_fist" >\n' +
+        '    <div class="col-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <select class="form-control" name="int_door_use_with_fist" id="int_door_use_with_fist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><select class="form-control" id="five_second_close" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <select class="form-control" id="hallway_width" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-6"><label for="narrowest_width"> Narrowest width (inches): </label><input type="number" min="0" class="form-control" id="narrowest_width" ></div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><select class="form-control" id="wheelchair_turnaround" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <select class="form-control" id="hallway_obstacles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><select class="form-control" id="hallway_clear" ></div>\n' +
+        '    <div class="col-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><select class="form-control" name="five_second_close" id="five_second_close" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -1983,14 +2305,47 @@ function addInteriorView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="lightingInterior"> Lighting is adequate: </label><select class="form-control" id="lightingInterior" >\n' +
+        '    <div class="col-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <select class="form-control" name="hallway_width" id="hallway_width" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeInterior" >\n' +
+        '    <div class="col-6"><label for="narrowest_width"> Narrowest width (inches): </label><input type="number" min="0" class="form-control" name="narrowest_width" id="narrowest_width" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><select class="form-control" name="wheelchair_turnaround" id="wheelchair_turnaround" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <select class="form-control" name="hallway_obstacles" id="hallway_obstacles" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><select class="form-control" name="hallway_clear" id="hallway_clear" ></div>\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="lightingInterior"> Lighting is adequate: </label><select class="form-control" name="lightingInterior" id="lightingInterior" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeInterior" id="lighting_typeInterior" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -2000,18 +2355,18 @@ function addInteriorView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><select class="form-control" id="service_counter" >\n' +
+        '    <div class="col-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><select class="form-control" name="service_counter" id="service_counter" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="counter_height"> Service counter height (inches): </label><input type="number" min="0" class="form-control" id="counter_height" ></div>\n' +
-        '    <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input class="form-control" id="writing_surface_height" ></div>\n' +
+        '    <div class="col-3"><label for="counter_height"> Service counter height (inches): </label><input type="number" min="0" class="form-control" name="counter_height" id="counter_height" ></div>\n' +
+        '    <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input class="form-control" name="writing_surface_height" id="writing_surface_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" id="drinking_fountain" >\n' +
+        '    <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" name="drinking_fountain" id="drinking_fountain" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2020,18 +2375,56 @@ function addInteriorView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentInterior"> Describe accessible entrance: </label><input type="text" class="form-control" id="commentInterior" ></div>\n' +
+        '    <div class="col-12"><label for="commentInterior"> Describe accessible entrance: </label><input type="text" class="form-control" name="commentInterior" id="commentInterior" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsInterior"> Recommendations: </label><input type="text" class="form-control" id="recommendationsInterior" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsInterior"> Recommendations: </label><input type="text" class="form-control" name="recommendationsInterior" id="recommendationsInterior" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_interior" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Interior</button>\n' +
+        '   </div>\n' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#int_door_open_clearance').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_interior" class="btn btn-success" onclick="addInterior()"><i class="fas fa-save"></i>&nbsp; Save Interior</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_interior").validate({
+        rules: {
+            int_opening_measurement: {
+                number: true
+            },
+            int_door_open_force: {
+                number: true
+            },
+            narrowest_width: {
+                number: true
+            },
+            counter_height: {
+                number: true
+            },
+            writing_surface_height: {
+                number: true
+            },
+            commentInterior: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsInterior: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentInterior:  " Only letters and numbers.",
+            recommendationsInterior: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addInterior();
+        }
+    });
 }
 
 function addInterior() {
@@ -2119,8 +2512,8 @@ function isElevator() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="is_elevator" class="btn btn-success" onclick="addElevatorView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="button" id="is_not_elevator" class="btn btn-secondary" onclick="addNoElevator()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="submit" id="is_elevator" class="btn btn-success" onclick="addElevatorView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="submit" id="is_not_elevator" class="btn btn-secondary" onclick="addNoElevator()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_elevator').focus();
 }
@@ -2160,43 +2553,26 @@ function addElevatorView() {
     $('#cardTitle').html('New Elevator');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <select class="form-control" id="is_elevator" >\n' +
+    bodyHtml = '<form id="add_elevator" >\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <select class="form-control" name="is_elevator" id="is_elevator" >\n' +
         '       <option value="" disabled >Please select one</option>\n' +
         '       <option value="Yes" selected>Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-9"><label for="location"> Where is nearest elevator or lift located in relation to the accessible entrance: </label> <input type="text" class="form-control" id="location" ></div>\n' +
+        '    <div class="col-9"><label for="location"> Where is nearest elevator or lift located in relation to the accessible entrance: </label> <input type="text" class="form-control" name="location" id="location" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="works"> The elevator or lift works properly: </label> <select class="form-control" id="works" >\n' +
+        '    <div class="col-6"><label for="works"> The elevator or lift works properly: </label> <select class="form-control" name="works" id="works" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <select class="form-control" id="no_assist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <select class="form-control" id="button_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-3"><label for="outside_btn_height"> Outside button height (inches): </label><input type="number" min="0" class="form-control" id="outside_btn_height" ></div>\n' +
-        '    <div class="col-3"><label for="inside_btn_height"> Inside button height (inches): </label> <input type="number" min="0" class="form-control" id="inside_btn_height" ></div>\n' +
-        '    <div class="col-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><select class="form-control" id="button_use_fist" >\n' +
+        '    <div class="col-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <select class="form-control" name="no_assist" id="no_assist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2205,14 +2581,16 @@ function addElevatorView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><select class="form-control" id="braille" >\n' +
+        '    <div class="col-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <select class="form-control" name="button_height" id="button_height" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <select class="form-control" id="audible_tones" >\n' +
+        '    <div class="col-3"><label for="outside_btn_height"> Outside button height (inches): </label><input type="number" min="0" class="form-control" name="outside_btn_height" id="outside_btn_height" ></div>\n' +
+        '    <div class="col-3"><label for="inside_btn_height"> Inside button height (inches): </label> <input type="number" min="0" class="form-control" name="inside_btn_height" id="inside_btn_height" ></div>\n' +
+        '    <div class="col-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><select class="form-control" name="button_use_fist" id="button_use_fist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2221,14 +2599,30 @@ function addElevatorView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="lightingElevator"> Lighting is adequate: </label><select class="form-control" id="lightingElevator" >\n' +
+        '    <div class="col-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><select class="form-control" id="braille" name="braille" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeElevator" >\n' +
+        '    <div class="col-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <select class="form-control" id="audible_tones" name="audible_tones" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="lightingElevator"> Lighting is adequate: </label><select class="form-control" id="lightingElevator" name="lightingElevator" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeElevator" name="lighting_typeElevator" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -2238,7 +2632,7 @@ function addElevatorView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​​from door to the back : </label><select class="form-control" id="elevator_depth" >\n' +
+        '    <div class="col-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​​from door to the back : </label><select class="form-control" id="elevator_depth"  name="elevator_depth" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2250,15 +2644,48 @@ function addElevatorView() {
         '    <div class="col-12"><label for="commentElevator"> Comments: </label><input type="text" class="form-control" id="commentElevator" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsElevator"> Recommendations: </label><input type="text" class="form-control" id="recommendationsElevator" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsElevator"> Recommendations: </label><input type="text" class="form-control" name="recommendationsElevator" id="recommendationsElevator" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_interior" class="btn btn-success" onclick="addElevator()"><i class="fas fa-save"></i>&nbsp; Save Elevator</button>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#is_elevator').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_interior" class="btn btn-success" onclick="addElevator()"><i class="fas fa-save"></i>&nbsp; Save Elevator</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_elevator").validate({
+        rules: {
+            location: {
+                maxlength: 255
+            },
+            outside_btn_height: {
+                number: true
+            },
+            inside_btn_height: {
+                number: true
+            },
+            commentElevator: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsElevator: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            location: " Must be less than 256 characters long.",
+            commentElevator:  " Only letters and numbers.",
+            recommendationsElevator: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addElevator();
+        }
+    });
 }
 
 function addElevator() {
@@ -2330,55 +2757,40 @@ function addSignageView() {
     $('#cardTitle').html('New Signage');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <select class="form-control" id="is_directory" >\n' +
+    bodyHtml = '<form id="add_signage">\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <select class="form-control" name="is_directory" id="is_directory" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="door_signs"> Door signs are on latch side of door, between 48” and 60” from floor: </label> <select class="form-control" id="door_signs" >\n' +
+        '    <div class="col-4"><label for="door_signs"> Door signs are on latch side of door, between 48” and 60” from floor: </label> <select class="form-control" name="door_signs" id="door_signs" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_height"> Height of signs (inches): </label> <input type="number" min="0" class="form-control" id="sign_height" ></div>\n' +
+        '    <div class="col-4"><label for="sign_height"> Height of signs (inches): </label> <input type="number" min="0" class="form-control" name="sign_height" id="sign_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="pub_sign_braile"> Public signs have Braille: </label> <select class="form-control" id="pub_sign_braile" >\n' +
+        '    <div class="col-4"><label for="pub_sign_braile"> Public signs have Braille: </label> <select class="form-control" name="pub_sign_braile" id="pub_sign_braile" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_high_contrast"> Signs have raised, high contrast lettering, ​low glare background: </label> <select class="form-control" id="sign_high_contrast" >\n' +
+        '    <div class="col-4"><label for="sign_high_contrast"> Signs have raised, high contrast lettering, ​low glare background: </label> <select class="form-control" name="sign_high_contrast" id="sign_high_contrast" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_images"> Signs include images, illustrations, or icons: </label><select class="form-control" id="sign_images" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="written_material_images"> Written material (menus, etc.) includes images or illustrations: </label> <select class="form-control" id="written_material_images" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-6"><label for="menu_access"> There is a large print menu, Braille menu, and/ or on­line accessible menu: </label><select class="form-control" id="menu_access" >\n' +
+        '    <div class="col-4"><label for="sign_images"> Signs include images, illustrations, or icons: </label><select class="form-control" name="sign_images" id="sign_images" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2387,14 +2799,30 @@ function addSignageView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_info"> Information is available in alternative formats: </label><select class="form-control" id="alt_info" >\n' +
+        '    <div class="col-6"><label for="written_material_images"> Written material (menus, etc.) includes images or illustrations: </label> <select class="form-control" name="written_material_images" id="written_material_images" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" id="alt_info_type" >\n' +
+        '    <div class="col-6"><label for="menu_access"> There is a large print menu, Braille menu, and/ or on­line accessible menu: </label><select class="form-control" name="menu_access" id="menu_access" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="alt_info"> Information is available in alternative formats: </label><select class="form-control" name="alt_info" id="alt_info" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" name="alt_info_type" id="alt_info_type" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Braille" >Braille</option>\n' +
         '       <option value="Large print" >Large print</option>\n' +
@@ -2404,18 +2832,44 @@ function addSignageView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentSignage"> Comments: </label><input type="text" class="form-control" id="commentSignage" ></div>\n' +
+        '    <div class="col-12"><label for="commentSignage"> Comments: </label><input type="text" class="form-control" name="commentSignage" id="commentSignage" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsSignage"> Recommendations: </label><input type="text" class="form-control" id="recommendationsSignage" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsSignage"> Recommendations: </label><input type="text" class="form-control" name="recommendationsSignage" id="recommendationsSignage" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '<div class="col-4">\n' +
+        '<button  type="submit" id="save_signage" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Signage</button>\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#is_directory').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_signage" class="btn btn-success" onclick="addSignage()"><i class="fas fa-save"></i>&nbsp; Save Signage</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_signage").validate({
+        rules: {
+            sign_height: {
+                number: true
+            },
+            commentSignage: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsSignage: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentSignage:  " Only letters and numbers.",
+            recommendationsSignage: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addSignage();
+        }
+    });
 }
 
 function addSignage() {
@@ -2481,22 +2935,23 @@ function addEmergencyPreparednessView() {
     $('#cardTitle').html('New Emergency Preparedness');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <select class="form-control" id="evac_info" >\n' +
+    bodyHtml = '<form id="add_emergency_preparedness"> \n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <select class="form-control" name="evac_info" id="evac_info" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="alt_evac_info"> Evacuation and safety information is available in alternative format: </label> <select class="form-control" id="alt_evac_info" >\n' +
+        '    <div class="col-4"><label for="alt_evac_info"> Evacuation and safety information is available in alternative format: </label> <select class="form-control" name="alt_evac_info" id="alt_evac_info" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" id="evac_info_format" >\n' +
+        '    <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" name="evac_info_format" id="evac_info_format" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Braille" >Braille</option>\n' +
         '       <option value="Large print" >Large print</option>\n' +
@@ -2506,37 +2961,21 @@ function addEmergencyPreparednessView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="alarms"> Emergency alarms both audible and visible: </label> <select class="form-control" id="alarms" >\n' +
+        '    <div class="col-4"><label for="alarms"> Emergency alarms both audible and visible: </label> <select class="form-control" name="alarms" id="alarms" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="location_no_flash"> There is an emergency location available where there are no flashing alarms: </label> <select class="form-control" id="location_no_flash" >\n' +
+        '    <div class="col-4"><label for="location_no_flash"> There is an emergency location available where there are no flashing alarms: </label> <select class="form-control" name="location_no_flash" id="location_no_flash" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="shelter"> There is an area of refuge, shelter in place during emergencies: </label><select class="form-control" id="shelter">\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="signs_to_exit"> Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes: </label> <select class="form-control" id="signs_to_exit" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-6"><label for="wheelchair_plan"> There is a plan for evacuating persons using wheelchairs in case elevators are inoperable: </label><select class="form-control" id="wheelchair_plan">\n' +
+        '    <div class="col-4"><label for="shelter"> There is an area of refuge, shelter in place during emergencies: </label><select class="form-control" name="shelter" id="shelter" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2545,21 +2984,14 @@ function addEmergencyPreparednessView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="floor_plan_routes"> Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes: </label><select class="form-control" id="floor_plan_routes">\n' +
+        '    <div class="col-6"><label for="signs_to_exit"> Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes: </label> <select class="form-control" name="signs_to_exit" id="signs_to_exit" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="fire_alarm_height"> Fire alarms pull boxes are no higher than 48”: </label> <select class="form-control" id="fire_alarm_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-4"><label for="fire_extinguisher_height"> Fire extinguishers are mounted with bottom no higher than 48”: </label> <select class="form-control" id="fire_extinguisher_height" >\n' +
+        '    <div class="col-6"><label for="wheelchair_plan"> There is a plan for evacuating persons using wheelchairs in case elevators are inoperable: </label><select class="form-control" name="wheelchair_plan" id="wheelchair_plan" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -2568,18 +3000,64 @@ function addEmergencyPreparednessView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentEmergency_Preparedness"> Comments: </label><input type="text" class="form-control" id="commentEmergency_Preparedness" ></div>\n' +
+        '    <div class="col-4"><label for="floor_plan_routes"> Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes: </label><select class="form-control" name="floor_plan_routes" id="floor_plan_routes" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="fire_alarm_height"> Fire alarms pull boxes are no higher than 48”: </label> <select class="form-control" name="fire_alarm_height" id="fire_alarm_height" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="fire_extinguisher_height"> Fire extinguishers are mounted with bottom no higher than 48”: </label> <select class="form-control" name="fire_extinguisher_height" id="fire_extinguisher_height" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsEmergency_Preparedness"> Recommendations: </label><input type="text" class="form-control" id="recommendationsEmergency_Preparedness" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="commentEmergency_Preparedness"> Comments: </label><input type="text" class="form-control" name="commentEmergency_Preparedness" id="commentEmergency_Preparedness" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-12"><label for="recommendationsEmergency_Preparedness"> Recommendations: </label><input type="text" class="form-control" name="recommendationsEmergency_Preparedness" id="recommendationsEmergency_Preparedness" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '<div class="col-4">\n' +
+        '<button  type="submit" id="save_emergency" class="btn btn-success" onclick="addEmergencyPreparedness()"><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#evac_info').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_emergency" class="btn btn-success" onclick="addEmergencyPreparedness()"><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_emergency_preparedness").validate({
+        rules: {
+            commentEmergency_Preparedness: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsEmergency_Preparedness: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentEmergency_Preparedness:  " Only letters and numbers.",
+            recommendationsEmergency_Preparedness: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addEmergencyPreparedness();
+        }
+    });
 }
 
 function addEmergencyPreparedness() {
@@ -2778,7 +3256,7 @@ function addSeatingView() {
     $('#seating_no_step').focus();
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_seating" class="btn btn-success" onclick="addSeating()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>\n' +
+        '<button  type="submit" id="save_seating" class="btn btn-success" onclick="addSeating()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>\n' +
         '</div>');
 }
 
@@ -2871,8 +3349,8 @@ function isRestroom() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="is_restroom" class="btn btn-success" onclick="addRestroomView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="button" id="is_not_restroom" class="btn btn-secondary" onclick="addNoRestroom()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="submit" id="is_restroom" class="btn btn-success" onclick="addRestroomView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="submit" id="is_not_restroom" class="btn btn-secondary" onclick="addNoRestroom()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_restroom').focus();
 }
@@ -2960,7 +3438,7 @@ function addRestroomView() {
     $('#public_restroom').focus();
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_restroom" class="btn btn-success" onclick="addRestroom()"><i class="fas fa-save"></i>&nbsp; Save Restroom</button>\n' +
+        '<button  type="submit" id="save_restroom" class="btn btn-success" onclick="addRestroom()"><i class="fas fa-save"></i>&nbsp; Save Restroom</button>\n' +
         '</div>');
 }
 
@@ -3293,8 +3771,8 @@ function addRestroomInformationView() {
     $('#restroom_desc').focus();
 
     $('#cardFooter').html('<div class="col-12">\n' +
-        '<button  type="button" id="save_restroom_information" class="btn btn-success" onclick="addRestroomInformation()"><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;' +
-        '<button  type="button" id="cancel_restroom_information" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n' +
+        '<button  type="submit" id="save_restroom_information" class="btn btn-success" onclick="addRestroomInformation()"><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;' +
+        '<button  type="submit" id="cancel_restroom_information" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n' +
         '</div>');
 }
 
@@ -3408,8 +3886,8 @@ function addRestroomInformation() {
             $('#cardBody').html(bodyHtml);
 
             $('#cardFooter').html('<div class="col-4">\n' +
-                '<button  type="button" id="add_another_restroom" class="btn btn-success" onclick="addRestroomInformationView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-                '<button  type="button" id="no_more_restrooms" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+                '<button  type="submit" id="add_another_restroom" class="btn btn-success" onclick="addRestroomInformationView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+                '<button  type="submit" id="no_more_restrooms" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
                 '</div>');
             $('#add_another_restroom').focus();
         },
@@ -3701,7 +4179,7 @@ function addCommunicationView() {
     $('#public_phone').focus();
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="button" id="save_restroom" class="btn btn-success" onclick="addCommunication()"><i class="fas fa-save"></i>&nbsp; Save Communication Technologies</button>\n' +
+        '<button  type="submit" id="save_restroom" class="btn btn-success" onclick="addCommunication()"><i class="fas fa-save"></i>&nbsp; Save Communication Technologies</button>\n' +
         '</div>');
 }
 
