@@ -41,7 +41,8 @@ function addEstablishmentView() {
             categoryData = data;
         },
         error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -57,7 +58,8 @@ function addEstablishmentView() {
             configData = data;
         },
         error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -73,7 +75,8 @@ function addEstablishmentView() {
             userData = data;
         },
         error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -83,14 +86,14 @@ function addEstablishmentView() {
     window.scrollTo(0,0);
 
     bodyHtml = '<form id="add_establishment">\n ' +
-    '        <div class="card-row">\n' +
-    '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="text" class="form-control" name="name" id="name" ></div>\n' +
-    '            <div class="col-6"><label for="website"> Website: </label><input type="url" placeholder="http://www.website.com" class="form-control" name="website" id="website" ></div>\n' +
-    '        </div>\n' +
-    '        <div class="card-row">\n' +
-    '           <div class="col-4">\n' +
-    '            <label for="cat_id"> Category: </label><select class="form-control" name="cat_id" id="cat_id" required>\n' +
-    '               <option value="" disabled selected>Please select one</option>\n';
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="name"> Establishment Name: </label><input type="text" class="form-control" name="name" id="name" ></div>\n' +
+        '            <div class="col-6"><label for="website"> Website: </label><input type="url" placeholder="http://www.website.com" class="form-control" name="website" id="website" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '           <div class="col-4">\n' +
+        '            <label for="cat_id"> Category: </label><select class="form-control" name="cat_id" id="cat_id" required>\n' +
+        '               <option value="" disabled selected>Please select one</option>\n';
 
     for (var i = 0; i < categoryData.length; i ++) {
         bodyHtml += '<option value="'+categoryData[i].cat_id+'">&nbsp;'+ categoryData[i].name +'</option>\n';
@@ -376,7 +379,8 @@ function addEstablishment() {
 
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -391,7 +395,7 @@ function isParking() {
 
     bodyHtml = '<div class="card-row">\n' +
         '<span class="card-text">Is there parking available near or at the location?</span>\n'+
-    '</div>';
+        '</div>';
 
     $('#cardBody').html(bodyHtml);
 
@@ -420,7 +424,8 @@ function addNoParking() {
                     console.log()
                 },
                 error: function(data) {
-                    $("#alert-body").html(JSON.stringify(data));
+                    $("#alert-body").empty();
+                    $("#alert-body").append(JSON.stringify(data));
                     $("#alert").modal('toggle');
                 }
             });
@@ -438,7 +443,8 @@ function addNoParking() {
             addPassengerLoadingView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -590,11 +596,12 @@ function addParking() {
                 dataType: 'json',
                 url: 'get/park_id/est/' + EST_ID,
                 success: function (data) {
-                        PARK_ID = data[0].park_id;
-                        console.log()
+                    PARK_ID = data[0].park_id;
+                    console.log()
                 },
                 error: function(data) {
-                    $("#alert-body").html(JSON.stringify(data));
+                    $("#alert-body").empty();
+                    $("#alert-body").append(JSON.stringify(data));
                     $("#alert").modal('toggle');
                 }
             });
@@ -612,7 +619,8 @@ function addParking() {
             addRouteFromParkingView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -780,7 +788,8 @@ function addRouteFromParking() {
             addPassengerLoadingView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -951,7 +960,8 @@ function addPassengerLoading() {
             addSTABusView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1134,7 +1144,8 @@ function addSTABus() {
             isSTARoute();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1166,7 +1177,7 @@ function addSTARouteView() {
     $('#cardTitle').html('New STA Route');
     window.scrollTo(0,0);
 
-    $('#cardBody').append( '<form id="add_sta_route">\n' +
+    $('#cardBody').html( '<form id="add_sta_route">\n' +
         '<div class="card-row">\n' +
         '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input type="number" min="0" class="form-control" name="route_numEdit" id="route_numEdit" ></div>\n' +
         '</div>\n'+
@@ -1176,10 +1187,11 @@ function addSTARouteView() {
         '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input type="number" min="0" class="form-control" name="east_bound_stopEdit" id="east_bound_stopEdit" ></div>\n' +
         '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input type="number" min="0" class="form-control" name="west_bound_stopEdit" id="west_bound_stopEdit" ></div>\n' +
         '</div>\n ' +
-        '<div class="card-row">\n' +
-        '<button type="submit" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save STA Route</button>\n' +
-        '&nbsp;\n' +
-        '<button type="submit" class="btn btn-secondary" onclick="addExteriorPathwaysView()">Cancel</button>\n ' +
+        '<div class="card-row">\n ' +
+        '   <span>\n ' +
+        '       <button type="submit" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save STA Route</button>&nbsp;\n' +
+        '       <button type="submit" class="btn btn-secondary" onclick="addExteriorPathwaysView()">Cancel</button>\n ' +
+        '   </span>\n' +
         '</div>\n ' +
         '</form>'
     );
@@ -1221,7 +1233,8 @@ function addSTARoute() {
             STA_ID = data[0].sta_id;
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1262,7 +1275,8 @@ function addSTARoute() {
 
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1449,7 +1463,8 @@ function addExteriorPathways() {
             isExteriorStairs();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1498,7 +1513,8 @@ function addNoExteriorStairs() {
             isExteriorRamps();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1695,7 +1711,8 @@ function addExteriorStairs() {
             isExteriorRamps();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1744,7 +1761,8 @@ function addNoExteriorRamps() {
             addMainEntranceView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -1983,7 +2001,8 @@ function addExteriorRamps() {
             addMainEntranceView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -2254,7 +2273,8 @@ function addMainEntrance() {
             addInteriorView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -2491,7 +2511,8 @@ function addInterior() {
             isElevator();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -2540,7 +2561,8 @@ function addNoElevator() {
             addSignageView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -2744,7 +2766,8 @@ function addElevator() {
             addSignageView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -2922,7 +2945,8 @@ function addSignage() {
             addEmergencyPreparednessView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3030,7 +3054,7 @@ function addEmergencyPreparednessView() {
         '</div>\n' +
         '<div class="card-row">\n' +
         '<div class="col-4">\n' +
-        '<button  type="submit" id="save_emergency" class="btn btn-success" onclick="addEmergencyPreparedness()"><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>\n' +
+        '<button  type="submit" id="save_emergency" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>\n' +
         '</div>\n' +
         '</div>\n' +
         '</form>';
@@ -3112,7 +3136,8 @@ function addEmergencyPreparedness() {
             addSeatingView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3125,15 +3150,16 @@ function addSeatingView() {
     $('#cardTitle').html('New Seating');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <select class="form-control" id="seating_no_step" >\n' +
+    bodyHtml = '<form id="add_seating"> \n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <select class="form-control" name="seating_no_step" id="seating_no_step" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="table_aisles"> Customers can maneuver between tables without bumping into chairs (36” aisles)​: </label> <select class="form-control" id="table_aisles" >\n' +
+        '    <div class="col-6"><label for="table_aisles"> Customers can maneuver between tables without bumping into chairs (36” aisles)​: </label> <select class="form-control" name="table_aisles" id="table_aisles" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3142,52 +3168,52 @@ function addSeatingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="legroom"> There are tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”): </label> <select class="form-control" id="legroom" >\n' +
+        '    <div class="col-6"><label for="legroom"> There are tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”): </label> <select class="form-control" name="legroom" id="legroom" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" class="form-control" id="num_legroom"  ></div>\n' +
+        '    <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" class="form-control" name="num_legroom" id="num_legroom"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" id="rearranged" >\n' +
+        '    <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" name="rearranged" id="rearranged" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="num_table_rearranged"> Number of tables that can be moved #/All: </label><input type="text" class="form-control" id="num_table_rearranged" ></div>\n' +
-        '    <div class="col-4"><label for="num_chair_rearranged"> Number of chairs that can be moved #/All: </label><input type="text" class="form-control" id="num_chair_rearranged" ></div>\n' +
+        '    <div class="col-4"><label for="num_table_rearranged"> Number of tables that can be moved #/All: </label><input type="text" class="form-control" name="num_table_rearranged" id="num_table_rearranged" ></div>\n' +
+        '    <div class="col-4"><label for="num_chair_rearranged"> Number of chairs that can be moved #/All: </label><input type="text" class="form-control" name="num_chair_rearranged" id="num_chair_rearranged" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" id="round_tables" >\n' +
+        '    <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" name="round_tables" id="round_tables" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="num_round_tables"> Number of round/oval tables: </label><input type="number" min="0" class="form-control" id="num_round_tables" ></div>\n' +
+        '    <div class="col-6"><label for="num_round_tables"> Number of round/oval tables: </label><input type="number" min="0" class="form-control" name="num_round_tables" id="num_round_tables" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingSeating"> Lighting is adequate: </label><select class="form-control" id="lightingSeating" >\n' +
+        '    <div class="col-4"><label for="lightingSeating"> Lighting is adequate: </label><select class="form-control" name="lightingSeating" id="lightingSeating" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionSeating"> Lighting level day/night: </label><select class="form-control" id="lighting_optionSeating" >\n' +
+        '    <div class="col-4"><label for="lighting_optionSeating"> Lighting level day/night: </label><select class="form-control" name="lighting_optionSeating" id="lighting_optionSeating" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Day" >Day</option>\n' +
         '       <option value="Night" >Night</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeSeating"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeSeating" >\n' +
+        '    <div class="col-4"><label for="lighting_typeSeating"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeSeating" id="lighting_typeSeating" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -3197,30 +3223,14 @@ function addSeatingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="adjustable_lighting"> There are one or more available spaces with adjustable lighting: </label><select class="form-control" id="adjustable_lighting">\n' +
+        '    <div class="col-6"><label for="adjustable_lighting"> There are one or more available spaces with adjustable lighting: </label><select class="form-control" name="adjustable_lighting" id="adjustable_lighting" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="low_visual_slim"> There are one or more areas with low visual stimulation: </label> <select class="form-control" id="low_visual_slim" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="quiet_table"> There is a quiet table, room or area available on request: </label><select class="form-control" id="quiet_table">\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-6"><label for="low_sound"> There is an area with low or no background sound, and/or that has sound­absorbing surfaces: </label> <select class="form-control" id="low_sound" >\n' +
+        '    <div class="col-6"><label for="low_visual_slim"> There are one or more areas with low visual stimulation: </label> <select class="form-control" name="low_visual_slim" id="low_visual_slim" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3229,15 +3239,14 @@ function addSeatingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="designated_space"> For theater or auditorium, there are spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated: </label><select class="form-control" id="designated_space">\n' +
+        '    <div class="col-6"><label for="quiet_table"> There is a quiet table, room or area available on request: </label><select class="form-control" name="quiet_table" id="quiet_table" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="num_desig_space"> Number of designated spaces: </label> <input type="number" min="0" class="form-control" id="num_desig_space"  ></div>\n' +
-        '    <div class="col-4"><label for="companion_space"> There are spaces for companions to sit next to the wheelchair users: </label> <select class="form-control" id="companion_space" >\n' +
+        '    <div class="col-6"><label for="low_sound"> There is an area with low or no background sound, and/or that has sound­absorbing surfaces: </label> <select class="form-control" name="low_sound" id="low_sound" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3246,18 +3255,75 @@ function addSeatingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentSeating"> Comments: </label><input type="text" class="form-control" id="commentSeating" ></div>\n' +
+        '    <div class="col-4"><label for="designated_space"> For theater or auditorium, there are spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated: </label><select class="form-control" name="designated_space" id="designated_space" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="num_desig_space"> Number of designated spaces: </label> <input type="number" min="0" class="form-control" name="num_desig_space" id="num_desig_space" ></div>\n' +
+        '    <div class="col-4"><label for="companion_space"> There are spaces for companions to sit next to the wheelchair users: </label> <select class="form-control" name="companion_space" id="companion_space" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsSeating"> Recommendations: </label><input type="text" class="form-control" id="recommendationsSeating" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="commentSeating"> Comments: </label><input type="text" class="form-control" name="commentSeating" id="commentSeating" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-12"><label for="recommendationsSeating"> Recommendations: </label><input type="text" class="form-control" name="recommendationsSeating" id="recommendationsSeating" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '<div class="col-4">\n' +
+        '<button  type="submit" id="save_seating" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Seating</button>\n' +
+        '</div>\n' +
+        '</div>\n' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#seating_no_step').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="save_seating" class="btn btn-success" onclick="addSeating()"><i class="fas fa-save"></i>&nbsp; Save Seating</button>\n' +
-        '</div>');
+    $('#cardFooter').html();
+
+    $('#cardFooter').html('');
+    $("#add_seating").validate({
+        rules: {
+            num_legroom: {
+                maxlength: 4
+            },
+            num_table_rearranged: {
+                maxlength: 32
+            },
+            num_chair_rearranged: {
+                maxlength: 32
+            },
+            num_round_tables: {
+                number: true
+            },
+            num_desig_space: {
+                number: true
+            },
+            commentSeating: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsSeating: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentSeating:  " Only letters and numbers.",
+            recommendationsSeating: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addSeating();
+        }
+    });
 }
 
 function addSeating() {
@@ -3328,7 +3394,8 @@ function addSeating() {
             isRestroom();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3336,7 +3403,6 @@ function addSeating() {
 }
 
 function isRestroom() {
-
 
     $('#collapseTitle').html('New Restroom');
     $('#cardTitle').html('New Restroom');
@@ -3377,7 +3443,8 @@ function addNoRestroom() {
             addCommunicationView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3390,36 +3457,37 @@ function addRestroomView() {
     $('#cardTitle').html('New Restroom');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <select class="form-control" id="public_restroom" >\n' +
+    bodyHtml = '<form id="add_restroom"> \n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <select class="form-control" name="public_restroom" id="public_restroom" >\n' +
         '       <option value="" disabled >Please select one</option>\n' +
         '       <option value="Yes" selected>Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="total_num"> Total number of public restrooms: </label> <input type="number" min="0" class="form-control" id="total_num"  ></div>\n' +
+        '    <div class="col-6"><label for="total_num"> Total number of public restrooms: </label> <input type="number" min="0" class="form-control" name="total_num" id="total_num" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="designated_number"> Number of accessible restrooms designated “family”, “unisex”, or “assisted use”: </label> <input type="number" min="0" class="form-control" id="designated_number"  ></div>\n' +
-        '    <div class="col-6"><label for="num_wheelchair_sign"> Number of restrooms that have “Wheelchair Accessible” signs: </label> <input type="number" min="0" class="form-control" id="num_wheelchair_sign"  ></div>\n' +
+        '    <div class="col-6"><label for="designated_number"> Number of accessible restrooms designated “family”, “unisex”, or “assisted use”: </label> <input type="number" min="0" class="form-control" name="designated_number" id="designated_number" ></div>\n' +
+        '    <div class="col-6"><label for="num_wheelchair_sign"> Number of restrooms that have “Wheelchair Accessible” signs: </label> <input type="number" min="0" class="form-control" name="num_wheelchair_sign" id="num_wheelchair_sign" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="sign_accessable"> Restrooms signs have high contrast, Braille, raised lettering, low glare background: </label> <select class="form-control" id="sign_accessable" >\n' +
+        '    <div class="col-4"><label for="sign_accessable"> Restrooms signs have high contrast, Braille, raised lettering, low glare background: </label> <select class="form-control" name="sign_accessable" id="sign_accessable" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_location"> Signage is on latch side of door between 48” and 60” above floor: </label><select class="form-control" id="sign_location" >\n' +
+        '    <div class="col-4"><label for="sign_location"> Signage is on latch side of door between 48” and 60” above floor: </label><select class="form-control" name="sign_location" id="sign_location" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="key_needed"> Users do not need to ask someone for a KEY to use the restroom: </label><select class="form-control" id="key_needed" >\n' +
+        '    <div class="col-4"><label for="key_needed"> Users do not need to ask someone for a KEY to use the restroom: </label><select class="form-control" name="key_needed" id="key_needed" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3428,18 +3496,50 @@ function addRestroomView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentRestroom"> Describe the restroom(s): </label><input type="text" class="form-control" id="commentRestroom" ></div>\n' +
+        '    <div class="col-12"><label for="commentRestroom"> Describe the restroom(s): </label><input type="text" class="form-control" name="commentRestroom" id="commentRestroom" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsRestroom"> Recommendations: </label><input type="text" class="form-control" id="recommendationsRestroom" ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsRestroom"> Recommendations: </label><input type="text" class="form-control" name="recommendationsRestroom" id="recommendationsRestroom" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '       <button  type="submit" id="save_restroom" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Restroom</button>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#public_restroom').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="save_restroom" class="btn btn-success" onclick="addRestroom()"><i class="fas fa-save"></i>&nbsp; Save Restroom</button>\n' +
-        '</div>');
+    $('#cardFooter').html('');
+    $("#add_restroom").validate({
+        rules: {
+            total_num: {
+                number: true
+            },
+            designated_number: {
+                number: true
+            },
+            num_wheelchair_sign: {
+                number: true
+            },
+            commentRestroom: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsRestroom: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentRestroom:  " Only letters and numbers.",
+            recommendationsRestroom: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addRestroom();
+        }
+    });
 }
 
 function addRestroom() {
@@ -3486,7 +3586,8 @@ function addRestroom() {
             getRestroomId();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3505,7 +3606,8 @@ function getRestroomId() {
             addRestroomInformationView()
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3517,65 +3619,39 @@ function addRestroomInformationView() {
     $('#cardTitle').html('New Restroom Information');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '   <div class="col-12"><label for="restroom_desc"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" id="restroom_desc" ></div>\n' +
+    bodyHtml = '<form id="add_restroom_information"> \n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-12"><label for="restroom_desc"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" name="restroom_desc" id="restroom_desc" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" id="easy_open" >\n' +
+        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" name="easy_open" id="easy_open" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" id="lbs_force"  ></div>\n' +
+        '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" id="clearance" >\n' +
+        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="opening"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" id="opening"  ></div>\n' +
+        '   <div class="col-6"><label for="opening"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" name="opening" id="opening"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" id="opens_out" >\n' +
+        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" name="opens_out" id="opens_out" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" id="use_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" id="can_turn_around" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '   <div class="col-4"><label for="turn_width"> Stall/Room width (inches)​: </label> <input type="number" min="0" class="form-control" id="turn_width"  ></div>\n' +
-        '   <div class="col-4"><label for="turn_depth"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" id="turn_depth"  ></div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" id="close_chair_inside" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" id="grab_bars" >\n' +
+        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" name="use_fist" id="use_fist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3584,15 +3660,25 @@ function addRestroomInformationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" id="seat_height_req" >\n' +
+        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" name="can_turn_around" id="can_turn_around" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="seat_height"> Seat height (inches): </label><input type="number" min="0" class="form-control" id="seat_height" ></div>\n' +
-        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" id="flush_auto_fist" >\n' +
+        '   <div class="col-4"><label for="turn_width"> Stall/Room width (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_width" id="turn_width"  ></div>\n' +
+        '   <div class="col-4"><label for="turn_depth"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_depth" id="turn_depth"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" name="close_chair_inside" id="close_chair_inside" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" name="grab_bars" id="grab_bars" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3601,88 +3687,105 @@ function addRestroomInformationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" id="ambulatory_accessible" >\n' +
+        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" name="seat_height_req" id="seat_height_req" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="bar_height"> Toilet height (inches): </label><input type="number" min="0" class="form-control" id="bar_height" ></div>\n' +
+        '   <div class="col-4"><label for="seat_height"> Seat height (inches): </label><input type="number" min="0" class="form-control" name="seat_height" id="seat_height" ></div>\n' +
+        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" name="flush_auto_fist" id="flush_auto_fist" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" id="coat_hook" >\n' +
+        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" name="ambulatory_accessible" id="ambulatory_accessible" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="num" min="0" class="form-control" id="hook_height"  ></div>\n' +
+        '   <div class="col-6"><label for="bar_height"> Toilet height (inches): </label><input type="number" min="0" class="form-control" name="bar_height" id="bar_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" id="sink" >\n' +
+        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" name="coat_hook" id="coat_hook" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="sink_height"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" id="sink_height" ></div>\n' +
+        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="num" min="0" class="form-control" name="hook_height" id="hook_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" id="faucet" >\n' +
+        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" name="sink" id="sink" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="faucet_depth"> Faucet depth (inches): </label> <input type="number" min="0" class="form-control" id="faucet_depth"  ></div>\n' +
+        '   <div class="col-6"><label for="sink_height"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" name="sink_height" id="sink_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" id="faucet_auto_fist" >\n' +
+        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" name="faucet" id="faucet" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" id="sink_clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '   <div class="col-4"><label for="sink_clearance_height"> Measurement (inches): </label> <input type="number" min="0" class="form-control" id="sink_clearance_height"  ></div>\n' +
+        '   <div class="col-6"><label for="faucet_depth"> Faucet depth (inches): </label> <input type="number" min="0" class="form-control" name="faucet_depth" id="faucet_depth"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" id="sink_pipes" >\n' +
+        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" name="faucet_auto_fist" id="faucet_auto_fist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" id="soap_dispenser" >\n' +
+        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" name="sink_clearance" id="sink_clearance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="soap_height">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" id="soap_height"  ></div>\n' +
+        '   <div class="col-4"><label for="sink_clearance_height"> Measurement (inches): </label> <input type="number" min="0" class="form-control" name="sink_clearance_height" id="sink_clearance_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select type="number" min="0" class="form-control" id="dry_fist" >\n' +
+        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" name="sink_pipes" id="sink_pipes" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="dry_fist_type"> Type Hand dryer/Towel dispenser: </label> <select class="form-control" id="dry_fist_type" >\n' +
+        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" name="soap_dispenser" id="soap_dispenser" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="soap_height">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" name="soap_height" id="soap_height"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="dry_fist_type"> Type Hand dryer/Towel dispenser: </label> <select class="form-control" name="dry_fist_type" id="dry_fist_type" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Hand dryer" >Hand dryer</option>\n' +
         '       <option value="Towel dispenser" >Towel dispenser</option>\n' +
@@ -3691,14 +3794,14 @@ function addRestroomInformationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="dry_controls"> Operation type - automatic/closed fist: </label> <select class="form-control" id="dry_controls" >\n' +
+        '   <div class="col-6"><label for="dry_controls"> Operation type - automatic/closed fist: </label> <select class="form-control" name="dry_controls" id="dry_controls" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Automatic" >Automatic</option>\n' +
         '       <option value="Closed fist" >Closed fist</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" id="dry_control_height" >\n' +
+        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" name="dry_control_height" id="dry_control_height" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3707,34 +3810,34 @@ function addRestroomInformationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" id="mirror" >\n' +
+        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" name="mirror" id="mirror" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="mirror_height"> Mirror height (inches): </label><input type="number" min="0" class="form-control" id="mirror_height" ></div>\n' +
+        '   <div class="col-6"><label for="mirror_height"> Mirror height (inches): </label><input type="number" min="0" class="form-control" name="mirror_height" id="mirror_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" id="shelves" >\n' +
+        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" name="shelves" id="shelves" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="shelf_height"> Shelf height (inches): </label> <input type="number" min="0" class="form-control" id="shelf_height"  ></div>\n' +
+        '   <div class="col-6"><label for="shelf_height"> Shelf height (inches): </label> <input type="number" min="0" class="form-control" name="shelf_height" id="shelf_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" id="trash_receptacles" >\n' +
+        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" name="trash_receptacles" id="trash_receptacles" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" id="hygiene_seat_cover" >\n' +
+        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" name="hygiene_seat_cover" id="hygiene_seat_cover" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3743,15 +3846,15 @@ function addRestroomInformationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="hygiene_cover_height"> Height (inches): </label> <input type="number" min="0" class="form-control" id="hygiene_cover_height"  ></div>\n' +
-        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" id="lightingRestroomInfo" >\n' +
+        '   <div class="col-4"><label for="hygiene_cover_height"> Height (inches): </label> <input type="number" min="0" class="form-control" name="hygiene_cover_height" id="hygiene_cover_height"  ></div>\n' +
+        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" name="lightingRestroomInfo" id="lightingRestroomInfo" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeRestroomInfo" >\n' +
+        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeRestroomInfo" id="lighting_typeRestroomInfo" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
@@ -3761,19 +3864,88 @@ function addRestroomInformationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentRestroomInfo"> Additional notes: </label><input type="text" class="form-control" id="commentRestroomInfo"  ></div>\n' +
+        '    <div class="col-12"><label for="commentRestroomInfo"> Additional notes: </label><input type="text" class="form-control" name="commentRestroomInfo" id="commentRestroomInfo"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsRestroomInfo"> Recommendations: </label><input type="text" class="form-control" id="recommendationsRestroomInfo"  ></div>\n' +
-        '</div>';
+        '    <div class="col-12"><label for="recommendationsRestroomInfo"> Recommendations: </label><input type="text" class="form-control" name="recommendationsRestroomInfo" id="recommendationsRestroomInfo"  ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-12">\n' +
+        '       <span>\n ' +
+        '           <button  type="submit" id="save_restroom_information" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;' +
+        '           <button  type="submit" id="cancel_restroom_information" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n ' +
+        '       </span>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#restroom_desc').focus();
 
-    $('#cardFooter').html('<div class="col-12">\n' +
-        '<button  type="submit" id="save_restroom_information" class="btn btn-success" onclick="addRestroomInformation()"><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;' +
-        '<button  type="submit" id="cancel_restroom_information" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n' +
-        '</div>');
+    $('#cardFooter').html();
+
+    $('#cardFooter').html('');
+    $("#add_restroom_information").validate({
+        rules: {
+            restroom_desc: {
+                maxlength: 32
+            },
+            lbs_force: {
+                number: true
+            },
+            opening: {
+                number: true
+            },
+            turn_width: {
+                number: true
+            },
+            turn_depth: {
+                number: true
+            },
+            seat_height: {
+                number: true
+            },
+            bar_height: {
+                number: true
+            },
+            hook_height: {
+                number: true
+            },
+            sink_height: {
+                number: true
+            },
+            sink_clearance_height: {
+                number: true
+            },
+            soap_height: {
+                number: true
+            },
+            mirror_height: {
+                number: true
+            },
+            shelf_height: {
+                number: true
+            },
+            hygiene_cover_height: {
+                number: true
+            },
+            commentRestroomInfo: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsRestroomInfo: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentRestroomInfo:  " Only letters and numbers.",
+            recommendationsRestroomInfo: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addRestroomInformation();
+        }
+    });
 }
 
 function addRestroomInformation() {
@@ -3892,7 +4064,8 @@ function addRestroomInformation() {
             $('#add_another_restroom').focus();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
@@ -3905,46 +4078,47 @@ function addCommunicationView() {
     $('#cardTitle').html('New Communication Technologies');
     window.scrollTo(0,0);
 
-    bodyHtml = '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <select class="form-control" id="public_phone" >\n' +
+    bodyHtml = '<form id="add_communication"> \n ' +
+        '<div class="card-row">\n' +
+        '    <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <select class="form-control" name="public_phone" id="public_phone" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="phone_clearance">  There are public phones w/ controls min 48” from floor, protruding < 4” from wall: </label> <select class="form-control" id="phone_clearance" >\n' +
+        '    <div class="col-4"><label for="phone_clearance">  There are public phones w/ controls min 48” from floor, protruding < 4” from wall: </label> <select class="form-control" name="phone_clearance" id="phone_clearance" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="num_phone"> Number of phones: </label> <input type="number" min="0" class="form-control" id="num_phone"  ></div>\n' +
+        '    <div class="col-4"><label for="num_phone"> Number of phones: </label> <input type="number" min="0" class="form-control" name="num_phone" id="num_phone"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="tty"> There is a TTY is available: </label> <select class="form-control" id="tty" >\n' +
+        '    <div class="col-3"><label for="tty"> There is a TTY is available: </label> <select class="form-control" name="tty" id="tty" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" id="staff_tty" >\n' +
+        '    <div class="col-3"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" name="staff_tty" id="staff_tty" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" id="assisted_listening" >\n' +
+        '    <div class="col-3"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" name="assisted_listening" id="assisted_listening" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="assisted_listen_type"> Type of listening device - Infra­red loop/Induction loop/FM/Amplification/Other: </label><select class="form-control" id="assisted_listen_type" >\n' +
+        '    <div class="col-3"><label for="assisted_listen_type"> Type of listening device - Infra­red loop/Induction loop/FM/Amplification/Other: </label><select class="form-control" name="assisted_listen_type" id="assisted_listen_type" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Infra­red loop" >Infra­red loop</option>\n' +
         '       <option value="Induction loop" >Induction loop</option>\n' +
@@ -3955,7 +4129,7 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="assisted_listen_receiver"> Type of receivers - Earbud/Neckloop/Headphones/Other: </label> <select class="form-control" id="assisted_listen_receiver" >\n' +
+        '    <div class="col-4"><label for="assisted_listen_receiver"> Type of receivers - Earbud/Neckloop/Headphones/Other: </label> <select class="form-control" name="assisted_listen_receiver" id="assisted_listen_receiver" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Earbud" >Earbud</option>\n' +
         '       <option value="Neckloop" >Neckloop</option>\n' +
@@ -3963,14 +4137,14 @@ function addCommunicationView() {
         '       <option value="Other" >Other</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="listening_signage"> Signs about listening devices are clearly displayed​: </label> <select class="form-control" id="listening_signage" >\n' +
+        '    <div class="col-4"><label for="listening_signage"> Signs about listening devices are clearly displayed​: </label> <select class="form-control" name="listening_signage" id="listening_signage" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="staff_listening"> Staff are trained to use assisted listening devices​: </label> <select class="form-control" id="staff_listening" >\n' +
+        '    <div class="col-4"><label for="staff_listening"> Staff are trained to use assisted listening devices​: </label> <select class="form-control" name="staff_listening" id="staff_listening" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -3979,21 +4153,21 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="acoustics"> The acoustics are comfortable (no echoing, loud music, etc): </label> <select class="form-control" id="acoustics" >\n' +
+        '    <div class="col-4"><label for="acoustics"> The acoustics are comfortable (no echoing, loud music, etc): </label> <select class="form-control" name="acoustics" id="acoustics" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="acoustics_level"> Noise level - Low/Medium/High: </label> <select class="form-control" id="acoustics_level" >\n' +
+        '    <div class="col-4"><label for="acoustics_level"> Noise level - Low/Medium/High: </label> <select class="form-control" name="acoustics_level" name="acoustics_level" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Low" >Low</option>\n' +
         '       <option value="Medium" >Medium</option>\n' +
         '       <option value="High" >High</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="alt_comm_methods"> If a customer is unable to hear, there are other forms of communication: </label><select class="form-control" id="alt_comm_methods" >\n' +
+        '    <div class="col-4"><label for="alt_comm_methods"> If a customer is unable to hear, there are other forms of communication: </label><select class="form-control" name="alt_comm_methods" id="alt_comm_methods" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -4002,8 +4176,8 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_comm_type"> Type of other form of communication (writing pad, staff know ASL, etc): </label><input type="text" class="form-control" id="alt_comm_type" ></div>\n' +
-        '    <div class="col-6"><label for="staff_ASL"> Staff have received instructions on how to provide ASL services upon request (in person or remote): </label><select class="form-control" id="staff_ASL" >\n' +
+        '    <div class="col-6"><label for="alt_comm_type"> Type of other form of communication (writing pad, staff know ASL, etc): </label><input type="text" class="form-control" name="alt_comm_type" id="alt_comm_type" ></div>\n' +
+        '    <div class="col-6"><label for="staff_ASL"> Staff have received instructions on how to provide ASL services upon request (in person or remote): </label><select class="form-control" name="staff_ASl" name="staff_ASL" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -4012,21 +4186,21 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="captioning_default"> Captioning is turned ‘on’ as default for TVs or projected video: </label> <select class="form-control" id="captioning_default" >\n' +
+        '    <div class="col-4"><label for="captioning_default"> Captioning is turned ‘on’ as default for TVs or projected video: </label> <select class="form-control" name="captioning_default" id="captioning_default" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="theater_captioning"> If this is a theater, there is captioning: </label><select class="form-control" id="theater_captioning" >\n' +
+        '    <div class="col-4"><label for="theater_captioning"> If this is a theater, there is captioning: </label><select class="form-control" name="theater_captioning" id="theater_captioning" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="theater_capt_type"> Type of captioning used - Real Time/Open Captions/Rear Window/Other: </label><select class="form-control" id="theater_capt_type" >\n' +
+        '    <div class="col-4"><label for="theater_capt_type"> Type of captioning used - Real Time/Open Captions/Rear Window/Other: </label><select class="form-control" name="theater_capt_type" id="theater_capt_type" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Real Time" >Real Time</option>\n' +
         '       <option value="Open Captions" >Open Captions</option>\n' +
@@ -4036,21 +4210,21 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="auditory_info_visual"> Auditory information is presented visually: </label> <select class="form-control" id="auditory_info_visual" >\n' +
+        '    <div class="col-4"><label for="auditory_info_visual"> Auditory information is presented visually: </label> <select class="form-control" name="auditory_info_visual" name="auditory_info_visual" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="visual_info_auditory"> Visual information is presented audibly: </label><select class="form-control" id="visual_info_auditory" >\n' +
+        '    <div class="col-4"><label for="visual_info_auditory"> Visual information is presented audibly: </label><select class="form-control" name="visual_info_auditory" id="visual_info_auditory" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="website_text_reader"> If the establishment has a website, it is accessible to users of screen text readers: </label> <select class="form-control" id="website_text_reader" >\n' +
+        '    <div class="col-4"><label for="website_text_reader"> If the establishment has a website, it is accessible to users of screen text readers: </label> <select class="form-control" name="website_text_reader" id="website_text_reader" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -4059,14 +4233,14 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_contact"> There are alternate means for patrons to order, contact, or schedule: </label><select class="form-control" id="alt_contact" >\n' +
+        '    <div class="col-6"><label for="alt_contact"> There are alternate means for patrons to order, contact, or schedule: </label><select class="form-control" name="alt_contact" id="alt_contact" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone: </label> <select class="form-control" id="alt_contact_type" >\n' +
+        '    <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone: </label> <select class="form-control" name="alt_contact_type" id="alt_contact_type" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Text" >Text</option>\n' +
         '       <option value="On-line" >On-line</option>\n' +
@@ -4075,21 +4249,21 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="shopping_assist"> The establishment offers shopping assistance or delivery: </label> <select class="form-control" id="shopping_assist" >\n' +
+        '    <div class="col-4"><label for="shopping_assist"> The establishment offers shopping assistance or delivery: </label> <select class="form-control" name="shopping_assist" id="shopping_assist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery: </label><select class="form-control" id="assist_service" >\n' +
+        '    <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery: </label><select class="form-control" name="assist_service" id="assist_service" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Shopping Assistance" >Shopping Assistance</option>\n' +
         '       <option value="Delivery" >Delivery</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="assist_fee"> Is there a fee for the service: </label> <select class="form-control" id="assist_fee" >\n' +
+        '    <div class="col-4"><label for="assist_fee"> Is there a fee for the service: </label> <select class="form-control" name="assist_fee" id="assist_fee" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -4098,50 +4272,31 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="store_scooter"> If this is a store, there are wheelchairs or scooters available for customer use: </label> <select class="form-control" id="store_scooter" >\n' +
+        '    <div class="col-3"><label for="store_scooter"> If this is a store, there are wheelchairs or scooters available for customer use: </label> <select class="form-control" name="store_scooter" id="store_scooter" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="scooter_fee"> Is there a fee to use wheelchairs or scooters: </label> <select class="form-control" id="scooter_fee" >\n' +
+        '    <div class="col-3"><label for="scooter_fee"> Is there a fee to use wheelchairs or scooters: </label> <select class="form-control" name="scooter_fee" id="scooter_fee" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="scooter_location"> Location of wheelchairs or scooters: </label> <input type="text" class="form-control" id="scooter_location"  ></div>\n' +
+        '    <div class="col-6"><label for="scooter_location"> Location of wheelchairs or scooters: </label> <input type="text" class="form-control" name="scooter_location" id="scooter_location"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="restaurant_allergies"> If this is a restaurant, information is available on food allergies, sensitivities: </label> <select class="form-control" id="restaurant_allergies" >\n' +
+        '    <div class="col-6"><label for="restaurant_allergies"> If this is a restaurant, information is available on food allergies, sensitivities: </label> <select class="form-control" name="restaurant_allergies" id="restaurant_allergies" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="staff_disable_trained"> The staff have received training within the past 12 months on how to provide “disability friendly” customer service to people with disabilities of all ages: </label> <select class="form-control" id="staff_disable_trained" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="staff_disable_trained_desc"> If ‘yes’, describe the type of training, how it was delivered, and how often it is provided: </label> <input type="text" class="form-control" id="staff_disable_trained_desc"  ></div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="items_reach"> All items are within reach, or assistance is offered to reach them: </label> <select class="form-control" id="items_reach" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '    <div class="col-6"><label for="service_alt_manner"> If goods and services are not accessible, they are provided in an alternative manner: </label><select class="form-control" id="service_alt_manner" >\n' +
+        '    <div class="col-6"><label for="staff_disable_trained"> The staff have received training within the past 12 months on how to provide “disability friendly” customer service to people with disabilities of all ages: </label> <select class="form-control" name="staff_disable_trained" id="staff_disable_trained" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -4150,17 +4305,17 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="senior_discount"> The establishment offers a senior discount: </label><select class="form-control" id="senior_discount" >\n' +
+        '    <div class="col-12"><label for="staff_disable_trained_desc"> If ‘yes’, describe the type of training, how it was delivered, and how often it is provided: </label> <input type="text" class="form-control" name="staff_disable_trained_desc" id="staff_disable_trained_desc"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="items_reach"> All items are within reach, or assistance is offered to reach them: </label> <select class="form-control" name="items_reach" id="items_reach" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="senior_age"> If ‘yes’, what age is considered ‘senior’: </label> <input type="number" min="0" class="form-control" id="senior_age"  ></div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" id="annual_A4A_review" >\n' +
+        '    <div class="col-6"><label for="service_alt_manner"> If goods and services are not accessible, they are provided in an alternative manner: </label><select class="form-control" name="service_alt_manner" id="service_alt_manner" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -4169,18 +4324,77 @@ function addCommunicationView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="commentCommunication"> Comments, reasons for “no” answers, additional information: </label><input type="text" class="form-control" id="commentCommunication" ></div>\n' +
+        '    <div class="col-6"><label for="senior_discount"> The establishment offers a senior discount: </label><select class="form-control" name="senior_discount" id="senior_discount" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-6"><label for="senior_age"> If ‘yes’, what age is considered ‘senior’: </label> <input type="number" min="0" class="form-control" name="senior_age" id="senior_age"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-12"><label for="recommendationsCommunication"> Recommendations: </label><input type="text" class="form-control" id="recommendationsCommunication" ></div>\n' +
-        '</div>';
+        '    <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" name="annual_A4A_review" id="annual_A4A_review" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-12"><label for="commentCommunication"> Comments, reasons for “no” answers, additional information: </label><input type="text" class="form-control" name="commentCommunication" id="commentCommunication" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-12"><label for="recommendationsCommunication"> Recommendations: </label><input type="text" class="form-control" name="recommendationsCommunication" id="recommendationsCommunication" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4">\n' +
+        '        <button  type="submit" id="save_restroom" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Communication Technologies</button>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>';
 
     $('#cardBody').html(bodyHtml);
     $('#public_phone').focus();
 
-    $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="save_restroom" class="btn btn-success" onclick="addCommunication()"><i class="fas fa-save"></i>&nbsp; Save Communication Technologies</button>\n' +
-        '</div>');
+    $('#cardFooter').html();
+
+    $('#cardFooter').html('');
+    $("#add_communication").validate({
+        rules: {
+            num_phone: {
+                number: true
+            },
+            alt_comm_type: {
+                maxlength: 50
+            },
+            scooter_location: {
+                maxlength: 5000
+            },
+            staff_disable_trained_desc: {
+                maxlength: 5000
+            },
+            senior_age: {
+                number: true
+            },
+            commentCommunication: {
+                alphanumeric: true,
+                maxlength: 5000
+            },
+            recommendationsCommunication: {
+                alphanumeric: true,
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentCommunication:  " Only letters and numbers.",
+            recommendationsCommunication: " Only letters and numbers."
+        },
+        submitHandler: function(form) {
+            addCommunication();
+        }
+    });
 }
 
 function addCommunication() {
@@ -4288,7 +4502,8 @@ function addCommunication() {
             setTimeout("location.href = 'home.php';",3500);
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(JSON.stringify(data));
             $("#alert").modal('toggle');
         }
     });
