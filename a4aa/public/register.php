@@ -37,7 +37,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["email"]))){
         $email_err = "Please enter a vaild email address.";
     } else{
-        $email = trim($_POST["email"]);
+        // Prepare a select statement
+        $sql = "SELECT user_id FROM User WHERE email = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            // Set parameters
+            $param_email = trim($_POST["email"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "Email address is already in use.";
+                } else{
+                    $email = trim($_POST["email"]);
+                }
+            } else{
+                $message = "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
     }
 
     // Validate username
@@ -177,7 +203,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="register-row">
                                 <div class="form-group col-6 <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
                                     <label for="fname">First Name</label>
-                                    <input type="name" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required>
+                                    <input type="name" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required autofocus>
                                     <span class="form-text error"><?php echo $fname_err; ?></span>
                                 </div>
                                 <div class="form-group col-6 <?php echo (!empty($lname_err)) ? 'has-error' : ''; ?>">

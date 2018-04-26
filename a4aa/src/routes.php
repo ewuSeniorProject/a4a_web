@@ -19,23 +19,15 @@ $app->get('/', function (Request $request, Response $response, array $args){
 $app->get('/establishment/', function (Request $request, Response $response, array $args){
     // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -53,25 +45,17 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get establishment by id
 $app->get('/get/establishment/{id}', function (Request $request, Response $response, array $args){
-    // Initialize the session
+// Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -93,23 +77,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/establishment/{user_id}/{cat_id}/{config_id}/{year}/{month}/{day}/', function (Request $request, Response $response, array $args){
     // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -137,23 +113,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/establishment/name/{id}', function (Request $request, Response $response, array $args){
     // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -175,23 +143,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/establishment/{id}', function (Request $request, Response $response, array $args){
     // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -210,23 +170,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/establishment/', function (Request $request, Response $response, array $args){
     // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -286,23 +238,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/establishment/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -320,23 +264,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/establishment/category/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -361,23 +297,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/establishment/config/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -402,23 +330,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/establishment/user/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -443,23 +363,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/establishment/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -538,23 +450,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/category/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -573,23 +477,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/category/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -609,23 +505,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/category/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -644,23 +532,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/category/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -678,23 +558,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/category/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -715,23 +587,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/configuration/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -750,23 +614,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/configuration/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -786,23 +642,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/configuration/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -821,23 +669,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/configuration/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -855,23 +695,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/configuration/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -892,20 +724,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/user/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
 $timeout_duration = 1800;
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -956,23 +783,15 @@ $app->get('/user/active/', function (Request $request, Response $response, array
 $app->get('/get/user/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1004,64 +823,102 @@ $app->get('/get/user/mobile/{id}', function (Request $request, Response $respons
 });
 
 // get user data by user name
-$app->get('/get/user/name/', function (Request $request, Response $response, array $args){ 
+$app->get('/get/user/name/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
     exit;
 }
 
-    $data = $request->getParsedBody();
-    $id = $data["user_id"];
+    $user = $request->getParam("uname");
 
-    $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
+    $sth = $this->db->prepare("SELECT COUNT(1) AS count FROM User WHERE user_name LIKE '$user'");
     $sth->execute();
     $data = $sth->fetchAll();
-    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+
+    if ($data[0]['count'] != 1) {
+//        $res = array("response" => true);
+        $res = true;
+        return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+    else {
+//        $res = array("response" => false, "message" => 'User name already in use.');
+        $res = false;
+        return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+
+});
+
+// get user data by user name
+$app->get('/get/user/email/', function (Request $request, Response $response, array $args){
+// Initialize the session
+    session_start();
+    $time = $_SERVER['REQUEST_TIME'];
+    $timeout_duration = 1800;
+    if (isset($_SESSION['LAST_ACTIVITY']) &&
+        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        session_start();
+    }
+    $_SESSION['LAST_ACTIVITY'] = $time;
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+        header("location: login.php");
+        exit;
+    }
+
+    $email = $request->getParam("email");
+
+    $sth = $this->db->prepare("SELECT COUNT(1) AS count FROM User WHERE email LIKE '$email'");
+    $sth->execute();
+    $data = $sth->fetchAll();
+
+    if ($data[0]['count'] != 1) {
+//        $res = array("response" => true);
+        $res = true;
+        return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+    else {
+//        $res = array("response" => false, "message" => 'User name already in use.');
+        $res = false;
+        return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+
 });
 
 // delete user data by id
 $app->delete('/delete/user/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1078,33 +935,45 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post user data
 $app->post('/post/user/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-
-$time = $_SERVER['REQUEST_TIME'];
-
-
-$timeout_duration = 1800;
-
-
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
+    // Initialize the session
     session_start();
-}
+    $time = $_SERVER['REQUEST_TIME'];
+    $timeout_duration = 1800;
+    if (isset($_SESSION['LAST_ACTIVITY']) &&
+        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        session_start();
+    }
+    $_SESSION['LAST_ACTIVITY'] = $time;
+    // If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+        header("location: login.php");
+        exit;
+    }
 
+    $data = $request->getParsedBody();
 
-$_SESSION['LAST_ACTIVITY'] = $time;
+    $fname = $data["fname"];
+    $lname = $data["lname"];
+    $user_name = $data["user_name"];
+    $email = $data["email"];
+    $password = password_hash($data["password"], PASSWORD_DEFAULT);
+    $role = $data["role"];
+    $active = $data["active"];
 
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+    $sth = $this->db->prepare("INSERT INTO User (fname, lname, user_name, email, password, role, active) 
+                                VALUES (:fname, :lname, :user_name, :email, :password, :role, :active)");
 
-//    $sth = $this->db->prepare("INSERT INTO User );
-//    $sth->execute();
+    $sth->bindParam(':fname', $fname, PDO::PARAM_STR);
+    $sth->bindParam(':lname', $lname, PDO::PARAM_STR);
+    $sth->bindParam(':user_name', $user_name, PDO::PARAM_STR);
+    $sth->bindParam(':email', $email, PDO::PARAM_STR);
+    $sth->bindParam(':password', $password, PDO::PARAM_STR);
+    $sth->bindParam(':role', $role, PDO::PARAM_STR);
+    $sth->bindParam(':active', $active, PDO::PARAM_STR);
+    $sth->execute();
+
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -1144,23 +1013,15 @@ $app->post('/post/user/mobile', function (Request $request, Response $response, 
 $app->put('/put/user/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1208,23 +1069,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1243,23 +1096,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1279,23 +1124,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/parking/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1324,23 +1161,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/park_id/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1361,23 +1190,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1396,23 +1217,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/parking/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1430,23 +1243,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/parking/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1492,23 +1297,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/parking/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1556,23 +1353,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/parking/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1633,23 +1422,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/route_from_parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1668,23 +1449,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/route_from_parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1704,23 +1477,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1740,23 +1505,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/route_from_parking/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1775,23 +1532,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1810,23 +1559,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1874,23 +1615,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/route_from_parking/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1908,23 +1641,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -1985,23 +1710,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/passenger_loading/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2020,23 +1737,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/passenger_loading/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2056,23 +1765,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2092,23 +1793,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/passenger_loading/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2127,23 +1820,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2162,23 +1847,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2226,23 +1903,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/passenger_loading/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2260,23 +1929,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2337,23 +1998,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/sta_bus/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2372,23 +2025,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2408,23 +2053,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/sta_bus/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2444,23 +2081,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/sta_bus_id/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2480,23 +2109,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/sta_bus/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2515,23 +2136,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/sta_bus/park/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2550,23 +2163,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2616,23 +2221,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2650,23 +2247,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/sta_bus/park/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2730,23 +2319,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/sta_route/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2765,23 +2346,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/sta_route/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2801,23 +2374,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2838,23 +2403,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/sta_route/single/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2877,23 +2434,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/sta_route/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2912,23 +2461,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2947,23 +2488,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/sta_route/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -2999,23 +2532,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/sta_route/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3033,23 +2558,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3092,23 +2609,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/exterior_pathways/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3127,23 +2636,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/exterior_pathways/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3163,23 +2664,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3199,23 +2692,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/exterior_pathways/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3234,23 +2719,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3269,23 +2746,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3337,23 +2806,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3420,23 +2881,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/exterior_stairs/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3455,23 +2908,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/exterior_stairs/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3491,23 +2936,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3527,23 +2964,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3562,23 +2991,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3597,23 +3018,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3665,23 +3078,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3735,23 +3140,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/exterior_stairs/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3769,23 +3166,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3855,23 +3244,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/exterior_ramps/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3890,23 +3271,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/exterior_ramps/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3926,23 +3299,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3962,23 +3327,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -3997,23 +3354,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4032,23 +3381,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4110,23 +3451,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4190,23 +3523,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4224,23 +3549,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4325,23 +3642,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/main_entrance/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4360,23 +3669,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/main_entrance/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4396,23 +3697,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/main_entrance/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4432,23 +3725,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/main_entrance/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4467,23 +3752,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/main_entrance/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4502,23 +3779,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4588,23 +3857,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/main_entrance/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4622,23 +3883,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/main_entrance/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4732,23 +3985,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/interior/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4767,23 +4012,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/interior/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4803,23 +4040,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/interior/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4839,23 +4068,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/interior/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4874,23 +4095,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/interior/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -4973,23 +4186,15 @@ $app->post('/post/interior/', function (Request $request, Response $response, ar
 $app->put('/put/interior/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5007,23 +4212,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/interior/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5108,23 +4305,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/elevator/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5143,23 +4332,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/elevator/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5179,23 +4360,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/elevator/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5215,23 +4388,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/elevator/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5250,23 +4415,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/elevator/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5285,23 +4442,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/elevator/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5356,23 +4505,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/elevator/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5428,23 +4569,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/elevator/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5462,23 +4595,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/elevator/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5551,23 +4676,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/signage/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5586,23 +4703,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/signage/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5622,23 +4731,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/signage/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5658,23 +4759,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/signage/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5693,23 +4786,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/signage/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5728,23 +4813,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/signage/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5794,23 +4871,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/signage/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5828,23 +4897,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/signage/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5908,23 +4969,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/emergency/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5943,23 +4996,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/emergency/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -5979,23 +5024,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/emergency/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6015,23 +5052,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/emergency/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6050,23 +5079,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/emergency/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6137,23 +5158,15 @@ $app->post('/post/emergency/', function (Request $request, Response $response, a
 $app->put('/put/emergency/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6175,23 +5188,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/emergency/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6258,23 +5263,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/seating/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6293,23 +5290,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/seating/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6329,23 +5318,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/seating/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6365,23 +5346,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/seating/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6400,23 +5373,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/seating/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6435,23 +5400,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/seating/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6520,23 +5477,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/seating/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6554,23 +5503,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/seating/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6661,23 +5602,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/restroom/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6696,23 +5629,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/restroom/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6732,23 +5657,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/restroom/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6768,23 +5685,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/restroom/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6803,23 +5712,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/restroom/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6838,23 +5739,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/restroom/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6897,23 +5790,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/restroom/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6958,23 +5843,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/restroom/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -6992,23 +5869,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/restroom/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7063,23 +5932,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/restroom_info/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7098,23 +5959,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/restroom_info/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7134,23 +5987,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/restroom_info/rest/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7170,23 +6015,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/restroom_info/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7205,23 +6042,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/restroom_info/rest/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7240,23 +6069,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7387,23 +6208,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/restroom_info/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7421,23 +6234,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/restroom_info/rest/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7599,23 +6404,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/communication/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7634,23 +6431,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/communication/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7670,23 +6459,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->get('/get/communication/est/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7706,23 +6487,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/communication/{id}', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7741,23 +6514,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->delete('/delete/communication/est/{id}', function (Request $request, Response $response, array $args){
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7776,23 +6541,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->post('/post/communication/', function (Request $request, Response $response, array $args){ 
     // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7897,23 +6654,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/communication/', function (Request $request, Response $response, array $args){ 
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");
@@ -7931,23 +6680,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 $app->put('/put/communication/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 // Initialize the session
 session_start();
-
 $time = $_SERVER['REQUEST_TIME'];
-
-
 $timeout_duration = 1800;
-
-
 if (isset($_SESSION['LAST_ACTIVITY']) &&
     ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
     session_unset();
     session_destroy();
     session_start();
 }
-
-
 $_SESSION['LAST_ACTIVITY'] = $time;
-
 // If session variable is not set it will redirect to login page
 if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
     header("location: login.php");

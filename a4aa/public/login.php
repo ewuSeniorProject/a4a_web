@@ -129,7 +129,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
                                 <label>Username</label>
-                                <input type="text" name="user_name" autocomplete="username" class="form-control" value="<?php echo $user_name; ?>">
+                                <input type="text" name="user_name" autocomplete="username" class="form-control" value="<?php echo $user_name; ?>" autofocus>
                             </div>
                             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                                 <label>Password</label>
