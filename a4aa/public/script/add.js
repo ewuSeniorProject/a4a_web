@@ -42,7 +42,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -59,7 +59,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -76,7 +76,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -380,7 +380,7 @@ function addEstablishment() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -425,7 +425,7 @@ function addNoParking() {
                 },
                 error: function(data) {
                     $("#alert-body").empty();
-                    $("#alert-body").append(JSON.stringify(data));
+                    $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
                     $("#alert").modal('toggle');
                 }
             });
@@ -444,7 +444,7 @@ function addNoParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -601,7 +601,7 @@ function addParking() {
                 },
                 error: function(data) {
                     $("#alert-body").empty();
-                    $("#alert-body").append(JSON.stringify(data));
+                    $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
                     $("#alert").modal('toggle');
                 }
             });
@@ -620,7 +620,7 @@ function addParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -789,7 +789,7 @@ function addRouteFromParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -961,7 +961,7 @@ function addPassengerLoading() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1145,7 +1145,7 @@ function addSTABus() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1234,7 +1234,7 @@ function addSTARoute() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1276,7 +1276,7 @@ function addSTARoute() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1464,7 +1464,7 @@ function addExteriorPathways() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1514,7 +1514,7 @@ function addNoExteriorStairs() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1712,7 +1712,7 @@ function addExteriorStairs() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -1762,7 +1762,7 @@ function addNoExteriorRamps() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -2002,7 +2002,7 @@ function addExteriorRamps() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -2274,7 +2274,7 @@ function addMainEntrance() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -2512,7 +2512,7 @@ function addInterior() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -2562,7 +2562,7 @@ function addNoElevator() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -2767,7 +2767,7 @@ function addElevator() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -2946,7 +2946,7 @@ function addSignage() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -3137,7 +3137,7 @@ function addEmergencyPreparedness() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -3395,7 +3395,7 @@ function addSeating() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -3444,7 +3444,7 @@ function addNoRestroom() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -3587,7 +3587,7 @@ function addRestroom() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -3607,7 +3607,7 @@ function getRestroomId() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -4065,7 +4065,7 @@ function addRestroomInformation() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });
@@ -4503,7 +4503,7 @@ function addCommunication() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(JSON.stringify(data));
+            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
             $("#alert").modal('toggle');
         }
     });

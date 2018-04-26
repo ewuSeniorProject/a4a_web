@@ -63,6 +63,9 @@ if($_SESSION['role'] !== 'admin'){
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!--jQuery Validation Plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 
         <script type="text/javascript">
             $(window).on('load', function () {
@@ -80,11 +83,11 @@ if($_SESSION['role'] !== 'admin'){
             <span class="spinner"></span>
         </div>
         <nav class="navbar navbar-light bg-header">
-                            <span class="navbar-brand mb-0 pointer">
-                                <a href="home.php" class="h1">
-                                    Access 4 All Spokane
-                                </a>
-                            </span>
+            <span class="navbar-brand mb-0 pointer">
+                <a href="home.php" class="h1">
+                    Access 4 All Spokane
+                </a>
+            </span>
             <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
                 <i class="fas fa-bars fa-lg"></i>
             </div>
@@ -107,6 +110,9 @@ if($_SESSION['role'] !== 'admin'){
                         <li>&nbsp;</li>
                         <li class="nav-item">
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt "></i> Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="addUserView()" ><i class="fas fa-user-plus "></i> Add User</div>
                         </li>
                     </ul>
                 </div>
