@@ -129,9 +129,16 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     <!-- Template -->
         <script type="text/html" id="establishment-list-template">
             <div class="box col-5">
-                <a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: baseUrl, title: 'Edit '+name+' information'}" >
+                <?php if($_SESSION['role'] == 'admin') {
+                    echo '<a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: adminUrl, title: \'Edit \'+name+\' information\'}" >
                     <span class="col-10 h4" data-bind="text:name"></span>&nbsp;<div class="icon col-2"><i class="fas fa-edit fa-lg"></i></div><br>
-                </a>
+                    </a>';
+                }
+                else {
+                    echo '<a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: userUrl, title: \'View \'+name+\' information\'}" >
+                    <span class="col-10 h4" data-bind="text:name"></span>&nbsp;<div class="icon col-2"><i class="fas fa-folder-open fa-lg"></i></div><br>
+                    </a>';
+                }?>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: website }" target="_new"></a><br>
                     <span data-bind="text:phone"></span><br>

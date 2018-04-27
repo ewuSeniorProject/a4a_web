@@ -34,7 +34,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     exit;
 }
 
-
     $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
     $data = $sth->fetchAll();
@@ -432,9 +431,9 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':Contact_lname', $contact_lname, PDO::PARAM_STR);
     $sth->bindParam(':Contact_title', $contact_title, PDO::PARAM_STR);
     $sth->bindParam(':Contact_email', $contact_email, PDO::PARAM_STR);
-    $sth->bindParam(':User_id', $user_id, PDO::PARAM_STR);
-    $sth->bindParam(':Cat_id', $cat_id, PDO::PARAM_STR);
-    $sth->bindParam(':Config_id', $config_id, PDO::PARAM_STR);
+    $sth->bindParam(':User_id', $user_id, PDO::PARAM_INT);
+    $sth->bindParam(':Cat_id', $cat_id, PDO::PARAM_INT);
+    $sth->bindParam(':Config_id', $config_id, PDO::PARAM_INT);
     $sth->bindParam(':Config_comment', $config_comment, PDO::PARAM_STR);
     $sth->bindParam(':Date', $date, PDO::PARAM_STR);
     $sth->execute();

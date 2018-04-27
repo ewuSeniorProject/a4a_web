@@ -6,19 +6,6 @@ var bodyHtml = "";
 
 $(document).ready(function () {
 
-    // $('#collapseTitle').hide();
-    //
-    // var entryheight = $('#cardTitle').height();
-    //
-    // $(document).scroll(function () {
-    //     var y = $(this).scrollTop();
-    //     if (y > entryheight + 27) {
-    //         $('#collapseTitle').slideDown('fast');
-    //     } else {
-    //         $('#collapseTitle').slideUp('fast');
-    //     }
-    // });
-
     addEstablishmentView();
 
 });
@@ -42,7 +29,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -59,7 +46,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -76,7 +63,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -187,7 +174,7 @@ function addEstablishmentView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="contact_email"> Email: </label><input type="email" class="form-control" name="contact_email" id="contact_email" ></div>\n' +
         '       <div class="col-4">\n' +
-        '           <label for="user_id"> User: </label><select class="form-control" name="user_id" name="user_id" id="user_id" required>\n' +
+        '           <label for="user_id"> Surveyor: </label><select class="form-control" name="user_id" name="user_id" id="user_id" required>\n' +
         '               <option value="" disabled selected>Please select one</option>\n';
 
     for (var i = 0; i < userData.length; i ++) {
@@ -270,7 +257,6 @@ function addEstablishmentView() {
                 dateISO: true
             },
             config_comment: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
@@ -292,7 +278,7 @@ function addEstablishmentView() {
             contact_email: " Must be a valid email address.",
             user_id: " Must select one from the list.",
             date: " Must be a valid date.",
-            config_comment: " Only letters and numbers."
+            config_comment: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addEstablishment();
@@ -380,7 +366,7 @@ function addEstablishment() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -425,7 +411,7 @@ function addNoParking() {
                 },
                 error: function(data) {
                     $("#alert-body").empty();
-                    $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+                    $("#alert-body").append(data);
                     $("#alert").modal('toggle');
                 }
             });
@@ -444,7 +430,7 @@ function addNoParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -461,12 +447,12 @@ function addParkingView() {
     bodyHtml = '<form id="add_parking">\n' +
         '<div class="card-row">\n' +
         '    <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label><select class="form-control" name="lot_free" id="lot_free">\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Free" >Free</option>\n' +
-        '       <option value="Paid" >Paid</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '</div>\n' +
+        '           <option value="" disabled selected>Please select one</option>\n' +
+        '           <option value="Free" >Free</option>\n' +
+        '           <option value="Paid" >Paid</option>\n' +
+        '           <option value="N/A" >N/A</option>\n' +
+        '       </select>\n' +
+        '    </div>\n' +
         '    <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" name="street_metered" id="street_metered" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Metered" >Metered</option>\n' +
@@ -534,11 +520,9 @@ function addParkingView() {
                 number: true
             },
             comment: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendations: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
@@ -548,8 +532,8 @@ function addParkingView() {
             num_reserved_spaces: " Must be a number.",
             num_accessable_space: " Must be a number.",
             num_van_accessible: " Must be a number.",
-            comment:  " Only letters and numbers.",
-            recommendations: " Only letters and numbers."
+            comment:  " Must be less than 5000 characters.",
+            recommendations: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addParking();
@@ -601,7 +585,7 @@ function addParking() {
                 },
                 error: function(data) {
                     $("#alert-body").empty();
-                    $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+                    $("#alert-body").append(data);
                     $("#alert").modal('toggle');
                 }
             });
@@ -620,7 +604,7 @@ function addParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -722,17 +706,15 @@ function addRouteFromParkingView() {
                 number: true
             },
             commentRouteFromParking: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsRouteFromParking: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentRouteFromParking:  " Only letters and numbers.",
-            recommendationsRouteFromParking: " Only letters and numbers."
+            commentRouteFromParking:  " Must be less than 5000 characters.",
+            recommendationsRouteFromParking: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addRouteFromParking();
@@ -789,7 +771,7 @@ function addRouteFromParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -894,17 +876,15 @@ function addPassengerLoadingView() {
                 number: true
             },
             commentPassengerLoading: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsPassengerLoading: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentPassengerLoading:  " Only letters and numbers.",
-            recommendationsPassengerLoading: " Only letters and numbers."
+            commentPassengerLoading:  " Must be less than 5000 characters.",
+            recommendationsPassengerLoading: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addPassengerLoading();
@@ -961,7 +941,7 @@ function addPassengerLoading() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1075,17 +1055,15 @@ function addSTABusView() {
                 number: true
             },
             commentStaBus: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsStaBus: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentStaBus:  " Only letters and numbers.",
-            recommendationsStaBus: " Only letters and numbers."
+            commentStaBus:  " Must be less than 5000 characters.",
+            recommendationsStaBus: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addSTABus();
@@ -1145,7 +1123,7 @@ function addSTABus() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1234,7 +1212,7 @@ function addSTARoute() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1276,7 +1254,7 @@ function addSTARoute() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1393,17 +1371,15 @@ function addExteriorPathwaysView() {
                 maxlength: 255
             },
             commentExteriorPathway: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsExteriorPathway: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentExteriorPathway:  " Only letters and numbers.",
-            recommendationsExteriorPathway: " Only letters and numbers."
+            commentExteriorPathway:  " Must be less than 5000 characters.",
+            recommendationsExteriorPathway: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addExteriorPathways();
@@ -1464,7 +1440,7 @@ function addExteriorPathways() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1514,7 +1490,7 @@ function addNoExteriorStairs() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1637,17 +1613,15 @@ function addExteriorStairsView() {
                 number: true
             },
             commentExteriorStairs: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsExteriorStairs: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentExteriorStairs:  " Only letters and numbers.",
-            recommendationsExteriorStairs: " Only letters and numbers."
+            commentExteriorStairs:  " Must be less than 5000 characters.",
+            recommendationsExteriorStairs: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addExteriorStairs();
@@ -1712,7 +1686,7 @@ function addExteriorStairs() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1762,7 +1736,7 @@ function addNoExteriorRamps() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -1919,17 +1893,15 @@ function addExteriorRampsView() {
                 number: true
             },
             commentExteriorRamps: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsExteriorRamps: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentExteriorRamps:  " Only letters and numbers.",
-            recommendationsExteriorRamps: " Only letters and numbers."
+            commentExteriorRamps:  " Must be less than 5000 characters.",
+            recommendationsExteriorRamps: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addExteriorRamps();
@@ -2002,7 +1974,7 @@ function addExteriorRamps() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -2185,17 +2157,15 @@ function addMainEntranceView() {
                 number: true
             },
             commentMainEntrance: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsMainEntrance: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentMainEntrance:  " Only letters and numbers.",
-            recommendationsMainEntrance: " Only letters and numbers."
+            commentMainEntrance:  " Must be less than 5000 characters.",
+            recommendationsMainEntrance: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addMainEntrance();
@@ -2274,7 +2244,7 @@ function addMainEntrance() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -2429,17 +2399,15 @@ function addInteriorView() {
                 number: true
             },
             commentInterior: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsInterior: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentInterior:  " Only letters and numbers.",
-            recommendationsInterior: " Only letters and numbers."
+            commentInterior:  " Must be less than 5000 characters.",
+            recommendationsInterior: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addInterior();
@@ -2512,7 +2480,7 @@ function addInterior() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -2562,7 +2530,7 @@ function addNoElevator() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -2691,18 +2659,16 @@ function addElevatorView() {
                 number: true
             },
             commentElevator: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsElevator: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
             location: " Must be less than 256 characters long.",
-            commentElevator:  " Only letters and numbers.",
-            recommendationsElevator: " Only letters and numbers."
+            commentElevator:  " Must be less than 5000 characters.",
+            recommendationsElevator: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addElevator();
@@ -2767,7 +2733,7 @@ function addElevator() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -2877,17 +2843,15 @@ function addSignageView() {
                 number: true
             },
             commentSignage: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsSignage: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentSignage:  " Only letters and numbers.",
-            recommendationsSignage: " Only letters and numbers."
+            commentSignage:  " Must be less than 5000 characters.",
+            recommendationsSignage: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addSignage();
@@ -2946,7 +2910,7 @@ function addSignage() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -3066,17 +3030,15 @@ function addEmergencyPreparednessView() {
     $("#add_emergency_preparedness").validate({
         rules: {
             commentEmergency_Preparedness: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsEmergency_Preparedness: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentEmergency_Preparedness:  " Only letters and numbers.",
-            recommendationsEmergency_Preparedness: " Only letters and numbers."
+            commentEmergency_Preparedness:  " Must be less than 5000 characters.",
+            recommendationsEmergency_Preparedness: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addEmergencyPreparedness();
@@ -3137,7 +3099,7 @@ function addEmergencyPreparedness() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -3308,17 +3270,15 @@ function addSeatingView() {
                 number: true
             },
             commentSeating: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsSeating: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentSeating:  " Only letters and numbers.",
-            recommendationsSeating: " Only letters and numbers."
+            commentSeating:  " Must be less than 5000 characters.",
+            recommendationsSeating: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addSeating();
@@ -3395,7 +3355,7 @@ function addSeating() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -3444,7 +3404,7 @@ function addNoRestroom() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -3524,17 +3484,15 @@ function addRestroomView() {
                 number: true
             },
             commentRestroom: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsRestroom: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentRestroom:  " Only letters and numbers.",
-            recommendationsRestroom: " Only letters and numbers."
+            commentRestroom:  " Must be less than 5000 characters.",
+            recommendationsRestroom: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addRestroom();
@@ -3587,7 +3545,7 @@ function addRestroom() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -3607,7 +3565,7 @@ function getRestroomId() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -3930,17 +3888,15 @@ function addRestroomInformationView() {
                 number: true
             },
             commentRestroomInfo: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsRestroomInfo: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentRestroomInfo:  " Only letters and numbers.",
-            recommendationsRestroomInfo: " Only letters and numbers."
+            commentRestroomInfo:  " Must be less than 5000 characters.",
+            recommendationsRestroomInfo: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addRestroomInformation();
@@ -4065,7 +4021,7 @@ function addRestroomInformation() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
@@ -4379,17 +4335,15 @@ function addCommunicationView() {
                 number: true
             },
             commentCommunication: {
-                alphanumeric: true,
                 maxlength: 5000
             },
             recommendationsCommunication: {
-                alphanumeric: true,
                 maxlength: 5000
             }
         },
         messages: {
-            commentCommunication:  " Only letters and numbers.",
-            recommendationsCommunication: " Only letters and numbers."
+            commentCommunication:  " Must be less than 5000 characters.",
+            recommendationsCommunication: " Must be less than 5000 characters."
         },
         submitHandler: function(form) {
             addCommunication();
@@ -4503,7 +4457,7 @@ function addCommunication() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append("An error has occurred, please make sure all required fields have been filled in.<br>If this error persistes please contact the admin.");
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
