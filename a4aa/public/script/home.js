@@ -19,7 +19,8 @@ function EstablishmentModel(data) {
     self.phone = data.phone;
     self.contact_fname = data.contact_fname;
     self.contact_lname = data.contact_lname;
-    self.baseUrl = ("update.php");
+    self.adminUrl = ("update.php");
+    self.userUrl = ("view.php");
 }
 
 function EstablishmentViewModel() {

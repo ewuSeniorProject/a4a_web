@@ -9,6 +9,7 @@ var USER_NAME = "";
 var STA_ID = 0;
 var REST_ID = 0;
 var INDEX = 0;
+var bodyHtml = "";
 
 $(document).ready(function () {
 
@@ -20,6 +21,9 @@ $(document).ready(function () {
     getConfigName(CONFIG_ID);
     getUserName(USER_ID);
 
+    EstablishmentView();
+    ParkingView();
+
     // Scrolls selected accordion card to the top of the page
     $('.collapse').on('shown.bs.collapse', function(e) {
         var $card = $(this).closest('.card');
@@ -29,194 +33,6 @@ $(document).ready(function () {
     });
 
 
-    function EstablishmentModel(parm) {
-        //console.log("EstablishmentModel(parm) : " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.est_id = ko.observable(parm.data.est_id);
-        this.name = ko.observable(parm.data.name);
-        this.name.focused = ko.observable(false);
-        this.website = ko.observable(parm.data.website);
-        this.website.focused = ko.observable(false);
-        this.cat_id = ko.observable(parm.data.cat_id);
-        this.cat_id.focused = ko.observable(false);
-        this.cat_name = ko.observable(CAT_NAME);
-        this.cat_name.focused = ko.observable(false);
-        this.subtype = ko.observable(parm.data.subtype);
-        this.subtype.focused = ko.observable(false);
-        this.config_id = ko.observable(parm.data.config_id);
-        this.config_id.focused = ko.observable(false);
-        this.config_name = ko.observable(CONFIG_NAME);
-        this.config_name.focused = ko.observable(false);
-        this.street = ko.observable(parm.data.street);
-        this.street.focused = ko.observable(false);
-        this.city = ko.observable(parm.data.city);
-        this.city.focused = ko.observable(false);
-        this.state = ko.observable(parm.data.state);
-        this.state.focused = ko.observable(false);
-        this.zip = ko.observable(parm.data.zip);
-        this.zip.focused = ko.observable(false);
-        this.phone = ko.observable(parm.data.phone);
-        this.phone.focused = ko.observable(false);
-        this.phone_tty = ko.observable(parm.data.tty);
-        this.phone_tty.focused = ko.observable(false);
-        this.contact_fname = ko.observable(parm.data.contact_fname);
-        this.contact_fname.focused = ko.observable(false);
-        this.contact_lname = ko.observable(parm.data.contact_lname);
-        this.contact_lname.focused = ko.observable(false);
-        this.contact_title = ko.observable(parm.data.contact_title);
-        this.contact_title.focused = ko.observable(false);
-        this.contact_email = ko.observable(parm.data.contact_email);
-        this.contact_email.focused = ko.observable(false);
-        this.date = ko.observable(parm.data.date);
-        this.date.focused = ko.observable(false);
-        this.user_id = ko.observable(parm.data.user_id);
-        this.user_id.focused = ko.observable(false);
-        this.user_name = ko.observable(USER_NAME);
-        this.user_name.focused = ko.observable(false);
-        this.config_comment = ko.observable(parm.data.config_comment);
-        this.config_comment.focused = ko.observable(false);
-    }
-
-    function EstablishmentViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.establishmentList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.establishmentList($.map(data, function (item) {
-                    return new EstablishmentModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-        // $("#collapseOne").validate({
-        //     // Specify validation rules
-        //     rules: {
-        //         name: {
-        //             required: true,
-        //             max: 255
-        //         },
-        //         website: {
-        //             required: true,
-        //             max: 255
-        //         },
-        //         category: {
-        //             required: true
-        //         },
-        //         street: {
-        //             required: true,
-        //             max: 255
-        //         },
-        //         date: {
-        //             required: true,
-        //             dateISO: true
-        //         },
-        //         overview: {
-        //             required: true,
-        //             minlength: 2
-        //         },
-        //         studio: {
-        //             required: true,
-        //             minlength: 2,
-        //             maxlength: 100
-        //         },
-        //         price: {
-        //             required: true,
-        //             number: true,
-        //             minlength: 1,
-        //             maxlength: 20
-        //         }
-        //     },
-        //     // Specify validation error messages
-        //     messages: {
-        //         name: " Establishment name must be less than 256 characters long.",
-        //         website: " Website must be less than 256 characters long.",
-        //         date: " Date (yyyy-mm-dd)",
-        //         overview: " Overview at least 2 characters",
-        //         studio: " Studio at least 2 characters",
-        //         price: " Price at least 0"
-        //     },
-        //     submitHandler: function(form) {
-        //         updateEstablishment();
-        //     },
-        // });
-
-    }
-
-    function CategoryModel(data) {
-        // console.log("CategoryModel(data): " + JSON.stringify(data));
-        this.category_id = ko.observable(data.cat_id);
-        this.category_id.focused = ko.observable(false);
-        this.category_name = ko.observable(data.name);
-        this.category_name.focused = ko.observable(false);
-    }
-
-    function CategoryViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.categoryList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.categoryList($.map(data, function (item) {
-                    return new CategoryModel(item);
-                }));
-            }
-        });
-    }
-
-    function ParkingModel(parm) {
-        // console.log("ParkingModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.park_id = ko.observable(parm.data.park_id);
-        this.lot_free = ko.observable(parm.data.lot_free);
-        this.lot_free.focused = ko.observable(false);
-        this.street_metered = ko.observable(parm.data.street_metered);
-        this.street_metered.focused = ko.observable(false);
-        this.parking_type = ko.observable(parm.data.parking_type);
-        this.parking_type.focused = ko.observable(false);
-        this.total_num_spaces = ko.observable(parm.data.total_num_spaces);
-        this.total_num_spaces.focused = ko.observable(false);
-        this.num_reserved_spaces = ko.observable(parm.data.num_reserved_spaces);
-        this.num_reserved_spaces.focused = ko.observable(false);
-        this.num_accessable_space = ko.observable(parm.data.num_accessable_space);
-        this.num_accessable_space.focused = ko.observable(false);
-        this.num_van_accessible = ko.observable(parm.data.num_van_accessible);
-        this.num_van_accessible.focused = ko.observable(false);
-        this.reserve_space_sign = ko.observable(parm.data.reserve_space_sign);
-        this.reserve_space_sign.focused = ko.observable(false);
-        this.reserve_space_obstacles = ko.observable(parm.data.reserve_space_obstacles);
-        this.reserve_space_obstacles.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function ParkingViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.parkingList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.parkingList($.map(data, function (item) {
-                    return new ParkingModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
 
     function RouteFromParkingModel(parm) {
         // console.log("ParkingModel(parm): " + JSON.stringify(parm));
@@ -1181,36 +997,7 @@ $(document).ready(function () {
         });
     }
 
-    function UserModel(parm) {
-        // console.log("UserModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.user_id = ko.observable(parm.data.user_id);
-        this.name = ko.observable(parm.data.fname + " " + parm.data.lname);
-        this.name.focused = ko.observable(false);
-    }
-
-    function UserViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.userList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.userList($.map(data, function (item) {
-                    return new UserModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
     var myParentVM = {
-           establishmentVM : new EstablishmentViewModel('get/establishment/' + EST_ID, 'delete/establishment/' + EST_ID, 'post/establishment/' + EST_ID, 'put/establishment/' + EST_ID),
-                categoryVM : new CategoryViewModel('category/', 'delete/category/', 'post/category/', 'put/category/'),
-                    userVM : new UserViewModel('user/', 'delete/user/', 'post/user/', 'put/user/'),
-                 parkingVM : new ParkingViewModel('get/parking/est/' + EST_ID, 'delete/parking/est/' + EST_ID, 'post/parking/', 'put/parking/est/' + EST_ID),
         routeFromParkingVM : new RouteFromParkingViewModel('get/route_from_parking/park/' + PARK_ID, 'delete/route_from_parking/park/' + PARK_ID, 'post/route_from_parking/', 'put/route_from_parking/park/' + PARK_ID),
         passengerLoadingVM : new PassengerLoadingViewModel('get/passenger_loading/park/' + PARK_ID, 'delete/passenger_loading/park/' + PARK_ID, 'post/passenger_loading/', 'put/passenger_loading/park/' + PARK_ID),
                   staBusVM : new StaBusViewModel('get/sta_bus/park/' + PARK_ID, 'delete/sta_bus/park/' + PARK_ID, 'post/sta_bus/', 'put/sta_bus/park/' + PARK_ID),
@@ -1362,9 +1149,259 @@ function getRestroomId(value) {
     });
 }
 
+function EstablishmentView() {
+    var categoryData = "";
+    var configData = "";
+    var userData = "";
+    var estData = "";
+
+    $('#establishment_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "category/",
+        success: function (data) {
+            categoryData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "configuration/",
+        success: function (data) {
+            configData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "user/active/",
+        success: function (data) {
+            userData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/establishment/" + EST_ID,
+        success: function (data) {
+            estData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="establishment_view">\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-6"><label for="name"> Establishment Name: </label><input type="text" class="form-control" id="name" name="name" value="' + estData[0].name + '" required autofocus></div>\n' +
+        '               <div class="col-6"><label for="website"> Website: </label><input type="url" class="form-control" id="website" name="website" value="' + estData[0].website + '"></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-4">\n' +
+        '                   <label for="cat_id"> Category: </label><select class="form-control" name="cat_id" id="cat_id" required>\n';
+
+    for (var i = 0; i < categoryData.length; i ++) {
+        if (categoryData[i].cat_id === estData[0].cat_id ) {
+            bodyHtml += '<option value="' + categoryData[i].cat_id + '" selected>&nbsp;' + categoryData[i].name + '</option>\n';
+        }
+        else {
+            bodyHtml += '<option value="' + categoryData[i].cat_id + '">&nbsp;' + categoryData[i].name + '</option>\n';
+        }
+    }
+
+    bodyHtml += '           </select>\n ' +
+        '               </div>\n' +
+        '               <div class="col-4">\n' +
+        '                   <label for="subtype"> Subtype: </label>\n' +
+        '                   <input class="form-control" id="subtype" name="subtype" value="' + estData[0].subtype + '">\n' +
+        '               </div>\n' +
+        '               <div class="col-4">\n' +
+        '                   <label for="cat_id"> Configuration: </label><select class="form-control" id="config_id" name="config_id" required>\n';
+
+    for (var i = 0; i < configData.length; i ++) {
+        if (configData[i].config_id === estData[0].config_id ) {
+            bodyHtml += '<option value="' + configData[i].config_id + '" selected>&nbsp;' + configData[i].name + '</option>\n';
+        }
+        else {
+            bodyHtml += '<option value="' + configData[i].config_id + '">&nbsp;' + configData[i].name + '</option>\n';
+        }
+    }
+
+    bodyHtml += '           </select>\n ' +
+        '               </div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-12"><label for="street"> Street: </label><input type="text" class="form-control" id="street" name="street" value="' + estData[0].street + '"></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-6"><label for="city"> City: </label><input type="text" class="form-control" id="city" name="city" value="' + estData[0].city + '"></div>\n' +
+        '               <div class="col-2"><label for="state"> State: </label><input type="text" class="form-control" id="state" name="state" value="' + estData[0].state + '"></div>\n' +
+        '               <div class="col-4"><label for="zip"> Zip: </label><input class="form-control" id="zip" name="zip" value="' + estData[0].zip + '"></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-6"><label for="phone"> Main Phone: </label><input type="tel" class="form-control" id="phone" name="phone" value="' + estData[0].phone + '"></div>\n' +
+        '               <div class="col-6"><label for="phone_tty"> TTY/TTD: </label><input type="tel" class="form-control" id="phone_tty" name="phone_tty" value="' + estData[0].tty + '"></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-4"><label for="contact_fname"> Contact First Name: </label><input type="text" class="form-control" id="contact_fname" name="contact_fname" value="' + estData[0].contact_fname + '"></div>\n' +
+        '               <div class="col-4"><label for="contact_lname"> Contact Last Name: </label><input type="text" class="form-control" id="contact_lname" name="contact_lname" value="' + estData[0].contact_lname + '"></div>\n' +
+        '               <div class="col-4"><label for="contact_title"> Contact Title: </label><input type="text" class="form-control" id="contact_title" name="contact_title" value="' + estData[0].contact_title + '"></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-4"><label for="contact_email"> Email: </label><input type="email" class="form-control" id="contact_email" name="contact_email" value="' + estData[0].contact_email + '"></div>\n' +
+        '               <div class="col-4">\n' +
+        '                   <label for="user_id"> Surveyor: </label><select class="form-control" id="user_id" name="user_id" required>\n';
+
+                            for (var i = 0; i < userData.length; i ++) {
+                                if (userData[i].user_id === estData[0].user_id ) {
+                                    bodyHtml += '<option value="'+userData[i].user_id+'" selected>&nbsp;'+userData[i].fname+' '+userData[i].lname+'</option>\n';
+                                }
+                                else {
+                                    bodyHtml += '<option value="'+userData[i].user_id+'">&nbsp;'+userData[i].fname+' '+userData[i].lname+'</option>\n';
+                                }
+                            }
+
+    bodyHtml += '           </select>\n ' +
+        '               </div>\n' +
+        '               <div class="col-4"><label for="date"> Survey Date: </label><input type="date" class="form-control" type="date" id="date" name="date" value="' + estData[0].date + '" required></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-12"><label for="commentEstablishment"> Comment: </label><input class="form-control" id="commentEstablishment" name="commentEstablishment" value="' + estData[0].config_comment + '" ></div>\n' +
+        '           </div>\n' +
+        '           <div class="card-row">\n' +
+        '               <div class="col-4">\n' +
+        '                   <button type="submit" id="save_establishment" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>\n' +
+        '               </div>\n' +
+        '           </div>\n ' +
+        '       </form>';
+
+    $('#establishment_card').append(bodyHtml);
+    $('#left_sb_name').html(estData[0].name);
+
+    $("#establishment_view").validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2,
+                maxlength: 255
+            },
+            website: {
+                url: true,
+                maxlength: 255
+            },
+            cat_id: {
+                required: true
+            },
+            subtype: {
+                maxlength: 255
+            },
+            config_id: {
+                required: true
+            },
+            street: {
+                maxlength: 255
+            },
+            city: {
+                maxlength: 255
+            },
+            state: {
+                minlength: 2,
+                maxlength: 2
+            },
+            zip: {
+                zipcodeUS: true
+            },
+            phone: {
+                phoneUS: true
+            },
+            phone_tty: {
+                phoneUS: true
+            },
+            contact_fname: {
+                maxlength: 255
+            },
+            contact_lname: {
+                maxlength: 255
+            },
+            contact_title: {
+                maxlength: 255
+            },
+            contact_email: {
+                email: true,
+                maxlength: 255
+            },
+            user_id: {
+                required: true
+            },
+            date: {
+                required: true,
+                dateISO: true
+            },
+            config_comment: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            name: " Must be between 2 and 256 characters long.",
+            website: " Include http:// or https://.",
+            cat_id: " Must select one from the list.",
+            subtype: " Must be less than 256 characters long.",
+            config_id: " Must select one from the list.",
+            street: " Must be less than 256 characters long.",
+            city: " Must be less than 256 characters long.",
+            state: " Must use two letter abbreviation.",
+            zip: " US Zip Code: 12345 or 12345-1234.",
+            phone: " US Phone: 1(509)555-1234, (509)555-1234, 1-509-555-1234, 509-555-1234.",
+            phone_tty: " US Phone: 1(509)555-1234, (509)555-1234, 1-509-555-1234, 509-555-1234.",
+            contact_fname: " Must be less than 256 characters long.",
+            contact_lname: " Must be less than 256 characters long.",
+            contact_title: " Must be less than 256 characters long.",
+            contact_email: " Must be a valid email address.",
+            user_id: " Must select one from the list.",
+            date: " Must be a valid date."
+        },
+        submitHandler: function(form) {
+            updateEstablishment();
+        }
+    });
+
+}
 
 function updateEstablishment() {
-    var est_id = document.getElementById("est_id").value;
     var name = document.getElementById("name").value;
     var website = document.getElementById("website").value;
     var cat_id = document.getElementById("cat_id").value;
@@ -1383,17 +1420,13 @@ function updateEstablishment() {
     var user_id = document.getElementById("user_id").value;
     var date = document.getElementById("date").value;
     var config_comment = document.getElementById("commentEstablishment").value;
-    // var arrdata = [EST_ID, name, website, CAT_ID, subtype, CONFIG_ID, street, city, state, zip, phone, phone_tty, contact_fname, contact_lname, contact_title, contact_email, USER_ID, date, config_comment];
-
-    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
         method: "PUT",
         contentType: "application/json; charset=utf-8",
-        url: "put/establishment/est/" + est_id,
+        url: "put/establishment/est/" + EST_ID,
         data: JSON.stringify({
-                "est_id": est_id,
                 "name" : name,
                 "website" : website,
                 "cat_id" : cat_id,
@@ -1415,6 +1448,214 @@ function updateEstablishment() {
             }),
         success: function () {
             $("#success-body").html('Premises Information Updated');
+            $("#success").modal('toggle');
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function ParkingView() {
+    var parkingData = "";
+
+    $('#parking_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/parking/est/" + EST_ID,
+        success: function (data) {
+            parkingData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="parking_view">\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label> <select class="form-control" id="lot_free" name="lot_free" >\n';
+
+                        if (parkingData[0].lot_free === "Free") {
+                            bodyHtml += '<option value="Free" selected>&nbsp; Free</option>\n' +
+                                '<option value="Paid" >&nbsp; Paid</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (parkingData[0].lot_free === "Paid"){
+                            bodyHtml += '<option value="Free" >&nbsp; Free</option>\n' +
+                                '<option value="Paid" selected>&nbsp; Paid</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Free" >&nbsp; Free</option>\n' +
+                                '<option value="Paid" >&nbsp; Paid</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '   </select>\n ' +
+        '       </div>\n' +
+        '       <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" id="street_metered" name="street_metered" >\n';
+
+                        if (parkingData[0].street_metered === "Metered") {
+                            bodyHtml += '<option value="Metered" selected>&nbsp; Metered</option>\n' +
+                                '<option value="Not Metered" >&nbsp; Not Metered</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (parkingData[0].street_metered === "Not Metered"){
+                            bodyHtml += '<option value="Metered" >&nbsp; Metered</option>\n' +
+                                '<option value="Not Metered" selected>&nbsp; Not Metered</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Metered" >&nbsp; Metered</option>\n' +
+                                '<option value="Not Metered" >&nbsp; Not Metered</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '   </select>\n ' +
+        '       </div>' +
+        '       <div class="col-4"><label for="parking_type"> Other type of parking: </label><input type="text" class="form-control" id="parking_type" name="parking_type" value="'+parkingData[0].parking_type+'"></div>\n' +
+        '   </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input type="number" class="form-control" id="total_num_spaces" name="total_num_spaces" value="'+parkingData[0].total_num_spaces+'"></div>\n' +
+        '        <div class="col-6"><label for="num_reserved_spaces"> Number of reserved spaces: </label><input type="number" class="form-control" id="num_reserved_spaces" name="num_reserved_spaces" value="'+parkingData[0].num_reserved_spaces+'"></div>\n' +
+        '   </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-6"><label for="num_accessable_space"> Number of accessible spaces: </label><input type="number" class="form-control" id="num_accessable_space" name="num_accessable_space" value="'+parkingData[0].num_accessable_space+'"></div>\n' +
+        '       <div class="col-6"><label for="num_van_accessible"> Number of van accessible spaces: </label><input type="number" class="form-control" id="num_van_accessible" name="num_van_accessible" value="'+parkingData[0].num_van_accessible+'"></div>\n' +
+        '   </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><select class="form-control" id="reserve_space_sign" name="reserve_space_sign" >\n ';
+
+                        if (parkingData[0].reserve_space_sign === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (parkingData[0].street_metered === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '   </select>\n ' +
+        '       </div>\n' +
+        '       <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><select class="form-control" id="reserve_space_obstacles" name="reserve_space_obstacles" >\n';
+
+                        if (parkingData[0].reserve_space_obstacles === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (parkingData[0].reserve_space_obstacles === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '   </select>\n ' +
+        '       </div>' +
+        '   </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-12"><label for="comment"> Describe parking area: </label><input type="text" class="form-control" id="comment" name="comment" value="'+parkingData[0].comment+'"></div>\n' +
+        '   </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-12"><label for="recommendations"> Recommendations: </label><input type="text" class="form-control" id="recommendations" name="recommendations" value="'+parkingData[0].recommendations+'"></div>\n' +
+        '       <input type="hidden" class="form-control" id="park_id" name="park_id" value="'+parkingData[0].park_id+'">\n' +
+        '       <input type="hidden" class="form-control" id="park_est_id" name="park_est_id" value="'+parkingData[0].est_id+'">\n' +
+        '   </div>\n' +
+        '   <div class="card-row">\n' +
+        '       <div class="col-4">\n' +
+        '           <button  type="submit" id="save_parking" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Parking</button>\n' +
+        '       </div>\n' +
+        '   </div>\n ' +
+        '</form>';
+
+    $('#parking_card').append(bodyHtml);
+
+    $("#parking_view").validate({
+        rules: {
+            parking_type: {
+                maxlength: 24
+            },
+            total_num_spaces: {
+                number: true
+            },
+            num_reserved_spaces: {
+                number: true
+            },
+            num_accessable_space: {
+                number: true
+            },
+            num_van_accessible: {
+                number: true
+            },
+            comment: {
+                maxlength: 5000
+            },
+            recommendations: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            parking_type: " Must be less than 25 characters long."
+        },
+        submitHandler: function(form) {
+            updateParking();
+        }
+    });
+
+}
+
+function updateParking() {
+    var est_id = document.getElementById("park_est_id").value;
+    var park_id = document.getElementById("park_id").value;
+    var lot_free = document.getElementById("lot_free").value;
+    var street_metered = document.getElementById("street_metered").value;
+    var parking_type = document.getElementById("parking_type").value;
+    var total_num_spaces = document.getElementById("total_num_spaces").value;
+    var num_reserved_spaces = document.getElementById("num_reserved_spaces").value;
+    var num_accessable_space = document.getElementById("num_accessable_space").value;
+    var num_van_accessible = document.getElementById("num_van_accessible").value;
+    var reserve_space_sign = document.getElementById("reserve_space_sign").value;
+    var reserve_space_obstacles = document.getElementById("reserve_space_obstacles").value;
+    var comment = document.getElementById("comment").value;
+    var recommendations = document.getElementById("recommendations").value;
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/parking/est/" + est_id,
+        data: JSON.stringify({
+            "park_id" : park_id,
+            "lot_free" : lot_free,
+            "street_metered" : street_metered,
+            "parking_type" : parking_type,
+            "total_num_spaces" : total_num_spaces,
+            "num_reserved_spaces" : num_reserved_spaces,
+            "num_accessable_space" : num_accessable_space,
+            "num_van_accessible" : num_van_accessible,
+            "reserve_space_sign" : reserve_space_sign,
+            "reserve_space_obstacles" : reserve_space_obstacles,
+            "comment" : comment,
+            "recommendations" : recommendations
+        }),
+        success: function () {
+            $("#success-body").html('Parking Updated');
             $("#success").modal('toggle');
         },
         error: function(data) {
@@ -1668,52 +1909,7 @@ function updateUser() {
     });
 }
 
-function updateParking() {
-    var est_id = document.getElementById("park_est_id").value;
-    var park_id = document.getElementById("park_id").value;
-    var lot_free = document.getElementById("lot_free").value;
-    var street_metered = document.getElementById("street_metered").value;
-    var parking_type = document.getElementById("parking_type").value;
-    var total_num_spaces = document.getElementById("total_num_spaces").value;
-    var num_reserved_spaces = document.getElementById("num_reserved_spaces").value;
-    var num_accessable_space = document.getElementById("num_accessable_space").value;
-    var num_van_accessible = document.getElementById("num_van_accessible").value;
-    var reserve_space_sign = document.getElementById("reserve_space_sign").value;
-    var reserve_space_obstacles = document.getElementById("reserve_space_obstacles").value;
-    var comment = document.getElementById("comment").value;
-    var recommendations = document.getElementById("recommendations").value;
 
-    // console.log("update.js:");
-
-    $.ajax({
-        accepts: "application/json",
-        method: "PUT",
-        contentType: "application/json; charset=utf-8",
-        url: "put/parking/est/" + est_id,
-        data: JSON.stringify({
-            "park_id" : park_id,
-            "lot_free" : lot_free,
-            "street_metered" : street_metered,
-            "parking_type" : parking_type,
-            "total_num_spaces" : total_num_spaces,
-            "num_reserved_spaces" : num_reserved_spaces,
-            "num_accessable_space" : num_accessable_space,
-            "num_van_accessible" : num_van_accessible,
-            "reserve_space_sign" : reserve_space_sign,
-            "reserve_space_obstacles" : reserve_space_obstacles,
-            "comment" : comment,
-            "recommendations" : recommendations
-        }),
-        success: function () {
-            $("#success-body").html('Parking Updated');
-            $("#success").modal('toggle');
-        },
-        error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
-        }
-    });
-}
 
 function updateRouteFromParking() {
     var route_park_id = document.getElementById("route_from_park_id").value;

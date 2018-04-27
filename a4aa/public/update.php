@@ -56,9 +56,9 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
-
         <!--jQuery Validation Plugin -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 
         <script type="text/javascript">
             $(window).on('load', function () {
@@ -94,7 +94,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         <div class="page">
             <!-- LEFT SIDEBAR -->
             <div class="left-sidebar">
-                <div class="left-sidebar-header" data-bind="foreach: establishmentVM.establishmentList">
+                <div class="left-sidebar-header">
                     <span class="h7">
                         <?php if($_SESSION['role'] == 'admin') {
                             echo
@@ -106,7 +106,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                         } ?>
                     </span>
                     <span class="h5">
-                        <span class="pad" data-bind="text: name"></span>
+                        <span class="pad" id="left_sb_name"></span>
                     </span>
                 </div>
                 <div class="left-sidebar-container">
@@ -184,102 +184,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                 </div>
                             </div>
                             <div id="collapseOne" class="collapse form-group" aria-labelledby="headingOne" data-parent="#accordion">
-                                <div class="card-body card-border card-body-color-add" data-bind="foreach: establishmentVM.establishmentList">
-                                    <div class="card-row">
-                                        <div class="col-6"><label for="name"> Establishment Name: </label><input type="name" class="form-control" id="name" data-bind="value: name, hasfocus: name.focused" requireds></div>
-                                        <div class="col-6"><label for="website"> Website: </label><input type="url" class="form-control" id="website" data-bind="value: website, hasfocus: website.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <input type="hidden" class="form-control" id="cat_id" data-bind="value: cat_id">
-                                        <div class="col-4">
-                                            <?php if($_SESSION['role'] == 'admin') {
-                                                echo
-                                                '<label for="cat_name">
-                                                    <span onclick="editCategory()" class="pointer" title="Click To Change Category"><i class="fas fa-edit"></i>&nbsp;Category:</span>
-                                                </label>
-                                                <input onclick="editCategory()" class="form-control pointer" title="Click To Change Category" id="cat_name" data-bind="value: cat_name, hasfocus: cat_name.focused" readonly>';
-                                            }
-                                            else {
-                                                echo
-                                                '<label for="cat_name">
-                                                    <span title="Click To Change Category">Category:</span>
-                                                </label>
-                                                <input class="form-control" title="Category" id="cat_name" data-bind="value: cat_name, hasfocus: cat_name.focused" readonly>';
-                                            } ?>
-                                        </div>
-                                        <div class="col-4">
-                                            <label for="subtype"> Subtype: </label>
-                                            <input class="form-control" id="subtype" data-bind="value: subtype, hasfocus: subtype.focused">
-                                        </div>
-                                        <input type="hidden" class="form-control" id="config_id" data-bind="value: config_id">
-                                        <div class="col-4">
-                                            <?php if($_SESSION['role'] == 'admin') {
-                                                echo
-                                                '<label for="config_name">
-                                                    <span onclick="editConfig()" class="pointer" title="Click To Change Configuration"><i class="fas fa-edit"></i>&nbsp;Configuration:</span>
-                                                </label>
-                                                <input onclick="editConfig()" class="form-control pointer" title="Click To Change Configuration" id="config_name" data-bind="value: config_name, hasfocus: config_name.focused" readonly>';
-                                            }
-                                            else {
-                                                echo
-                                                '<label for="config_name">
-                                                    <span title="Configuration">Configuration:</span>
-                                                </label>
-                                                <input class="form-control" title="Configuration" id="config_name" data-bind="value: config_name, hasfocus: config_name.focused" readonly>';
-                                            } ?>
-                                        </div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-12"><label for="street"> Street: </label><input class="form-control" id="street" data-bind="value: street, hasfocus: street.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-6"><label for="city"> City: </label><input class="form-control" id="city" data-bind="value: city, hasfocus: city.focused"></div>
-                                        <div class="col-2"><label for="state"> State: </label><input class="form-control" id="state" data-bind="value: state, hasfocus: state.focused"></div>
-                                        <div class="col-4"><label for="zip"> Zip: </label><input class="form-control" id="zip" data-bind="value: zip, hasfocus: zip.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-6"><label for="phone"> Main Phone: </label><input class="form-control" id="phone" data-bind="value: phone, hasfocus: phone.focused"></div>
-                                        <div class="col-6"><label for="phone_tty"> TTY/TTD: </label><input class="form-control" id="phone_tty" data-bind="value: phone_tty, hasfocus: phone_tty.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-4"><label for="contact_fname"> Contact First Name: </label><input class="form-control" id="contact_fname" data-bind="value: contact_fname, hasfocus: contact_fname.focused"></div>
-                                        <div class="col-4"><label for="contact_lname"> Contact Last Name: </label><input class="form-control" id="contact_lname" data-bind="value: contact_lname, hasfocus: contact_lname.focused"></div>
-                                        <div class="col-4"><label for="contact_title"> Contact Title: </label><input class="form-control" id="contact_title" data-bind="value: contact_title, hasfocus: contact_title.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-4"><label for="contact_email"> Email: </label><input class="form-control" id="contact_email" data-bind="value: contact_email, hasfocus: contact_email.focused"></div>
-                                        <input type="hidden" class="form-control" id="user_id" data-bind="value: user_id">
-                                        <div class="col-4">
-                                            <?php if($_SESSION['role'] == 'admin') {
-                                                echo
-                                                '<label for="user_name">
-                                                    <span onclick="editUser()" class="pointer" title="Click To Change Surveyor"><i class="fas fa-edit"></i>&nbsp;Surveyor:</span>
-                                                </label>
-                                                <input onclick="editUser()" class="form-control pointer" title="Click To Change Surveyor" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly>';
-                                            }
-                                            else {
-                                                echo
-                                                '<label for="user_name">
-                                                    <span title="Surveyor">Surveyor:</span>
-                                                </label>
-                                                <input class="form-control" title="Surveyor" id="user_name" data-bind="value: user_name, hasfocus: user_name.focused" readonly>';
-                                            } ?>
-                                        </div>
-                                        <div class="col-4"><label for="date"> Survey Date: </label><input class="form-control" type="date" id="date" data-bind="value: date, hasfocus: date.focused" required></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-12"><label for="commentEstablishment"> Comment: </label><input class="form-control" id="commentEstablishment" data-bind="value: config_comment, hasfocus: config_comment.focused"></div>
-                                        <input type="hidden" class="form-control" id="est_id" data-bind="value: est_id">
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-4">
-                                            <?php if($_SESSION['role'] == 'admin') {
-                                                echo
-                                                '<button  type="button" id="save_establishment" class="btn btn-success" onclick="updateEstablishment()"><i class="fas fa-save"></i>&nbsp; Save Premises Information</button>';
-                                            } ?>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="card-body card-border card-body-color-add" id="establishment_card"></div>
                             </div>
                         </div>
                         <!-- Parking -->
@@ -291,41 +196,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                 </div>
                             </div>
                             <div id="collapseTwo" class="collapse form-group" aria-labelledby="headingTwo" data-parent="#accordion">
-                                <div class="card-body card-border card-body-color-add" data-bind="foreach: parkingVM.parkingList">
-                                    <div class="card-row">
-                                        <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label> <input class="form-control" id="lot_free" data-bind="value: lot_free,hasfocus: lot_free.focused"></div>
-                                        <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><input class="form-control" id="street_metered" data-bind="value: street_metered, hasfocus: street_metered.focused"></div>
-                                        <div class="col-4"><label for="parking_type"> Other type of parking: </label><input class="form-control" id="parking_type" data-bind="value: parking_type, hasfocus: parking_type.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-6"><label for="total_num_spaces"> Total number of spaces: </label> <input class="form-control" id="total_num_spaces" data-bind="value: total_num_spaces,hasfocus: total_num_spaces.focused"></div>
-                                        <div class="col-6"><label for="num_reserved_spaces"> Number of reserved spaces: </label><input class="form-control" id="num_reserved_spaces" data-bind="value: num_reserved_spaces, hasfocus: num_reserved_spaces.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-6"><label for="num_accessable_space"> Number of accessible spaces: </label><input class="form-control" id="num_accessable_space" data-bind="value: num_accessable_space, hasfocus: num_accessable_space.focused"></div>
-                                        <div class="col-6"><label for="num_van_accessible"> Number of van accessible spaces: </label><input class="form-control" id="num_van_accessible" data-bind="value: num_van_accessible, hasfocus: num_van_accessible.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><input class="form-control" id="reserve_space_sign" data-bind="value: reserve_space_sign, hasfocus: reserve_space_sign.focused"></div>
-                                        <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><input class="form-control" id="reserve_space_obstacles" data-bind="value: reserve_space_obstacles, hasfocus: reserve_space_obstacles.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-12"><label for="comment"> Describe parking area: </label><input class="form-control" id="comment" data-bind="value: comment, hasfocus: comment.focused"></div>
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-12"><label for="recommendations"> Recommendations: </label><input class="form-control" id="recommendations" data-bind="value: recommendations, hasfocus: recommendations.focused"></div>
-                                        <input type="hidden" class="form-control" id="park_id" data-bind="value: park_id">
-                                        <input type="hidden" class="form-control" id="park_est_id" data-bind="value: est_id">
-                                    </div>
-                                    <div class="card-row">
-                                        <div class="col-4">
-                                            <?php if($_SESSION['role'] == 'admin') {
-                                                echo
-                                                '<button  type="button" id="save_parking" class="btn btn-success" onclick="updateParking()"><i class="fas fa-save"></i>&nbsp; Save Parking</button>';
-                                            } ?>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="card-body card-border card-body-color-add" id="parking_card"></div>
                             </div>
                         </div>
                         <!-- Route From Accessible Parking -->
