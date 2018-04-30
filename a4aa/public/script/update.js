@@ -23,6 +23,20 @@ $(document).ready(function () {
 
     EstablishmentView();
     ParkingView();
+    RouteFromParkingView();
+    PassengerLoadingView();
+    StaBusView();
+    ExteriorPathwayView();
+    ExteriorStairsView();
+    ExteriorRampsViewModel();
+    MainEntranceView();
+    InteriorViewModel();
+    ElevatorView();
+    SignageView();
+    EmergencyView();
+    SeatingView();
+    RestroomView();
+    RestroomInfoView();
 
     // Scrolls selected accordion card to the top of the page
     $('.collapse').on('shown.bs.collapse', function(e) {
@@ -32,867 +46,6 @@ $(document).ready(function () {
         }, 500);
     });
 
-
-
-    function RouteFromParkingModel(parm) {
-        // console.log("ParkingModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.route_park_id = ko.observable(parm.data.route_park_id);
-        this.distance = ko.observable(parm.data.distance);
-        this.distance.focused = ko.observable(false);
-        this.min_width = ko.observable(parm.data.min_width);
-        this.min_width.focused = ko.observable(false);
-        this.route_surface = ko.observable(parm.data.route_surface);
-        this.route_surface.focused = ko.observable(false);
-        this.route_curbs = ko.observable(parm.data.route_curbs);
-        this.route_curbs.focused = ko.observable(false);
-        this.tactile_warning = ko.observable(parm.data.tactile_warning);
-        this.tactile_warning.focused = ko.observable(false);
-        this.covered = ko.observable(parm.data.covered);
-        this.covered.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.park_id = ko.observable(parm.data.park_id);
-        this.park_id.focused = ko.observable(false);
-    }
-
-    function RouteFromParkingViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.routeFromParkingList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.routeFromParkingList($.map(data, function (item) {
-                    return new RouteFromParkingModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function PassengerLoadingModel(parm) {
-        //console.log("PassengerLoadingModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.passenger_id = ko.observable(parm.data.passenger_id);
-        this.designated_zone = ko.observable(parm.data.designated_zone);
-        this.designated_zone.focused = ko.observable(false);
-        this.distance = ko.observable(parm.data.distance);
-        this.distance.focused = ko.observable(false);
-        this.min_width = ko.observable(parm.data.min_width);
-        this.min_width.focused = ko.observable(false);
-        this.passenger_surface = ko.observable(parm.data.passenger_surface);
-        this.passenger_surface.focused = ko.observable(false);
-        this.tactile_warning_strips = ko.observable(parm.data.tactile_warning_strips);
-        this.tactile_warning_strips.focused = ko.observable(false);
-        this.covered = ko.observable(parm.data.covered);
-        this.covered.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.park_id = ko.observable(parm.data.park_id);
-    }
-
-    function PassengerLoadingViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.passengerLoadingList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.passengerLoadingList($.map(data, function (item) {
-                    return new PassengerLoadingModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function StaBusModel(parm) {
-        // console.log("StaBusModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.sta_id = ko.observable(parm.data.sta_id);
-        this.sta_service_area = ko.observable(parm.data.sta_service_area);
-        this.sta_service_area.focused = ko.observable(false);
-        this.distance = ko.observable(parm.data.distance);
-        this.distance.focused = ko.observable(false);
-        this.min_width = ko.observable(parm.data.min_width);
-        this.min_width.focused = ko.observable(false);
-        this.route_surface = ko.observable(parm.data.route_surface);
-        this.route_surface.focused = ko.observable(false);
-        this.tactile_warning_strips = ko.observable(parm.data.tactile_warning_strips);
-        this.tactile_warning_strips.focused = ko.observable(false);
-        this.curb_cuts = ko.observable(parm.data.curb_cuts);
-        this.curb_cuts.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.shelter_bench = ko.observable(parm.data.shelter_bench);
-        this.shelter_bench.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.park_id = ko.observable(parm.data.park_id);
-        this.park_id.focused = ko.observable(false);
-    }
-
-    function StaBusViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.staBusList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.staBusList($.map(data, function (item) {
-                    return new StaBusModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function StaBusRouteModel(parm) {
-        //console.log("StaBusRouteModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.sta_route_id = ko.observable(parm.data.sta_route_id);
-        this.route_num = ko.observable(parm.data.route_num);
-        this.route_num.focused = ko.observable(false);
-        this.north_bound_stop = ko.observable(parm.data.north_bound_stop);
-        this.north_bound_stop.focused = ko.observable(false);
-        this.south_bound_stop = ko.observable(parm.data.south_bound_stop);
-        this.south_bound_stop.focused = ko.observable(false);
-        this.east_bound_stop = ko.observable(parm.data.east_bound_stop);
-        this.east_bound_stop.focused = ko.observable(false);
-        this.west_bound_stop = ko.observable(parm.data.west_bound_stop);
-        this.west_bound_stop.focused = ko.observable(false);
-        this.sta_bus_id = ko.observable(parm.data.sta_bus_id);
-    }
-
-    function StaBusRouteViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.staBusRouteList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.staBusRouteList($.map(data, function (item) {
-                    return new StaBusRouteModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function ExteriorPathwayModel(parm) {
-        //console.log("ExteriorPathwayModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.ext_path_id = ko.observable(parm.data.ext_path_id);
-        this.service_animal = ko.observable(parm.data.service_animal);
-        this.service_animal.focused = ko.observable(false);
-        this.service_animal_location = ko.observable(parm.data.service_animal_location);
-        this.service_animal_location.focused = ko.observable(false);
-        this.has_exterior_path = ko.observable(parm.data.has_exterior_path);
-        this.has_exterior_path.focused = ko.observable(false);
-        this.min_width = ko.observable(parm.data.min_width);
-        this.min_width.focused = ko.observable(false);
-        this.pathway_surface = ko.observable(parm.data.pathway_surface);
-        this.pathway_surface.focused = ko.observable(false);
-        this.pathway_curbs = ko.observable(parm.data.pathway_curbs);
-        this.pathway_curbs.focused = ko.observable(false);
-        this.tactile_warning = ko.observable(parm.data.tactile_warning);
-        this.tactile_warning.focused = ko.observable(false);
-        this.slope = ko.observable(parm.data.slope);
-        this.slope.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function ExteriorPathwayViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.exteriorPathwayList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.exteriorPathwayList($.map(data, function (item) {
-                    return new ExteriorPathwayModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function ExteriorStairsModel(parm) {
-        //console.log("ExteriorStairsModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.ext_stair_id = ko.observable(parm.data.ext_stair_id);
-        this.stairs_required = ko.observable(parm.data.stairs_required);
-        this.stairs_required.focused = ko.observable(false);
-        this.stairs_available = ko.observable(parm.data.stairs_available);
-        this.stairs_available.focused = ko.observable(false);
-        this.num_stairs = ko.observable(parm.data.num_stairs);
-        this.num_stairs.focused = ko.observable(false);
-        this.handrail_both_sides = ko.observable(parm.data.handrail_both_sides);
-        this.handrail_both_sides.focused = ko.observable(false);
-        this.handrail_side = ko.observable(parm.data.handrail_side);
-        this.handrail_side.focused = ko.observable(false);
-        this.handrail_regulation_height = ko.observable(parm.data.handrail_regulation_height);
-        this.handrail_regulation_height.focused = ko.observable(false);
-        this.handrail_height = ko.observable(parm.data.handrail_height);
-        this.handrail_height.focused = ko.observable(false);
-        this.obstacles = ko.observable(parm.data.obstacles);
-        this.obstacles.focused = ko.observable(false);
-        this.clearly_marked = ko.observable(parm.data.clearly_marked);
-        this.clearly_marked.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function ExteriorStairsViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.exteriorStairsList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.exteriorStairsList($.map(data, function (item) {
-                    return new ExteriorStairsModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function ExteriorRampsModel(parm) {
-        //console.log("ExteriorRampsModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.ext_ramp_id = ko.observable(parm.data.ext_ramp_id);
-        this.ramp_required = ko.observable(parm.data.ramp_required);
-        this.ramp_required.focused = ko.observable(false);
-        this.ramp_available = ko.observable(parm.data.ramp_available);
-        this.ramp_available.focused = ko.observable(false);
-        this.min_width = ko.observable(parm.data.min_width);
-        this.min_width.focused = ko.observable(false);
-        this.width_between_handrails = ko.observable(parm.data.width_between_handrails);
-        this.width_between_handrails.focused = ko.observable(false);
-        this.min_slope = ko.observable(parm.data.min_slope);
-        this.min_slope.focused = ko.observable(false);
-        this.slope = ko.observable(parm.data.slope);
-        this.slope.focused = ko.observable(false);
-        this.level_landing_both = ko.observable(parm.data.level_landing_both);
-        this.level_landing_both.focused = ko.observable(false);
-        this.level_landing_location = ko.observable(parm.data.level_landing_location);
-        this.level_landing_location.focused = ko.observable(false);
-        this.obstacles = ko.observable(parm.data.obstacles);
-        this.obstacles.focused = ko.observable(false);
-        this.handrails_both_sides = ko.observable(parm.data.handrails_both_sides);
-        this.handrails_both_sides.focused = ko.observable(false);
-        this.handrail_sides = ko.observable(parm.data.handrail_sides);
-        this.handrail_sides.focused = ko.observable(false);
-        this.handrail_regulation_height = ko.observable(parm.data.handrail_regulation_height);
-        this.handrail_regulation_height.focused = ko.observable(false);
-        this.handrail_height = ko.observable(parm.data.handrail_height);
-        this.handrail_height.focused = ko.observable(false);
-        this.side_guards = ko.observable(parm.data.side_guards);
-        this.side_guards.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function ExteriorRampsViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.exteriorRampsList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.exteriorRampsList($.map(data, function (item) {
-                    return new ExteriorRampsModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function MainEntranceModel(parm) {
-        //console.log("MainEntranceModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.main_ent_id = ko.observable(parm.data.main_ent_id);
-        this.total_num_public_entrances = ko.observable(parm.data.total_num_public_entrances);
-        this.total_num_public_entrances.focused = ko.observable(false);
-        this.main_ent_accessible = ko.observable(parm.data.main_ent_accessible);
-        this.main_ent_accessible.focused = ko.observable(false);
-        this.alt_ent_accessible = ko.observable(parm.data.alt_ent_accessible);
-        this.alt_ent_accessible.focused = ko.observable(false);
-        this.accessable_signage = ko.observable(parm.data.accessable_signage);
-        this.accessable_signage.focused = ko.observable(false);
-        this.ground_level = ko.observable(parm.data.ground_level);
-        this.ground_level.focused = ko.observable(false);
-        this.threshold_level = ko.observable(parm.data.threshold_level);
-        this.threshold_level.focused = ko.observable(false);
-        this.threshold_beveled = ko.observable(parm.data.threshold_beveled);
-        this.threshold_beveled.focused = ko.observable(false);
-        this.beveled_height = ko.observable(parm.data.beveled_height);
-        this.beveled_height.focused = ko.observable(false);
-        this.door_action = ko.observable(parm.data.door_action);
-        this.door_action.focused = ko.observable(false);
-        this.door_open_clearance = ko.observable(parm.data.door_open_clearance);
-        this.door_open_clearance.focused = ko.observable(false);
-        this.opening_measurement = ko.observable(parm.data.opening_measurement);
-        this.opening_measurement.focused = ko.observable(false);
-        this.door_easy_open = ko.observable(parm.data.door_easy_open);
-        this.door_easy_open.focused = ko.observable(false);
-        this.door_open_force = ko.observable(parm.data.door_open_force);
-        this.door_open_force.focused = ko.observable(false);
-        this.door_use_with_fist = ko.observable(parm.data.door_use_with_fist);
-        this.door_use_with_fist.focused = ko.observable(false);
-        this.door_auto_open = ko.observable(parm.data.door_auto_open);
-        this.door_auto_open.focused = ko.observable(false);
-        this.second_door_inside = ko.observable(parm.data.second_door_inside);
-        this.second_door_inside.focused = ko.observable(false);
-        this.min_dist_between_doors = ko.observable(parm.data.min_dist_between_doors);
-        this.min_dist_between_doors.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function MainEntranceViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.mainEntranceList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.mainEntranceList($.map(data, function (item) {
-                    return new MainEntranceModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function InteriorModel(parm) {
-        //console.log("InteriorModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.interior_id = ko.observable(parm.data.interior_id);
-        this.int_door_open_clearance = ko.observable(parm.data.int_door_open_clearance);
-        this.int_door_open_clearance.focused = ko.observable(false);
-        this.int_opening_measurement = ko.observable(parm.data.int_opening_measurement);
-        this.int_opening_measurement.focused = ko.observable(false);
-        this.int_door_easy_open = ko.observable(parm.data.int_door_easy_open);
-        this.int_door_easy_open.focused = ko.observable(false);
-        this.int_door_open_force = ko.observable(parm.data.int_door_open_force);
-        this.int_door_open_force.focused = ko.observable(false);
-        this.int_door_use_with_fist = ko.observable(parm.data.int_door_use_with_fist);
-        this.int_door_use_with_fist.focused = ko.observable(false);
-        this.five_second_close = ko.observable(parm.data.five_second_close);
-        this.five_second_close.focused = ko.observable(false);
-        this.hallway_width = ko.observable(parm.data.hallway_width);
-        this.hallway_width.focused = ko.observable(false);
-        this.narrowest_width = ko.observable(parm.data.narrowest_width);
-        this.narrowest_width.focused = ko.observable(false);
-        this.wheelchair_turnaround = ko.observable(parm.data.wheelchair_turnaround);
-        this.wheelchair_turnaround.focused = ko.observable(false);
-        this.hallway_obstacles = ko.observable(parm.data.hallway_obstacles);
-        this.hallway_obstacles.focused = ko.observable(false);
-        this.hallway_clear = ko.observable(parm.data.hallway_clear);
-        this.hallway_clear.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.service_counter = ko.observable(parm.data.service_counter);
-        this.service_counter.focused = ko.observable(false);
-        this.counter_height = ko.observable(parm.data.counter_height);
-        this.counter_height.focused = ko.observable(false);
-        this.writing_surface_height = ko.observable(parm.data.writing_surface_height);
-        this.writing_surface_height.focused = ko.observable(false);
-        this.drinking_fountain = ko.observable(parm.data.drinking_fountain);
-        this.drinking_fountain.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function InteriorViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.interiorList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.interiorList($.map(data, function (item) {
-                    return new InteriorModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function ElevatorModel(parm) {
-        //console.log("ElevatorModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.elevator_id = ko.observable(parm.data.elevator_id);
-        this.is_elevator = ko.observable(parm.data.is_elevator);
-        this.is_elevator.focused = ko.observable(false);
-        this.location = ko.observable(parm.data.location);
-        this.location.focused = ko.observable(false);
-        this.works = ko.observable(parm.data.works);
-        this.works.focused = ko.observable(false);
-        this.no_assist = ko.observable(parm.data.no_assist);
-        this.no_assist.focused = ko.observable(false);
-        this.button_height = ko.observable(parm.data.button_height);
-        this.button_height.focused = ko.observable(false);
-        this.outside_btn_height = ko.observable(parm.data.outside_btn_height);
-        this.outside_btn_height.focused = ko.observable(false);
-        this.inside_btn_height = ko.observable(parm.data.inside_btn_height);
-        this.inside_btn_height.focused = ko.observable(false);
-        this.button_use_fist = ko.observable(parm.data.button_use_fist);
-        this.button_use_fist.focused = ko.observable(false);
-        this.braille = ko.observable(parm.data.braille);
-        this.braille.focused = ko.observable(false);
-        this.audible_tones = ko.observable(parm.data.audible_tones);
-        this.audible_tones.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.elevator_depth = ko.observable(parm.data.elevator_depth);
-        this.elevator_depth.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function ElevatorViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.elevatorList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.elevatorList($.map(data, function (item) {
-                    return new ElevatorModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function SignageModel(parm) {
-        //console.log("SignageModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.sign_id = ko.observable(parm.data.sign_id);
-        this.is_directory = ko.observable(parm.data.is_directory);
-        this.is_directory.focused = ko.observable(false);
-        this.door_signs = ko.observable(parm.data.door_signs);
-        this.door_signs.focused = ko.observable(false);
-        this.sign_height = ko.observable(parm.data.sign_height);
-        this.sign_height.focused = ko.observable(false);
-        this.pub_sign_braile = ko.observable(parm.data.pub_sign_braile);
-        this.pub_sign_braile.focused = ko.observable(false);
-        this.sign_high_contrast = ko.observable(parm.data.sign_high_contrast);
-        this.sign_high_contrast.focused = ko.observable(false);
-        this.sign_images = ko.observable(parm.data.sign_images);
-        this.sign_images.focused = ko.observable(false);
-        this.written_material_images = ko.observable(parm.data.written_material_images);
-        this.written_material_images.focused = ko.observable(false);
-        this.menu_access = ko.observable(parm.data.menu_access);
-        this.menu_access.focused = ko.observable(false);
-        this.alt_info = ko.observable(parm.data.alt_info);
-        this.alt_info.focused = ko.observable(false);
-        this.alt_info_type = ko.observable(parm.data.alt_info_type);
-        this.alt_info_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function SignageViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.signageList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.signageList($.map(data, function (item) {
-                    return new SignageModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function EmergencyModel(parm) {
-        //console.log("EmergencyModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.emergency_id = ko.observable(parm.data.emergency_id);
-        this.evac_info = ko.observable(parm.data.evac_info);
-        this.evac_info.focused = ko.observable(false);
-        this.alt_evac_info = ko.observable(parm.data.alt_evac_info);
-        this.alt_evac_info.focused = ko.observable(false);
-        this.evac_info_format = ko.observable(parm.data.evac_info_format);
-        this.evac_info_format.focused = ko.observable(false);
-        this.alarms = ko.observable(parm.data.alarms);
-        this.alarms.focused = ko.observable(false);
-        this.location_no_flash = ko.observable(parm.data.location_no_flash);
-        this.location_no_flash.focused = ko.observable(false);
-        this.shelter = ko.observable(parm.data.shelter);
-        this.shelter.focused = ko.observable(false);
-        this.signs_to_exit = ko.observable(parm.data.signs_to_exit);
-        this.signs_to_exit.focused = ko.observable(false);
-        this.wheelchair_plan = ko.observable(parm.data.wheelchair_plan);
-        this.wheelchair_plan.focused = ko.observable(false);
-        this.floor_plan_routes = ko.observable(parm.data.floor_plan_routes);
-        this.floor_plan_routes.focused = ko.observable(false);
-        this.fire_alarm_height = ko.observable(parm.data.fire_alarm_height);
-        this.fire_alarm_height.focused = ko.observable(false);
-        this.fire_extinguisher_height = ko.observable(parm.data.fire_extinguisher_height);
-        this.fire_extinguisher_height.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function EmergencyViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.emergencyList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.emergencyList($.map(data, function (item) {
-                    return new EmergencyModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function SeatingModel(parm) {
-        //console.log("SeatingModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.seating_id = ko.observable(parm.data.seating_id);
-        this.seating_no_step = ko.observable(parm.data.seating_no_step);
-        this.seating_no_step.focused = ko.observable(false);
-        this.table_aisles = ko.observable(parm.data.table_aisles);
-        this.table_aisles.focused = ko.observable(false);
-        this.legroom = ko.observable(parm.data.legroom);
-        this.legroom.focused = ko.observable(false);
-        this.num_legroom = ko.observable(parm.data.num_legroom);
-        this.num_legroom.focused = ko.observable(false);
-        this.rearranged = ko.observable(parm.data.rearranged);
-        this.rearranged.focused = ko.observable(false);
-        this.num_table_rearranged = ko.observable(parm.data.num_table_rearranged);
-        this.num_table_rearranged.focused = ko.observable(false);
-        this.num_chair_rearranged = ko.observable(parm.data.num_chair_rearranged);
-        this.num_chair_rearranged.focused = ko.observable(false);
-        this.round_tables = ko.observable(parm.data.round_tables);
-        this.round_tables.focused = ko.observable(false);
-        this.num_round_tables = ko.observable(parm.data.num_round_tables);
-        this.num_round_tables.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_option = ko.observable(parm.data.lighting_option);
-        this.lighting_option.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.adjustable_lighting = ko.observable(parm.data.adjustable_lighting);
-        this.adjustable_lighting.focused = ko.observable(false);
-        this.low_visual_slim = ko.observable(parm.data.low_visual_slim);
-        this.low_visual_slim.focused = ko.observable(false);
-        this.quiet_table = ko.observable(parm.data.quiet_table);
-        this.quiet_table.focused = ko.observable(false);
-        this.low_sound = ko.observable(parm.data.low_sound);
-        this.low_sound.focused = ko.observable(false);
-        this.designated_space = ko.observable(parm.data.designated_space);
-        this.designated_space.focused = ko.observable(false);
-        this.num_desig_space = ko.observable(parm.data.num_desig_space);
-        this.num_desig_space.focused = ko.observable(false);
-        this.companion_space = ko.observable(parm.data.companion_space);
-        this.companion_space.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function SeatingViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.seatingList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.seatingList($.map(data, function (item) {
-                    return new SeatingModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    function RestroomModel(parm) {
-        //console.log("RestroomModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.restroom_id = ko.observable(parm.data.restroom_id);
-        this.public_restroom = ko.observable(parm.data.public_restroom);
-        this.public_restroom.focused = ko.observable(false);
-        this.total_num = ko.observable(parm.data.total_num);
-        this.total_num.focused = ko.observable(false);
-        this.designated_number = ko.observable(parm.data.designated_number);
-        this.designated_number.focused = ko.observable(false);
-        this.num_wheelchair_sign = ko.observable(parm.data.num_wheelchair_sign);
-        this.num_wheelchair_sign.focused = ko.observable(false);
-        this.sign_accessable = ko.observable(parm.data.sign_accessable);
-        this.sign_accessable.focused = ko.observable(false);
-        this.sign_location = ko.observable(parm.data.sign_location);
-        this.sign_location.focused = ko.observable(false);
-        this.key_needed = ko.observable(parm.data.key_needed);
-        this.key_needed.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.est_id = ko.observable(parm.data.est_id);
-        this.est_id.focused = ko.observable(false);
-    }
-
-    function RestroomViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.restroomList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.restroomList($.map(data, function (item) {
-                    return new RestroomModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-
-    }
-
-    function RestroomInfoModel(parm) {
-        //console.log("RestroomInfoModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.rest_info_id = ko.observable(parm.data.rest_info_id);
-        this.restroom_desc = ko.observable(parm.data.restroom_desc);
-        this.restroom_desc.focused = ko.observable(false);
-        this.easy_open = ko.observable(parm.data.easy_open);
-        this.easy_open.focused = ko.observable(false);
-        this.lbs_force = ko.observable(parm.data.lbs_force);
-        this.lbs_force.focused = ko.observable(false);
-        this.clearance = ko.observable(parm.data.clearance);
-        this.clearance.focused = ko.observable(false);
-        this.opening = ko.observable(parm.data.opening);
-        this.opening.focused = ko.observable(false);
-        this.opens_out = ko.observable(parm.data.opens_out);
-        this.opens_out.focused = ko.observable(false);
-        this.use_fist = ko.observable(parm.data.use_fist);
-        this.use_fist.focused = ko.observable(false);
-        this.can_turn_around = ko.observable(parm.data.can_turn_around);
-        this.can_turn_around.focused = ko.observable(false);
-        this.turn_width = ko.observable(parm.data.turn_width);
-        this.turn_width.focused = ko.observable(false);
-        this.turn_depth = ko.observable(parm.data.turn_depth);
-        this.turn_depth.focused = ko.observable(false);
-        this.close_chair_inside = ko.observable(parm.data.close_chair_inside);
-        this.close_chair_inside.focused = ko.observable(false);
-        this.grab_bars = ko.observable(parm.data.grab_bars);
-        this.grab_bars.focused = ko.observable(false);
-        this.seat_height_req = ko.observable(parm.data.seat_height_req);
-        this.seat_height_req.focused = ko.observable(false);
-        this.seat_height = ko.observable(parm.data.seat_height);
-        this.seat_height.focused = ko.observable(false);
-        this.flush_auto_fist = ko.observable(parm.data.flush_auto_fist);
-        this.flush_auto_fist.focused = ko.observable(false);
-        this.ambulatory_accessible = ko.observable(parm.data.ambulatory_accessible);
-        this.ambulatory_accessible.focused = ko.observable(false);
-        this.bar_height = ko.observable(parm.data.bar_height);
-        this.bar_height.focused = ko.observable(false);
-        this.coat_hook = ko.observable(parm.data.coat_hook);
-        this.coat_hook.focused = ko.observable(false);
-        this.hook_height = ko.observable(parm.data.hook_height);
-        this.hook_height.focused = ko.observable(false);
-        this.sink = ko.observable(parm.data.sink);
-        this.sink.focused = ko.observable(false);
-        this.sink_height = ko.observable(parm.data.sink_height);
-        this.sink_height.focused = ko.observable(false);
-        this.faucet = ko.observable(parm.data.faucet);
-        this.faucet.focused = ko.observable(false);
-        this.faucet_depth = ko.observable(parm.data.faucet_depth);
-        this.faucet_depth.focused = ko.observable(false);
-        this.faucet_auto_fist = ko.observable(parm.data.faucet_auto_fist);
-        this.faucet_auto_fist.focused = ko.observable(false);
-        this.sink_clearance = ko.observable(parm.data.sink_clearance);
-        this.sink_clearance.focused = ko.observable(false);
-        this.sink_clearance_height = ko.observable(parm.data.sink_clearance_height);
-        this.sink_clearance_height.focused = ko.observable(false);
-        this.sink_pipes = ko.observable(parm.data.sink_pipes);
-        this.sink_pipes.focused = ko.observable(false);
-        this.soap_dispenser = ko.observable(parm.data.soap_dispenser);
-        this.soap_dispenser.focused = ko.observable(false);
-        this.soap_height = ko.observable(parm.data.soap_height);
-        this.soap_height.focused = ko.observable(false);
-        this.dry_fist = ko.observable(parm.data.dry_fist);
-        this.dry_fist.focused = ko.observable(false);
-        this.dry_fist_type = ko.observable(parm.data.dry_fist_type);
-        this.dry_fist_type.focused = ko.observable(false);
-        this.dry_controls = ko.observable(parm.data.dry_controls);
-        this.dry_controls.focused = ko.observable(false);
-        this.dry_control_height = ko.observable(parm.data.dry_control_height);
-        this.dry_control_height.focused = ko.observable(false);
-        this.mirror = ko.observable(parm.data.mirror);
-        this.mirror.focused = ko.observable(false);
-        this.mirror_height = ko.observable(parm.data.mirror_height);
-        this.mirror_height.focused = ko.observable(false);
-        this.shelves = ko.observable(parm.data.shelves);
-        this.shelves.focused = ko.observable(false);
-        this.shelf_height = ko.observable(parm.data.shelf_height);
-        this.shelf_height.focused = ko.observable(false);
-        this.trash_receptacles = ko.observable(parm.data.trash_receptacles);
-        this.trash_receptacles.focused = ko.observable(false);
-        this.hygiene_seat_cover = ko.observable(parm.data.hygiene_seat_cover);
-        this.hygiene_seat_cover.focused = ko.observable(false);
-        this.hygiene_cover_height = ko.observable(parm.data.hygiene_cover_height);
-        this.hygiene_cover_height.focused = ko.observable(false);
-        this.lighting = ko.observable(parm.data.lighting);
-        this.lighting.focused = ko.observable(false);
-        this.lighting_type = ko.observable(parm.data.lighting_type);
-        this.lighting_type.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.rest_id = ko.observable(parm.data.est_id);
-        this.rest_id.focused = ko.observable(false);
-    }
-
-    function RestroomInfoViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.restroomInfoList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.restroomInfoList($.map(data, function (item) {
-                    return new RestroomInfoModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
 
     function CommunicationModel(parm) {
         //console.log("CommunicationModel(parm): " + JSON.stringify(parm));
@@ -998,21 +151,6 @@ $(document).ready(function () {
     }
 
     var myParentVM = {
-        routeFromParkingVM : new RouteFromParkingViewModel('get/route_from_parking/park/' + PARK_ID, 'delete/route_from_parking/park/' + PARK_ID, 'post/route_from_parking/', 'put/route_from_parking/park/' + PARK_ID),
-        passengerLoadingVM : new PassengerLoadingViewModel('get/passenger_loading/park/' + PARK_ID, 'delete/passenger_loading/park/' + PARK_ID, 'post/passenger_loading/', 'put/passenger_loading/park/' + PARK_ID),
-                  staBusVM : new StaBusViewModel('get/sta_bus/park/' + PARK_ID, 'delete/sta_bus/park/' + PARK_ID, 'post/sta_bus/', 'put/sta_bus/park/' + PARK_ID),
-             staBusRouteVM : new StaBusRouteViewModel('get/sta_route/sta_bus/' + STA_ID, 'delete/sta_route/sta_bus/' + STA_ID, 'post/sta_route/', 'put/sta_route/sta_bus/' + STA_ID),
-         exteriorPathwayVM : new ExteriorPathwayViewModel('get/exterior_pathways/est/' + EST_ID, 'delete/exterior_pathways/est/' + EST_ID, 'post/exterior_pathways/', 'put/exterior_pathways/est/' + EST_ID),
-          exteriorStairsVM : new ExteriorStairsViewModel('get/exterior_stairs/est/' + EST_ID, 'delete/exterior_stairs/est/' + EST_ID, 'post/exterior_stairs/', 'put/exterior_stairs/est/' + EST_ID),
-           exteriorRampsVM : new ExteriorRampsViewModel('get/exterior_ramps/est/' + EST_ID, 'delete/exterior_ramps/est/' + EST_ID, 'post/exterior_ramps/', 'put/exterior_ramps/est/' + EST_ID),
-            mainEntranceVM : new MainEntranceViewModel('get/main_entrance/est/' + EST_ID, 'delete/main_entrance/est/' + EST_ID, 'post/main_entrance/', 'put/main_entrance/est/' + EST_ID),
-                interiorVM : new InteriorViewModel('get/interior/est/' + EST_ID, 'delete/interior/est/' + EST_ID, 'post/interior/', 'put/interior/est/' + EST_ID),
-                elevatorVM : new ElevatorViewModel('get/elevator/est/' + EST_ID, 'delete/elevator/est/' + EST_ID, 'post/elevator/', 'put/elevator/est/' + EST_ID),
-                 signageVM : new SignageViewModel('get/signage/est/' + EST_ID, 'delete/signage/est/' + EST_ID, 'post/signage/', 'put/signage/est/' + EST_ID),
-               emergencyVM : new EmergencyViewModel('get/emergency/est/' + EST_ID, 'delete/emergency/est/' + EST_ID, 'post/emergency/', 'put/emergency/est/' + EST_ID),
-                 seatingVM : new SeatingViewModel('get/seating/est/' + EST_ID, 'delete/seating/est/' + EST_ID, 'post/seating/', 'put/seating/est/' + EST_ID),
-                restroomVM : new RestroomViewModel('get/restroom/est/' + EST_ID, 'delete/restroom/est/' + EST_ID, 'post/restroom/', 'put/restroom/est/' + EST_ID),
-            restroomInfoVM : new RestroomInfoViewModel('get/restroom_info/rest/' + REST_ID, 'delete/restroom_info/rest/' + REST_ID, 'post/restroom_info/', 'put/restroom_info/rest/' + REST_ID),
            communicationVM : new CommunicationViewModel('get/communication/est/' + EST_ID, 'delete/communication/est/' + EST_ID, 'post/communication/', 'put/communication/est/' + EST_ID),
     };
 
@@ -1309,7 +447,7 @@ function EstablishmentView() {
         '           </div>\n ' +
         '       </form>';
 
-    $('#establishment_card').append(bodyHtml);
+    $('#establishment_card').html(bodyHtml);
     $('#left_sb_name').html(estData[0].name);
 
     $("#establishment_view").validate({
@@ -1665,91 +803,10 @@ function updateParking() {
     });
 }
 
-function editCategory() {
-    var cat_id = document.getElementById("cat_id").value;
+function RouteFromParkingView() {
+    var routeFromParkingData = "";
 
-    // console.log("cat_id: " + cat_id);
-
-    $.ajax({
-        async: false,
-        accepts: "application/json",
-        method: "GET",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        url: "category/",
-        success: function (data) {
-            // console.log(JSON.stringify(data));
-            var category_select = "";
-
-            category_select += '<div class="card-row">\n' +
-                               '   <select name="category" id="category">\n';
-
-            for (var i = 0; i < data.length; i ++) {
-                if (data[i].cat_id === cat_id ){
-                    category_select += '<option value="'+data[i].cat_id+'_'+data[i].name+'" selected="selected">&nbsp;'+ data[i].name +'</option>';
-                }
-                else {
-                    category_select += '<option value="'+data[i].cat_id+'_'+data[i].name+'">&nbsp;'+ data[i].name +'</option>';
-                }
-            }
-
-            category_select += '</select>\n' +
-                                '</div>';
-
-            $("#gen-title").html("Edit Category");
-
-            $("#gen-body").html(category_select);
-
-            $("#gen-footer").html(
-                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
-                '&nbsp;\n' +
-                '<button type="button" class="btn btn-success" onclick="updateCategory()"><i class="fas fa-save"></i>&nbsp; Save</button>'
-            );
-
-            $("#gen-modal").modal('toggle');
-        },
-        error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
-        }
-    });
-}
-
-function updateCategory() {
-    $("#gen-modal").modal('toggle');
-
-    var temp = document.getElementById("category").value;
-    var cat_id = temp.split("_")[0];
-    var cat_name = temp.split("_")[1];
-
-    // console.log("update.js:");
-
-    $.ajax({
-        accepts: "application/json",
-        method: "PUT",
-        contentType: "application/json; charset=utf-8",
-        url: "put/establishment/category/est/" + EST_ID,
-        data: JSON.stringify({
-            "cat_id" : cat_id
-        }),
-        success: function () {
-            $("#success-body").html('Category Updated');
-            $("#success").modal('toggle');
-
-            document.getElementById("cat_id").value = cat_id;
-            document.getElementById("cat_name").value = cat_name;
-        },
-        error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
-        }
-    });
-}
-
-function editConfig() {
-    var config_id = document.getElementById("config_id").value;
-
-    // console.log("config_id: " + config_id);
+    $('#route_from_parking_card').empty();
 
     $.ajax({
         async: false,
@@ -1757,159 +814,225 @@ function editConfig() {
         method: "GET",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        url: "configuration/",
+        url: "/get/route_from_parking/park/" + PARK_ID,
         success: function (data) {
-            // console.log(JSON.stringify(data));
-            var config_select = "";
-
-            config_select += '<div class="card-row">\n' +
-                '   <select name="config" id="config">\n';
-
-            for (var i = 0; i < data.length; i ++) {
-                if (data[i].config_id === config_id ){
-                    config_select += '<option value="'+data[i].config_id+'_'+data[i].name+'" selected="selected">&nbsp;'+ data[i].name +'</option>';
-                }
-                else {
-                    config_select += '<option value="'+data[i].config_id+'_'+data[i].name+'">&nbsp;'+ data[i].name +'</option>';
-                }
-
-            }
-
-            config_select += '</select>\n' +
-                '</div>';
-
-            $("#gen-title").html("Edit Configuration");
-
-            $("#gen-body").html(config_select);
-
-            $("#gen-footer").html(
-                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
-                '&nbsp;\n' +
-                '<button type="button" class="btn btn-success" onclick="updateConfig()"><i class="fas fa-save"></i>&nbsp; Save</button>'
-            );
-
-            $("#gen-modal").modal('toggle');
+            routeFromParkingData = data;
         },
         error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
-}
 
-function updateConfig() {
-    $("#gen-modal").modal('toggle');
+    bodyHtml = '<form id="route_from_parking_view">\n ' +
+        '       <div class="card-row">\n' +
+        '            <div class="col-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input type="number" min="0" class="form-control" id="distance" name="distance" value="'+routeFromParkingData[0].distance+'"  ></div>\n' +
+        '            <div class="col-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_width" name="min_width">\n ';
 
-    var temp = document.getElementById("config").value;
-    var config_id = temp.split("_")[0];
-    var config_name = temp.split("_")[1];
+                        if (routeFromParkingData[0].min_width === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].min_width === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
 
-    // console.log("update.js:");
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="route_surface"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="route_surface" name="route_surface" >\n';
 
-    $.ajax({
-        accepts: "application/json",
-        method: "PUT",
-        contentType: "application/json; charset=utf-8",
-        url: "put/establishment/config/est/" + EST_ID,
-        data: JSON.stringify({
-            "config_id" : config_id
-        }),
-        success: function () {
-            $("#success-body").html('Configuration Updated');
-            $("#success").modal('toggle');
+                        if (routeFromParkingData[0].route_surface === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].route_surface === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
 
-            document.getElementById("config_id").value = config_id;
-            document.getElementById("config_name").value = config_name;
-        },
-        error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
-        }
-    });
-}
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="route_curbs"> Route has curb ramps and curb cuts where needed: </label> <select class="form-control" id="route_curbs" name="route_curbs" >\n';
 
-function editUser() {
-    var user_id = document.getElementById("user_id").value;
+                        if (routeFromParkingData[0].route_curbs === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].route_curbs === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
 
-    // console.log("user_id: " + user_id);
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="tactile_warning"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warning" name="tactile_warning" >\n';
 
-    $.ajax({
-        async: false,
-        accepts: "application/json",
-        method: "GET",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        url: "user/",
-        success: function (data) {
-            // console.log(JSON.stringify(data));
-            var user_select = "";
+                        if (routeFromParkingData[0].tactile_warning === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].tactile_warning === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
 
-            user_select += '<div class="card-row">\n' +
-                '   <select name="user" id="user">\n';
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="covered"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="covered" name="covered" >\n';
 
-            for (var i = 0; i < data.length; i ++) {
-                if (data[i].user_id === user_id ){
-                    user_select += '<option value="'+data[i].user_id+'_'+data[i].fname+' '+data[i].lname +'" selected="selected">&nbsp;'+data[i].fname+' '+data[i].lname +'</option>';
-                }
-                else {
-                    user_select += '<option value="'+data[i].user_id+'_'+data[i].fname+' '+data[i].lname +'">&nbsp;'+data[i].fname+' '+data[i].lname +'</option>';
-                }
+                        if (routeFromParkingData[0].covered === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].covered === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="lighting"> Lighting is adequate: </label><select class="form-control" id="lighting" name="lighting" >\n';
+
+                        if (routeFromParkingData[0].lighting === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].lighting === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_option"> Lighting level day/night: </label><select class="form-control" id="lighting_option" name="lighting_option" >\n';
+
+                        if (routeFromParkingData[0].lighting_option === "Day") {
+                            bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                '<option value="Night" >&nbsp; Night</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].lighting_option === "Night") {
+                            bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                '<option value="Night" >&nbsp; Night</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_type"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_type" name="lighting_type" >\n';
+
+                        if (routeFromParkingData[0].lighting_type === "Low") {
+                            bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                '<option value="Bright" >Bright</option>\n' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].lighting_type === "Medium") {
+                            bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (routeFromParkingData[0].lighting_type === "Bright") {
+                            bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentRouteFromParking"> Describe the route: </label><input type="text" class="form-control" id="commentRouteFromParking" name="commentRouteFromParking" value="'+routeFromParkingData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsRouteFromParking"> Recommendations: </label><input type="text" class="form-control" id="recommendationsRouteFromParking" name="recommendationsRouteFromParking" value="'+routeFromParkingData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="route_park_id" value="'+routeFromParkingData[0].park_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="route_from_park_id" value="'+routeFromParkingData[0].route_park_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_route_from_parking" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Route From Parking</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '    </form>';
+
+    $('#route_from_parking_card').append(bodyHtml);
+
+    $("#route_from_parking_view").validate({
+        rules: {
+            distance: {
+                number: true
+            },
+            commentRouteFromParking: {
+                maxlength: 5000
+            },
+            recommendationsRouteFromParking: {
+                maxlength: 5000
             }
-
-            user_select += '</select>\n' +
-                '</div>';
-
-            $("#gen-title").html("Edit Surveyor");
-
-            $("#gen-body").html(user_select);
-
-            $("#gen-footer").html(
-                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
-                '&nbsp;\n' +
-                '<button type="button" class="btn btn-success" onclick="updateUser()"><i class="fas fa-save"></i>&nbsp; Save</button>'
-            );
-
-            $("#gen-modal").modal('toggle');
         },
-        error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
+        messages: {
+            commentRouteFromParking: " Must be less than 5000 characters long.",
+            recommendationsRouteFromParking: " Must be less than 5000 characters long."
+        },
+        submitHandler: function(form) {
+            updateRouteFromParking();
         }
     });
+
 }
-
-function updateUser() {
-    $("#gen-modal").modal('toggle');
-
-    var temp = document.getElementById("user").value;
-    var user_id = temp.split("_")[0];
-    var user_name = temp.split("_")[1];
-
-    // console.log("update.js:");
-
-    $.ajax({
-        accepts: "application/json",
-        method: "PUT",
-        contentType: "application/json; charset=utf-8",
-        url: "put/establishment/user/est/" + EST_ID,
-        data: JSON.stringify({
-            "user_id" : user_id
-        }),
-        success: function () {
-            $("#success-body").html('Surveyor Updated');
-            $("#success").modal('toggle');
-
-            document.getElementById("user_id").value = user_id;
-            document.getElementById("user_name").value = user_name;
-        },
-        error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
-        }
-    });
-}
-
-
 
 function updateRouteFromParking() {
     var route_park_id = document.getElementById("route_from_park_id").value;
@@ -1958,6 +1081,237 @@ function updateRouteFromParking() {
     });
 }
 
+function PassengerLoadingView() {
+    var passengerLoadingData = "";
+
+    $('#passenger_loading_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/passenger_loading/park/" + PARK_ID,
+        success: function (data) {
+            passengerLoadingData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="passenger_loading_view">\n ' +
+        '   <div class="card-row">\n' +
+        '        <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <select class="form-control" id="designated_zonePassengerLoading" name="designated_zonePassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].designated_zone === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].designated_zone === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        <div class="col-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input type="number" min="0" class="form-control" id="distancePassengerLoading" name="distancePassengerLoading" value="'+passengerLoadingData[0].distance+'" ></div>\n' +
+        '        <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_widthPassengerLoading" name="min_widthPassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].min_width === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].min_width === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '    </div>\n' +
+        '    <div class="card-row">\n' +
+        '        <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="passenger_surfacePassengerLoading" name="passenger_surfacePassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].passenger_surface === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].passenger_surface === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" id="tactile_warning_stripsPassengerLoading" name="tactile_warning_stripsPassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].tactile_warning_strips === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].tactile_warning_strips === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        <div class="col-4"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="coveredPassengerLoading" name="coveredPassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].covered === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].covered === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '    </div>\n' +
+        '    <div class="card-row">\n' +
+        '        <div class="col-4"><label for="lightingPassengerLoading"> Lighting is adequate: </label><select class="form-control" id="lightingPassengerLoading" name="lightingPassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        <div class="col-4"><label for="lighting_optionPassengerLoading"> Lighting level day/night: </label><select class="form-control" id="lighting_optionPassengerLoading" name="lighting_optionPassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        <div class="col-4"><label for="lighting_typePassengerLoading"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typePassengerLoading" name="lighting_typePassengerLoading" >\n';
+
+                            if (passengerLoadingData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '    </div>\n' +
+        '    <div class="card-row">\n' +
+        '        <div class="col-12"><label for="commentPassengerLoading"> Describe the route: </label><input type="text" class="form-control" id="commentPassengerLoading" name="commentPassengerLoading" value="'+passengerLoadingData[0].comment+'" ></div>\n' +
+        '    </div>\n' +
+        '    <div class="card-row">\n' +
+        '        <div class="col-12"><label for="recommendationsPassengerLoading"> Recommendations: </label><input type="text" class="form-control" id="recommendationsPassengerLoading" name="recommendationsPassengerLoading" value="'+passengerLoadingData[0].recommendations+'" ></div>\n' +
+        '        <input type="hidden" class="form-control" id="passenger_park_id" value="'+passengerLoadingData[0].park_id+'" >\n' +
+        '        <input type="hidden" class="form-control" id="passenger_id" value="'+passengerLoadingData[0].passenger_id+'" >\n' +
+        '    </div>\n' +
+        '    <div class="card-row">\n' +
+        '        <div class="col-4">\n' +
+        '            <button  type="submit" id="save_passenger_loading" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Passenger Loading Zones</button>\n' +
+        '        </div>\n' +
+        '    </div>\n ' +
+        '</form>';
+
+    $('#passenger_loading_card').html(bodyHtml);
+    $('#designated_zonePassengerLoading').focus();
+
+    $("#passenger_loading_view").validate({
+        rules: {
+            distance: {
+                number: true
+            },
+            commentRouteFromParking: {
+                maxlength: 5000
+            },
+            recommendationsRouteFromParking: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentRouteFromParking:  " Must be less than 5000 characters.",
+            recommendationsRouteFromParking: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updatePassengerLoading();
+        }
+    });
+}
+
 function updatePassengerLoading() {
     var passenger_id = document.getElementById("passenger_id").value;
     var designated_zone = document.getElementById("designated_zonePassengerLoading").value;
@@ -1972,8 +1326,6 @@ function updatePassengerLoading() {
     var comment = document.getElementById("commentPassengerLoading").value;
     var recommendations = document.getElementById("recommendationsPassengerLoading").value;
     var park_id = document.getElementById("passenger_park_id").value;
-
-    //console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2003,6 +1355,295 @@ function updatePassengerLoading() {
             $("#alert").modal('toggle');
         }
     });
+}
+
+function StaBusView() {
+    var staBusData = "";
+    var staRouteData = "";
+
+    $("#sta-route-modal").modal('hide');
+
+    $('#sta_bus_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/sta_bus/park/" + PARK_ID,
+        success: function (data) {
+            staBusData = data;
+
+            $.ajax({
+                async: false,
+                accepts: "application/json",
+                method: "GET",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                url: "/get/sta_route/sta_bus/" + staBusData[0].sta_id,
+                success: function (data) {
+                    staRouteData = data;
+                },
+                error: function (data) {
+                    $("#alert-body").empty();
+                    $("#alert-body").append(data);
+                    $("#alert").modal('toggle');
+                }
+            });
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="sta_bus_view">\n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <select class="form-control" id="sta_service_area">\n';
+
+                            if (staBusData[0].sta_service_area === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].sta_service_area === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '            <div class="col-4"><p>&emsp;</p></div>\n' +
+        '            <div class="col-2"><label for="add_route"> Add STA Route: </label><br><button  type="button" id="add_route" class="btn btn-warning" onclick="addSTARouteView()"><i class="far fa-plus-square"></i>&nbsp; Add Route</button></div>\n' +
+        '        </div>\n';
+
+                    for(var i = 0; i < staRouteData.length; i++ ) {
+                        bodyHtml += '<div class="card-row">\n' +
+                        '                <div class="col-2"><label for="route_num_'+staRouteData[i].sta_route_id+'"  > Route Number: </label><input type="number" min="0" class="form-control" id="route_num_'+staRouteData[i].sta_route_id+'"  name="route_num_'+staRouteData[i].sta_route_id+'"  value="'+staRouteData[i].route_num+'" ></div>\n' +
+                        '                <div class="col-2"><label for="north_bound_stop_'+staRouteData[i].sta_route_id+'" > North Bound Stop: </label><input type="number" min="0" class="form-control" id="north_bound_stop_'+staRouteData[i].sta_route_id+'" name="north_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].north_bound_stop+'" ></div>\n' +
+                        '                <div class="col-2"><label for="south_bound_stop_'+staRouteData[i].sta_route_id+'" > South Bound Stop: </label><input type="number" min="0" class="form-control" id="south_bound_stop_'+staRouteData[i].sta_route_id+'" name="south_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].south_bound_stop+'" ></div>\n' +
+                        '                <div class="col-2"><label for="east_bound_stop_'+staRouteData[i].sta_route_id+'" > East Bound Stop: </label><input type="number" min="0" class="form-control" id="east_bound_stop_'+staRouteData[i].sta_route_id+'" name="east_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].east_bound_stop+'" ></div>\n' +
+                        '                <div class="col-2"><label for="west_bound_stop_'+staRouteData[i].sta_route_id+'" > West Bound Stop: </label><input type="number" min="0" class="form-control" id="west_bound_stop_'+staRouteData[i].sta_route_id+'" name="west_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].west_bound_stop+'" ></div>\n' +
+                        '                <input type="hidden" class="form-control" id="sta_route_id_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].sta_route_id+'" >\n' +
+                        '                <input type="hidden" class="form-control" id="sta_bus_id_'+staRouteData[i].sta_route_id+'"  value="'+staRouteData[i].sta_bus_id+'" ">\n' +
+                        '                <div class="col-2"><label> Save&emsp;&nbsp;Delete </label><br>\n' +
+                        '                    <button type="button" id="add_route_'+staRouteData[i].sta_route_id+'" class="btn btn-success pointer" onclick="updateSTARoute('+staRouteData[i].sta_route_id+')"><i class="fas fa-save"></i></button>&emsp;\n ' +
+                        '                    <button type="button" id="delete_route_'+staRouteData[i].sta_route_id+'" class="btn btn-danger pointer" onclick="deleteSTARoute('+staRouteData[i].sta_route_id+')"><i class="fas fa-trash-alt"></i></button>\n ' +
+                        '                </div>\n' +
+                        '            </div>\n';
+                    }
+
+    bodyHtml += '<div class="card-row">\n' +
+        '            <div class="col-6"><label for="distanceStaBus"> Distance from nearest bus stop (feet): </label> <input type="number" min="0" class="form-control" id="distanceStaBus" name="distanceStaBus" value="'+staBusData[0].distance+'" ></div>\n' +
+        '            <div class="col-6"><label for="min_widthStaBus"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_widthStaBus" name="min_widthStaBus" >\n';
+
+                            if (staBusData[0].min_width === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].min_width === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="route_surfaceStaBus" name="route_surfaceStaBus" >\n';
+
+                            if (staBusData[0].route_surface === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].route_surface === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warning_stripsStaBus" name="tactile_warning_stripsStaBus" >\n';
+
+                            if (staBusData[0].tactile_warning_strips === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].tactile_warning_strips === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="curb_cutsStaBus" name="curb_cutsStaBus" >\n';
+
+                            if (staBusData[0].curb_cuts === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].curb_cuts === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><select class="form-control" id="lightingStaBus" name="lightingStaBus" >\n';
+
+                            if (staBusData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><select class="form-control" id="lighting_optionStaBus" name="lighting_optionStaBus" >\n';
+
+                            if (staBusData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeStaBus" name="lighting_typeStaBus" >\n';
+
+                            if (staBusData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><select class="form-control" id="shelter_bench" name="shelter_bench" >\n';
+
+                            if (staBusData[0].shelter_bench === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (staBusData[0].shelter_bench === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentStaBus"> Describe the route: </label><input type="text" class="form-control" id="commentStaBus" name="commentStaBus" value="'+staBusData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsStaBus"> Recommendations: </label><input type="text" class="form-control" id="recommendationsStaBus" name="recommendationsStaBus" value="'+staBusData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="sta_park_id" value="'+staBusData[0].park_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="sta_id" value="'+staBusData[0].sta_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_sta_bus" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save STA Bus Information</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#sta_bus_card').html(bodyHtml);
+    $('#sta_service_area').focus();
+
+    $("#sta_bus_view").validate({
+        rules: {
+            commentStaBus: {
+                maxlength: 5000
+            },
+            recommendationsStaBus: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentStaBus:  " Must be less than 5000 characters.",
+            recommendationsStaBus: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateSTABus();
+        }
+    });
+
 }
 
 function updateSTABus() {
@@ -2054,73 +1695,14 @@ function updateSTABus() {
     });
 }
 
-function editSTARoute(index) {
-    // console.log("index: " + index);
-    INDEX = index;
-    var route_id = document.getElementById("sta_route_id_"+index).value;
+function updateSTARoute(sta_route_id) {
 
-    // console.log("route_id: " + route_id);
-    // console.log("INDEX: " + INDEX);
-
-    $.ajax({
-        async: false,
-        accepts: "application/json",
-        method: "GET",
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        url: "get/sta_route/" + route_id,
-        success: function (data) {
-            // console.log(JSON.stringify(data));
-            var sta_route_id = data[0].sta_route_id;
-            var route_num = data[0].route_num;
-            var north_bound_stop = data[0].north_bound_stop;
-            var south_bound_stop = data[0].south_bound_stop;
-            var east_bound_stop = data[0].east_bound_stop;
-            var west_bound_stop = data[0].west_bound_stop;
-            var sta_bus_id = data[0].sta_bus_id;
-
-
-            $("#sta-body").html(
-                '<div class="card-row">\n' +
-                '   <div class="col-3"><label for="route_numEdit"> Route Number: </label><input class="form-control" id="route_numEdit" value="'+route_num+'"></div>\n' +
-                '</div>\n'+
-                '<div class="card-row">\n' +
-                '   <div class="col-3"><label for="north_bound_stopEdit"> North Bound Stop: </label><input class="form-control" id="north_bound_stopEdit" value="'+north_bound_stop+'"></div>\n' +
-                '   <div class="col-3"><label for="south_bound_stopEdit"> South Bound Stop: </label><input class="form-control" id="south_bound_stopEdit" value="'+south_bound_stop+'"></div>\n' +
-                '   <div class="col-3"><label for="east_bound_stopEdit"> East Bound Stop: </label><input class="form-control" id="east_bound_stopEdit" value="'+east_bound_stop+'"></div>\n' +
-                '   <div class="col-3"><label for="west_bound_stopEdit"> West Bound Stop: </label><input class="form-control" id="west_bound_stopEdit" value="'+west_bound_stop+'"></div>\n' +
-                '   <input type="hidden" class="form-control" id="sta_route_idEdit" value="'+sta_route_id+'">\n'+
-                '   <input type="hidden" class="form-control" id="sta_bus_idEdit" value="'+sta_bus_id+'">\n'+
-                '</div>'
-            );
-
-            $("#sta-footer").html(
-                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
-                '&nbsp;\n' +
-                '<button type="button" class="btn btn-success" onclick="updateSTARoute()"><i class="fas fa-save"></i>&nbsp; Save</button>'
-            );
-
-            $("#sta-route-modal").modal('toggle');
-        },
-        error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
-            $("#alert").modal('toggle');
-        }
-    });
-}
-
-function updateSTARoute() {
-    $("#sta-route-modal").modal('toggle');
-
-    var sta_route_id = document.getElementById("sta_route_idEdit").value;
-    var route_num = document.getElementById("route_numEdit").value;
-    var north_bound_stop = document.getElementById("north_bound_stopEdit").value;
-    var south_bound_stop = document.getElementById("south_bound_stopEdit").value;
-    var east_bound_stop = document.getElementById("east_bound_stopEdit").value;
-    var west_bound_stop = document.getElementById("west_bound_stopEdit").value;
-    var sta_bus_id = document.getElementById("sta_bus_idEdit").value;
-
-    // console.log("update.js:");
+    var route_num = document.getElementById("route_num_"+sta_route_id).value;
+    var north_bound_stop = document.getElementById("north_bound_stop_"+sta_route_id).value;
+    var south_bound_stop = document.getElementById("south_bound_stop_"+sta_route_id).value;
+    var east_bound_stop = document.getElementById("east_bound_stop_"+sta_route_id).value;
+    var west_bound_stop = document.getElementById("west_bound_stop_"+sta_route_id).value;
+    var sta_bus_id = document.getElementById("sta_bus_id_"+sta_route_id).value;
 
     $.ajax({
         accepts: "application/json",
@@ -2136,18 +1718,400 @@ function updateSTARoute() {
             "west_bound_stop" : west_bound_stop
         }),
         success: function () {
-            $("#success-body").html('STA Route Updated');
+            $("#success-body").html('STA Route '+route_num+' Updated');
             $("#success").modal('toggle');
-
-            document.getElementById("route_num_" + INDEX).value = route_num;
-            document.getElementById("north_bound_stop_" + INDEX).value = north_bound_stop;
-            document.getElementById("south_bound_stop_" + INDEX).value = south_bound_stop;
-            document.getElementById("east_bound_stop_" + INDEX).value = east_bound_stop;
-            document.getElementById("west_bound_stop_" + INDEX).value = west_bound_stop;
         },
         error: function(data) {
             $("#alert-body").html(JSON.stringify(data));
             $("#alert").modal('toggle');
+        }
+    });
+}
+
+function addSTARouteView() {
+
+    $('#staTitle').html('New STA Route');
+
+    $('#sta-body').html( '<form id="add_sta_route">\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-3"><label for="route_numAdd"> Route Number: </label><input type="number" min="0" class="form-control" name="route_numAdd" id="route_numAdd" ></div>\n' +
+        '</div>\n'+
+        '<div class="card-row">\n' +
+        '   <div class="col-3"><label for="north_bound_stopAdd"> North Bound Stop: </label><input type="number" min="0" class="form-control" name="north_bound_stopAdd" id="north_bound_stopAdd" ></div>\n' +
+        '   <div class="col-3"><label for="south_bound_stopAdd"> South Bound Stop: </label><input type="number" min="0" class="form-control" name="south_bound_stopAdd" id="south_bound_stopAdd" ></div>\n' +
+        '   <div class="col-3"><label for="east_bound_stopAdd"> East Bound Stop: </label><input type="number" min="0" class="form-control" name="east_bound_stopAdd" id="east_bound_stopAdd" ></div>\n' +
+        '   <div class="col-3"><label for="west_bound_stopAdd"> West Bound Stop: </label><input type="number" min="0" class="form-control" name="west_bound_stopAdd" id="west_bound_stopAdd" ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n ' +
+        '   <span>\n ' +
+        '       <button type="submit" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save STA Route</button>&nbsp;\n' +
+        '       <button type="button" class="btn btn-secondary" onclick="StaBusView()">Cancel</button>\n ' +
+        '   </span>\n' +
+        '</div>\n ' +
+        '</form>'
+    );
+    $('#route_numAdd').focus();
+
+    $("#sta-route-modal").modal('toggle');
+
+    $("#add_sta_route").validate({
+        rules: {
+            route_numAdd: {
+                number: true
+            },
+            north_bound_stopAdd: {
+                number: true
+            },
+            south_bound_stopAdd: {
+                number: true
+            },
+            east_bound_stopAdd: {
+                number: true
+            },
+            west_bound_stopAdd: {
+                number: true
+            }
+        },
+        submitHandler: function(form) {
+            addSTARoute();
+        }
+    });
+
+}
+
+function addSTARoute() {
+
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        url: 'get/sta_bus_id/park/' + PARK_ID,
+        success: function (data) {
+            STA_ID = data[0].sta_id;
+        },
+        error: function(data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    var route_num = document.getElementById("route_numAdd").value;
+    var north_bound_stop = document.getElementById("north_bound_stopAdd").value;
+    var south_bound_stop = document.getElementById("south_bound_stopAdd").value;
+    var east_bound_stop = document.getElementById("east_bound_stopAdd").value;
+    var west_bound_stop = document.getElementById("west_bound_stopAdd").value;
+
+    $.ajax({
+        accepts: "application/json",
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "post/sta_route/",
+        data: JSON.stringify({
+            "route_num" : route_num,
+            "north_bound_stop" : north_bound_stop,
+            "south_bound_stop" : south_bound_stop,
+            "east_bound_stop" : east_bound_stop,
+            "west_bound_stop" : west_bound_stop,
+            "sta_bus_id" : STA_ID
+        }),
+        success: function () {
+            $("#success-body").html('New STA Route '+route_num+' Added');
+            $("#success").modal('toggle');
+            StaBusView();
+        },
+        error: function(data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+}
+
+function deleteSTARoute(sta_route_id) {
+    var route_num = document.getElementById('route_num_'+sta_route_id).value;
+    if(confirm('Are you sure you want to delete STA Route '+route_num+'?\nThis action can not be undone.')) {
+        $.ajax({
+            async: false,
+            method: 'DELETE',
+            url: 'delete/sta_route/' + sta_route_id,
+            success: function () {
+                StaBusView();
+            },
+            error: function (data) {
+                $("#alert-body").html(JSON.stringify(data));
+                $("#alert").modal('toggle');
+            }
+        });
+    }
+}
+
+function ExteriorPathwayView() {
+    var exteriorPathwayData = "";
+
+    $('#exterior_pathways_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/exterior_pathways/est/" + EST_ID,
+        success: function (data) {
+            exteriorPathwayData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="exterior_pathways_view">\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <select class="form-control" id="service_animal" name="service_animal" >\n';
+
+                        if (exteriorPathwayData[0].service_animal === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (exteriorPathwayData[0].service_animal === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '            <div class="col-8"><label for="service_animal_location"> Location of service animal relief: </label> <input type="text" class="form-control" id="service_animal_location" name="service_animal_location"  value="'+exteriorPathwayData[0].service_animal_location+'"></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <select class="form-control" id="has_exterior_path" name="has_exterior_path" >\n';
+
+                            if (exteriorPathwayData[0].has_exterior_path === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].has_exterior_path === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '            <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><select class="form-control" id="min_widthExteriorPathway" name="min_widthExteriorPathway" >\n';
+
+                            if (exteriorPathwayData[0].min_width === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].min_width === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '            <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="pathway_surface" name="pathway_surface" >\n';
+
+                            if (exteriorPathwayData[0].pathway_surface === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].pathway_surface === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="pathway_curbs" name="pathway_curbs" >\n';
+
+                            if (exteriorPathwayData[0].pathway_curbs === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].pathway_curbs === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '            <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warningExteriorPathway" name="tactile_warningExteriorPathway" >\n';
+
+                            if (exteriorPathwayData[0].tactile_warning === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].tactile_warning === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '            <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><select class="form-control" id="slope" name="slope" >\n';
+
+                            if (exteriorPathwayData[0].slope === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].slope === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n ' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorPathway" name="lightingExteriorPathway" >\n';
+
+                            if (exteriorPathwayData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_optionExteriorPathway"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorPathway" name="lighting_optionExteriorPathway" >\n';
+
+                            if (exteriorPathwayData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_typeExteriorPathway"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorPathway" name="lighting_typeExteriorPathway" >\n';
+
+                            if (exteriorPathwayData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorPathwayData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentExteriorPathway"> Describe the route: </label><input type="text" class="form-control" id="commentExteriorPathway" name="commentExteriorPathway" value="'+exteriorPathwayData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsExteriorPathway"> Recommendations: </label><input type="text" class="form-control" id="recommendationsExteriorPathway" name="recommendationsExteriorPathway" value="'+exteriorPathwayData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="ext_path_id" value="'+exteriorPathwayData[0].ext_path_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idExteriorPathway" value="'+exteriorPathwayData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_exterior_pathways" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Exterior Pathways</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#exterior_pathways_card').html(bodyHtml);
+
+    $("#exterior_pathways_view").validate({
+        rules: {
+            service_animal_location: {
+                maxlength: 255
+            },
+            commentExteriorPathway: {
+                maxlength: 5000
+            },
+            recommendationsExteriorPathway: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            service_animal_location: " Must be less than 256 characters.",
+            commentExteriorPathway:  " Must be less than 5000 characters.",
+            recommendationsExteriorPathway: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateExteriorPathways();
         }
     });
 }
@@ -2168,8 +2132,6 @@ function updateExteriorPathways() {
     var comment = document.getElementById("commentExteriorPathway").value;
     var recommendations = document.getElementById("recommendationsExteriorPathway").value;
     var est_id = document.getElementById("est_idExteriorPathway").value;
-
-    // console.log("update.js:");
 
     $.ajax({
         accepts: "application/json",
@@ -2201,6 +2163,287 @@ function updateExteriorPathways() {
             $("#alert").modal('toggle');
         }
     });
+}
+
+function ExteriorStairsView() {
+    var exteriorStairsData = "";
+
+    $('#exterior_stairs_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/exterior_stairs/est/" + EST_ID,
+        success: function (data) {
+            exteriorStairsData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="exterior_stairs_view"> \n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <select class="form-control" id="stairs_required" name="stairs_required" >\n';
+
+                            if (exteriorStairsData[0].stairs_required === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].stairs_required === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <select class="form-control" id="stairs_available" name="stairs_available" >\n';
+
+                            if (exteriorStairsData[0].stairs_available === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].stairs_available === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="num_stairs"> Number of stairs: </label> <input type="number" min="0" class="form-control" id="num_stairs" name="num_stairs" value="'+exteriorStairsData[0].num_stairs+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" id="handrail_both_sides" name="handrail_both_sides" >\n';
+
+                            if (exteriorStairsData[0].handrail_both_sides === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].handrail_both_sides === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None/NA: </label><select class="form-control" id="handrail_side" name="handrail_side" >\n';
+
+                            if (exteriorStairsData[0].handrail_side === "Left") {
+                                bodyHtml += '<option value="Left" selected>&nbsp; Left</option>\n' +
+                                    '<option value="Right" >&nbsp; Right</option>\n ' +
+                                    '<option value="None" >&nbsp; None</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].handrail_side === "Right") {
+                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
+                                    '<option value="Right" selected>&nbsp; Right</option>\n ' +
+                                    '<option value="None" >&nbsp; None</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].handrail_side === "None") {
+                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
+                                    '<option value="Right" >&nbsp; Right</option>\n ' +
+                                    '<option value="None" selected>&nbsp; None</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
+                                    '<option value="Right" >&nbsp; Right</option>\n ' +
+                                    '<option value="None" >&nbsp; None</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-8"><label for="handrail_regulation_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" id="handrail_regulation_height" name="handrail_regulation_height" >\n';
+
+                            if (exteriorStairsData[0].handrail_regulation_height === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].handrail_regulation_height === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="handrail_height"> Handrail height: </label><input type="number" min="0" class="form-control" id="handrail_height" name="handrail_height" value="'+exteriorStairsData[0].handrail_height+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><select class="form-control" id="obstacles" name="obstacles" >\n';
+
+                            if (exteriorStairsData[0].obstacles === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].obstacles === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><select class="form-control" id="clearly_marked" name="clearly_marked" >\n';
+
+                        if (exteriorStairsData[0].clearly_marked === "Yes") {
+                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        }
+                        else if (exteriorStairsData[0].clearly_marked === "No") {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" selected>&nbsp; No</option>\n ' +
+                                '<option value="N/A" >&nbsp; N/A</option>';
+                        } else {
+                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                '<option value="No" >&nbsp; No</option>\n ' +
+                                '<option value="N/A" selected>&nbsp; N/A</option>';
+                        }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorStairs" name="lightingExteriorStairs" >\n';
+
+                            if (exteriorStairsData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_optionExteriorStairs"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorStairs" name="lighting_optionExteriorStairs" >\n';
+
+                            if (exteriorStairsData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_typeExteriorStairs"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorStairs" name="lighting_typeExteriorStairs" >\n';
+
+                            if (exteriorStairsData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorStairsData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentExteriorStairs"> Describe the route: </label><input class="form-control" id="commentExteriorStairs" name="commentExteriorStairs" value="'+exteriorStairsData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsExteriorStairs"> Recommendations: </label><input class="form-control" id="recommendationsExteriorStairs" name="recommendationsExteriorStairs" value="'+exteriorStairsData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="ext_stair_id"  value="'+exteriorStairsData[0].ext_stair_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idExteriorStairs"  value="'+exteriorStairsData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_exterior_stairs" class="btn btn-success"><i class="fas fa-save"></i>&nbsp; Save Exterior Stairs</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#exterior_stairs_card').html(bodyHtml);
+
+    $("#exterior_stairs_view").validate({
+        rules: {
+            commentExteriorStairs: {
+                maxlength: 5000
+            },
+            recommendationsExteriorStairs: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentExteriorStairs:  " Must be less than 5000 characters.",
+            recommendationsExteriorStairs: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateExteriorStairs();
+        }
+    });
+
 }
 
 function updateExteriorStairs() {
@@ -2254,6 +2497,365 @@ function updateExteriorStairs() {
             $("#alert").modal('toggle');
         }
     });
+}
+
+function ExteriorRampsViewModel() {
+    var exteriorRampsData = "";
+
+    $('#exterior_ramps_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/exterior_ramps/est/" + EST_ID,
+        success: function (data) {
+            exteriorRampsData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="exterior_ramps_view">\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <select class="form-control" id="ramp_required" name="ramp_required" >\n';
+
+                            if (exteriorRampsData[0].ramp_required === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].ramp_required === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <select class="form-control" id="ramp_available" name="ramp_available" >\n';
+
+                            if (exteriorRampsData[0].ramp_available === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].ramp_available === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <select class="form-control" id="min_widthExteriorRamps" name="min_widthExteriorRamps" >\n';
+
+                            if (exteriorRampsData[0].min_width === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].min_width === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="width_between_handrails"> Ramps width: </label> <input type="number" min="0" class="form-control" id="width_between_handrails" name="width_between_handrails" value="'+exteriorRampsData[0].width_between_handrails+'"></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="min_slope"> For each section of ramp, the RUNNING SLOPE is no greater than 1:12: </label> <select class="form-control" id="min_slope" name="min_slope" >\n';
+
+                            if (exteriorRampsData[0].min_slope === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].min_slope === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="slopeExteriorRamps"> Alternatively, the slope is less than 2 percent grade (%): </label><input type="number" min="0" class="form-control" id="slopeExteriorRamps" name="slopeExteriorRamps" value="'+exteriorRampsData[0].slope+'"></div>\n'+
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="level_landing_both"> There is a level landing at the top and bottom of the ramp: </label> <select class="form-control" id="level_landing_both" name="level_landing_both" >\n';
+
+                            if (exteriorRampsData[0].level_landing_both === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].level_landing_both === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="level_landing_location"> Landing location Top/Bottom/NA: </label><select class="form-control" id="level_landing_location" name="level_landing_location" >\n';
+
+                            if (exteriorRampsData[0].level_landing_location === "Top") {
+                                bodyHtml += '<option value="Top" selected>&nbsp; Top</option>\n' +
+                                    '<option value="Bottom" >&nbsp; Bottom</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].level_landing_location === "Bottom") {
+                                bodyHtml += '<option value="Top" >&nbsp; Top</option>\n' +
+                                    '<option value="Bottom" selected>&nbsp; Bottom</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Top" >&nbsp; Top</option>\n' +
+                                    '<option value="Bottom" >&nbsp; Bottom</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="obstaclesExteriorRamps"> Ramps are clear of obstacles or protrusions: </label><select class="form-control" id="obstaclesExteriorRamps" name="obstaclesExteriorRamps" >\n';
+
+                            if (exteriorRampsData[0].obstacles === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].obstacles === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" id="handrails_both_sides" name="handrails_both_sides" >\n';
+
+                            if (exteriorRampsData[0].handrail_sides === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].handrail_sides === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="handrail_sides"> Handrail sides Left/Right/None/NA: </label><select class="form-control" id="handrail_sides" name="handrail_sides" >\n';
+
+                            if (exteriorRampsData[0].handrail_sides === "Left") {
+                                bodyHtml += '<option value="Left" selected>&nbsp; Left</option>\n' +
+                                    '<option value="Right" >&nbsp; Right</option>\n ' +
+                                    '<option value="None" >&nbsp; None</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].handrail_sides === "Right") {
+                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
+                                    '<option value="Right" selected>&nbsp; Right</option>\n ' +
+                                    '<option value="None" >&nbsp; None</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].handrail_sides === "None") {
+                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
+                                    '<option value="Right" >&nbsp; Right</option>\n ' +
+                                    '<option value="None" selected>&nbsp; None</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
+                                    '<option value="Right" >&nbsp; Right</option>\n ' +
+                                    '<option value="None" >&nbsp; None</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="handrail_regulation_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" id="handrail_regulation_heightExteriorRamps" name="handrail_regulation_heightExteriorRamps" >\n';
+
+                            if (exteriorRampsData[0].handrail_regulation_height === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].handrail_regulation_height === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="handrail_heightExteriorRamps"> Handrail height: </label><input type="number" min="0" class="form-control" id="handrail_heightExteriorRamps" name="handrail_heightExteriorRamps" value="'+exteriorRampsData[0].handrail_height+'"></div>\n' +
+        '            <div class="col-4"><label for="side_guards"> Ramps have adequate side guards: </label><select class="form-control" id="side_guards" name="side_guards" >\n';
+
+                            if (exteriorRampsData[0].side_guards === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].side_guards === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="lightingExteriorRamps"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorRamps" name="lightingExteriorRamps" >\n';
+
+                            if (exteriorRampsData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_optionExteriorRamps"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorRamps" name="lighting_optionExteriorRamps" >\n';
+
+                            if (exteriorRampsData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_typeExteriorRamps"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorRamps" name="lighting_typeExteriorRamps" >\n';
+
+                            if (exteriorRampsData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (exteriorRampsData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentExteriorRamps"> Describe the route: </label><input type="text" class="form-control" id="commentExteriorRamps" name="commentExteriorRamps" value="'+exteriorRampsData[0].comment+'"></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsExteriorRamps"> Recommendations: </label><input type="text" class="form-control" id="recommendationsExteriorRamps" name="recommendationsExteriorRamps" value="'+exteriorRampsData[0].recommendations+'"></div>\n' +
+        '            <input type="hidden" class="form-control" id="ext_ramp_id" value="'+exteriorRampsData[0].ext_ramp_id+'">\n' +
+        '            <input type="hidden" class="form-control" id="est_idExteriorRamps" value="'+exteriorRampsData[0].est_id+'">\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_exterior_ramps" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Exterior Ramps</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#exterior_ramps_card').html(bodyHtml);
+
+    $("#exterior_ramps_view").validate({
+        rules: {
+            commentExteriorRamps: {
+                maxlength: 5000
+            },
+            recommendationsExteriorRamps: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentExteriorRamps:  " Must be less than 5000 characters.",
+            recommendationsExteriorRamps: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateExteriorRamps();
+        }
+    });
+
 }
 
 function updateExteriorRamps() {
@@ -2315,6 +2917,409 @@ function updateExteriorRamps() {
         error: function (data) {
             $("#alert-body").html(JSON.stringify(data));
             $("#alert").modal('toggle');
+        }
+    });
+}
+
+function MainEntranceView() {
+    var mainEntranceData = "";
+
+    $('#main_entrance_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/main_entrance/est/" + EST_ID,
+        success: function (data) {
+            mainEntranceData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="main_entrance_view">\n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input type="number" min="0" class="form-control" id="total_num_public_entrances" name="total_num_public_entrances" value="'+mainEntranceData[0].total_num_public_entrances+'"></div>\n' +
+        '            <div class="col-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <select class="form-control" id="main_ent_accessible" name="main_ent_accessible" >\n';
+
+                            if (mainEntranceData[0].main_ent_accessible === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].main_ent_accessible === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <select class="form-control" id="alt_ent_accessible" name="alt_ent_accessible" >\n';
+
+                            if (mainEntranceData[0].alt_ent_accessible === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].alt_ent_accessible === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <select class="form-control" id="accessable_signage" name="accessable_signage" >\n';
+
+                            if (mainEntranceData[0].accessable_signage === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].accessable_signage === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <select class="form-control" id="ground_level" name="ground_level" >\n';
+
+                            if (mainEntranceData[0].ground_level === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].ground_level === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="threshold_level"> Threshold of entrance is level: </label><select class="form-control" id="threshold_level" name="threshold_level" >\n';
+
+                            if (mainEntranceData[0].threshold_level === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].threshold_level === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <select class="form-control" id="threshold_beveled" name="threshold_beveled" >\n';
+
+                            if (mainEntranceData[0].threshold_beveled === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].threshold_beveled === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="beveled_height"> Height: </label><input type="number" min="0" class="form-control" id="beveled_height" name="beveled_height" value="'+mainEntranceData[0].beveled_height+'"></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="door_action"> As you enter the door opens: </label><select class="form-control" id="door_action" name="door_action" >\n';
+
+                            if (mainEntranceData[0].door_action === "Slide To Side") {
+                                bodyHtml += '<option value="Slide To Side" selected>&nbsp; Slide To Side</option>\n' +
+                                    '<option value="Open Out" >&nbsp; Open Out</option>\n ' +
+                                    '<option value="Open In" >&nbsp; Open In</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>';
+                            }
+                            else if (mainEntranceData[0].door_action === "Open Out") {
+                                bodyHtml += '<option value="Slide To Side" >&nbsp; Slide To Side</option>\n' +
+                                    '<option value="Open Out" selected>&nbsp; Open Out</option>\n ' +
+                                    '<option value="Open In" >&nbsp; Open In</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>';
+                            }
+                            else if (mainEntranceData[0].door_action === "Open In") {
+                                bodyHtml += '<option value="Slide To Side" >&nbsp; Slide To Side</option>\n' +
+                                    '<option value="Open Out" >&nbsp; Open Out</option>\n ' +
+                                    '<option value="Open In" selected>&nbsp; Open In</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Slide To Side" >&nbsp; Slide To Side</option>\n' +
+                                    '<option value="Open Out" >&nbsp; Open Out</option>\n ' +
+                                    '<option value="Open In" >&nbsp; Open In</option>\n ' +
+                                    '<option value="Other" selected>&nbsp; Other</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" id="door_open_clearance" name="door_open_clearance" >\n';
+
+                            if (mainEntranceData[0].door_open_clearance === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].door_open_clearance === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="opening_measurement"> Opening measurement (inches): </label><input type="number" min="0" class="form-control" id="opening_measurement" name="opening_measurement" value="'+mainEntranceData[0].opening_measurement+'"></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="door_easy_open"> Doors are easy to open: </label><select class="form-control" id="door_easy_open" name="door_easy_open" >\n';
+
+                            if (mainEntranceData[0].door_easy_open === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].door_easy_open === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="door_open_force"> Actual lbs of force: </label><input type="number" min="0" class="form-control" id="door_open_force" name="door_open_force" value="'+mainEntranceData[0].door_open_force+'"></div>\n' +
+        '            <div class="col-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><select class="form-control" id="door_use_with_fist" name="door_use_with_fist" >\n';
+
+                            if (mainEntranceData[0].door_use_with_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].door_use_with_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><select class="form-control" id="door_auto_open" name="door_auto_open" >\n';
+
+                            if (mainEntranceData[0].door_auto_open === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].door_auto_open === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><select class="form-control" id="second_door_inside" name="second_door_inside" >\n';
+
+                            if (mainEntranceData[0].second_door_inside === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].second_door_inside === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><select class="form-control" id="min_dist_between_doors" name="min_dist_between_doors" >\n';
+
+                            if (mainEntranceData[0].min_dist_between_doors === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].min_dist_between_doors === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><select class="form-control" id="lightingMainEntrance" name="lightingMainEntrance" >\n';
+
+                            if (mainEntranceData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><select class="form-control" id="lighting_optionMainEntrance" name="lighting_optionMainEntrance" >\n';
+
+                            if (mainEntranceData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeMainEntrance" name="lighting_typeMainEntrance" >\n';
+
+                            if (mainEntranceData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (mainEntranceData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentMainEntrance"> Describe accessible entrance: </label><input type="text" class="form-control" id="commentMainEntrance" name="commentMainEntrance" value="'+mainEntranceData[0].comment+'"></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsMainEntrance"> Recommendations: </label><input type="text" class="form-control" id="recommendationsMainEntrance" name="recommendationsMainEntrance" value="'+mainEntranceData[0].recommendations+'"></div>\n' +
+        '            <input type="hidden" class="form-control" id="main_ent_id" value="'+mainEntranceData[0].main_ent_id+'">\n' +
+        '            <input type="hidden" class="form-control" id="est_idMainEntrance" value="'+mainEntranceData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_main_entrance" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Main Entrance</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#main_entrance_card').html(bodyHtml);
+
+    $("#main_entrance_view").validate({
+        rules: {
+            commentMainEntrance: {
+                maxlength: 5000
+            },
+            recommendationsMainEntrance: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentMainEntrance:  " Must be less than 5000 characters.",
+            recommendationsMainEntrance: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateMainEntrance();
         }
     });
 }
@@ -2388,6 +3393,324 @@ function updateMainEntrance() {
     });
 }
 
+function InteriorViewModel() {
+    var interiorData = "";
+
+    $('#interior_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/interior/est/" + EST_ID,
+        success: function (data) {
+            interiorData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="interior_view">\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" id="int_door_open_clearance" name="int_door_open_clearance" >\n';
+
+                            if (interiorData[0].int_door_open_clearance === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].int_door_open_clearance === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="int_opening_measurement"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" id="int_opening_measurement" name="int_opening_measurement" value="'+interiorData[0].int_opening_measurement+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <select class="form-control" id="int_door_easy_open" >\n';
+
+                            if (interiorData[0].int_door_easy_open === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].int_door_easy_open === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="int_door_open_force"> Actual lbs of force: </label> <input type="number" min="0" class="form-control" id="int_door_open_force" name="int_door_open_force" value="'+interiorData[0].int_door_open_force+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <select class="form-control" id="int_door_use_with_fist" name="int_door_use_with_fist" >\n';
+
+                            if (interiorData[0].int_door_use_with_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].int_door_use_with_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><select class="form-control" id="five_second_close" name="five_second_close" >\n';
+
+                            if (interiorData[0].five_second_close === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].five_second_close === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <select class="form-control" id="hallway_width" name="hallway_width" >\n';
+
+                            if (interiorData[0].hallway_width === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].hallway_width === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="narrowest_width"> Narrowest width (inches): </label><input type="number" min="0" class="form-control" id="narrowest_width" id="narrowest_width" value="'+interiorData[0].narrowest_width+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><select class="form-control" id="wheelchair_turnaround" name="wheelchair_turnaround" >\n';
+
+                            if (interiorData[0].wheelchair_turnaround === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].wheelchair_turnaround === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <select class="form-control" id="hallway_obstacles"  name="hallway_obstacles"  >\n';
+
+                            if (interiorData[0].hallway_obstacles === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].hallway_obstacles === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><select class="form-control" id="hallway_clear" name="hallway_clear" >\n';
+
+                            if (interiorData[0].hallway_clear === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].hallway_clear === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="lightingInterior"> Lighting is adequate: </label><select class="form-control" id="lightingInterior" name="lightingInterior" >\n';
+
+                            if (interiorData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeInterior" name="lighting_typeInterior" >\n';
+
+                            if (interiorData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><select class="form-control" id="service_counter" name="service_counter" >\n';
+
+                            if (interiorData[0].service_counter === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].service_counter === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="counter_height"> Service counter height (inches): </label><input type="number" min="0" class="form-control" id="counter_height" name="counter_height" value="'+interiorData[0].counter_height+'" ></div>\n' +
+        '            <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input type="number" min="0" class="form-control" id="writing_surface_height" name="writing_surface_height" value="'+interiorData[0].estwriting_surface_height_id+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" id="drinking_fountain" name="drinking_fountain" >\n';
+
+                            if (interiorData[0].drinking_fountain === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (interiorData[0].drinking_fountain === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentInterior"> Describe accessible entrance: </label><input type="text" class="form-control" id="commentInterior" name="commentInterior" value="'+interiorData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsInterior"> Recommendations: </label><input type="text" class="form-control" id="recommendationsInterior" name="recommendationsInterior" value="'+interiorData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="interior_id" value="'+interiorData[0].interior_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idInterior" value="'+interiorData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_interior" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Interior</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#interior_card').html(bodyHtml);
+
+    $("#interior_view").validate({
+        rules: {
+            commentInterior: {
+                maxlength: 5000
+            },
+            recommendationsInterior: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentInterior:  " Must be less than 5000 characters.",
+            recommendationsInterior: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateInterior();
+        }
+    });
+
+}
+
 function updateInterior() {
     var interior_id = document.getElementById("interior_id").value;
     var int_door_open_clearance = document.getElementById("int_door_open_clearance").value;
@@ -2451,6 +3774,284 @@ function updateInterior() {
     });
 }
 
+function ElevatorView() {
+    var elevatorData = "";
+
+    $('#elevator_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/elevator/est/" + EST_ID,
+        success: function (data) {
+            elevatorData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="elevator_view">\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <select class="form-control" id="is_elevator" name="is_elevator" >\n';
+
+                            if (elevatorData[0].is_elevator === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].is_elevator === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-9"><label for="location"> Where is nearest elevator or lift located in relation to the accessible entrance: </label> <input type="text" class="form-control" id="location" name="location"  value="'+elevatorData[0].location+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="works"> The elevator or lift works properly: </label> <select class="form-control" id="works" >\n';
+
+                            if (elevatorData[0].works === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].works === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <select class="form-control" id="no_assist" name="no_assist" >\n';
+
+                            if (elevatorData[0].no_assist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].no_assist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <select class="form-control" id="button_height" name="button_height" >\n';
+
+                            if (elevatorData[0].button_height === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].button_height === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="outside_btn_height"> Outside button height (inches): </label><input type="number" min="0" class="form-control" id="outside_btn_height" name="outside_btn_height" value="'+elevatorData[0].outside_btn_height+'" ></div>\n' +
+        '            <div class="col-3"><label for="inside_btn_height"> Inside button height (inches): </label> <input type="number" min="0" class="form-control" id="inside_btn_height" name="inside_btn_height"  value="'+elevatorData[0].inside_btn_height+'" ></div>\n' +
+        '            <div class="col-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><select class="form-control" id="button_use_fist" name="button_use_fist" >\n';
+
+                            if (elevatorData[0].button_use_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].button_use_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><select class="form-control" id="braille" name="braille" >\n';
+
+                            if (elevatorData[0].braille === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].braille === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <select class="form-control" id="audible_tones" name="audible_tones" >\n';
+
+                            if (elevatorData[0].audible_tones === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].audible_tones === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="lightingElevator"> Lighting is adequate: </label><select class="form-control" id="lightingElevator" name="lightingElevator" >\n';
+
+                            if (elevatorData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeElevator" name="lighting_typeElevator" >\n';
+
+                            if (elevatorData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​ ​from door to the back : </label><select class="form-control" id="elevator_depth" name="elevator_depth" >\n';
+
+                            if (elevatorData[0].elevator_depth === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (elevatorData[0].elevator_depth === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentElevator"> Describe accessible entrance: </label><input type="text" class="form-control" id="commentElevator" name="commentElevator" value="'+elevatorData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsElevator"> Recommendations: </label><input type="text" class="form-control" id="recommendationsElevator" name="recommendationsElevator" value="'+elevatorData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="elevator_id" value="'+elevatorData[0].elevator_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idElevator" value="'+elevatorData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_elevator" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Elevator</button>\n' +
+        '            </div>\n' +
+        '        </div>\n ' +
+        '   </form>';
+
+    $('#elevator_card').html(bodyHtml);
+
+    $("#elevator_view").validate({
+        rules: {
+            location: {
+                maxlength: 500
+            },
+            commentElevator: {
+                maxlength: 5000
+            },
+            recommendationsElevator: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            location:  " Must be less than 500 characters.",
+            commentElevator:  " Must be less than 5000 characters.",
+            recommendationsElevator: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateElevator();
+        }
+    });
+
+}
+
 function updateElevator() {
     var elevator_id = document.getElementById("elevator_id").value;
     var is_elevator = document.getElementById("is_elevator").value;
@@ -2506,6 +4107,268 @@ function updateElevator() {
     });
 }
 
+function SignageView() {
+    var signageData = "";
+
+    $('#signage_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/signage/est/" + EST_ID,
+        success: function (data) {
+            signageData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="signage_view">\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <select class="form-control" id="is_directory" name="is_directory" >\n';
+
+                            if (signageData[0].is_directory === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].is_directory === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="door_signs"> Door signs are on latch side of door, between 48” and 60” from floor: </label> <select class="form-control" id="door_signs" name="door_signs" >\n';
+
+                            if (signageData[0].door_signs === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].door_signs === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="sign_height"> Height of signs (inches): </label> <input type="number" min="0" class="form-control" id="sign_height" name="sign_height"  value="'+signageData[0].sign_height+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="pub_sign_braile"> Public signs have Braille: </label> <select class="form-control" id="pub_sign_braile" name="pub_sign_braile" >\n';
+
+                            if (signageData[0].pub_sign_braile === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].pub_sign_braile === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="sign_high_contrast"> Signs have raised, high contrast lettering, ​low glare background: </label> <select class="form-control" id="sign_high_contrast" name="sign_high_contrast" >\n';
+
+                            if (signageData[0].sign_high_contrast === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].sign_high_contrast === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="sign_images"> Signs include images, illustrations, or icons: </label><select class="form-control" id="sign_images" name="sign_images" >\n';
+
+                            if (signageData[0].sign_images === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].sign_images === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="written_material_images"> Written material (menus, etc.) includes images or illustrations: </label> <select class="form-control" id="written_material_images" name="written_material_images" >\n';
+
+                            if (signageData[0].written_material_images === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].written_material_images === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="menu_access"> There is a large print menu, Braille menu, and/ or on­line accessible menu: </label><select class="form-control" id="menu_access" name="menu_access" >\n';
+
+                            if (signageData[0].written_material_images === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].written_material_images === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="alt_info"> Information is available in alternative formats: </label><select class="form-control" id="alt_info" name="alt_info" >\n';
+
+                            if (signageData[0].alt_info === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].alt_info === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large Print/Recorded Audio/Video/NA: </label> <select class="form-control" id="alt_info_type" name="alt_info_type" >\n';
+
+                            if (signageData[0].alt_info_type === "Braille") {
+                                bodyHtml += '<option value="Braille" selected>&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].alt_info_type === "Large Print") {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" selected>&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].alt_info_type === "Recorded audio") {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" selected>&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (signageData[0].alt_info_type === "Video") {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" selected>&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else  {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentSignage"> Comments: </label><input type="text" class="form-control" id="commentSignage" name="commentSignage" value="'+signageData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsSignage"> Recommendations: </label><input type="text" class="form-control" id="recommendationsSignage" name="recommendationsSignage" value="'+signageData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="sign_id" value="'+signageData[0].sign_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idSignage" value="'+signageData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_signage" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Signage</button>\n' +
+        '            </div>\n' +
+        '        </div>'+
+        '   </form>';
+
+    $('#signage_card').html(bodyHtml);
+
+    $("#signage_view").validate({
+        rules: {
+            commentSignage: {
+                maxlength: 5000
+            },
+            recommendationsSignage: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentSignage:  " Must be less than 5000 characters.",
+            recommendationsSignage: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateSignage();
+        }
+    });
+
+}
+
 function updateSignage() {
     var sign_id = document.getElementById("sign_id").value;
     var is_directory = document.getElementById("is_directory").value;
@@ -2551,6 +4414,303 @@ function updateSignage() {
         error: function (data) {
             $("#alert-body").html(JSON.stringify(data));
             $("#alert").modal('toggle');
+        }
+    });
+}
+
+function EmergencyView() {
+    var emergencyPreparednessData = "";
+
+    $('#emergency_preparedness_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/emergency/est/" + EST_ID,
+        success: function (data) {
+            emergencyPreparednessData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="emergency_preparedness_view">\n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <select class="form-control" id="evac_info" name="evac_info" >\n';
+
+                            if (emergencyPreparednessData[0].evac_info === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].evac_info === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="alt_evac_info"> Evacuation and safety information is available in alternative format: </label> <select class="form-control" id="alt_evac_info" name="alt_evac_info" >\n';
+
+                            if (emergencyPreparednessData[0].alt_evac_info === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].alt_evac_info === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" id="evac_info_format" name="evac_info_format" >\n';
+
+                            if (emergencyPreparednessData[0].evac_info_format === "Braille") {
+                                bodyHtml += '<option value="Braille" selected>&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].evac_info_format === "Large Print") {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" selected>&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].evac_info_format === "Recorded audio") {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" selected>&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].evac_info_format === "Video") {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" selected>&nbsp; Video</option>' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else  {
+                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
+                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
+                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
+                                    '<option value="Video" >&nbsp; Video</option>' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="alarms"> Emergency alarms both audible and visible: </label> <select class="form-control" id="alarms" name="alarms" >\n';
+
+                            if (emergencyPreparednessData[0].alarms === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].alarms === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="location_no_flash"> There is an emergency location available where there are no flashing alarms: </label> <select class="form-control" id="location_no_flash" name="location_no_flash" >\n';
+
+                            if (emergencyPreparednessData[0].location_no_flash === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].location_no_flash === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="shelter"> There is an area of refuge, shelter in place during emergencies: </label><select class="form-control" id="shelter" name="shelter" >\n';
+
+                            if (emergencyPreparednessData[0].shelter === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].shelter === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="signs_to_exit"> Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes: </label> <select class="form-control" id="signs_to_exit" name="signs_to_exit" >\n';
+
+                            if (emergencyPreparednessData[0].signs_to_exit === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].signs_to_exit === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="wheelchair_plan"> There is a plan for evacuating persons using wheelchairs in case elevators are inoperable: </label><select class="form-control" id="wheelchair_plan" name="wheelchair_plan" >\n';
+
+                            if (emergencyPreparednessData[0].wheelchair_plan === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].wheelchair_plan === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="floor_plan_routes"> Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes: </label><select class="form-control" id="floor_plan_routes" name="floor_plan_routes" >\n';
+
+                            if (emergencyPreparednessData[0].floor_plan_routes === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].floor_plan_routes === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="fire_alarm_height"> Fire alarms pull boxes are no higher than 48”: </label> <select class="form-control" id="fire_alarm_height" name="fire_alarm_height" >\n';
+
+                            if (emergencyPreparednessData[0].fire_alarm_height === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].fire_alarm_height === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="fire_extinguisher_height"> Fire extinguishers are mounted with bottom no higher than 48”: </label> <select class="form-control" id="fire_extinguisher_height" name="fire_extinguisher_height"  >\n';
+
+                            if (emergencyPreparednessData[0].fire_extinguisher_height === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (emergencyPreparednessData[0].fire_extinguisher_height === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentEmergency_Preparedness"> Comments: </label><input type="text" class="form-control" id="commentEmergency_Preparedness" name="commentEmergency_Preparedness" value="'+emergencyPreparednessData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsEmergency_Preparedness"> Recommendations: </label><input type="text" class="form-control" id="recommendationsEmergency_Preparedness" name="recommendationsEmergency_Preparedness" value="'+emergencyPreparednessData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="emergency_id" value="'+emergencyPreparednessData[0].emergency_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idEmergency_Preparedness" value="'+emergencyPreparednessData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_emergency_preparedness" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Emergency Preparedness</button>\n' +
+        '            </div>\n' +
+        '        </div>' +
+        '   </form>';
+
+    $('#emergency_preparedness_card').html(bodyHtml);
+
+    $("#emergency_preparedness_view").validate({
+        rules: {
+            commentEmergency_Preparedness: {
+                maxlength: 5000
+            },
+            recommendationsEmergency_Preparedness: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentEmergency_Preparedness:  " Must be less than 5000 characters.",
+            recommendationsEmergency_Preparedness: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateEmergencyPreparedness();
         }
     });
 }
@@ -2602,6 +4762,361 @@ function updateEmergencyPreparedness() {
         error: function (data) {
             $("#alert-body").html(JSON.stringify(data));
             $("#alert").modal('toggle');
+        }
+    });
+}
+
+function SeatingView() {
+    var seatingData = "";
+
+    $('#seating_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/seating/est/" + EST_ID,
+        success: function (data) {
+            seatingData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="seating_view">\n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <select class="form-control" id="seating_no_step" name="seating_no_step" >\n';
+
+                            if (seatingData[0].seating_no_step === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].seating_no_step === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="table_aisles"> Customers can maneuver between tables without bumping into chairs (36” aisles)​: </label> <select class="form-control" id="table_aisles" name="table_aisles" >\n';
+
+                            if (seatingData[0].table_aisles === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].table_aisles === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="legroom"> There are tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”): </label> <select class="form-control" id="legroom" name="legroom" >\n';
+
+                            if (seatingData[0].legroom === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].legroom === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" type="text" class="form-control" id="num_legroom" value="'+seatingData[0].num_legroom+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" id="rearranged" name="rearranged" >\n';
+
+                            if (seatingData[0].rearranged === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].rearranged === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="num_table_rearranged"> Number of tables that can be moved #/All: </label><input type="text" class="form-control" id="num_table_rearranged" name="num_table_rearranged" value="'+seatingData[0].num_table_rearranged+'" ></div>\n' +
+        '            <div class="col-4"><label for="num_chair_rearranged"> Number of chairs that can be moved #/All: </label><input type="text" class="form-control" id="num_chair_rearranged" name="num_chair_rearranged" value="'+seatingData[0].num_chair_rearranged+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" id="round_tables" name="round_tables" >\n';
+
+                            if (seatingData[0].round_tables === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].round_tables === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="num_round_tables"> Number of round/oval tables: </label><input type="number" min="0" class="form-control" id="num_round_tables" name="num_round_tables" value="'+seatingData[0].num_round_tables+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="lightingSeating"> Lighting is adequate: </label><select class="form-control" id="lightingSeating" name="lightingSeating" >\n';
+
+                            if (seatingData[0].lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_optionSeating"> Lighting level day/night: </label><select class="form-control" id="lighting_optionSeating" name="lighting_optionSeating" >\n';
+
+                            if (seatingData[0].lighting_option === "Day") {
+                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].lighting_option === "Night") {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
+                                    '<option value="Night" >&nbsp; Night</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="lighting_typeSeating"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeSeating" name="lighting_typeSeating" >\n';
+
+                            if (seatingData[0].lighting_type === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].lighting_type === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].lighting_type === "Bright") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="adjustable_lighting"> There are one or more available spaces with adjustable lighting: </label><select class="form-control" id="adjustable_lighting" name="adjustable_lighting" >\n';
+
+                            if (seatingData[0].adjustable_lighting === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].adjustable_lighting === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="low_visual_slim"> There are one or more areas with low visual stimulation: </label> <select class="form-control" id="low_visual_slim" name="low_visual_slim" >\n';
+
+                            if (seatingData[0].low_visual_slim === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].low_visual_slim === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="quiet_table"> There is a quiet table, room or area available on request: </label><select class="form-control" id="quiet_table" id="quiet_table" >\n';
+
+                            if (seatingData[0].quiet_table === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].quiet_table === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="low_sound"> There is an area with low or no background sound, and/or that has sound­absorbing surfaces: </label> <select class="form-control" id="low_sound" name="low_sound" >\n';
+
+                            if (seatingData[0].low_sound === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].low_sound === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="designated_space"> For theater or auditorium, there are spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated: </label><select class="form-control" id="designated_space" name="designated_space" >\n';
+
+                            if (seatingData[0].designated_space === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].designated_space === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="num_desig_space"> Number of designated spaces: </label> <input type="number" min="0" class="form-control" id="num_desig_space" name="num_desig_space" value="'+seatingData[0].num_desig_space+'" ></div>\n' +
+        '            <div class="col-4"><label for="companion_space"> There are spaces for companions to sit next to the wheelchair users: </label> <select class="form-control" id="companion_space" name="companion_space" >\n';
+
+                            if (seatingData[0].companion_space === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (seatingData[0].companion_space === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentSeating"> Comments: </label><input type="text" class="form-control" id="commentSeating" name="commentSeating" value="'+seatingData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsSeating"> Recommendations: </label><input type="text" class="form-control" id="recommendationsSeating" name="recommendationsSeating" value="'+seatingData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="seating_id" value="'+seatingData[0].est_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idSeating" value="'+seatingData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_seating" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Seating</button>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '   </form>';
+
+    $('#seating_card').html(bodyHtml);
+
+    $("#seating_view").validate({
+        rules: {
+            commentSeating: {
+                maxlength: 5000
+            },
+            recommendationsSeating: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentSeating:  " Must be less than 5000 characters.",
+            recommendationsSeating: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateSeating();
         }
     });
 }
@@ -2673,6 +5188,151 @@ function updateSeating() {
     });
 }
 
+function RestroomView() {
+    var restroomData = "";
+
+    $('#restroom_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/restroom/est/" + EST_ID,
+        success: function (data) {
+            restroomData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="restroom_view">\n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <select class="form-control" id="public_restroom" name="public_restroom" >\n';
+
+                            if (restroomData[0].public_restroom === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomData[0].public_restroom === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="total_num"> Total number of public restrooms: </label> <input type="number" min="0" class="form-control" id="total_num" name="total_num"  value="'+restroomData[0].total_num+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="designated_number"> Number of accessible restrooms designated “family”, “unisex”, or “assisted use”: </label> <input type="number" min="0" class="form-control" id="designated_number" name="designated_number" value="'+restroomData[0].designated_number+'" ></div>\n' +
+        '            <div class="col-6"><label for="num_wheelchair_sign"> Number of restrooms that have “Wheelchair Accessible” signs: </label> <input type="number" min="0" class="form-control" id="num_wheelchair_sign" name="num_wheelchair_sign" value="'+restroomData[0].num_wheelchair_sign+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="sign_accessable"> Restrooms signs have high contrast, Braille, raised lettering, low glare background: </label> <select class="form-control" id="sign_accessable" name="sign_accessable" >\n';
+
+                            if (restroomData[0].sign_accessable === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomData[0].sign_accessable === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="sign_location"> Signage is on latch side of door between 48” and 60” above floor: </label><select class="form-control" id="sign_location" name="sign_location" >\n';
+
+                            if (restroomData[0].sign_location === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomData[0].sign_location === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="key_needed"> Users do not need to ask someone for a KEY to use the restroom: </label><select class="form-control" id="key_needed" name="key_needed" >\n';
+
+                            if (restroomData[0].key_needed === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomData[0].key_needed === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentRestroom"> Describe the restroom(s): </label><input type="text" class="form-control" id="commentRestroom" name="commentRestroom" value="'+restroomData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsRestroom"> Recommendations: </label><input type="text" class="form-control" id="recommendationsRestroom" name="recommendationsRestroom" value="'+restroomData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="restroom_id" value="'+restroomData[0].restroom_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idRestroom" value="'+restroomData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_restroom" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Restroom</button>\n' +
+        '            </div>\n' +
+        '        </div>\n'+
+        '   </form>';
+
+    $('#restroom_card').html(bodyHtml);
+
+    $("#restroom_view").validate({
+        rules: {
+            commentRestroom: {
+                maxlength: 5000
+            },
+            recommendationsRestroom: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            commentRestroom:  " Must be less than 5000 characters.",
+            recommendationsRestroom: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateRestroom();
+        }
+    });
+
+}
+
 function updateRestroom() {
     var restroom_id = document.getElementById("restroom_id").value;
     var public_restroom = document.getElementById("public_restroom").value;
@@ -2716,13 +5376,11 @@ function updateRestroom() {
     });
 }
 
-function editRestroomInfo(index) {
-    // console.log("index: " + index);
-    INDEX = index;
-    var rest_info_id = document.getElementById("rest_info_id_"+index).value;
+function RestroomInfoView() {
+    var restroomInfoData = "";
+    var restroomData = "";
 
-    // console.log("rest_info_id: " + rest_info_id);
-    // console.log("INDEX: " + INDEX);
+    $('#restroom_info_card').empty();
 
     $.ajax({
         async: false,
@@ -2730,212 +5388,687 @@ function editRestroomInfo(index) {
         method: "GET",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        url: "get/restroom_info/" + rest_info_id,
+        url: "/get/restroom/est/" + EST_ID,
         success: function (data) {
-            // console.log(JSON.stringify(data));
-            var rest_info_id = data[0].rest_info_id;
-            var restroom_desc = data[0].restroom_desc;
-            var easy_open = data[0].easy_open;
-            var lbs_force = data[0].lbs_force;
-            var clearance = data[0].clearance;
-            var opening = data[0].opening;
-            var opens_out = data[0].opens_out;
-            var use_fist = data[0].use_fist;
-            var can_turn_around = data[0].can_turn_around;
-            var turn_width = data[0].turn_width;
-            var turn_depth = data[0].turn_depth;
-            var close_chair_inside = data[0].close_chair_inside;
-            var grab_bars = data[0].grab_bars;
-            var seat_height_req = data[0].seat_height_req;
-            var seat_height = data[0].seat_height;
-            var flush_auto_fist = data[0].flush_auto_fist;
-            var ambulatory_accessible = data[0].ambulatory_accessible;
-            var bar_height = data[0].bar_height;
-            var coat_hook = data[0].coat_hook;
-            var hook_height = data[0].hook_height;
-            var sink = data[0].sink;
-            var sink_height = data[0].sink_height;
-            var faucet = data[0].faucet;
-            var faucet_depth = data[0].faucet_depth;
-            var faucet_auto_fist = data[0].faucet_auto_fist;
-            var sink_clearance = data[0].sink_clearance;
-            var sink_clearance_height = data[0].sink_clearance_height;
-            var sink_pipes = data[0].sink_pipes;
-            var soap_dispenser = data[0].soap_dispenser;
-            var soap_height = data[0].soap_height;
-            var dry_fist = data[0].dry_fist;
-            var dry_fist_type = data[0].dry_fist_type;
-            var dry_controls = data[0].dry_controls;
-            var dry_control_height = data[0].dry_control_height;
-            var mirror = data[0].mirror;
-            var mirror_height = data[0].mirror_height;
-            var shelves = data[0].shelves;
-            var shelf_height = data[0].shelf_height;
-            var trash_receptacles = data[0].trash_receptacles;
-            var hygiene_seat_cover = data[0].hygiene_seat_cover;
-            var hygiene_cover_height = data[0].hygiene_cover_height;
-            var lighting = data[0].lighting;
-            var lighting_type = data[0].lighting_type;
-            var comment = data[0].comment;
-            var recommendations = data[0].recommendations;
-            var rest_id = data[0].rest_id;
-
-            $("#restroom-body").html(
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="restroom_descEdit"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input class="form-control" id="restroom_descEdit" value="'+restroom_desc+'" ></div>\n' +
-                '   <div class="col-6"><label for="easy_openEdit">  Room door is easy to open, requiring 5 lb. or less force: </label> <input class="form-control" id="easy_openEdit" value="'+easy_open+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="lbs_forceEdit"> Actual force - lbs. or light/ med/ heavy: </label> <input class="form-control" id="lbs_forceEdit" value="'+lbs_force+'" ></div>\n' +
-                '   <div class="col-6"><label for="clearanceEdit"> Stall/Room door has at least 32” clearance when the door is open: </label> <input class="form-control" id="clearanceEdit" value="'+clearance+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="openingEdit"> Opening measurement (inches): </label> <input class="form-control" id="openingEdit" value="'+opening+'" ></div>\n' +
-                '   <div class="col-6"><label for="opens_outEdit"> The stall door opens to the outside: </label><input class="form-control" id="opens_outEdit" value="'+opens_out+'"></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="use_fistEdit"> The stall door can be opened, closed, and latched with a closed fist: </label><input class="form-control" id="use_fistEdit" value="'+use_fist+'"></div>\n' +
-                '   <div class="col-6"><label for="can_turn_aroundEdit"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <input class="form-control" id="can_turn_aroundEdit" value="'+can_turn_around+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="turn_widthEdit"> Stall/Room width (inches)​: </label> <input class="form-control" id="turn_widthEdit" value="'+turn_width+'" ></div>\n' +
-                '   <div class="col-6"><label for="turn_depthEdit"> Stall/Room depth (inches)​: </label> <input class="form-control" id="turn_depthEdit" value="'+turn_depth+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="close_chair_insideEdit"> The stall/room door can be closed once a wheelchair is inside: </label> <input class="form-control" id="close_chair_insideEdit" value="'+close_chair_inside+'" ></div>\n' +
-                '   <div class="col-6"><label for="grab_barsEdit"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <input class="form-control" id="grab_barsEdit" value="'+grab_bars+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="seat_height_reqEdit"> The height of the toilet seat is at least 17” from the floor: </label><input class="form-control" id="seat_height_reqEdit" value="'+seat_height_req+'"></div>\n' +
-                '   <div class="col-6"><label for="seat_heightEdit"> Seat height (inches): </label><input class="form-control" id="seat_heightEdit" value="'+seat_height+'"></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="flush_auto_fistEdit"> The toilet flushes automatically, or can be operated with a closed fist: </label><input class="form-control" id="flush_auto_fistEdit" value="'+flush_auto_fist+'"></div>\n' +
-                '   <div class="col-6"><label for="ambulatory_accessibleEdit"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <input class="form-control" id="ambulatory_accessibleEdit" value="'+ambulatory_accessible+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="bar_heightEdit"> Toilet height (inches): </label><input class="form-control" id="bar_heightEdit" value="'+bar_height+'"></div>\n' +
-                '   <div class="col-6"><label for="coat_hookEdit"> If there is a coat hook, it is between 35” and 48” from the floor: </label><input class="form-control" id="coat_hookEdit" value="'+coat_hook+'"></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="hook_heightEdit"> Hook height (inches): </label> <input class="form-control" id="hook_heightEdit" value="'+hook_height+'" ></div>\n' +
-                '   <div class="col-6"><label for="sinkEdit"> The height of the sink/countertop is 34” or less from the floor: </label><input class="form-control" id="sinkEdit" value="'+sink+'"></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="sink_heightEdit"> Sink/Countertop height (inches): </label> <input class="form-control" id="sink_heightEdit" value="'+sink_height+'" ></div>\n' +
-                '   <div class="col-6"><label for="faucetEdit"> The faucet control is 17” or less from the front edge of the sink counter: </label><input class="form-control" id="faucetEdit" value="'+faucet+'"></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="faucet_depthEdit"> Faucet depth (inches): </label> <input class="form-control" id="faucet_depthEdit" value="'+faucet_depth+'" ></div>\n' +
-                '   <div class="col-6"><label for="faucet_auto_fistEdit"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <input class="form-control" id="faucet_auto_fistEdit" value="'+faucet_auto_fist+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="sink_clearanceEdit"> There is room for a wheelchair to roll under the sink ​: </label><input class="form-control" id="sink_clearanceEdit" value="'+sink_clearance+'"></div>\n' +
-                '   <div class="col-6"><label for="sink_clearance_heightEdit"> Measurement (inches): </label> <input class="form-control" id="sink_clearance_heightEdit" value="'+sink_clearance_height+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-4"><label for="sink_pipesEdit"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <input class="form-control" id="sink_pipesEdit" value="'+sink_pipes+'" ></div>\n' +
-                '   <div class="col-4"><label for="soap_dispenserEdit"> The height of the soap dispenser control is 48” or less from the floor: </label> <input class="form-control" id="soap_dispenserEdit" value="'+soap_dispenser+'" ></div>\n' +
-                '   <div class="col-4"><label for="soap_heightEdit">  Soap dispenser height (inches): </label> <input class="form-control" id="soap_heightEdit" value="'+soap_height+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="dry_fistEdit">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <input class="form-control" id="dry_fistEdit" value="'+dry_fist+'" ></div>\n' +
-                '   <div class="col-6"><label for="dry_fist_typeEdit"> Type Hand dryer/Towel dispenser: </label> <input class="form-control" id="dry_fist_typeEdit" value="'+dry_fist_type+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="dry_controlsEdit"> Operation type - automatic/closed fist: </label> <input class="form-control" id="dry_controlsEdit" value="'+dry_controls+'" ></div>\n' +
-                '   <div class="col-6"><label for="dry_control_heightEdit"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <input class="form-control" id="dry_control_heightEdit" value="'+dry_control_height+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="mirrorEdit"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <input class="form-control" id="mirrorEdit" value="'+mirror+'" ></div>\n' +
-                '   <div class="col-6"><label for="mirror_heightEdit"> Mirror height (inches): </label><input class="form-control" id="mirror_heightEdit" value="'+mirror_height+'"></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="shelvesEdit"> If there are shelves to set items, they are 48” or less from the floor: </label><input class="form-control" id="shelvesEdit" value="'+shelves+'"></div>\n' +
-                '   <div class="col-6"><label for="shelf_heightEdit"> Shelf height (inches): </label> <input class="form-control" id="shelf_heightEdit" value="'+shelf_height+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-6"><label for="trash_receptaclesEdit"> Trash receptacles are positioned so they do not block the route to the door​: </label> <input class="form-control" id="trash_receptaclesEdit" value="'+trash_receptacles+'" ></div>\n' +
-                '   <div class="col-6"><label for="hygiene_seat_coverEdit"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <input class="form-control" id="hygiene_seat_coverEdit" value="'+hygiene_seat_cover+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '   <div class="col-4"><label for="hygiene_cover_heightEdit"> Height (inches): </label> <input class="form-control" id="hygiene_cover_heightEdit" value="'+hygiene_cover_height+'" ></div>\n' +
-                '   <div class="col-4"><label for="lightingRestroomInfoEdit"> Lighting is adequate: </label><input class="form-control" id="lightingRestroomInfoEdit" value="'+lighting+'" ></div>\n' +
-                '   <div class="col-4"><label for="lighting_typeRestroomInfoEdit"> Lighting level low/medium/bright: </label><input class="form-control" id="lighting_typeRestroomInfoEdit" value="'+lighting_type+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '    <div class="col-12"><label for="commentRestroomInfoEdit"> Additional notes: </label><input class="form-control" id="commentRestroomInfoEdit" value="'+comment+'" ></div>\n' +
-                '</div>\n' +
-                '<div class="card-row">\n' +
-                '    <div class="col-12"><label for="recommendationsRestroomInfoEdit"> Recommendations: </label><input class="form-control" id="recommendationsRestroomInfoEdit" value="'+recommendations+'" ></div>\n' +
-                '   <input type="hidden" class="form-control" id="rest_info_idEdit" value="'+rest_info_id+'">\n'+
-                '   <input type="hidden" class="form-control" id="rest_idEdit" value="'+rest_id+'">\n'+
-                '</div>'
-            );
-
-            $("#restroom-footer").html(
-                '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>\n' +
-                '&nbsp;\n' +
-                '<button type="button" class="btn btn-success" onclick="updateRestroomInfo()"><i class="fas fa-save"></i>&nbsp; Save</button>'
-            );
-
-            $("#restroom-modal").modal('toggle');
+            restroomData = data;
         },
         error: function (data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
             $("#alert").modal('toggle');
         }
     });
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/restroom_info/rest/" + restroomData[0].restroom_id,
+        success: function (data) {
+            restroomInfoData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = ' <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '               <button  type="button" id="add_restroom" class="btn btn-warning" onclick="addRestroomInfoView('+restroomData[0].restroom_id+')"><i class="far fa-plus-square"></i>&nbsp; Add Restroom</button></div>\n' +
+        '            </div>\n';
+
+    for (var i = 0; i < restroomInfoData.length; i++) {
+        bodyHtml += '<form id="restroom_info_view_'+restroomInfoData[i].rest_info_id+'">\n ' +
+        '              <div class="card-row">\n' +
+        '                <div class="hr-restroom col-12"></div>\n' +
+        '              </div>\n';
+
+        if (restroomInfoData.length > 1) {
+            bodyHtml += ' <div class="card-row">\n' +
+                '            <div class="col-4 h9">\n' +
+                '                <label for="restroom_number"> Restroom Number: ' + (i + 1) + '</label>\n' +
+                '        </div>\n';
+        }
+
+        bodyHtml += '</div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-4"><label for="restroom_desc_'+restroomInfoData[i].rest_info_id+'" > Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" id="restroom_desc_'+restroomInfoData[i].rest_info_id+'" name="restroom_desc_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].restroom_desc+'" ></div>\n' +
+            '            <div class="col-4"><label for="easy_open_'+restroomInfoData[i].rest_info_id+'" >  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" id="easy_open_'+restroomInfoData[i].rest_info_id+'"  name="easy_open_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].easy_open === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].easy_open === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="lbs_force_'+restroomInfoData[i].rest_info_id+'" > Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" id="lbs_force_'+restroomInfoData[i].rest_info_id+'" name="lbs_force_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].lbs_force+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="clearance_'+restroomInfoData[i].rest_info_id+'"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" id="clearance_'+restroomInfoData[i].rest_info_id+'" name="clearance_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].clearance === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].clearance === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="opening_'+restroomInfoData[i].rest_info_id+'"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" id="opening_'+restroomInfoData[i].rest_info_id+'" name="opening_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].opening+'" ></div>\n' +
+            '            <div class="col-3"><label for="opens_out_'+restroomInfoData[i].rest_info_id+'"> The stall door opens to the outside: </label><select class="form-control" id="opens_out_'+restroomInfoData[i].rest_info_id+'" name="opens_out_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].opens_out === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].opens_out === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="use_fist_'+restroomInfoData[i].rest_info_id+'"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" id="use_fist_'+restroomInfoData[i].rest_info_id+'" name="use_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].use_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].use_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="can_turn_around_'+restroomInfoData[i].rest_info_id+'"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" id="can_turn_around_'+restroomInfoData[i].rest_info_id+'" name="can_turn_around_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].can_turn_around === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].can_turn_around === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="turn_width_'+restroomInfoData[i].rest_info_id+'"> Stall/Room width (inches)​: </label> <input type="number" min="0" class="form-control" id="turn_width_'+restroomInfoData[i].rest_info_id+'" name="turn_width_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].turn_width+'" ></div>\n' +
+            '            <div class="col-3"><label for="turn_depth_'+restroomInfoData[i].rest_info_id+'"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" id="turn_depth_'+restroomInfoData[i].rest_info_id+'" name="turn_depth_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].turn_depth+'" ></div>\n' +
+            '            <div class="col-3"><label for="close_chair_inside_'+restroomInfoData[i].rest_info_id+'"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" id="close_chair_inside_'+restroomInfoData[i].rest_info_id+'" name="close_chair_inside_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].close_chair_inside === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].close_chair_inside === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="grab_bars_'+restroomInfoData[i].rest_info_id+'"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" id="grab_bars_'+restroomInfoData[i].rest_info_id+'" name="grab_bars_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].grab_bars === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].grab_bars === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="seat_height_req_'+restroomInfoData[i].rest_info_id+'"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" id="seat_height_req_'+restroomInfoData[i].rest_info_id+'" name="seat_height_req_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].seat_height_req === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].seat_height_req === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="seat_height_'+restroomInfoData[i].rest_info_id+'"> Seat height (inches): </label><input type="number" min="0" class="form-control" id="seat_height_'+restroomInfoData[i].rest_info_id+'" name="seat_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].seat_height+'" ></div>\n' +
+            '            <div class="col-3"><label for="flush_auto_fist_'+restroomInfoData[i].rest_info_id+'"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" id="flush_auto_fist_'+restroomInfoData[i].rest_info_id+'" name="flush_auto_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].flush_auto_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].flush_auto_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="ambulatory_accessible_'+restroomInfoData[i].rest_info_id+'"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" id="ambulatory_accessible_'+restroomInfoData[i].rest_info_id+'" name="ambulatory_accessible_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].ambulatory_accessible === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].ambulatory_accessible === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="bar_height_'+restroomInfoData[i].rest_info_id+'"> Toilet height (inches): </label><input type="number" min="0" class="form-control" id="bar_height_'+restroomInfoData[i].rest_info_id+'" name="bar_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].bar_height+'" ></div>\n' +
+            '            <div class="col-3"><label for="coat_hook_'+restroomInfoData[i].rest_info_id+'"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" id="coat_hook_'+restroomInfoData[i].rest_info_id+'" name="coat_hook_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].coat_hook === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].coat_hook === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="hook_height_'+restroomInfoData[i].rest_info_id+'"> Hook height (inches): </label> <input type="number" min="0" class="form-control" id="hook_height_'+restroomInfoData[i].rest_info_id+'" name="hook_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].hook_height+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="sink_'+restroomInfoData[i].rest_info_id+'"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" id="sink_'+restroomInfoData[i].rest_info_id+'" name="sink_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].sink === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].sink === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="sink_height_'+restroomInfoData[i].rest_info_id+'"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" id="sink_height_'+restroomInfoData[i].rest_info_id+'" name="sink_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].sink_height+'" ></div>\n' +
+            '            <div class="col-3"><label for="faucet_'+restroomInfoData[i].rest_info_id+'"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" id="faucet_'+restroomInfoData[i].rest_info_id+'" name="faucet_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].faucet === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].faucet === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="faucet_depth_'+restroomInfoData[i].rest_info_id+'"> Faucet depth (inches): </label> <input type="number" min="0" class="form-control" id="faucet_depth_'+restroomInfoData[i].rest_info_id+'" name="faucet_depth_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].faucet_depth+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-4"><label for="faucet_auto_fist_'+restroomInfoData[i].rest_info_id+'"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" id="faucet_auto_fist_'+restroomInfoData[i].rest_info_id+'" name="faucet_auto_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].faucet_auto_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].faucet_auto_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="sink_clearance_'+restroomInfoData[i].rest_info_id+'"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" id="sink_clearance_'+restroomInfoData[i].rest_info_id+'" name="sink_clearance_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].sink_clearance === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].sink_clearance === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="sink_clearance_height_'+restroomInfoData[i].rest_info_id+'"> Measurement (inches): </label> <input type="number" min="0" class="form-control" id="sink_clearance_height_'+restroomInfoData[i].rest_info_id+'" name="sink_clearance_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].sink_clearance_height+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-4"><label for="sink_pipes_'+restroomInfoData[i].rest_info_id+'"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" id="sink_pipes_'+restroomInfoData[i].rest_info_id+'" name="sink_pipes_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].sink_pipes === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].sink_pipes === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="soap_dispenser_'+restroomInfoData[i].rest_info_id+'"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" id="soap_dispenser_'+restroomInfoData[i].rest_info_id+'" name="soap_dispenser_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].soap_dispenser === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].soap_dispenser === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="soap_height_'+restroomInfoData[i].rest_info_id+'">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" id="soap_height_'+restroomInfoData[i].rest_info_id+'" name="soap_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].soap_height+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="dry_fist_'+restroomInfoData[i].rest_info_id+'">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" id="dry_fist_'+restroomInfoData[i].rest_info_id+'" name="dry_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].dry_fist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].dry_fist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="dry_fist_type_'+restroomInfoData[i].rest_info_id+'"> Type Hand Dryer/Towel Dispenser: </label> <select class="form-control" id="dry_fist_type_'+restroomInfoData[i].rest_info_id+'" name="dry_fist_type_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].dry_fist_type === "Hand Dryer") {
+                                bodyHtml += '<option value="Hand Dryer" selected>&nbsp; Hand Dryer</option>\n' +
+                                    '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].dry_fist_type === "Hand Dryer") {
+                                bodyHtml += '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n' +
+                                    '<option value="Hand Dryer" selected>&nbsp; Hand Dryer</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n' +
+                                    '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="dry_controls_'+restroomInfoData[i].rest_info_id+'"> Operation type - Automatic/Closed Fist: </label> <select class="form-control" id="dry_controls_'+restroomInfoData[i].rest_info_id+'" name="dry_controls_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].dry_controls === "Automatic") {
+                                bodyHtml += '<option value="Automatic" selected>&nbsp; Automatic</option>\n' +
+                                    '<option value="Closed Fist" >&nbsp; Closed Fist</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].dry_controls === "Closed Fist") {
+                                bodyHtml += '<option value="Automatic" >&nbsp; Automatic</option>\n' +
+                                    '<option value="Closed Fist" selected>&nbsp; Closed Fist</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Automatic" >&nbsp; Automatic</option>\n' +
+                                    '<option value="Closed Fist" >&nbsp; Closed Fist</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="dry_control_height_'+restroomInfoData[i].rest_info_id+'"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" id="dry_control_height_'+restroomInfoData[i].rest_info_id+'" name="dry_control_height_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].dry_control_height === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].dry_control_height === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-3"><label for="mirror_'+restroomInfoData[i].rest_info_id+'"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" id="mirror_'+restroomInfoData[i].rest_info_id+'" name="mirror_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].mirror === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].mirror === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="mirror_height_'+restroomInfoData[i].rest_info_id+'"> Mirror height (inches): </label><input type="number" min="0" class="form-control" id="mirror_height_'+restroomInfoData[i].rest_info_id+'" name="mirror_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].mirror_height+'" ></div>\n' +
+            '            <div class="col-3"><label for="shelves_'+restroomInfoData[i].rest_info_id+'"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" id="shelves_'+restroomInfoData[i].rest_info_id+'" name="shelves_'+restroomInfoData[i].rest_info_id+'"  >\n';
+
+                            if (restroomInfoData[0].shelves === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].shelves === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-3"><label for="shelf_height_'+restroomInfoData[i].rest_info_id+'"> Shelf height (inches): </label> <input type="number" min="0" class="form-control" id="shelf_height_'+restroomInfoData[i].rest_info_id+'" name="shelf_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].shelf_height+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-4"><label for="trash_receptacles_'+restroomInfoData[i].rest_info_id+'"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" id="trash_receptacles_'+restroomInfoData[i].rest_info_id+'" name="trash_receptacles_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].trash_receptacles === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].trash_receptacles === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="hygiene_seat_cover_'+restroomInfoData[i].rest_info_id+'"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" id="hygiene_seat_cover_'+restroomInfoData[i].rest_info_id+'" name="hygiene_seat_cover_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                            if (restroomInfoData[0].hygiene_seat_cover === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (restroomInfoData[0].hygiene_seat_cover === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+            '            <div class="col-4"><label for="hygiene_cover_height_'+restroomInfoData[i].rest_info_id+'"> Height (inches): </label> <input type="number" min="0" class="form-control" id="hygiene_cover_height_'+restroomInfoData[i].rest_info_id+'" name="hygiene_cover_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].hygiene_cover_height+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="lightingRestroomInfo_'+restroomInfoData[i].rest_info_id+'"> Lighting is adequate: </label><select class="form-control" id="lightingRestroomInfo_'+restroomInfoData[i].rest_info_id+'" name="lightingRestroomInfo_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                                if (restroomInfoData[0].lighting === "Yes") {
+                                    bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                        '<option value="No" >&nbsp; No</option>\n ' +
+                                        '<option value="N/A" >&nbsp; N/A</option>';
+                                }
+                                else if (restroomInfoData[0].lighting === "No") {
+                                    bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                        '<option value="No" selected>&nbsp; No</option>\n ' +
+                                        '<option value="N/A" >&nbsp; N/A</option>';
+                                } else {
+                                    bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                        '<option value="No" >&nbsp; No</option>\n ' +
+                                        '<option value="N/A" selected>&nbsp; N/A</option>';
+                                }
+
+        bodyHtml += '       </select>\n' +
+            '           </div>\n' +
+            '            <div class="col-6"><label for="lighting_typeRestroomInfo_'+restroomInfoData[i].rest_info_id+'"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeRestroomInfo_'+restroomInfoData[i].rest_info_id+'" name="lighting_typeRestroomInfo_'+restroomInfoData[i].rest_info_id+'" >\n';
+
+                                if (restroomInfoData[0].lighting_type === "Low") {
+                                    bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                        '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                        '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                        '<option value="N/A" >&nbsp; N/A</option>';
+                                }
+                                else if (restroomInfoData[0].lighting_type === "Medium") {
+                                    bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                        '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                        '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                        '<option value="N/A" >&nbsp; N/A</option>';
+                                }
+                                else if (restroomInfoData[0].lighting_type === "Bright") {
+                                    bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                        '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                        '<option value="Bright" selected>&nbsp; Bright</option>\n' +
+                                        '<option value="N/A" >&nbsp; N/A</option>';
+                                } else {
+                                    bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                        '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                        '<option value="Bright" >&nbsp; Bright</option>\n' +
+                                        '<option value="N/A" selected>&nbsp; N/A</option>';
+                                }
+
+        bodyHtml += '       </select>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-12"><label for="commentRestroomInfo_'+restroomInfoData[i].rest_info_id+'"> Additional notes: </label><input type="text" class="form-control" id="commentRestroomInfo_'+restroomInfoData[i].rest_info_id+'" name="commentRestroomInfo_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].comment+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <div class="col-12"><label for="recommendationsRestroomInfo_'+restroomInfoData[i].rest_info_id+'"> Recommendations: </label><input type="text" class="form-control" id="recommendationsRestroomInfo_'+restroomInfoData[i].rest_info_id+'" name="recommendationsRestroomInfo_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].recommendations+'" ></div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row">\n' +
+            '            <input type="hidden" class="form-control" id="rest_info_id_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].rest_info_id+'" >\n' +
+            '            <input type="hidden" class="form-control" id="rest_id_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].rest_id+'" >\n' +
+            '            <input type="hidden" class="form-control" id="restroom_num_'+restroomInfoData[i].rest_info_id+'" value="'+(i+1)+'" >\n' +
+            '            <div class="col-10">\n' +
+            '                <button type="button" id="update_restroom_'+restroomInfoData[i].rest_info_id+'" class="btn btn-success" onclick="updateRestroomInfo('+restroomInfoData[i].rest_info_id+')"><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;\n' +
+            '                <button type="button" id="delete_restroom_'+restroomInfoData[i].rest_info_id+'" class="btn btn-danger" onclick="deleteRestroomInfo('+restroomInfoData[i].rest_info_id+')"><i class="fas fa-trash-alt"></i>&nbsp; Delete Restroom Information</button>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '        <div class="card-row-spacer">\n' +
+            '            &nbsp;\n' +
+            '        </div>\n';
+
+        bodyHtml += '</div>\n' +
+            '   </form>';
+    }
+
+    $('#restroom_info_card').html(bodyHtml);
+
 }
 
-function updateRestroomInfo() {
-    $("#restroom-modal").modal('toggle');
+function updateRestroomInfo(curr_rest_info_id) {
 
-    var rest_info_id = document.getElementById("rest_info_idEdit").value;
-    var restroom_desc = document.getElementById("restroom_descEdit").value;
-    var easy_open = document.getElementById("easy_openEdit").value;
-    var lbs_force = document.getElementById("lbs_forceEdit").value;
-    var clearance = document.getElementById("clearanceEdit").value;
-    var opening = document.getElementById("openingEdit").value;
-    var opens_out = document.getElementById("opens_outEdit").value;
-    var use_fist = document.getElementById("use_fistEdit").value;
-    var can_turn_around = document.getElementById("can_turn_aroundEdit").value;
-    var turn_width = document.getElementById("turn_widthEdit").value;
-    var turn_depth = document.getElementById("turn_depthEdit").value;
-    var close_chair_inside = document.getElementById("close_chair_insideEdit").value;
-    var grab_bars = document.getElementById("grab_barsEdit").value;
-    var seat_height_req = document.getElementById("seat_height_reqEdit").value;
-    var seat_height = document.getElementById("seat_heightEdit").value;
-    var flush_auto_fist = document.getElementById("flush_auto_fistEdit").value;
-    var ambulatory_accessible = document.getElementById("ambulatory_accessibleEdit").value;
-    var bar_height = document.getElementById("bar_heightEdit").value;
-    var coat_hook = document.getElementById("coat_hookEdit").value;
-    var hook_height = document.getElementById("hook_heightEdit").value;
-    var sink = document.getElementById("sinkEdit").value;
-    var sink_height = document.getElementById("sink_heightEdit").value;
-    var faucet = document.getElementById("faucetEdit").value;
-    var faucet_depth = document.getElementById("faucet_depthEdit").value;
-    var faucet_auto_fist = document.getElementById("faucet_auto_fistEdit").value;
-    var sink_clearance = document.getElementById("sink_clearanceEdit").value;
-    var sink_clearance_height = document.getElementById("sink_clearance_heightEdit").value;
-    var sink_pipes = document.getElementById("sink_pipesEdit").value;
-    var soap_dispenser = document.getElementById("soap_dispenserEdit").value;
-    var dry_fist = document.getElementById("dry_fistEdit").value;
-    var dry_fist_type = document.getElementById("dry_fist_typeEdit").value;
-    var dry_controls = document.getElementById("dry_controlsEdit").value;
-    var dry_control_height = document.getElementById("dry_control_heightEdit").value;
-    var mirror = document.getElementById("mirrorEdit").value;
-    var mirror_height = document.getElementById("mirror_heightEdit").value;
-    var shelves = document.getElementById("shelvesEdit").value;
-    var shelf_height = document.getElementById("shelf_heightEdit").value;
-    var trash_receptacles = document.getElementById("trash_receptaclesEdit").value;
-    var hygiene_seat_cover = document.getElementById("hygiene_seat_coverEdit").value;
-    var hygiene_cover_height = document.getElementById("hygiene_cover_heightEdit").value;
-    var lighting = document.getElementById("lightingRestroomInfoEdit").value;
-    var lighting_type = document.getElementById("lighting_typeRestroomInfoEdit").value;
-    var comment = document.getElementById("commentRestroomInfoEdit").value;
-    var recommendations = document.getElementById("recommendationsRestroomInfoEdit").value;
-    var rest_id = document.getElementById("rest_idEdit").value;
+    var restroom_desc = document.getElementById("restroom_desc_"+curr_rest_info_id).value;
+    var easy_open = document.getElementById("easy_open_"+curr_rest_info_id).value;
+    var lbs_force = document.getElementById("lbs_force_"+curr_rest_info_id).value;
+    var clearance = document.getElementById("clearance_"+curr_rest_info_id).value;
+    var opening = document.getElementById("opening_"+curr_rest_info_id).value;
+    var opens_out = document.getElementById("opens_out_"+curr_rest_info_id).value;
+    var use_fist = document.getElementById("use_fist_"+curr_rest_info_id).value;
+    var can_turn_around = document.getElementById("can_turn_around_"+curr_rest_info_id).value;
+    var turn_width = document.getElementById("turn_width_"+curr_rest_info_id).value;
+    var turn_depth = document.getElementById("turn_depth_"+curr_rest_info_id).value;
+    var close_chair_inside = document.getElementById("close_chair_inside_"+curr_rest_info_id).value;
+    var grab_bars = document.getElementById("grab_bars_"+curr_rest_info_id).value;
+    var seat_height_req = document.getElementById("seat_height_req_"+curr_rest_info_id).value;
+    var seat_height = document.getElementById("seat_height_"+curr_rest_info_id).value;
+    var flush_auto_fist = document.getElementById("flush_auto_fist_"+curr_rest_info_id).value;
+    var ambulatory_accessible = document.getElementById("ambulatory_accessible_"+curr_rest_info_id).value;
+    var bar_height = document.getElementById("bar_height_"+curr_rest_info_id).value;
+    var coat_hook = document.getElementById("coat_hook_"+curr_rest_info_id).value;
+    var hook_height = document.getElementById("hook_height_"+curr_rest_info_id).value;
+    var sink = document.getElementById("sink_"+curr_rest_info_id).value;
+    var sink_height = document.getElementById("sink_height_"+curr_rest_info_id).value;
+    var faucet = document.getElementById("faucet_"+curr_rest_info_id).value;
+    var faucet_depth = document.getElementById("faucet_depth_"+curr_rest_info_id).value;
+    var faucet_auto_fist = document.getElementById("faucet_auto_fist_"+curr_rest_info_id).value;
+    var sink_clearance = document.getElementById("sink_clearance_"+curr_rest_info_id).value;
+    var sink_clearance_height = document.getElementById("sink_clearance_height_"+curr_rest_info_id).value;
+    var sink_pipes = document.getElementById("sink_pipes_"+curr_rest_info_id).value;
+    var soap_dispenser = document.getElementById("soap_dispenser_"+curr_rest_info_id).value;
+    var dry_fist = document.getElementById("dry_fist_"+curr_rest_info_id).value;
+    var dry_fist_type = document.getElementById("dry_fist_type_"+curr_rest_info_id).value;
+    var dry_controls = document.getElementById("dry_controls_"+curr_rest_info_id).value;
+    var dry_control_height = document.getElementById("dry_control_height_"+curr_rest_info_id).value;
+    var mirror = document.getElementById("mirror_"+curr_rest_info_id).value;
+    var mirror_height = document.getElementById("mirror_height_"+curr_rest_info_id).value;
+    var shelves = document.getElementById("shelves_"+curr_rest_info_id).value;
+    var shelf_height = document.getElementById("shelf_height_"+curr_rest_info_id).value;
+    var trash_receptacles = document.getElementById("trash_receptacles_"+curr_rest_info_id).value;
+    var hygiene_seat_cover = document.getElementById("hygiene_seat_cover_"+curr_rest_info_id).value;
+    var hygiene_cover_height = document.getElementById("hygiene_cover_height_"+curr_rest_info_id).value;
+    var lighting = document.getElementById("lightingRestroomInfo_"+curr_rest_info_id).value;
+    var lighting_type = document.getElementById("lighting_typeRestroomInfo_"+curr_rest_info_id).value;
+    var comment = document.getElementById("commentRestroomInfo_"+curr_rest_info_id).value;
+    var recommendations = document.getElementById("recommendationsRestroomInfo_"+curr_rest_info_id).value;
+    var rest_id = document.getElementById("rest_id_"+curr_rest_info_id).value;
 
     $.ajax({
         accepts: "application/json",
@@ -2943,7 +6076,7 @@ function updateRestroomInfo() {
         contentType: "application/json; charset=utf-8",
         url: "put/restroom_info/rest/" + rest_id,
         data: JSON.stringify({
-            "rest_info_id" : rest_info_id,
+            "rest_info_id" : curr_rest_info_id,
             "restroom_desc" : restroom_desc,
             "easy_open" : easy_open,
             "lbs_force" : lbs_force,
@@ -2992,49 +6125,6 @@ function updateRestroomInfo() {
             $("#success-body").html('Restroom Information Updated');
             $("#success").modal('toggle');
 
-            document.getElementById("restroom_desc_" + INDEX).value = restroom_desc;
-            document.getElementById("easy_open_" + INDEX).value = easy_open;
-            document.getElementById("lbs_force_" + INDEX).value = lbs_force;
-            document.getElementById("clearance_" + INDEX).value = clearance;
-            document.getElementById("opening_" + INDEX).value = opening;
-            document.getElementById("opens_out_" + INDEX).value = opens_out;
-            document.getElementById("use_fist_" + INDEX).value = use_fist;
-            document.getElementById("can_turn_around_" + INDEX).value = can_turn_around;
-            document.getElementById("turn_width_" + INDEX).value = turn_width;
-            document.getElementById("turn_depth_" + INDEX).value = turn_depth;
-            document.getElementById("close_chair_inside_" + INDEX).value = close_chair_inside;
-            document.getElementById("grab_bars_" + INDEX).value = grab_bars;
-            document.getElementById("seat_height_req_" + INDEX).value = seat_height_req;
-            document.getElementById("seat_height_" + INDEX).value = seat_height;
-            document.getElementById("flush_auto_fist_" + INDEX).value = flush_auto_fist;
-            document.getElementById("ambulatory_accessible_" + INDEX).value = ambulatory_accessible;
-            document.getElementById("bar_height_" + INDEX).value = bar_height;
-            document.getElementById("coat_hook_" + INDEX).value = coat_hook;
-            document.getElementById("hook_height_" + INDEX).value = hook_height;
-            document.getElementById("sink_" + INDEX).value = sink;
-            document.getElementById("sink_height_" + INDEX).value = sink_height;
-            document.getElementById("faucet_" + INDEX).value = faucet;
-            document.getElementById("faucet_depth_" + INDEX).value = faucet_depth;
-            document.getElementById("faucet_auto_fist_" + INDEX).value = faucet_auto_fist;
-            document.getElementById("sink_clearance_" + INDEX).value = sink_clearance;
-            document.getElementById("sink_clearance_height_" + INDEX).value = sink_clearance_height;
-            document.getElementById("sink_pipes_" + INDEX).value = sink_pipes;
-            document.getElementById("soap_dispenser_" + INDEX).value = soap_dispenser;
-            document.getElementById("dry_fist_" + INDEX).value = dry_fist;
-            document.getElementById("dry_fist_type_" + INDEX).value = dry_fist_type;
-            document.getElementById("dry_controls_" + INDEX).value = dry_controls;
-            document.getElementById("dry_control_height_" + INDEX).value = dry_control_height;
-            document.getElementById("mirror_" + INDEX).value = mirror;
-            document.getElementById("mirror_height_" + INDEX).value = mirror_height;
-            document.getElementById("shelves_" + INDEX).value = shelves;
-            document.getElementById("shelf_height_" + INDEX).value = shelf_height;
-            document.getElementById("trash_receptacles_" + INDEX).value = trash_receptacles;
-            document.getElementById("hygiene_seat_cover_" + INDEX).value = hygiene_seat_cover;
-            document.getElementById("hygiene_cover_height_" + INDEX).value = hygiene_cover_height;
-            document.getElementById("lightingRestroomInfo_" + INDEX).value = lighting;
-            document.getElementById("lighting_typeRestroomInfo_" + INDEX).value = lighting_type;
-            document.getElementById("commentRestroomInfo_" + INDEX).value = comment;
-            document.getElementById("recommendationsRestroomInfo_" + INDEX).value = recommendations;
         },
         error: function(data) {
             $("#alert-body").html(JSON.stringify(data));
@@ -3043,6 +6133,408 @@ function updateRestroomInfo() {
     });
 }
 
+function addRestroomInfoView(rest_id) {
+
+    $("#restroom-body").html(
+        '<form id="add_restroom_information"> \n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-12"><label for="restroom_desc"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" name="restroom_desc" id="restroom_desc" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" name="easy_open" id="easy_open" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="opening"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" name="opening" id="opening"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" name="opens_out" id="opens_out" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" name="use_fist" id="use_fist" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" name="can_turn_around" id="can_turn_around" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="turn_width"> Stall/Room width (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_width" id="turn_width"  ></div>\n' +
+        '   <div class="col-4"><label for="turn_depth"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_depth" id="turn_depth"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" name="close_chair_inside" id="close_chair_inside" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" name="grab_bars" id="grab_bars" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" name="seat_height_req" id="seat_height_req" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="seat_height"> Seat height (inches): </label><input type="number" min="0" class="form-control" name="seat_height" id="seat_height" ></div>\n' +
+        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" name="flush_auto_fist" id="flush_auto_fist" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" name="ambulatory_accessible" id="ambulatory_accessible" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="bar_height"> Toilet height (inches): </label><input type="number" min="0" class="form-control" name="bar_height" id="bar_height" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" name="coat_hook" id="coat_hook" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="num" min="0" class="form-control" name="hook_height" id="hook_height"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" name="sink" id="sink" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="sink_height"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" name="sink_height" id="sink_height" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" name="faucet" id="faucet" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="faucet_depth"> Faucet depth (inches): </label> <input type="number" min="0" class="form-control" name="faucet_depth" id="faucet_depth"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" name="faucet_auto_fist" id="faucet_auto_fist" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" name="sink_clearance" id="sink_clearance" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="sink_clearance_height"> Measurement (inches): </label> <input type="number" min="0" class="form-control" name="sink_clearance_height" id="sink_clearance_height"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" name="sink_pipes" id="sink_pipes" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" name="soap_dispenser" id="soap_dispenser" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-4"><label for="soap_height">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" name="soap_height" id="soap_height"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="dry_fist_type"> Type Hand dryer/Towel dispenser: </label> <select class="form-control" name="dry_fist_type" id="dry_fist_type" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Hand dryer" >Hand dryer</option>\n' +
+        '       <option value="Towel dispenser" >Towel dispenser</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="dry_controls"> Operation type - automatic/closed fist: </label> <select class="form-control" name="dry_controls" id="dry_controls" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Automatic" >Automatic</option>\n' +
+        '       <option value="Closed fist" >Closed fist</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" name="dry_control_height" id="dry_control_height" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" name="mirror" id="mirror" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="mirror_height"> Mirror height (inches): </label><input type="number" min="0" class="form-control" name="mirror_height" id="mirror_height" ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" name="shelves" id="shelves" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="shelf_height"> Shelf height (inches): </label> <input type="number" min="0" class="form-control" name="shelf_height" id="shelf_height"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" name="trash_receptacles" id="trash_receptacles" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" name="hygiene_seat_cover" id="hygiene_seat_cover" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '   <div class="col-4"><label for="hygiene_cover_height"> Height (inches): </label> <input type="number" min="0" class="form-control" name="hygiene_cover_height" id="hygiene_cover_height"  ></div>\n' +
+        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" name="lightingRestroomInfo" id="lightingRestroomInfo" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeRestroomInfo" id="lighting_typeRestroomInfo" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Low" >Low</option>\n' +
+        '       <option value="Medium" >Medium</option>\n' +
+        '       <option value="Bright" >Bright</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-12"><label for="commentRestroomInfo"> Additional notes: </label><input type="text" class="form-control" name="commentRestroomInfo" id="commentRestroomInfo"  ></div>\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-12"><label for="recommendationsRestroomInfo"> Recommendations: </label><input type="text" class="form-control" name="recommendationsRestroomInfo" id="recommendationsRestroomInfo"  ></div>\n' +
+        '</div>\n ' +
+        '<div class="card-row">\n' +
+        '   <div class="col-12">\n' +
+        '       <span>\n ' +
+        '           <button  type="button" id="save_restroom_information" class="btn btn-success" onclick="addRestroomInfo('+rest_id+')"><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;' +
+        '           <button  type="button" id="cancel_restroom_information" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n ' +
+        '       </span>\n' +
+        '   </div>\n ' +
+        '</div>\n ' +
+        '</form>'
+    );
+
+    $("#restroom-footer").html('');
+
+    $("#restroom-modal").modal('toggle');
+
+}
+
+function addRestroomInfo(rest_id) {
+
+    $("#restroom-modal").modal('toggle');
+
+    var restroom_desc = document.getElementById("restroom_desc").value;
+    var easy_open = document.getElementById("easy_open").value;
+    var lbs_force = document.getElementById("lbs_force").value;
+    var clearance = document.getElementById("clearance").value;
+    var opening = document.getElementById("opening").value;
+    var opens_out = document.getElementById("opens_out").value;
+    var use_fist = document.getElementById("use_fist").value;
+    var can_turn_around = document.getElementById("can_turn_around").value;
+    var turn_width = document.getElementById("turn_width").value;
+    var turn_depth = document.getElementById("turn_depth").value;
+    var close_chair_inside = document.getElementById("close_chair_inside").value;
+    var grab_bars = document.getElementById("grab_bars").value;
+    var seat_height_req = document.getElementById("seat_height_req").value;
+    var seat_height = document.getElementById("seat_height").value;
+    var flush_auto_fist = document.getElementById("flush_auto_fist").value;
+    var ambulatory_accessible = document.getElementById("ambulatory_accessible").value;
+    var bar_height = document.getElementById("bar_height").value;
+    var coat_hook = document.getElementById("coat_hook").value;
+    var hook_height = document.getElementById("hook_height").value;
+    var sink = document.getElementById("sink").value;
+    var sink_height = document.getElementById("sink_height").value;
+    var faucet = document.getElementById("faucet").value;
+    var faucet_depth = document.getElementById("faucet_depth").value;
+    var faucet_auto_fist = document.getElementById("faucet_auto_fist").value;
+    var sink_clearance = document.getElementById("sink_clearance").value;
+    var sink_clearance_height = document.getElementById("sink_clearance_height").value;
+    var sink_pipes = document.getElementById("sink_pipes").value;
+    var soap_dispenser = document.getElementById("soap_dispenser").value;
+    var soap_height = document.getElementById("soap_height").value;
+    var dry_fist = document.getElementById("dry_fist").value;
+    var dry_fist_type = document.getElementById("dry_fist_type").value;
+    var dry_controls = document.getElementById("dry_controls").value;
+    var dry_control_height = document.getElementById("dry_control_height").value;
+    var mirror = document.getElementById("mirror").value;
+    var mirror_height = document.getElementById("mirror_height").value;
+    var shelves = document.getElementById("shelves").value;
+    var shelf_height = document.getElementById("shelf_height").value;
+    var trash_receptacles = document.getElementById("trash_receptacles").value;
+    var hygiene_seat_cover = document.getElementById("hygiene_seat_cover").value;
+    var hygiene_cover_height = document.getElementById("hygiene_cover_height").value;
+    var lighting = document.getElementById("lightingRestroomInfo").value;
+    var lighting_type = document.getElementById("lighting_typeRestroomInfo").value;
+    var comment = document.getElementById("commentRestroomInfo").value;
+    var recommendations = document.getElementById("recommendationsRestroomInfo").value;
+
+    $.ajax({
+        accepts: "application/json",
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "post/restroom_info/",
+        data: JSON.stringify({
+            "restroom_desc" : restroom_desc,
+            "easy_open" : easy_open,
+            "lbs_force" : lbs_force,
+            "clearance" : clearance,
+            "opening" : opening,
+            "opens_out" : opens_out,
+            "use_fist" : use_fist,
+            "can_turn_around" : can_turn_around,
+            "turn_width" : turn_width,
+            "turn_depth" : turn_depth,
+            "close_chair_inside" : close_chair_inside,
+            "grab_bars" : grab_bars,
+            "seat_height_req" : seat_height_req,
+            "seat_height" : seat_height,
+            "flush_auto_fist" : flush_auto_fist,
+            "ambulatory_accessible" : ambulatory_accessible,
+            "bar_height" : bar_height,
+            "coat_hook" : coat_hook,
+            "hook_height" : hook_height,
+            "sink" : sink,
+            "sink_height" : sink_height,
+            "faucet" : faucet,
+            "faucet_depth" : faucet_depth,
+            "faucet_auto_fist" : faucet_auto_fist,
+            "sink_clearance" : sink_clearance,
+            "sink_clearance_height" : sink_clearance_height,
+            "sink_pipes" : sink_pipes,
+            "soap_dispenser" : soap_dispenser,
+            "soap_height" : soap_height,
+            "dry_fist" : dry_fist,
+            "dry_fist_type" : dry_fist_type,
+            "dry_controls" : dry_controls,
+            "dry_control_height" : dry_control_height,
+            "mirror" : mirror,
+            "mirror_height" : mirror_height,
+            "shelves" : shelves,
+            "shelf_height" : shelf_height,
+            "trash_receptacles" : trash_receptacles,
+            "hygiene_seat_cover" : hygiene_seat_cover,
+            "hygiene_cover_height" : hygiene_cover_height,
+            "lighting" : lighting,
+            "lighting_type" : lighting_type,
+            "comment" : comment,
+            "recommendations" : recommendations,
+            "rest_id" : rest_id
+        }),
+        success: function () {
+            $("#success-body").html('Restroom Information Added');
+            $("#success").modal('toggle');
+            RestroomInfoView();
+        },
+        error: function(data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+}
+
+function deleteRestroomInfo(rest_info_id) {
+    var restroom_num = document.getElementById('restroom_num_'+rest_info_id).value;
+    if(confirm('Are you sure you want to delete Restroom '+restroom_num+' Information?\nThis action can not be undone.')) {
+        $.ajax({
+            async: false,
+            method: 'DELETE',
+            url: 'delete/restroom_info/' + rest_info_id,
+            success: function () {
+                RestroomInfoView();
+            },
+            error: function (data) {
+                $("#alert-body").html(JSON.stringify(data));
+                $("#alert").modal('toggle');
+            }
+        });
+    }
+}
 
 function updateCommunication() {
     var communication_id = document.getElementById("communication_id").value;
