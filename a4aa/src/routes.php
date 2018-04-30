@@ -12,6 +12,7 @@ $app->get('/', function (Request $request, Response $response, array $args){
 })->setname("root");
 
 
+
 /**
  * ESTABLISHMENT ROUTES
  */
@@ -442,6 +443,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+
+
+
+
 /**
  * CATEGORY ROUTES
  */
@@ -579,6 +584,9 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+
+
+
 /**
  * CONFIGURATION ROUTES
  */
@@ -715,6 +723,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * USER ROUTES
@@ -1414,6 +1426,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+
+
+
+
 /**
  * ROUTE FROM PARKING ROUTES
  */
@@ -1591,13 +1607,13 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth = $this->db->prepare("INSERT INTO Route_From_Parking (distance, min_width, route_surface, route_curbs, tactile_warning, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
                                     VALUES (:distance, :min_width, :route_surface, :route_curbs, :tactile_warning, :covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
-    $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
     $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
     $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
-    $sth->bindParam(':route_curbs', $route_curbs, PDO::PARAM_INT);
-    $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_INT);
-    $sth->bindParam(':covered', $covered, PDO::PARAM_INT);
-    $sth->bindParam(':lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':route_curbs', $route_curbs, PDO::PARAM_STR);
+    $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
+    $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
+    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
     $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
     $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
@@ -1684,13 +1700,13 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                      recommendations = :Recommendations
                                                      WHERE route_park_id=$route_park_id AND park_id=$id");
 
-    $sth->bindParam(':Distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':Distance', $distance, PDO::PARAM_INT);
     $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
     $sth->bindParam(':Route_surface', $route_surface, PDO::PARAM_STR);
-    $sth->bindParam(':Route_curbs', $route_curbs, PDO::PARAM_INT);
-    $sth->bindParam(':Tactile_warning', $tactile_warning, PDO::PARAM_INT);
-    $sth->bindParam(':Covered', $covered, PDO::PARAM_INT);
-    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':Route_curbs', $route_curbs, PDO::PARAM_STR);
+    $sth->bindParam(':Tactile_warning', $tactile_warning, PDO::PARAM_STR);
+    $sth->bindParam(':Covered', $covered, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
     $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
@@ -1701,6 +1717,11 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
+
 
 /**
  * PASSENGER LOADING ROUTES
@@ -1880,7 +1901,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                     VALUES (:designated_zone, :distance, :min_width, :passenger_surface, :tactile_warning_strips, :covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
     $sth->bindParam(':designated_zone', $designated_zone, PDO::PARAM_STR);
-    $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
     $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
     $sth->bindParam(':passenger_surface', $passenger_surface, PDO::PARAM_STR);
     $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
@@ -1890,7 +1911,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
     $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
     $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-    $sth->bindParam(':park_id', $park_id, PDO::PARAM_STR);
+    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
     $sth->execute();
 
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
@@ -1973,12 +1994,12 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                      WHERE passenger_id=$passenger_id AND park_id=$id");
 
     $sth->bindParam(':Designated_zone', $designated_zone, PDO::PARAM_STR);
-    $sth->bindParam(':Distance', $distance, PDO::PARAM_STR);
+    $sth->bindParam(':Distance', $distance, PDO::PARAM_INT);
     $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
-    $sth->bindParam(':Passenger_surface', $passenger_surface, PDO::PARAM_INT);
-    $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_INT);
-    $sth->bindParam(':Covered', $covered, PDO::PARAM_INT);
-    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':Passenger_surface', $passenger_surface, PDO::PARAM_STR);
+    $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+    $sth->bindParam(':Covered', $covered, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
     $sth->bindParam(':Comment', $comment, PDO::PARAM_STR);
@@ -1989,6 +2010,11 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
+
 
 /**
  * STA BUS ROUTES
@@ -2199,10 +2225,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':sta_service_area', $sta_service_area, PDO::PARAM_STR);
     $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
     $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-    $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_INT);
-    $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_INT);
-    $sth->bindParam(':curb_cuts', $curb_cuts, PDO::PARAM_INT);
-    $sth->bindParam(':lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
+    $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+    $sth->bindParam(':curb_cuts', $curb_cuts, PDO::PARAM_STR);
+    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
     $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
     $sth->bindParam(':shelter_bench', $shelter_bench, PDO::PARAM_STR);
@@ -2295,10 +2321,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':Sta_service_area', $sta_service_area, PDO::PARAM_STR);
     $sth->bindParam(':Distance', $distance, PDO::PARAM_STR);
     $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
-    $sth->bindParam(':Route_surface', $route_surface, PDO::PARAM_INT);
-    $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_INT);
-    $sth->bindParam(':Curb_cuts', $curb_cuts, PDO::PARAM_INT);
-    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_INT);
+    $sth->bindParam(':Route_surface', $route_surface, PDO::PARAM_STR);
+    $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+    $sth->bindParam(':Curb_cuts', $curb_cuts, PDO::PARAM_STR);
+    $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_type', $lighting_type, PDO::PARAM_STR);
     $sth->bindParam(':Shelter_bench', $shelter_bench, PDO::PARAM_STR);
@@ -2310,6 +2336,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * STA ROUTE ROUTES
@@ -2589,7 +2619,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                      west_bound_stop = :West_bound_stop
                                                      WHERE sta_route_id=$sta_route_id AND sta_bus_id=$id");
 
-    $sth->bindParam(':Route_num', $route_num, PDO::PARAM_STR);
+    $sth->bindParam(':Route_num', $route_num, PDO::PARAM_INT);
     $sth->bindParam(':North_bound_stop', $north_bound_stop, PDO::PARAM_INT);
     $sth->bindParam(':South_bound_stop', $south_bound_stop, PDO::PARAM_INT);
     $sth->bindParam(':East_bound_stop', $east_bound_stop, PDO::PARAM_INT);
@@ -2600,6 +2630,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * EXTERIOR PATHWAYS ROUTES
@@ -2872,6 +2906,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * EXTERIOR STAIRS ROUTES
@@ -3235,6 +3273,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * EXTERIOR RAMPS ROUTES
@@ -3634,6 +3676,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+
+
+
+
 /**
  * MAIN ENTRANCE ROUTES
  */
@@ -3822,7 +3868,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth = $this->db->prepare("INSERT INTO Main_Entrance (total_num_public_entrances, main_ent_accessible, alt_ent_accessible, accessable_signage, ground_level, threshold_level, threshold_beveled, beveled_height, door_action, door_open_clearance, opening_measurement, door_easy_open, door_open_force, door_use_with_fist, door_auto_open, second_door_inside, min_dist_between_doors, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
                                 VALUES (:total_num_public_entrances, :main_ent_accessible, :alt_ent_accessible, :accessable_signage, :ground_level, :threshold_level, :threshold_beveled, :beveled_height, :door_action, :door_open_clearance, :opening_measurement, :door_easy_open, :door_open_force, :door_use_with_fist, :door_auto_open, :second_door_inside, :min_dist_between_doors, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id) ");
 
-    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_STR);
+    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_INT);
     $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
     $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
     $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
@@ -3948,7 +3994,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                      recommendations = :recommendations
                                                      WHERE main_ent_id=$main_ent_id AND est_id=$id");
 
-    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_STR);
+    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_INT);
     $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
     $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
     $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
@@ -3976,6 +4022,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * INTERIOR ROUTES
@@ -4296,6 +4346,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * ELEVATOR ROUTES
@@ -4668,6 +4722,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+
+
+
+
 /**
  * SIGNAGE ROUTES
  */
@@ -4960,6 +5018,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * EMERGENCY ROUTES
@@ -5254,6 +5316,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * SEATING ROUTES
@@ -5594,6 +5660,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+
+
+
+
 /**
  * RESTROOM ROUTES
  */
@@ -5923,6 +5993,10 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
 /**
  * RESTROOM INFO ROUTES
@@ -6394,6 +6468,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
 
 
 /**
