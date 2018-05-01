@@ -433,8 +433,9 @@ function PassengerLoadingView() {
         '        <div class="col-6"><label class="view-label" for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><br><span class="view" id="passenger_surfacePassengerLoading" >'+passengerLoadingData[0].passenger_surface+'</span></div>\n' +
         '    </div>\n' +
         '    <div class="card-row">\n' +
-        '        <div class="col-6"><label class="view-label" for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><br><span class="view" id="tactile_warning_stripsPassengerLoading" >'+passengerLoadingData[0].tactile_warning_strips+'</span></div>\n' +
-        '        <div class="col-6"><label class="view-label" for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><br><span class="view" id="coveredPassengerLoading" >'+passengerLoadingData[0].covered+'</span></div>\n' +
+        '        <div class="col-4"><label class="view-label" for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><br><span class="view" id="tactile_warning_stripsPassengerLoading" >'+passengerLoadingData[0].tactile_warning_strips+'</span></div>\n' +
+        '        <div class="col-4"><label class="view-label" for="passenger_curbs"> Route has curb ramps and curb cuts where needed: </label><br><span class="view" id="passenger_curbs" >'+passengerLoadingData[0].passenger_curbs+'</span></div>\n' +
+        '        <div class="col-4"><label class="view-label" for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><br><span class="view" id="coveredPassengerLoading" >'+passengerLoadingData[0].covered+'</span></div>\n' +
         '    </div>\n' +
         '    <div class="card-row">\n' +
         '        <div class="col-4"><label class="view-label" for="lightingPassengerLoading"> Lighting is adequate: </label><br><span class="view" id="lightingPassengerLoading" >'+passengerLoadingData[0].lighting+'</span></div>\n' +

@@ -1889,6 +1889,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $min_width = $data["min_width"];
     $passenger_surface = $data["passenger_surface"];
     $tactile_warning_strips = $data["tactile_warning_strips"];
+    $passenger_curbs = $data["passenger_curbs"];
     $covered = $data["covered"];
     $lighting = $data["lighting"];
     $lighting_option = $data["lighting_option"];
@@ -1897,14 +1898,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $recommendations = $data["recommendations"];
     $park_id = $data["park_id"];
 
-    $sth = $this->db->prepare("INSERT INTO Passenger_Loading (designated_zone, distance, min_width, passenger_surface, tactile_warning_strips, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
-                                    VALUES (:designated_zone, :distance, :min_width, :passenger_surface, :tactile_warning_strips, :covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
+    $sth = $this->db->prepare("INSERT INTO Passenger_Loading (designated_zone, distance, min_width, passenger_surface, tactile_warning_strips, passenger_curbs, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
+                                    VALUES (:designated_zone, :distance, :min_width, :passenger_surface, :tactile_warning_strips, :passenger_curbs,:covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
     $sth->bindParam(':designated_zone', $designated_zone, PDO::PARAM_STR);
     $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
     $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
     $sth->bindParam(':passenger_surface', $passenger_surface, PDO::PARAM_STR);
     $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+    $sth->bindParam(':passenger_curbs', $passenger_curbs, PDO::PARAM_STR);
     $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
     $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
@@ -1973,6 +1975,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $min_width = $data["min_width"];
     $passenger_surface = $data["passenger_surface"];
     $tactile_warning_strips = $data["tactile_warning_strips"];
+    $passenger_curbs = $data["passenger_curbs"];
     $covered = $data["covered"];
     $lighting = $data["lighting"];
     $lighting_option = $data["lighting_option"];
@@ -1985,6 +1988,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                      min_width = :Min_width,
                                                      passenger_surface = :Passenger_surface,
                                                      tactile_warning_strips = :Tactile_warning_strips,
+                                                     passenger_curbs = :passenger_curbs,
                                                      covered = :Covered,
                                                      lighting = :Lighting,
                                                      lighting_option = :Lighting_option,
@@ -1998,6 +2002,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':Min_width', $min_width, PDO::PARAM_STR);
     $sth->bindParam(':Passenger_surface', $passenger_surface, PDO::PARAM_STR);
     $sth->bindParam(':Tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+    $sth->bindParam(':passenger_curbs', $passenger_curbs, PDO::PARAM_STR);
     $sth->bindParam(':Covered', $covered, PDO::PARAM_STR);
     $sth->bindParam(':Lighting', $lighting, PDO::PARAM_STR);
     $sth->bindParam(':Lighting_option', $lighting_option, PDO::PARAM_STR);

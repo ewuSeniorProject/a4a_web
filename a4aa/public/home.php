@@ -65,7 +65,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                 $preloader.delay(350).fadeOut('slow');
             });
         </script>
-        <script src="script/sumthreefive.js"></script>
+
         <script src="script/home.js"></script>
     </head>
     <body>
@@ -130,9 +130,15 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
         <script type="text/html" id="establishment-list-template">
             <div class="box col-5">
                 <?php if($_SESSION['role'] == 'admin') {
-                    echo '<a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: adminUrl, title: \'Edit \'+name+\' information\'}" >
-                    <span class="col-10 h4" data-bind="text:name"></span>&nbsp;<div class="icon col-2"><i class="fas fa-edit fa-lg"></i></div><br>
-                    </a>';
+                    echo '<div class="box-title">
+                        <div class="col-8 h4" data-bind="text:name"></div>
+                        <a class="pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: userUrl, title: \'View \'+name+\' information\'}" >
+                            <div class="icon col-2" style="float: right"><i class="fas fas fa-folder-open fa-lg"></i>&nbsp;</div>
+                        </a>
+                        <a class="pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: adminUrl, title: \'Edit \'+name+\' information\'}" >
+                            <div class="icon col-2" style="float: right"><i class="fas fa-edit fa-lg"></i>&nbsp;</div>
+                        </a>
+                    </div>';
                 }
                 else {
                     echo '<a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: userUrl, title: \'View \'+name+\' information\'}" >

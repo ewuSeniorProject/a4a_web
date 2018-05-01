@@ -804,21 +804,30 @@ function addPassengerLoadingView() {
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="passenger_surfacePassengerLoading" id="passenger_surfacePassengerLoading" >\n' +
+        '    <div class="col-6"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="passenger_surfacePassengerLoading" id="passenger_surfacePassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" name="tactile_warning_stripsPassengerLoading" id="tactile_warning_stripsPassengerLoading" >\n' +
+        '    <div class="col-6"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" name="tactile_warning_stripsPassengerLoading" id="tactile_warning_stripsPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="coveredPassengerLoading" id="coveredPassengerLoading" >\n' +
+        '</div>\n' +
+        '<div class="card-row">\n' +
+        '    <div class="col-6"><label for="passenger_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="passenger_curbs" id="passenger_curbs" >\n' +
+        '       <option value="" disabled selected>Please select one</option>\n' +
+        '       <option value="Yes" >Yes</option>\n' +
+        '       <option value="No" >No</option>\n' +
+        '       <option value="N/A" >N/A</option>\n' +
+        '    </select>\n' +
+        '   </div>\n' +
+        '    <div class="col-6"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="coveredPassengerLoading" id="coveredPassengerLoading" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
@@ -899,6 +908,7 @@ function addPassengerLoading() {
     var min_width = document.getElementById("min_widthPassengerLoading").value;
     var passenger_surface = document.getElementById("passenger_surfacePassengerLoading").value;
     var tactile_warning_strips = document.getElementById("tactile_warning_stripsPassengerLoading").value;
+    var passenger_curbs = document.getElementById("passenger_curbs").value;
     var covered = document.getElementById("coveredPassengerLoading").value;
     var lighting = document.getElementById("lightingPassengerLoading").value;
     var lighting_option = document.getElementById("lighting_optionPassengerLoading").value;
@@ -917,6 +927,7 @@ function addPassengerLoading() {
             "min_width" : min_width,
             "passenger_surface" : passenger_surface,
             "tactile_warning_strips" : tactile_warning_strips,
+            "passenger_curbs" : passenger_curbs,
             "covered" : covered,
             "lighting" : lighting,
             "lighting_option" : lighting_option,
