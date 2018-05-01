@@ -10,7 +10,7 @@ a:hover {
 }
 
 .hr-restroom {
-    border-bottom: 6px solid rgb(68, 143, 195);
+    border-bottom: 5px solid rgb(68, 143, 195);
     width: available;
 }
 
@@ -760,6 +760,19 @@ a:hover {
 
 .text-white {
     color: #ffffff;
+}
+
+.view {
+    margin: 0;
+    padding: 0 1em;
+    color: #353535;
+    font-size: 18px;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+}
+
+.view-label {
+    font-weight: 600;
 }
 
 .white-link {

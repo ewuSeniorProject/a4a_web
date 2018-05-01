@@ -386,8 +386,8 @@ function isParking() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="is_parking" class="btn btn-success" onclick="addParkingView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="submit" id="is_not_parking" class="btn btn-secondary" onclick="addNoParking()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="button" id="is_parking" class="btn btn-success" onclick="addParkingView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="button" id="is_not_parking" class="btn btn-secondary" onclick="addNoParking()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_parking').focus();
 }
@@ -1707,8 +1707,8 @@ function isExteriorRamps() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="is_ramps" class="btn btn-success" onclick="addExteriorRampsView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="submit" id="is_not_ramps" class="btn btn-secondary" onclick="addNoExteriorRamps()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="button" id="is_ramps" class="btn btn-success" onclick="addExteriorRampsView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="button" id="is_not_ramps" class="btn btn-secondary" onclick="addNoExteriorRamps()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_ramps').focus();
 }
@@ -2501,8 +2501,8 @@ function isElevator() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="is_elevator" class="btn btn-success" onclick="addElevatorView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="submit" id="is_not_elevator" class="btn btn-secondary" onclick="addNoElevator()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="button" id="is_elevator" class="btn btn-success" onclick="addElevatorView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="button" id="is_not_elevator" class="btn btn-secondary" onclick="addNoElevator()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_elevator').focus();
 }
@@ -3375,8 +3375,8 @@ function isRestroom() {
     $('#cardBody').html(bodyHtml);
 
     $('#cardFooter').html('<div class="col-4">\n' +
-        '<button  type="submit" id="is_restroom" class="btn btn-success" onclick="addRestroomView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-        '<button  type="submit" id="is_not_restroom" class="btn btn-secondary" onclick="addNoRestroom()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+        '<button  type="button" id="is_restroom" class="btn btn-success" onclick="addRestroomView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+        '<button  type="button" id="is_not_restroom" class="btn btn-secondary" onclick="addNoRestroom()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
         '</div>');
     $('#is_restroom').focus();
 }
@@ -3831,7 +3831,7 @@ function addRestroomInformationView() {
         '   <div class="col-12">\n' +
         '       <span>\n ' +
         '           <button  type="submit" id="save_restroom_information" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Restroom Information</button>&nbsp;' +
-        '           <button  type="submit" id="cancel_restroom_information" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n ' +
+        '           <button  type="button" id="cancel_restroom_information" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; Cancel </button>\n ' +
         '       </span>\n' +
         '   </div>\n ' +
         '</div>\n ' +
@@ -4014,8 +4014,8 @@ function addRestroomInformation() {
             $('#cardBody').html(bodyHtml);
 
             $('#cardFooter').html('<div class="col-4">\n' +
-                '<button  type="submit" id="add_another_restroom" class="btn btn-success" onclick="addRestroomInformationView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-                '<button  type="submit" id="no_more_restrooms" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+                '<button  type="button" id="add_another_restroom" class="btn btn-success" onclick="addRestroomInformationView()"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+                '<button  type="button" id="no_more_restrooms" class="btn btn-secondary" onclick="addCommunicationView()"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
                 '</div>');
             $('#add_another_restroom').focus();
         },
