@@ -6189,8 +6189,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $soap_dispenser = $data["soap_dispenser"];
     $soap_height = $data["soap_height"];
     $dry_fist = $data["dry_fist"];
-    $dry_fist_type = $data["dry_fist_type"];
-    $dry_controls = $data["dry_controls"];
     $dry_control_height = $data["dry_control_height"];
     $mirror = $data["mirror"];
     $mirror_height = $data["mirror_height"];
@@ -6211,7 +6209,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                           ambulatory_accessible, bar_height, coat_hook, hook_height, sink, 
                                                           sink_height, faucet, faucet_depth, faucet_auto_fist, sink_clearance, 
                                                           sink_clearance_height, sink_pipes, soap_dispenser, soap_height, dry_fist, 
-                                                          dry_fist_type, dry_controls, dry_control_height, mirror, mirror_height, 
+                                                          dry_control_height, mirror, mirror_height, 
                                                           shelves, shelf_height, trash_receptacles, hygiene_seat_cover, hygiene_cover_height, 
                                                           lighting, lighting_type, comment, recommendations, rest_id) 
                                                   VALUES (:restroom_desc, :easy_open, :lbs_force, :clearance, :opening, 
@@ -6220,7 +6218,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                           :ambulatory_accessible, :bar_height, :coat_hook, :hook_height, :sink, 
                                                           :sink_height, :faucet, :faucet_depth, :faucet_auto_fist, :sink_clearance, 
                                                           :sink_clearance_height, :sink_pipes, :soap_dispenser, :soap_height, :dry_fist, 
-                                                          :dry_fist_type, :dry_controls, :dry_control_height, :mirror, :mirror_height, 
+                                                          :dry_control_height, :mirror, :mirror_height, 
                                                           :shelves, :shelf_height, :trash_receptacles, :hygiene_seat_cover, :hygiene_cover_height, 
                                                           :lighting, :lighting_type, :comment, :recommendations, :rest_id) ");
 
@@ -6254,8 +6252,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':soap_dispenser', $soap_dispenser, PDO::PARAM_STR);
     $sth->bindParam(':soap_height', $soap_height, PDO::PARAM_STR);
     $sth->bindParam(':dry_fist', $dry_fist, PDO::PARAM_STR);
-    $sth->bindParam(':dry_fist_type', $dry_fist_type, PDO::PARAM_STR);
-    $sth->bindParam(':dry_controls', $dry_controls, PDO::PARAM_STR);
     $sth->bindParam(':dry_control_height', $dry_control_height, PDO::PARAM_STR);
     $sth->bindParam(':mirror', $mirror, PDO::PARAM_STR);
     $sth->bindParam(':mirror_height', $mirror_height, PDO::PARAM_STR);
@@ -6356,8 +6352,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $soap_dispenser = $data["soap_dispenser"];
     $soap_height = $data["soap_height"];
     $dry_fist = $data["dry_fist"];
-    $dry_fist_type = $data["dry_fist_type"];
-    $dry_controls = $data["dry_controls"];
     $dry_control_height = $data["dry_control_height"];
     $mirror = $data["mirror"];
     $mirror_height = $data["mirror_height"];
@@ -6402,8 +6396,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                                                         soap_dispenser = :soap_dispenser,
                                                         soap_height = :soap_height,
                                                         dry_fist = :dry_fist,
-                                                        dry_fist_type = :dry_fist_type,
-                                                        dry_controls = :dry_controls,
                                                         dry_control_height = :dry_control_height,
                                                         mirror = :mirror,
                                                         mirror_height = :mirror_height,
@@ -6448,8 +6440,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':soap_dispenser', $soap_dispenser, PDO::PARAM_STR);
     $sth->bindParam(':soap_height', $soap_height, PDO::PARAM_STR);
     $sth->bindParam(':dry_fist', $dry_fist, PDO::PARAM_STR);
-    $sth->bindParam(':dry_fist_type', $dry_fist_type, PDO::PARAM_STR);
-    $sth->bindParam(':dry_controls', $dry_controls, PDO::PARAM_STR);
     $sth->bindParam(':dry_control_height', $dry_control_height, PDO::PARAM_STR);
     $sth->bindParam(':mirror', $mirror, PDO::PARAM_STR);
     $sth->bindParam(':mirror_height', $mirror_height, PDO::PARAM_STR);

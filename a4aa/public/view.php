@@ -32,11 +32,6 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     header("location: login.php");
     exit;
 }
-
-if($_SESSION['role'] !== 'admin'){
-    header("location: home.php");
-    exit;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,18 +69,18 @@ if($_SESSION['role'] !== 'admin'){
             });
         </script>
 
-        <script src="script/update.js"></script>
+        <script src="script/view.js"></script>
     </head>
     <body>
         <div id="page-preloader">
             <span class="spinner"></span>
         </div>
         <nav class="navbar navbar-light bg-header">
-            <span class="navbar-brand mb-0 pointer">
-                <a href="home.php" class="h1">
-                    Access 4 All Spokane
-                </a>
-            </span>
+                    <span class="navbar-brand mb-0 pointer">
+                        <a href="home.php" class="h1">
+                            Access 4 All Spokane
+                        </a>
+                    </span>
             <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
                 <i class="fas fa-bars fa-lg"></i>
             </div>
@@ -101,7 +96,7 @@ if($_SESSION['role'] !== 'admin'){
             <div class="left-sidebar">
                 <div class="left-sidebar-header">
                     <span class="h7">
-                        <p>Viewing/Editing:</p>
+                        <p>Viewing:</p>
                     </span>
                     <span class="h5">
                         <span class="pad" id="left_sb_name"></span>
@@ -381,7 +376,7 @@ if($_SESSION['role'] !== 'admin'){
             </div>
         </div>
 
-    <!-- ALERT MODAL -->
+        <!-- ALERT MODAL -->
         <div class="modal fade bd-example-modal-lg" id="alert" tabindex="-1" role="dialog" aria-labelledby="alert" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -398,7 +393,7 @@ if($_SESSION['role'] !== 'admin'){
                 </div>
             </div>
         </div>
-    <!-- SUCCESS MODAL -->
+        <!-- SUCCESS MODAL -->
         <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="success" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -415,7 +410,7 @@ if($_SESSION['role'] !== 'admin'){
                 </div>
             </div>
         </div>
-    <!-- STA MODAL -->
+        <!-- STA MODAL -->
         <div class="modal fade bd-example-modal-lg" id="sta-route-modal" tabindex="-1" role="dialog" aria-labelledby="sta-route-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -430,7 +425,7 @@ if($_SESSION['role'] !== 'admin'){
                 </div>
             </div>
         </div>
-    <!-- RESTROOM MODAL -->
+        <!-- RESTROOM MODAL -->
         <div class="modal fade bd-example-modal-lg" id="restroom-modal" tabindex="-1" role="dialog" aria-labelledby="restroom-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -445,7 +440,7 @@ if($_SESSION['role'] !== 'admin'){
                 </div>
             </div>
         </div>
-    <!-- GENERAL MODAL -->
+        <!-- GENERAL MODAL -->
         <div class="modal fade" id="gen-modal" tabindex="-1" role="dialog" aria-labelledby="gen-modal" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
