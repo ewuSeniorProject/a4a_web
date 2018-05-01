@@ -65,7 +65,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                 $preloader.delay(350).fadeOut('slow');
             });
         </script>
-
+        <script src="script/sumthreefive.js"></script>
         <script src="script/home.js"></script>
     </head>
     <body>

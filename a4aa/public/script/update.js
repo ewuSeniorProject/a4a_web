@@ -8,7 +8,6 @@ var USER_ID = 0;
 var USER_NAME = "";
 var STA_ID = 0;
 var REST_ID = 0;
-var INDEX = 0;
 var bodyHtml = "";
 
 $(document).ready(function () {
@@ -37,6 +36,7 @@ $(document).ready(function () {
     SeatingView();
     RestroomView();
     RestroomInfoView();
+    CommunicationView();
 
     // Scrolls selected accordion card to the top of the page
     $('.collapse').on('shown.bs.collapse', function(e) {
@@ -46,115 +46,6 @@ $(document).ready(function () {
         }, 500);
     });
 
-
-    function CommunicationModel(parm) {
-        //console.log("CommunicationModel(parm): " + JSON.stringify(parm));
-        this.postUri = parm.postUri;
-        this.putUri = parm.putUri;
-        this.communication_id = ko.observable(parm.data.communication_id);
-        this.public_phone = ko.observable(parm.data.public_phone);
-        this.public_phone.focused = ko.observable(false);
-        this.phone_clearance = ko.observable(parm.data.phone_clearance);
-        this.phone_clearance.focused = ko.observable(false);
-        this.num_phone = ko.observable(parm.data.num_phone);
-        this.num_phone.focused = ko.observable(false);
-        this.tty = ko.observable(parm.data.tty);
-        this.tty.focused = ko.observable(false);
-        this.staff_tty = ko.observable(parm.data.staff_tty);
-        this.staff_tty.focused = ko.observable(false);
-        this.assisted_listening = ko.observable(parm.data.assisted_listening);
-        this.assisted_listening.focused = ko.observable(false);
-        this.assisted_listen_type = ko.observable(parm.data.assisted_listen_type);
-        this.assisted_listen_type.focused = ko.observable(false);
-        this.assisted_listen_receiver = ko.observable(parm.data.assisted_listen_receiver);
-        this.assisted_listen_receiver.focused = ko.observable(false);
-        this.listening_signage = ko.observable(parm.data.listening_signage);
-        this.listening_signage.focused = ko.observable(false);
-        this.staff_listening = ko.observable(parm.data.staff_listening);
-        this.staff_listening.focused = ko.observable(false);
-        this.acoustics = ko.observable(parm.data.acoustics);
-        this.acoustics.focused = ko.observable(false);
-        this.acoustics_level = ko.observable(parm.data.acoustics_level);
-        this.acoustics_level.focused = ko.observable(false);
-        this.alt_comm_methods = ko.observable(parm.data.alt_comm_methods);
-        this.alt_comm_methods.focused = ko.observable(false);
-        this.alt_comm_type = ko.observable(parm.data.alt_comm_type);
-        this.alt_comm_type.focused = ko.observable(false);
-        this.staff_ASL = ko.observable(parm.data.staff_ASL);
-        this.staff_ASL.focused = ko.observable(false);
-        this.captioning_default = ko.observable(parm.data.captioning_default);
-        this.captioning_default.focused = ko.observable(false);
-        this.theater_captioning = ko.observable(parm.data.theater_captioning);
-        this.theater_captioning.focused = ko.observable(false);
-        this.theater_capt_type = ko.observable(parm.data.theater_capt_type);
-        this.theater_capt_type.focused = ko.observable(false);
-        this.auditory_info_visual = ko.observable(parm.data.auditory_info_visual);
-        this.auditory_info_visual.focused = ko.observable(false);
-        this.visual_info_auditory = ko.observable(parm.data.visual_info_auditory);
-        this.visual_info_auditory.focused = ko.observable(false);
-        this.website_text_reader = ko.observable(parm.data.website_text_reader);
-        this.website_text_reader.focused = ko.observable(false);
-        this.alt_contact = ko.observable(parm.data.alt_contact);
-        this.alt_contact.focused = ko.observable(false);
-        this.alt_contact_type = ko.observable(parm.data.alt_contact_type);
-        this.alt_contact_type.focused = ko.observable(false);
-        this.shopping_assist = ko.observable(parm.data.shopping_assist);
-        this.shopping_assist.focused = ko.observable(false);
-        this.assist_service = ko.observable(parm.data.assist_service);
-        this.assist_service.focused = ko.observable(false);
-        this.assist_fee = ko.observable(parm.data.assist_fee);
-        this.assist_fee.focused = ko.observable(false);
-        this.store_scooter = ko.observable(parm.data.store_scooter);
-        this.store_scooter.focused = ko.observable(false);
-        this.scooter_fee = ko.observable(parm.data.scooter_fee);
-        this.scooter_fee.focused = ko.observable(false);
-        this.scooter_location = ko.observable(parm.data.scooter_location);
-        this.scooter_location.focused = ko.observable(false);
-        this.restaurant_allergies = ko.observable(parm.data.restaurant_allergies);
-        this.restaurant_allergies.focused = ko.observable(false);
-        this.staff_disable_trained = ko.observable(parm.data.staff_disable_trained);
-        this.staff_disable_trained.focused = ko.observable(false);
-        this.staff_disable_trained_desc = ko.observable(parm.data.staff_disable_trained_desc);
-        this.staff_disable_trained_desc.focused = ko.observable(false);
-        this.items_reach = ko.observable(parm.data.items_reach);
-        this.items_reach.focused = ko.observable(false);
-        this.service_alt_manner = ko.observable(parm.data.service_alt_manner);
-        this.service_alt_manner.focused = ko.observable(false);
-        this.senior_discount = ko.observable(parm.data.senior_discount);
-        this.senior_discount.focused = ko.observable(false);
-        this.senior_age = ko.observable(parm.data.senior_age);
-        this.senior_age.focused = ko.observable(false);
-        this.annual_A4A_review = ko.observable(parm.data.annual_A4A_review);
-        this.annual_A4A_review.focused = ko.observable(false);
-        this.comment = ko.observable(parm.data.comment);
-        this.comment.focused = ko.observable(false);
-        this.recommendations = ko.observable(parm.data.recommendations);
-        this.recommendations.focused = ko.observable(false);
-        this.rest_id = ko.observable(parm.data.est_id);
-        this.rest_id.focused = ko.observable(false);
-    }
-
-    function CommunicationViewModel(getUri, deleteUri, postUri, putUri) {
-        var self = this;
-        self.communicationList = ko.observableArray([]);
-
-        $.ajax ({
-            async: false,
-            dataType: 'json',
-            url: getUri,
-            success: function (data) {
-                self.communicationList($.map(data, function (item) {
-                    return new CommunicationModel({data:item, postUri:postUri, putUri:putUri});
-                }));
-            }
-        });
-    }
-
-    var myParentVM = {
-           communicationVM : new CommunicationViewModel('get/communication/est/' + EST_ID, 'delete/communication/est/' + EST_ID, 'post/communication/', 'put/communication/est/' + EST_ID),
-    };
-
-    ko.applyBindings(myParentVM);
 
 });
 
@@ -3651,7 +3542,7 @@ function InteriorViewModel() {
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="counter_height"> Service counter height (inches): </label><input type="number" min="0" class="form-control" id="counter_height" name="counter_height" value="'+interiorData[0].counter_height+'" ></div>\n' +
-        '            <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input type="number" min="0" class="form-control" id="writing_surface_height" name="writing_surface_height" value="'+interiorData[0].estwriting_surface_height_id+'" ></div>\n' +
+        '            <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input type="number" min="0" class="form-control" id="writing_surface_height" name="writing_surface_height" value="'+interiorData[0].writing_surface_height_id+'" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" id="drinking_fountain" name="drinking_fountain" >\n';
@@ -4849,7 +4740,7 @@ function SeatingView() {
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" type="text" class="form-control" id="num_legroom" value="'+seatingData[0].num_legroom+'" ></div>\n' +
+        '            <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" class="form-control" id="num_legroom" value="'+seatingData[0].num_legroom+'" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" id="rearranged" name="rearranged" >\n';
@@ -5787,7 +5678,7 @@ function RestroomInfoView() {
             '            <div class="col-4"><label for="soap_height_'+restroomInfoData[i].rest_info_id+'">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" id="soap_height_'+restroomInfoData[i].rest_info_id+'" name="soap_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].soap_height+'" ></div>\n' +
             '        </div>\n' +
             '        <div class="card-row">\n' +
-            '            <div class="col-3"><label for="dry_fist_'+restroomInfoData[i].rest_info_id+'">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" id="dry_fist_'+restroomInfoData[i].rest_info_id+'" name="dry_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
+            '            <div class="col-6"><label for="dry_fist_'+restroomInfoData[i].rest_info_id+'">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" id="dry_fist_'+restroomInfoData[i].rest_info_id+'" name="dry_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
 
                             if (restroomInfoData[0].dry_fist === "Yes") {
                                 bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
@@ -5806,45 +5697,7 @@ function RestroomInfoView() {
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-            '            <div class="col-3"><label for="dry_fist_type_'+restroomInfoData[i].rest_info_id+'"> Type Hand Dryer/Towel Dispenser: </label> <select class="form-control" id="dry_fist_type_'+restroomInfoData[i].rest_info_id+'" name="dry_fist_type_'+restroomInfoData[i].rest_info_id+'" >\n';
-
-                            if (restroomInfoData[0].dry_fist_type === "Hand Dryer") {
-                                bodyHtml += '<option value="Hand Dryer" selected>&nbsp; Hand Dryer</option>\n' +
-                                    '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].dry_fist_type === "Hand Dryer") {
-                                bodyHtml += '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n' +
-                                    '<option value="Hand Dryer" selected>&nbsp; Hand Dryer</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n' +
-                                    '<option value="Hand Dryer" >&nbsp; Hand Dryer</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
-
-    bodyHtml += '       </select>\n' +
-        '            </div>\n' +
-            '            <div class="col-3"><label for="dry_controls_'+restroomInfoData[i].rest_info_id+'"> Operation type - Automatic/Closed Fist: </label> <select class="form-control" id="dry_controls_'+restroomInfoData[i].rest_info_id+'" name="dry_controls_'+restroomInfoData[i].rest_info_id+'" >\n';
-
-                            if (restroomInfoData[0].dry_controls === "Automatic") {
-                                bodyHtml += '<option value="Automatic" selected>&nbsp; Automatic</option>\n' +
-                                    '<option value="Closed Fist" >&nbsp; Closed Fist</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].dry_controls === "Closed Fist") {
-                                bodyHtml += '<option value="Automatic" >&nbsp; Automatic</option>\n' +
-                                    '<option value="Closed Fist" selected>&nbsp; Closed Fist</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Automatic" >&nbsp; Automatic</option>\n' +
-                                    '<option value="Closed Fist" >&nbsp; Closed Fist</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
-
-    bodyHtml += '       </select>\n' +
-        '            </div>\n' +
-            '            <div class="col-3"><label for="dry_control_height_'+restroomInfoData[i].rest_info_id+'"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" id="dry_control_height_'+restroomInfoData[i].rest_info_id+'" name="dry_control_height_'+restroomInfoData[i].rest_info_id+'" >\n';
+            '            <div class="col-6"><label for="dry_control_height_'+restroomInfoData[i].rest_info_id+'"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" id="dry_control_height_'+restroomInfoData[i].rest_info_id+'" name="dry_control_height_'+restroomInfoData[i].rest_info_id+'" >\n';
 
                             if (restroomInfoData[0].dry_control_height === "Yes") {
                                 bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
@@ -6054,8 +5907,6 @@ function updateRestroomInfo(curr_rest_info_id) {
     var sink_pipes = document.getElementById("sink_pipes_"+curr_rest_info_id).value;
     var soap_dispenser = document.getElementById("soap_dispenser_"+curr_rest_info_id).value;
     var dry_fist = document.getElementById("dry_fist_"+curr_rest_info_id).value;
-    var dry_fist_type = document.getElementById("dry_fist_type_"+curr_rest_info_id).value;
-    var dry_controls = document.getElementById("dry_controls_"+curr_rest_info_id).value;
     var dry_control_height = document.getElementById("dry_control_height_"+curr_rest_info_id).value;
     var mirror = document.getElementById("mirror_"+curr_rest_info_id).value;
     var mirror_height = document.getElementById("mirror_height_"+curr_rest_info_id).value;
@@ -6106,8 +5957,6 @@ function updateRestroomInfo(curr_rest_info_id) {
             "sink_pipes" : sink_pipes,
             "soap_dispenser" : soap_dispenser,
             "dry_fist" : dry_fist,
-            "dry_fist_type" : dry_fist_type,
-            "dry_controls" : dry_controls,
             "dry_control_height" : dry_control_height,
             "mirror" : mirror,
             "mirror_height" : mirror_height,
@@ -6292,29 +6141,13 @@ function addRestroomInfoView(rest_id) {
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="soap_height">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" name="soap_height" id="soap_height"  ></div>\n' +
+        '   <div class="col-4"><label for="soap_height"> Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" name="soap_height" id="soap_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' +
         '       <option value="" disabled selected>Please select one</option>\n' +
         '       <option value="Yes" >Yes</option>\n' +
         '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '   <div class="col-6"><label for="dry_fist_type"> Type Hand dryer/Towel dispenser: </label> <select class="form-control" name="dry_fist_type" id="dry_fist_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Hand dryer" >Hand dryer</option>\n' +
-        '       <option value="Towel dispenser" >Towel dispenser</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="dry_controls"> Operation type - automatic/closed fist: </label> <select class="form-control" name="dry_controls" id="dry_controls" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Automatic" >Automatic</option>\n' +
-        '       <option value="Closed fist" >Closed fist</option>\n' +
         '       <option value="N/A" >N/A</option>\n' +
         '    </select>\n' +
         '   </div>\n' +
@@ -6437,8 +6270,6 @@ function addRestroomInfo(rest_id) {
     var soap_dispenser = document.getElementById("soap_dispenser").value;
     var soap_height = document.getElementById("soap_height").value;
     var dry_fist = document.getElementById("dry_fist").value;
-    var dry_fist_type = document.getElementById("dry_fist_type").value;
-    var dry_controls = document.getElementById("dry_controls").value;
     var dry_control_height = document.getElementById("dry_control_height").value;
     var mirror = document.getElementById("mirror").value;
     var mirror_height = document.getElementById("mirror_height").value;
@@ -6488,8 +6319,6 @@ function addRestroomInfo(rest_id) {
             "soap_dispenser" : soap_dispenser,
             "soap_height" : soap_height,
             "dry_fist" : dry_fist,
-            "dry_fist_type" : dry_fist_type,
-            "dry_controls" : dry_controls,
             "dry_control_height" : dry_control_height,
             "mirror" : mirror,
             "mirror_height" : mirror_height,
@@ -6536,6 +6365,807 @@ function deleteRestroomInfo(rest_info_id) {
     }
 }
 
+function CommunicationView() {
+    var communicationData = "";
+
+    $('#communication_card').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "/get/communication/est/" + EST_ID,
+        success: function (data) {
+            communicationData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml = '<form id="communication_view">\n ' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <select class="form-control" name="public_phone" id="public_phone" >\n';
+
+                            if (communicationData[0].public_phone === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].public_phone === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="phone_clearance">  There are public phones w/ controls min 48” from floor, protruding < 4” from wall: </label> <select class="form-control" name="phone_clearance" id="phone_clearance" >\n';
+
+                            if (communicationData[0].phone_clearance === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].phone_clearance === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="num_phone"> Number of phones: </label> <input type="number" min="0" class="form-control" name="num_phone" id="num_phone" value="'+communicationData[0].num_phone+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="tty"> There is a TTY is available: </label> <select class="form-control" name="tty" id="tty" >\n';
+
+                            if (communicationData[0].tty === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].tty === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" name="staff_tty" id="staff_tty" >\n';
+
+                            if (communicationData[0].staff_tty === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].staff_tty === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" name="assisted_listening" id="assisted_listening" >\n';
+
+                            if (communicationData[0].assisted_listening === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listening === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="assisted_listen_type"> Type of listening device - Infra­red Loop/Induction Loop/FM/Amplification/Other: </label><select class="form-control" name="assisted_listen_type" id="assisted_listen_type" >\n';
+
+                            if (communicationData[0].assisted_listen_type === "Infra­red Loop") {
+                                bodyHtml += '<option value="Infra­red Loop" selected>&nbsp; Infra­red Loop</option>\n' +
+                                    '<option value="Induction Loop" >&nbsp; Induction Loop</option>\n ' +
+                                    '<option value="FM" >&nbsp; FM</option>\n ' +
+                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_type === "Induction Loop") {
+                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
+                                    '<option value="Induction Loop" selected>&nbsp; Induction Loop</option>\n ' +
+                                    '<option value="FM" >&nbsp; FM</option>\n ' +
+                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_type === "FM") {
+                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
+                                    '<option value="Induction Loop" >&nbsp; Induction Loop</option>\n ' +
+                                    '<option value="FM" selected>&nbsp; FM</option>\n ' +
+                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_type === "Amplification") {
+                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
+                                    '<option value="Induction Loop" selected>&nbsp; Induction Loop</option>\n ' +
+                                    '<option value="FM" >&nbsp; FM</option>\n ' +
+                                    '<option value="Amplification" selected>&nbsp; Amplification</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_type === "Other") {
+                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
+                                    '<option value="Induction Loop" selected>&nbsp; Induction Loop</option>\n ' +
+                                    '<option value="FM" >&nbsp; FM</option>\n ' +
+                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
+                                    '<option value="Other" selected>&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
+                                    '<option value="Induction Loop" >&nbsp; Induction Loop</option>\n ' +
+                                    '<option value="FM" >&nbsp; FM</option>\n ' +
+                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="assisted_listen_receiver"> Type of receivers - Earbud/Neckloop/Headphones/Other: </label> <select class="form-control" name="assisted_listen_receiver" id="assisted_listen_receiver" >\n';
+
+                            if (communicationData[0].assisted_listen_receiver === "Earbud") {
+                                bodyHtml += '<option value="Earbud" selected>&nbsp; Earbud</option>\n' +
+                                    '<option value="Neckloop" >&nbsp; Neckloop</option>\n ' +
+                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_receiver === "Neckloop") {
+                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
+                                    '<option value="Neckloop" selected>&nbsp; Neckloop</option>\n ' +
+                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_receiver === "Headphones") {
+                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
+                                    '<option value="Neckloop" >&nbsp; Neckloop</option>\n ' +
+                                    '<option value="Headphones" selected>&nbsp; Headphones</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assisted_listen_receiver === "Other") {
+                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
+                                    '<option value="Neckloop" selected>&nbsp; Neckloop</option>\n ' +
+                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
+                                    '<option value="Other" selected>&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
+                                    '<option value="Neckloop" >&nbsp; Neckloop</option>\n ' +
+                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="listening_signage"> Signs about listening devices are clearly displayed​: </label> <select class="form-control" name="listening_signage" id="listening_signage" >\n';
+
+                            if (communicationData[0].listening_signage === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].listening_signage === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="staff_listening"> Staff are trained to use assisted listening devices​: </label> <select class="form-control" name="staff_listening" id="staff_listening" >\n';
+
+                            if (communicationData[0].staff_listening === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].staff_listening === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="acoustics"> The acoustics are comfortable (no echoing, loud music, etc): </label> <select class="form-control" name="acoustics" id="acoustics" >\n';
+
+                            if (communicationData[0].acoustics === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].acoustics === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="acoustics_level"> Noise level - Low/Medium/High: </label> <select class="form-control" name="acoustics_level" id="acoustics_level" >\n';
+
+                            if (communicationData[0].acoustics_level === "Low") {
+                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="High" >&nbsp; High</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].acoustics_level === "Medium") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
+                                    '<option value="High" >&nbsp; High</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].acoustics_level === "High") {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="High" selected>&nbsp; High</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
+                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
+                                    '<option value="High" >&nbsp; High</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="alt_comm_methods"> If a customer is unable to hear, there are other forms of communication: </label><select class="form-control" name="alt_comm_methods" id="alt_comm_methods" >\n';
+
+                            if (communicationData[0].alt_comm_methods === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].alt_comm_methods === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="alt_comm_type"> Type of other form of communication (writing pad, staff know ASL, etc): </label><input type="text" class="form-control" name="alt_comm_type" id="alt_comm_type" value="'+communicationData[0].alt_comm_type+'"></div>\n'+
+        '            <div class="col-6"><label for="staff_ASL"> Staff have received instructions on how to provide ASL services upon request (in person or remote): </label><select class="form-control" name="staff_ASL" id="staff_ASL" >\n';
+
+                            if (communicationData[0].staff_ASL === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].staff_ASL === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="captioning_default"> Captioning is turned ‘on’ as default for TVs or projected video: </label> <select class="form-control" name="captioning_default" id="captioning_default" >\n';
+
+                            if (communicationData[0].captioning_default === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].captioning_default === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="theater_captioning"> If this is a theater, there is captioning: </label><select class="form-control" name="theater_captioning" id="theater_captioning" >\n';
+
+                            if (communicationData[0].theater_captioning === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].theater_captioning === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="theater_capt_type"> Type of captioning used - Real Time/Open Captions/Rear Window/Other: </label><select class="form-control" name="theater_capt_type" id="theater_capt_type" >\n';
+
+                            if (communicationData[0].theater_capt_type === "Real Time") {
+                                bodyHtml += '<option value="Real Time" selected>&nbsp; Real Time</option>\n' +
+                                    '<option value="Open Captions" >&nbsp; Open Captions</option>\n ' +
+                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].theater_capt_type === "Open Captions") {
+                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
+                                    '<option value="Open Captions" selected>&nbsp; Open Captions</option>\n ' +
+                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].theater_capt_type === "Rear Window") {
+                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
+                                    '<option value="Open Captions" >&nbsp; Open Captions</option>\n ' +
+                                    '<option value="Rear Window" selected>&nbsp; Rear Window</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].theater_capt_type === "Other") {
+                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
+                                    '<option value="Open Captions" selected>&nbsp; Open Captions</option>\n ' +
+                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
+                                    '<option value="Other" selected>&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
+                                    '<option value="Open Captions" >&nbsp; Open Captions</option>\n ' +
+                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
+                                    '<option value="Other" >&nbsp; Other</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="auditory_info_visual"> Auditory information is presented visually: </label> <select class="form-control" name="auditory_info_visual" id="auditory_info_visual" >\n';
+
+                            if (communicationData[0].auditory_info_visual === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].auditory_info_visual === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="visual_info_auditory"> Visual information is presented audibly: </label><select class="form-control" name="visual_info_auditory" id="visual_info_auditory" >\n';
+
+                            if (communicationData[0].visual_info_auditory === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].visual_info_auditory === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="website_text_reader"> If the establishment has a website, it is accessible to users of screen text readers: </label> <select class="form-control" name="website_text_reader" id="website_text_reader" >\n';
+
+                            if (communicationData[0].website_text_reader === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].website_text_reader === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="alt_contact"> There are alternate means for patrons to order, contact, or schedule: </label><select class="form-control" name="alt_contact" id="alt_contact" >\n';
+
+                            if (communicationData[0].alt_contact === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].alt_contact === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone: </label> <select class="form-control" name="alt_contact_type" id="alt_contact_type" >\n';
+
+                            if (communicationData[0].alt_contact_type === "Text") {
+                                bodyHtml += '<option value="Text" selected>&nbsp; Text</option>\n' +
+                                    '<option value="On-line" >&nbsp; On-line</option>\n ' +
+                                    '<option value="Phone" >&nbsp; Phone</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].alt_contact_type === "On-line") {
+                                bodyHtml += '<option value="Text" >&nbsp; Text</option>\n' +
+                                    '<option value="On-line" selected>&nbsp; On-line</option>\n ' +
+                                    '<option value="Phone" >&nbsp; Phone</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].alt_contact_type === "Phone") {
+                                bodyHtml += '<option value="Text" >&nbsp; Text</option>\n' +
+                                    '<option value="On-line" >&nbsp; On-line</option>\n ' +
+                                    '<option value="Phone" selected>&nbsp; Phone</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else {
+                                bodyHtml += '<option value="Text" >&nbsp; Text</option>\n' +
+                                    '<option value="On-line" >&nbsp; On-line</option>\n ' +
+                                    '<option value="Phone" >&nbsp; Phone</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4"><label for="shopping_assist"> The establishment offers shopping assistance or delivery: </label> <select class="form-control" name="shopping_assist" id="shopping_assist" >\n';
+
+                            if (communicationData[0].shopping_assist === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].shopping_assist === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery: </label><select class="form-control" name="assist_service" id="assist_service" >\n';
+
+                            if (communicationData[0].assist_service === "Shopping Assistance") {
+                                bodyHtml += '<option value="Shopping Assistance" selected>&nbsp; Shopping Assistance</option>\n' +
+                                    '<option value="Delivery" >&nbsp; Delivery</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assist_service === "Delivery") {
+                                bodyHtml += '<option value="Shopping Assistance" >&nbsp; Shopping Assistance</option>\n' +
+                                    '<option value="Delivery" selected>&nbsp; Delivery</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Shopping Assistance" >&nbsp; Shopping Assistance</option>\n' +
+                                    '<option value="Delivery" >&nbsp; Delivery</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-4"><label for="assist_fee"> Is there a fee for the service: </label> <select class="form-control" name="assist_fee" id="assist_fee" >\n';
+
+                            if (communicationData[0].assist_fee === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].assist_fee === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="store_scooter"> If this is a store, there are wheelchairs or scooters available for customer use: </label> <select class="form-control" name="store_scooter" id="store_scooter" >\n';
+
+                            if (communicationData[0].store_scooter === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].store_scooter === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="scooter_fee"> Is there a fee to use wheelchairs or scooters: </label> <select class="form-control" name="scooter_fee" id="scooter_fee" >\n';
+
+                            if (communicationData[0].scooter_fee === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].scooter_fee === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="scooter_location"> Location of wheelchairs or scooters: </label> <input type="text" class="form-control" name="scooter_location" id="scooter_location" value="'+communicationData[0].scooter_location+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="restaurant_allergies"> If this is a restaurant, information is available on food allergies, sensitivities: </label> <select class="form-control" name="restaurant_allergies" id="restaurant_allergies" >\n';
+
+                            if (communicationData[0].restaurant_allergies === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].restaurant_allergies === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-6"><label for="staff_disable_trained"> The staff have received training within the past 12 months on how to provide “disability friendly” customer service to people with disabilities of all ages: </label> <select class="form-control" name="staff_disable_trained" id="staff_disable_trained" >\n';
+
+                            if (communicationData[0].staff_disable_trained === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].staff_disable_trained === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="staff_disable_trained_desc"> If ‘yes’, describe the type of training, how it was delivered, and how often it is provided: </label> <input type="text" class="form-control" name="staff_disable_trained_desc" id="staff_disable_trained_desc" value="'+communicationData[0].staff_disable_trained_desc+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-3"><label for="items_reach"> All items are within reach, or assistance is offered to reach them: </label> <select class="form-control" name="items_reach" id="items_reach" >\n';
+
+                            if (communicationData[0].items_reach === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].items_reach === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="service_alt_manner"> If goods and services are not accessible, they are provided in an alternative manner: </label><select class="form-control" name="service_alt_manner" id="service_alt_manner" >\n';
+
+                            if (communicationData[0].service_alt_manner === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].service_alt_manner === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="senior_discount"> The establishment offers a senior discount: </label><select class="form-control" name="senior_discount" id="senior_discount" >\n';
+
+                            if (communicationData[0].senior_discount === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].senior_discount === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '            <div class="col-3"><label for="senior_age"> If ‘yes’, what age is considered ‘senior’: </label> <input type="number" min="0" class="form-control" name="senior_age" id="senior_age" value="'+communicationData[0].senior_age+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" name="annual_A4A_review" id="annual_A4A_review" >\n';
+
+                            if (communicationData[0].annual_A4A_review === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (communicationData[0].annual_A4A_review === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="commentCommunication"> Comments, reasons for “no” answers, additional information: </label><input type="text" class="form-control" name="commentCommunication" id="commentCommunication" value="'+communicationData[0].comment+'" ></div>\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-12"><label for="recommendationsCommunication"> Recommendations: </label><input type="text" class="form-control" name="recommendationsCommunication" id="recommendationsCommunication" value="'+communicationData[0].recommendations+'" ></div>\n' +
+        '            <input type="hidden" class="form-control" id="communication_id" value="'+communicationData[0].communication_id+'" >\n' +
+        '            <input type="hidden" class="form-control" id="est_idCommunication" value="'+communicationData[0].est_id+'" >\n' +
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-4">\n' +
+        '                <button  type="submit" id="save_communication" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Communication Technologies & Customer Service</button>\n' +
+        '            </div>\n' +
+        '        </div>' +
+        '   </form>';
+
+    $('#communication_card').html(bodyHtml);
+
+    $("#communication_view").validate({
+        rules: {
+            scooter_location: {
+                maxlength: 5000
+            },
+            commentCommunication: {
+                maxlength: 5000
+            },
+            recommendationsCommunication: {
+                maxlength: 5000
+            }
+        },
+        messages: {
+            scooter_location:  " Must be less than 5000 characters.",
+            commentCommunication:  " Must be less than 5000 characters.",
+            recommendationsCommunication: " Must be less than 5000 characters."
+        },
+        submitHandler: function(form) {
+            updateCommunication();
+        }
+    });
+
+}
+
 function updateCommunication() {
     var communication_id = document.getElementById("communication_id").value;
     var public_phone = document.getElementById("public_phone").value;
@@ -6577,7 +7207,7 @@ function updateCommunication() {
     var annual_A4A_review = document.getElementById("annual_A4A_review").value;
     var comment = document.getElementById("commentCommunication").value;
     var recommendations = document.getElementById("recommendationsCommunication").value;
-    var est_id = document.getElementById("est_idSeating").value;
+    var est_id = document.getElementById("est_idCommunication").value;
 
     // console.log("update.js:");
 
@@ -6631,6 +7261,7 @@ function updateCommunication() {
         success: function () {
             $("#success-body").html('Communication Technologies & Customer Service Updated');
             $("#success").modal('toggle');
+            CommunicationView();
         },
         error: function (data) {
             $("#alert-body").html(JSON.stringify(data));
