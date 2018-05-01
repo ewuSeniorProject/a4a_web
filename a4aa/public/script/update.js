@@ -9,6 +9,13 @@ var USER_NAME = "";
 var STA_ID = 0;
 var REST_ID = 0;
 var bodyHtml = "";
+var yesNoNAOptions = ["Yes","No","N/A"];
+var freePaidNAOptions = ["Free","Paid","N/A"];
+var meteredNotOptions = ["Metered","Not Metered","N/A"];
+var dayNitghtOptions = ["Day","Night","N/A"];
+var lowMedBrightOptions = ["Low","Medium","Bright","N/A"];
+var earbudNeckLoopOptions = ["Earbud","Neckloop","Headphones","Other","N/A"];
+var infraRedLoopOptions = ["Infra­red Loop","Induction Loop","FM","Amplification","Other","N/A"];
 
 $(document).ready(function () {
 
@@ -512,20 +519,7 @@ function ParkingView() {
         '   <div class="card-row">\n' +
         '       <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label> <select class="form-control" id="lot_free" name="lot_free" >\n';
 
-                        if (parkingData[0].lot_free === "Free") {
-                            bodyHtml += '<option value="Free" selected>&nbsp; Free</option>\n' +
-                                '<option value="Paid" >&nbsp; Paid</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (parkingData[0].lot_free === "Paid"){
-                            bodyHtml += '<option value="Free" >&nbsp; Free</option>\n' +
-                                '<option value="Paid" selected>&nbsp; Paid</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Free" >&nbsp; Free</option>\n' +
-                                '<option value="Paid" >&nbsp; Paid</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateThreeSelectOptions(parkingData[0].lot_free, freePaidNAOptions);
 
     bodyHtml += '   </select>\n ' +
         '       </div>\n' +
@@ -1037,7 +1031,7 @@ function PassengerLoadingView() {
         '            </div>\n' +
         '    </div>\n' +
         '    <div class="card-row">\n' +
-        '        <div class="col-4"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="passenger_surfacePassengerLoading" name="passenger_surfacePassengerLoading" >\n';
+        '        <div class="col-6"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="passenger_surfacePassengerLoading" name="passenger_surfacePassengerLoading" >\n';
 
                             if (passengerLoadingData[0].passenger_surface === "Yes") {
                                 bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
@@ -1056,7 +1050,7 @@ function PassengerLoadingView() {
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '        <div class="col-4"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" id="tactile_warning_stripsPassengerLoading" name="tactile_warning_stripsPassengerLoading" >\n';
+        '        <div class="col-6"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" id="tactile_warning_stripsPassengerLoading" name="tactile_warning_stripsPassengerLoading" >\n';
 
                             if (passengerLoadingData[0].tactile_warning_strips === "Yes") {
                                 bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
@@ -1075,7 +1069,28 @@ function PassengerLoadingView() {
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '        <div class="col-4"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="coveredPassengerLoading" name="coveredPassengerLoading" >\n';
+        '    </div>\n' +
+        '    <div class="card-row">\n' +
+        '        <div class="col-6"><label for="passenger_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="passenger_curbs" name="passenger_curbs" >\n';
+
+                            if (passengerLoadingData[0].passenger_curbs === "Yes") {
+                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            }
+                            else if (passengerLoadingData[0].passenger_curbs === "No") {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" selected>&nbsp; No</option>\n ' +
+                                    '<option value="N/A" >&nbsp; N/A</option>';
+                            } else {
+                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
+                                    '<option value="No" >&nbsp; No</option>\n ' +
+                                    '<option value="N/A" selected>&nbsp; N/A</option>';
+                            }
+
+    bodyHtml += '       </select>\n' +
+        '            </div>\n' +
+        '        <div class="col-6"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="coveredPassengerLoading" name="coveredPassengerLoading" >\n';
 
                             if (passengerLoadingData[0].covered === "Yes") {
                                 bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
@@ -1210,6 +1225,7 @@ function updatePassengerLoading() {
     var min_width = document.getElementById("min_widthPassengerLoading").value;
     var passenger_surface = document.getElementById("passenger_surfacePassengerLoading").value;
     var tactile_warning_strips = document.getElementById("tactile_warning_stripsPassengerLoading").value;
+    var passenger_curbs = document.getElementById("passenger_curbs").value;
     var covered = document.getElementById("coveredPassengerLoading").value;
     var lighting = document.getElementById("lightingPassengerLoading").value;
     var lighting_option = document.getElementById("lighting_optionPassengerLoading").value;
@@ -1230,6 +1246,7 @@ function updatePassengerLoading() {
             "min_width" : min_width,
             "passenger_surface" : passenger_surface,
             "tactile_warning_strips" : tactile_warning_strips,
+            "passenger_curbs" : passenger_curbs,
             "covered" : covered,
             "lighting" : lighting,
             "lighting_option" : lighting_option,
