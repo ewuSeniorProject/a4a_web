@@ -195,7 +195,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     margin: 0;
-    padding: 1em 0;
+    padding: 1em 0 0 0;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     background-color: lightslategrey;
@@ -230,7 +230,7 @@ a:hover {
 
 .box-padding {
     margin: 0;
-    padding: .2em 1em 1em 1em;
+    padding: .5em 1em 1em 1em;
 }
 
 .box-delete {

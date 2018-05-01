@@ -73,7 +73,7 @@ if($_SESSION['role'] !== 'admin'){
                 $preloader.delay(350).fadeOut('slow');
             });
         </script>
-
+        <script src="script/selectOptions.js"></script>
         <script src="script/update.js"></script>
     </head>
     <body>
@@ -101,7 +101,7 @@ if($_SESSION['role'] !== 'admin'){
             <div class="left-sidebar">
                 <div class="left-sidebar-header">
                     <span class="h7">
-                        <p>Viewing/Editing:</p>
+                        <p>Editing:</p>
                     </span>
                     <span class="h5">
                         <span class="pad" id="left_sb_name"></span>
