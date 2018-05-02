@@ -2,7 +2,7 @@ var EST_ID = "";
 var PARK_ID = "";
 var STA_ID = "";
 var RESTROOM_ID ="";
-var bodyHtml = "";
+// var bodyHtml = "";
 
 $(document).ready(function () {
 
@@ -107,57 +107,57 @@ function addEstablishmentView() {
         '            <div class="col-6"><label for="city"> City: </label><input type="text" class="form-control" name="city" id="city" ></div>\n' +
         '            <div class="col-2"><label for="state"> State: </label><select class="form-control" name="state" id="state">\n' +
         '               <option value="" disabled >Please select one</option>\n' +
-        '               <option value="AL">Alabama</option>\n' +
-        '               <option value="AK">Alaska</option>\n' +
-        '               <option value="AZ">Arizona</option>\n' +
-        '               <option value="AR">Arkansas</option>\n' +
-        '               <option value="CA">California</option>\n' +
-        '               <option value="CO">Colorado</option>\n' +
-        '               <option value="CT">Connecticut</option>\n' +
-        '               <option value="DE">Delaware</option>\n' +
-        '               <option value="DC">District Of Columbia</option>\n' +
-        '               <option value="FL">Florida</option>\n' +
-        '               <option value="GA">Georgia</option>\n' +
-        '               <option value="HI">Hawaii</option>\n' +
-        '               <option value="ID">Idaho</option>\n' +
-        '               <option value="IL">Illinois</option>\n' +
-        '               <option value="IN">Indiana</option>\n' +
-        '               <option value="IA">Iowa</option>\n' +
-        '               <option value="KS">Kansas</option>\n' +
-        '               <option value="KY">Kentucky</option>\n' +
-        '               <option value="LA">Louisiana</option>\n' +
-        '               <option value="ME">Maine</option>\n' +
-        '               <option value="MD">Maryland</option>\n' +
-        '               <option value="MA">Massachusetts</option>\n' +
-        '               <option value="MI">Michigan</option>\n' +
-        '               <option value="MN">Minnesota</option>\n' +
-        '               <option value="MS">Mississippi</option>\n' +
-        '               <option value="MO">Missouri</option>\n' +
-        '               <option value="MT">Montana</option>\n' +
-        '               <option value="NE">Nebraska</option>\n' +
-        '               <option value="NV">Nevada</option>\n' +
-        '               <option value="NH">New Hampshire</option>\n' +
-        '               <option value="NJ">New Jersey</option>\n' +
-        '               <option value="NM">New Mexico</option>\n' +
-        '               <option value="NY">New York</option>\n' +
-        '               <option value="NC">North Carolina</option>\n' +
-        '               <option value="ND">North Dakota</option>\n' +
-        '               <option value="OH">Ohio</option>\n' +
-        '               <option value="OK">Oklahoma</option>\n' +
-        '               <option value="OR">Oregon</option>\n' +
-        '               <option value="PA">Pennsylvania</option>\n' +
-        '               <option value="RI">Rhode Island</option>\n' +
-        '               <option value="SC">South Carolina</option>\n' +
-        '               <option value="SD">South Dakota</option>\n' +
-        '               <option value="TN">Tennessee</option>\n' +
-        '               <option value="TX">Texas</option>\n' +
-        '               <option value="UT">Utah</option>\n' +
-        '               <option value="VT">Vermont</option>\n' +
-        '               <option value="VA">Virginia</option>\n' +
-        '               <option value="WA" selected>Washington</option>\n' +
-        '               <option value="WV">West Virginia</option>\n' +
-        '               <option value="WI">Wisconsin</option>\n' +
-        '               <option value="WY">Wyoming</option>\n ' +
+        '               <option value="AL">AL</option>\n' +
+        '               <option value="AK">AK</option>\n' +
+        '               <option value="AZ">AZ</option>\n' +
+        '               <option value="AR">AR</option>\n' +
+        '               <option value="CA">CA</option>\n' +
+        '               <option value="CO">CO</option>\n' +
+        '               <option value="CT">CT</option>\n' +
+        '               <option value="DE">DE</option>\n' +
+        '               <option value="DC">DC</option>\n' +
+        '               <option value="FL">FL</option>\n' +
+        '               <option value="GA">GA</option>\n' +
+        '               <option value="HI">HI</option>\n' +
+        '               <option value="ID">ID</option>\n' +
+        '               <option value="IL">IL</option>\n' +
+        '               <option value="IN">IN</option>\n' +
+        '               <option value="IA">IA</option>\n' +
+        '               <option value="KS">KS</option>\n' +
+        '               <option value="KY">KY</option>\n' +
+        '               <option value="LA">LA</option>\n' +
+        '               <option value="ME">ME</option>\n' +
+        '               <option value="MD">MD</option>\n' +
+        '               <option value="MA">MA</option>\n' +
+        '               <option value="MI">MI</option>\n' +
+        '               <option value="MN">MN</option>\n' +
+        '               <option value="MS">MS</option>\n' +
+        '               <option value="MO">MO</option>\n' +
+        '               <option value="MT">MT</option>\n' +
+        '               <option value="NE">NE</option>\n' +
+        '               <option value="NV">NV</option>\n' +
+        '               <option value="NH">NH</option>\n' +
+        '               <option value="NJ">NJ</option>\n' +
+        '               <option value="NM">NM</option>\n' +
+        '               <option value="NY">NY</option>\n' +
+        '               <option value="NC">NC</option>\n' +
+        '               <option value="ND">ND</option>\n' +
+        '               <option value="OH">OH</option>\n' +
+        '               <option value="OK">OK</option>\n' +
+        '               <option value="OR">OR</option>\n' +
+        '               <option value="PA">PA</option>\n' +
+        '               <option value="RI">RI</option>\n' +
+        '               <option value="SC">SC</option>\n' +
+        '               <option value="SD">SD</option>\n' +
+        '               <option value="TN">TN</option>\n' +
+        '               <option value="TX">TX</option>\n' +
+        '               <option value="UT">UT</option>\n' +
+        '               <option value="VT">VT</option>\n' +
+        '               <option value="VA">VA</option>\n' +
+        '               <option value="WA" selected>WA</option>\n' +
+        '               <option value="WV">WV</option>\n' +
+        '               <option value="WI">WI</option>\n' +
+        '               <option value="WY">WY</option>\n ' +
         '               </select>\n ' +
         '               </div>' +
         '            <div class="col-4"><label for="zip"> Zip: </label><input class="form-control" name="zip" id="zip" ></div>\n' +
@@ -446,19 +446,13 @@ function addParkingView() {
 
     bodyHtml = '<form id="add_parking">\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label><select class="form-control" name="lot_free" id="lot_free">\n' +
-        '           <option value="" disabled selected>Please select one</option>\n' +
-        '           <option value="Free" >Free</option>\n' +
-        '           <option value="Paid" >Paid</option>\n' +
-        '           <option value="N/A" >N/A</option>\n' +
-        '       </select>\n' +
+        '    <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label><select class="form-control" name="lot_free" id="lot_free">\n';
+    bodyHtml += addGenSelectOptions(freePaidNAOptions);
+    bodyHtml += '</select>\n' +
         '    </div>\n' +
-        '    <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" name="street_metered" id="street_metered" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Metered" >Metered</option>\n' +
-        '       <option value="Not Metered" >Not Metered</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" name="street_metered" id="street_metered" >\n';
+    bodyHtml += addGenSelectOptions(meteredNotOptions);
+    bodyHtml += '</select>\n' +
         '</div>\n' +
         '    <div class="col-4"><label for="parking_type"> Other type of parking: </label><input type="text" class="form-control" name="parking_type" id="parking_type" ></div>\n' +
         '</div>\n' +
@@ -471,19 +465,13 @@ function addParkingView() {
         '    <div class="col-6"><label for="num_van_accessible"> Number of van accessible spaces: </label><input type="number" min="0"  class="form-control" id="num_van_accessible" id="num_van_accessible" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><select class="form-control" name="reserve_space_sign" id="reserve_space_sign" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><select class="form-control" name="reserve_space_sign" id="reserve_space_sign" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '</div>\n' +
-        '    <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><select class="form-control" name="reserve_space_obstacles" id="reserve_space_obstacles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><select class="form-control" name="reserve_space_obstacles" id="reserve_space_obstacles" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '</div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -621,66 +609,41 @@ function addRouteFromParkingView() {
     bodyHtml = '<form id="add_route_from_parking">\n ' +
         '<div class="card-row">\n' +
         '    <div class="col-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input type="number" min="0" class="form-control" name="distance" id="distance" ></div>\n' +
-        '    <div class="col-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_width" id="min_width" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_width" id="min_width" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="route_surface"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="route_surface" id="route_surface">\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="route_surface"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="route_surface" id="route_surface">\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="route_curbs"> Route has curb ramps and curb cuts where needed: </label> <select class="form-control" name="route_curbs" id="route_curbs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="route_curbs"> Route has curb ramps and curb cuts where needed: </label> <select class="form-control" name="route_curbs" id="route_curbs" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warning"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warning" id="tactile_warning" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="tactile_warning"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warning" id="tactile_warning" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="covered"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="covered" id="covered" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="covered"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="covered" id="covered" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lighting"> Lighting is adequate: </label><select class="form-control" name="lighting" id="lighting" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting"> Lighting is adequate: </label><select class="form-control" name="lighting" id="lighting" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_option"> Lighting level day/night: </label><select class="form-control" name="lighting_option" id="lighting_option" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_option"> Lighting level day/night: </label><select class="form-control" name="lighting_option" id="lighting_option" >\n';
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_type"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_type" id="lighting_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_type"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_type" id="lighting_type" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -787,76 +750,48 @@ function addPassengerLoadingView() {
 
     bodyHtml = '<form id="add_passenger_loading">\n ' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <select class="form-control" name="designated_zonePassengerLoading" id="designated_zonePassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <select class="form-control" name="designated_zonePassengerLoading" id="designated_zonePassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input type="number" min="0" class="form-control" name="distancePassengerLoading" id="distancePassengerLoading"></div>\n' +
-        '    <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_widthPassengerLoading" id="min_widthPassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_widthPassengerLoading" id="min_widthPassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="passenger_surfacePassengerLoading" id="passenger_surfacePassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="passenger_surfacePassengerLoading" id="passenger_surfacePassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" name="tactile_warning_stripsPassengerLoading" id="tactile_warning_stripsPassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" name="tactile_warning_stripsPassengerLoading" id="tactile_warning_stripsPassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="passenger_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="passenger_curbs" id="passenger_curbs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="passenger_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="passenger_curbs" id="passenger_curbs" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="coveredPassengerLoading" id="coveredPassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" name="coveredPassengerLoading" id="coveredPassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingPassengerLoading"> Lighting is adequate: </label><select class="form-control" name="lightingPassengerLoading" id="lightingPassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingPassengerLoading"> Lighting is adequate: </label><select class="form-control" name="lightingPassengerLoading" id="lightingPassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionPassengerLoading"> Lighting level day/night: </label><select class="form-control" name="lighting_optionPassengerLoading" id="lighting_optionPassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_optionPassengerLoading"> Lighting level day/night: </label><select class="form-control" name="lighting_optionPassengerLoading" id="lighting_optionPassengerLoading" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typePassengerLoading"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typePassengerLoading" id="lighting_typePassengerLoading" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typePassengerLoading"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typePassengerLoading" id="lighting_typePassengerLoading" >\n';
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -879,9 +814,6 @@ function addPassengerLoadingView() {
     $("#add_passenger_loading").validate({
         rules: {
             distancePassengerLoading: {
-                number: true
-            },
-            min_widthPassengerLoading: {
                 number: true
             },
             commentPassengerLoading: {
@@ -968,12 +900,9 @@ function addSTABusView() {
 
     bodyHtml = '<form id="add_sta">\n ' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <select class="form-control" name="sta_service_area" id="sta_service_area" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <select class="form-control" name="sta_service_area" id="sta_service_area" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="fixed_stop"> Access to Spokane Transit Area Fixed BUS STOP: </label><br>\n' +
         '       <span class="alert-text">You will be prompted to add STA Routes after saving this section</span>\n' +
@@ -981,66 +910,41 @@ function addSTABusView() {
         '</div>\n' +
         '<div class="card-row">\n' +
         '    <div class="col-6"><label for="distanceStaBus"> Distance from nearest bus stop (feet): </label> <input type="number" min="0" class="form-control" name="distanceStaBus" id="distanceStaBus" ></div>\n' +
-        '    <div class="col-6"><label for="min_widthStaBus"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_widthStaBus" id="min_widthStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="min_widthStaBus"> Route is minimum width and free of obstacles: </label><select class="form-control" name="min_widthStaBus" id="min_widthStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="route_surfaceStaBus" id="route_surfaceStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="route_surfaceStaBus" id="route_surfaceStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warning_stripsStaBus" id="tactile_warning_stripsStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warning_stripsStaBus" id="tactile_warning_stripsStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="curb_cutsStaBus" id="curb_cutsStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="curb_cutsStaBus" id="curb_cutsStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><select class="form-control" name="lightingStaBus" id="lightingStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><select class="form-control" name="lightingStaBus" id="lightingStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><select class="form-control" name="lighting_optionStaBus" id="lighting_optionStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><select class="form-control" name="lighting_optionStaBus" id="lighting_optionStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeStaBus" id="lighting_typeStaBus" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeStaBus" id="lighting_typeStaBus" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><select class="form-control" name="shelter_bench" id="shelter_bench" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><select class="form-control" name="shelter_bench" id="shelter_bench" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -1279,83 +1183,52 @@ function addExteriorPathwaysView() {
 
     bodyHtml = '<form id="add_exterior_pathways">\n ' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <select class="form-control" name="service_animal" id="service_animal" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <select class="form-control" name="service_animal" id="service_animal" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-8"><label for="service_animal_location"> Location of service animal relief: </label> <input type="text" class="form-control" name="service_animal_location" id="service_animal_location" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <select class="form-control" name="has_exterior_path" id="has_exterior_path" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <select class="form-control" name="has_exterior_path" id="has_exterior_path" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><select class="form-control" name="min_widthExteriorPathway" id="min_widthExteriorPathway" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><select class="form-control" name="min_widthExteriorPathway" id="min_widthExteriorPathway" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="pathway_surface" id="pathway_surface" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" name="pathway_surface" id="pathway_surface" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="pathway_curbs" id="pathway_curbs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" name="pathway_curbs" id="pathway_curbs" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warningExteriorPathway" id="tactile_warningExteriorPathway" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><select class="form-control" name="tactile_warningExteriorPathway" id="tactile_warningExteriorPathway" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><select class="form-control" name="slope" id="slope" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><select class="form-control" name="slope" id="slope" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorPathway" id="lightingExteriorPathway" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorPathway" id="lightingExteriorPathway" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionExteriorPathway"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorPathway" id="lighting_optionExteriorPathway" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_optionExteriorPathway"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorPathway" id="lighting_optionExteriorPathway" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeExteriorPathway"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorPathway" id="lighting_typeExteriorPathway" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeExteriorPathway"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorPathway" id="lighting_typeExteriorPathway" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -1516,86 +1389,55 @@ function addExteriorStairsView() {
 
     bodyHtml = '<form id="add_exterior_stairs">\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <select class="form-control" name="stairs_required" id="stairs_required" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <select class="form-control" name="stairs_required" id="stairs_required" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <select class="form-control" name="stairs_available" id="stairs_available" >\n' +
-        '       <option value="" disabled>Please select one</option>\n' +
-        '       <option value="Yes" selected>Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <select class="form-control" name="stairs_available" id="stairs_available" >\n';
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="num_stairs"> Number of stairs: </label> <input type="number" min="0" class="form-control" name="num_stairs" id="num_stairs" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" name="handrail_both_sides" id="handrail_both_sides" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" name="handrail_both_sides" id="handrail_both_sides" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><select class="form-control" name="handrail_side" id="handrail_side" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Left" >Left</option>\n' +
-        '       <option value="Right" >Right</option>\n' +
-        '       <option value="None" >None</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None: </label><select class="form-control" name="handrail_side" id="handrail_side" >\n';
+    bodyHtml += addGenSelectOptions(leftRightNoneOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-8"><label for="handrail_regulation_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" name="handrail_regulation_height" id="handrail_regulation_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-8"><label for="handrail_regulation_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" name="handrail_regulation_height" id="handrail_regulation_height" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="handrail_height"> Handrail height: </label><input type="number" min="0" class="form-control" name="handrail_height" id="handrail_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><select class="form-control" name="obstacles" id="obstacles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><select class="form-control" name="obstacles" id="obstacles" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><select class="form-control" name="clearly_marked" id="clearly_marked" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><select class="form-control" name="clearly_marked" id="clearly_marked" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorStairs" id="lightingExteriorStairs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorStairs" id="lightingExteriorStairs" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionExteriorStairs"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorStairs" id="lighting_optionExteriorStairs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_optionExteriorStairs"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorStairs" id="lighting_optionExteriorStairs" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeExteriorStairs"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorStairs" id="lighting_typeExteriorStairs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeExteriorStairs"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorStairs" id="lighting_typeExteriorStairs" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -1762,117 +1604,74 @@ function addExteriorRampsView() {
 
     bodyHtml = '<form id="add_exterior_ramps">\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <select class="form-control" name="ramp_required" id="ramp_required" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <select class="form-control" name="ramp_required" id="ramp_required" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <select class="form-control" name="ramp_available" id="ramp_available" >\n' +
-        '       <option value="" disabled >Please select one</option>\n' +
-        '       <option value="Yes" selected>Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <select class="form-control" name="ramp_available" id="ramp_available" >\n';
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <select class="form-control" name="min_widthExteriorRamps" id="min_widthExteriorRamps" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <select class="form-control" name="min_widthExteriorRamps" id="min_widthExteriorRamps" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-3"><label for="width_between_handrails"> Ramps width: </label> <input type="number" min="0" class="form-control" name="width_between_handrails" id="width_between_handrails" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="min_slope"> For each section of ramp, the RUNNING SLOPE is no greater than 1:12: </label> <select class="form-control" name="min_slope" id="min_slope" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="min_slope"> For each section of ramp, the RUNNING SLOPE is no greater than 1:12: </label> <select class="form-control" name="min_slope" id="min_slope" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="slopeExteriorRamps"> Alternatively, the slope is less than 2 percent grade (%): </label><input type="number" min="0"  class="form-control" name="slopeExteriorRamps" id="slopeExteriorRamps" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="level_landing_both"> There is a level landing at the top and bottom of the ramp: </label> <select class="form-control" name="level_landing_both" id="level_landing_both" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="level_landing_both"> There is a level landing at the top and bottom of the ramp: </label> <select class="form-control" name="level_landing_both" id="level_landing_both" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="level_landing_location"> Landing location Top/Bottom: </label><select class="form-control" name="level_landing_location" id="level_landing_location" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Top" >Top</option>\n' +
-        '       <option value="Bottom" >Bottom</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="level_landing_location"> Landing location Top/Bottom: </label><select class="form-control" name="level_landing_location" id="level_landing_location" >\n';
+    bodyHtml += addGenSelectOptions(topBottomOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="obstaclesExteriorRamps"> Ramps are clear of obstacles or protrusions: </label><select class="form-control" name="obstaclesExteriorRamps" id="obstaclesExteriorRamps" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="obstaclesExteriorRamps"> Ramps are clear of obstacles or protrusions: </label><select class="form-control" name="obstaclesExteriorRamps" id="obstaclesExteriorRamps" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" name="handrails_both_sides" id="handrails_both_sides" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" name="handrails_both_sides" id="handrails_both_sides" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="handrail_sides"> Handrail sides Left/Right/None: </label><select class="form-control" name="handrail_sides" id="handrail_sides" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Left" >Left</option>\n' +
-        '       <option value="Right" >Right</option>\n' +
-        '       <option value="None" >None</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="handrail_sides"> Handrail sides Left/Right/None: </label><select class="form-control" name="handrail_sides" id="handrail_sides" >\n';
+    bodyHtml += addGenSelectOptions(leftRightNoneOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="handrail_regulation_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" name="handrail_regulation_heightExteriorRamps" id="handrail_regulation_heightExteriorRamps" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="handrail_regulation_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" name="handrail_regulation_heightExteriorRamps" id="handrail_regulation_heightExteriorRamps" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="handrail_heightExteriorRamps"> Handrail height: </label><input type="number" min="0" class="form-control" name="handrail_heightExteriorRamps" id="handrail_heightExteriorRamps" ></div>\n' +
-        '    <div class="col-4"><label for="side_guards"> Ramps have adequate side guards: </label><select class="form-control" name="side_guards" id="side_guards" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="side_guards"> Ramps have adequate side guards: </label><select class="form-control" name="side_guards" id="side_guards" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingExteriorRamps"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorRamps" id="lightingExteriorRamps" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingExteriorRamps"> Lighting is adequate: </label><select class="form-control" name="lightingExteriorRamps" id="lightingExteriorRamps" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionExteriorRamps"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorRamps" id="lighting_optionExteriorRamps" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_optionExteriorRamps"> Lighting level day/night: </label><select class="form-control" name="lighting_optionExteriorRamps" id="lighting_optionExteriorRamps" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeExteriorRamps"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorRamps" id="lighting_typeExteriorRamps" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeExteriorRamps"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeExteriorRamps" id="lighting_typeExteriorRamps" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -1998,139 +1797,89 @@ function addMainEntranceView() {
     $('#cardTitle').html('New Main Entrance');
     window.scrollTo(0,0);
 
-    bodyHtml = '<form id="add_main_entrance"\n' +
+    bodyHtml = '<form id="add_main_entrance">\n' +
         '<div class="card-row">\n' +
         '    <div class="col-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input type="number" min="0" class="form-control" name="total_num_public_entrances" id="total_num_public_entrances" ></div>\n' +
-        '    <div class="col-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <select class="form-control" name="main_ent_accessible" id="main_ent_accessible" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <select class="form-control" name="main_ent_accessible" id="main_ent_accessible" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <select class="form-control" name="alt_ent_accessible" id="alt_ent_accessible" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <select class="form-control" name="alt_ent_accessible" id="alt_ent_accessible" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <select class="form-control" name="accessable_signage" id="accessable_signage" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <select class="form-control" name="accessable_signage" id="accessable_signage" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <select class="form-control" name="ground_level" id="ground_level" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <select class="form-control" name="ground_level" id="ground_level" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="threshold_level"> Threshold of entrance is level: </label><select class="form-control" name="threshold_level" id="threshold_level" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="threshold_level"> Threshold of entrance is level: </label><select class="form-control" name="threshold_level" id="threshold_level" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <select class="form-control" name="threshold_beveled" id="threshold_beveled" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <select class="form-control" name="threshold_beveled" id="threshold_beveled" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="beveled_height"> Height: </label><input type="number" min="0.00" step=".01" placeholder="0.5" class="form-control" name="beveled_height" id="beveled_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="door_action"> As you enter the door opens: </label><select class="form-control" name="door_action" id="door_action" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Slide To Side" >Slide To Side</option>\n' +
-        '       <option value="Open Out" >Open Out</option>\n' +
-        '       <option value="Open In" >Open In</option>\n' +
-        '       <option value="Other" >Other</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="door_action"> As you enter the door opens: </label><select class="form-control" name="door_action" id="door_action" >\n';
+    bodyHtml += addGenSelectOptions(slideOpenOtherOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" name="door_open_clearance" id="door_open_clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" name="door_open_clearance" id="door_open_clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="opening_measurement"> Opening measurement (inches): </label><input type="number" min="0" class="form-control" name="opening_measurement" id="opening_measurement" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="door_easy_open"> Doors are easy to open: </label><select class="form-control" name="door_easy_open" id="door_easy_open" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="door_easy_open"> Doors are easy to open: </label><select class="form-control" name="door_easy_open" id="door_easy_open" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="door_open_force"> Actual lbs of force: </label><input type="number" min="0" class="form-control" name="door_open_force" id="door_open_force" ></div>\n' +
-        '    <div class="col-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><select class="form-control" name="door_use_with_fist" id="door_use_with_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><select class="form-control" name="door_use_with_fist" id="door_use_with_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><select class="form-control" name="door_auto_open" id="door_auto_open" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><select class="form-control" name="door_auto_open" id="door_auto_open" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><select class="form-control" name="second_door_inside" id="second_door_inside" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><select class="form-control" name="second_door_inside" id="second_door_inside" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><select class="form-control" name="min_dist_between_doors" id="min_dist_between_doors" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><select class="form-control" name="min_dist_between_doors" id="min_dist_between_doors" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><select class="form-control" name="lightingMainEntrance" id="lightingMainEntrance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><select class="form-control" name="lightingMainEntrance" id="lightingMainEntrance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><select class="form-control" name="lighting_optionMainEntrance" id="lighting_optionMainEntrance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><select class="form-control" name="lighting_optionMainEntrance" id="lighting_optionMainEntrance" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeMainEntrance" id="lighting_typeMainEntrance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeMainEntrance" id="lighting_typeMainEntrance" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -2153,9 +1902,6 @@ function addMainEntranceView() {
     $("#add_main_entrance").validate({
         rules: {
             total_num_public_entrances: {
-                number: true
-            },
-            main_ent_accessible: {
                 number: true
             },
             beveled_height: {
@@ -2270,109 +2016,72 @@ function addInteriorView() {
 
     bodyHtml = '<form id="add_interior">\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" name="int_door_open_clearance" id="int_door_open_clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" name="int_door_open_clearance" id="int_door_open_clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="int_opening_measurement"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" name="int_opening_measurement" id="int_opening_measurement" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <select class="form-control" name="int_door_easy_open" id="int_door_easy_open" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <select class="form-control" name="int_door_easy_open" id="int_door_easy_open" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="int_door_open_force"> Actual lbs of force: </label> <input type="number" min="0" class="form-control" name="int_door_open_force" id="int_door_open_force" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <select class="form-control" name="int_door_use_with_fist" id="int_door_use_with_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <select class="form-control" name="int_door_use_with_fist" id="int_door_use_with_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><select class="form-control" name="five_second_close" id="five_second_close" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><select class="form-control" name="five_second_close" id="five_second_close" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <select class="form-control" name="hallway_width" id="hallway_width" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <select class="form-control" name="hallway_width" id="hallway_width" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="narrowest_width"> Narrowest width (inches): </label><input type="number" min="0" class="form-control" name="narrowest_width" id="narrowest_width" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><select class="form-control" name="wheelchair_turnaround" id="wheelchair_turnaround" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><select class="form-control" name="wheelchair_turnaround" id="wheelchair_turnaround" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <select class="form-control" name="hallway_obstacles" id="hallway_obstacles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <select class="form-control" name="hallway_obstacles" id="hallway_obstacles" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><select class="form-control" name="hallway_clear" id="hallway_clear" ></div>\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><select class="form-control" name="hallway_clear" id="hallway_clear" ></div>\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="lightingInterior"> Lighting is adequate: </label><select class="form-control" name="lightingInterior" id="lightingInterior" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="lightingInterior"> Lighting is adequate: </label><select class="form-control" name="lightingInterior" id="lightingInterior" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeInterior" id="lighting_typeInterior" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeInterior" id="lighting_typeInterior" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><select class="form-control" name="service_counter" id="service_counter" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><select class="form-control" name="service_counter" id="service_counter" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-3"><label for="counter_height"> Service counter height (inches): </label><input type="number" min="0" class="form-control" name="counter_height" id="counter_height" ></div>\n' +
-        '    <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input class="form-control" name="writing_surface_height" id="writing_surface_height" ></div>\n' +
+        '    <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input type="number" min="0" class="form-control" name="writing_surface_height" id="writing_surface_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" name="drinking_fountain" id="drinking_fountain" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" name="drinking_fountain" id="drinking_fountain" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -2556,89 +2265,58 @@ function addElevatorView() {
 
     bodyHtml = '<form id="add_elevator" >\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <select class="form-control" name="is_elevator" id="is_elevator" >\n' +
-        '       <option value="" disabled >Please select one</option>\n' +
-        '       <option value="Yes" selected>Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <select class="form-control" name="is_elevator" id="is_elevator" >\n';
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-9"><label for="location"> Where is nearest elevator or lift located in relation to the accessible entrance: </label> <input type="text" class="form-control" name="location" id="location" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="works"> The elevator or lift works properly: </label> <select class="form-control" name="works" id="works" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="works"> The elevator or lift works properly: </label> <select class="form-control" name="works" id="works" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <select class="form-control" name="no_assist" id="no_assist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <select class="form-control" name="no_assist" id="no_assist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <select class="form-control" name="button_height" id="button_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <select class="form-control" name="button_height" id="button_height" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-3"><label for="outside_btn_height"> Outside button height (inches): </label><input type="number" min="0" class="form-control" name="outside_btn_height" id="outside_btn_height" ></div>\n' +
         '    <div class="col-3"><label for="inside_btn_height"> Inside button height (inches): </label> <input type="number" min="0" class="form-control" name="inside_btn_height" id="inside_btn_height" ></div>\n' +
-        '    <div class="col-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><select class="form-control" name="button_use_fist" id="button_use_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><select class="form-control" name="button_use_fist" id="button_use_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><select class="form-control" id="braille" name="braille" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><select class="form-control" id="braille" name="braille" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <select class="form-control" id="audible_tones" name="audible_tones" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <select class="form-control" id="audible_tones" name="audible_tones" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="lightingElevator"> Lighting is adequate: </label><select class="form-control" id="lightingElevator" name="lightingElevator" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="lightingElevator"> Lighting is adequate: </label><select class="form-control" id="lightingElevator" name="lightingElevator" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeElevator" name="lighting_typeElevator" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeElevator" name="lighting_typeElevator" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​​from door to the back : </label><select class="form-control" id="elevator_depth"  name="elevator_depth" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​​from door to the back : </label><select class="form-control" id="elevator_depth"  name="elevator_depth" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -2759,76 +2437,48 @@ function addSignageView() {
 
     bodyHtml = '<form id="add_signage">\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <select class="form-control" name="is_directory" id="is_directory" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <select class="form-control" name="is_directory" id="is_directory" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="door_signs"> Door signs are on latch side of door, between 48” and 60” from floor: </label> <select class="form-control" name="door_signs" id="door_signs" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="door_signs"> Door signs are on latch side of door, between 48” and 60” from floor: </label> <select class="form-control" name="door_signs" id="door_signs" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="sign_height"> Height of signs (inches): </label> <input type="number" min="0" class="form-control" name="sign_height" id="sign_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="pub_sign_braile"> Public signs have Braille: </label> <select class="form-control" name="pub_sign_braile" id="pub_sign_braile" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="pub_sign_braile"> Public signs have Braille: </label> <select class="form-control" name="pub_sign_braile" id="pub_sign_braile" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_high_contrast"> Signs have raised, high contrast lettering, ​low glare background: </label> <select class="form-control" name="sign_high_contrast" id="sign_high_contrast" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="sign_high_contrast"> Signs have raised, high contrast lettering, ​low glare background: </label> <select class="form-control" name="sign_high_contrast" id="sign_high_contrast" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_images"> Signs include images, illustrations, or icons: </label><select class="form-control" name="sign_images" id="sign_images" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="sign_images"> Signs include images, illustrations, or icons: </label><select class="form-control" name="sign_images" id="sign_images" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="written_material_images"> Written material (menus, etc.) includes images or illustrations: </label> <select class="form-control" name="written_material_images" id="written_material_images" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="written_material_images"> Written material (menus, etc.) includes images or illustrations: </label> <select class="form-control" name="written_material_images" id="written_material_images" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="menu_access"> There is a large print menu, Braille menu, and/ or on­line accessible menu: </label><select class="form-control" name="menu_access" id="menu_access" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="menu_access"> There is a large print menu, Braille menu, and/ or on­line accessible menu: </label><select class="form-control" name="menu_access" id="menu_access" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_info"> Information is available in alternative formats: </label><select class="form-control" name="alt_info" id="alt_info" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="alt_info"> Information is available in alternative formats: </label><select class="form-control" name="alt_info" id="alt_info" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" name="alt_info_type" id="alt_info_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Braille" >Braille</option>\n' +
-        '       <option value="Large print" >Large print</option>\n' +
-        '       <option value="Recorded audio" >Recorded audio</option>\n' +
-        '       <option value="Video" >Video</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" name="alt_info_type" id="alt_info_type" >\n';
+    bodyHtml += addGenSelectOptions(brailleLargePrintOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -2936,89 +2586,55 @@ function addEmergencyPreparednessView() {
 
     bodyHtml = '<form id="add_emergency_preparedness"> \n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <select class="form-control" name="evac_info" id="evac_info" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <select class="form-control" name="evac_info" id="evac_info" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="alt_evac_info"> Evacuation and safety information is available in alternative format: </label> <select class="form-control" name="alt_evac_info" id="alt_evac_info" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="alt_evac_info"> Evacuation and safety information is available in alternative format: </label> <select class="form-control" name="alt_evac_info" id="alt_evac_info" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" name="evac_info_format" id="evac_info_format" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Braille" >Braille</option>\n' +
-        '       <option value="Large print" >Large print</option>\n' +
-        '       <option value="Recorded audio" >Recorded audio</option>\n' +
-        '       <option value="Video" >Video</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" name="evac_info_format" id="evac_info_format" >\n';
+    bodyHtml += addGenSelectOptions(brailleLargePrintOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="alarms"> Emergency alarms both audible and visible: </label> <select class="form-control" name="alarms" id="alarms" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="alarms"> Emergency alarms both audible and visible: </label> <select class="form-control" name="alarms" id="alarms" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="location_no_flash"> There is an emergency location available where there are no flashing alarms: </label> <select class="form-control" name="location_no_flash" id="location_no_flash" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="location_no_flash"> There is an emergency location available where there are no flashing alarms: </label> <select class="form-control" name="location_no_flash" id="location_no_flash" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="shelter"> There is an area of refuge, shelter in place during emergencies: </label><select class="form-control" name="shelter" id="shelter" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="shelter"> There is an area of refuge, shelter in place during emergencies: </label><select class="form-control" name="shelter" id="shelter" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="signs_to_exit"> Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes: </label> <select class="form-control" name="signs_to_exit" id="signs_to_exit" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="signs_to_exit"> Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes: </label> <select class="form-control" name="signs_to_exit" id="signs_to_exit" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="wheelchair_plan"> There is a plan for evacuating persons using wheelchairs in case elevators are inoperable: </label><select class="form-control" name="wheelchair_plan" id="wheelchair_plan" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="wheelchair_plan"> There is a plan for evacuating persons using wheelchairs in case elevators are inoperable: </label><select class="form-control" name="wheelchair_plan" id="wheelchair_plan" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="floor_plan_routes"> Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes: </label><select class="form-control" name="floor_plan_routes" id="floor_plan_routes" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="floor_plan_routes"> Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes: </label><select class="form-control" name="floor_plan_routes" id="floor_plan_routes" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="fire_alarm_height"> Fire alarms pull boxes are no higher than 48”: </label> <select class="form-control" name="fire_alarm_height" id="fire_alarm_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="fire_alarm_height"> Fire alarms pull boxes are no higher than 48”: </label> <select class="form-control" name="fire_alarm_height" id="fire_alarm_height" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="fire_extinguisher_height"> Fire extinguishers are mounted with bottom no higher than 48”: </label> <select class="form-control" name="fire_extinguisher_height" id="fire_extinguisher_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="fire_extinguisher_height"> Fire extinguishers are mounted with bottom no higher than 48”: </label> <select class="form-control" name="fire_extinguisher_height" id="fire_extinguisher_height" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -3125,123 +2741,80 @@ function addSeatingView() {
 
     bodyHtml = '<form id="add_seating"> \n ' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <select class="form-control" name="seating_no_step" id="seating_no_step" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <select class="form-control" name="seating_no_step" id="seating_no_step" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="table_aisles"> Customers can maneuver between tables without bumping into chairs (36” aisles)​: </label> <select class="form-control" name="table_aisles" id="table_aisles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="table_aisles"> Customers can maneuver between tables without bumping into chairs (36” aisles)​: </label> <select class="form-control" name="table_aisles" id="table_aisles" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="legroom"> There are tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”): </label> <select class="form-control" name="legroom" id="legroom" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="legroom"> There are tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”): </label> <select class="form-control" name="legroom" id="legroom" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" class="form-control" name="num_legroom" id="num_legroom"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" name="rearranged" id="rearranged" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" name="rearranged" id="rearranged" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="num_table_rearranged"> Number of tables that can be moved #/All: </label><input type="text" class="form-control" name="num_table_rearranged" id="num_table_rearranged" ></div>\n' +
         '    <div class="col-4"><label for="num_chair_rearranged"> Number of chairs that can be moved #/All: </label><input type="text" class="form-control" name="num_chair_rearranged" id="num_chair_rearranged" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" name="round_tables" id="round_tables" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" name="round_tables" id="round_tables" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="num_round_tables"> Number of round/oval tables: </label><input type="number" min="0" class="form-control" name="num_round_tables" id="num_round_tables" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="lightingSeating"> Lighting is adequate: </label><select class="form-control" name="lightingSeating" id="lightingSeating" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingSeating"> Lighting is adequate: </label><select class="form-control" name="lightingSeating" id="lightingSeating" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_optionSeating"> Lighting level day/night: </label><select class="form-control" name="lighting_optionSeating" id="lighting_optionSeating" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Day" >Day</option>\n' +
-        '       <option value="Night" >Night</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_optionSeating"> Lighting level day/night: </label><select class="form-control" name="lighting_optionSeating" id="lighting_optionSeating" >\n' ;
+    bodyHtml += addGenSelectOptions(dayNightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeSeating"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeSeating" id="lighting_typeSeating" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeSeating"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeSeating" id="lighting_typeSeating" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="adjustable_lighting"> There are one or more available spaces with adjustable lighting: </label><select class="form-control" name="adjustable_lighting" id="adjustable_lighting" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="adjustable_lighting"> There are one or more available spaces with adjustable lighting: </label><select class="form-control" name="adjustable_lighting" id="adjustable_lighting" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="low_visual_slim"> There are one or more areas with low visual stimulation: </label> <select class="form-control" name="low_visual_slim" id="low_visual_slim" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="low_visual_slim"> There are one or more areas with low visual stimulation: </label> <select class="form-control" name="low_visual_slim" id="low_visual_slim" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="quiet_table"> There is a quiet table, room or area available on request: </label><select class="form-control" name="quiet_table" id="quiet_table" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="quiet_table"> There is a quiet table, room or area available on request: </label><select class="form-control" name="quiet_table" id="quiet_table" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="low_sound"> There is an area with low or no background sound, and/or that has sound­absorbing surfaces: </label> <select class="form-control" name="low_sound" id="low_sound" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="low_sound"> There is an area with low or no background sound, and/or that has sound­absorbing surfaces: </label> <select class="form-control" name="low_sound" id="low_sound" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="designated_space"> For theater or auditorium, there are spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated: </label><select class="form-control" name="designated_space" id="designated_space" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="designated_space"> For theater or auditorium, there are spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated: </label><select class="form-control" name="designated_space" id="designated_space" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="num_desig_space"> Number of designated spaces: </label> <input type="number" min="0" class="form-control" name="num_desig_space" id="num_desig_space" ></div>\n' +
-        '    <div class="col-4"><label for="companion_space"> There are spaces for companions to sit next to the wheelchair users: </label> <select class="form-control" name="companion_space" id="companion_space" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="companion_space"> There are spaces for companions to sit next to the wheelchair users: </label> <select class="form-control" name="companion_space" id="companion_space" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -3430,12 +3003,9 @@ function addRestroomView() {
 
     bodyHtml = '<form id="add_restroom"> \n ' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <select class="form-control" name="public_restroom" id="public_restroom" >\n' +
-        '       <option value="" disabled >Please select one</option>\n' +
-        '       <option value="Yes" selected>Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <select class="form-control" name="public_restroom" id="public_restroom" >\n';
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="total_num"> Total number of public restrooms: </label> <input type="number" min="0" class="form-control" name="total_num" id="total_num" ></div>\n' +
         '</div>\n' +
@@ -3444,26 +3014,17 @@ function addRestroomView() {
         '    <div class="col-6"><label for="num_wheelchair_sign"> Number of restrooms that have “Wheelchair Accessible” signs: </label> <input type="number" min="0" class="form-control" name="num_wheelchair_sign" id="num_wheelchair_sign" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="sign_accessable"> Restrooms signs have high contrast, Braille, raised lettering, low glare background: </label> <select class="form-control" name="sign_accessable" id="sign_accessable" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="sign_accessable"> Restrooms signs have high contrast, Braille, raised lettering, low glare background: </label> <select class="form-control" name="sign_accessable" id="sign_accessable" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="sign_location"> Signage is on latch side of door between 48” and 60” above floor: </label><select class="form-control" name="sign_location" id="sign_location" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="sign_location"> Signage is on latch side of door between 48” and 60” above floor: </label><select class="form-control" name="sign_location" id="sign_location" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="key_needed"> Users do not need to ask someone for a KEY to use the restroom: </label><select class="form-control" name="key_needed" id="key_needed" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="key_needed"> Users do not need to ask someone for a KEY to use the restroom: </label><select class="form-control" name="key_needed" id="key_needed" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -3593,243 +3154,151 @@ function addRestroomInformationView() {
         '   <div class="col-12"><label for="restroom_desc"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" name="restroom_desc" id="restroom_desc" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" name="easy_open" id="easy_open" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" name="easy_open" id="easy_open" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="opening"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" name="opening" id="opening"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" name="opens_out" id="opens_out" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" name="opens_out" id="opens_out" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" name="use_fist" id="use_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" name="use_fist" id="use_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" name="can_turn_around" id="can_turn_around" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" name="can_turn_around" id="can_turn_around" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="turn_width"> Stall/Room width (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_width" id="turn_width"  ></div>\n' +
         '   <div class="col-4"><label for="turn_depth"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_depth" id="turn_depth"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" name="close_chair_inside" id="close_chair_inside" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" name="close_chair_inside" id="close_chair_inside" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" name="grab_bars" id="grab_bars" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" name="grab_bars" id="grab_bars" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" name="seat_height_req" id="seat_height_req" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" name="seat_height_req" id="seat_height_req" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="seat_height"> Seat height (inches): </label><input type="number" min="0" class="form-control" name="seat_height" id="seat_height" ></div>\n' +
-        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" name="flush_auto_fist" id="flush_auto_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" name="flush_auto_fist" id="flush_auto_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" name="ambulatory_accessible" id="ambulatory_accessible" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" name="ambulatory_accessible" id="ambulatory_accessible" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="bar_height"> Toilet height (inches): </label><input type="number" min="0" class="form-control" name="bar_height" id="bar_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" name="coat_hook" id="coat_hook" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" name="coat_hook" id="coat_hook" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="num" min="0" class="form-control" name="hook_height" id="hook_height"  ></div>\n' +
+        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="number" min="0" class="form-control" name="hook_height" id="hook_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" name="sink" id="sink" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" name="sink" id="sink" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="sink_height"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" name="sink_height" id="sink_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" name="faucet" id="faucet" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" name="faucet" id="faucet" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="faucet_depth"> Faucet depth (inches): </label> <input type="number" min="0" class="form-control" name="faucet_depth" id="faucet_depth"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" name="faucet_auto_fist" id="faucet_auto_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" name="faucet_auto_fist" id="faucet_auto_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" name="sink_clearance" id="sink_clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" name="sink_clearance" id="sink_clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="sink_clearance_height"> Measurement (inches): </label> <input type="number" min="0" class="form-control" name="sink_clearance_height" id="sink_clearance_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" name="sink_pipes" id="sink_pipes" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" name="sink_pipes" id="sink_pipes" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" name="soap_dispenser" id="soap_dispenser" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" name="soap_dispenser" id="soap_dispenser" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="soap_height">  Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" name="soap_height" id="soap_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="dry_fist_type"> Type Hand dryer/Towel dispenser: </label> <select class="form-control" name="dry_fist_type" id="dry_fist_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Hand dryer" >Hand dryer</option>\n' +
-        '       <option value="Towel dispenser" >Towel dispenser</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" name="dry_control_height" id="dry_control_height" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="dry_controls"> Operation type - automatic/closed fist: </label> <select class="form-control" name="dry_controls" id="dry_controls" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Automatic" >Automatic</option>\n' +
-        '       <option value="Closed fist" >Closed fist</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" name="dry_control_height" id="dry_control_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
-        '   </div>\n' +
-        '</div>\n' +
-        '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" name="mirror" id="mirror" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" name="mirror" id="mirror" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="mirror_height"> Mirror height (inches): </label><input type="number" min="0" class="form-control" name="mirror_height" id="mirror_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" name="shelves" id="shelves" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" name="shelves" id="shelves" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="shelf_height"> Shelf height (inches): </label> <input type="number" min="0" class="form-control" name="shelf_height" id="shelf_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" name="trash_receptacles" id="trash_receptacles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" name="trash_receptacles" id="trash_receptacles" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" name="hygiene_seat_cover" id="hygiene_seat_cover" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" name="hygiene_seat_cover" id="hygiene_seat_cover" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '   <div class="col-4"><label for="hygiene_cover_height"> Height (inches): </label> <input type="number" min="0" class="form-control" name="hygiene_cover_height" id="hygiene_cover_height"  ></div>\n' +
-        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" name="lightingRestroomInfo" id="lightingRestroomInfo" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" name="lightingRestroomInfo" id="lightingRestroomInfo" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeRestroomInfo" id="lighting_typeRestroomInfo" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeRestroomInfo" id="lighting_typeRestroomInfo" >\n' ;
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -3947,8 +3416,6 @@ function addRestroomInformation() {
     var soap_dispenser = document.getElementById("soap_dispenser").value;
     var soap_height = document.getElementById("soap_height").value;
     var dry_fist = document.getElementById("dry_fist").value;
-    var dry_fist_type = document.getElementById("dry_fist_type").value;
-    var dry_controls = document.getElementById("dry_controls").value;
     var dry_control_height = document.getElementById("dry_control_height").value;
     var mirror = document.getElementById("mirror").value;
     var mirror_height = document.getElementById("mirror_height").value;
@@ -3998,8 +3465,6 @@ function addRestroomInformation() {
             "soap_dispenser" : soap_dispenser,
             "soap_height" : soap_height,
             "dry_fist" : dry_fist,
-            "dry_fist_type" : dry_fist_type,
-            "dry_controls" : dry_controls,
             "dry_control_height" : dry_control_height,
             "mirror" : mirror,
             "mirror_height" : mirror_height,
@@ -4047,266 +3512,166 @@ function addCommunicationView() {
 
     bodyHtml = '<form id="add_communication"> \n ' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <select class="form-control" name="public_phone" id="public_phone" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <select class="form-control" name="public_phone" id="public_phone" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="phone_clearance">  There are public phones w/ controls min 48” from floor, protruding < 4” from wall: </label> <select class="form-control" name="phone_clearance" id="phone_clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="phone_clearance">  There are public phones w/ controls min 48” from floor, protruding < 4” from wall: </label> <select class="form-control" name="phone_clearance" id="phone_clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-4"><label for="num_phone"> Number of phones: </label> <input type="number" min="0" class="form-control" name="num_phone" id="num_phone"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="tty"> There is a TTY is available: </label> <select class="form-control" name="tty" id="tty" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="tty"> There is a TTY is available: </label> <select class="form-control" name="tty" id="tty" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" name="staff_tty" id="staff_tty" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" name="staff_tty" id="staff_tty" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" name="assisted_listening" id="assisted_listening" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" name="assisted_listening" id="assisted_listening" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="assisted_listen_type"> Type of listening device - Infra­red loop/Induction loop/FM/Amplification/Other: </label><select class="form-control" name="assisted_listen_type" id="assisted_listen_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Infra­red loop" >Infra­red loop</option>\n' +
-        '       <option value="Induction loop" >Induction loop</option>\n' +
-        '       <option value="FM" >FM</option>\n' +
-        '       <option value="Amplification" >Amplification</option>\n' +
-        '       <option value="Other" >Other</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="assisted_listen_type"> Type of listening device - Infra­red loop/Induction loop/FM/Amplification/Other: </label><select class="form-control" name="assisted_listen_type" id="assisted_listen_type" >\n';
+    bodyHtml += addGenSelectOptions(infraRedLoopOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="assisted_listen_receiver"> Type of receivers - Earbud/Neckloop/Headphones/Other: </label> <select class="form-control" name="assisted_listen_receiver" id="assisted_listen_receiver" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Earbud" >Earbud</option>\n' +
-        '       <option value="Neckloop" >Neckloop</option>\n' +
-        '       <option value="Headphones" >Headphones</option>\n' +
-        '       <option value="Other" >Other</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="assisted_listen_receiver"> Type of receivers - Earbud/Neckloop/Headphones/Other: </label> <select class="form-control" name="assisted_listen_receiver" id="assisted_listen_receiver" >\n';
+    bodyHtml += addGenSelectOptions(earbudNeckLoopOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="listening_signage"> Signs about listening devices are clearly displayed​: </label> <select class="form-control" name="listening_signage" id="listening_signage" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="listening_signage"> Signs about listening devices are clearly displayed​: </label> <select class="form-control" name="listening_signage" id="listening_signage" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="staff_listening"> Staff are trained to use assisted listening devices​: </label> <select class="form-control" name="staff_listening" id="staff_listening" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="staff_listening"> Staff are trained to use assisted listening devices​: </label> <select class="form-control" name="staff_listening" id="staff_listening" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="acoustics"> The acoustics are comfortable (no echoing, loud music, etc): </label> <select class="form-control" name="acoustics" id="acoustics" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="acoustics"> The acoustics are comfortable (no echoing, loud music, etc): </label> <select class="form-control" name="acoustics" id="acoustics" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="acoustics_level"> Noise level - Low/Medium/High: </label> <select class="form-control" name="acoustics_level" name="acoustics_level" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="High" >High</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="acoustics_level"> Noise level - Low/Medium/High: </label> <select class="form-control" name="acoustics_level" id="acoustics_level" >\n';
+    bodyHtml += addGenSelectOptions(lowMedHighOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="alt_comm_methods"> If a customer is unable to hear, there are other forms of communication: </label><select class="form-control" name="alt_comm_methods" id="alt_comm_methods" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="alt_comm_methods"> If a customer is unable to hear, there are other forms of communication: </label><select class="form-control" name="alt_comm_methods" id="alt_comm_methods" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '    <div class="col-6"><label for="alt_comm_type"> Type of other form of communication (writing pad, staff know ASL, etc): </label><input type="text" class="form-control" name="alt_comm_type" id="alt_comm_type" ></div>\n' +
-        '    <div class="col-6"><label for="staff_ASL"> Staff have received instructions on how to provide ASL services upon request (in person or remote): </label><select class="form-control" name="staff_ASl" name="staff_ASL" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="staff_ASL"> Staff have received instructions on how to provide ASL services upon request (in person or remote): </label><select class="form-control" name="staff_ASl" id="staff_ASL" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="captioning_default"> Captioning is turned ‘on’ as default for TVs or projected video: </label> <select class="form-control" name="captioning_default" id="captioning_default" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="captioning_default"> Captioning is turned ‘on’ as default for TVs or projected video: </label> <select class="form-control" name="captioning_default" id="captioning_default" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="theater_captioning"> If this is a theater, there is captioning: </label><select class="form-control" name="theater_captioning" id="theater_captioning" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="theater_captioning"> If this is a theater, there is captioning: </label><select class="form-control" name="theater_captioning" id="theater_captioning" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="theater_capt_type"> Type of captioning used - Real Time/Open Captions/Rear Window/Other: </label><select class="form-control" name="theater_capt_type" id="theater_capt_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Real Time" >Real Time</option>\n' +
-        '       <option value="Open Captions" >Open Captions</option>\n' +
-        '       <option value="Rear Window" >Rear Window</option>\n' +
-        '       <option value="Other" >Other</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="theater_capt_type"> Type of captioning used - Real Time/Open Captions/Rear Window/Other: </label><select class="form-control" name="theater_capt_type" id="theater_capt_type" >\n';
+    bodyHtml += addGenSelectOptions(realTiemOpenOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="auditory_info_visual"> Auditory information is presented visually: </label> <select class="form-control" name="auditory_info_visual" name="auditory_info_visual" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="auditory_info_visual"> Auditory information is presented visually: </label> <select class="form-control" name="auditory_info_visual" id="auditory_info_visual" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="visual_info_auditory"> Visual information is presented audibly: </label><select class="form-control" name="visual_info_auditory" id="visual_info_auditory" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="visual_info_auditory"> Visual information is presented audibly: </label><select class="form-control" name="visual_info_auditory" id="visual_info_auditory" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="website_text_reader"> If the establishment has a website, it is accessible to users of screen text readers: </label> <select class="form-control" name="website_text_reader" id="website_text_reader" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="website_text_reader"> If the establishment has a website, it is accessible to users of screen text readers: </label> <select class="form-control" name="website_text_reader" id="website_text_reader" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="alt_contact"> There are alternate means for patrons to order, contact, or schedule: </label><select class="form-control" name="alt_contact" id="alt_contact" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="alt_contact"> There are alternate means for patrons to order, contact, or schedule: </label><select class="form-control" name="alt_contact" id="alt_contact" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone: </label> <select class="form-control" name="alt_contact_type" id="alt_contact_type" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Text" >Text</option>\n' +
-        '       <option value="On-line" >On-line</option>\n' +
-        '       <option value="Phone" >Phone</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone: </label> <select class="form-control" name="alt_contact_type" id="alt_contact_type" >\n';
+    bodyHtml += addGenSelectOptions(textOnLineOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-4"><label for="shopping_assist"> The establishment offers shopping assistance or delivery: </label> <select class="form-control" name="shopping_assist" id="shopping_assist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="shopping_assist"> The establishment offers shopping assistance or delivery: </label> <select class="form-control" name="shopping_assist" id="shopping_assist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery: </label><select class="form-control" name="assist_service" id="assist_service" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Shopping Assistance" >Shopping Assistance</option>\n' +
-        '       <option value="Delivery" >Delivery</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery: </label><select class="form-control" name="assist_service" id="assist_service" >\n';
+    bodyHtml += addGenSelectOptions(shoppingAssistOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="assist_fee"> Is there a fee for the service: </label> <select class="form-control" name="assist_fee" id="assist_fee" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="assist_fee"> Is there a fee for the service: </label> <select class="form-control" name="assist_fee" id="assist_fee" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-3"><label for="store_scooter"> If this is a store, there are wheelchairs or scooters available for customer use: </label> <select class="form-control" name="store_scooter" id="store_scooter" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="store_scooter"> If this is a store, there are wheelchairs or scooters available for customer use: </label> <select class="form-control" name="store_scooter" id="store_scooter" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-3"><label for="scooter_fee"> Is there a fee to use wheelchairs or scooters: </label> <select class="form-control" name="scooter_fee" id="scooter_fee" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-3"><label for="scooter_fee"> Is there a fee to use wheelchairs or scooters: </label> <select class="form-control" name="scooter_fee" id="scooter_fee" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="scooter_location"> Location of wheelchairs or scooters: </label> <input type="text" class="form-control" name="scooter_location" id="scooter_location"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="restaurant_allergies"> If this is a restaurant, information is available on food allergies, sensitivities: </label> <select class="form-control" name="restaurant_allergies" id="restaurant_allergies" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="restaurant_allergies"> If this is a restaurant, information is available on food allergies, sensitivities: </label> <select class="form-control" name="restaurant_allergies" id="restaurant_allergies" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="staff_disable_trained"> The staff have received training within the past 12 months on how to provide “disability friendly” customer service to people with disabilities of all ages: </label> <select class="form-control" name="staff_disable_trained" id="staff_disable_trained" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="staff_disable_trained"> The staff have received training within the past 12 months on how to provide “disability friendly” customer service to people with disabilities of all ages: </label> <select class="form-control" name="staff_disable_trained" id="staff_disable_trained" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '    <div class="col-12"><label for="staff_disable_trained_desc"> If ‘yes’, describe the type of training, how it was delivered, and how often it is provided: </label> <input type="text" class="form-control" name="staff_disable_trained_desc" id="staff_disable_trained_desc"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="items_reach"> All items are within reach, or assistance is offered to reach them: </label> <select class="form-control" name="items_reach" id="items_reach" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="items_reach"> All items are within reach, or assistance is offered to reach them: </label> <select class="form-control" name="items_reach" id="items_reach" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="service_alt_manner"> If goods and services are not accessible, they are provided in an alternative manner: </label><select class="form-control" name="service_alt_manner" id="service_alt_manner" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="service_alt_manner"> If goods and services are not accessible, they are provided in an alternative manner: </label><select class="form-control" name="service_alt_manner" id="service_alt_manner" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="senior_discount"> The establishment offers a senior discount: </label><select class="form-control" name="senior_discount" id="senior_discount" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="senior_discount"> The establishment offers a senior discount: </label><select class="form-control" name="senior_discount" id="senior_discount" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '    <div class="col-6"><label for="senior_age"> If ‘yes’, what age is considered ‘senior’: </label> <input type="number" min="0" class="form-control" name="senior_age" id="senior_age"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" name="annual_A4A_review" id="annual_A4A_review" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" name="annual_A4A_review" id="annual_A4A_review" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
