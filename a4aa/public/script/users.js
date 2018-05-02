@@ -1,10 +1,10 @@
 var htmlBody = "";
 
 $(document).ready(function () {
-    addUserCardView();
+    ActiveUserCardView();
 });
 
-function addUserCardView() {
+function ActiveUserCardView() {
 
     $('#edit-user-view').html('');
     htmlBody = '';
@@ -12,8 +12,89 @@ function addUserCardView() {
     $.ajax({
         async: false,
         dataType: 'json',
-        url: 'user/',
+        url: 'user/active/',
         success: function (data) {
+
+            $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="InactiveUserCardView()" ><i class="fas fa-user-times"></i> Inactive Users</div>');
+
+            for (var i = 0; i < data.length; i ++) {
+
+                htmlBody += '<div class="box-user col-5">\n' +
+                    ' <form name="save_user_'+data[i].user_id+'" >\n' +
+                    '    <div class="box-title-user"><span class="col-10 h4"><i class="far fa-user"></i>&emsp;' + data[i].lname + ',&nbsp;'+ data[i].fname + '</span></div> \n' +
+                    '    <div class="card-row">\n' +
+                    '       <div class="col-6"><label for="fname_'+data[i].user_id+'"> First Name: </label><input type="name" class="form-control" id="fname_'+data[i].user_id+'" value="' + data[i].fname + '" required></div>\n' +
+                    '       <div class="col-6"><label for="lname_'+data[i].user_id+'"> Last Name: </label><input type="name" class="form-control" id="lname_'+data[i].user_id+'" value="' + data[i].lname + '" required></div>\n' +
+                    '    </div>\n' +
+                    '    <div class="card-row">\n' +
+                    '       <div class="col-7"><label for="user_name_'+data[i].user_id+'"> User Name: </label><input type="name" class="form-control" id="user_name_'+data[i].user_id+'" value="' + data[i].user_name + '" required></div>\n' +
+                    '       <div class="col-5"><label for="change_password_'+data[i].user_id+'"> Password: </label><button type="button" id="change_password_'+data[i].user_id+'" class="btn btn-warning" onclick="addUserCardView()"><i class="fas fa-key"></i>&nbsp;Change</button></div>\n' +
+                    '    </div>\n' +
+                    '    <div class="card-row">\n' +
+                    '       <div class="col-12"><label for="email_'+data[i].user_id+'"> Email: </label><input type="email" class="form-control" id="email_'+data[i].user_id+'" value="' + data[i].email + '" required></div>\n' +
+                    '    </div>\n' +
+                    '    <div class="card-row">\n' +
+                    '       <div class="col-6"><label for="role_'+data[i].user_id+'"> User Role: </label><select class="form-control" id="role_'+data[i].user_id+'" value="' + data[i].email + '" required>\n';
+
+                if (data[i].role === "admin") {
+                    htmlBody += '<option value="' + data[i].role + '" selected>&nbsp;' + data[i].role + '</option>\n' +
+                        '<option value="user">&nbsp; user</option>\n';
+                }
+                else {
+                    htmlBody += '<option value="admin" selected>&nbsp; admin</option>\n' +
+                        '<option value="'+data[i].role+'" selected>&nbsp;'+data[i].role+'</option>\n';
+                }
+
+                htmlBody += '</select>\n' +
+                    '    </div>\n' +
+                    '       <div class="col-6"><label for="active_'+data[i].user_id+'"> Active: </label><select class="form-control" id="active_'+data[i].user_id+'" value="' + data[i].active + '" required></div>\n';
+
+                if (data[i].active === "yes") {
+                    htmlBody += '<option value="' + data[i].active + '" selected>&nbsp;' + data[i].active + '</option>\n' +
+                        '<option value="no">&nbsp; no</option>\n';
+                }
+                else {
+                    htmlBody += '<option value="yes" selected>&nbsp; yes</option>\n' +
+                        '<option value="'+data[i].active+'" selected>&nbsp;'+data[i].active+'</option>\n';
+                }
+
+                htmlBody += '   </select>\n' +
+                    '       </div>\n' +
+                    '   </div>\n' +
+                    '    <div class="card-row">\n' +
+                    '       <div class="col-4">\n' +
+                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="saveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
+                    '       </div>\n' +
+                    '   </div>\n' +
+                    '</form>\n' +
+                    ' </div>\n' +
+                    '<div class="box-blank col-1"></div>\n';
+
+                $('#edit-user-view').html(htmlBody);
+            }
+
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+
+}
+
+function InactiveUserCardView() {
+
+    $('#edit-user-view').html('');
+    htmlBody = '';
+
+    $.ajax({
+        async: false,
+        dataType: 'json',
+        url: 'user/inactive/',
+        success: function (data) {
+
+            $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-users"></i> Active Users</div>');
+
             for (var i = 0; i < data.length; i ++) {
 
                 htmlBody += '<div class="box-user col-5">\n' +
@@ -112,6 +193,7 @@ function saveUser(user_id) {
 
             $("#success-body").html('User Updated');
             $("#success").modal('toggle');
+            ActiveUserCardView();
 
         },
         error: function(data) {
