@@ -112,7 +112,10 @@ if($_SESSION['role'] !== 'admin'){
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt "></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="addUserView()" ><i class="fas fa-user-plus "></i> Add User</div>
+                            <div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-user-plus"></i> Add User</div>
+                        </li>
+                        <li class="nav-item">
+                            <div id="users"></div>
                         </li>
                     </ul>
                 </div>
