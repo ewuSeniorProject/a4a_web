@@ -8,14 +8,6 @@ var USER_ID = 0;
 var USER_NAME = "";
 var STA_ID = 0;
 var REST_ID = 0;
-var bodyHtml = "";
-var yesNoNAOptions = ["Yes","No","N/A"];
-var freePaidNAOptions = ["Free","Paid","N/A"];
-var meteredNotOptions = ["Metered","Not Metered","N/A"];
-var dayNitghtOptions = ["Day","Night","N/A"];
-var lowMedBrightOptions = ["Low","Medium","Bright","N/A"];
-var earbudNeckLoopOptions = ["Earbud","Neckloop","Headphones","Other","N/A"];
-var infraRedLoopOptions = ["Infra­red Loop","Induction Loop","FM","Amplification","Other","N/A"];
 
 $(document).ready(function () {
 
@@ -519,26 +511,13 @@ function ParkingView() {
         '   <div class="card-row">\n' +
         '       <div class="col-4"><label for="lot_free"> Lot parking Free/Paid: </label> <select class="form-control" id="lot_free" name="lot_free" >\n';
 
-    bodyHtml += generateThreeSelectOptions(parkingData[0].lot_free, freePaidNAOptions);
+    bodyHtml += generateSelectOptions(parkingData[0].lot_free, freePaidNAOptions);
 
     bodyHtml += '   </select>\n ' +
         '       </div>\n' +
         '       <div class="col-4"><label for="street_metered"> Street parking Metered/Not Metered: </label><select class="form-control" id="street_metered" name="street_metered" >\n';
 
-                        if (parkingData[0].street_metered === "Metered") {
-                            bodyHtml += '<option value="Metered" selected>&nbsp; Metered</option>\n' +
-                                '<option value="Not Metered" >&nbsp; Not Metered</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (parkingData[0].street_metered === "Not Metered"){
-                            bodyHtml += '<option value="Metered" >&nbsp; Metered</option>\n' +
-                                '<option value="Not Metered" selected>&nbsp; Not Metered</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Metered" >&nbsp; Metered</option>\n' +
-                                '<option value="Not Metered" >&nbsp; Not Metered</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(parkingData[0].street_metered, meteredNotOptions);
 
     bodyHtml += '   </select>\n ' +
         '       </div>' +
@@ -555,39 +534,13 @@ function ParkingView() {
         '   <div class="card-row">\n' +
         '       <div class="col-6"><label for="reserve_space_sign"> Reserved space signage is unobstructed: </label><select class="form-control" id="reserve_space_sign" name="reserve_space_sign" >\n ';
 
-                        if (parkingData[0].reserve_space_sign === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (parkingData[0].street_metered === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(parkingData[0].reserve_space_sign, yesNoNAOptions);
 
     bodyHtml += '   </select>\n ' +
         '       </div>\n' +
         '       <div class="col-6"><label for="reserve_space_obstacles"> Reserved parking free of obstacles: </label><select class="form-control" id="reserve_space_obstacles" name="reserve_space_obstacles" >\n';
 
-                        if (parkingData[0].reserve_space_obstacles === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (parkingData[0].reserve_space_obstacles === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(parkingData[0].reserve_space_obstacles, yesNoNAOptions);
 
     bodyHtml += '   </select>\n ' +
         '       </div>' +
@@ -715,39 +668,13 @@ function RouteFromParkingView() {
         '            <div class="col-4"><label for="distance"> Distance from reserved parking to accessible entrance (feet): </label> <input type="number" min="0" class="form-control" id="distance" name="distance" value="'+routeFromParkingData[0].distance+'"  ></div>\n' +
         '            <div class="col-4"><label for="min_width"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_width" name="min_width">\n ';
 
-                        if (routeFromParkingData[0].min_width === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].min_width === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].min_width, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="route_surface"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="route_surface" name="route_surface" >\n';
 
-                        if (routeFromParkingData[0].route_surface === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].route_surface === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].route_surface, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -755,58 +682,19 @@ function RouteFromParkingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="route_curbs"> Route has curb ramps and curb cuts where needed: </label> <select class="form-control" id="route_curbs" name="route_curbs" >\n';
 
-                        if (routeFromParkingData[0].route_curbs === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].route_curbs === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].route_curbs, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="tactile_warning"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warning" name="tactile_warning" >\n';
 
-                        if (routeFromParkingData[0].tactile_warning === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].tactile_warning === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].tactile_warning, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="covered"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="covered" name="covered" >\n';
 
-                        if (routeFromParkingData[0].covered === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].covered === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].covered, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -814,67 +702,19 @@ function RouteFromParkingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="lighting"> Lighting is adequate: </label><select class="form-control" id="lighting" name="lighting" >\n';
 
-                        if (routeFromParkingData[0].lighting === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].lighting === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_option"> Lighting level day/night: </label><select class="form-control" id="lighting_option" name="lighting_option" >\n';
 
-                        if (routeFromParkingData[0].lighting_option === "Day") {
-                            bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                '<option value="Night" >&nbsp; Night</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].lighting_option === "Night") {
-                            bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                '<option value="Night" >&nbsp; Night</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_type"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_type" name="lighting_type" >\n';
 
-                        if (routeFromParkingData[0].lighting_type === "Low") {
-                            bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                '<option value="Bright" >Bright</option>\n' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].lighting_type === "Medium") {
-                            bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (routeFromParkingData[0].lighting_type === "Bright") {
-                            bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(routeFromParkingData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -992,40 +832,14 @@ function PassengerLoadingView() {
         '   <div class="card-row">\n' +
         '        <div class="col-4"><label for="designated_zonePassengerLoading"> There is a designated passenger loading zone: </label> <select class="form-control" id="designated_zonePassengerLoading" name="designated_zonePassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].designated_zone === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].designated_zone === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].designated_zone, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '        <div class="col-4"><label for="distancePassengerLoading"> Distance from passenger loading zone (feet): </label> <input type="number" min="0" class="form-control" id="distancePassengerLoading" name="distancePassengerLoading" value="'+passengerLoadingData[0].distance+'" ></div>\n' +
         '        <div class="col-4"><label for="min_widthPassengerLoading"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_widthPassengerLoading" name="min_widthPassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].min_width === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].min_width === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].min_width, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1033,39 +847,13 @@ function PassengerLoadingView() {
         '    <div class="card-row">\n' +
         '        <div class="col-6"><label for="passenger_surfacePassengerLoading"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="passenger_surfacePassengerLoading" name="passenger_surfacePassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].passenger_surface === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].passenger_surface === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].passenger_surface, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '        <div class="col-6"><label for="tactile_warning_stripsPassengerLoading"> Tactile warning strips are installed:</label><select class="form-control" id="tactile_warning_stripsPassengerLoading" name="tactile_warning_stripsPassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].tactile_warning_strips === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].tactile_warning_strips === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].tactile_warning_strips, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1073,39 +861,13 @@ function PassengerLoadingView() {
         '    <div class="card-row">\n' +
         '        <div class="col-6"><label for="passenger_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="passenger_curbs" name="passenger_curbs" >\n';
 
-                            if (passengerLoadingData[0].passenger_curbs === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].passenger_curbs === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].passenger_curbs, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '        <div class="col-6"><label for="coveredPassengerLoading"> Route from parking to accessible entrance is covered: </label><select class="form-control" id="coveredPassengerLoading" name="coveredPassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].covered === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].covered === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].covered, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1113,67 +875,19 @@ function PassengerLoadingView() {
         '    <div class="card-row">\n' +
         '        <div class="col-4"><label for="lightingPassengerLoading"> Lighting is adequate: </label><select class="form-control" id="lightingPassengerLoading" name="lightingPassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '        <div class="col-4"><label for="lighting_optionPassengerLoading"> Lighting level day/night: </label><select class="form-control" id="lighting_optionPassengerLoading" name="lighting_optionPassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '        <div class="col-4"><label for="lighting_typePassengerLoading"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typePassengerLoading" name="lighting_typePassengerLoading" >\n';
 
-                            if (passengerLoadingData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (passengerLoadingData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(passengerLoadingData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1311,20 +1025,7 @@ function StaBusView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="sta_service_area"> Establishment is within the STA Service Area: </label> <select class="form-control" id="sta_service_area">\n';
 
-                            if (staBusData[0].sta_service_area === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].sta_service_area === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].sta_service_area, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
@@ -1332,40 +1033,27 @@ function StaBusView() {
         '            <div class="col-2"><label for="add_route"> Add STA Route: </label><br><button  type="button" id="add_route" class="btn btn-warning" onclick="addSTARouteView()"><i class="far fa-plus-square"></i>&nbsp; Add Route</button></div>\n' +
         '        </div>\n';
 
-                    for(var i = 0; i < staRouteData.length; i++ ) {
-                        bodyHtml += '<div class="card-row">\n' +
-                        '                <div class="col-2"><label for="route_num_'+staRouteData[i].sta_route_id+'"  > Route Number: </label><input type="number" min="0" class="form-control" id="route_num_'+staRouteData[i].sta_route_id+'"  name="route_num_'+staRouteData[i].sta_route_id+'"  value="'+staRouteData[i].route_num+'" ></div>\n' +
-                        '                <div class="col-2"><label for="north_bound_stop_'+staRouteData[i].sta_route_id+'" > North Bound Stop: </label><input type="number" min="0" class="form-control" id="north_bound_stop_'+staRouteData[i].sta_route_id+'" name="north_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].north_bound_stop+'" ></div>\n' +
-                        '                <div class="col-2"><label for="south_bound_stop_'+staRouteData[i].sta_route_id+'" > South Bound Stop: </label><input type="number" min="0" class="form-control" id="south_bound_stop_'+staRouteData[i].sta_route_id+'" name="south_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].south_bound_stop+'" ></div>\n' +
-                        '                <div class="col-2"><label for="east_bound_stop_'+staRouteData[i].sta_route_id+'" > East Bound Stop: </label><input type="number" min="0" class="form-control" id="east_bound_stop_'+staRouteData[i].sta_route_id+'" name="east_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].east_bound_stop+'" ></div>\n' +
-                        '                <div class="col-2"><label for="west_bound_stop_'+staRouteData[i].sta_route_id+'" > West Bound Stop: </label><input type="number" min="0" class="form-control" id="west_bound_stop_'+staRouteData[i].sta_route_id+'" name="west_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].west_bound_stop+'" ></div>\n' +
-                        '                <input type="hidden" class="form-control" id="sta_route_id_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].sta_route_id+'" >\n' +
-                        '                <input type="hidden" class="form-control" id="sta_bus_id_'+staRouteData[i].sta_route_id+'"  value="'+staRouteData[i].sta_bus_id+'" ">\n' +
-                        '                <div class="col-2"><label> Save&emsp;&nbsp;Delete </label><br>\n' +
-                        '                    <button type="button" id="add_route_'+staRouteData[i].sta_route_id+'" class="btn btn-success pointer" onclick="updateSTARoute('+staRouteData[i].sta_route_id+')"><i class="fas fa-save"></i></button>&emsp;\n ' +
-                        '                    <button type="button" id="delete_route_'+staRouteData[i].sta_route_id+'" class="btn btn-danger pointer" onclick="deleteSTARoute('+staRouteData[i].sta_route_id+')"><i class="fas fa-trash-alt"></i></button>\n ' +
-                        '                </div>\n' +
-                        '            </div>\n';
-                    }
+    for(var i = 0; i < staRouteData.length; i++ ) {
+        bodyHtml += '<div class="card-row">\n' +
+        '                <div class="col-2"><label for="route_num_'+staRouteData[i].sta_route_id+'"  > Route Number: </label><input type="number" min="0" class="form-control" id="route_num_'+staRouteData[i].sta_route_id+'"  name="route_num_'+staRouteData[i].sta_route_id+'"  value="'+staRouteData[i].route_num+'" ></div>\n' +
+        '                <div class="col-2"><label for="north_bound_stop_'+staRouteData[i].sta_route_id+'" > North Bound Stop: </label><input type="number" min="0" class="form-control" id="north_bound_stop_'+staRouteData[i].sta_route_id+'" name="north_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].north_bound_stop+'" ></div>\n' +
+        '                <div class="col-2"><label for="south_bound_stop_'+staRouteData[i].sta_route_id+'" > South Bound Stop: </label><input type="number" min="0" class="form-control" id="south_bound_stop_'+staRouteData[i].sta_route_id+'" name="south_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].south_bound_stop+'" ></div>\n' +
+        '                <div class="col-2"><label for="east_bound_stop_'+staRouteData[i].sta_route_id+'" > East Bound Stop: </label><input type="number" min="0" class="form-control" id="east_bound_stop_'+staRouteData[i].sta_route_id+'" name="east_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].east_bound_stop+'" ></div>\n' +
+        '                <div class="col-2"><label for="west_bound_stop_'+staRouteData[i].sta_route_id+'" > West Bound Stop: </label><input type="number" min="0" class="form-control" id="west_bound_stop_'+staRouteData[i].sta_route_id+'" name="west_bound_stop_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].west_bound_stop+'" ></div>\n' +
+        '                <input type="hidden" class="form-control" id="sta_route_id_'+staRouteData[i].sta_route_id+'" value="'+staRouteData[i].sta_route_id+'" >\n' +
+        '                <input type="hidden" class="form-control" id="sta_bus_id_'+staRouteData[i].sta_route_id+'"  value="'+staRouteData[i].sta_bus_id+'" ">\n' +
+        '                <div class="col-2"><label> Save&emsp;&nbsp;Delete </label><br>\n' +
+        '                    <button type="button" id="add_route_'+staRouteData[i].sta_route_id+'" class="btn btn-success pointer" onclick="updateSTARoute('+staRouteData[i].sta_route_id+')"><i class="fas fa-save"></i></button>&emsp;\n ' +
+        '                    <button type="button" id="delete_route_'+staRouteData[i].sta_route_id+'" class="btn btn-danger pointer" onclick="deleteSTARoute('+staRouteData[i].sta_route_id+')"><i class="fas fa-trash-alt"></i></button>\n ' +
+        '                </div>\n' +
+        '            </div>\n';
+    }
 
     bodyHtml += '<div class="card-row">\n' +
         '            <div class="col-6"><label for="distanceStaBus"> Distance from nearest bus stop (feet): </label> <input type="number" min="0" class="form-control" id="distanceStaBus" name="distanceStaBus" value="'+staBusData[0].distance+'" ></div>\n' +
         '            <div class="col-6"><label for="min_widthStaBus"> Route is minimum width and free of obstacles: </label><select class="form-control" id="min_widthStaBus" name="min_widthStaBus" >\n';
 
-                            if (staBusData[0].min_width === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].min_width === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].min_width, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1373,58 +1061,19 @@ function StaBusView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="route_surfaceStaBus"> Route surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="route_surfaceStaBus" name="route_surfaceStaBus" >\n';
 
-                            if (staBusData[0].route_surface === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].route_surface === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].route_surface, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="tactile_warning_stripsStaBus"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warning_stripsStaBus" name="tactile_warning_stripsStaBus" >\n';
 
-                            if (staBusData[0].tactile_warning_strips === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].tactile_warning_strips === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].tactile_warning_strips, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="curb_cutsStaBus"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="curb_cutsStaBus" name="curb_cutsStaBus" >\n';
 
-                            if (staBusData[0].curb_cuts === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].curb_cuts === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].curb_cuts, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1432,86 +1081,25 @@ function StaBusView() {
         '        <div class="card-row">\n' +
         '            <div class="col-3"><label for="lightingStaBus"> Lighting is adequate: </label><select class="form-control" id="lightingStaBus" name="lightingStaBus" >\n';
 
-                            if (staBusData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="lighting_optionStaBus"> Lighting level day/night: </label><select class="form-control" id="lighting_optionStaBus" name="lighting_optionStaBus" >\n';
 
-                            if (staBusData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="lighting_typeStaBus"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeStaBus" name="lighting_typeStaBus" >\n';
 
-                            if (staBusData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="shelter_bench"> Shelter or Bench at bust stop: </label><select class="form-control" id="shelter_bench" name="shelter_bench" >\n';
 
-                            if (staBusData[0].shelter_bench === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (staBusData[0].shelter_bench === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(staBusData[0].shelter_bench, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -1779,20 +1367,7 @@ function ExteriorPathwayView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="service_animal"> There is a service animal relief area on the premises or within 1 block: </label> <select class="form-control" id="service_animal" name="service_animal" >\n';
 
-                        if (exteriorPathwayData[0].service_animal === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (exteriorPathwayData[0].service_animal === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].service_animal, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
@@ -1801,58 +1376,19 @@ function ExteriorPathwayView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="has_exterior_path"> The establishment has exterior pathways/walkways: </label> <select class="form-control" id="has_exterior_path" name="has_exterior_path" >\n';
 
-                            if (exteriorPathwayData[0].has_exterior_path === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].has_exterior_path === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].has_exterior_path, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
         '            <div class="col-4"><label for="min_widthExteriorPathway"> Pathway is minimum width and free of obstacles: </label><select class="form-control" id="min_widthExteriorPathway" name="min_widthExteriorPathway" >\n';
 
-                            if (exteriorPathwayData[0].min_width === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].min_width === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].min_width, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
         '            <div class="col-4"><label for="pathway_surface"> Pathway surface is level, unbroken, firm, slip-resistant: </label><select class="form-control" id="pathway_surface" name="pathway_surface" >\n';
 
-                            if (exteriorPathwayData[0].pathway_surface === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].pathway_surface === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].pathway_surface, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
@@ -1860,58 +1396,19 @@ function ExteriorPathwayView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="pathway_curbs"> Route has curb ramps and curb cuts where needed: </label><select class="form-control" id="pathway_curbs" name="pathway_curbs" >\n';
 
-                            if (exteriorPathwayData[0].pathway_curbs === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].pathway_curbs === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].pathway_curbs, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
         '            <div class="col-4"><label for="tactile_warningExteriorPathway"> Tactile warning strips are installed: </label><select class="form-control" id="tactile_warningExteriorPathway" name="tactile_warningExteriorPathway" >\n';
 
-                            if (exteriorPathwayData[0].tactile_warning === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].tactile_warning === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].tactile_warning, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
         '            <div class="col-4"><label for="slope"> Slope of the pathway is no steeper than 1:20: </label><select class="form-control" id="slope" name="slope" >\n';
 
-                            if (exteriorPathwayData[0].slope === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].slope === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].slope, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n ' +
@@ -1919,67 +1416,19 @@ function ExteriorPathwayView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="lightingExteriorPathway"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorPathway" name="lightingExteriorPathway" >\n';
 
-                            if (exteriorPathwayData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_optionExteriorPathway"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorPathway" name="lighting_optionExteriorPathway" >\n';
 
-                            if (exteriorPathwayData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_typeExteriorPathway"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorPathway" name="lighting_typeExteriorPathway" >\n';
 
-                            if (exteriorPathwayData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorPathwayData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorPathwayData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2099,39 +1548,13 @@ function ExteriorStairsView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="stairs_required"> Stairs are required: </label> <select class="form-control" id="stairs_required" name="stairs_required" >\n';
 
-                            if (exteriorStairsData[0].stairs_required === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].stairs_required === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].stairs_required, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="stairs_available"> Stairs are available: </label> <select class="form-control" id="stairs_available" name="stairs_available" >\n';
 
-                            if (exteriorStairsData[0].stairs_available === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].stairs_available === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].stairs_available, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2140,49 +1563,13 @@ function ExteriorStairsView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" id="handrail_both_sides" name="handrail_both_sides" >\n';
 
-                            if (exteriorStairsData[0].handrail_both_sides === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].handrail_both_sides === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].handrail_both_sides, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="handrail_side"> Handrail sides Left/Right/None/NA: </label><select class="form-control" id="handrail_side" name="handrail_side" >\n';
 
-                            if (exteriorStairsData[0].handrail_side === "Left") {
-                                bodyHtml += '<option value="Left" selected>&nbsp; Left</option>\n' +
-                                    '<option value="Right" >&nbsp; Right</option>\n ' +
-                                    '<option value="None" >&nbsp; None</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].handrail_side === "Right") {
-                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
-                                    '<option value="Right" selected>&nbsp; Right</option>\n ' +
-                                    '<option value="None" >&nbsp; None</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].handrail_side === "None") {
-                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
-                                    '<option value="Right" >&nbsp; Right</option>\n ' +
-                                    '<option value="None" selected>&nbsp; None</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
-                                    '<option value="Right" >&nbsp; Right</option>\n ' +
-                                    '<option value="None" >&nbsp; None</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].handrail_side, leftRightNoneOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2190,20 +1577,7 @@ function ExteriorStairsView() {
         '        <div class="card-row">\n' +
         '            <div class="col-8"><label for="handrail_regulation_height"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" id="handrail_regulation_height" name="handrail_regulation_height" >\n';
 
-                            if (exteriorStairsData[0].handrail_regulation_height === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].handrail_regulation_height === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].handrail_regulation_height, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2212,39 +1586,13 @@ function ExteriorStairsView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="obstacles"> Stairs are clear of obstacles or protrusions: </label><select class="form-control" id="obstacles" name="obstacles" >\n';
 
-                            if (exteriorStairsData[0].obstacles === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].obstacles === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].obstacles, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="clearly_marked"> Stairs are clearly marked: </label><select class="form-control" id="clearly_marked" name="clearly_marked" >\n';
 
-                        if (exteriorStairsData[0].clearly_marked === "Yes") {
-                            bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        }
-                        else if (exteriorStairsData[0].clearly_marked === "No") {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" selected>&nbsp; No</option>\n ' +
-                                '<option value="N/A" >&nbsp; N/A</option>';
-                        } else {
-                            bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                '<option value="No" >&nbsp; No</option>\n ' +
-                                '<option value="N/A" selected>&nbsp; N/A</option>';
-                        }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].clearly_marked, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2252,67 +1600,19 @@ function ExteriorStairsView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="lightingExteriorStairs"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorStairs" name="lightingExteriorStairs" >\n';
 
-                            if (exteriorStairsData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_optionExteriorStairs"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorStairs" name="lighting_optionExteriorStairs" >\n';
 
-                            if (exteriorStairsData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_typeExteriorStairs"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorStairs" name="lighting_typeExteriorStairs" >\n';
 
-                            if (exteriorStairsData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorStairsData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorStairsData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2433,58 +1733,19 @@ function ExteriorRampsViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-3"><label for="ramp_required"> Ramps are required: </label> <select class="form-control" id="ramp_required" name="ramp_required" >\n';
 
-                            if (exteriorRampsData[0].ramp_required === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].ramp_required === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].ramp_required, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="ramp_available"> Ramps are available: </label> <select class="form-control" id="ramp_available" name="ramp_available" >\n';
 
-                            if (exteriorRampsData[0].ramp_available === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].ramp_available === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].ramp_available, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="min_widthExteriorRamps"> Ramps are at least 36 inches wide: </label> <select class="form-control" id="min_widthExteriorRamps" name="min_widthExteriorRamps" >\n';
 
-                            if (exteriorRampsData[0].min_width === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].min_width === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].min_width, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2493,20 +1754,7 @@ function ExteriorRampsViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="min_slope"> For each section of ramp, the RUNNING SLOPE is no greater than 1:12: </label> <select class="form-control" id="min_slope" name="min_slope" >\n';
 
-                            if (exteriorRampsData[0].min_slope === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].min_slope === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].min_slope, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2515,58 +1763,19 @@ function ExteriorRampsViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="level_landing_both"> There is a level landing at the top and bottom of the ramp: </label> <select class="form-control" id="level_landing_both" name="level_landing_both" >\n';
 
-                            if (exteriorRampsData[0].level_landing_both === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].level_landing_both === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].level_landing_both, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="level_landing_location"> Landing location Top/Bottom/NA: </label><select class="form-control" id="level_landing_location" name="level_landing_location" >\n';
 
-                            if (exteriorRampsData[0].level_landing_location === "Top") {
-                                bodyHtml += '<option value="Top" selected>&nbsp; Top</option>\n' +
-                                    '<option value="Bottom" >&nbsp; Bottom</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].level_landing_location === "Bottom") {
-                                bodyHtml += '<option value="Top" >&nbsp; Top</option>\n' +
-                                    '<option value="Bottom" selected>&nbsp; Bottom</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Top" >&nbsp; Top</option>\n' +
-                                    '<option value="Bottom" >&nbsp; Bottom</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].level_landing_location, topBottomOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="obstaclesExteriorRamps"> Ramps are clear of obstacles or protrusions: </label><select class="form-control" id="obstaclesExteriorRamps" name="obstaclesExteriorRamps" >\n';
 
-                            if (exteriorRampsData[0].obstacles === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].obstacles === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].obstacles, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2574,48 +1783,13 @@ function ExteriorRampsViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="handrail_both_sides"> Both sides of stairs have handrails: </label> <select class="form-control" id="handrails_both_sides" name="handrails_both_sides" >\n';
 
-                            if (exteriorRampsData[0].handrail_sides === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].handrail_sides === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].handrail_sides, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="handrail_sides"> Handrail sides Left/Right/None/NA: </label><select class="form-control" id="handrail_sides" name="handrail_sides" >\n';
 
-                            if (exteriorRampsData[0].handrail_sides === "Left") {
-                                bodyHtml += '<option value="Left" selected>&nbsp; Left</option>\n' +
-                                    '<option value="Right" >&nbsp; Right</option>\n ' +
-                                    '<option value="None" >&nbsp; None</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].handrail_sides === "Right") {
-                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
-                                    '<option value="Right" selected>&nbsp; Right</option>\n ' +
-                                    '<option value="None" >&nbsp; None</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].handrail_sides === "None") {
-                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
-                                    '<option value="Right" >&nbsp; Right</option>\n ' +
-                                    '<option value="None" selected>&nbsp; None</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Left" >&nbsp; Left</option>\n' +
-                                    '<option value="Right" >&nbsp; Right</option>\n ' +
-                                    '<option value="None" >&nbsp; None</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].handrail_sides, leftRightNoneOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2623,40 +1797,14 @@ function ExteriorRampsViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="handrail_regulation_heightExteriorRamps"> Top of the handrail gripping surface is between 34” and 38” above the stair surface: </label><select class="form-control" id="handrail_regulation_heightExteriorRamps" name="handrail_regulation_heightExteriorRamps" >\n';
 
-                            if (exteriorRampsData[0].handrail_regulation_height === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].handrail_regulation_height === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].handrail_regulation_height, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="handrail_heightExteriorRamps"> Handrail height: </label><input type="number" min="0" class="form-control" id="handrail_heightExteriorRamps" name="handrail_heightExteriorRamps" value="'+exteriorRampsData[0].handrail_height+'"></div>\n' +
         '            <div class="col-4"><label for="side_guards"> Ramps have adequate side guards: </label><select class="form-control" id="side_guards" name="side_guards" >\n';
 
-                            if (exteriorRampsData[0].side_guards === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].side_guards === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].side_guards, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2664,67 +1812,19 @@ function ExteriorRampsViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="lightingExteriorRamps"> Lighting is adequate: </label><select class="form-control" id="lightingExteriorRamps" name="lightingExteriorRamps" >\n';
 
-                            if (exteriorRampsData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_optionExteriorRamps"> Lighting level day/night: </label><select class="form-control" id="lighting_optionExteriorRamps" name="lighting_optionExteriorRamps" >\n';
 
-                            if (exteriorRampsData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_typeExteriorRamps"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeExteriorRamps" name="lighting_typeExteriorRamps" >\n';
 
-                            if (exteriorRampsData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (exteriorRampsData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(exteriorRampsData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2856,20 +1956,7 @@ function MainEntranceView() {
         '            <div class="col-6"><label for="total_num_public_entrances"> Total number of public entrances: </label> <input type="number" min="0" class="form-control" id="total_num_public_entrances" name="total_num_public_entrances" value="'+mainEntranceData[0].total_num_public_entrances+'"></div>\n' +
         '            <div class="col-6"><label for="main_ent_accessible"> Main entrance is accessible: </label> <select class="form-control" id="main_ent_accessible" name="main_ent_accessible" >\n';
 
-                            if (mainEntranceData[0].main_ent_accessible === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].main_ent_accessible === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].main_ent_accessible, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2877,39 +1964,13 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="alt_ent_accessible"> Alternative accessible entrance can be used independently during same hours: </label> <select class="form-control" id="alt_ent_accessible" name="alt_ent_accessible" >\n';
 
-                            if (mainEntranceData[0].alt_ent_accessible === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].alt_ent_accessible === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].alt_ent_accessible, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="accessable_signage"> There is signage to direct patrons to the wheelchair accessible entrance: </label> <select class="form-control" id="accessable_signage" name="accessable_signage" >\n';
 
-                            if (mainEntranceData[0].accessable_signage === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].accessable_signage === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].accessable_signage, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2917,39 +1978,13 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="ground_level"> The ground or floor is level inside and outside the accessible entrance: </label> <select class="form-control" id="ground_level" name="ground_level" >\n';
 
-                            if (mainEntranceData[0].ground_level === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].ground_level === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].ground_level, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="threshold_level"> Threshold of entrance is level: </label><select class="form-control" id="threshold_level" name="threshold_level" >\n';
 
-                            if (mainEntranceData[0].threshold_level === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].threshold_level === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].threshold_level, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2957,21 +1992,7 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="threshold_beveled"> If threshold is beveled, it is no more than 1/2 inch high with the top 1/4 inch beveled: </label> <select class="form-control" id="threshold_beveled" name="threshold_beveled" >\n';
 
-                            if (mainEntranceData[0].threshold_beveled === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].threshold_beveled === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].threshold_beveled, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -2980,49 +2001,13 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="door_action"> As you enter the door opens: </label><select class="form-control" id="door_action" name="door_action" >\n';
 
-                            if (mainEntranceData[0].door_action === "Slide To Side") {
-                                bodyHtml += '<option value="Slide To Side" selected>&nbsp; Slide To Side</option>\n' +
-                                    '<option value="Open Out" >&nbsp; Open Out</option>\n ' +
-                                    '<option value="Open In" >&nbsp; Open In</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>';
-                            }
-                            else if (mainEntranceData[0].door_action === "Open Out") {
-                                bodyHtml += '<option value="Slide To Side" >&nbsp; Slide To Side</option>\n' +
-                                    '<option value="Open Out" selected>&nbsp; Open Out</option>\n ' +
-                                    '<option value="Open In" >&nbsp; Open In</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>';
-                            }
-                            else if (mainEntranceData[0].door_action === "Open In") {
-                                bodyHtml += '<option value="Slide To Side" >&nbsp; Slide To Side</option>\n' +
-                                    '<option value="Open Out" >&nbsp; Open Out</option>\n ' +
-                                    '<option value="Open In" selected>&nbsp; Open In</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Slide To Side" >&nbsp; Slide To Side</option>\n' +
-                                    '<option value="Open Out" >&nbsp; Open Out</option>\n ' +
-                                    '<option value="Open In" >&nbsp; Open In</option>\n ' +
-                                    '<option value="Other" selected>&nbsp; Other</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].door_action, slideOpenOtherOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" id="door_open_clearance" name="door_open_clearance" >\n';
 
-                            if (mainEntranceData[0].door_open_clearance === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].door_open_clearance === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].door_open_clearance, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3031,40 +2016,14 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="door_easy_open"> Doors are easy to open: </label><select class="form-control" id="door_easy_open" name="door_easy_open" >\n';
 
-                            if (mainEntranceData[0].door_easy_open === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].door_easy_open === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].door_easy_open, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="door_open_force"> Actual lbs of force: </label><input type="number" min="0" class="form-control" id="door_open_force" name="door_open_force" value="'+mainEntranceData[0].door_open_force+'"></div>\n' +
         '            <div class="col-4"><label for="door_use_with_fist"> Door handles can be opened and shut with a closed fist: </label><select class="form-control" id="door_use_with_fist" name="door_use_with_fist" >\n';
 
-                            if (mainEntranceData[0].door_use_with_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].door_use_with_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].door_use_with_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3072,58 +2031,19 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="door_auto_open"> Door(s) open automatically or with a push button: </label><select class="form-control" id="door_auto_open" name="door_auto_open" >\n';
 
-                            if (mainEntranceData[0].door_auto_open === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].door_auto_open === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].door_auto_open, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="second_door_inside"> There is a second door or set of doors inside the accessible entry: </label><select class="form-control" id="second_door_inside" name="second_door_inside" >\n';
 
-                            if (mainEntranceData[0].second_door_inside === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].second_door_inside === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].second_door_inside, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="min_dist_between_doors"> Distance between outer door and inner door is at least 48” plus door clearance(s): </label><select class="form-control" id="min_dist_between_doors" name="min_dist_between_doors" >\n';
 
-                            if (mainEntranceData[0].min_dist_between_doors === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].min_dist_between_doors === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].min_dist_between_doors, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3131,67 +2051,19 @@ function MainEntranceView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="lightingMainEntrance"> Lighting is adequate: </label><select class="form-control" id="lightingMainEntrance" name="lightingMainEntrance" >\n';
 
-                            if (mainEntranceData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_optionMainEntrance"> Lighting level day/night: </label><select class="form-control" id="lighting_optionMainEntrance" name="lighting_optionMainEntrance" >\n';
 
-                            if (mainEntranceData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_typeMainEntrance"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeMainEntrance" name="lighting_typeMainEntrance" >\n';
 
-                            if (mainEntranceData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (mainEntranceData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(mainEntranceData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3327,20 +2199,7 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="int_door_open_clearance"> Doors have at least 32” clearance when open at 90 degrees: </label> <select class="form-control" id="int_door_open_clearance" name="int_door_open_clearance" >\n';
 
-                            if (interiorData[0].int_door_open_clearance === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].int_door_open_clearance === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].int_door_open_clearance, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3349,20 +2208,7 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="int_door_easy_open"> Doors are easy to open: </label> <select class="form-control" id="int_door_easy_open" >\n';
 
-                            if (interiorData[0].int_door_easy_open === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].int_door_easy_open === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].int_door_easy_open, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3371,39 +2217,13 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="int_door_use_with_fist"> Door handles can be opened and shut with a closed fist, open automatically, or push button: </label> <select class="form-control" id="int_door_use_with_fist" name="int_door_use_with_fist" >\n';
 
-                            if (interiorData[0].int_door_use_with_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].int_door_use_with_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].int_door_use_with_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="five_second_close"> Doors take 5 seconds or longer to close: </label><select class="form-control" id="five_second_close" name="five_second_close" >\n';
 
-                            if (interiorData[0].five_second_close === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].five_second_close === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].five_second_close, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3411,20 +2231,7 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="hallway_width"> Hallways and ​aisles are min. 36” WIDE, or not less than 28” for 4 foot intervals: </label> <select class="form-control" id="hallway_width" name="hallway_width" >\n';
 
-                            if (interiorData[0].hallway_width === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].hallway_width === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].hallway_width, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3433,58 +2240,19 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="wheelchair_turnaround"> There are locations that allow 60” space for a wheelchair to turn around: </label><select class="form-control" id="wheelchair_turnaround" name="wheelchair_turnaround" >\n';
 
-                            if (interiorData[0].wheelchair_turnaround === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].wheelchair_turnaround === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].wheelchair_turnaround, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="hallway_obstacles"> Hallways and aisles are clear of obstacles and tripping hazards: </label> <select class="form-control" id="hallway_obstacles"  name="hallway_obstacles"  >\n';
 
-                            if (interiorData[0].hallway_obstacles === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].hallway_obstacles === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].hallway_obstacles, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="hallway_clear"> Hallways are clear of objects protruding more than 4” or lower than 80”: </label><select class="form-control" id="hallway_clear" name="hallway_clear" >\n';
 
-                            if (interiorData[0].hallway_clear === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].hallway_clear === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].hallway_clear, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3492,48 +2260,13 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="lightingInterior"> Lighting is adequate: </label><select class="form-control" id="lightingInterior" name="lightingInterior" >\n';
 
-                            if (interiorData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="lighting_typeInterior"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeInterior" name="lighting_typeInterior" >\n';
 
-                            if (interiorData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3541,43 +2274,17 @@ function InteriorViewModel() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="service_counter"> Lowest ​service counter is no higher than 38” ​with a clear view from a sitting position, and a check writing surface is no higher than 34”: </label><select class="form-control" id="service_counter" name="service_counter" >\n';
 
-                            if (interiorData[0].service_counter === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].service_counter === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].service_counter, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="counter_height"> Service counter height (inches): </label><input type="number" min="0" class="form-control" id="counter_height" name="counter_height" value="'+interiorData[0].counter_height+'" ></div>\n' +
-        '            <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input type="number" min="0" class="form-control" id="writing_surface_height" name="writing_surface_height" value="'+interiorData[0].writing_surface_height_id+'" ></div>\n' +
+        '            <div class="col-3"><label for="writing_surface_height"> Writing surface height (inches): </label><input type="number" min="0" class="form-control" id="writing_surface_height" name="writing_surface_height" value="'+interiorData[0].writing_surface_height+'" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="drinking_fountain"> Accessible drinking fountain with spout no higher than 36”, and easy to operate controls: </label><select class="form-control" id="drinking_fountain" name="drinking_fountain" >\n';
 
-                            if (interiorData[0].drinking_fountain === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (interiorData[0].drinking_fountain === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(interiorData[0].drinking_fountain, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3708,20 +2415,7 @@ function ElevatorView() {
         '        <div class="card-row">\n' +
         '            <div class="col-3"><label for="is_elevator"> Is there ​at least one elevator ​or lift: </label> <select class="form-control" id="is_elevator" name="is_elevator" >\n';
 
-                            if (elevatorData[0].is_elevator === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].is_elevator === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].is_elevator, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3730,39 +2424,13 @@ function ElevatorView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="works"> The elevator or lift works properly: </label> <select class="form-control" id="works" >\n';
 
-                            if (elevatorData[0].works === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].works === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].works, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="no_assist"> Users can operate elevator or lift without having to find someone to assist or provide a key: </label> <select class="form-control" id="no_assist" name="no_assist" >\n';
 
-                            if (elevatorData[0].no_assist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].no_assist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].no_assist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3770,20 +2438,7 @@ function ElevatorView() {
         '        <div class="card-row">\n' +
         '            <div class="col-3"><label for="button_height"> Buttons are no higher than 48” and no lower than 15”: </label> <select class="form-control" id="button_height" name="button_height" >\n';
 
-                            if (elevatorData[0].button_height === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].button_height === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].button_height, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3791,20 +2446,7 @@ function ElevatorView() {
         '            <div class="col-3"><label for="inside_btn_height"> Inside button height (inches): </label> <input type="number" min="0" class="form-control" id="inside_btn_height" name="inside_btn_height"  value="'+elevatorData[0].inside_btn_height+'" ></div>\n' +
         '            <div class="col-3"><label for="button_use_fist"> Buttons are easy to press with closed fist: </label><select class="form-control" id="button_use_fist" name="button_use_fist" >\n';
 
-                            if (elevatorData[0].button_use_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].button_use_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].button_use_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3812,39 +2454,13 @@ function ElevatorView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="braille"> Buttons ​and signs ​have braille markings ​and raised letters/numbers: </label><select class="form-control" id="braille" name="braille" >\n';
 
-                            if (elevatorData[0].braille === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].braille === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].braille, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="audible_tones"> Elevator or lift uses ​audible tones as well as visible signals : </label> <select class="form-control" id="audible_tones" name="audible_tones" >\n';
 
-                            if (elevatorData[0].audible_tones === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].audible_tones === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].audible_tones, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3852,48 +2468,13 @@ function ElevatorView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="lightingElevator"> Lighting is adequate: </label><select class="form-control" id="lightingElevator" name="lightingElevator" >\n';
 
-                            if (elevatorData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="lighting_typeElevator"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeElevator" name="lighting_typeElevator" >\n';
 
-                            if (elevatorData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -3901,20 +2482,7 @@ function ElevatorView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="elevator_depth"> Elevator interior is at least 54” DEEP ​ ​from door to the back : </label><select class="form-control" id="elevator_depth" name="elevator_depth" >\n';
 
-                            if (elevatorData[0].elevator_depth === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (elevatorData[0].elevator_depth === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(elevatorData[0].elevator_depth, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4041,39 +2609,13 @@ function SignageView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="is_directory"> There is a directory at all accessible entrances to help visitors to find their way: </label> <select class="form-control" id="is_directory" name="is_directory" >\n';
 
-                            if (signageData[0].is_directory === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].is_directory === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].is_directory, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="door_signs"> Door signs are on latch side of door, between 48” and 60” from floor: </label> <select class="form-control" id="door_signs" name="door_signs" >\n';
 
-                            if (signageData[0].door_signs === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].door_signs === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].door_signs, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4082,58 +2624,19 @@ function SignageView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="pub_sign_braile"> Public signs have Braille: </label> <select class="form-control" id="pub_sign_braile" name="pub_sign_braile" >\n';
 
-                            if (signageData[0].pub_sign_braile === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].pub_sign_braile === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].pub_sign_braile, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="sign_high_contrast"> Signs have raised, high contrast lettering, ​low glare background: </label> <select class="form-control" id="sign_high_contrast" name="sign_high_contrast" >\n';
 
-                            if (signageData[0].sign_high_contrast === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].sign_high_contrast === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].sign_high_contrast, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="sign_images"> Signs include images, illustrations, or icons: </label><select class="form-control" id="sign_images" name="sign_images" >\n';
 
-                            if (signageData[0].sign_images === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].sign_images === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].sign_images, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4141,39 +2644,13 @@ function SignageView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="written_material_images"> Written material (menus, etc.) includes images or illustrations: </label> <select class="form-control" id="written_material_images" name="written_material_images" >\n';
 
-                            if (signageData[0].written_material_images === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].written_material_images === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].written_material_images, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="menu_access"> There is a large print menu, Braille menu, and/ or on­line accessible menu: </label><select class="form-control" id="menu_access" name="menu_access" >\n';
 
-                            if (signageData[0].written_material_images === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].written_material_images === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].menu_access, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4181,61 +2658,13 @@ function SignageView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="alt_info"> Information is available in alternative formats: </label><select class="form-control" id="alt_info" name="alt_info" >\n';
 
-                            if (signageData[0].alt_info === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].alt_info === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].alt_info, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large Print/Recorded Audio/Video/NA: </label> <select class="form-control" id="alt_info_type" name="alt_info_type" >\n';
+        '            <div class="col-6"><label for="alt_info_type"> Type of alternative format Braille/Large Print/Recorded Audio/Video/Other/NA: </label> <select class="form-control" id="alt_info_type" name="alt_info_type" >\n';
 
-                            if (signageData[0].alt_info_type === "Braille") {
-                                bodyHtml += '<option value="Braille" selected>&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].alt_info_type === "Large Print") {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" selected>&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].alt_info_type === "Recorded audio") {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" selected>&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (signageData[0].alt_info_type === "Video") {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" selected>&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else  {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(signageData[0].alt_info_type, brailleLargePrintOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4352,79 +2781,19 @@ function EmergencyView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="evac_info"> Evacuation and safety information is available in a visible location: </label> <select class="form-control" id="evac_info" name="evac_info" >\n';
 
-                            if (emergencyPreparednessData[0].evac_info === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].evac_info === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].evac_info, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="alt_evac_info"> Evacuation and safety information is available in alternative format: </label> <select class="form-control" id="alt_evac_info" name="alt_evac_info" >\n';
 
-                            if (emergencyPreparednessData[0].alt_evac_info === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].alt_evac_info === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].alt_evac_info, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video: </label> <select class="form-control" id="evac_info_format" name="evac_info_format" >\n';
+        '            <div class="col-4"><label for="evac_info_format"> Type of alternative format Braille/Large print/Recorded audio/Video/Other/NA: </label> <select class="form-control" id="evac_info_format" name="evac_info_format" >\n';
 
-                            if (emergencyPreparednessData[0].evac_info_format === "Braille") {
-                                bodyHtml += '<option value="Braille" selected>&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].evac_info_format === "Large Print") {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" selected>&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].evac_info_format === "Recorded audio") {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" selected>&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].evac_info_format === "Video") {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" selected>&nbsp; Video</option>' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else  {
-                                bodyHtml += '<option value="Braille" >&nbsp; Braille</option>\n' +
-                                    '<option value="Large Print" >&nbsp; Large Print</option>\n ' +
-                                    '<option value="Recorded Audio" >&nbsp; Recorded Audio</option>\n ' +
-                                    '<option value="Video" >&nbsp; Video</option>' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].evac_info_format, brailleLargePrintOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4432,58 +2801,19 @@ function EmergencyView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="alarms"> Emergency alarms both audible and visible: </label> <select class="form-control" id="alarms" name="alarms" >\n';
 
-                            if (emergencyPreparednessData[0].alarms === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].alarms === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].alarms, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="location_no_flash"> There is an emergency location available where there are no flashing alarms: </label> <select class="form-control" id="location_no_flash" name="location_no_flash" >\n';
 
-                            if (emergencyPreparednessData[0].location_no_flash === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].location_no_flash === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].location_no_flash, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="shelter"> There is an area of refuge, shelter in place during emergencies: </label><select class="form-control" id="shelter" name="shelter" >\n';
 
-                            if (emergencyPreparednessData[0].shelter === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].shelter === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].shelter, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4491,39 +2821,13 @@ function EmergencyView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="signs_to_exit"> Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes: </label> <select class="form-control" id="signs_to_exit" name="signs_to_exit" >\n';
 
-                            if (emergencyPreparednessData[0].signs_to_exit === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].signs_to_exit === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].signs_to_exit, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="wheelchair_plan"> There is a plan for evacuating persons using wheelchairs in case elevators are inoperable: </label><select class="form-control" id="wheelchair_plan" name="wheelchair_plan" >\n';
 
-                            if (emergencyPreparednessData[0].wheelchair_plan === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].wheelchair_plan === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].wheelchair_plan, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4531,58 +2835,19 @@ function EmergencyView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="floor_plan_routes"> Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes: </label><select class="form-control" id="floor_plan_routes" name="floor_plan_routes" >\n';
 
-                            if (emergencyPreparednessData[0].floor_plan_routes === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].floor_plan_routes === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].floor_plan_routes, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="fire_alarm_height"> Fire alarms pull boxes are no higher than 48”: </label> <select class="form-control" id="fire_alarm_height" name="fire_alarm_height" >\n';
 
-                            if (emergencyPreparednessData[0].fire_alarm_height === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].fire_alarm_height === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].fire_alarm_height, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="fire_extinguisher_height"> Fire extinguishers are mounted with bottom no higher than 48”: </label> <select class="form-control" id="fire_extinguisher_height" name="fire_extinguisher_height"  >\n';
 
-                            if (emergencyPreparednessData[0].fire_extinguisher_height === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (emergencyPreparednessData[0].fire_extinguisher_height === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(emergencyPreparednessData[0].fire_extinguisher_height, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4700,39 +2965,13 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="seating_no_step"> One or more seating areas in the common area can be accessed without steps: </label> <select class="form-control" id="seating_no_step" name="seating_no_step" >\n';
 
-                            if (seatingData[0].seating_no_step === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].seating_no_step === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].seating_no_step, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="table_aisles"> Customers can maneuver between tables without bumping into chairs (36” aisles)​: </label> <select class="form-control" id="table_aisles" name="table_aisles" >\n';
 
-                            if (seatingData[0].table_aisles === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].table_aisles === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].table_aisles, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4740,20 +2979,7 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="legroom"> There are tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”): </label> <select class="form-control" id="legroom" name="legroom" >\n';
 
-                            if (seatingData[0].legroom === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].legroom === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].legroom, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4762,20 +2988,7 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" id="rearranged" name="rearranged" >\n';
 
-                            if (seatingData[0].rearranged === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].rearranged === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].rearranged, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4785,20 +2998,7 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" id="round_tables" name="round_tables" >\n';
 
-                            if (seatingData[0].round_tables === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].round_tables === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].round_tables, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4807,67 +3007,19 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="lightingSeating"> Lighting is adequate: </label><select class="form-control" id="lightingSeating" name="lightingSeating" >\n';
 
-                            if (seatingData[0].lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_optionSeating"> Lighting level day/night: </label><select class="form-control" id="lighting_optionSeating" name="lighting_optionSeating" >\n';
 
-                            if (seatingData[0].lighting_option === "Day") {
-                                bodyHtml += '<option value="Day" selected>&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].lighting_option === "Night") {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" selected>&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Day" >&nbsp; Day</option>\n' +
-                                    '<option value="Night" >&nbsp; Night</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].lighting_option, dayNightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="lighting_typeSeating"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeSeating" name="lighting_typeSeating" >\n';
 
-                            if (seatingData[0].lighting_type === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].lighting_type === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].lighting_type === "Bright") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].lighting_type, lowMedBrightOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4875,39 +3027,13 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="adjustable_lighting"> There are one or more available spaces with adjustable lighting: </label><select class="form-control" id="adjustable_lighting" name="adjustable_lighting" >\n';
 
-                            if (seatingData[0].adjustable_lighting === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].adjustable_lighting === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].adjustable_lighting, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="low_visual_slim"> There are one or more areas with low visual stimulation: </label> <select class="form-control" id="low_visual_slim" name="low_visual_slim" >\n';
 
-                            if (seatingData[0].low_visual_slim === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].low_visual_slim === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].low_visual_slim, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4915,39 +3041,13 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="quiet_table"> There is a quiet table, room or area available on request: </label><select class="form-control" id="quiet_table" id="quiet_table" >\n';
 
-                            if (seatingData[0].quiet_table === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].quiet_table === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].quiet_table, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="low_sound"> There is an area with low or no background sound, and/or that has sound­absorbing surfaces: </label> <select class="form-control" id="low_sound" name="low_sound" >\n';
 
-                            if (seatingData[0].low_sound === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].low_sound === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].low_sound, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -4955,40 +3055,14 @@ function SeatingView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="designated_space"> For theater or auditorium, there are spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated: </label><select class="form-control" id="designated_space" name="designated_space" >\n';
 
-                            if (seatingData[0].designated_space === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].designated_space === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].designated_space, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="num_desig_space"> Number of designated spaces: </label> <input type="number" min="0" class="form-control" id="num_desig_space" name="num_desig_space" value="'+seatingData[0].num_desig_space+'" ></div>\n' +
         '            <div class="col-4"><label for="companion_space"> There are spaces for companions to sit next to the wheelchair users: </label> <select class="form-control" id="companion_space" name="companion_space" >\n';
 
-                            if (seatingData[0].companion_space === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (seatingData[0].companion_space === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(seatingData[0].companion_space, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5122,20 +3196,7 @@ function RestroomView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="public_restroom"> Public restrooms ​are available near or ​at the location: </label> <select class="form-control" id="public_restroom" name="public_restroom" >\n';
 
-                            if (restroomData[0].public_restroom === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomData[0].public_restroom === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(restroomData[0].public_restroom, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5148,58 +3209,19 @@ function RestroomView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="sign_accessable"> Restrooms signs have high contrast, Braille, raised lettering, low glare background: </label> <select class="form-control" id="sign_accessable" name="sign_accessable" >\n';
 
-                            if (restroomData[0].sign_accessable === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomData[0].sign_accessable === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(restroomData[0].sign_accessable, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="sign_location"> Signage is on latch side of door between 48” and 60” above floor: </label><select class="form-control" id="sign_location" name="sign_location" >\n';
 
-                            if (restroomData[0].sign_location === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomData[0].sign_location === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(restroomData[0].sign_location, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="key_needed"> Users do not need to ask someone for a KEY to use the restroom: </label><select class="form-control" id="key_needed" name="key_needed" >\n';
 
-                            if (restroomData[0].key_needed === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomData[0].key_needed === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(restroomData[0].key_needed, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5347,20 +3369,7 @@ function RestroomInfoView() {
             '            <div class="col-4"><label for="restroom_desc_'+restroomInfoData[i].rest_info_id+'" > Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" id="restroom_desc_'+restroomInfoData[i].rest_info_id+'" name="restroom_desc_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].restroom_desc+'" ></div>\n' +
             '            <div class="col-4"><label for="easy_open_'+restroomInfoData[i].rest_info_id+'" >  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" id="easy_open_'+restroomInfoData[i].rest_info_id+'"  name="easy_open_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].easy_open === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].easy_open === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].easy_open, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5369,59 +3378,20 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="clearance_'+restroomInfoData[i].rest_info_id+'"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" id="clearance_'+restroomInfoData[i].rest_info_id+'" name="clearance_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].clearance === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].clearance === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].clearance, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="opening_'+restroomInfoData[i].rest_info_id+'"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" id="opening_'+restroomInfoData[i].rest_info_id+'" name="opening_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].opening+'" ></div>\n' +
             '            <div class="col-3"><label for="opens_out_'+restroomInfoData[i].rest_info_id+'"> The stall door opens to the outside: </label><select class="form-control" id="opens_out_'+restroomInfoData[i].rest_info_id+'" name="opens_out_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].opens_out === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].opens_out === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].opens_out, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="use_fist_'+restroomInfoData[i].rest_info_id+'"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" id="use_fist_'+restroomInfoData[i].rest_info_id+'" name="use_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].use_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].use_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].use_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5429,20 +3399,7 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="can_turn_around_'+restroomInfoData[i].rest_info_id+'"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" id="can_turn_around_'+restroomInfoData[i].rest_info_id+'" name="can_turn_around_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].can_turn_around === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].can_turn_around === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].can_turn_around, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5450,20 +3407,7 @@ function RestroomInfoView() {
             '            <div class="col-3"><label for="turn_depth_'+restroomInfoData[i].rest_info_id+'"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" id="turn_depth_'+restroomInfoData[i].rest_info_id+'" name="turn_depth_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].turn_depth+'" ></div>\n' +
             '            <div class="col-3"><label for="close_chair_inside_'+restroomInfoData[i].rest_info_id+'"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" id="close_chair_inside_'+restroomInfoData[i].rest_info_id+'" name="close_chair_inside_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].close_chair_inside === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].close_chair_inside === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].close_chair_inside, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5471,59 +3415,20 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="grab_bars_'+restroomInfoData[i].rest_info_id+'"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" id="grab_bars_'+restroomInfoData[i].rest_info_id+'" name="grab_bars_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].grab_bars === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].grab_bars === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].grab_bars, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="seat_height_req_'+restroomInfoData[i].rest_info_id+'"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" id="seat_height_req_'+restroomInfoData[i].rest_info_id+'" name="seat_height_req_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].seat_height_req === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].seat_height_req === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].seat_height_req, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="seat_height_'+restroomInfoData[i].rest_info_id+'"> Seat height (inches): </label><input type="number" min="0" class="form-control" id="seat_height_'+restroomInfoData[i].rest_info_id+'" name="seat_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].seat_height+'" ></div>\n' +
             '            <div class="col-3"><label for="flush_auto_fist_'+restroomInfoData[i].rest_info_id+'"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" id="flush_auto_fist_'+restroomInfoData[i].rest_info_id+'" name="flush_auto_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].flush_auto_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].flush_auto_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].flush_auto_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5531,40 +3436,14 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="ambulatory_accessible_'+restroomInfoData[i].rest_info_id+'"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" id="ambulatory_accessible_'+restroomInfoData[i].rest_info_id+'" name="ambulatory_accessible_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].ambulatory_accessible === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].ambulatory_accessible === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].ambulatory_accessible, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="bar_height_'+restroomInfoData[i].rest_info_id+'"> Toilet height (inches): </label><input type="number" min="0" class="form-control" id="bar_height_'+restroomInfoData[i].rest_info_id+'" name="bar_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].bar_height+'" ></div>\n' +
             '            <div class="col-3"><label for="coat_hook_'+restroomInfoData[i].rest_info_id+'"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" id="coat_hook_'+restroomInfoData[i].rest_info_id+'" name="coat_hook_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].coat_hook === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].coat_hook === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].coat_hook, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5573,40 +3452,14 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="sink_'+restroomInfoData[i].rest_info_id+'"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" id="sink_'+restroomInfoData[i].rest_info_id+'" name="sink_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].sink === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].sink === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].sink, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="sink_height_'+restroomInfoData[i].rest_info_id+'"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" id="sink_height_'+restroomInfoData[i].rest_info_id+'" name="sink_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].sink_height+'" ></div>\n' +
             '            <div class="col-3"><label for="faucet_'+restroomInfoData[i].rest_info_id+'"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" id="faucet_'+restroomInfoData[i].rest_info_id+'" name="faucet_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].faucet === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].faucet === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].faucet, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5615,39 +3468,13 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-4"><label for="faucet_auto_fist_'+restroomInfoData[i].rest_info_id+'"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" id="faucet_auto_fist_'+restroomInfoData[i].rest_info_id+'" name="faucet_auto_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].faucet_auto_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].faucet_auto_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].faucet_auto_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-4"><label for="sink_clearance_'+restroomInfoData[i].rest_info_id+'"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" id="sink_clearance_'+restroomInfoData[i].rest_info_id+'" name="sink_clearance_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].sink_clearance === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].sink_clearance === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].sink_clearance, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5656,39 +3483,13 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-4"><label for="sink_pipes_'+restroomInfoData[i].rest_info_id+'"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" id="sink_pipes_'+restroomInfoData[i].rest_info_id+'" name="sink_pipes_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].sink_pipes === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].sink_pipes === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].sink_pipes, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-4"><label for="soap_dispenser_'+restroomInfoData[i].rest_info_id+'"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" id="soap_dispenser_'+restroomInfoData[i].rest_info_id+'" name="soap_dispenser_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].soap_dispenser === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].soap_dispenser === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].soap_dispenser, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5697,39 +3498,13 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-6"><label for="dry_fist_'+restroomInfoData[i].rest_info_id+'">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" id="dry_fist_'+restroomInfoData[i].rest_info_id+'" name="dry_fist_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].dry_fist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].dry_fist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].dry_fist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-6"><label for="dry_control_height_'+restroomInfoData[i].rest_info_id+'"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" id="dry_control_height_'+restroomInfoData[i].rest_info_id+'" name="dry_control_height_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].dry_control_height === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].dry_control_height === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].dry_control_height, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5737,40 +3512,14 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="mirror_'+restroomInfoData[i].rest_info_id+'"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" id="mirror_'+restroomInfoData[i].rest_info_id+'" name="mirror_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].mirror === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].mirror === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].mirror, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-3"><label for="mirror_height_'+restroomInfoData[i].rest_info_id+'"> Mirror height (inches): </label><input type="number" min="0" class="form-control" id="mirror_height_'+restroomInfoData[i].rest_info_id+'" name="mirror_height_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].mirror_height+'" ></div>\n' +
             '            <div class="col-3"><label for="shelves_'+restroomInfoData[i].rest_info_id+'"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" id="shelves_'+restroomInfoData[i].rest_info_id+'" name="shelves_'+restroomInfoData[i].rest_info_id+'"  >\n';
 
-                            if (restroomInfoData[0].shelves === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].shelves === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].shelves, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5779,39 +3528,13 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-4"><label for="trash_receptacles_'+restroomInfoData[i].rest_info_id+'"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" id="trash_receptacles_'+restroomInfoData[i].rest_info_id+'" name="trash_receptacles_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].trash_receptacles === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].trash_receptacles === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].trash_receptacles, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
             '            <div class="col-4"><label for="hygiene_seat_cover_'+restroomInfoData[i].rest_info_id+'"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" id="hygiene_seat_cover_'+restroomInfoData[i].rest_info_id+'" name="hygiene_seat_cover_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                            if (restroomInfoData[0].hygiene_seat_cover === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (restroomInfoData[0].hygiene_seat_cover === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].hygiene_seat_cover, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -5820,48 +3543,13 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="lightingRestroomInfo_'+restroomInfoData[i].rest_info_id+'"> Lighting is adequate: </label><select class="form-control" id="lightingRestroomInfo_'+restroomInfoData[i].rest_info_id+'" name="lightingRestroomInfo_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                                if (restroomInfoData[0].lighting === "Yes") {
-                                    bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                        '<option value="No" >&nbsp; No</option>\n ' +
-                                        '<option value="N/A" >&nbsp; N/A</option>';
-                                }
-                                else if (restroomInfoData[0].lighting === "No") {
-                                    bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                        '<option value="No" selected>&nbsp; No</option>\n ' +
-                                        '<option value="N/A" >&nbsp; N/A</option>';
-                                } else {
-                                    bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                        '<option value="No" >&nbsp; No</option>\n ' +
-                                        '<option value="N/A" selected>&nbsp; N/A</option>';
-                                }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].lighting, yesNoNAOptions);
 
         bodyHtml += '       </select>\n' +
             '           </div>\n' +
             '            <div class="col-6"><label for="lighting_typeRestroomInfo_'+restroomInfoData[i].rest_info_id+'"> Lighting level low/medium/bright: </label><select class="form-control" id="lighting_typeRestroomInfo_'+restroomInfoData[i].rest_info_id+'" name="lighting_typeRestroomInfo_'+restroomInfoData[i].rest_info_id+'" >\n';
 
-                                if (restroomInfoData[0].lighting_type === "Low") {
-                                    bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                        '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                        '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                        '<option value="N/A" >&nbsp; N/A</option>';
-                                }
-                                else if (restroomInfoData[0].lighting_type === "Medium") {
-                                    bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                        '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                        '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                        '<option value="N/A" >&nbsp; N/A</option>';
-                                }
-                                else if (restroomInfoData[0].lighting_type === "Bright") {
-                                    bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                        '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                        '<option value="Bright" selected>&nbsp; Bright</option>\n' +
-                                        '<option value="N/A" >&nbsp; N/A</option>';
-                                } else {
-                                    bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                        '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                        '<option value="Bright" >&nbsp; Bright</option>\n' +
-                                        '<option value="N/A" selected>&nbsp; N/A</option>';
-                                }
+        bodyHtml += generateSelectOptions(restroomInfoData[i].lighting_type, lowMedBrightOptions);
 
         bodyHtml += '       </select>\n' +
             '            </div>\n' +
@@ -6001,233 +3689,156 @@ function updateRestroomInfo(curr_rest_info_id) {
 
 function addRestroomInfoView(rest_id) {
 
-    $("#restroom-body").html(
-        '<form id="add_restroom_information"> \n' +
+    bodyHtml = '<form id="add_restroom_information"> \n' +
         '<div class="card-row">\n' +
         '   <div class="col-12"><label for="restroom_desc"> Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <input type="text" class="form-control" name="restroom_desc" id="restroom_desc" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" name="easy_open" id="easy_open" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="easy_open">  Room door is easy to open, requiring 5 lb. or less force: </label> <select class="form-control" name="easy_open" id="easy_open" >\n';
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="opening"> Opening measurement (inches): </label> <input type="number" min="0" class="form-control" name="opening" id="opening"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" name="opens_out" id="opens_out" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="opens_out"> The stall door opens to the outside: </label><select class="form-control" name="opens_out" id="opens_out" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" name="use_fist" id="use_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="use_fist"> The stall door can be opened, closed, and latched with a closed fist: </label><select class="form-control" name="use_fist" id="use_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" name="can_turn_around" id="can_turn_around" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="can_turn_around"> The stall or room is large enough for a wheelchair or walker to turn around: </label> <select class="form-control" name="can_turn_around" id="can_turn_around" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="turn_width"> Stall/Room width (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_width" id="turn_width"  ></div>\n' +
         '   <div class="col-4"><label for="turn_depth"> Stall/Room depth (inches)​: </label> <input type="number" min="0" class="form-control" name="turn_depth" id="turn_depth"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" name="close_chair_inside" id="close_chair_inside" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="close_chair_inside"> The stall/room door can be closed once a wheelchair is inside: </label> <select class="form-control" name="close_chair_inside" id="close_chair_inside" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" name="grab_bars" id="grab_bars" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="grab_bars"> Grab bars are easily reachable behind the toilet and on the side wall ​ nearest the toilet: </label> <select class="form-control" name="grab_bars" id="grab_bars" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" name="seat_height_req" id="seat_height_req" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="seat_height_req"> The height of the toilet seat is at least 17” from the floor: </label><select class="form-control" name="seat_height_req" id="seat_height_req" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="seat_height"> Seat height (inches): </label><input type="number" min="0" class="form-control" name="seat_height" id="seat_height" ></div>\n' +
-        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" name="flush_auto_fist" id="flush_auto_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="flush_auto_fist"> The toilet flushes automatically, or can be operated with a closed fist: </label><select class="form-control" name="flush_auto_fist" id="flush_auto_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" name="ambulatory_accessible" id="ambulatory_accessible" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="ambulatory_accessible"> If there are multiple stalls, at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor: </label> <select class="form-control" name="ambulatory_accessible" id="ambulatory_accessible" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="bar_height"> Toilet height (inches): </label><input type="number" min="0" class="form-control" name="bar_height" id="bar_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" name="coat_hook" id="coat_hook" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="coat_hook"> If there is a coat hook, it is between 35” and 48” from the floor: </label><select class="form-control" name="coat_hook" id="coat_hook" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="num" min="0" class="form-control" name="hook_height" id="hook_height"  ></div>\n' +
+        '   <div class="col-6"><label for="hook_height"> Hook height (inches): </label> <input type="number" min="0" class="form-control" name="hook_height" id="hook_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" name="sink" id="sink" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="sink"> The height of the sink/countertop is 34” or less from the floor: </label><select class="form-control" name="sink" id="sink" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="sink_height"> Sink/Countertop height (inches): </label> <input type="number" min="0" class="form-control" name="sink_height" id="sink_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" name="faucet" id="faucet" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="faucet"> The faucet control is 17” or less from the front edge of the sink counter: </label><select class="form-control" name="faucet" id="faucet" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="faucet_depth"> Faucet depth (inches): </label> <input type="number" min="0" class="form-control" name="faucet_depth" id="faucet_depth"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" name="faucet_auto_fist" id="faucet_auto_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="faucet_auto_fist"> Faucet​ can ​be operated ​automatically or ​with a closed fist: </label> <select class="form-control" name="faucet_auto_fist" id="faucet_auto_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" name="sink_clearance" id="sink_clearance" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="sink_clearance"> There is room for a wheelchair to roll under the sink ​: </label><select class="form-control" name="sink_clearance" id="sink_clearance" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="sink_clearance_height"> Measurement (inches): </label> <input type="number" min="0" class="form-control" name="sink_clearance_height" id="sink_clearance_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" name="sink_pipes" id="sink_pipes" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="sink_pipes"> If there are pipes under the sink, they are covered to prevent injury or burns: </label> <select class="form-control" name="sink_pipes" id="sink_pipes" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" name="soap_dispenser" id="soap_dispenser" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-4"><label for="soap_dispenser"> The height of the soap dispenser control is 48” or less from the floor: </label> <select class="form-control" name="soap_dispenser" id="soap_dispenser" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-4"><label for="soap_height"> Soap dispenser height (inches): </label> <input type="number" min="0" class="form-control" name="soap_height" id="soap_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="dry_fist">  Hand dryer or towel dispenser can be operated automatically or with closed fist: </label> <select class="form-control" name="dry_fist" id="dry_fist" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" name="dry_control_height" id="dry_control_height" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="dry_control_height"> Controls for hand dryer or towel dispenser are 48” or less from floor: </label> <select class="form-control" name="dry_control_height" id="dry_control_height" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" name="mirror" id="mirror" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="mirror"> If there is a mirror, the bottom edge is 40” or less from the floor: </label> <select class="form-control" name="mirror" id="mirror" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="mirror_height"> Mirror height (inches): </label><input type="number" min="0" class="form-control" name="mirror_height" id="mirror_height" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" name="shelves" id="shelves" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="shelves"> If there are shelves to set items, they are 48” or less from the floor: </label><select class="form-control" name="shelves" id="shelves" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '   <div class="col-6"><label for="shelf_height"> Shelf height (inches): </label> <input type="number" min="0" class="form-control" name="shelf_height" id="shelf_height"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" name="trash_receptacles" id="trash_receptacles" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="trash_receptacles"> Trash receptacles are positioned so they do not block the route to the door​: </label> <select class="form-control" name="trash_receptacles" id="trash_receptacles" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" name="hygiene_seat_cover" id="hygiene_seat_cover" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '   <div class="col-6"><label for="hygiene_seat_cover"> Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor: </label> <select class="form-control" name="hygiene_seat_cover" id="hygiene_seat_cover" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '   <div class="col-4"><label for="hygiene_cover_height"> Height (inches): </label> <input type="number" min="0" class="form-control" name="hygiene_cover_height" id="hygiene_cover_height"  ></div>\n' +
-        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" name="lightingRestroomInfo" id="lightingRestroomInfo" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Yes" >Yes</option>\n' +
-        '       <option value="No" >No</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lightingRestroomInfo"> Lighting is adequate: </label><select class="form-control" name="lightingRestroomInfo" id="lightingRestroomInfo" >\n' ;
+    bodyHtml += addGenSelectOptions(yesNoNAOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeRestroomInfo" id="lighting_typeRestroomInfo" >\n' +
-        '       <option value="" disabled selected>Please select one</option>\n' +
-        '       <option value="Low" >Low</option>\n' +
-        '       <option value="Medium" >Medium</option>\n' +
-        '       <option value="Bright" >Bright</option>\n' +
-        '       <option value="N/A" >N/A</option>\n' +
-        '    </select>\n' +
+        '    <div class="col-4"><label for="lighting_typeRestroomInfo"> Lighting level low/medium/bright: </label><select class="form-control" name="lighting_typeRestroomInfo" id="lighting_typeRestroomInfo" >\n';
+    bodyHtml += addGenSelectOptions(lowMedBrightOptions);
+    bodyHtml += '</select>\n' +
         '   </div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
@@ -6244,8 +3855,9 @@ function addRestroomInfoView(rest_id) {
         '       </span>\n' +
         '   </div>\n ' +
         '</div>\n ' +
-        '</form>'
-    );
+        '</form>';
+
+    $("#restroom-body").html(bodyHtml);
 
     $("#restroom-footer").html('');
 
@@ -6408,152 +4020,42 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="public_phone"> There is one or more public phones available w/adjustable volume control.: </label> <select class="form-control" name="public_phone" id="public_phone" >\n';
 
-                            if (communicationData[0].public_phone === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].public_phone === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].public_phone, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="phone_clearance">  There are public phones w/ controls min 48” from floor, protruding < 4” from wall: </label> <select class="form-control" name="phone_clearance" id="phone_clearance" >\n';
 
-                            if (communicationData[0].phone_clearance === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].phone_clearance === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].phone_clearance, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="num_phone"> Number of phones: </label> <input type="number" min="0" class="form-control" name="num_phone" id="num_phone" value="'+communicationData[0].num_phone+'" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-3"><label for="tty"> There is a TTY is available: </label> <select class="form-control" name="tty" id="tty" >\n';
+        '            <div class="col-6"><label for="tty"> There is a TTY is available: </label> <select class="form-control" name="tty" id="tty" >\n';
 
-                            if (communicationData[0].tty === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].tty === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].tty, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-3"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" name="staff_tty" id="staff_tty" >\n';
+        '            <div class="col-6"><label for="staff_tty"> Staff are trained in use of TTY, and how to accept relay calls: </label> <select class="form-control" name="staff_tty" id="staff_tty" >\n';
 
-                            if (communicationData[0].staff_tty === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].staff_tty === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].staff_tty, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-3"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" name="assisted_listening" id="assisted_listening" >\n';
+        '        </div>\n' +
+        '        <div class="card-row">\n' +
+        '            <div class="col-6"><label for="assisted_listening"> There are assisted listening devices available: </label><select class="form-control" name="assisted_listening" id="assisted_listening" >\n';
 
-                            if (communicationData[0].assisted_listening === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listening === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].assisted_listening, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-3"><label for="assisted_listen_type"> Type of listening device - Infra­red Loop/Induction Loop/FM/Amplification/Other: </label><select class="form-control" name="assisted_listen_type" id="assisted_listen_type" >\n';
+        '            <div class="col-6"><label for="assisted_listen_type"> Type of listening device - Infra­red Loop/Induction Loop/FM/Amplification/Other: </label><select class="form-control" name="assisted_listen_type" id="assisted_listen_type" >\n';
 
-                            if (communicationData[0].assisted_listen_type === "Infra­red Loop") {
-                                bodyHtml += '<option value="Infra­red Loop" selected>&nbsp; Infra­red Loop</option>\n' +
-                                    '<option value="Induction Loop" >&nbsp; Induction Loop</option>\n ' +
-                                    '<option value="FM" >&nbsp; FM</option>\n ' +
-                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_type === "Induction Loop") {
-                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
-                                    '<option value="Induction Loop" selected>&nbsp; Induction Loop</option>\n ' +
-                                    '<option value="FM" >&nbsp; FM</option>\n ' +
-                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_type === "FM") {
-                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
-                                    '<option value="Induction Loop" >&nbsp; Induction Loop</option>\n ' +
-                                    '<option value="FM" selected>&nbsp; FM</option>\n ' +
-                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_type === "Amplification") {
-                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
-                                    '<option value="Induction Loop" selected>&nbsp; Induction Loop</option>\n ' +
-                                    '<option value="FM" >&nbsp; FM</option>\n ' +
-                                    '<option value="Amplification" selected>&nbsp; Amplification</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_type === "Other") {
-                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
-                                    '<option value="Induction Loop" selected>&nbsp; Induction Loop</option>\n ' +
-                                    '<option value="FM" >&nbsp; FM</option>\n ' +
-                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
-                                    '<option value="Other" selected>&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Infra­red Loop" >&nbsp; Infra­red Loop</option>\n' +
-                                    '<option value="Induction Loop" >&nbsp; Induction Loop</option>\n ' +
-                                    '<option value="FM" >&nbsp; FM</option>\n ' +
-                                    '<option value="Amplification" >&nbsp; Amplification</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].assisted_listen_type, infraRedLoopOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6561,79 +4063,19 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="assisted_listen_receiver"> Type of receivers - Earbud/Neckloop/Headphones/Other: </label> <select class="form-control" name="assisted_listen_receiver" id="assisted_listen_receiver" >\n';
 
-                            if (communicationData[0].assisted_listen_receiver === "Earbud") {
-                                bodyHtml += '<option value="Earbud" selected>&nbsp; Earbud</option>\n' +
-                                    '<option value="Neckloop" >&nbsp; Neckloop</option>\n ' +
-                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_receiver === "Neckloop") {
-                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
-                                    '<option value="Neckloop" selected>&nbsp; Neckloop</option>\n ' +
-                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_receiver === "Headphones") {
-                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
-                                    '<option value="Neckloop" >&nbsp; Neckloop</option>\n ' +
-                                    '<option value="Headphones" selected>&nbsp; Headphones</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assisted_listen_receiver === "Other") {
-                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
-                                    '<option value="Neckloop" selected>&nbsp; Neckloop</option>\n ' +
-                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
-                                    '<option value="Other" selected>&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Earbud" >&nbsp; Earbud</option>\n' +
-                                    '<option value="Neckloop" >&nbsp; Neckloop</option>\n ' +
-                                    '<option value="Headphones" >&nbsp; Headphones</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].assisted_listen_receiver, earbudNeckLoopOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="listening_signage"> Signs about listening devices are clearly displayed​: </label> <select class="form-control" name="listening_signage" id="listening_signage" >\n';
 
-                            if (communicationData[0].listening_signage === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].listening_signage === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].listening_signage, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="staff_listening"> Staff are trained to use assisted listening devices​: </label> <select class="form-control" name="staff_listening" id="staff_listening" >\n';
 
-                            if (communicationData[0].staff_listening === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].staff_listening === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].staff_listening, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6641,68 +4083,19 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="acoustics"> The acoustics are comfortable (no echoing, loud music, etc): </label> <select class="form-control" name="acoustics" id="acoustics" >\n';
 
-                            if (communicationData[0].acoustics === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].acoustics === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].acoustics, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="acoustics_level"> Noise level - Low/Medium/High: </label> <select class="form-control" name="acoustics_level" id="acoustics_level" >\n';
 
-                            if (communicationData[0].acoustics_level === "Low") {
-                                bodyHtml += '<option value="Low" selected>&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="High" >&nbsp; High</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].acoustics_level === "Medium") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" selected>&nbsp; Medium</option>\n ' +
-                                    '<option value="High" >&nbsp; High</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].acoustics_level === "High") {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="High" selected>&nbsp; High</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Low" >&nbsp; Low</option>\n' +
-                                    '<option value="Medium" >&nbsp; Medium</option>\n ' +
-                                    '<option value="High" >&nbsp; High</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].acoustics_level, lowMedHighOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="alt_comm_methods"> If a customer is unable to hear, there are other forms of communication: </label><select class="form-control" name="alt_comm_methods" id="alt_comm_methods" >\n';
 
-                            if (communicationData[0].alt_comm_methods === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].alt_comm_methods === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].alt_comm_methods, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6711,20 +4104,7 @@ function CommunicationView() {
         '            <div class="col-6"><label for="alt_comm_type"> Type of other form of communication (writing pad, staff know ASL, etc): </label><input type="text" class="form-control" name="alt_comm_type" id="alt_comm_type" value="'+communicationData[0].alt_comm_type+'"></div>\n'+
         '            <div class="col-6"><label for="staff_ASL"> Staff have received instructions on how to provide ASL services upon request (in person or remote): </label><select class="form-control" name="staff_ASL" id="staff_ASL" >\n';
 
-                            if (communicationData[0].staff_ASL === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].staff_ASL === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].staff_ASL, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6732,79 +4112,19 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="captioning_default"> Captioning is turned ‘on’ as default for TVs or projected video: </label> <select class="form-control" name="captioning_default" id="captioning_default" >\n';
 
-                            if (communicationData[0].captioning_default === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].captioning_default === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].captioning_default, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="theater_captioning"> If this is a theater, there is captioning: </label><select class="form-control" name="theater_captioning" id="theater_captioning" >\n';
 
-                            if (communicationData[0].theater_captioning === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].theater_captioning === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].theater_captioning, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="theater_capt_type"> Type of captioning used - Real Time/Open Captions/Rear Window/Other: </label><select class="form-control" name="theater_capt_type" id="theater_capt_type" >\n';
 
-                            if (communicationData[0].theater_capt_type === "Real Time") {
-                                bodyHtml += '<option value="Real Time" selected>&nbsp; Real Time</option>\n' +
-                                    '<option value="Open Captions" >&nbsp; Open Captions</option>\n ' +
-                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].theater_capt_type === "Open Captions") {
-                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
-                                    '<option value="Open Captions" selected>&nbsp; Open Captions</option>\n ' +
-                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].theater_capt_type === "Rear Window") {
-                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
-                                    '<option value="Open Captions" >&nbsp; Open Captions</option>\n ' +
-                                    '<option value="Rear Window" selected>&nbsp; Rear Window</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].theater_capt_type === "Other") {
-                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
-                                    '<option value="Open Captions" selected>&nbsp; Open Captions</option>\n ' +
-                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
-                                    '<option value="Other" selected>&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Real Time" >&nbsp; Real Time</option>\n' +
-                                    '<option value="Open Captions" >&nbsp; Open Captions</option>\n ' +
-                                    '<option value="Rear Window" >&nbsp; Rear Window</option>\n ' +
-                                    '<option value="Other" >&nbsp; Other</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].theater_capt_type, realTiemOpenOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6812,58 +4132,19 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="auditory_info_visual"> Auditory information is presented visually: </label> <select class="form-control" name="auditory_info_visual" id="auditory_info_visual" >\n';
 
-                            if (communicationData[0].auditory_info_visual === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].auditory_info_visual === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].auditory_info_visual, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="visual_info_auditory"> Visual information is presented audibly: </label><select class="form-control" name="visual_info_auditory" id="visual_info_auditory" >\n';
 
-                            if (communicationData[0].visual_info_auditory === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].visual_info_auditory === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].visual_info_auditory, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="website_text_reader"> If the establishment has a website, it is accessible to users of screen text readers: </label> <select class="form-control" name="website_text_reader" id="website_text_reader" >\n';
 
-                            if (communicationData[0].website_text_reader === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].website_text_reader === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].website_text_reader, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6871,49 +4152,13 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="alt_contact"> There are alternate means for patrons to order, contact, or schedule: </label><select class="form-control" name="alt_contact" id="alt_contact" >\n';
 
-                            if (communicationData[0].alt_contact === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].alt_contact === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].alt_contact, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone: </label> <select class="form-control" name="alt_contact_type" id="alt_contact_type" >\n';
+        '            <div class="col-6"><label for="alt_contact_type"> Type of alternate means - Text/On-line/Phone/NA: </label> <select class="form-control" name="alt_contact_type" id="alt_contact_type" >\n';
 
-                            if (communicationData[0].alt_contact_type === "Text") {
-                                bodyHtml += '<option value="Text" selected>&nbsp; Text</option>\n' +
-                                    '<option value="On-line" >&nbsp; On-line</option>\n ' +
-                                    '<option value="Phone" >&nbsp; Phone</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].alt_contact_type === "On-line") {
-                                bodyHtml += '<option value="Text" >&nbsp; Text</option>\n' +
-                                    '<option value="On-line" selected>&nbsp; On-line</option>\n ' +
-                                    '<option value="Phone" >&nbsp; Phone</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].alt_contact_type === "Phone") {
-                                bodyHtml += '<option value="Text" >&nbsp; Text</option>\n' +
-                                    '<option value="On-line" >&nbsp; On-line</option>\n ' +
-                                    '<option value="Phone" selected>&nbsp; Phone</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else {
-                                bodyHtml += '<option value="Text" >&nbsp; Text</option>\n' +
-                                    '<option value="On-line" >&nbsp; On-line</option>\n ' +
-                                    '<option value="Phone" >&nbsp; Phone</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].alt_contact_type, textOnLineOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6921,58 +4166,19 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-4"><label for="shopping_assist"> The establishment offers shopping assistance or delivery: </label> <select class="form-control" name="shopping_assist" id="shopping_assist" >\n';
 
-                            if (communicationData[0].shopping_assist === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].shopping_assist === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].shopping_assist, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-        '            <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery: </label><select class="form-control" name="assist_service" id="assist_service" >\n';
+        '            <div class="col-4"><label for="assist_service"> Type of service - Shopping Assistance/Delivery/NA: </label><select class="form-control" name="assist_service" id="assist_service" >\n';
 
-                            if (communicationData[0].assist_service === "Shopping Assistance") {
-                                bodyHtml += '<option value="Shopping Assistance" selected>&nbsp; Shopping Assistance</option>\n' +
-                                    '<option value="Delivery" >&nbsp; Delivery</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assist_service === "Delivery") {
-                                bodyHtml += '<option value="Shopping Assistance" >&nbsp; Shopping Assistance</option>\n' +
-                                    '<option value="Delivery" selected>&nbsp; Delivery</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Shopping Assistance" >&nbsp; Shopping Assistance</option>\n' +
-                                    '<option value="Delivery" >&nbsp; Delivery</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].assist_service, shoppingAssistOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-4"><label for="assist_fee"> Is there a fee for the service: </label> <select class="form-control" name="assist_fee" id="assist_fee" >\n';
 
-                            if (communicationData[0].assist_fee === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].assist_fee === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].assist_fee, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -6980,39 +4186,13 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-3"><label for="store_scooter"> If this is a store, there are wheelchairs or scooters available for customer use: </label> <select class="form-control" name="store_scooter" id="store_scooter" >\n';
 
-                            if (communicationData[0].store_scooter === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].store_scooter === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].store_scooter, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="scooter_fee"> Is there a fee to use wheelchairs or scooters: </label> <select class="form-control" name="scooter_fee" id="scooter_fee" >\n';
 
-                            if (communicationData[0].scooter_fee === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].scooter_fee === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].scooter_fee, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -7021,39 +4201,13 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="restaurant_allergies"> If this is a restaurant, information is available on food allergies, sensitivities: </label> <select class="form-control" name="restaurant_allergies" id="restaurant_allergies" >\n';
 
-                            if (communicationData[0].restaurant_allergies === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].restaurant_allergies === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].restaurant_allergies, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-6"><label for="staff_disable_trained"> The staff have received training within the past 12 months on how to provide “disability friendly” customer service to people with disabilities of all ages: </label> <select class="form-control" name="staff_disable_trained" id="staff_disable_trained" >\n';
 
-                            if (communicationData[0].staff_disable_trained === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].staff_disable_trained === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].staff_disable_trained, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -7064,58 +4218,19 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-3"><label for="items_reach"> All items are within reach, or assistance is offered to reach them: </label> <select class="form-control" name="items_reach" id="items_reach" >\n';
 
-                            if (communicationData[0].items_reach === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].items_reach === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].items_reach, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="service_alt_manner"> If goods and services are not accessible, they are provided in an alternative manner: </label><select class="form-control" name="service_alt_manner" id="service_alt_manner" >\n';
 
-                            if (communicationData[0].service_alt_manner === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].service_alt_manner === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].service_alt_manner, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
         '            <div class="col-3"><label for="senior_discount"> The establishment offers a senior discount: </label><select class="form-control" name="senior_discount" id="senior_discount" >\n';
 
-                            if (communicationData[0].senior_discount === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].senior_discount === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].senior_discount, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -7124,20 +4239,7 @@ function CommunicationView() {
         '        <div class="card-row">\n' +
         '            <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" name="annual_A4A_review" id="annual_A4A_review" >\n';
 
-                            if (communicationData[0].annual_A4A_review === "Yes") {
-                                bodyHtml += '<option value="Yes" selected>&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            }
-                            else if (communicationData[0].annual_A4A_review === "No") {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" selected>&nbsp; No</option>\n ' +
-                                    '<option value="N/A" >&nbsp; N/A</option>';
-                            } else {
-                                bodyHtml += '<option value="Yes" >&nbsp; Yes</option>\n' +
-                                    '<option value="No" >&nbsp; No</option>\n ' +
-                                    '<option value="N/A" selected>&nbsp; N/A</option>';
-                            }
+    bodyHtml += generateSelectOptions(communicationData[0].annual_A4A_review, yesNoNAOptions);
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
@@ -7286,5 +4388,3 @@ function updateCommunication() {
         }
     });
 }
-
-
