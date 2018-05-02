@@ -21,8 +21,8 @@ function addEstablishmentCardView() {
         success: function (data) {
             for (var i = 0; i < data.length; i ++) {
                 htmlBody += '<div class="box-delete col-5">\n' +
-                    '    <a class="box-title pointer" onclick="deleteEstablishmentId('+data[i].est_id+')" >\n' +
-                    '        <span class="col-10 h4">'+data[i].name+'</span>&nbsp;<div class="icon col-2"><i class="fas fa-trash-alt fa-lg"></i></div><br>\n' +
+                    '    <a class="box-title-delete pointer" onclick="deleteEstablishmentId('+data[i].est_id+')" >\n' +
+                    '        <span class="col-10 h4">'+data[i].name+'</span>&nbsp;<div class="icon col-2"><i class="fas fa-trash-alt fa-lg"></i></div>\n' +
                     '    </a>\n' +
                     '    <div class="box-padding">\n' +
                     '        <a class="red-link" href="'+data[i].website+'" target="_new">'+data[i].website+'</a><br>\n' +
@@ -107,17 +107,21 @@ function deleteStart() {
         '           </div>\n' +
         '           <div class="card-body card-body-color-delete col-12" id="cardBody">\n' +
         '              <div class="card-row">\n' +
-        '               <span class="h8">The survey for&nbsp;'+EST_NAME+'&nbsp;is being deleted. <br> Please wait.</span>\n' +
+        '                   <span class="h8">The survey for&nbsp;'+EST_NAME+'&nbsp;is being deleted.</span>\n' +
         '                   <span class="text-white">\n ' +
         '                       &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;' +
         '                   </span>\n ' +
-        '           </div>\n' +
+        '               </div>\n' +
+        '               <div class="card-row">\n' +
+        '                   <div class="h8 loading">Please wait </div><br>\n' +
+        '               </div>\n' +
         '           </div>\n' +
         '           <div class="card-footer card-header-color-delete text-muted" id="cardFooter">\n' +
         '               <p> </p>\n' +
         '           </div>\n' +
         '       </div>\n' +
-        '   </div>' ;
+        '   </div>\n' +
+        '</div>' ;
 
     $('#delete-view').html(htmlBody);
 

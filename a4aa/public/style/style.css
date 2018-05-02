@@ -203,6 +203,18 @@ a:hover {
     align-items: flex-start;
 }
 
+.box-title-delete {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 1em 0;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color: lightslategrey;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
 .box-user {
     position: relative;
     margin: 1em 0;
@@ -359,7 +371,7 @@ a:hover {
 }
 
 .card-header-color-delete {
-    background-color: rgba(195, 142, 142, 0.65);
+    background-color: rgba(229, 192, 189, 0.49);
 }
 
 .card-header-text-delete {
@@ -523,6 +535,31 @@ a:hover {
     /*color: #ffffff;*/
     color: #000000;
     font-style: normal;
+}
+
+.loading {
+}
+
+.loading:after {
+    overflow: hidden;
+    display: inline-flex;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(4,end) 900ms infinite;
+    animation: ellipsis steps(4,end) 900ms infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+    width: 0px;
+}
+
+@keyframes ellipsis {
+    to {
+        width: 1.25em;
+    }
+}
+
+@-webkit-keyframes ellipsis {
+    to {
+        width: 1.25em;
+    }
 }
 
 .login {
