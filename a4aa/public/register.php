@@ -140,8 +140,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
-                $_SESSION['role'] = $role;
-                $success = "Success! Redirecting you to the home page.";
+                $success = "Success! Redirecting you to the login page.";
                 // Redirect to login page
                 header( "Refresh:2; url=login.php", true, 303);
             } else{
@@ -180,6 +179,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+        <script>
+            function ResetForm(){
+                document.getElementById("register_form").reset();
+            }
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-light bg-header">
@@ -199,7 +204,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="register_form">
                             <div class="register-row">
                                 <div class="form-group col-6 <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
                                     <label for="fname">First Name</label>
@@ -238,15 +243,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             </div>
                             <div class="register-row">
                                 <span class="form-text error"><?php echo $message; ?></span>
-                            </div>
-                            <div class="register-row">
                                 <span class="form-text success"><?php echo $success; ?></span>
                             </div>
                     </div>
                     <div class="card-footer">
                             <div class="form-group">
-                                <input type="submit" class="btn btn-primary col-2" value="Submit">
-                                <input type="reset" class="btn btn-secondary col-2" value="Reset">
+                                <button type="submit" class="btn btn-primary col-2">Submit</button>
+                                <button type="button" class="btn btn-secondary col-2" onclick="ResetForm()">Reset</button>
                             </div>
                             <p>Already have an account? <a href="login.php">Login here</a>.</p>
                         </form>

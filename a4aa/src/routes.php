@@ -842,7 +842,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 }
 
     $id = $args['id'];
-    $sth = $this->db->prepare("SELECT * FROM User WHERE user_id=$id");
+    $sth = $this->db->prepare("SELECT fname, lname, user_name, email FROM User WHERE user_id=$id");
     $sth->execute();
     $data = $sth->fetchAll();
     return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
@@ -907,7 +907,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 });
 
-// get user data by user name
+// get user data by email
 $app->get('/get/user/email/', function (Request $request, Response $response, array $args){
 // Initialize the session
     session_start();
@@ -1095,6 +1095,82 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     $sth->bindParam(':email', $email, PDO::PARAM_STR);
     $sth->bindParam(':role', $role, PDO::PARAM_STR);
     $sth->bindParam(':active', $active, PDO::PARAM_STR);
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put user data
+$app->put('/put/user/account/{id}', function (Request $request, Response $response, array $args){
+// Initialize the session
+    session_start();
+    $time = $_SERVER['REQUEST_TIME'];
+    $timeout_duration = 1800;
+    if (isset($_SESSION['LAST_ACTIVITY']) &&
+        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        session_start();
+    }
+    $_SESSION['LAST_ACTIVITY'] = $time;
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+        header("location: login.php");
+        exit;
+    }
+
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $fname = $data["fname"];
+    $lname = $data["lname"];
+    $user_name = $data["user_name"];
+    $email = $data["email"];
+
+    $sth = $this->db->prepare("UPDATE User SET fname = :fname,
+                                               lname = :lname,
+                                               user_name = :user_name,
+                                               email = :email
+                                               WHERE user_id=$id");
+
+    $sth->bindParam(':fname', $fname, PDO::PARAM_STR);
+    $sth->bindParam(':lname', $lname, PDO::PARAM_STR);
+    $sth->bindParam(':user_name', $user_name, PDO::PARAM_STR);
+    $sth->bindParam(':email', $email, PDO::PARAM_STR);
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put user password
+$app->put('/put/user/password/{id}', function (Request $request, Response $response, array $args){
+// Initialize the session
+    session_start();
+    $time = $_SERVER['REQUEST_TIME'];
+    $timeout_duration = 1800;
+    if (isset($_SESSION['LAST_ACTIVITY']) &&
+        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        session_start();
+    }
+    $_SESSION['LAST_ACTIVITY'] = $time;
+// If session variable is not set it will redirect to login page
+    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+        header("location: login.php");
+        exit;
+    }
+
+    $id = $args['id'];
+    $data = $request->getParsedBody();
+
+    $password = password_hash($data["password"], PASSWORD_DEFAULT);
+
+    $sth = $this->db->prepare("UPDATE User SET password = :password WHERE user_id=$id");
+
+    $sth->bindParam(':password', $password, PDO::PARAM_STR);
     $sth->execute();
     return $this->response->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')

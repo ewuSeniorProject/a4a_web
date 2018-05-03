@@ -49,11 +49,6 @@ $(document).ready(function () {
 
 });
 
-function logout() {
-    localStorage.clear();
-    location.href = "logout.php";
-}
-
 // value is EST_ID
 function getParkId(value) {
     $.ajax({
