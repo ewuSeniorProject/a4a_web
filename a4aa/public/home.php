@@ -65,7 +65,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                 $preloader.delay(350).fadeOut('slow');
             });
         </script>
-
+        <script src="script/common.js"></script>
         <script src="script/home.js"></script>
     </head>
     <body>
@@ -89,6 +89,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                      <div class="dropdown-item"></div>
                     <a class="dropdown-item" href="users.php"><i class="fas fa-users"></i> Edit Users</a>';
                 } ?>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="user_account.php"><i class="fas fa-user-circle"></i> My Account</a>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
@@ -141,9 +143,12 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                     </div>';
                 }
                 else {
-                    echo '<a class="box-title pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: userUrl, title: \'View \'+name+\' information\'}" >
-                    <span class="col-10 h4" data-bind="text:name"></span>&nbsp;<div class="icon col-2"><i class="fas fa-folder-open fa-lg"></i></div><br>
-                    </a>';
+                    echo '<div class="box-title">
+                        <div class="col-10 h4" data-bind="text:name"></div>
+                        <a class="pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: userUrl, title: \'View \'+name+\' information\'}" >
+                            <div class="icon col-2"><i class="fas fa-folder-open fa-lg"></i>&nbsp;</div>
+                        </a>
+                    </div>';
                 }?>
                 <div class="box-padding">
                     <a class="white-link" data-bind="text:website, attr: { href: website }" target="_new"></a><br>

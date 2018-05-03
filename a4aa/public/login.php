@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
-        $sql = "SELECT user_name, password, role, active FROM User WHERE user_name = ?";
+        $sql = "SELECT user_id, user_name, password, role, active FROM User WHERE user_name = ?";
 
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -49,7 +49,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 // Check if username exists, if yes then verify password
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     // Bind result variables
-                    mysqli_stmt_bind_result($stmt, $user_name, $hashed_password, $role, $active);
+                    mysqli_stmt_bind_result($stmt, $user_id, $user_name, $hashed_password, $role, $active);
 
                     if(mysqli_stmt_fetch($stmt)){
 
@@ -58,6 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             save role and active to the session */
 
                             session_start();
+                            $_SESSION['user_id'] = $user_id;
                             $_SESSION['role'] = $role;
                             $_SESSION['active'] = $active;
                             header("location: home.php");

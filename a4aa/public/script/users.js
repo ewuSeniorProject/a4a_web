@@ -28,7 +28,7 @@ function ActiveUserCardView() {
                     '    </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-7"><label for="user_name_'+data[i].user_id+'"> User Name: </label><input type="name" class="form-control" id="user_name_'+data[i].user_id+'" value="' + data[i].user_name + '" required></div>\n' +
-                    '       <div class="col-5"><label for="change_password_'+data[i].user_id+'"> Password: </label><button type="button" id="change_password_'+data[i].user_id+'" class="btn btn-warning" onclick="addUserCardView()"><i class="fas fa-key"></i>&nbsp;Change</button></div>\n' +
+                    '       <div class="col-5"><label for="change_password_'+data[i].user_id+'"> Password: </label><button type="button" id="change_password_'+data[i].user_id+'" class="btn btn-warning" onclick="ChangePasswordView('+data[i].user_id+',\''+data[i].fname+'\',\''+data[i].lname+'\')"><i class="fas fa-key"></i>&nbsp;Change</button></div>\n' +
                     '    </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-12"><label for="email_'+data[i].user_id+'"> Email: </label><input type="email" class="form-control" id="email_'+data[i].user_id+'" value="' + data[i].email + '" required></div>\n' +
@@ -63,7 +63,7 @@ function ActiveUserCardView() {
                     '   </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-4">\n' +
-                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="saveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
+                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="SaveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '</form>\n' +
@@ -106,7 +106,7 @@ function InactiveUserCardView() {
                     '    </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-7"><label for="user_name_'+data[i].user_id+'"> User Name: </label><input type="name" class="form-control" id="user_name_'+data[i].user_id+'" value="' + data[i].user_name + '" required></div>\n' +
-                    '       <div class="col-5"><label for="change_password_'+data[i].user_id+'"> Password: </label><button type="button" id="change_password_'+data[i].user_id+'" class="btn btn-warning" onclick="addUserCardView()"><i class="fas fa-key"></i>&nbsp;Change</button></div>\n' +
+                    '       <div class="col-5"><label for="change_password_'+data[i].user_id+'"> Password: </label><button type="button" id="change_password_'+data[i].user_id+'" class="btn btn-warning" onclick="ChangePasswordView('+data[i].user_id+',\''+data[i].fname+'\',\''+data[i].lname+'\')"><i class="fas fa-key"></i>&nbsp;Change</button></div>\n' +
                     '    </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-12"><label for="email_'+data[i].user_id+'"> Email: </label><input type="email" class="form-control" id="email_'+data[i].user_id+'" value="' + data[i].email + '" required></div>\n' +
@@ -141,7 +141,7 @@ function InactiveUserCardView() {
                     '   </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-4">\n' +
-                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="saveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
+                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="SaveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '</form>\n' +
@@ -160,7 +160,7 @@ function InactiveUserCardView() {
 
 }
 
-function saveUser(user_id) {
+function SaveUser(user_id) {
 
     console.log("user_id: " + user_id);
     var fname = document.getElementById('fname_'+user_id+'').value;
@@ -204,12 +204,7 @@ function saveUser(user_id) {
 
 }
 
-function logout() {
-    localStorage.clear();
-    location.href = "logout.php";
-}
-
-function addUserView() {
+function AddUserView() {
 
     $('#edit-user-view').empty();
 
@@ -271,7 +266,7 @@ function addUserView() {
         '                </div>\n' +
         '                <div class="form-group">\n' +
         '                    <button  type="submit" id="save_user" class="btn btn-success col-2"><i class="fas fa-save"></i>&nbsp; Save User</button>\n' +
-        '                    <input type="reset" class="btn btn-secondary col-2" value="Cancel" onclick="addUserCardView()">\n' +
+        '                    <input type="reset" class="btn btn-secondary col-2" value="Cancel" onclick="ActiveUserCardView()">\n' +
         '                </div>\n' +
         '            </form>\n' +
         '        </div>\n' +
@@ -282,6 +277,7 @@ function addUserView() {
         '</div>';
 
     $('#edit-user-view').html(htmlBody);
+    $('#fname').focus();
 
     $("#add_user").validate({
         rules: {
@@ -339,13 +335,13 @@ function addUserView() {
             confirm_password: " Passwords must match."
         },
         submitHandler: function(form) {
-            addUser();
+            AddUser();
         }
     });
 
 }
 
-function addUser() {
+function AddUser() {
 
     var fname = document.getElementById('fname').value;
     var lname = document.getElementById('lname').value;
@@ -374,7 +370,102 @@ function addUser() {
             $("#success-body").html('User Created');
             $("#success").modal('toggle');
 
-            setTimeout("location.href = 'users.php';",2500);
+            setTimeout(ActiveUserCardView(),2500);
+
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
+
+}
+
+function ChangePasswordView(user_id,fname,lname) {
+
+    $('#edit-user-view').empty();
+
+    htmlBody = '<div class="container">\n' +
+        '    <div class="card card-fx">\n' +
+        '        <div class="card-header col-12">\n' +
+        '            <div>\n' +
+        '                <span class="h2">Change Password for '+fname+' '+lname+'</span>\n' +
+        '                <p>Please make a note of the new password before changing it as it will not be displayed.</p>\n' +
+        '            </div>\n' +
+        '        </div>\n' +
+        '        <div class="card-body col-12">\n' +
+        '            <form id="change_password">\n' +
+        '                <div class="register-row">\n' +
+        '                    <div class="form-group col-6 ">\n' +
+        '                        <label for="password">Password</label>\n' +
+        '                        <input type="password" name="password" id="password" class="form-control" required>\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '                <div class="register-row">\n' +
+        '                    <div class="form-group col-6 ">\n' +
+        '                        <label for="confirm_password">Confirm Password</label>\n' +
+        '                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" required>\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '                <div class="register-row ">\n' +
+        '                    <div class="form-group col-12">\n' +
+        '                       <button type="submit" id="save_user" class="btn btn-success col-4"><i class="fas fa-save"></i>&nbsp; Save Password</button>\n' +
+        '                       <button type="button" class="btn btn-secondary col-4" onclick="ActiveUserCardView()">Cancel</button>\n' +
+        '                   </div>\n' +
+        '                </div>\n' +
+        '            </form>\n' +
+        '        </div>\n' +
+        '        <div class="card-footer col-12">\n ' +
+        '             <p></p>' +
+        '        </div>\n' +
+        '    </div>\n' +
+        '</div>';
+
+    $('#edit-user-view').html(htmlBody);
+    $('#password').focus();
+
+    $("#change_password").validate({
+        rules: {
+            password: {
+                required: true,
+                minlength: 6,
+                maxlength: 128
+            },
+            confirm_password: {
+                minlength: 6,
+                maxlength: 128,
+                equalTo : "#password"
+            }
+        },
+        messages: {
+            password: " Password must be at least 6 characters long and no more than 128 characters long.",
+            confirm_password: " Passwords must match."
+        },
+        submitHandler: function(form) {
+            ChangePassword(user_id);
+        }
+    });
+
+}
+
+function ChangePassword(user_id) {
+
+    var password = document.getElementById('confirm_password').value;
+
+    $.ajax({
+        accepts: "application/json",
+        method: "PUT",
+        contentType: "application/json; charset=utf-8",
+        url: "put/user/password/"+user_id,
+        data: JSON.stringify({
+            "password" : password
+        }),
+        success: function () {
+
+            $("#success-body").html('Password Changed');
+            $("#success").modal('toggle');
+
+            setTimeout(ActiveUserCardView(),2500);
 
         },
         error: function(data) {

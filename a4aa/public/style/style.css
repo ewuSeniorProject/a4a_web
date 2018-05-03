@@ -273,6 +273,7 @@ a:hover {
 .card-fx {
     border-radius: 5px;
     box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.2);
+    width: fit-content;
 }
 
 .card-row {
@@ -284,6 +285,14 @@ a:hover {
     justify-content: space-between;
 }
 
+.card-row-button {
+    display: flex;
+    padding: 1em;
+    align-content: flex-start;
+    align-items: flex-end;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
 .card-row-spacer {
     background-color: rgb(255, 255, 255);
 }

@@ -69,6 +69,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
                 $preloader.delay(350).fadeOut('slow');
             });
         </script>
+        <script src="script/common.js"></script>
         <script src="script/selectOptions.js"></script>
         <script src="script/add.js"></script>
     </head>
