@@ -73,6 +73,7 @@ if($_SESSION['role'] !== 'admin'){
                 $preloader.delay(350).fadeOut('slow');
             });
         </script>
+        <script src="script/common.js"></script>
         <script src="script/selectOptions.js"></script>
         <script src="script/update.js"></script>
     </head>
