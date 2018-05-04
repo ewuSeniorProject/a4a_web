@@ -208,7 +208,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="register-row">
                                 <div class="form-group col-6 <?php echo (!empty($fname_err)) ? 'has-error' : ''; ?>">
                                     <label for="fname">First Name</label>
-                                    <input type="name" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required autofocus>
+                                        <input type="name" autocomplete="name" name="fname" class="form-control" value="<?php echo $fname; ?>" required autofocus>
                                     <span class="form-text error"><?php echo $fname_err; ?></span>
                                 </div>
                                 <div class="form-group col-6 <?php echo (!empty($lname_err)) ? 'has-error' : ''; ?>">

@@ -12,6 +12,37 @@ $app->get('/', function (Request $request, Response $response, array $args){
 })->setname("root");
 
 
+/**
+ * EMAILEr ROUTES
+ */
+$app->post('/post/email', function (Request $request, Response $response, array $args){
+
+    if (isset($_POST['send']) && isset($_POST['to']) && isset($_POST['fname']) && isset($_POST['lname']) &&
+        isset($_POST['user_name']) && isset($_POST['email'])) {
+
+        if ($_POST['send'] === 'active') {
+            $to = $_POST['to'];
+            $subject = 'New user added.';
+            $fname = $_POST['fname'];
+            $lname = $_POST['lname'];
+            $user_name = $_POST['user_name'];
+            $email = $_POST['email'];
+
+            $headers = 'From: brian@mizesolutions.com \r\n';
+            $headers .= 'Content-Type: text/plain; charset=utf-8 \r\n';
+            $headers .= 'Reply-To: brian@mizesolutions.com';
+
+            $messgae = 'A new user account has been created. \r\n\r\n';
+            $messgae .= 'Name: '.$fname.' '.$lname.'\r\nUser: '.$user_name.'\r\nEmail :'.$email.'\r\n\r\n';
+            $messgae .= 'Please log in and inactive the user account if you do not recognize this user.';
+
+            mail($to, $subject, $messgae, $headers, '-fbrian@mizesolutions.com');
+        }
+    }
+
+});
+
+
 
 /**
  * ESTABLISHMENT ROUTES
@@ -867,26 +898,26 @@ $app->get('/get/user/mobile/{id}', function (Request $request, Response $respons
 
 // get user data by user name
 $app->get('/get/user/name/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+//// Initialize the session
+//session_start();
+//$time = $_SERVER['REQUEST_TIME'];
+//$timeout_duration = 1800;
+//if (isset($_SESSION['LAST_ACTIVITY']) &&
+//    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+//    session_unset();
+//    session_destroy();
+//    session_start();
+//}
+//$_SESSION['LAST_ACTIVITY'] = $time;
+//// If session variable is not set it will redirect to login page
+//if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
+//    header("location: login.php");
+//    exit;
+//}
 
     $user = $request->getParam("uname");
 
-    $sth = $this->db->prepare("SELECT COUNT(1) AS count FROM User WHERE user_name LIKE '$user'");
+    $sth = $this->db->prepare("SELECT COUNT(1) AS count FROM User WHERE user_name='$user'");
     $sth->execute();
     $data = $sth->fetchAll();
 
@@ -940,7 +971,7 @@ $app->get('/get/user/email/', function (Request $request, Response $response, ar
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
     else {
-//        $res = array("response" => false, "message" => 'User name already in use.');
+//        $res = array("response" => false, "message" => 'email already in use.');
         $res = false;
         return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
             ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
