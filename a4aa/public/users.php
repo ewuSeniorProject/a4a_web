@@ -248,9 +248,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="page">
             <div class="left-sidebar">
                 <div class="left-sidebar-header" aria-label="Delete Survey Title" >
-                        <span class="h5">
-                            <i class="fas fa-users"></i>&nbsp; Edit Users
-                        </span>
+                        <span class="h5" id="pageTitle"></span>
                 </div>
                 <div class="left-sidebar-container">
                     <ul class="nav nav-pills flex-column" aria-label="Navigaiton Links">
@@ -259,10 +257,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt "></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <div id="add_view"></div>
-                        </li>
-                        <li class="nav-item">
                             <div id="users"></div>
+                        </li>
+                        <li>&nbsp;</li>
+                        <li class="nav-item">
+                            <div id="add_view"></div>
                         </li>
                     </ul>
                 </div>
