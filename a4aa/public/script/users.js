@@ -390,7 +390,7 @@ function AddUser() {
         }),
         success: function () {
 
-            sendMessage(fname, lname, user_name, email);
+            sendMessage();
 
             $("#success-body").html('User Created');
             $("#success").modal('toggle');
@@ -501,22 +501,12 @@ function ChangePassword(user_id) {
 
 }
 
-function sendMessage(fname, lname, user_name, email) {
-
-    var to = 'brian.r.mize@gmail.com, brian.r.mize@hotmail.com';
+function sendMessage() {
 
     $.ajax({
         accepts: "application/json",
-        method: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: "post/email",
-        data: JSON.stringify({
-            "to" : to,
-            "fname" : fname,
-            "lname" : lname,
-            "user_name" : user_name,
-            "email" : email
-        }),
+        method: "GET",
+        url: "email.php",
         success: function () {
             console.log("Message sent");
         },

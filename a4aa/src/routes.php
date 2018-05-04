@@ -3,6 +3,9 @@
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Postmark\PostmarkClient;
+use Postmark\Models\PostmarkException;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 // Routes
 
@@ -18,30 +21,60 @@ $app->get('/', function (Request $request, Response $response, array $args){
 /**
  * EMAILER
  */
-$app->post('/post/email', function (Request $request, Response $response, array $args){
+$app->get('/email', function (Request $request, Response $response, array $args){
+
+    try {
+        $to = 'brian.r.mize@gmail.com, brian.r.mize@hotmail.com';
+        $subject = "New user added.";
+        $from = "noreply@mizesolutions.com";
+
+        $client = new PostmarkClient("3bf0b6f0-90d5-45da-a492-32190de022dc");
+
+        $body = '<p>A new user account has been created. </p>';
+        $body .= '<p>Please log in and inactive the user account if you do not recognize the new user.</p>';
+
+        // Send an email:
+        $sendResult = $client->sendEmail($from, $to, $subject, $body);
+
+        header("Refresh:2; url=home.php", true, 303);
+
+    } catch(PostmarkException $ex){
+        // If client is able to communicate with the API in a timely fashion,
+        // but the message data is invalid, or there's a server error,
+        // a PostmarkException can be thrown.
+        echo $ex->httpStatusCode;
+        echo $ex->message;
+        echo $ex->postmarkApiErrorCode;
+
+    } catch(Exception $generalException){
+        echo $generalException;
+    }
+
+});
+
+
+/**
+ * REPORT
+ */
+$app->post('/post/report', function (Request $request, Response $response, array $args){
 
     $data = $request->getParsedBody();
 
-    $to = $data["to"];
-    $subject = "New user added.";
-    $from = "noreply@mizesolutions.com";
-    $fname = $data["fname"];
-    $lname = $data["lname"];
-    $user_name = $data["user_name"];
-    $email = $data["email"];
+    $html = (string)$data["html"];
 
-    $client = new PostmarkClient("3bf0b6f0-90d5-45da-a492-32190de022dc");
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $dompdf = new Dompdf($options);
+    $dompdf->setPaper('letter', 'portrait');
 
-    $body = '<p>A new user account has been created. </p>';
-    $body .= '<p><strong>Name:  </strong>'.$fname.' '.$lname.'<br><strong>User:  </strong>'.$user_name.'<br><strong>Email:  </strong>'.$email.'</p>';
-    $body .= '<p>Please log in and inactive the user account if you do not recognize this user.</p>';
+    // instantiate and use the dompdf class
+    $dompdf->loadHtml($html);
 
-    // Send an email:
-    $sendResult = $client->sendEmail($from, $to, $subject, $body);
+    // Render the HTML as PDF
+    $dompdf->render();
 
-    return $this->response->withJson($sendResult)->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    // Output the generated PDF to Browser
+    $dompdf->output();
 
 });
 
@@ -52,22 +85,7 @@ $app->post('/post/email', function (Request $request, Response $response, array 
  */
 // get establishment data
 $app->get('/establishment/', function (Request $request, Response $response, array $args){
-    // Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Establishment ORDER BY name ASC");
     $sth->execute();
@@ -79,22 +97,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get establishment by id
 $app->get('/get/establishment/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
 
@@ -109,22 +112,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get establishment id by name and date
 $app->get('/get/establishment/{user_id}/{cat_id}/{config_id}/{year}/{month}/{day}/', function (Request $request, Response $response, array $args){
-    // Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+    include_once('../public/user.cfg.php');
 
     $user_id = $args['user_id'];
     $cat_id = $args['cat_id'];
@@ -145,22 +133,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get establishment name by id
 $app->get('/get/establishment/name/{id}', function (Request $request, Response $response, array $args){
-    // Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+    include_once('../public/user.cfg.php');
 
     $est_id = $args['id'];
 
@@ -175,22 +148,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete establishment data by id
 $app->delete('/delete/establishment/{id}', function (Request $request, Response $response, array $args){
-    // Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Establishment WHERE est_id=$id");
@@ -202,22 +161,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post establishment data
 $app->post('/post/establishment/', function (Request $request, Response $response, array $args){
-    // Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -270,22 +215,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put establishment data
 $app->put('/put/establishment/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Establishment );
 //    $sth->execute();
@@ -296,22 +227,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put category data by cat id
 $app->put('/put/establishment/category/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -329,22 +246,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put config data by config id
 $app->put('/put/establishment/config/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -362,22 +265,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put user data by user id
 $app->put('/put/establishment/user/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -395,22 +284,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put establishment data by est id
 $app->put('/put/establishment/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -486,22 +361,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all category
 $app->get('/category/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Category");
     $sth->execute();
@@ -513,22 +373,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get category data by id
 $app->get('/get/category/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Category WHERE cat_id=$id");
@@ -541,22 +386,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete category data by id
 $app->delete('/delete/category/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Category WHERE cat_id=$id");
@@ -568,22 +399,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post category data
 $app->post('/post/category/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
@@ -594,22 +411,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put category data
 $app->put('/put/category/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
@@ -626,22 +429,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all configuration
 $app->get('/configuration/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Configuration");
     $sth->execute();
@@ -653,22 +441,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get configuration data by id
 $app->get('/get/configuration/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Configuration WHERE config_id=$id");
@@ -681,22 +454,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete configuration data by id
 $app->delete('/delete/configuration/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Configuration WHERE config_id=$id");
@@ -708,22 +467,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post configuration data
 $app->post('/post/configuration/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
@@ -734,22 +479,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put configuration data
 $app->put('/put/configuration/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
@@ -767,22 +498,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all user
 $app->get('/user/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM User ORDER BY lname ASC");
     $sth->execute();
@@ -794,27 +510,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get all active users
 $app->get('/user/active/', function (Request $request, Response $response, array $args){
-// Initialize the session
-    session_start();
-
-    $time = $_SERVER['REQUEST_TIME'];
-
-    $timeout_duration = 1800;
-
-    if (isset($_SESSION['LAST_ACTIVITY']) &&
-        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        session_start();
-    }
-
-    $_SESSION['LAST_ACTIVITY'] = $time;
-
-// If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-        header("location: login.php");
-        exit;
-    }
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM User WHERE active='yes' ORDER BY lname ASC");
     $sth->execute();
@@ -826,27 +522,7 @@ $app->get('/user/active/', function (Request $request, Response $response, array
 
 // get all inactive users
 $app->get('/user/inactive/', function (Request $request, Response $response, array $args){
-// Initialize the session
-    session_start();
-
-    $time = $_SERVER['REQUEST_TIME'];
-
-    $timeout_duration = 1800;
-
-    if (isset($_SESSION['LAST_ACTIVITY']) &&
-        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        session_start();
-    }
-
-    $_SESSION['LAST_ACTIVITY'] = $time;
-
-// If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-        header("location: login.php");
-        exit;
-    }
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM User WHERE active='no' ORDER BY lname ASC");
     $sth->execute();
@@ -858,22 +534,7 @@ $app->get('/user/inactive/', function (Request $request, Response $response, arr
 
 // get user data by id
 $app->get('/get/user/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT fname, lname, user_name, email FROM User WHERE user_id=$id");
@@ -901,22 +562,7 @@ $app->get('/get/user/mobile/{id}', function (Request $request, Response $respons
 
 // get user data by user name
 $app->get('/get/user/name/', function (Request $request, Response $response, array $args){
-//// Initialize the session
-//session_start();
-//$time = $_SERVER['REQUEST_TIME'];
-//$timeout_duration = 1800;
-//if (isset($_SESSION['LAST_ACTIVITY']) &&
-//    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-//    session_unset();
-//    session_destroy();
-//    session_start();
-//}
-//$_SESSION['LAST_ACTIVITY'] = $time;
-//// If session variable is not set it will redirect to login page
-//if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-//    header("location: login.php");
-//    exit;
-//}
+include_once('../public/user.cfg.php');
 
     $user = $request->getParam("uname");
 
@@ -943,22 +589,7 @@ $app->get('/get/user/name/', function (Request $request, Response $response, arr
 
 // get user data by email
 $app->get('/get/user/email/', function (Request $request, Response $response, array $args){
-// Initialize the session
-    session_start();
-    $time = $_SERVER['REQUEST_TIME'];
-    $timeout_duration = 1800;
-    if (isset($_SESSION['LAST_ACTIVITY']) &&
-        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        session_start();
-    }
-    $_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-        header("location: login.php");
-        exit;
-    }
+include_once('../public/user.cfg.php');
 
     $email = $request->getParam("email");
 
@@ -985,22 +616,8 @@ $app->get('/get/user/email/', function (Request $request, Response $response, ar
 
 // delete user data by id
 $app->delete('/delete/user/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM User WHERE user_id=$id");
@@ -1012,22 +629,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post user data
 $app->post('/post/user/', function (Request $request, Response $response, array $args){ 
-    // Initialize the session
-    session_start();
-    $time = $_SERVER['REQUEST_TIME'];
-    $timeout_duration = 1800;
-    if (isset($_SESSION['LAST_ACTIVITY']) &&
-        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        session_start();
-    }
-    $_SESSION['LAST_ACTIVITY'] = $time;
-    // If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-        header("location: login.php");
-        exit;
-    }
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -1088,22 +691,8 @@ $app->post('/post/user/mobile', function (Request $request, Response $response, 
 
 // put user data
 $app->put('/put/user/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1137,22 +726,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put user data
 $app->put('/put/user/account/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-    session_start();
-    $time = $_SERVER['REQUEST_TIME'];
-    $timeout_duration = 1800;
-    if (isset($_SESSION['LAST_ACTIVITY']) &&
-        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        session_start();
-    }
-    $_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-        header("location: login.php");
-        exit;
-    }
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1180,22 +755,8 @@ $app->put('/put/user/account/{id}', function (Request $request, Response $respon
 
 // put user password
 $app->put('/put/user/password/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-    session_start();
-    $time = $_SERVER['REQUEST_TIME'];
-    $timeout_duration = 1800;
-    if (isset($_SESSION['LAST_ACTIVITY']) &&
-        ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-        session_unset();
-        session_destroy();
-        session_start();
-    }
-    $_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-    if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-        header("location: login.php");
-        exit;
-    }
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1220,22 +781,7 @@ $app->put('/put/user/password/{id}', function (Request $request, Response $respo
  */
 // get all parking
 $app->get('/parking/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Parking");
     $sth->execute();
@@ -1247,22 +793,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get parking data by parking id
 $app->get('/get/parking/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Parking WHERE park_id=$id");
@@ -1275,22 +806,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get parking data by establishment id
 $app->get('/get/parking/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     if (($this->db->prepare("SELECT * FROM Parking WHERE est_id=$id")) == null) {
@@ -1312,22 +828,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get parking id by establishment id
 $app->get('/get/park_id/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT park_id FROM Parking WHERE est_id=$id");
@@ -1341,22 +842,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete parking data by id
 $app->delete('/delete/parking/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE park_id=$id");
@@ -1368,22 +855,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete parking data by establishment id
 $app->delete('/delete/parking/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Parking WHERE est_id=$id");
@@ -1394,22 +867,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 });
 // post parking data by est id
 $app->post('/post/parking/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $lot_free = "";
     $street_metered = "";
@@ -1448,22 +907,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post parking data
 $app->post('/post/parking/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -1504,22 +949,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put parking data by est id
 $app->put('/put/parking/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1577,22 +1008,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all route_from_parking
 $app->get('/route_from_parking/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking");
     $sth->execute();
@@ -1604,22 +1020,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get route_from_parking data by route_from_parking id
 $app->get('/get/route_from_parking/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE route_park_id=$id");
@@ -1632,22 +1033,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get route_from_parking data by parking id
 $app->get('/get/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Route_From_Parking WHERE park_id=$id");
@@ -1660,22 +1046,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete route_from_parking data by id
 $app->delete('/delete/route_from_parking/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE route_park_id=$id");
@@ -1687,22 +1059,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete route_from_parking data by parking id
 $app->delete('/delete/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Route_From_Parking WHERE park_id=$id");
@@ -1714,22 +1072,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post route_from_parking data
 $app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
     
     $data = $request->getParsedBody();
 
@@ -1770,22 +1114,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put route_from_parking data
 $app->put('/put/route_from_parking/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Route_From_Parking );
 //    $sth->execute();
@@ -1796,22 +1126,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put route_from_parking data by park id
 $app->put('/put/route_from_parking/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -1870,22 +1186,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all passenger_loading
 $app->get('/passenger_loading/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading");
     $sth->execute();
@@ -1897,22 +1198,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get passenger_loading data by passenger_loading id
 $app->get('/get/passenger_loading/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE passenger_id=$id");
@@ -1925,22 +1211,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get passenger_loading data by parking id
 $app->get('/get/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Passenger_Loading WHERE park_id=$id");
@@ -1953,22 +1224,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete passenger_loading data by id
 $app->delete('/delete/passenger_loading/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE passenger_id=$id");
@@ -1980,22 +1237,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete passenger_loading data by parking id
 $app->delete('/delete/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Passenger_Loading WHERE park_id=$id");
@@ -2007,22 +1250,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post passenger_loading data
 $app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
     
@@ -2065,22 +1294,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put passenger_loading data
 $app->put('/put/passenger_loading/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Passenger_Loading );
 //    $sth->execute();
@@ -2091,22 +1306,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put passenger_loading data by park id
 $app->put('/put/passenger_loading/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2168,22 +1369,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all sta_bus
 $app->get('/sta_bus/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM STA_Bus");
     $sth->execute();
@@ -2195,22 +1381,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get sta_bus data by sta_bus id
 $app->get('/get/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE sta_id=$id");
@@ -2223,22 +1394,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get sta_bus data by parking id
 $app->get('/get/sta_bus/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Bus WHERE park_id=$id");
@@ -2251,22 +1407,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get sta_bus id by parking id
 $app->get('/get/sta_bus_id/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT sta_id FROM STA_Bus WHERE park_id=$id");
@@ -2279,22 +1420,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete sta_bus data by  id
 $app->delete('/delete/sta_bus/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE sta_id=$id");
@@ -2306,22 +1433,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete sta_bus data by parking id
 $app->delete('/delete/sta_bus/park/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Bus WHERE park_id=$id");
@@ -2333,22 +1446,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post sta_bus data
 $app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2391,22 +1490,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put sta_bus data
 $app->put('/put/sta_bus/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO STA_Bus );
 //    $sth->execute();
@@ -2417,22 +1502,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put sta_bus data by park id
 $app->put('/put/sta_bus/park/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2493,22 +1564,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all sta_route
 $app->get('/sta_route/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM STA_Route");
     $sth->execute();
@@ -2520,22 +1576,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get all sta_route data id
 $app->get('/get/sta_route/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM STA_Route WHERE sta_route_id=$id");
@@ -2548,22 +1589,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get all sta_route data by sta_bus id
 $app->get('/get/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
 
@@ -2577,22 +1603,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get single sta_route record by sta_route id and sta_bus id
 $app->get('/get/sta_route/single/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2608,22 +1619,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete sta_route data by id
 $app->delete('/delete/sta_route/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_route_id=$id");
@@ -2635,22 +1632,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete sta_route data by sta_bus id
 $app->delete('/delete/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM STA_Route WHERE sta_bus_id=$id");
@@ -2662,22 +1645,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post sta_route data
 $app->post('/post/sta_route/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2706,22 +1675,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put sta_route data
 $app->put('/put/sta_route/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO STA_Route );
 //    $sth->execute();
@@ -2732,22 +1687,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put sta_route data by sta_bus id
 $app->put('/put/sta_route/sta_bus/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -2787,22 +1728,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all exterior_pathways
 $app->get('/exterior_pathways/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways");
     $sth->execute();
@@ -2814,22 +1740,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get exterior_pathways data by id
 $app->get('/get/exterior_pathways/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE ext_path_id=$id");
@@ -2842,22 +1753,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get exterior_pathways data by establishment id
 $app->get('/get/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Pathways WHERE est_id=$id");
@@ -2870,22 +1766,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete exterior_pathways data by id
 $app->delete('/delete/exterior_pathways/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE exterior_pathways_id=$id");
@@ -2897,22 +1779,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete exterior_pathways data by establishment id
 $app->delete('/delete/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Pathways WHERE est_id=$id");
@@ -2924,22 +1792,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post exterior_pathways data
 $app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2984,22 +1838,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put exterior_pathways data by ext_path id and est id
 $app->put('/put/exterior_pathways/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3063,22 +1903,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all exterior_stairs
 $app->get('/exterior_stairs/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs");
     $sth->execute();
@@ -3090,22 +1915,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get exterior_stairs data by id
 $app->get('/get/exterior_stairs/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE ext_stair_id=$id");
@@ -3118,22 +1928,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get exterior_stairs data by establishment id
 $app->get('/get/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Stairs WHERE est_id=$id");
@@ -3146,22 +1941,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete exterior_stairs data by id
 $app->delete('/delete/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE ext_stair_id=$id");
@@ -3173,22 +1954,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete exterior_stairs data by establishment id
 $app->delete('/delete/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Stairs WHERE est_id=$id");
@@ -3200,22 +1967,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $stairs_required = "No";
     $stairs_available =  "";
@@ -3260,22 +2013,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -3322,22 +2061,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put exterior_stairs data
 $app->put('/put/exterior_stairs/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs );
 //    $sth->execute();
@@ -3348,22 +2073,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put exterior_stairs data by ext_stair id and est id
 $app->put('/put/exterior_stairs/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3430,22 +2141,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all exterior_ramps
 $app->get('/exterior_ramps/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps");
     $sth->execute();
@@ -3457,22 +2153,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get exterior_ramps data by id
 $app->get('/get/exterior_ramps/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE ext_ramp_id=$id");
@@ -3485,22 +2166,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get exterior_ramps data by establishment id
 $app->get('/get/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Exterior_Ramps WHERE est_id=$id");
@@ -3513,22 +2179,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete exterior_ramps data by id
 $app->delete('/delete/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE ext_ramp_id=$id");
@@ -3540,22 +2192,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete exterior_ramps data by establishment id
 $app->delete('/delete/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Exterior_Ramps WHERE est_id=$id");
@@ -3567,22 +2205,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $ramp_required = "No";
     $ramp_available = "";
@@ -3637,22 +2261,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -3709,22 +2319,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put exterior_ramps data
 $app->put('/put/exterior_ramps/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps );
 //    $sth->execute();
@@ -3735,22 +2331,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put exterior_ramps data by ext_ramp id and est id
 $app->put('/put/exterior_ramps/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -3832,22 +2414,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all main_entrance
 $app->get('/main_entrance/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance");
     $sth->execute();
@@ -3859,22 +2426,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get main_entrance data by id
 $app->get('/get/main_entrance/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE main_ent_id=$id");
@@ -3887,22 +2439,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get main_entrance data by establishment id
 $app->get('/get/main_entrance/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Main_Entrance WHERE est_id=$id");
@@ -3915,22 +2452,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete main_entrance data by id
 $app->delete('/delete/main_entrance/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE main_ent_id=$id");
@@ -3942,22 +2465,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete main_entrance data by establishment id
 $app->delete('/delete/main_entrance/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Main_Entrance WHERE est_id=$id");
@@ -3969,22 +2478,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post main_entrance data
 $app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -4047,22 +2542,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put main_entrance data
 $app->put('/put/main_entrance/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Main_Entrance );
 //    $sth->execute();
@@ -4073,22 +2554,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put main_entrance data by main_entrance id and est id
 $app->put('/put/main_entrance/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -4179,22 +2646,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all interior
 $app->get('/interior/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Interior");
     $sth->execute();
@@ -4206,22 +2658,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get interior data by id
 $app->get('/get/interior/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE interior_id=$id");
@@ -4234,22 +2671,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get interior data by establishment id
 $app->get('/get/interior/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Interior WHERE est_id=$id");
@@ -4262,22 +2684,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete interior data by id
 $app->delete('/delete/interior/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE interior_id=$id");
@@ -4289,22 +2697,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete interior data by establishment id
 $app->delete('/delete/interior/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Interior WHERE est_id=$id");
@@ -4315,14 +2709,9 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 });
 
 // post interior data
-$app->post('/post/interior/', function (Request $request, Response $response, array $args){ 
-//// Initialize the session
-//    session_start();
-//
-//    // If session variable is not set it will redirect to login page
-//    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-//        return $response->withRedirect($this->router->pathFor('root'));
-//    }
+$app->post('/post/interior/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -4380,22 +2769,8 @@ $app->post('/post/interior/', function (Request $request, Response $response, ar
 
 // put interior data
 $app->put('/put/interior/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
@@ -4406,22 +2781,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put interior data by interior id and est id
 $app->put('/put/interior/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -4503,22 +2864,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all elevator
 $app->get('/elevator/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Elevator");
     $sth->execute();
@@ -4530,22 +2876,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get elevator data by id
 $app->get('/get/elevator/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE elevator_id=$id");
@@ -4558,22 +2889,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get elevator data by establishment id
 $app->get('/get/elevator/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Elevator WHERE est_id=$id");
@@ -4586,22 +2902,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete elevator data by id
 $app->delete('/delete/elevator/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE elevator_id=$id");
@@ -4613,22 +2915,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete elevator data by establishment id
 $app->delete('/delete/elevator/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Elevator WHERE est_id=$id");
@@ -4640,22 +2928,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post elevator data
 $app->post('/post/elevator/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 
     $is_elevator = "";
@@ -4703,22 +2977,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post elevator data
 $app->post('/post/elevator/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -4767,22 +3027,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put elevator data
 $app->put('/put/elevator/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Elevator );
 //    $sth->execute();
@@ -4793,22 +3039,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put elevator data by elevator id and est id
 $app->put('/put/elevator/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -4878,22 +3110,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all signage
 $app->get('/signage/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Signage");
     $sth->execute();
@@ -4905,22 +3122,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get signage data by id
 $app->get('/get/signage/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE sign_id=$id");
@@ -4933,22 +3135,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get signage data by establishment id
 $app->get('/get/signage/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Signage WHERE est_id=$id");
@@ -4961,22 +3148,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete signage data by id
 $app->delete('/delete/signage/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE sign_id=$id");
@@ -4988,22 +3161,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete signage data by establishment id
 $app->delete('/delete/signage/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Signage WHERE est_id=$id");
@@ -5015,22 +3174,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post signage data
 $app->post('/post/signage/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -5073,22 +3218,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put signage data
 $app->put('/put/signage/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Signage );
 //    $sth->execute();
@@ -5099,22 +3230,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put signage data by signage id and est id
 $app->put('/put/signage/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -5175,22 +3292,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all emergency
 $app->get('/emergency/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Emergency");
     $sth->execute();
@@ -5202,22 +3304,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get emergency data by id
 $app->get('/get/emergency/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE emergency_id=$id");
@@ -5230,22 +3317,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get emergency data by establishment id
 $app->get('/get/emergency/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Emergency WHERE est_id=$id");
@@ -5258,22 +3330,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete emergency data by id
 $app->delete('/delete/emergency/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE emergency_id=$id");
@@ -5285,22 +3343,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete emergency data by establishment id
 $app->delete('/delete/emergency/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Emergency WHERE est_id=$id");
@@ -5311,14 +3355,9 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 });
 
 // post emergency data
-$app->post('/post/emergency/', function (Request $request, Response $response, array $args){ 
-//// Initialize the session
-//    session_start();
-//
-//    // If session variable is not set it will redirect to login page
-//    if(!isset($_SESSION['role']) || empty($_SESSION['role'])){
-//        return $response->withRedirect($this->router->pathFor('root'));
-//    }
+$app->post('/post/emergency/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -5364,22 +3403,8 @@ $app->post('/post/emergency/', function (Request $request, Response $response, a
 
 // put emergency data
 $app->put('/put/emergency/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     
 //    $sth = $this->db->prepare("UPDATE Emergency SET evac_info = :evac_info, WHERE ");
@@ -5394,22 +3419,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put emergency data by emergency id and est id
 $app->put('/put/emergency/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -5473,22 +3484,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all seating
 $app->get('/seating/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Seating");
     $sth->execute();
@@ -5500,22 +3496,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get seating data by id
 $app->get('/get/seating/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE seating_id=$id");
@@ -5528,22 +3509,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get seating data by establishment id
 $app->get('/get/seating/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Seating WHERE est_id=$id");
@@ -5556,22 +3522,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete seating data by id
 $app->delete('/delete/seating/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE seating_id=$id");
@@ -5583,22 +3535,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete seating data by establishment id
 $app->delete('/delete/seating/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Seating WHERE est_id=$id");
@@ -5610,22 +3548,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post seating data
 $app->post('/post/seating/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -5687,22 +3611,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put seating data
 $app->put('/put/seating/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Seating );
 //    $sth->execute();
@@ -5713,22 +3623,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put seating data by seating id and est id
 $app->put('/put/seating/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -5816,22 +3712,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all restroom
 $app->get('/restroom/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Restroom");
     $sth->execute();
@@ -5843,22 +3724,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get restroom data by id
 $app->get('/get/restroom/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE restroom_id=$id");
@@ -5871,22 +3737,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get restroom data by establishment id
 $app->get('/get/restroom/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom WHERE est_id=$id");
@@ -5899,22 +3750,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete restroom data by id
 $app->delete('/delete/restroom/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE restroom_id=$id");
@@ -5926,22 +3763,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete restroom data by establishment id
 $app->delete('/delete/restroom/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom WHERE est_id=$id");
@@ -5953,22 +3776,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post restroom data by est id
 $app->post('/post/restroom/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $public_restroom = "";
     $total_num = "";
@@ -6004,22 +3813,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post restroom data
 $app->post('/post/restroom/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -6057,22 +3852,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put restroom data
 $app->put('/put/restroom/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Restroom );
 //    $sth->execute();
@@ -6083,22 +3864,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put restroom data by restroom id and est id
 $app->put('/put/restroom/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -6150,22 +3917,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all restroom_info
 $app->get('/restroom_info/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info");
     $sth->execute();
@@ -6177,22 +3929,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get restroom_info data by id
 $app->get('/get/restroom_info/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_info_id=$id");
@@ -6205,22 +3942,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get restroom_info data by restroom id
 $app->get('/get/restroom_info/rest/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Restroom_Info WHERE rest_id=$id");
@@ -6233,22 +3955,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete restroom_info data by id
 $app->delete('/delete/restroom_info/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_info_id=$id");
@@ -6260,22 +3968,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete restroom_info data by restroom id
 $app->delete('/delete/restroom_info/rest/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Restroom_Info WHERE rest_id=$id");
@@ -6287,22 +3981,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post restroom_info data
 $app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
     
@@ -6422,22 +4102,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put restroom_info data
 $app->put('/put/restroom_info/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Restroom_Info );
 //    $sth->execute();
@@ -6448,22 +4114,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put restroom data by restroom id and rest id
 $app->put('/put/restroom_info/rest/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -6614,22 +4266,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
  */
 // get all communication
 $app->get('/communication/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Communication");
     $sth->execute();
@@ -6641,22 +4278,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get communication data by id
 $app->get('/get/communication/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE communication_id=$id");
@@ -6669,22 +4291,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // get communication data by establishment id
 $app->get('/get/communication/est/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("SELECT * FROM Communication WHERE est_id=$id");
@@ -6697,22 +4304,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete communication data by id
 $app->delete('/delete/communication/{id}', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE communication_id=$id");
@@ -6724,22 +4317,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // delete communication data by establishment id
 $app->delete('/delete/communication/est/{id}', function (Request $request, Response $response, array $args){
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $sth = $this->db->prepare("DELETE FROM Communication WHERE est_id=$id");
@@ -6751,22 +4330,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // post communication data
 $app->post('/post/communication/', function (Request $request, Response $response, array $args){ 
-    // Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -6864,22 +4429,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put communication data
 $app->put('/put/communication/', function (Request $request, Response $response, array $args){ 
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
     
 //    $sth = $this->db->prepare("INSERT INTO Communication );
 //    $sth->execute();
@@ -6890,22 +4441,8 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
 
 // put communication data by communication id and est id
 $app->put('/put/communication/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
-// Initialize the session
-session_start();
-$time = $_SERVER['REQUEST_TIME'];
-$timeout_duration = 1800;
-if (isset($_SESSION['LAST_ACTIVITY']) &&
-    ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
-    session_unset();
-    session_destroy();
-    session_start();
-}
-$_SESSION['LAST_ACTIVITY'] = $time;
-// If session variable is not set it will redirect to login page
-if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] === 'no'){
-    header("location: login.php");
-    exit;
-}
+include_once('../public/user.cfg.php');
+include_once('../public/admin.cfg.php');
     
     $id = $args['id'];
     $data = $request->getParsedBody();
