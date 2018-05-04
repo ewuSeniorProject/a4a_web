@@ -15,6 +15,7 @@ function ActiveUserCardView() {
         url: 'user/active/',
         success: function (data) {
 
+            $('#pageTitle').html('<i class="fas fa-users"></i>&nbsp; Edit Users');
             $('#add_view').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="AddUserView()" ><i class="fas fa-user-plus"></i> Add User</div>');
             $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="InactiveUserCardView()" ><i class="fas fa-user-times"></i> Inactive Users</div>');
 
@@ -94,6 +95,7 @@ function InactiveUserCardView() {
         url: 'user/inactive/',
         success: function (data) {
 
+            $('#pageTitle').html('<i class="fas fa-users"></i>&nbsp; Edit Users');
             $('#add_view').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="AddUserView()" ><i class="fas fa-user-plus"></i> Add User</div>');
             $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-user"></i> Active Users</div>');
 
@@ -225,6 +227,7 @@ function SaveUser(user_id, view) {
 
 function AddUserView() {
 
+    $('#pageTitle').html('<i class="fas fa-user-plus"></i>&nbsp;Add User');
     $('#add_view').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-users"></i> Edit Users</div>');
     $('#edit-user-view').empty();
 
@@ -500,8 +503,7 @@ function ChangePassword(user_id) {
 
 function sendMessage(fname, lname, user_name, email) {
 
-    var to = 'brian.r.mize@gmail.com; brian.r.mize@hotmail.com';
-    var send = 'active';
+    var to = 'brian.r.mize@gmail.com, brian.r.mize@hotmail.com';
 
     $.ajax({
         accepts: "application/json",
@@ -509,7 +511,6 @@ function sendMessage(fname, lname, user_name, email) {
         contentType: "application/json; charset=utf-8",
         url: "post/email",
         data: JSON.stringify({
-            "send" : send,
             "to" : to,
             "fname" : fname,
             "lname" : lname,
