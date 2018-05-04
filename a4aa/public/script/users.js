@@ -15,6 +15,7 @@ function ActiveUserCardView() {
         url: 'user/active/',
         success: function (data) {
 
+            $('#add_view').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="AddUserView()" ><i class="fas fa-user-plus"></i> Add User</div>');
             $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="InactiveUserCardView()" ><i class="fas fa-user-times"></i> Inactive Users</div>');
 
             for (var i = 0; i < data.length; i ++) {
@@ -63,7 +64,7 @@ function ActiveUserCardView() {
                     '   </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-4">\n' +
-                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="SaveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
+                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="SaveUser('+data[i].user_id+',0)"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '</form>\n' +
@@ -93,7 +94,8 @@ function InactiveUserCardView() {
         url: 'user/inactive/',
         success: function (data) {
 
-            $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-users"></i> Active Users</div>');
+            $('#add_view').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="AddUserView()" ><i class="fas fa-user-plus"></i> Add User</div>');
+            $('#users').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-user"></i> Active Users</div>');
 
             for (var i = 0; i < data.length; i ++) {
 
@@ -141,7 +143,7 @@ function InactiveUserCardView() {
                     '   </div>\n' +
                     '    <div class="card-row">\n' +
                     '       <div class="col-4">\n' +
-                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="SaveUser('+data[i].user_id+')"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
+                    '           <button  type="button" id="save_user_'+data[i].user_id+'" class="btn btn-success" onclick="SaveUser('+data[i].user_id+',1)"><i class="fas fa-save"></i>&nbsp; Save Changes</button>\n' +
                     '       </div>\n' +
                     '   </div>\n' +
                     '</form>\n' +
@@ -160,7 +162,7 @@ function InactiveUserCardView() {
 
 }
 
-function SaveUser(user_id) {
+function SaveUser(user_id, view) {
 
     console.log("user_id: " + user_id);
     var fname = document.getElementById('fname_'+user_id+'').value;
@@ -193,12 +195,29 @@ function SaveUser(user_id) {
 
             $("#success-body").html('User Updated');
             $("#success").modal('toggle');
-            ActiveUserCardView();
+            if(view === 0){
+                ActiveUserCardView();
+            }
+            else {
+                InactiveUserCardView();
+            }
 
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $('#alertTitle').html('User Name or Email Address Taken')
+            $("#alert-body").html(
+                '<span class="h8">\n ' +
+                'The user name and/or email address you entered are already in use.<br>\n ' +
+                'Please try a different user name and/or email address and save again.\n ' +
+                '</span>');
+            $("#alertFooter").html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>');
             $("#alert").modal('toggle');
+            if(view === 0){
+                ActiveUserCardView();
+            }
+            else {
+                InactiveUserCardView();
+            }
         }
     });
 
@@ -206,6 +225,7 @@ function SaveUser(user_id) {
 
 function AddUserView() {
 
+    $('#add_view').html('<div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="ActiveUserCardView()" ><i class="fas fa-users"></i> Edit Users</div>');
     $('#edit-user-view').empty();
 
     htmlBody = '<div class="container">\n' +
@@ -264,9 +284,9 @@ function AddUserView() {
         '                       </select>\n' +
         '                    </div>\n' +
         '                </div>\n' +
-        '                <div class="form-group">\n' +
-        '                    <button  type="submit" id="save_user" class="btn btn-success col-2"><i class="fas fa-save"></i>&nbsp; Save User</button>\n' +
-        '                    <input type="reset" class="btn btn-secondary col-2" value="Cancel" onclick="ActiveUserCardView()">\n' +
+        '                <div class="form-group col-12">\n' +
+        '                    <button  type="submit" id="save_user" class="btn btn-success col-3"><i class="fas fa-save"></i>&nbsp; Save </button>\n' +
+        '                    <input type="reset" class="btn btn-secondary col-3" value="Cancel" onclick="ActiveUserCardView()">\n' +
         '                </div>\n' +
         '            </form>\n' +
         '        </div>\n' +
@@ -366,6 +386,8 @@ function AddUser() {
             "active" : active
         }),
         success: function () {
+
+            sendMessage(fname, lname, user_name, email);
 
             $("#success-body").html('User Created');
             $("#success").modal('toggle');
@@ -474,4 +496,32 @@ function ChangePassword(user_id) {
         }
     });
 
+}
+
+function sendMessage(fname, lname, user_name, email) {
+
+    var to = 'brian.r.mize@gmail.com; brian.r.mize@hotmail.com';
+    var send = 'active';
+
+    $.ajax({
+        accepts: "application/json",
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: "post/email",
+        data: JSON.stringify({
+            "send" : send,
+            "to" : to,
+            "fname" : fname,
+            "lname" : lname,
+            "user_name" : user_name,
+            "email" : email
+        }),
+        success: function () {
+            console.log("Message sent");
+        },
+        error: function(data) {
+            $("#alert-body").html(JSON.stringify(data));
+            $("#alert").modal('toggle');
+        }
+    });
 }
