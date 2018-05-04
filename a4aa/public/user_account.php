@@ -33,6 +33,129 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     exit;
 }
 
+// Define variables and initialize with empty values
+$fname = $lname = $email = $user_name = "";
+$fname_err = $lname_err = $email_err = $username_err = "";
+$success = $message = "";
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Validate first name
+    if(empty(trim($_POST["fname"]))){
+        $fname_err = "Please enter your first name.";
+    } else{
+        $fname = trim($_POST["fname"]);
+    }
+
+    // Validate last name
+    if(empty(trim($_POST["lname"]))){
+        $lname_err = "Please enter your last name.";
+    } else{
+        $lname = trim($_POST["lname"]);
+    }
+
+    // Validate email
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter a vaild email address.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT user_id FROM User WHERE email = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            // Set parameters
+            $param_email = trim($_POST["email"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "Email address is already in use.";
+                } else{
+                    $email = trim($_POST["email"]);
+                }
+            } else{
+                $message = "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Validate username
+    if(empty(trim($_POST["user_name"]))){
+        $username_err = "Please enter a username.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT user_id FROM User WHERE user_name = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+            // Set parameters
+            $param_username = trim($_POST["user_name"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $username_err = "User name is already in use.";
+                } else{
+                    $user_name = trim($_POST["user_name"]);
+                }
+            } else{
+                $message = "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Check input errors before inserting in database
+    if(empty($fname_err) && empty($lname_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO User (fname, lname, user_name, email) VALUES (?, ?, ?, ?)";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "ssss", $param_fname, $param_lname, $param_username, $param_email);
+
+            // Set parameters
+            $param_fname = $fname;
+            $param_lname = $lname;
+            $param_username = $user_name;
+            $param_email = $email;
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                $success = "Success! Redirecting you to the login page.";
+                // Redirect to login page
+                header( "Refresh:2; url=user_account.php", true, 303);
+            } else{
+                $message = "Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Close connection
+    mysqli_close($link);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +230,7 @@ if(!isset($_SESSION['role']) || empty($_SESSION['role']) || $_SESSION['active'] 
     </div>
     <div class="section">
         <div class="container" id="user-container">
-            <div class="box-container" id="edit-user-view"></div>
+            <div class="box-container" id="user_account_view"></div>
         </div>
     </div>
 </div>

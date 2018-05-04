@@ -38,6 +38,153 @@ if($_SESSION['role'] !== 'admin'){
     exit;
 }
 
+// Define variables and initialize with empty values
+$fname = $lname = $email = $user_name = $password = $confirm_password = "";
+$fname_err = $lname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
+$role = "user";
+$active = "yes";
+$success = $message = "";
+
+// Processing form data when form is submitted
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+    // Validate first name
+    if(empty(trim($_POST["fname"]))){
+        $fname_err = "Please enter your first name.";
+    } else{
+        $fname = trim($_POST["fname"]);
+    }
+
+    // Validate last name
+    if(empty(trim($_POST["lname"]))){
+        $lname_err = "Please enter your last name.";
+    } else{
+        $lname = trim($_POST["lname"]);
+    }
+
+    // Validate email
+    if(empty(trim($_POST["email"]))){
+        $email_err = "Please enter a vaild email address.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT user_id FROM User WHERE email = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_email);
+
+            // Set parameters
+            $param_email = trim($_POST["email"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $email_err = "Email address is already in use.";
+                } else{
+                    $email = trim($_POST["email"]);
+                }
+            } else{
+                $message = "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Validate username
+    if(empty(trim($_POST["user_name"]))){
+        $username_err = "Please enter a username.";
+    } else{
+        // Prepare a select statement
+        $sql = "SELECT user_id FROM User WHERE user_name = ?";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "s", $param_username);
+
+            // Set parameters
+            $param_username = trim($_POST["user_name"]);
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                /* store result */
+                mysqli_stmt_store_result($stmt);
+
+                if(mysqli_stmt_num_rows($stmt) == 1){
+                    $username_err = "User name is already in use.";
+                } else{
+                    $user_name = trim($_POST["user_name"]);
+                }
+            } else{
+                $message = "Oops! Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Validate password
+    if(empty(trim($_POST['password']))){
+        $password_err = "Please enter a password.";
+    } elseif(strlen(trim($_POST['password'])) < 6){
+        $password_err = "Password must have at least 6 characters.";
+    } else{
+        $password = trim($_POST['password']);
+    }
+
+    // Validate confirm password
+    if(empty(trim($_POST["confirm_password"]))){
+        $confirm_password_err = 'Please confirm password.';
+    } else{
+        $confirm_password = trim($_POST['confirm_password']);
+        if($password != $confirm_password){
+            $confirm_password_err = 'Password did not match.';
+        }
+    }
+
+    // Check input errors before inserting in database
+    if(empty($fname_err) && empty($lname_err) && empty($email_err) && empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+
+
+        // Prepare an insert statement
+        $sql = "INSERT INTO User (fname, lname, user_name, email, password, role, active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        if($stmt = mysqli_prepare($link, $sql)){
+            // Bind variables to the prepared statement as parameters
+            mysqli_stmt_bind_param($stmt, "sssssss", $param_fname, $param_lname, $param_username, $param_email, $param_password, $param_role, $param_active);
+
+            // Set parameters
+            $param_fname = $fname;
+            $param_lname = $lname;
+            $param_username = $user_name;
+            $param_email = $email;
+            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
+            $param_role = $role;
+            $param_active = $active;
+
+            // Attempt to execute the prepared statement
+            if(mysqli_stmt_execute($stmt)){
+                $success = "Success! Redirecting you to the login page.";
+                // Redirect to login page
+                header( "Refresh:2; url=login.php", true, 303);
+            } else{
+                $message = "Something went wrong. Please try again later.";
+            }
+        }
+
+        // Close statement
+        mysqli_stmt_close($stmt);
+    }
+
+    // Close connection
+    mysqli_close($link);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +259,7 @@ if($_SESSION['role'] !== 'admin'){
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt "></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <div class="nav-link pointer left-sidebar-row left-sidebar-non-link" onclick="AddUserView()" ><i class="fas fa-user-plus"></i> Add User</div>
+                            <div id="add_view"></div>
                         </li>
                         <li class="nav-item">
                             <div id="users"></div>

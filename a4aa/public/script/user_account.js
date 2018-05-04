@@ -8,7 +8,7 @@ function UserAccountCardView() {
 
     var userData = "";
     htmlBody = '';
-    $('#edit-user-view').empty();
+    $('#user_account_view').empty();
     $('#user_tag').empty();
 
     $.ajax({
@@ -50,7 +50,7 @@ function UserAccountCardView() {
         '</div>\n' +
         '<div class="box-blank col-1"></div>\n';
 
-    $('#edit-user-view').html(htmlBody);
+    $('#user_account_view').html(htmlBody);
 
     $("#update_user").validate({
         rules: {
@@ -124,11 +124,18 @@ function SaveUser() {
 
             $("#success-body").html('User Updated');
             $("#success").modal('toggle');
-            setTimeout(UserAccountCardView(),2500);
+            UserAccountCardView();
         },
         error: function(data) {
-            $("#alert-body").html(JSON.stringify(data));
+            $('#alertTitle').html('User Name or Email Address Taken')
+            $("#alert-body").html(
+                '<span class="h8">\n ' +
+                'The user name and/or email address you entered are already in use.<br>\n ' +
+                'Please try a different user name and/or email address and save again.\n ' +
+                '</span>');
+            $("#alertFooter").html('<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>');
             $("#alert").modal('toggle');
+            UserAccountCardView();
         }
     });
 
@@ -136,7 +143,7 @@ function SaveUser() {
 
 function ChangePasswordView(fname,lname) {
 
-    $('#edit-user-view').empty();
+    $('#user_account_view').empty();
 
     htmlBody = '<div class="container">\n' +
         '    <div class="card card-fx">\n' +
@@ -162,7 +169,7 @@ function ChangePasswordView(fname,lname) {
         '                </div>\n' +
         '                <div class="register-row ">\n' +
         '                    <div class="form-group col-12">\n' +
-        '                       <button type="submit" id="save_user" class="btn btn-success col-4"><i class="fas fa-save"></i>&nbsp; Change Password</button>\n' +
+        '                       <button type="submit" id="save_password" class="btn btn-success col-4"><i class="fas fa-save"></i>&nbsp; Change Password</button>\n' +
         '                       <button type="button" class="btn btn-secondary col-4" onclick="UserAccountCardView()">Cancel</button>\n' +
         '                   </div>\n' +
         '                </div>\n' +
@@ -174,7 +181,7 @@ function ChangePasswordView(fname,lname) {
         '    </div>\n' +
         '</div>';
 
-    $('#edit-user-view').html(htmlBody);
+    $('#user_account_view').html(htmlBody);
     $('#password').focus();
 
     $("#change_password").validate({
