@@ -2,10 +2,13 @@
 
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Postmark\PostmarkClient;
 
 // Routes
 
-// home page
+/**
+ * HOME
+ */
 $app->get('/', function (Request $request, Response $response, array $args){
     $url = 'home.php';
     return $response->withRedirect($url, 301);
@@ -13,32 +16,32 @@ $app->get('/', function (Request $request, Response $response, array $args){
 
 
 /**
- * EMAILEr ROUTES
+ * EMAILER
  */
 $app->post('/post/email', function (Request $request, Response $response, array $args){
 
-    if (isset($_POST['send']) && isset($_POST['to']) && isset($_POST['fname']) && isset($_POST['lname']) &&
-        isset($_POST['user_name']) && isset($_POST['email'])) {
+    $data = $request->getParsedBody();
 
-        if ($_POST['send'] === 'active') {
-            $to = $_POST['to'];
-            $subject = 'New user added.';
-            $fname = $_POST['fname'];
-            $lname = $_POST['lname'];
-            $user_name = $_POST['user_name'];
-            $email = $_POST['email'];
+    $to = $data["to"];
+    $subject = "New user added.";
+    $from = "noreply@mizesolutions.com";
+    $fname = $data["fname"];
+    $lname = $data["lname"];
+    $user_name = $data["user_name"];
+    $email = $data["email"];
 
-            $headers = 'From: brian@mizesolutions.com \r\n';
-            $headers .= 'Content-Type: text/plain; charset=utf-8 \r\n';
-            $headers .= 'Reply-To: brian@mizesolutions.com';
+    $client = new PostmarkClient("3bf0b6f0-90d5-45da-a492-32190de022dc");
 
-            $messgae = 'A new user account has been created. \r\n\r\n';
-            $messgae .= 'Name: '.$fname.' '.$lname.'\r\nUser: '.$user_name.'\r\nEmail :'.$email.'\r\n\r\n';
-            $messgae .= 'Please log in and inactive the user account if you do not recognize this user.';
+    $body = '<p>A new user account has been created. </p>';
+    $body .= '<p><strong>Name:  </strong>'.$fname.' '.$lname.'<br><strong>User:  </strong>'.$user_name.'<br><strong>Email:  </strong>'.$email.'</p>';
+    $body .= '<p>Please log in and inactive the user account if you do not recognize this user.</p>';
 
-            mail($to, $subject, $messgae, $headers, '-fbrian@mizesolutions.com');
-        }
-    }
+    // Send an email:
+    $sendResult = $client->sendEmail($from, $to, $subject, $body);
+
+    return $this->response->withJson($sendResult)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 
 });
 
