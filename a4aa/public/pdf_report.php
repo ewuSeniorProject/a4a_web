@@ -1,6 +1,8 @@
 <?php
 include_once('user.cfg.php');
 include_once('admin.cfg.php');
+
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +28,9 @@ include_once('admin.cfg.php');
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!--jQuery Validation Plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 
         <script type="text/javascript">
             $(window).on('load', function () {
@@ -36,47 +41,33 @@ include_once('admin.cfg.php');
             });
         </script>
         <script src="script/common.js"></script>
-        <script src="script/delete.js"></script>
+        <script src="script/pdf_report.js"></script>
     </head>
     <body>
         <div id="page-preloader">
             <span class="spinner"></span>
         </div>
         <nav class="navbar navbar-light bg-header">
-                    <span class="navbar-brand mb-0 pointer">
-                        <a href="home.php" class="h1">
-                            Access 4 All Spokane
-                        </a>
-                    </span>
+            <span class="navbar-brand mb-0 pointer">
+                <a href="home.php" class="h1">
+                    Access 4 All Spokane
+                </a>
+            </span>
             <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
                 <i class="fas fa-bars fa-lg"></i>
             </div>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="home.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                <div class="dropdown-item pointer" onclick="printReport()"><i class="fas fa-file-pdf"></i> Print Report</div>
                 <div class="dropdown-item"></div>
                 <div class="dropdown-divider"></div>
                 <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
         </nav>
         <div class="page">
-            <div class="left-sidebar">
-                <div class="left-sidebar-header" aria-label="Delete Survey Title" >
-                    <span class="h5">
-                        <i class="fas fa-trash-alt"></i>&nbsp; Delete Survey
-                    </span>
-                </div>
-                <div class="left-sidebar-container">
-                    <ul class="nav nav-pills flex-column" aria-label="Navigaiton Links">
-                        <li>&nbsp;</li>
-                        <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="home.php" ><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="section">
-                <div class="container" id="delete-container">
-                    <div class="box-container" id="delete-view"></div>
+            <div class="section-report">
+                <div class="container" id="report_container">
+                    <div class="box-container" id="report_view"></div>
                 </div>
             </div>
         </div>
@@ -93,6 +84,23 @@ include_once('admin.cfg.php');
                     </div>
                     <div id="alert-body" class="modal-body modal-alert-body"></div>
                     <div class="modal-footer" id="alertFooter"></div>
+                </div>
+            </div>
+        </div>
+        <!-- SUCCESS MODAL -->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="success" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header modal-success-header">
+                        <span class="h5 modal-title modal-success-title" id="successTitle">Success</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                        </button>
+                    </div>
+                    <div id="success-body" class="modal-body modal-success-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>

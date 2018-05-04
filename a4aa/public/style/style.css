@@ -763,6 +763,14 @@ a:hover {
     padding-left: 15em;
 }
 
+.section-report {
+    position: relative;
+    top: 6em;
+    left: 0;
+    margin: 1em;
+    padding: 1em;
+}
+
 .section-update {
     position: relative;
     top: 6em;

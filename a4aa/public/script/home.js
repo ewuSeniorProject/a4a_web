@@ -21,6 +21,7 @@ function EstablishmentModel(data) {
     self.contact_lname = data.contact_lname;
     self.adminUrl = ("update.php");
     self.userUrl = ("view.php");
+    self.reportUrl = ("pdf_report.php");
 }
 
 function EstablishmentViewModel() {

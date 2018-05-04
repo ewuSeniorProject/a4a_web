@@ -8,7 +8,6 @@ if (isset($_SESSION['role']) && $_SESSION['active'] === 'yes'){
     header("location: home.php");
 }
 
-
 // Define variables and initialize with empty values
 $fname = $lname = $email = $user_name = $password = $confirm_password = "";
 $fname_err = $lname_err = $email_err = $username_err = $password_err = $confirm_password_err = "";
@@ -141,13 +140,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 $success = "Success! Redirecting you to the login page.";
-                // Redirect to login page
-                header( "Refresh:2; url=login.php", true, 303);
+
+                // Redirect to login page via email route
+                header( "Refresh:2; url=email", true, 303);
             } else{
                 $message = "Something went wrong. Please try again later.";
             }
         }
-
         // Close statement
         mysqli_stmt_close($stmt);
     }
@@ -179,6 +178,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.2.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+        <!--jQuery Validation Plugin -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/additional-methods.js"></script>
 
         <script>
             function ResetForm(){
