@@ -12,7 +12,7 @@ include_once('admin.cfg.php');
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>A4ASpokane</title>
+        <title id="est_name">A4ASpokane</title>
 
         <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css' />
         <!-- Bootstrap CSS -->
@@ -53,22 +53,35 @@ include_once('admin.cfg.php');
                     Access 4 All Spokane
                 </a>
             </span>
-            <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
-                <i class="fas fa-bars fa-lg"></i>
+            <div class="btn-group nav-right">
+                <div class="pointer" role="button"  href="#" id="reportDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="reportMenu">
+                    <div class="h10" id="header_est_name"></div>
+                    <div class="dropdown-menu dropdown-margin-report" id="reportDropDownDiv" aria-labelledby="reportDropdown"></div>
+                </div>
             </div>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="home.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-                <div class="dropdown-item pointer" onclick="printReport()"><i class="fas fa-file-pdf"></i> Print Report</div>
-                <div class="dropdown-item"></div>
-                <div class="dropdown-divider"></div>
-                <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
+            <div class="btn-group">
+                <div class="nav-link white-link pointer" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="userMenu">
+                    <i class="fas fa-bars fa-lg"></i>
+                </div>
+                <div class="dropdown-menu dropdown-menu-right dropdown-margin" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="home.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <div class="dropdown-item pointer" onclick="printReport()"><i class="fas fa-file-pdf"></i> Print Report</div>
+                    <div class="dropdown-item"></div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
+                </div>
             </div>
         </nav>
-        <div class="page">
-            <div class="section-report">
-                <div class="container" id="report_container">
-                    <div id="report_header"></div>
-                    <div id="report_parking"></div>
+        <div class="report-page" id="reportPage">
+            <div class="section-report" id="sectionReport">
+                <div class="container-fluid" id="report_container">
+                    <div class="print-report" id="report_header"></div>
+                    <div class="print-report" id="report_parking"></div>
+                    <div class="print-report" id="report_route_from_parking"></div>
+                    <div class="print-report" id="report_passenger_loading"></div>
+                    <div class="print-report" id="report_sta"></div>
+                    <div class="print-report" id="report_sta"></div>
+                    <div class="print-report" id="report_exterior"></div>
                 </div>
             </div>
         </div>
