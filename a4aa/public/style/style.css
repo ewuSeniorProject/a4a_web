@@ -285,6 +285,19 @@ a:hover {
     justify-content: space-between;
 }
 
+.card-row-report {
+    display: flex;
+    padding: .5em 1em 0 1em;
+    align-content: flex-start;
+    align-items: flex-end;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.card-report-padding {
+    padding-left: 1em;
+}
+
 .card-row-button {
     display: flex;
     padding: 1em;
@@ -732,6 +745,33 @@ a:hover {
     justify-content: space-between;
 }
 
+.report {
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+}
+
+.report-check {
+    margin: 0;
+    padding-left: 2em;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+}
+
+.report-label {
+    margin: 0;
+    padding-left: 1.5em;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+}
+
 .subtitle {
     display: flex;
     margin: 0;
@@ -828,6 +868,7 @@ a:hover {
 .view-label {
     font-weight: 600;
 }
+
 
 .white-link {
     color: #ffffff;

@@ -67,7 +67,8 @@ include_once('admin.cfg.php');
         <div class="page">
             <div class="section-report">
                 <div class="container" id="report_container">
-                    <div class="box-container" id="report_view"></div>
+                    <div id="report_header"></div>
+                    <div id="report_parking"></div>
                 </div>
             </div>
         </div>
