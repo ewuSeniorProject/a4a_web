@@ -95,6 +95,18 @@ include_once('../public/user.cfg.php');
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// get establishment id and name data
+$app->get('/get/establishment/id/name/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $sth = $this->db->prepare("SELECT est_id, name FROM Establishment ORDER BY name ASC");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // get establishment by id
 $app->get('/get/establishment/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');

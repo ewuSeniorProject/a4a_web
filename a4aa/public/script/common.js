@@ -1,7 +1,12 @@
+function setEstablishmentId(value) {
+    localStorage.setItem('establishmentID', value);
+}
+
 function logout() {
     localStorage.clear();
     location.href = "logout.php";
 }
+
 
 /**
  * Convert an integer to its words representation

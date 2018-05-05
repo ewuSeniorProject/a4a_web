@@ -4,6 +4,11 @@ body {
     background-color: #f7f7f7;
 }
 
+@media print{
+    body {margin-top: -5em !important;}
+    .print-report { break-inside: avoid; }
+}
+
 a:hover {
     text-decoration: none;
     -moz-text-decoration-line: none;
@@ -101,6 +106,15 @@ a:hover {
     font-family: 'Lato', sans-serif;
 }
 
+.h10 {
+    margin-bottom: 0;
+    color: #bfff57;
+    font-weight: 500;
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    align-self: center;
+}
+
 #page-preloader {
     position: fixed;
     top: 0;
@@ -156,6 +170,13 @@ a:hover {
     align-items: flex-start;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.dropdown-margin {
+    margin-top: 1.43em;
+}
+.dropdown-margin-report {
+    margin-top: 1.83em;
 }
 
 .box-container {
@@ -333,6 +354,24 @@ a:hover {
     font-family: 'Lato', sans-serif;
 }
 
+.card-header-report {
+    text-transform: uppercase;
+    letter-spacing: normal;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
+.card-subheader-report {
+    text-transform: capitalize;
+    letter-spacing: normal;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
 .card-shadow {
     box-shadow: -2px 3px 5px 0 hsla(0,0%,0%,0.2);
 }
@@ -480,6 +519,10 @@ a:hover {
 .icon {
     color: #FFFFFF;
     align-self: flex-end;
+}
+
+.lowercase {
+    text-transform: lowercase;
 }
 
 .left-sidebar {
@@ -687,6 +730,12 @@ a:hover {
     padding: 0;
 }
 
+.nav-right {
+    position: absolute;
+    right: 4.5em;
+    text-align: center;
+    }
+
 .non-link {
     color: #ffffff;
     text-transform: uppercase;
@@ -716,6 +765,10 @@ a:hover {
     padding: .7em 1em;
     background-color: #778899;
     color: #ffffff;
+}
+
+.print-report {
+    margin: 0;
 }
 
 .pointer {
@@ -749,16 +802,24 @@ a:hover {
     margin: 0;
     padding: 0;
     color: #000000;
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: normal;
     font-family: 'Lato', sans-serif;
+}
+
+.report-page {
+    position: relative;
+    top: 6em;
+    left: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .report-check {
     margin: 0;
     padding-left: 2em;
     color: #000000;
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: normal;
     font-family: 'Lato', sans-serif;
 }
@@ -766,6 +827,20 @@ a:hover {
 .report-label {
     margin: 0;
     padding-left: 1.5em;
+    color: #000000;
+    font-size: 14px;
+    letter-spacing: normal;
+    font-family: 'Lato', sans-serif;
+}
+
+.report-subtitle {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-content: center;
+    align-items: center;
+    flex-flow: nowrap row;
+    justify-content: center;
     color: #000000;
     font-size: 16px;
     letter-spacing: normal;
@@ -804,11 +879,6 @@ a:hover {
 }
 
 .section-report {
-    position: relative;
-    top: 6em;
-    left: 0;
-    margin: 1em;
-    padding: 1em;
 }
 
 .section-update {
