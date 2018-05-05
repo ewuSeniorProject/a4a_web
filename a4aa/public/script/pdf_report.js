@@ -1291,7 +1291,6 @@ function ExteriorView() {
             '</div>\n ';
     }
 
-
     if (viewData[0].service_animal === "Yes") {
         if(viewData[0].service_animal_location)
             temp = ' ('+viewData[0].service_animal_location+')'
