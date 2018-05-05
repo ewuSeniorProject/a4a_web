@@ -506,7 +506,7 @@ function sendMessage() {
     $.ajax({
         accepts: "application/json",
         method: "GET",
-        url: "email.php",
+        url: "email",
         success: function () {
             console.log("Message sent");
         },
