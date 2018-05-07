@@ -43,7 +43,7 @@ include_once('admin.cfg.php');
         <script src="script/common.js"></script>
         <script src="script/pdf_report.js"></script>
     </head>
-    <body>
+    <body class="report-body">
         <div id="page-preloader">
             <span class="spinner"></span>
         </div>
@@ -82,6 +82,14 @@ include_once('admin.cfg.php');
                     <div class="print-report" id="report_sta"></div>
                     <div class="print-report" id="report_sta"></div>
                     <div class="print-report" id="report_exterior"></div>
+                    <div class="print-report" id="report_main_entrance"></div>
+                    <div class="print-report" id="report_interior"></div>
+                    <div class="print-report" id="report_elevator"></div>
+                    <div class="print-report" id="report_signage"></div>
+                    <div class="print-report" id="report_emergency_preparedness"></div>
+                    <div class="print-report" id="report_seating"></div>
+                    <div class="print-report" id="report_restroom"></div>
+                    <div class="print-report" id="report_communication"></div>
                 </div>
             </div>
         </div>

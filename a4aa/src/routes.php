@@ -3760,6 +3760,19 @@ include_once('../public/user.cfg.php');
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// get public_restroom data by establishment id
+$app->get('/get/restroom/est/public/{id}', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $id = $args['id'];
+    $sth = $this->db->prepare("SELECT public_restroom FROM Restroom WHERE est_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // delete restroom data by id
 $app->delete('/delete/restroom/{id}', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
