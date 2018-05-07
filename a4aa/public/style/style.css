@@ -4,9 +4,18 @@ body {
     background-color: #f7f7f7;
 }
 
+@page {
+    size: letter;
+    margin-top: -1em;
+}
+
 @media print{
     body {margin-top: -5em !important;}
-    .print-report { break-inside: avoid; }
+    .print-report {
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
 }
 
 a:hover {
@@ -359,7 +368,7 @@ a:hover {
     letter-spacing: normal;
     font-weight: bold;
     font-style: normal;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Lato', sans-serif;
 }
 
@@ -368,7 +377,7 @@ a:hover {
     letter-spacing: normal;
     font-weight: bold;
     font-style: normal;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Lato', sans-serif;
 }
 
@@ -802,9 +811,13 @@ a:hover {
     margin: 0;
     padding: 0;
     color: #000000;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: normal;
     font-family: 'Lato', sans-serif;
+}
+
+.report-body {
+    background: #ffffff;
 }
 
 .report-page {
@@ -819,7 +832,7 @@ a:hover {
     margin: 0;
     padding-left: 2em;
     color: #000000;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: normal;
     font-family: 'Lato', sans-serif;
 }
@@ -828,7 +841,7 @@ a:hover {
     margin: 0;
     padding-left: 1.5em;
     color: #000000;
-    font-size: 14px;
+    font-size: 12px;
     letter-spacing: normal;
     font-family: 'Lato', sans-serif;
 }
@@ -842,7 +855,7 @@ a:hover {
     flex-flow: nowrap row;
     justify-content: center;
     color: #000000;
-    font-size: 16px;
+    font-size: 12px;
     letter-spacing: normal;
     font-family: 'Lato', sans-serif;
 }

@@ -23,6 +23,11 @@ $(document).ready(function () {
     PassengerLoadingZoneView();
     StaView();
     ExteriorView();
+    MainEntranceView();
+    InteriorView();
+    ElevatorView();
+    SignageView();
+    EmergencyPreparednessView();
 
 });
 
@@ -178,7 +183,7 @@ function ParkingView() {
         '</div>\n ' +
         '<div class="card-row-report">\n ' +
         '   <div class="col-12 ">\n ' +
-        '       <label class="report-label" > This establishment has the following parking: </label>&nbsp;\n ';
+        '       <label class="report-label" > This establishment has the following parking:&nbsp;\n ';
 
     if (viewData[0].lot_free !== "N/A" || viewData[0].lot_free !== "") {
         if (viewData[0].lot_free === "Free") {
@@ -203,7 +208,7 @@ function ParkingView() {
     }
 
     bodyHtml +=
-        '       <span class="report">'+tempArray+'.</span>\n' +
+        '       '+tempArray+'.</label>\n' +
         '   </div>\n ' +
         '</div>\n ';
 
@@ -300,8 +305,7 @@ function ParkingView() {
 
     bodyHtml +=
         '<div class="card-row-report">\n ' +
-        '   <div class="col-12">\n ' +
-        '       <span class="report-check"></span>\n ' +
+        '   <div class="col-12"><p></p>\n ' +
         '   </div>\n ' +
         '</div>\n ';
 
@@ -412,13 +416,13 @@ function RouteFromParkingView() {
                 '</div>\n ';
         }
 
-        if (viewData[0].lighting === "Yes") {
+        if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
             bodyHtml +=
                 '<div class="card-row-report">\n ' +
                 '   <div class="col-12">\n ' +
                 '       <span class="report-check">\n ' +
                 '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
-                '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span>, and is adequate for mobility and reading signs.\n ' +
+                '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
                 '       </span>\n ' +
                 '   </div>\n ' +
                 '</div>\n ';
@@ -443,7 +447,6 @@ function RouteFromParkingView() {
         bodyHtml +=
             '<div class="card-row-report">\n ' +
             '   <div class="col-12">\n ' +
-            '       <span class="report-check"></span>\n ' +
             '   </div>\n ' +
             '</div>\n ';
 
@@ -565,13 +568,13 @@ function PassengerLoadingZoneView() {
             '</div>\n ';
     }
 
-    if (viewData[0].lighting === "Yes") {
+    if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
         bodyHtml +=
             '<div class="card-row-report">\n ' +
             '   <div class="col-12">\n ' +
             '       <span class="report-check">\n ' +
             '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
-            '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span>, and is adequate for mobility and reading signs.\n ' +
+            '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
             '       </span>\n ' +
             '   </div>\n ' +
             '</div>\n ';
@@ -581,7 +584,7 @@ function PassengerLoadingZoneView() {
         bodyHtml +=
             '<div class="card-row-report">\n ' +
             '   <div class="col-12">\n ' +
-            '       <span class="card-subheader-report" >route notes:</span>\n ' +
+            '       <span class="card-subheader-report" >passenger loading zone notes:</span>\n ' +
             '   </div>\n ' +
             '</div>\n ' +
             '<div class="card-row-report">\n ' +
@@ -595,8 +598,7 @@ function PassengerLoadingZoneView() {
 
     bodyHtml +=
         '<div class="card-row-report">\n ' +
-        '   <div class="col-12">\n ' +
-        '       <span class="report-check"></span>\n ' +
+        '   <div class="col-12"><p></p>\n ' +
         '   </div>\n ' +
         '</div>\n ';
 
@@ -767,13 +769,13 @@ function StaView() {
             '</div>\n ';
     }
 
-    if (viewData[0].lighting === "Yes") {
+    if (viewData[0].lighting === "Yes"  && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
         bodyHtml +=
             '<div class="card-row-report">\n ' +
             '   <div class="col-12">\n ' +
             '       <span class="report-check">\n ' +
             '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
-            '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span>, and is adequate for mobility and reading signs.\n ' +
+            '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
             '       </span>\n ' +
             '   </div>\n ' +
             '</div>\n ';
@@ -809,8 +811,7 @@ function StaView() {
 
     bodyHtml +=
         '<div class="card-row-report">\n ' +
-        '   <div class="col-12">\n ' +
-        '       <span class="report-check"></span>\n ' +
+        '   <div class="col-12"><p></p>\n ' +
         '   </div>\n ' +
         '</div>\n ';
 
@@ -957,13 +958,13 @@ function ExteriorView() {
                 '</div>\n ';
         }
 
-        if (viewData[0].lighting === "Yes") {
+        if (viewData[0].lighting === "Yes"  && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
             bodyHtml +=
                 '<div class="card-row-report">\n ' +
                 '   <div class="col-12">\n ' +
                 '       <span class="report-check">\n ' +
                 '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
-                '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span>, and is adequate for mobility and reading signs.\n ' +
+                '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
                 '       </span>\n ' +
                 '   </div>\n ' +
                 '</div>\n ';
@@ -1077,13 +1078,13 @@ function ExteriorView() {
                 '</div>\n ';
         }
 
-        if (extStairs[0].lighting === "Yes") {
+        if (extStairs[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
             bodyHtml +=
                 '<div class="card-row-report">\n ' +
                 '   <div class="col-12">\n ' +
                 '       <span class="report-check">\n ' +
                 '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
-                '           Lighting level is <span class="lowercase">'+extStairs[0].lighting_type+' during the '+extStairs[0].lighting_option+'</span>, and is adequate for mobility and reading signs.\n ' +
+                '           Lighting level is <span class="lowercase">'+extStairs[0].lighting_type+' during the '+extStairs[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
                 '       </span>\n ' +
                 '   </div>\n ' +
                 '</div>\n ';
@@ -1251,13 +1252,13 @@ function ExteriorView() {
                 '</div>\n ';
         }
 
-        if (extRamps[0].lighting === "Yes") {
+        if (extRamps[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
             bodyHtml +=
                 '<div class="card-row-report">\n ' +
                 '   <div class="col-12">\n ' +
                 '       <span class="report-check">\n ' +
                 '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
-                '           Lighting level is <span class="lowercase">'+extRamps[0].lighting_type+' during the '+extRamps[0].lighting_option+'</span>, and is adequate for mobility and reading signs.\n ' +
+                '           Lighting level is <span class="lowercase">'+extRamps[0].lighting_type+' during the '+extRamps[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
                 '       </span>\n ' +
                 '   </div>\n ' +
                 '</div>\n ';
@@ -1308,11 +1309,1028 @@ function ExteriorView() {
 
     bodyHtml +=
         '<div class="card-row-report">\n ' +
-        '   <div class="col-12">\n ' +
-        '       <span class="report-check"></span>\n ' +
+        '   <div class="col-12"><p></p>\n ' +
         '   </div>\n ' +
         '</div>\n ';
 
     $('#report_exterior').html(bodyHtml);
+
+}
+
+function MainEntranceView() {
+
+    var temp = "";
+    var force = "";
+    var num = "";
+
+    $('#report_main_entrance').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/main_entrance/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >main entrance:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].total_num_public_entrances > 0) {
+        if (viewData[0].total_num_public_entrances > 1)
+            temp = 'entrances';
+        else
+            temp = 'entrance'
+        num = numberToEnglish(viewData[0].total_num_public_entrances, " ");
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           The establishment has '+num+' public '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].main_ent_accessible === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           The main entrance is wheelchair accessible.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].alt_ent_accessible === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is an alternative accessible entrance which can be used independently.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].accessable_signage === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is signage to direct patrons to the wheelchair accessible entrance.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].ground_level === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           The ground or floor is level inside and outside the entrance door.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].threshold_level === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Threshold of door is level.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].threshold_beveled === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Door threshold is no more than 1/2\" high.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].door_action !== "N/A") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           As you enter, door opens <span class="lowercase">'+viewData[0].door_action+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].door_open_clearance === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Door has at least 32" clearance when door is open 90 degrees.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].door_easy_open === "Yes") {
+        if (viewData[0].door_open_force > 0)
+            force = ' (actual '+viewData[0].door_open_force+' lbs)';
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Door is easy to open, requiring 10 lbs or less of force'+force+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].door_use_with_fist === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Door handles can be operated with closed fist.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].door_auto_open === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Door(s) open automatically or with a push button.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].second_door_inside === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is a second door or set of doors inside the accessible entry.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        if (viewData[0].min_dist_between_doors === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           The distance between outer door and inner door is at least 48” plus door clearance(s).\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+    }
+
+    if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate for mobility and reading signs.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >main entrance notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_main_entrance').html(bodyHtml);
+
+}
+
+function InteriorView() {
+    var counter = "";
+    var writing = "";
+    var temp = "";
+    var force = "";
+    var tempData = "";
+
+    $('#report_interior').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/interior/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/restroom/est/public/" + EST_ID,
+        success: function (data) {
+            tempData = data[0].public_restroom;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >interior:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].int_door_open_clearance === "Yes") {
+        if (tempData === "Yes")
+            temp = ' (restroom doors are covered in restroom section)';
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           This establishment has interior doors'+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Interior doors have at least 32" clearance when doors are open 90 degrees.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        if (viewData[0].int_door_easy_open === "Yes") {
+            if (viewData[0].int_door_open_force > 0)
+                force = ' (actual '+viewData[0].int_door_open_force+' lbs)';
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Door is easy to open, requiring 5 lbs or less of force'+force+'.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].int_door_use_with_fist === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Door handles can be operated with closed fist.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].five_second_close === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Doors take 5 seconds or longer to close.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+    }
+    else {
+        if (tempData === "Yes")
+            temp = ', except for the restroom(s)';
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           There are no interior doors'+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].hallway_width === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Hallways and ​aisles are min. 36\” wide, ​ or not less than 28\” for 4 foot intervals.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].wheelchair_turnaround === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are locations that allow 60” space for a wheelchair to turn around.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].hallway_obstacles === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Hallways and aisles are clear of obstacles and tripping hazards.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].hallway_clear === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Hallways are clear of objects protruding more than 4\” or lower than 80\”.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+'</span> and is adequate for mobility and reading signs.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].service_counter === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Lowest service counter is no higher than 38\" with a clear view from a sitting position and a check writing surface is no higher than 34\".\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        if(viewData[0].counter_height > 0 || viewData[0].writing_surface_height > 0) {
+            if (viewData[0].counter_height > 0)
+                counter = 'Actual service counter height: ' + viewData[0].counter_height + '\"&emsp;';
+            if (viewData[0].writing_surface_height > 0)
+                writing += 'Actual writing surface height: ' + viewData[0].writing_surface_height + '\"';
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           '+counter+''+writing+'.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+    }
+
+    if (viewData[0].drinking_fountain === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is an accessible drinking fountain with spout no higher than 36\”, and easy to operate controls.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >interior notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_interior').html(bodyHtml);
+
+}
+
+function ElevatorView() {
+    var outside = "";
+    var inside = "";
+
+    $('#report_elevator').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/elevator/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+
+    if (viewData[0].is_elevator === "Yes") {
+
+        bodyHtml =
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-header-report" >elevator:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           This establishment has an elevator or lift.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        if (viewData[0].location) {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Elevator or lift located <span class="lowercase">'+viewData[0].location+'</span>.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].works === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Elevator or lift works properly.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].no_assist === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Users can operate elevator or lift without having to find someone to assist or provide a key.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].button_height === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Buttons are no higher than 48\” ​and no lower than 15\”.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+
+            if(viewData[0].outside_btn_height > 0 || viewData[0].inside_btn_height > 0) {
+                if (viewData[0].outside_btn_height > 0)
+                    outside = 'Actual outside button height: ' + viewData[0].outside_btn_height + '\"&emsp;';
+                if (viewData[0].inside_btn_height > 0)
+                    inside += 'Actual inside button height: ' + viewData[0].inside_btn_height + '\"';
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           '+outside+''+inside+'.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+        }
+
+        if (viewData[0].button_use_fist === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Buttons are easy to press with closed fist.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].braille === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Buttons ​ and signs ​have Braille markings​ and raised letters/numbers.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].audible_tones === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Elevator or lift uses ​audible tones as well as visible signals .\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Lighting level is <span class="lowercase">'+viewData[0].lighting_type+'</span> and is adequate for mobility and reading signs.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].elevator_depth === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Elevator interior is at least 54\” deep from door to the back .\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].comment) {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="card-subheader-report" >elevator notes:</span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ' +
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-label">\n ' +
+                '           '+viewData[0].comment+'.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12"><p></p>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        $('#report_elevator').html(bodyHtml);
+    }
+}
+
+function SignageView() {
+    var temp = "";
+
+    $('#report_signage').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/signage/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >signage:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].is_directory === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           There is a directory at all accessible entrances to help visitors to find their way.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].door_signs === "Yes") {
+        if (viewData[0].sign_height > 0)
+            temp = ' (actual height'+viewData[0].sign_height+')';
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Door signs are on latch side of door, between 48\” and 60\” from floor'+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].pub_sign_braile === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Public signs have Braille.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].sign_high_contrast === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Signs have raised, high contrast lettering, ​low glare background.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].sign_images === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Signs include images, illustrations, or icons.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].written_material_images === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Written material (menus, etc.) includes images or illustrations.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].menu_access === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is a large print menu, Braille menu, and/or on­line accessible menu.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].alt_info === "Yes") {
+        if (viewData[0].alt_info_type !== "N/A")
+            temp = ': '+viewData[0].alt_info_type;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Information is available in an alternative format<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >signage notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_signage').html(bodyHtml);
+
+}
+
+function EmergencyPreparednessView() {
+    var temp = "";
+
+    $('#report_emergency_preparedness').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/emergency/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >Emergency Preparedness:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].evac_info === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           Evacuation and safety information is available in a visible location.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].alt_evac_info === "Yes") {
+        if (viewData[0].evac_info_format !== "N/A")
+            temp = ': '+viewData[0].evac_info_format;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Evacuation and safety information is available in an alternative format<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].alarms === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Emergency alarms both audible and visible (flashing or strobe).\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].location_no_flash === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is an emergency location available where there are no flashing alarms.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].shelter === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is an area of refuge, shelter in place during emergencies.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].signs_to_exit === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Signs direct patrons to exits, safety zone, fire extinguishers and alarm pull boxes.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].wheelchair_plan === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is a plan for evacuating persons using wheelchairs in case elevators are inoperable.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].floor_plan_routes === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Posted floor plans show emergency routes, and locations of fire extinguishers and alarm pull boxes.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].fire_alarm_height === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Fire alarms pull boxes are no higher than 48\”.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].fire_extinguisher_height === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Fire extinguishers are mounted with bottom no higher than 48\”.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >signage notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_emergency_preparedness').html(bodyHtml);
 
 }
