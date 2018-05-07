@@ -28,6 +28,7 @@ $(document).ready(function () {
     ElevatorView();
     SignageView();
     EmergencyPreparednessView();
+    SeatingView();
 
 });
 
@@ -2184,7 +2185,7 @@ function EmergencyPreparednessView() {
     bodyHtml =
         '<div class="card-row-report">\n ' +
         '   <div class="col-12">\n ' +
-        '       <span class="card-header-report" >Emergency Preparedness:</span>\n ' +
+        '       <span class="card-header-report" >emergency preparedness:</span>\n ' +
         '   </div>\n ' +
         '</div>\n ';
 
@@ -2313,7 +2314,7 @@ function EmergencyPreparednessView() {
         bodyHtml +=
             '<div class="card-row-report">\n ' +
             '   <div class="col-12">\n ' +
-            '       <span class="card-subheader-report" >signage notes:</span>\n ' +
+            '       <span class="card-subheader-report" >emergency preparedness notes:</span>\n ' +
             '   </div>\n ' +
             '</div>\n ' +
             '<div class="card-row-report">\n ' +
@@ -2332,5 +2333,231 @@ function EmergencyPreparednessView() {
         '</div>\n ';
 
     $('#report_emergency_preparedness').html(bodyHtml);
+
+}
+
+function SeatingView() {
+    var temp = "";
+    var num = "";
+    var num_tables = "";
+    var num_chairs = "";
+
+    $('#report_seating').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/seating/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >seating:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].seating_no_step === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           One or more seating areas in the common area can be accessed without steps.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].table_aisles === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Customers can maneuver between tables without bumping into chairs (36” aisles) ​.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].legroom === "Yes") {
+        if (viewData[0].num_legroom === "All")
+            temp = 'All tables have ​legroom for wheelchair users (bottom of table = 27 ​ to 34”)';
+        else {
+            num = numberToEnglish(viewData[0].num_legroom, " ");
+            temp = 'There are '+num+' tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”)';
+        }
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].rearranged === "Yes") {
+        if (viewData[0].num_table_rearranged === "All" && viewData[0].num_chair_rearranged === "All")
+            temp = 'All tables and chairs that can be moved or rearranged';
+        else {
+            num_tables = numberToEnglish(viewData[0].num_table_rearranged, " ");
+            num_chairs = numberToEnglish(viewData[0].num_chair_rearranged, " ");
+            temp = 'There are '+num_tables+' tables and '+num_chairs+' ​chairs that can be moved or rearranged';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].round_tables === "Yes") {
+        if (viewData[0].num_round_tables > 0) {
+            num = numberToEnglish(viewData[0].num_table_rearranged, " ");
+            temp = 'There are '+num+' round tables ​that can be moved or rearranged';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Lighting level in the main seating area is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate to read the menu/ program.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].adjustable_lighting === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are one or more available spaces with adjustable lighting, lower or brighter lighting.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].low_visual_slim === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are one or more areas with low visual stimulation (windows covered, non­distracting wallpaper).\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].quiet_table === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is a quiet table, room or area available on request.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].low_sound === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is an area with low or no background sound, and/ or that has sound­absorbing surfaces.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].designated_space === "Yes") {
+        if (viewData[0].num_desig_space > 0) {
+            num = numberToEnglish(viewData[0].num_desig_space, " ");
+            temp = 'There are '+num+' spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].companion_space === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are spaces for companions to sit next to the wheelchair users.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >seating notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_seating').html(bodyHtml);
 
 }
