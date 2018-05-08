@@ -172,6 +172,30 @@ $app->delete('/delete/establishment/{id}', function (Request $request, Response 
 });
 
 // post establishment data
+$app->post('/post/establishment/blank/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+    include_once('../public/admin.cfg.php');
+
+    $name = "";
+    $config_id = 1;
+    $user_id = 1;
+    $cat_id = 1;
+
+    $sth = $this->db->prepare("INSERT INTO Establishment (name, user_id, cat_id, config_id)
+                               VALUES (:name, :user_id, :cat_id, :config_id)");
+
+    $sth->bindParam(':name', $name, PDO::PARAM_STR);
+    $sth->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sth->bindParam(':cat_id', $cat_id, PDO::PARAM_INT);
+    $sth->bindParam(':config_id', $config_id, PDO::PARAM_INT);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// post establishment data
 $app->post('/post/establishment/', function (Request $request, Response $response, array $args){
     include_once('../public/user.cfg.php');
     include_once('../public/admin.cfg.php');

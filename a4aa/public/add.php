@@ -36,6 +36,7 @@ include_once('user.cfg.php');
                 $spinner.fadeOut();
                 $preloader.delay(350).fadeOut('slow');
             });
+            var user_id = "<?php echo $_SESSION['user_id']; ?>";
         </script>
         <script src="script/common.js"></script>
         <script src="script/selectOptions.js"></script>
