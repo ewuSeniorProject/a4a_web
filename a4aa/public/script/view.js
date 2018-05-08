@@ -1202,7 +1202,7 @@ function RestroomInfoView() {
             '        <div class="card-row">\n' +
             '            <div class="col-4"><label class="view-label" for="restroom_desc_'+restroomInfoData[i].rest_info_id+'" > Identify this bathroom rated with location and other information (i.e. 1st floor front women): </label> <br><span class="view" id="restroom_desc_'+restroomInfoData[i].rest_info_id+'" >'+restroomInfoData[i].restroom_desc+'</span></div>\n' +
             '            <div class="col-4"><label class="view-label" for="easy_open_'+restroomInfoData[i].rest_info_id+'" >  Room door is easy to open, requiring 5 lb. or less force: </label> <br><span class="view" id="easy_open_'+restroomInfoData[i].rest_info_id+'"  >'+restroomInfoData[0].easy_open+'</span></div>\n' +
-            '            <div class="col-4"><label class="view-label" for="lbs_force_'+restroomInfoData[i].rest_info_id+'" > Actual force - lbs. or light/ med/ heavy: </label> <br><span class="view" id="lbs_force_'+restroomInfoData[i].rest_info_id+'" >'+restroomInfoData[i].lbs_force+'</span></div>\n' +
+            '            <div class="col-4"><label class="view-label" for="lbs_force_'+restroomInfoData[i].rest_info_id+'" > Actual force (lbs): </label> <br><span class="view" id="lbs_force_'+restroomInfoData[i].rest_info_id+'" >'+restroomInfoData[i].lbs_force+'</span></div>\n' +
             '        </div>\n' +
             '        <div class="card-row">\n' +
             '            <div class="col-6"><label class="view-label" for="clearance_'+restroomInfoData[i].rest_info_id+'" > Stall/Room door has at least 32” clearance when the door is open: </label> <br><span class="view" id="clearance_'+restroomInfoData[i].rest_info_id+'" >'+restroomInfoData[0].clearance+'</span></div>\n' +

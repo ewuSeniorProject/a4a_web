@@ -2766,7 +2766,7 @@ function addSeatingView() {
         '    <div class="col-4"><label for="num_chair_rearranged"> Number of chairs that can be moved #/All: </label><input type="text" class="form-control" name="num_chair_rearranged" id="num_chair_rearranged" ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
-        '    <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" name="round_tables" id="round_tables" >\n' ;
+        '    <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5 to 9 individuals: </label> <select class="form-control" name="round_tables" id="round_tables" >\n' ;
     bodyHtml += addGenSelectOptions(yesNoNAOptions);
     bodyHtml += '</select>\n' +
         '   </div>\n' +
@@ -3158,7 +3158,7 @@ function addRestroomInformationView() {
     bodyHtml += addGenSelectOptions(yesNoNAOptions);
     bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
+        '   <div class="col-6"><label for="lbs_force"> Actual force (lbs): </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' ;

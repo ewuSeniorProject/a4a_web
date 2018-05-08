@@ -2992,7 +2992,7 @@ function SeatingView() {
         '            <div class="col-4"><label for="num_chair_rearranged"> Number of chairs that can be moved #/All: </label><input type="text" class="form-control" id="num_chair_rearranged" name="num_chair_rearranged" value="'+seatingData[0].num_chair_rearranged+'" ></div>\n' +
         '        </div>\n' +
         '        <div class="card-row">\n' +
-        '            <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5­9 individuals: </label> <select class="form-control" id="round_tables" name="round_tables" >\n';
+        '            <div class="col-6"><label for="round_tables"> There are round or oval tables that can seat 5 to 9 individuals: </label> <select class="form-control" id="round_tables" name="round_tables" >\n';
 
     bodyHtml += generateSelectOptions(seatingData[0].round_tables, yesNoNAOptions);
 
@@ -3369,7 +3369,7 @@ function RestroomInfoView() {
 
     bodyHtml += '       </select>\n' +
         '            </div>\n' +
-            '            <div class="col-4"><label for="lbs_force_'+restroomInfoData[i].rest_info_id+'" > Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" id="lbs_force_'+restroomInfoData[i].rest_info_id+'" name="lbs_force_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].lbs_force+'" ></div>\n' +
+            '            <div class="col-4"><label for="lbs_force_'+restroomInfoData[i].rest_info_id+'" > Actual force (lbs): </label> <input type="number" min="0" class="form-control" id="lbs_force_'+restroomInfoData[i].rest_info_id+'" name="lbs_force_'+restroomInfoData[i].rest_info_id+'" value="'+restroomInfoData[i].lbs_force+'" ></div>\n' +
             '        </div>\n' +
             '        <div class="card-row">\n' +
             '            <div class="col-3"><label for="clearance_'+restroomInfoData[i].rest_info_id+'"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" id="clearance_'+restroomInfoData[i].rest_info_id+'" name="clearance_'+restroomInfoData[i].rest_info_id+'" >\n';
@@ -3694,7 +3694,7 @@ function addRestroomInfoView(rest_id) {
     bodyHtml += addGenSelectOptions(yesNoNAOptions);
     bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '   <div class="col-6"><label for="lbs_force"> Actual force - lbs. or light/ med/ heavy: </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
+        '   <div class="col-6"><label for="lbs_force"> Actual force (lbs): </label> <input type="number" min="0" class="form-control" name="lbs_force" id="lbs_force"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '   <div class="col-6"><label for="clearance"> Stall/Room door has at least 32” clearance when the door is open: </label> <select class="form-control" name="clearance" id="clearance" >\n' ;

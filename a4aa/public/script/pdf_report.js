@@ -28,6 +28,9 @@ $(document).ready(function () {
     ElevatorView();
     SignageView();
     EmergencyPreparednessView();
+    SeatingView();
+    RestroomView();
+    CommunicationView();
 
 });
 
@@ -2184,7 +2187,7 @@ function EmergencyPreparednessView() {
     bodyHtml =
         '<div class="card-row-report">\n ' +
         '   <div class="col-12">\n ' +
-        '       <span class="card-header-report" >Emergency Preparedness:</span>\n ' +
+        '       <span class="card-header-report" >emergency preparedness:</span>\n ' +
         '   </div>\n ' +
         '</div>\n ';
 
@@ -2313,7 +2316,7 @@ function EmergencyPreparednessView() {
         bodyHtml +=
             '<div class="card-row-report">\n ' +
             '   <div class="col-12">\n ' +
-            '       <span class="card-subheader-report" >signage notes:</span>\n ' +
+            '       <span class="card-subheader-report" >emergency preparedness notes:</span>\n ' +
             '   </div>\n ' +
             '</div>\n ' +
             '<div class="card-row-report">\n ' +
@@ -2332,5 +2335,1232 @@ function EmergencyPreparednessView() {
         '</div>\n ';
 
     $('#report_emergency_preparedness').html(bodyHtml);
+
+}
+
+function SeatingView() {
+    var temp = "";
+    var num = "";
+    var num_tables = "";
+    var num_chairs = "";
+
+    $('#report_seating').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/seating/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >seating:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].seating_no_step === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           One or more seating areas in the common area can be accessed without steps.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].table_aisles === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Customers can maneuver between tables without bumping into chairs (36” aisles) ​.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].legroom === "Yes") {
+        if (viewData[0].num_legroom === "All")
+            temp = 'All tables have ​legroom for wheelchair users (bottom of table = 27 ​ to 34”)';
+        else {
+            num = numberToEnglish(viewData[0].num_legroom, " ");
+            temp = 'There are '+num+' tables with ​legroom for wheelchair users (bottom of table = 27 ​ to 34”)';
+        }
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].rearranged === "Yes") {
+        if (viewData[0].num_table_rearranged === "All" && viewData[0].num_chair_rearranged === "All")
+            temp = 'All tables and chairs that can be moved or rearranged';
+        else {
+            num_tables = numberToEnglish(viewData[0].num_table_rearranged, " ");
+            num_chairs = numberToEnglish(viewData[0].num_chair_rearranged, " ");
+            temp = 'There are '+num_tables+' tables and '+num_chairs+' ​chairs that can be moved or rearranged';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].round_tables === "Yes") {
+        if (viewData[0].num_round_tables > 0) {
+            num = numberToEnglish(viewData[0].num_table_rearranged, " ");
+            temp = 'There are '+num+' round tables ​that can be moved or rearranged';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].lighting === "Yes" && viewData[0].lighting_type !== "N/A" && viewData[0].lighting_option !== "N/A") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Lighting level in the main seating area is <span class="lowercase">'+viewData[0].lighting_type+' during the '+viewData[0].lighting_option+'</span> and is adequate to read the menu/ program.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].adjustable_lighting === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are one or more available spaces with adjustable lighting, lower or brighter lighting.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].low_visual_slim === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are one or more areas with low visual stimulation (windows covered, non­distracting wallpaper).\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].quiet_table === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is a quiet table, room or area available on request.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].low_sound === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is an area with low or no background sound, and/ or that has sound­absorbing surfaces.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].designated_space === "Yes") {
+        if (viewData[0].num_desig_space > 0) {
+            num = numberToEnglish(viewData[0].num_desig_space, " ");
+            temp = 'There are '+num+' spaces designated for wheelchair users that have the same general views as the rest of the audience when the person is seated';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].companion_space === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are spaces for companions to sit next to the wheelchair users.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >seating notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_seating').html(bodyHtml);
+
+}
+
+function RestroomView() {
+    var temp = "";
+    var restroomInfoData = "";
+
+    $('#report_restroom').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/restroom/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/restroom_info/rest/" + REST_ID,
+        success: function (data) {
+            restroomInfoData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >restroom:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].public_restroom === "Yes") {
+
+        if (viewData[0].total_num > 0 && viewData[0].total_num < 2)
+            temp = 'There is '+numberToEnglish(viewData[0].total_num, " ")+' public restroom available near or ​at the location.';
+        else if (viewData[0].total_num > 1)
+            temp = 'There are '+numberToEnglish(viewData[0].total_num, " ")+' public restrooms available near or ​at the location.';
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '          '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+
+        if (viewData[0].designated_number > 0) {
+            if (viewData[0].designated_number > 0 && viewData[0].designated_number < 2)
+                temp = 'There is '+numberToEnglish(viewData[0].designated_number, " ")+' accessible restroom designated “family”, “unisex”, or “assisted use”.';
+            else if (viewData[0].designated_number > 1)
+                temp = 'There are '+numberToEnglish(viewData[0].designated_number, " ")+' accessible restrooms designated “family”, “unisex”, or “assisted use”.';
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           '+temp+'.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].num_wheelchair_sign > 0) {
+            if (viewData[0].num_wheelchair_sign > 0 && viewData[0].num_wheelchair_sign < 2)
+                temp = 'There is '+numberToEnglish(viewData[0].num_wheelchair_sign, " ")+' restroom that has a “wheelchair accessible” sign.';
+            else if (viewData[0].num_wheelchair_sign > 1)
+                temp = 'There are '+numberToEnglish(viewData[0].num_wheelchair_sign, " ")+' restrooms that have a “wheelchair accessible” sign.';
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           '+temp+'.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].sign_accessable === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Restrooms signs have high contrast, Braille, raised lettering, low glare background.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].sign_location === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Signage is on latch side of door between 48” and 60” above floor .\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].key_needed === "Yes") {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           Users do not need to ask someone for a KEY to use the restroom.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        if (viewData[0].comment) {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="card-subheader-report" >general restroom notes:</span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ' +
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-label">\n ' +
+                '           ' + viewData[0].comment + '.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12"><p></p>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        for (var i = 0; i < restroomInfoData.length; i++) {
+
+            if (viewData[0].total_num > 0 && viewData[0].total_num < 2)
+                temp = 'Restroom: ';
+            else
+                temp = 'Restroom '+(i+1)+':';
+
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="card-header-report" >'+temp+'</span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+
+            if (restroomInfoData[i].restroom_desc) {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-label">\n ' +
+                    '           '+restroomInfoData[i].restroom_desc+'\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].easy_open === "Yes") {
+                if (restroomInfoData[i].lbs_force > 0)
+                    temp = ' (actual '+restroomInfoData[i].lbs_force+' lbs)';
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Room door is easy to open, requiring 5 lb. or less force'+temp+'.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].clearance === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Stall/room door has at least 32” clearance when the door is open.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].opens_out === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The stall door opens to the outside.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].use_fist === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The stall door can be opened, closed, and latched with a closed fist.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].can_turn_around === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The stall or room is large enough for a wheelchair or walker to turn around [at least 60” wide, at least 56” deep].\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].close_chair_inside === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The stall or room door can be closed once a wheelchair is inside.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].grab_bars === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Grab bars are easily reachable behind the toilet and on the side wall ​nearest the toilet.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].seat_height_req === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The height of the toilet seat is at least 17” from the floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].flush_auto_fist === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The toilet flushes automatically, or can be operated with a closed fist.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].ambulatory_accessible === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           There is at least one is ambulatory accessible with grab bars on either side and toilet height at least 17” from floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].coat_hook === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           There is a coat hook that is between 35” and 48” from the floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].sink === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The height of the sink/countertop is 34” or less from the floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].faucet === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The faucet control is 17” or less from the front edge of the sink counter.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].faucet_auto_fist === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Faucet​ can ​be operated ​automatically or ​with a closed fist.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].sink_clearance === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           There is room for a wheelchair to roll under the sink .\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].sink_pipes === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Pipes under the sink are covered to prevent injury or burns.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].soap_dispenser === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The height of the soap dispenser control is 48” or less from the floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].dry_fist === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Hand dryer or towel dispenser can be operated automatically or with closed fist.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].dry_control_height === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Controls for hand dryer or towel dispenser are 48” or less from floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].mirror === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           The bottom edge of the lowest mirror is no more than 40" from the floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].shelves === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Shelves to set items on are no more than 48" from the floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].trash_receptacles === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Trash receptacles are positioned so they do not block the route to the door.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].hygiene_seat_cover === "Yes") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Feminine hygiene product & toilet seat cover dispensers are 48” or less from floor.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].lighting === "Yes" && restroomInfoData[i].lighting_type !== "N/A") {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-check">\n ' +
+                    '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                    '           Lighting level is <span class="lowercase">' + restroomInfoData[i].lighting_type + '</span> and is adequate for mobility and reading signs.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+            if (restroomInfoData[i].comment) {
+                bodyHtml +=
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="card-subheader-report" >restroom notes:</span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ' +
+                    '<div class="card-row-report">\n ' +
+                    '   <div class="col-12">\n ' +
+                    '       <span class="report-label">\n ' +
+                    '           ' + restroomInfoData[i].comment + '.\n ' +
+                    '       </span>\n ' +
+                    '   </div>\n ' +
+                    '</div>\n ';
+            }
+
+        }
+
+    }
+    else {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           There are no public Restrooms ​are available near or ​at the location ​.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    $('#report_restroom').html(bodyHtml);
+
+}
+
+function CommunicationView() {
+    var temp = "";
+    var device = "";
+    var receiver = "";
+    var fee = "";
+
+    $('#report_communication').empty();
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: "get/communication/est/" + EST_ID,
+        success: function (data) {
+            viewData = data;
+        },
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+    bodyHtml =
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="card-header-report" >communication technologies & customer service:</span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    if (viewData[0].public_phone === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           One or more public phones are available w/adjustable volume control.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].phone_clearance === "Yes") {
+        if (viewData[0].num_phone < 1)
+            temp = 'There is at least one public phone w/ controls min 48” from floor, protruding < 4” from wall';
+        else if (viewData[0].num_phone < 2)
+            temp = 'There is '+numberToEnglish(viewData[0].num_phone,"")+' public phone w/ controls min 48” from floor, protruding < 4” from wall';
+        else if (viewData[0].num_phone > 1)
+            temp = 'There are '+numberToEnglish(viewData[0].num_phone,"")+' public phones w/ controls min 48” from floor, protruding < 4” from wall';
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].tty === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is a TTY is available.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].staff_tty === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Staff are trained in use of TTY, and how to accept relay calls.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].assisted_listening === "Yes") {
+        if (viewData[0].assisted_listen_type !== "N/A")
+            device = ' '+viewData[0].assisted_listen_type;
+        if (viewData[0].assisted_listen_receiver !== "N/A")
+            receiver = ' '+viewData[0].assisted_listen_receiver;
+
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           The following assisted listening devices are available:'+device+receiver+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].listening_signage === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Signs about listening devices are clearly displayed.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].staff_listening === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Staff are trained to use assisted listening devices.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].acoustics === "Yes") {
+        if (viewData[0].acoustics !== "N/A")
+            temp = viewData[0].acoustics_level;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           The acoustics are comfortable (no echoing, loud music, etc) Noise level: '+temp+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].alt_comm_methods === "Yes") {
+        if (viewData[0].alt_comm_type)
+            temp = ' include: '+viewData[0].alt_comm_type;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           If a customer is unable to hear, there are other forms of communication<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].staff_ASL === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Staff have received instructions on how to provide ASL services upon request (in person or remote).\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].captioning_default === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Captioning is turned ‘on’ as default for TVs or projected video.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].theater_captioning === "Yes") {
+        if (viewData[0].theater_captioning !== "N/A")
+            temp = ' includes: '+viewData[0].theater_captioning;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is captioning in this theater<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].auditory_info_visual === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Auditory information is presented visually.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].visual_info_auditory === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Visual information is presented audibly.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].website_text_reader === "Yes") {bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           The establishment\'s website is accessible to users of screen text readers.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].alt_contact === "Yes") {
+        if (viewData[0].alt_contact !== "N/A")
+            temp = ' includes: '+viewData[0].alt_contact_type;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are alternate means for patrons to order, contact, or schedule<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].shopping_assist === "Yes") {
+        if (viewData[0].assist_service !== "N/A") {
+            temp = ' ' + viewData[0].assist_service;
+            if (viewData[0].assist_service === "Yes")
+                temp += ' for a fee';
+            else if (viewData[0].assist_service === "No")
+                temp += ' for free';
+        }
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           The establishment offers<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].captioning_default === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Captioning is turned ‘on’ as default for TVs or projected video.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].theater_captioning === "Yes") {
+        if (viewData[0].theater_captioning !== "N/A")
+            temp = ' includes: '+viewData[0].theater_captioning;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There is captioning in this theater<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].auditory_info_visual === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Auditory information is presented visually.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].visual_info_auditory === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Visual information is presented audibly.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].website_text_reader === "Yes") {bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="report-check">\n ' +
+        '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+        '           The establishment\'s website is accessible to users of screen text readers.\n ' +
+        '       </span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+    }
+
+    if (viewData[0].alt_contact === "Yes") {
+        if (viewData[0].alt_contact !== "N/A")
+            temp = ' includes: '+viewData[0].alt_contact_type;
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           There are alternate means for patrons to order, contact, or schedule<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].shopping_assist === "Yes") {
+        if (viewData[0].assist_service !== "N/A") {
+            temp = ' ' + viewData[0].assist_service;
+            if (viewData[0].assist_service === "Yes")
+                temp += ' for a fee';
+            else if (viewData[0].assist_service === "No")
+                temp += ' for free';
+        }
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Scooters are available<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].store_scooter === "Yes") {
+        if (viewData[0].scooter_location) {
+            temp = ' and located ' + viewData[0].scooter_location;
+            if (viewData[0].scooter_fee === "Yes")
+                temp += ' for a fee';
+            else if (viewData[0].scooter_fee === "No")
+                temp += ' for free';
+        }
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Captioning is turned ‘on’ as default for TVs or projected video.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].restaurant_allergies === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Information is available on food allergies, sensitivities.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].staff_disable_trained === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           In the last 12 months the staff have received training  on how to provide “disability friendly” customer service.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+
+        if (viewData[0].staff_disable_trained_desc) {
+            bodyHtml +=
+                '<div class="card-row-report">\n ' +
+                '   <div class="col-12">\n ' +
+                '       <span class="report-check">\n ' +
+                '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+                '           This training includes: <span class="lowercase">'+viewData[0].staff_disable_trained_desc+'</span>.\n ' +
+                '       </span>\n ' +
+                '   </div>\n ' +
+                '</div>\n ';
+        }
+    }
+
+    if (viewData[0].visual_info_auditory === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Visual information is presented audibly.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].items_reach === "Yes") {
+        bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12">\n ' +
+        '       <span class="report-check">\n ' +
+        '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+        '           All items are within reach, or assistance is offered to reach them.\n ' +
+        '       </span>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+    }
+
+    if (viewData[0].service_alt_manner === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           If goods and services are not accessible, they are provided in an alternative manner.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].senior_discount === "Yes") {
+        if (viewData[0].senior_age > 0)
+            temp = viewData[0].senior_age+' years of age and older';
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           A senior discount is offered to patrons<span class="lowercase">'+temp+'</span>.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].annual_A4A_review === "Yes") {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-check">\n ' +
+            '           <i class="fas fa-check fa-xs"></i>&emsp;\n' +
+            '           Management has agreed to annual A4A reviews.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    if (viewData[0].comment) {
+        bodyHtml +=
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="card-subheader-report" >communication technologies & customer service notes:</span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ' +
+            '<div class="card-row-report">\n ' +
+            '   <div class="col-12">\n ' +
+            '       <span class="report-label">\n ' +
+            '           '+viewData[0].comment+'.\n ' +
+            '       </span>\n ' +
+            '   </div>\n ' +
+            '</div>\n ';
+    }
+
+    bodyHtml +=
+        '<div class="card-row-report">\n ' +
+        '   <div class="col-12"><p></p>\n ' +
+        '   </div>\n ' +
+        '</div>\n ';
+
+    $('#report_communication').html(bodyHtml);
 
 }
