@@ -6,12 +6,17 @@ body {
 
 @page {
     size: letter;
-    margin-top: -1em;
 }
 
 @media print{
     body {margin-top: -5em !important;}
     .print-report {
+        -webkit-column-break-before: auto;
+        page-break-before: auto;
+        break-before: auto;
+        -webkit-column-break-after: auto;
+        page-break-after: auto;
+        break-after: auto;
         -webkit-column-break-inside: avoid;
         page-break-inside: avoid;
         break-inside: avoid;
@@ -778,6 +783,7 @@ a:hover {
 
 .print-report {
     margin: 0;
+    position: relative;
 }
 
 .pointer {
@@ -892,6 +898,7 @@ a:hover {
 }
 
 .section-report {
+    position: relative;
 }
 
 .section-update {
