@@ -83,52 +83,52 @@ include_once('admin.cfg.php');
                             <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Premises Information</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Parking</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="ParkingView()">Parking</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Route From Accessible Parking</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onclick="RouteFromParkingView()">Route From Accessible Parking</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Passenger Loading Zones</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" onclick="PassengerLoadingView()">Passenger Loading Zones</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">STA Bus Information</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" onclick="StaBusView()">STA Bus Information</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">Exterior Pathways</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" onclick="ExteriorPathwayView()">Exterior Pathways</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Exterior Stairs</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" onclick="ExteriorStairsView()">Exterior Stairs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">Exterior Ramps</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" onclick="ExteriorRampsView()">Exterior Ramps</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">Main Entrance</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine" onclick="MainEntranceView()">Main Entrance</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">Interior</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen" onclick="InteriorView()">Interior</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">Elevator</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven" onclick="ElevatorView()">Elevator</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">Signage</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve" onclick="SignageView()">Signage</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">Emergency Preparedness</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen" onclick="EmergencyView()">Emergency Preparedness</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">Seating</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen" onclick="SeatingView()">Seating</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">Restroom</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen" onclick="RestroomView()">Restroom</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">Restroom Information</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen" onclick="RestroomInfoView()">Restroom Information</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">Communication Technologies</a>
+                            <a class="nav-link pointer left-sidebar-row left-sidebar-non-link" href="#" data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen" onclick="CommunicationView()">Communication Technologies</a>
                         </li>
                     </ul>
                     <div class="pad">&nbsp;</div>
@@ -152,7 +152,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Parking -->
                         <div class="card">
-                            <div class="card-header phead-color pointer non-link collapsed" id="headerTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <div class="card-header phead-color pointer non-link collapsed" id="headerTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" onclick="ParkingView()">
                                 <div>
                                     <a name="parking"></a>
                                     <i class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Parking
@@ -164,7 +164,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Route From Accessible Parking -->
                         <div class="card">
-                            <div class="card-header phead-color pointer non-link collapsed" id="headerThree"  data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <div class="card-header phead-color pointer non-link collapsed" id="headerThree"  data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" onclick="RouteFromParkingView()">
                                 <div>
                                     <a name="route-from-accessible-parking"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Route From Accessible Parking
@@ -176,7 +176,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Passenger Loading Zone -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFour"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFour"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour" onclick="PassengerLoadingView()">
                                 <div>
                                     <a name="passenger-loading-zones"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Passenger Loading Zones
@@ -188,7 +188,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- STA Bus Information -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFive"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFive"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" onclick="StaBusView()">
                                 <div>
                                     <a name="sta-bus-information"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;STA Bus Information
@@ -200,7 +200,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Exterior Pathways -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSix"  data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSix"  data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix" onclick="ExteriorPathwayView()">
                                 <div>
                                     <a name="exterior-pathways"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Exterior Pathways
@@ -212,7 +212,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Exterior Stairs -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSeven"  data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSeven"  data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven" onclick="ExteriorStairsView()">
                                 <div>
                                     <a name="exterior-stairs"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Exterior Stairs
@@ -224,7 +224,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Exterior Ramps -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerEight"  data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerEight"  data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight" onclick="ExteriorRampsView()">
                                 <div>
                                     <a name="exterior-ramps"></a>
                                     <i class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Exterior Ramps
@@ -236,7 +236,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Main Entrance -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerNine"  data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerNine"  data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine" onclick="MainEntranceView()">
                                 <div>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Main Entrance
                                 </div>
@@ -247,7 +247,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Interior -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerTen"  data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerTen"  data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen" onclick="InteriorView()">
                                 <div>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Interior
                                 </div>
@@ -258,7 +258,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Elevator -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerEleven"  data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerEleven"  data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven" onclick="ElevatorView()">
                                 <div>
                                     <a name="elevator"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Elevator
@@ -270,7 +270,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Signage -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerTwelve"  data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerTwelve"  data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve" onclick="SignageView()">
                                 <div>
                                     <a name="signage"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Signage
@@ -282,7 +282,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Emergency Preparedness -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerThirteen"  data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerThirteen"  data-toggle="collapse" data-target="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen" onclick="EmergencyView()">
                                 <div>
                                     <a name="emergency_preparedness"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Emergency Preparedness
@@ -294,7 +294,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Seating -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFourteen"  data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFourteen"  data-toggle="collapse" data-target="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen" onclick="SeatingView()">
                                 <div>
                                     <a name="seating"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Seating
@@ -306,7 +306,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Restroom Cover Page -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFifteen"  data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerFifteen"  data-toggle="collapse" data-target="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen" onclick="RestroomView()">
                                 <div>
                                     <a name="restroom"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Restroom
@@ -318,7 +318,7 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Restroom Information -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSixteen"  data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSixteen"  data-toggle="collapse" data-target="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen" onclick="RestroomInfoView()">
                                 <div>
                                     <a name="restroom_info"></a>
                                     <i  class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Restroom Information
@@ -330,13 +330,13 @@ include_once('admin.cfg.php');
                         </div>
                         <!-- Communication Tech and Customer Service -->
                         <div class="card">
-                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSeventeen"  data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
+                            <div class="card-header phead-color pointer  non-link collapsed" id="headerSeventeen"  data-toggle="collapse" data-target="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen" onclick="CommunicationView()">
                                 <div>
                                     <i class="fas fa-plus-square fa-lg hover-green" aria-hidden="true"></i>&emsp;Communication Technologies & Customer Service
                                 </div>
                             </div>
                             <div id="collapseSeventeen" class="collapse form-group" aria-labelledby="headingSeventeen" data-parent="#accordion">
-                                <div d="communication" class="card-body card-border card-body-color-add" id="communication_card"></div>
+                                <div class="card-body card-border card-body-color-add" id="communication_card"></div>
                             </div>
                         </div>
                     </div>

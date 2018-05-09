@@ -31,4 +31,3 @@ $container['db'] = function ($c) {
 $container['view'] = function ($container) {
     return new \Slim\Views\PhpRenderer('../templates/');
 };
-
