@@ -20,22 +20,6 @@ $(document).ready(function () {
     getUserName(USER_ID);
 
     EstablishmentView();
-    ParkingView();
-    RouteFromParkingView();
-    PassengerLoadingView();
-    StaBusView();
-    ExteriorPathwayView();
-    ExteriorStairsView();
-    ExteriorRampsViewModel();
-    MainEntranceView();
-    InteriorViewModel();
-    ElevatorView();
-    SignageView();
-    EmergencyView();
-    SeatingView();
-    RestroomView();
-    RestroomInfoView();
-    CommunicationView();
 
     // Scrolls selected accordion card to the top of the page
     $('.collapse').on('shown.bs.collapse', function(e) {
@@ -1703,7 +1687,7 @@ function updateExteriorStairs() {
     });
 }
 
-function ExteriorRampsViewModel() {
+function ExteriorRampsView() {
     var exteriorRampsData = "";
 
     $('#exterior_ramps_card').empty();
@@ -2169,7 +2153,7 @@ function updateMainEntrance() {
     });
 }
 
-function InteriorViewModel() {
+function InteriorView() {
     var interiorData = "";
 
     $('#interior_card').empty();
@@ -4384,3 +4368,5 @@ function updateCommunication() {
         }
     });
 }
+
+

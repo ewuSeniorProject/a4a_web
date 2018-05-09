@@ -174,7 +174,6 @@ $app->delete('/delete/establishment/{id}', function (Request $request, Response 
 // post establishment data
 $app->post('/post/establishment/blank/', function (Request $request, Response $response, array $args){
     include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $name = "";
     $config_id = 1;
@@ -198,7 +197,6 @@ $app->post('/post/establishment/blank/', function (Request $request, Response $r
 // post establishment data
 $app->post('/post/establishment/', function (Request $request, Response $response, array $args){
     include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -436,7 +434,6 @@ include_once('../public/user.cfg.php');
 // post category data
 $app->post('/post/category/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Category );
 //    $sth->execute();
@@ -504,7 +501,6 @@ include_once('../public/user.cfg.php');
 // post configuration data
 $app->post('/post/configuration/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO configuration );
 //    $sth->execute();
@@ -666,7 +662,6 @@ include_once('../public/user.cfg.php');
 // post user data
 $app->post('/post/user/', function (Request $request, Response $response, array $args){ 
     include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -904,7 +899,6 @@ include_once('../public/user.cfg.php');
 // post parking data by est id
 $app->post('/post/parking/est/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $lot_free = "";
     $street_metered = "";
@@ -1109,7 +1103,6 @@ include_once('../public/admin.cfg.php');
 // post route_from_parking data
 $app->post('/post/route_from_parking/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
     
     $data = $request->getParsedBody();
 
@@ -1287,7 +1280,6 @@ include_once('../public/admin.cfg.php');
 // post passenger_loading data
 $app->post('/post/passenger_loading/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
     
@@ -1483,7 +1475,6 @@ include_once('../public/admin.cfg.php');
 // post sta_bus data
 $app->post('/post/sta_bus/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -1682,7 +1673,6 @@ include_once('../public/admin.cfg.php');
 // post sta_route data
 $app->post('/post/sta_route/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -1829,7 +1819,6 @@ include_once('../public/admin.cfg.php');
 // post exterior_pathways data
 $app->post('/post/exterior_pathways/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2004,7 +1993,6 @@ include_once('../public/admin.cfg.php');
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $stairs_required = "No";
     $stairs_available =  "";
@@ -2242,7 +2230,6 @@ include_once('../public/admin.cfg.php');
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $ramp_required = "No";
     $ramp_available = "";
@@ -2515,7 +2502,6 @@ include_once('../public/admin.cfg.php');
 // post main_entrance data
 $app->post('/post/main_entrance/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2747,7 +2733,6 @@ include_once('../public/admin.cfg.php');
 // post interior data
 $app->post('/post/interior/', function (Request $request, Response $response, array $args){
     include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2965,8 +2950,6 @@ include_once('../public/admin.cfg.php');
 // post elevator data
 $app->post('/post/elevator/est/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
-
 
     $is_elevator = "";
     $location = "";
@@ -3014,7 +2997,6 @@ include_once('../public/admin.cfg.php');
 // post elevator data
 $app->post('/post/elevator/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -3211,7 +3193,6 @@ include_once('../public/admin.cfg.php');
 // post signage data
 $app->post('/post/signage/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -3393,7 +3374,6 @@ include_once('../public/admin.cfg.php');
 // post emergency data
 $app->post('/post/emergency/', function (Request $request, Response $response, array $args){
     include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -3585,7 +3565,6 @@ include_once('../public/admin.cfg.php');
 // post seating data
 $app->post('/post/seating/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -3826,7 +3805,6 @@ include_once('../public/admin.cfg.php');
 // post restroom data by est id
 $app->post('/post/restroom/est/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $public_restroom = "";
     $total_num = "";
@@ -3863,7 +3841,6 @@ include_once('../public/admin.cfg.php');
 // post restroom data
 $app->post('/post/restroom/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -4031,7 +4008,6 @@ include_once('../public/admin.cfg.php');
 // post restroom_info data
 $app->post('/post/restroom_info/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
     
@@ -4380,7 +4356,6 @@ include_once('../public/admin.cfg.php');
 // post communication data
 $app->post('/post/communication/', function (Request $request, Response $response, array $args){ 
     include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -4623,4 +4598,8 @@ include_once('../public/admin.cfg.php');
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+
+
+
+
 
