@@ -80,6 +80,119 @@ $app->post('/post/report', function (Request $request, Response $response, array
 
 
 
+
+/**
+ * AUTO SAVE ROUTES
+ */
+// get auto save data
+$app->get('/auto_save/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $sth = $this->db->prepare("SELECT * FROM Auto_Save ORDER BY user_id ASC");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// get auto save data by user id
+$app->get('/get/auto_save/user/{id}', function (Request $request, Response $response, array $args){
+    //include_once('../public/user.cfg.php');
+
+    $id = $args['id'];
+
+    $sth = $this->db->prepare("SELECT * FROM Auto_Save WHERE user_id=$id");
+    $sth->execute();
+    $data = $sth->fetchAll();
+    return $this->response->withJson($data)->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// delete auto save data by user id and est id
+$app->delete('/delete/auto_save/user/{id}/est/{est_id}', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $user_id = $args['id'];
+    $est_id = $args['est_id'];
+
+    $sth = $this->db->prepare("DELETE FROM Auto_Save WHERE user_id=$user_id AND est_id=$est_id");
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// post auto save data
+$app->post('/post/auto_save/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $data = $request->getParsedBody();
+
+    $user_id = $data['user_id'];
+    $est_id = $data['est_id'];
+    $park_id = $data['park_id'];
+    $sta_id = $data['sta_id'];
+    $restroom_id = $data['restroom_id'];
+    $section_name = $data['section_name'];
+    $next_function = $data['next_function'];
+
+    $sth = $this->db->prepare("INSERT INTO Auto_Save (user_id, est_id, park_id, sta_id, restroom_id, section_name, next_function)
+                               VALUES (:user_id, :est_id, :park_id, :sta_id, :restroom_id, :section_name, :next_function)");
+
+    $sth->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+    $sth->bindParam(':sta_id', $sta_id, PDO::PARAM_INT);
+    $sth->bindParam(':restroom_id', $restroom_id, PDO::PARAM_INT);
+    $sth->bindParam(':section_name', $section_name, PDO::PARAM_STR);
+    $sth->bindParam(':next_function', $next_function, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+// put auto save data
+$app->put('/put/auto_save/', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $data = $request->getParsedBody();
+
+    $user_id = $data['user_id'];
+    $est_id = $data['est_id'];
+    $park_id = $data['park_id'];
+    $sta_id = $data['sta_id'];
+    $restroom_id = $data['restroom_id'];
+    $section_name = $data['section_name'];
+    $next_function = $data['next_function'];
+
+    $sth = $this->db->prepare("UPDATE Auto_Save SET est_id = :est_id,
+                                                    park_id = :park_id,
+                                                    sta_id = :sta_id,
+                                                    restroom_id = :restroom_id,
+                                                    section_name = :section_name,
+                                                    next_function = :next_function
+                                                    WHERE user_id = $user_id");
+
+    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+    $sth->bindParam(':sta_id', $sta_id, PDO::PARAM_INT);
+    $sth->bindParam(':restroom_id', $restroom_id, PDO::PARAM_INT);
+    $sth->bindParam(':section_name', $section_name, PDO::PARAM_STR);
+    $sth->bindParam(':next_function', $next_function, PDO::PARAM_STR);
+    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+
+
+
 /**
  * ESTABLISHMENT ROUTES
  */
