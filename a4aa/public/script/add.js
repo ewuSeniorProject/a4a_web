@@ -66,7 +66,7 @@ function CheckPriorSurvey() {
 
                         $('#gen-footer').html('<div class="col-12">\n' +
                             '<button  type="button" id="restore_survey" class="btn btn-success" data-dismiss="modal" onclick="' + NEXT_FUNCTION + '"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
-                            '<button  type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addEstablishmentView()" aria-label="No"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+                            '<button  type="button" class="btn btn-secondary" data-dismiss="modal" onclick="DeleteAutoSave(1)" aria-label="No"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
                             '</div>');
                         $('#restore_survey').focus();
                         $("#gen-modal").modal('toggle');
@@ -116,20 +116,18 @@ function AutoSave(section_name, next_function, type) {
 }
 
 
-function DeleteAutoSave() {
+function DeleteAutoSave(value) {
     $.ajax({
         async: false,
         accepts: "application/json",
         method: "DELETE",
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
-        url: 'delete/auto_save/user/'+user_id+'/est/'+EST_ID,
-        error: function (data) {
-            $("#alert-body").empty();
-            $("#alert-body").append(data);
-            $("#alert").modal('toggle');
-        }
+        url: 'delete/auto_save/user/'+user_id+'/est/'+EST_ID
     });
+
+    if(value === 1)
+        addEstablishmentView();
 }
 
 function addEstablishmentView() {
