@@ -140,7 +140,7 @@ include_once('user.cfg.php');
                     <div id="accordion">
                         <!-- Establishment / Premises Information -->
                         <div class="card">
-                            <div class="card-header phead-color pointer non-link collapsed" id="headerOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <div class="card-header phead-color pointer non-link collapsed" id="headerOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" >
                                 <div>
                                     <a name="premises-information"></a>
                                     <i class="fas fa-plus-square fa-lg" aria-hidden="true"></i>&emsp;Premises Information
