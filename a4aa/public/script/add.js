@@ -1,14 +1,136 @@
-var EST_ID = "";
-var PARK_ID = "";
-var STA_ID = "";
-var RESTROOM_ID ="";
-// var bodyHtml = "";
+var EST_ID = 0;
+var PARK_ID = 0;
+var STA_ID = 0;
+var RESTROOM_ID = 0;
+var SECTION = "";
+var NEXT_FUNCTION = "";
+var bodyHtml = "";
 
 $(document).ready(function () {
-
-    addEstablishmentView();
-
+    CheckPriorSurvey();
 });
+
+function CheckPriorSurvey() {
+
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "GET",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: 'get/auto_save/user/' + user_id,
+        success: function (data) {
+            if(!($.isEmptyObject(data))) {
+                console.log(JSON.stringify(data));
+                EST_ID = data[0].est_id;
+                PARK_ID = data[0].park_id;
+                STA_ID = data[0].sta_id;
+                RESTROOM_ID = data[0].restroom_id;
+                SECTION = data[0].section_name;
+                NEXT_FUNCTION = data[0].next_function;
+
+                if (EST_ID) {
+                    var est_name = "";
+
+                    $.ajax({
+                        async: false,
+                        accepts: "application/json",
+                        method: "GET",
+                        dataType: 'json',
+                        contentType: "application/json; charset=utf-8",
+                        url: "get/establishment/" + EST_ID,
+                        success: function (data) {
+                            if(!($.isEmptyObject(data))) {
+                                est_name = data[0].name;
+                            }
+                        },
+                        error: function (data) {
+                            $("#alert-body").empty();
+                            $("#alert-body").append(data);
+                            $("#alert").modal('toggle');
+                        }
+                    });
+
+                    if (est_name) {
+
+                        $('#gen-title').html('Continue Survey');
+
+                        bodyHtml = '<div class="card-row-report">\n' +
+                            '<span class="card-text col-12">A partially completed survey for \"' + est_name + '\" has been detected.</span>\n' +
+                            '</div>\n ' +
+                            '<div class="card-row-report">\n' +
+                            '<span class="card-text col-12">Do you wish to resume this survey?</span>\n' +
+                            '</div>\n ';
+
+                        $('#gen-body').html(bodyHtml);
+
+                        $('#gen-footer').html('<div class="col-12">\n' +
+                            '<button  type="button" id="restore_survey" class="btn btn-success" data-dismiss="modal" onclick="' + NEXT_FUNCTION + '"><i class="fas fa-check"></i>&nbsp; Yes</button>&nbsp;\n' +
+                            '<button  type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addEstablishmentView()" aria-label="No"><i class="fas fa-times"></i>&nbsp; No</button>\n' +
+                            '</div>');
+                        $('#restore_survey').focus();
+                        $("#gen-modal").modal('toggle');
+                    }
+                    else
+                        addEstablishmentView();
+                }
+            }
+            else
+                addEstablishmentView();
+        }
+    });
+
+}
+
+function AutoSave(section_name, next_function, type) {
+
+    console.log("user_id: " + user_id);
+    console.log("EST_ID: " + EST_ID);
+    console.log("PARK_ID: " + PARK_ID);
+    console.log("STA_ID: " + STA_ID);
+    console.log("RESTROOM_ID: " + RESTROOM_ID);
+    console.log("section_name: " + section_name);
+    console.log("next_function: " + next_function);
+
+    $.ajax({
+        accepts: "application/json",
+        method: type,
+        contentType: "application/json; charset=utf-8",
+        url: type + "/auto_save/",
+        data: JSON.stringify({
+            "user_id" : user_id,
+            "est_id" : EST_ID,
+            "park_id" : PARK_ID,
+            "sta_id" : STA_ID,
+            "restroom_id" : RESTROOM_ID,
+            "section_name" : section_name,
+            "next_function" : next_function
+        }),
+        error: function(data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+
+}
+
+
+function DeleteAutoSave() {
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "DELETE",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: 'delete/auto_save/user/'+user_id+'/est/'+EST_ID,
+        error: function (data) {
+            $("#alert-body").empty();
+            $("#alert-body").append(data);
+            $("#alert").modal('toggle');
+        }
+    });
+}
 
 function addEstablishmentView() {
     var categoryData = "";
@@ -345,6 +467,7 @@ function addEstablishment() {
                 success: function (data) {
                     EST_ID = data[0].est_id;
                     console.log('EST_ID: '+ EST_ID);
+                    AutoSave('establishment', 'isParking()', 'post');
                 },
                 error: function(data) {
                     console.log(JSON.stringify(data));
@@ -362,7 +485,6 @@ function addEstablishment() {
             $('#cardFooter').html('');
 
             isParking();
-
         },
         error: function(data) {
             $("#alert-body").empty();
@@ -371,6 +493,7 @@ function addEstablishment() {
         }
     });
 }
+
 
 function isParking() {
 
@@ -407,7 +530,7 @@ function addNoParking() {
                 url: 'get/park_id/est/' + EST_ID,
                 success: function (data) {
                     PARK_ID = data[0].park_id;
-                    console.log()
+                    AutoSave('no_parking', 'addPassengerLoadingView()', 'put');
                 },
                 error: function(data) {
                     $("#alert-body").empty();
@@ -569,7 +692,7 @@ function addParking() {
                 url: 'get/park_id/est/' + EST_ID,
                 success: function (data) {
                     PARK_ID = data[0].park_id;
-                    console.log()
+                    AutoSave('parking', 'addRouteFromParkingView()', 'put');
                 },
                 error: function(data) {
                     $("#alert-body").empty();
@@ -720,6 +843,8 @@ function addRouteFromParking() {
         }),
         success: function () {
 
+            AutoSave('route_from_parking', 'addPassengerLoadingView()', 'put');
+
             $('#cardTitle').html('Route From Accessible Parking Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -869,6 +994,8 @@ function addPassengerLoading() {
             "park_id" : PARK_ID
         }),
         success: function () {
+
+            AutoSave('passenger_loading', 'addSTABusView()', 'put');
 
             $('#cardTitle').html('Passenger Loading Zones Added');
 
@@ -1024,6 +1151,8 @@ function addSTABus() {
         }),
         success: function () {
 
+            AutoSave('sta_bus_info', 'isSTARoute()', 'put');
+
             $('#cardTitle').html('STA Bus Information');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -1152,6 +1281,9 @@ function addSTARoute() {
             "sta_bus_id" : STA_ID
         }),
         success: function () {
+
+            AutoSave('sta_route', 'addExteriorPathwaysView()', 'put');
+
             $('#collapseTitle').html('STA Route Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -1251,7 +1383,6 @@ function addExteriorPathwaysView() {
     $("#add_exterior_pathways").validate({
         rules: {
             service_animal_location: {
-                alphanumeric: true,
                 maxlength: 255
             },
             commentExteriorPathway: {
@@ -1310,6 +1441,8 @@ function addExteriorPathways() {
         }),
         success: function () {
 
+            AutoSave('exterior_pathways', 'isExteriorStairs()', 'put');
+
             $('#cardTitle').html('Exterior Pathways Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -1339,7 +1472,7 @@ function isExteriorStairs() {
     window.scrollTo(0,0);
 
     bodyHtml = '<div class="card-row">\n' +
-        '<span class="card-text">​Stairs are required OR available to enter the establishment?</span>\n'+
+        '<span class="card-text">​Stairs are required OR are available to enter the establishment?</span>\n'+
         '</div>';
 
     $('#cardBody').html(bodyHtml);
@@ -1359,6 +1492,8 @@ function addNoExteriorStairs() {
         contentType: "application/json; charset=utf-8",
         url: "post/exterior_stairs/" + EST_ID,
         success: function () {
+
+            AutoSave('exterior_stairs', 'put');
 
             $('#cardTitle').html('No Exterior Stairs Added');
 
@@ -1480,6 +1615,7 @@ function addExteriorStairsView() {
             addExteriorStairs();
         }
     });
+
 }
 
 function addExteriorStairs() {
@@ -1524,6 +1660,8 @@ function addExteriorStairs() {
             "est_id" : EST_ID
         }),
         success: function () {
+
+            AutoSave('exterior_stairs', 'isExteriorRamps()', 'put');
 
             $('#cardTitle').html('Exterior Stairs Added');
 
@@ -1574,6 +1712,8 @@ function addNoExteriorRamps() {
         contentType: "application/json; charset=utf-8",
         url: "post/exterior_ramps/" + EST_ID,
         success: function () {
+
+            AutoSave('exterior_ramps', 'addMainEntranceView()', 'put');
 
             $('#cardTitle').html('No Exterior Ramps Added');
 
@@ -1717,6 +1857,7 @@ function addExteriorRampsView() {
             addExteriorRamps();
         }
     });
+
 }
 
 function addExteriorRamps() {
@@ -1769,6 +1910,8 @@ function addExteriorRamps() {
             "est_id" : EST_ID
         }),
         success: function () {
+
+            AutoSave('exterior_ramps', 'addMainEntranceView()', 'put');
 
             $('#cardTitle').html('Exterior Ramps Added');
 
@@ -1987,6 +2130,8 @@ function addMainEntrance() {
         }),
         success: function () {
 
+            AutoSave('main_entrance', 'addInteriorView()', 'put');
+
             $('#cardTitle').html('Main Entrance Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -2186,6 +2331,8 @@ function addInterior() {
         }),
         success: function () {
 
+            AutoSave('interior', 'isElevator()', 'put');
+
             $('#cardTitle').html('Interior Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -2235,6 +2382,8 @@ function addNoElevator() {
         contentType: "application/json; charset=utf-8",
         url: "post/elevator/est/" + EST_ID,
         success: function () {
+
+            AutoSave('elevator', 'addSignageView()', 'put');
 
             $('#cardTitle').html('No Elevator Added');
 
@@ -2408,6 +2557,8 @@ function addElevator() {
         }),
         success: function () {
 
+            AutoSave('elevator', 'addSignageView()', 'put');
+
             $('#cardTitle').html('Elevator Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -2556,6 +2707,8 @@ function addSignage() {
             "est_id" : EST_ID
         }),
         success: function () {
+
+            AutoSave('signage', 'addEmergencyPreparednessView()', 'put');
 
             $('#cardTitle').html('Signage Added');
 
@@ -2712,6 +2865,8 @@ function addEmergencyPreparedness() {
         }),
         success: function () {
 
+            AutoSave('emergency', 'addSeatingView()', 'put');
+
             $('#cardTitle').html('Emergency Preparedness Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -2755,7 +2910,7 @@ function addSeatingView() {
     bodyHtml += addGenSelectOptions(yesNoNAOptions);
     bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" class="form-control" name="num_legroom" id="num_legroom"  ></div>\n' +
+        '    <div class="col-6"><label for="num_legroom"> Number of tables with legroom #/All: </label> <input type="text" class="form-control" name="num_legroom" id="num_legroom" placeholder="ex: 10 or All"></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '    <div class="col-4"><label for="rearranged"> There are tables and chairs that can be moved or rearranged: </label> <select class="form-control" name="rearranged" id="rearranged" >\n' ;
@@ -2925,6 +3080,8 @@ function addSeating() {
         }),
         success: function () {
 
+            AutoSave('seating', 'isRestroom()', 'put');
+
             $('#cardTitle').html('Seating Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -2973,6 +3130,8 @@ function addNoRestroom() {
         contentType: "application/json; charset=utf-8",
         url: "post/restroom/est/" + EST_ID,
         success: function () {
+
+            AutoSave('no_restroom', 'addCommunicationView()', 'put');
 
             $('#cardTitle').html('No Restroom Added');
 
@@ -3102,6 +3261,8 @@ function addRestroom() {
             "est_id" : EST_ID
         }),
         success: function () {
+
+            AutoSave('restroom', 'getRestroomId()', 'put');
 
             $('#cardTitle').html('Restroom Added');
 
@@ -3481,6 +3642,8 @@ function addRestroomInformation() {
         }),
         success: function () {
 
+            AutoSave('restroom_info', 'addCommunicationView()', 'put');
+
             $('#cardTitle').html('Restroom Information Added');
 
             bodyHtml = '<div class="card-row">\n' +
@@ -3817,6 +3980,9 @@ function addCommunication() {
             "est_id" : EST_ID
         }),
         success: function () {
+
+            DeleteAutoSave();
+
             $('#cardTitle').html('Survey Entry Completed');
 
             bodyHtml = '<div class="card-row">\n' +

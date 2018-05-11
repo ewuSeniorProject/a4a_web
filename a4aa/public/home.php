@@ -134,6 +134,7 @@ include_once('user.cfg.php');
 
         </script>
     <!-- End Template -->
-
+<!--                         <a class="pointer" data-bind="click: setEstablishmentId(est_id), attr: { href: reportUrl, title: 'Report for '+name}" > -->
     </body>
 </html>
+

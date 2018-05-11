@@ -4,6 +4,7 @@ $(document).ready(start);
 
 function start() {
     ko.applyBindings(EVM.viewModel, document.getElementById('establishment-list-wrapper'));
+
 }
 
 function EstablishmentModel(data) {
