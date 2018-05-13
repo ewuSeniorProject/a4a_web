@@ -884,7 +884,6 @@ include_once('../public/user.cfg.php');
 // put user data
 $app->put('/put/user/account/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
@@ -913,7 +912,6 @@ include_once('../public/user.cfg.php');
 // put user password
 $app->put('/put/user/password/{id}', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
