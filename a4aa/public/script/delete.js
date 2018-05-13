@@ -134,6 +134,7 @@ function deleteSurvey() {
     getStaBusId(PARK_ID);
     getRestroomId(EST_ID);
 
+    DeleteAutoSave();
     deleteCommunication();
 }
 
@@ -192,6 +193,17 @@ function getRestroomId(value) {
 /**
  *  DELETE FUNCTION SECTION
  */
+function DeleteAutoSave() {
+    $.ajax({
+        async: false,
+        accepts: "application/json",
+        method: "DELETE",
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        url: 'delete/auto_save/est/'+EST_ID
+    });
+}
+
 function deleteCommunication() {
 
     $.ajax({
