@@ -21,7 +21,6 @@ function CheckPriorSurvey() {
         url: 'get/auto_save/user/' + user_id,
         success: function (data) {
             if(!($.isEmptyObject(data))) {
-                console.log(JSON.stringify(data));
                 EST_ID = data[0].est_id;
                 PARK_ID = data[0].park_id;
                 STA_ID = data[0].sta_id;
