@@ -110,6 +110,19 @@ $app->get('/get/auto_save/user/{id}', function (Request $request, Response $resp
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// delete auto save data by est id
+$app->delete('/delete/auto_save/est/{est_id}', function (Request $request, Response $response, array $args){
+    include_once('../public/user.cfg.php');
+
+    $est_id = $args['est_id'];
+
+    $sth = $this->db->prepare("DELETE FROM Auto_Save WHERE est_id=$est_id");
+    $sth->execute();
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
 // delete auto save data by user id and est id
 $app->delete('/delete/auto_save/user/{id}/est/{est_id}', function (Request $request, Response $response, array $args){
     include_once('../public/user.cfg.php');
@@ -1051,7 +1064,6 @@ include_once('../public/user.cfg.php');
 // post parking data
 $app->post('/post/parking/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-    include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2151,7 +2163,6 @@ include_once('../public/user.cfg.php');
 // post exterior_stairs data
 $app->post('/post/exterior_stairs/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
@@ -2398,7 +2409,6 @@ include_once('../public/user.cfg.php');
 // post exterior_ramps data
 $app->post('/post/exterior_ramps/', function (Request $request, Response $response, array $args){
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $data = $request->getParsedBody();
 
