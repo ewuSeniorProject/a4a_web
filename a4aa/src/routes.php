@@ -79,6 +79,40 @@ $app->post('/post/report', function (Request $request, Response $response, array
 });
 
 
+/**
+ * MOBILE APP SURVEY ROUTE
+ */
+// post user data
+$app->post('/post/survey/mobile', function (Request $request, Response $response, array $args){
+
+    $data = $request->getParsedBody();
+
+//    $fname = $data["fname"];
+//    $lname = $data["lname"];
+//    $user_name = $data["user_name"];
+//    $email = $data["email"];
+//    $password = $data["password"];
+//    $role = $data["role"];
+//    $active = $data["active"];
+//
+//    $sth = $this->db->prepare("INSERT INTO User (fname, lname, user_name, email, password, role, active)
+//                                VALUES (:fname, :lname, :user_name, :email, :password, :role, :active)");
+//
+//    $sth->bindParam(':fname', $fname, PDO::PARAM_STR);
+//    $sth->bindParam(':lname', $lname, PDO::PARAM_STR);
+//    $sth->bindParam(':user_name', $user_name, PDO::PARAM_STR);
+//    $sth->bindParam(':email', $email, PDO::PARAM_STR);
+//    $sth->bindParam(':password', $password, PDO::PARAM_STR);
+//    $sth->bindParam(':role', $role, PDO::PARAM_STR);
+//    $sth->bindParam(':active', $active, PDO::PARAM_STR);
+//    $sth->execute();
+
+    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+});
+
+
 
 
 /**
