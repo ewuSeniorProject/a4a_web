@@ -45,7 +45,7 @@ function CheckPriorSurvey() {
                         },
                         error: function (data) {
                             $("#alert-body").empty();
-                            $("#alert-body").append(data);
+                            $("#alert-body").append("There was an error while checking for any incomplete surveys. You may continue, or try reloading this page.");
                             $("#alert").modal('toggle');
                         }
                     });
@@ -105,9 +105,12 @@ function AutoSave(section_name, next_function, type) {
             "section_name" : section_name,
             "next_function" : next_function
         }),
+        success: function (data) {
+          console.log(JSON.stringify(data))
+        },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error auto saving your current position in the survey, please continue work on the survey.");
             $("#alert").modal('toggle');
         }
     });
@@ -148,7 +151,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was a problem getting category information.");
             $("#alert").modal('toggle');
         }
     });
@@ -165,7 +168,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was a problem getting configuration information.");
             $("#alert").modal('toggle');
         }
     });
@@ -182,7 +185,7 @@ function addEstablishmentView() {
         },
         error: function (data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was a problem getting user information.");
             $("#alert").modal('toggle');
         }
     });
@@ -485,7 +488,7 @@ function addEstablishment() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -531,7 +534,7 @@ function addNoParking() {
                 },
                 error: function(data) {
                     $("#alert-body").empty();
-                    $("#alert-body").append(data);
+                    $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
                     $("#alert").modal('toggle');
                 }
             });
@@ -550,7 +553,7 @@ function addNoParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -693,7 +696,7 @@ function addParking() {
                 },
                 error: function(data) {
                     $("#alert-body").empty();
-                    $("#alert-body").append(data);
+                    $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
                     $("#alert").modal('toggle');
                 }
             });
@@ -712,7 +715,7 @@ function addParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -856,7 +859,7 @@ function addRouteFromParking() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1008,7 +1011,7 @@ function addPassengerLoading() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1164,7 +1167,7 @@ function addSTABus() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1253,7 +1256,7 @@ function addSTARoute() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1298,7 +1301,7 @@ function addSTARoute() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1454,7 +1457,7 @@ function addExteriorPathways() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1506,7 +1509,7 @@ function addNoExteriorStairs() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1674,7 +1677,7 @@ function addExteriorStairs() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1726,7 +1729,7 @@ function addNoExteriorRamps() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -1924,7 +1927,7 @@ function addExteriorRamps() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -2143,7 +2146,7 @@ function addMainEntrance() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -2344,7 +2347,7 @@ function addInterior() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -2396,7 +2399,7 @@ function addNoElevator() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -2570,7 +2573,7 @@ function addElevator() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -2721,7 +2724,7 @@ function addSignage() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -2878,7 +2881,7 @@ function addEmergencyPreparedness() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -3093,7 +3096,7 @@ function addSeating() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -3144,7 +3147,7 @@ function addNoRestroom() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -3275,7 +3278,7 @@ function addRestroom() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -3295,7 +3298,7 @@ function getRestroomId() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -3657,7 +3660,7 @@ function addRestroomInformation() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
@@ -3826,7 +3829,7 @@ function addCommunicationView() {
     bodyHtml += addGenSelectOptions(yesNoNAOptions);
     bodyHtml += '</select>\n' +
         '   </div>\n' +
-        '    <div class="col-6"><label for="senior_age"> If ‘yes’, what age is considered ‘senior’: </label> <input type="number" min="0" class="form-control" name="senior_age" id="senior_age"  ></div>\n' +
+        '    <div class="col-6"><label for="senior_age"> If ‘yes’, what age is considered ‘senior’: </label> <input type="number" min="55" class="form-control" name="senior_age" id="senior_age"  ></div>\n' +
         '</div>\n' +
         '<div class="card-row">\n' +
         '    <div class="col-6"><label for="annual_A4A_review"> Management has agreed to annual A4A reviews​: </label> <select class="form-control" name="annual_A4A_review" id="annual_A4A_review" >\n' ;
@@ -3996,7 +3999,7 @@ function addCommunication() {
         },
         error: function(data) {
             $("#alert-body").empty();
-            $("#alert-body").append(data);
+            $("#alert-body").append("There was an error while trying to save the information for this section. Please try again or reload the page and try again.");
             $("#alert").modal('toggle');
         }
     });
