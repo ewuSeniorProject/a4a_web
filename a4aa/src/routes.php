@@ -132,7 +132,7 @@ $app->get('/auto_save/', function (Request $request, Response $response, array $
 
 // get auto save data by user id
 $app->get('/get/auto_save/user/{id}', function (Request $request, Response $response, array $args){
-    //include_once('../public/user.cfg.php');
+    include_once('../public/user.cfg.php');
 
     $id = $args['id'];
 
@@ -409,7 +409,7 @@ $app->post('/post/establishment/', function (Request $request, Response $respons
 
 // put establishment data
 $app->put('/put/establishment/', function (Request $request, Response $response, array $args){ 
-include_once('../public/user.cfg.php');
+    include_once('../public/user.cfg.php');
     include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Establishment );
@@ -421,7 +421,7 @@ include_once('../public/user.cfg.php');
 
 // put category data by cat id
 $app->put('/put/establishment/category/est/{id}', function (Request $request, Response $response, array $args){ 
-include_once('../public/user.cfg.php');
+    include_once('../public/user.cfg.php');
     include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
@@ -440,7 +440,7 @@ include_once('../public/user.cfg.php');
 
 // put config data by config id
 $app->put('/put/establishment/config/est/{id}', function (Request $request, Response $response, array $args){ 
-include_once('../public/user.cfg.php');
+    include_once('../public/user.cfg.php');
     include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
@@ -2946,7 +2946,6 @@ $app->post('/post/interior/', function (Request $request, Response $response, ar
 // put interior data
 $app->put('/put/interior/', function (Request $request, Response $response, array $args){ 
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
 //    $sth = $this->db->prepare("INSERT INTO Interior );
 //    $sth->execute();
@@ -2958,7 +2957,6 @@ include_once('../public/admin.cfg.php');
 // put interior data by interior id and est id
 $app->put('/put/interior/est/{id}', function (Request $request, Response $response, array $args) use ($recommendations) {
 include_once('../public/user.cfg.php');
-include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
     $data = $request->getParsedBody();
