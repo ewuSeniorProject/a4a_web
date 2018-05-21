@@ -89,10 +89,15 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 
     $data = $request->getParsedBody();
 
-    if($data)
+    if($data) {
         $res = $data;
-    else
+        $stat = 200;
+    }
+    else {
         $res = "Error, data var empty";
+        $stat = 412;
+    }
+
 
 //    $fname = $data["fname"];
 //    $lname = $data["lname"];
@@ -114,7 +119,7 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 //    $sth->bindParam(':active', $active, PDO::PARAM_STR);
 //    $sth->execute();
 
-    return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
+    return $this->response->withJson($res)->withStatus($stat)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
