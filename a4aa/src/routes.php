@@ -23,32 +23,34 @@ $app->get('/', function (Request $request, Response $response, array $args){
  */
 $app->get('/email', function (Request $request, Response $response, array $args){
 
-    try {
-        $to = 'brian.r.mize@gmail.com, brian.r.mize@hotmail.com';
-        $subject = "New user added.";
-        $from = "noreply@mizesolutions.com";
+//    try {
+//        $to = '';
+//        $subject = "New user added.";
+//        $from = "";
+//
+//        $client = new PostmarkClient("");
+//
+//        $body = '<p>A new user account has been created. </p>';
+//        $body .= '<p>Please log in and inactive the user account if you do not recognize the new user.</p>';
+//
+//        // Send an email:
+//        $sendResult = $client->sendEmail($from, $to, $subject, $body);
+//
+//        header("Refresh:2; url=home.php", true, 303);
+//
+//    } catch(PostmarkException $ex){
+//        // If client is able to communicate with the API in a timely fashion,
+//        // but the message data is invalid, or there's a server error,
+//        // a PostmarkException can be thrown.
+//        echo $ex->httpStatusCode;
+//        echo $ex->message;
+//        echo $ex->postmarkApiErrorCode;
+//
+//    } catch(Exception $generalException){
+//        echo $generalException;
+//    }
 
-        $client = new PostmarkClient("3bf0b6f0-90d5-45da-a492-32190de022dc");
-
-        $body = '<p>A new user account has been created. </p>';
-        $body .= '<p>Please log in and inactive the user account if you do not recognize the new user.</p>';
-
-        // Send an email:
-        $sendResult = $client->sendEmail($from, $to, $subject, $body);
-
-        header("Refresh:2; url=home.php", true, 303);
-
-    } catch(PostmarkException $ex){
-        // If client is able to communicate with the API in a timely fashion,
-        // but the message data is invalid, or there's a server error,
-        // a PostmarkException can be thrown.
-        echo $ex->httpStatusCode;
-        echo $ex->message;
-        echo $ex->postmarkApiErrorCode;
-
-    } catch(Exception $generalException){
-        echo $generalException;
-    }
+    header("Refresh:2; url=home.php", true, 303);
 
 });
 
@@ -87,6 +89,11 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 
     $data = $request->getParsedBody();
 
+    if($data)
+        $res = $data;
+    else
+        $res = "Error, data var empty";
+
 //    $fname = $data["fname"];
 //    $lname = $data["lname"];
 //    $user_name = $data["user_name"];
@@ -107,7 +114,7 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 //    $sth->bindParam(':active', $active, PDO::PARAM_STR);
 //    $sth->execute();
 
-    return $this->response->withHeader('Access-Control-Allow-Origin', '*')
+    return $this->response->withJson($res)->withHeader('Access-Control-Allow-Origin', '*')
         ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
@@ -622,7 +629,7 @@ include_once('../public/user.cfg.php');
  */
 // get all configuration
 $app->get('/configuration/', function (Request $request, Response $response, array $args){ 
-include_once('../public/user.cfg.php');
+    include_once('../public/user.cfg.php');
 
     $sth = $this->db->prepare("SELECT * FROM Configuration");
     $sth->execute();
@@ -647,7 +654,7 @@ include_once('../public/user.cfg.php');
 
 // delete configuration data by id
 $app->delete('/delete/configuration/{id}', function (Request $request, Response $response, array $args){ 
-include_once('../public/user.cfg.php');
+    include_once('../public/user.cfg.php');
     include_once('../public/admin.cfg.php');
 
     $id = $args['id'];
