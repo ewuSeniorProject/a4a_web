@@ -733,8 +733,8 @@ a:hover {
 }
 
 .modal-gen-body {
-    background-color: rgb(68, 143, 195);
-    color: #ffffff;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
     font-family: 'Lato', sans-serif;
 }
 

@@ -96,7 +96,7 @@ include_once('user.cfg.php');
     <!-- GENERAL MODAL -->
         <div class="modal fade bd-example-modal-lg" id="gen-modal" tabindex="-1" role="dialog" aria-labelledby="gen-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
+                <div class="modal-content card-border">
                     <div class="modal-header modal-gen-header">
                         <span class="h5 modal-title modal-gen-title" id="gen-title"></span>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
