@@ -4784,7 +4784,7 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             if($temp['config_id']) {
                 $config_id = $temp['config_id'];
             } else {
-                $config_id = 14;
+                $config_id = 1;
             }
 
 
