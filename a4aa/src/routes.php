@@ -4762,25 +4762,29 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 
             $sth = $this->db->prepare("SELECT user_id FROM User WHERE fname LIKE '$fname' AND lname LIKE '$lname'");
             $sth->execute();
-            $user_id = $sth->fetchAll();
-            if(is_null($user_id)) {
+            $temp= $sth->fetchAll();
+            if($temp['user_id']) {
+                $user_id = $temp['user_id'];
+            } else {
                 $user_id = 14;
             }
 
             $catName = $sectionA['cat_id'];
             $sth = $this->db->prepare("SELECT cat_id FROM Category WHERE name LIKE '$catName'");
             $sth->execute();
-            $cat_id = $sth->fetchAll();
-            if(is_null($cat_id)) {
+            if($temp['cat_id']) {
+                $cat_id = $temp['cat_id'];
+            } else {
                 $cat_id = 1;
             }
 
             $configName = $sectionA["config_id"];
             $sth = $this->db->prepare("SELECT config_id FROM Configuration WHERE name LIKE '$configName'");
             $sth->execute();
-            $config_id = $sth->fetchAll();
-            if(is_null($config_id)) {
-                $config_id = 1;
+            if($temp['config_id']) {
+                $config_id = $temp['config_id'];
+            } else {
+                $config_id = 14;
             }
 
 
