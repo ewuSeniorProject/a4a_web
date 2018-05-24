@@ -4757,36 +4757,38 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
              * ESTABLISHMENT
              */
             $sectionA = $data['section A'];
-            $fname = (string)explode(" ", $sectionA['user_id'])[0];
-            $lname = (string)explode(" ", $sectionA['user_id'])[1];
-
-            $sth = $this->db->prepare("SELECT user_id FROM User WHERE fname LIKE '$fname' AND lname LIKE '$lname'");
+            $tempName = explode(" ", $sectionA['user_id']);
+            $fname = $tempName[0];
+            $lname = $tempName[1];
+            $sth = $this->db->prepare("SELECT user_id FROM User WHERE fname LIKE '".$fname."' AND lname LIKE '".$lname."'");
             $sth->execute();
-            $temp= $sth->fetchAll();
-            if($temp['user_id']) {
-                $user_id = $temp['user_id'];
+            $temp = $sth->fetchAll();
+            if($temp) {
+                $user_id = $temp[0]['user_id'];
             } else {
                 $user_id = 14;
             }
 
+
             $catName = $sectionA['cat_id'];
-            $sth = $this->db->prepare("SELECT cat_id FROM Category WHERE name LIKE '$catName'");
+            $sth = $this->db->prepare("SELECT cat_id FROM Category WHERE name LIKE '".$catName."'");
             $sth->execute();
-            if($temp['cat_id']) {
-                $cat_id = $temp['cat_id'];
+            $temp = $sth->fetchAll();
+            if($temp) {
+                $cat_id = $temp[0]['cat_id'];
             } else {
                 $cat_id = 1;
             }
 
             $configName = $sectionA["config_id"];
-            $sth = $this->db->prepare("SELECT config_id FROM Configuration WHERE name LIKE '$configName'");
+            $sth = $this->db->prepare("SELECT config_id FROM Configuration WHERE name LIKE '".$configName."'");
             $sth->execute();
-            if($temp['config_id']) {
-                $config_id = $temp['config_id'];
+            $temp = $sth->fetchAll();
+            if($temp) {
+                $config_id = $temp[0]['config_id'];
             } else {
                 $config_id = 1;
             }
-
 
             $name = $sectionA["name"];
             $website = $sectionA["website"];
