@@ -525,12 +525,26 @@ function addNoParking() {
         success: function () {
 
             $.ajax({
-                async: false,
                 dataType: 'json',
                 url: 'get/park_id/est/' + EST_ID,
                 success: function (data) {
                     PARK_ID = data[0].park_id;
                     AutoSave('no_parking', 'addPassengerLoadingView()', 'put');
+
+                    $.ajax({
+                        async: true,
+                        dataType: 'json',
+                        accepts: "application/json",
+                        method: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: 'post/no_route_from_parking/',
+                        data: JSON.stringify({
+                            "park_id" : PARK_ID
+                        }),
+                        success: function (data) {
+                            console.log("no route from parking added");
+                        }
+                    });
                 },
                 error: function(data) {
                     $("#alert-body").empty();

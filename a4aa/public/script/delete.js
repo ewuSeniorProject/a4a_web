@@ -113,7 +113,7 @@ function deleteStart() {
         '                   </span>\n ' +
         '               </div>\n' +
         '               <div class="card-row">\n' +
-        '                   <div class="h8 loading">Please wait </div><br>\n' +
+        '                   <div class="h8">Please wait... </div><br>\n' +
         '               </div>\n' +
         '           </div>\n' +
         '           <div class="card-footer card-header-color-delete text-muted" id="cardFooter">\n' +
@@ -486,14 +486,14 @@ function deleteEstablishment() {
                 '           </div>\n' +
                 '           </div>\n' +
                 '           <div class="card-footer card-header-color-delete text-muted" id="cardFooter">\n' +
-                '               <span><a href="delete.php">Click Here </a> if the page fails to refresh.</span>\n' +
+                '               <span><a href="#" onclick="addEstablishmentCardView()">Click Here </a> if the page fails to refresh.</span>\n' +
                 '           </div>\n' +
                 '       </div>\n' +
                 '   </div>' ;
 
             $('#delete-view').html(htmlBody);
 
-            setTimeout("location.href = 'delete.php';",3500);
+            setTimeout("addEstablishmentCardView();",3500);
         },
         error: function(data) {
             $("#alert-body").html(JSON.stringify(data));
