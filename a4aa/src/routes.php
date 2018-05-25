@@ -5905,7 +5905,7 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  RESTROOM
              */
-            if ($data['section I0']) {
+            if ($data['section I']) {
                 $sectionI0 = $data['section I0'];
                 $public_restroom = $sectionI0["public_restroom"];
                 $total_num = $sectionI0["total_num"];
@@ -5960,11 +5960,125 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 
             }
 
+            $rest_id = $this->db->lastInsertId();
 
             /**
              * RESTROOM INFO
              */
+            if ($data['section I']) {
+                $restroom = $data['section I'];
+                if($restroom['Restroom_InfoT']) {
+                    $restInfo = $restroom['Restroom_InfoT'];
+                    foreach($restInfo as $item) {
+                        $restroom_desc = $item["restroom_desc"];
+                        $easy_open = $item["easy_open"];
+                        $lbs_force = $item["lbs_force"];
+                        $clearance = $item["clearance"];
+                        $opening = $item["opening"];
+                        $opens_out = $item["opens_out"];
+                        $use_fist = $item["use_fist"];
+                        $can_turn_around = $item["can_turn_around"];
+                        $turn_width = $item["turn_width"];
+                        $turn_depth = $item["turn_depth"];
+                        $close_chair_inside = $item["close_chair_inside"];
+                        $grab_bars = $item["grab_bars"];
+                        $seat_height_req = $item["seat_height_req"];
+                        $seat_height = $item["seat_height"];
+                        $flush_auto_fist = $item["flush_auto_fist"];
+                        $ambulatory_accessible = $item["ambulatory_accessible"];
+                        $bar_height = $item["bar_height"];
+                        $coat_hook = $item["coat_hook"];
+                        $hook_height = $item["hook_height"];
+                        $sink = $item["sink"];
+                        $sink_height = $item["sink_height"];
+                        $faucet = $item["faucet"];
+                        $faucet_depth = $item["faucet_depth"];
+                        $faucet_auto_fist = $item["faucet_auto_fist"];
+                        $sink_clearance = $item["sink_clearance"];
+                        $sink_clearance_height = $item["sink_clearance_height"];
+                        $sink_pipes = $item["sink_pipes"];
+                        $soap_dispenser = $item["soap_dispenser"];
+                        $soap_height = $item["soap_height"];
+                        $dry_fist = $item["dry_fist"];
+                        $dry_control_height = $item["dry_control_height"];
+                        $mirror = $item["mirror"];
+                        $mirror_height = $item["mirror_height"];
+                        $shelves = $item["shelves"];
+                        $shelf_height = $item["shelf_height"];
+                        $trash_receptacles = $item["trash_receptacles"];
+                        $hygiene_seat_cover = $item["hygiene_seat_cover"];
+                        $hygiene_cover_height = $item["hygiene_cover_height"];
+                        $lighting = $item["lighting"];
+                        $lighting_type = $item["lighting_type"];
+                        $comment = $item["comment"];
+                        $recommendations = $item["recommendations"];
 
+                        $sth = $this->db->prepare("INSERT INTO Restroom_Info (restroom_desc, easy_open, lbs_force, clearance, opening, 
+                                                          opens_out, use_fist, can_turn_around, turn_width, turn_depth, 
+                                                          close_chair_inside, grab_bars, seat_height_req, seat_height, flush_auto_fist, 
+                                                          ambulatory_accessible, bar_height, coat_hook, hook_height, sink, 
+                                                          sink_height, faucet, faucet_depth, faucet_auto_fist, sink_clearance, 
+                                                          sink_clearance_height, sink_pipes, soap_dispenser, soap_height, dry_fist, 
+                                                          dry_control_height, mirror, mirror_height, 
+                                                          shelves, shelf_height, trash_receptacles, hygiene_seat_cover, hygiene_cover_height, 
+                                                          lighting, lighting_type, comment, recommendations, rest_id) 
+                                                  VALUES (:restroom_desc, :easy_open, :lbs_force, :clearance, :opening, 
+                                                          :opens_out, :use_fist, :can_turn_around, :turn_width, :turn_depth, 
+                                                          :close_chair_inside, :grab_bars, :seat_height_req, :seat_height, :flush_auto_fist, 
+                                                          :ambulatory_accessible, :bar_height, :coat_hook, :hook_height, :sink, 
+                                                          :sink_height, :faucet, :faucet_depth, :faucet_auto_fist, :sink_clearance, 
+                                                          :sink_clearance_height, :sink_pipes, :soap_dispenser, :soap_height, :dry_fist, 
+                                                          :dry_control_height, :mirror, :mirror_height, 
+                                                          :shelves, :shelf_height, :trash_receptacles, :hygiene_seat_cover, :hygiene_cover_height, 
+                                                          :lighting, :lighting_type, :comment, :recommendations, :rest_id) ");
+
+                        $sth->bindParam(':restroom_desc', $restroom_desc, PDO::PARAM_STR);
+                        $sth->bindParam(':easy_open', $easy_open, PDO::PARAM_STR);
+                        $sth->bindParam(':lbs_force', $lbs_force, PDO::PARAM_STR);
+                        $sth->bindParam(':clearance', $clearance, PDO::PARAM_STR);
+                        $sth->bindParam(':opening', $opening, PDO::PARAM_STR);
+                        $sth->bindParam(':opens_out', $opens_out, PDO::PARAM_STR);
+                        $sth->bindParam(':use_fist', $use_fist, PDO::PARAM_STR);
+                        $sth->bindParam(':can_turn_around', $can_turn_around, PDO::PARAM_STR);
+                        $sth->bindParam(':turn_width', $turn_width, PDO::PARAM_STR);
+                        $sth->bindParam(':turn_depth', $turn_depth, PDO::PARAM_STR);
+                        $sth->bindParam(':close_chair_inside', $close_chair_inside, PDO::PARAM_STR);
+                        $sth->bindParam(':grab_bars', $grab_bars, PDO::PARAM_STR);
+                        $sth->bindParam(':seat_height_req', $seat_height_req, PDO::PARAM_STR);
+                        $sth->bindParam(':seat_height', $seat_height, PDO::PARAM_STR);
+                        $sth->bindParam(':flush_auto_fist', $flush_auto_fist, PDO::PARAM_STR);
+                        $sth->bindParam(':ambulatory_accessible', $ambulatory_accessible, PDO::PARAM_STR);
+                        $sth->bindParam(':bar_height', $bar_height, PDO::PARAM_STR);
+                        $sth->bindParam(':coat_hook', $coat_hook, PDO::PARAM_STR);
+                        $sth->bindParam(':hook_height', $hook_height, PDO::PARAM_STR);
+                        $sth->bindParam(':sink', $sink, PDO::PARAM_STR);
+                        $sth->bindParam(':sink_height', $sink_height, PDO::PARAM_STR);
+                        $sth->bindParam(':faucet', $faucet, PDO::PARAM_STR);
+                        $sth->bindParam(':faucet_depth', $faucet_depth, PDO::PARAM_STR);
+                        $sth->bindParam(':faucet_auto_fist', $faucet_auto_fist, PDO::PARAM_STR);
+                        $sth->bindParam(':sink_clearance', $sink_clearance, PDO::PARAM_STR);
+                        $sth->bindParam(':sink_clearance_height', $sink_clearance_height, PDO::PARAM_STR);
+                        $sth->bindParam(':sink_pipes', $sink_pipes, PDO::PARAM_STR);
+                        $sth->bindParam(':soap_dispenser', $soap_dispenser, PDO::PARAM_STR);
+                        $sth->bindParam(':soap_height', $soap_height, PDO::PARAM_STR);
+                        $sth->bindParam(':dry_fist', $dry_fist, PDO::PARAM_STR);
+                        $sth->bindParam(':dry_control_height', $dry_control_height, PDO::PARAM_STR);
+                        $sth->bindParam(':mirror', $mirror, PDO::PARAM_STR);
+                        $sth->bindParam(':mirror_height', $mirror_height, PDO::PARAM_STR);
+                        $sth->bindParam(':shelves', $shelves, PDO::PARAM_STR);
+                        $sth->bindParam(':shelf_height', $shelf_height, PDO::PARAM_STR);
+                        $sth->bindParam(':trash_receptacles', $trash_receptacles, PDO::PARAM_STR);
+                        $sth->bindParam(':hygiene_seat_cover', $hygiene_seat_cover, PDO::PARAM_STR);
+                        $sth->bindParam(':hygiene_cover_height', $hygiene_cover_height, PDO::PARAM_STR);
+                        $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                        $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                        $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                        $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                        $sth->bindParam(':rest_id', $rest_id, PDO::PARAM_INT);
+                        $sth->execute();
+                    }
+                }
+            }
 
             /**
              *  COMMUNICATION
