@@ -63,7 +63,7 @@ include_once('user.cfg.php');
             </div>
         </nav>
         <div class="page">
-            <div class="left-sidebar">
+            <div class="left-sidebar-add">
                 <div class="left-sidebar-header" aria-label="Delete Survey Title" >
                     <span class="h5">
                         <i class="fas fa-clipboard-list"></i>&nbsp; Add New Survey

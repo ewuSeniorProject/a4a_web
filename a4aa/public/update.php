@@ -69,7 +69,7 @@ include_once('admin.cfg.php');
                         <p>Editing:</p>
                     </span>
                     <span class="h5">
-                        <span class="pad" id="left_sb_name"></span>
+                        <span class="wrap-text" id="left_sb_name"></span>
                     </span>
                 </div>
                 <div class="left-sidebar-container">
