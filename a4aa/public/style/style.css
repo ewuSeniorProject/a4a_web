@@ -68,7 +68,7 @@ a:hover {
 }
 
 .h4 {
-    margin: .5em 0 0 0;
+    margin: 0;
     padding: 0 0 0 1em;
     color: #ffffff;
     letter-spacing: normal;
@@ -230,7 +230,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     margin: 0;
-    padding: 1em 0 0 0;
+    padding: 1em 0 .5em 0;
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     background-color: lightslategrey;
@@ -540,9 +540,35 @@ a:hover {
 
 .left-sidebar {
     position: fixed;
+    max-width: 20em;
     top: 5.1em;
     bottom: 0;
     left: 0;
+    float: left;
+    z-index: 85;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    height: available;
+    /*border-right: 1px solid #dde7ee;*/
+    /*background-color: #8095a9;*/
+    /*border-right: 1px solid #d3dde4;*/
+    background-color: #ffffff;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
+.left-sidebar-add {
+    position: fixed;
+    max-width: 15em;
+    top: 5.1em;
+    bottom: 0;
+    left: 0;
+    float: left;
     z-index: 85;
     display: flex;
     flex-direction: column;
@@ -601,8 +627,8 @@ a:hover {
 }
 
 .left-sidebar-row-add {
-    margin: 0 .3em .4em .3em;
-    padding: .25em 1em;
+    margin: 0;
+    padding: .25em .3em .25em 1em;
     color: #000000;
     font-size: 17px;
     font-family: 'Lato', sans-serif;
@@ -905,15 +931,15 @@ a:hover {
     top: 6em;
     left: 0;
     margin: 1em;
-    padding-left: 15em;
+    padding-left: 18em;
 }
 
 .section-add {
     position: relative;
-    top: 5.3em;
-    left: 2em;
+    top: 5.1em;
+    left: 0;
     margin: 1em;
-    padding-left: 5em;
+    padding-left: 15em;
 }
 
 .spacer {
@@ -963,4 +989,9 @@ a:hover {
     color: #ffffff;
     font-style: normal;
     align-self: flex-end;
+}
+
+.wrap-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
