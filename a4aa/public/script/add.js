@@ -791,7 +791,7 @@ function addRouteFromParkingView() {
         '</div>\n ' +
         '<div class="card-row">\n' +
         '<div class="col-4">\n' +
-        '<button  type="submit" id="save_establishment" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Route From Accessible Parking</button>\n' +
+        '<button  type="submit" id="save_establishment" class="btn btn-success" ><i class="fas fa-save"></i>&nbsp; Save Route From Accessible Parking</button>\n' +
         '</div>\n ' +
         '</div>\n ' +
         '</form>';
