@@ -4752,11 +4752,11 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 
     if($data) {
 
-        if($data['section A']) {
+        if($data['sectionA']) {
             /**
              * ESTABLISHMENT
              */
-            $sectionA = $data['section A'];
+            $sectionA = $data['sectionA'];
             $tempName = explode(" ", $sectionA['user_id']);
             $fname = $tempName[0];
             $lname = $tempName[1];
@@ -4831,652 +4831,681 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
 
             $est_id = $this->db->lastInsertId();
 
-            /**
-             * PARKING
-             */
-            if ($data['section B0']) {
-                $sectionB0 = $data['section B0'];
-                $lot_free = $sectionB0["lot_free"];
-                $street_metered = $sectionB0["street_metered"];
-                $parking_type = $sectionB0["parking_type"];
-                $total_num_spaces = $sectionB0["total_num_spaces"];
-                $num_reserved_spaces = $sectionB0["num_reserved_spaces"];
-                $num_accessable_space = $sectionB0["num_accessable_space"];
-                $num_van_accessible = $sectionB0["num_van_accessible"];
-                $reserve_space_sign = $sectionB0["reserve_space_sign"];
-                $reserve_space_obstacles = $sectionB0["reserve_space_obstacles"];
-                $comment = $sectionB0["comment"];
-                $recommendations = $sectionB0["recommendations"];
+            if ($data['sectionB']) {
+                $parking = $data['sectionB'];
+                /**
+                 * PARKING
+                 */
+                if ($parking['sectionB0']) {
+                    $sectionB0 = $parking['sectionB0'];
+                    $lot_free = $sectionB0["lot_free"];
+                    $street_metered = $sectionB0["street_metered"];
+                    $parking_type = $sectionB0["parking_type"];
+                    $total_num_spaces = $sectionB0["total_num_spaces"];
+                    $num_reserved_spaces = $sectionB0["num_reserved_spaces"];
+                    $num_accessable_space = $sectionB0["num_accessable_space"];
+                    $num_van_accessible = $sectionB0["num_van_accessible"];
+                    $reserve_space_sign = $sectionB0["reserve_space_sign"];
+                    $reserve_space_obstacles = $sectionB0["reserve_space_obstacles"];
+                    $comment = $sectionB0["comment"];
+                    $recommendations = $sectionB0["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO Parking (lot_free, street_metered, parking_type, total_num_spaces, num_reserved_spaces, num_accessable_space, num_van_accessible, reserve_space_sign, reserve_space_obstacles, comment, recommendations, est_id)
+                    $sth = $this->db->prepare("INSERT INTO Parking (lot_free, street_metered, parking_type, total_num_spaces, num_reserved_spaces, num_accessable_space, num_van_accessible, reserve_space_sign, reserve_space_obstacles, comment, recommendations, est_id)
                                         VALUES (:lot_free, :street_metered, :parking_type, :total_num_spaces, :num_reserved_spaces, :num_accessable_space, :num_van_accessible, :reserve_space_sign, :reserve_space_obstacles, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':lot_free', $lot_free, PDO::PARAM_STR);
-                $sth->bindParam(':street_metered', $street_metered, PDO::PARAM_STR);
-                $sth->bindParam(':parking_type', $parking_type, PDO::PARAM_STR);
-                $sth->bindParam(':total_num_spaces', $total_num_spaces, PDO::PARAM_INT);
-                $sth->bindParam(':num_reserved_spaces', $num_reserved_spaces, PDO::PARAM_INT);
-                $sth->bindParam(':num_accessable_space', $num_accessable_space, PDO::PARAM_INT);
-                $sth->bindParam(':num_van_accessible', $num_van_accessible, PDO::PARAM_INT);
-                $sth->bindParam(':reserve_space_sign', $reserve_space_sign, PDO::PARAM_STR);
-                $sth->bindParam(':reserve_space_obstacles', $reserve_space_obstacles, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':lot_free', $lot_free, PDO::PARAM_STR);
+                    $sth->bindParam(':street_metered', $street_metered, PDO::PARAM_STR);
+                    $sth->bindParam(':parking_type', $parking_type, PDO::PARAM_STR);
+                    $sth->bindParam(':total_num_spaces', $total_num_spaces, PDO::PARAM_INT);
+                    $sth->bindParam(':num_reserved_spaces', $num_reserved_spaces, PDO::PARAM_INT);
+                    $sth->bindParam(':num_accessable_space', $num_accessable_space, PDO::PARAM_INT);
+                    $sth->bindParam(':num_van_accessible', $num_van_accessible, PDO::PARAM_INT);
+                    $sth->bindParam(':reserve_space_sign', $reserve_space_sign, PDO::PARAM_STR);
+                    $sth->bindParam(':reserve_space_obstacles', $reserve_space_obstacles, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $lot_free = "";
-                $street_metered = "";
-                $parking_type = "";
-                $total_num_spaces = 0;
-                $num_reserved_spaces = 0;
-                $num_accessable_space = 0;
-                $num_van_accessible = 0;
-                $reserve_space_sign = "";
-                $reserve_space_obstacles = "";
-                $comment = "";
-                $recommendations = "No parking associated with this establishment.";
+                } else {
+                    $lot_free = "";
+                    $street_metered = "";
+                    $parking_type = "";
+                    $total_num_spaces = 0;
+                    $num_reserved_spaces = 0;
+                    $num_accessable_space = 0;
+                    $num_van_accessible = 0;
+                    $reserve_space_sign = "";
+                    $reserve_space_obstacles = "";
+                    $comment = "";
+                    $recommendations = "No parking associated with this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Parking (lot_free, street_metered, parking_type, total_num_spaces, num_reserved_spaces, num_accessable_space, num_van_accessible, reserve_space_sign, reserve_space_obstacles, comment, recommendations, est_id)
+                    $sth = $this->db->prepare("INSERT INTO Parking (lot_free, street_metered, parking_type, total_num_spaces, num_reserved_spaces, num_accessable_space, num_van_accessible, reserve_space_sign, reserve_space_obstacles, comment, recommendations, est_id)
                                         VALUES (:lot_free, :street_metered, :parking_type, :total_num_spaces, :num_reserved_spaces, :num_accessable_space, :num_van_accessible, :reserve_space_sign, :reserve_space_obstacles, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':lot_free', $lot_free, PDO::PARAM_STR);
-                $sth->bindParam(':street_metered', $street_metered, PDO::PARAM_STR);
-                $sth->bindParam(':parking_type', $parking_type, PDO::PARAM_STR);
-                $sth->bindParam(':total_num_spaces', $total_num_spaces, PDO::PARAM_INT);
-                $sth->bindParam(':num_reserved_spaces', $num_reserved_spaces, PDO::PARAM_INT);
-                $sth->bindParam(':num_accessable_space', $num_accessable_space, PDO::PARAM_INT);
-                $sth->bindParam(':num_van_accessible', $num_van_accessible, PDO::PARAM_INT);
-                $sth->bindParam(':reserve_space_sign', $reserve_space_sign, PDO::PARAM_STR);
-                $sth->bindParam(':reserve_space_obstacles', $reserve_space_obstacles, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':lot_free', $lot_free, PDO::PARAM_STR);
+                    $sth->bindParam(':street_metered', $street_metered, PDO::PARAM_STR);
+                    $sth->bindParam(':parking_type', $parking_type, PDO::PARAM_STR);
+                    $sth->bindParam(':total_num_spaces', $total_num_spaces, PDO::PARAM_INT);
+                    $sth->bindParam(':num_reserved_spaces', $num_reserved_spaces, PDO::PARAM_INT);
+                    $sth->bindParam(':num_accessable_space', $num_accessable_space, PDO::PARAM_INT);
+                    $sth->bindParam(':num_van_accessible', $num_van_accessible, PDO::PARAM_INT);
+                    $sth->bindParam(':reserve_space_sign', $reserve_space_sign, PDO::PARAM_STR);
+                    $sth->bindParam(':reserve_space_obstacles', $reserve_space_obstacles, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            }
+                }
 
-            $park_id = $this->db->lastInsertId();
+                $park_id = $this->db->lastInsertId();
 
-            /**
-             *  ROUTE FROM PARKING
-             */
-            if ($data['section B1']) {
-                $sectionB1 = $data['section B1'];
-                $distance = $sectionB1["distance"];
-                $min_width = $sectionB1["min_width"];
-                $route_surface = $sectionB1["route_surface"];
-                $route_curbs = $sectionB1["route_curbs"];
-                $tactile_warning = $sectionB1["tactile_warning"];
-                $covered = $sectionB1["covered"];
-                $lighting = $sectionB1["lighting"];
-                $lighting_option = $sectionB1["lighting_option"];
-                $lighting_type = $sectionB1["lighting_type"];
-                $comment = $sectionB1["comment"];
-                $recommendations = $sectionB1["recommendations"];
+                /**
+                 *  ROUTE FROM PARKING
+                 */
+                if ($parking['sectionB1']) {
+                    $sectionB1 = $parking['sectionB1'];
+                    $distance = $sectionB1["distance"];
+                    $min_width = $sectionB1["min_width"];
+                    $route_surface = $sectionB1["route_surface"];
+                    $route_curbs = $sectionB1["route_curbs"];
+                    $tactile_warning = $sectionB1["tactile_warning"];
+                    $covered = $sectionB1["covered"];
+                    $lighting = $sectionB1["lighting"];
+                    $lighting_option = $sectionB1["lighting_option"];
+                    $lighting_type = $sectionB1["lighting_type"];
+                    $comment = $sectionB1["comment"];
+                    $recommendations = $sectionB1["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO Route_From_Parking (distance, min_width, route_surface, route_curbs, tactile_warning, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
+                    $sth = $this->db->prepare("INSERT INTO Route_From_Parking (distance, min_width, route_surface, route_curbs, tactile_warning, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
                                         VALUES (:distance, :min_width, :route_surface, :route_curbs, :tactile_warning, :covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
-                $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
-                $sth->bindParam(':route_curbs', $route_curbs, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
-                $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':route_curbs', $route_curbs, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
+                    $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $distance = "0";
-                $min_width = "N/A";
-                $route_surface = "N/A";
-                $route_curbs = "N/A";
-                $tactile_warning = "N/A";
-                $covered = "N/A";
-                $lighting = "N/A";
-                $lighting_option = "N/A";
-                $lighting_type = "N/A";
-                $comment = "";
-                $recommendations = "No route from parking associated with this establishment.";
+                } else {
+                    $distance = "0";
+                    $min_width = "N/A";
+                    $route_surface = "N/A";
+                    $route_curbs = "N/A";
+                    $tactile_warning = "N/A";
+                    $covered = "N/A";
+                    $lighting = "N/A";
+                    $lighting_option = "N/A";
+                    $lighting_type = "N/A";
+                    $comment = "";
+                    $recommendations = "No route from parking associated with this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Route_From_Parking (distance, min_width, route_surface, route_curbs, tactile_warning, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
+                    $sth = $this->db->prepare("INSERT INTO Route_From_Parking (distance, min_width, route_surface, route_curbs, tactile_warning, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
                                         VALUES (:distance, :min_width, :route_surface, :route_curbs, :tactile_warning, :covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
-                $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
-                $sth->bindParam(':route_curbs', $route_curbs, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
-                $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':route_curbs', $route_curbs, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
+                    $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            }
+                }
 
-            /**
-             *  PASSENGER LOADING
-             */
-            if ($data['section B2']) {
-                $sectionB2 = $data['section B2'];
-                $designated_zone = $sectionB2["designated_zone"];
-                $distance = $sectionB2["distance"];
-                $min_width = $sectionB2["min_width"];
-                $passenger_surface = $sectionB2["passenger_surface"];
-                $tactile_warning_strips = $sectionB2["tactile_warning_strips"];
-                $passenger_curbs = $sectionB2["passenger_curbs"];
-                $covered = $sectionB2["covered"];
-                $lighting = $sectionB2["lighting"];
-                $lighting_option = $sectionB2["lighting_option"];
-                $lighting_type = $sectionB2["lighting_type"];
-                $comment = $sectionB2["comment"];
-                $recommendations = $sectionB2["recommendations"];
+                /**
+                 *  PASSENGER LOADING
+                 */
+                if ($parking['sectionB2']) {
+                    $sectionB2 = $parking['sectionB2'];
+                    $designated_zone = $sectionB2["designated_zone"];
+                    $distance = $sectionB2["distance"];
+                    $min_width = $sectionB2["min_width"];
+                    $passenger_surface = $sectionB2["passenger_surface"];
+                    $tactile_warning_strips = $sectionB2["tactile_warning_strips"];
+                    $passenger_curbs = $sectionB2["passenger_curbs"];
+                    $covered = $sectionB2["covered"];
+                    $lighting = $sectionB2["lighting"];
+                    $lighting_option = $sectionB2["lighting_option"];
+                    $lighting_type = $sectionB2["lighting_type"];
+                    $comment = $sectionB2["comment"];
+                    $recommendations = $sectionB2["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO Passenger_Loading (designated_zone, distance, min_width, passenger_surface, tactile_warning_strips, passenger_curbs, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
+                    $sth = $this->db->prepare("INSERT INTO Passenger_Loading (designated_zone, distance, min_width, passenger_surface, tactile_warning_strips, passenger_curbs, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
                                         VALUES (:designated_zone, :distance, :min_width, :passenger_surface, :tactile_warning_strips, :passenger_curbs,:covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
-                $sth->bindParam(':designated_zone', $designated_zone, PDO::PARAM_STR);
-                $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':passenger_surface', $passenger_surface, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
-                $sth->bindParam(':passenger_curbs', $passenger_curbs, PDO::PARAM_STR);
-                $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':designated_zone', $designated_zone, PDO::PARAM_STR);
+                    $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':passenger_surface', $passenger_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+                    $sth->bindParam(':passenger_curbs', $passenger_curbs, PDO::PARAM_STR);
+                    $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $designated_zone = "N/A";
-                $distance = 0;
-                $min_width = "N/A";
-                $passenger_surface = "N/A";
-                $tactile_warning_strips = "N/A";
-                $passenger_curbs = "N/A";
-                $covered = "N/A";
-                $lighting = "N/A";
-                $lighting_option = "N/A";
-                $lighting_type = "N/A";
-                $comment = "";
-                $recommendations = "No passenger loading zone associated with this establishment.";
+                } else {
+                    $designated_zone = "N/A";
+                    $distance = 0;
+                    $min_width = "N/A";
+                    $passenger_surface = "N/A";
+                    $tactile_warning_strips = "N/A";
+                    $passenger_curbs = "N/A";
+                    $covered = "N/A";
+                    $lighting = "N/A";
+                    $lighting_option = "N/A";
+                    $lighting_type = "N/A";
+                    $comment = "";
+                    $recommendations = "No passenger loading zone associated with this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Passenger_Loading (designated_zone, distance, min_width, passenger_surface, tactile_warning_strips, passenger_curbs, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
+                    $sth = $this->db->prepare("INSERT INTO Passenger_Loading (designated_zone, distance, min_width, passenger_surface, tactile_warning_strips, passenger_curbs, covered, lighting, lighting_option, lighting_type, comment, recommendations, park_id)
                                         VALUES (:designated_zone, :distance, :min_width, :passenger_surface, :tactile_warning_strips, :passenger_curbs,:covered, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :park_id)");
 
-                $sth->bindParam(':designated_zone', $designated_zone, PDO::PARAM_STR);
-                $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':passenger_surface', $passenger_surface, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
-                $sth->bindParam(':passenger_curbs', $passenger_curbs, PDO::PARAM_STR);
-                $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':designated_zone', $designated_zone, PDO::PARAM_STR);
+                    $sth->bindParam(':distance', $distance, PDO::PARAM_INT);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':passenger_surface', $passenger_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+                    $sth->bindParam(':passenger_curbs', $passenger_curbs, PDO::PARAM_STR);
+                    $sth->bindParam(':covered', $covered, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            }
+                }
 
-            /**
-             *  STA BUS
-             */
-            if ($data['section B3']) {
-                $sectionB3 = $data['section B3'];
-                $sta_service_area = $sectionB3["sta_service_area"];
-                $distance = $sectionB3["distance"];
-                $min_width = $sectionB3["min_width"];
-                $route_surface = $sectionB3["route_surface"];
-                $tactile_warning_strips = $sectionB3["tactile_warning_strips"];
-                $curb_cuts = $sectionB3["curb_cuts"];
-                $lighting = $sectionB3["lighting"];
-                $lighting_option = $sectionB3["lighting_option"];
-                $lighting_type = $sectionB3["lighting_type"];
-                $shelter_bench = $sectionB3["shelter_bench"];
-                $comment = $sectionB3["comment"];
-                $recommendations = $sectionB3["recommendations"];
+                /**
+                 *  STA BUS
+                 */
+                if ($parking['sectionB3']) {
+                    $sectionB3 = $parking['sectionB3'];
+                    $sta_service_area = $sectionB3["sta_service_area"];
+                    $distance = $sectionB3["distance"];
+                    $min_width = $sectionB3["min_width"];
+                    $route_surface = $sectionB3["route_surface"];
+                    $tactile_warning_strips = $sectionB3["tactile_warning_strips"];
+                    $curb_cuts = $sectionB3["curb_cuts"];
+                    $lighting = $sectionB3["lighting"];
+                    $lighting_option = $sectionB3["lighting_option"];
+                    $lighting_type = $sectionB3["lighting_type"];
+                    $shelter_bench = $sectionB3["shelter_bench"];
+                    $comment = $sectionB3["comment"];
+                    $recommendations = $sectionB3["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO STA_Bus (sta_service_area, distance, min_width, route_surface, tactile_warning_strips, curb_cuts, lighting, lighting_option, lighting_type, shelter_bench, comment, recommendations, park_id)
+                    $sth = $this->db->prepare("INSERT INTO STA_Bus (sta_service_area, distance, min_width, route_surface, tactile_warning_strips, curb_cuts, lighting, lighting_option, lighting_type, shelter_bench, comment, recommendations, park_id)
                                       VALUES (:sta_service_area, :distance, :min_width, :route_surface, :tactile_warning_strips, :curb_cuts, :lighting, :lighting_option, :lighting_type, :shelter_bench, :comment, :recommendations, :park_id)");
 
-                $sth->bindParam(':sta_service_area', $sta_service_area, PDO::PARAM_STR);
-                $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
-                $sth->bindParam(':curb_cuts', $curb_cuts, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':shelter_bench', $shelter_bench, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':sta_service_area', $sta_service_area, PDO::PARAM_STR);
+                    $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+                    $sth->bindParam(':curb_cuts', $curb_cuts, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':shelter_bench', $shelter_bench, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $sta_service_area = "N/A";
-                $distance = 0;
-                $min_width = "N/A";
-                $route_surface = "N/A";
-                $tactile_warning_strips = "N/A";
-                $curb_cuts = "N/A";
-                $lighting = "N/A";
-                $lighting_option = "N/A";
-                $lighting_type = "N/A";
-                $shelter_bench = "N/A";
-                $comment = "";
-                $recommendations = "No STA Bus information associated with this establishment.";
+                } else {
+                    $sta_service_area = "N/A";
+                    $distance = 0;
+                    $min_width = "N/A";
+                    $route_surface = "N/A";
+                    $tactile_warning_strips = "N/A";
+                    $curb_cuts = "N/A";
+                    $lighting = "N/A";
+                    $lighting_option = "N/A";
+                    $lighting_type = "N/A";
+                    $shelter_bench = "N/A";
+                    $comment = "";
+                    $recommendations = "No STA Bus information associated with this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO STA_Bus (sta_service_area, distance, min_width, route_surface, tactile_warning_strips, curb_cuts, lighting, lighting_option, lighting_type, shelter_bench, comment, recommendations, park_id)
+                    $sth = $this->db->prepare("INSERT INTO STA_Bus (sta_service_area, distance, min_width, route_surface, tactile_warning_strips, curb_cuts, lighting, lighting_option, lighting_type, shelter_bench, comment, recommendations, park_id)
                                       VALUES (:sta_service_area, :distance, :min_width, :route_surface, :tactile_warning_strips, :curb_cuts, :lighting, :lighting_option, :lighting_type, :shelter_bench, :comment, :recommendations, :park_id)");
 
-                $sth->bindParam(':sta_service_area', $sta_service_area, PDO::PARAM_STR);
-                $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
-                $sth->bindParam(':curb_cuts', $curb_cuts, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':shelter_bench', $shelter_bench, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':sta_service_area', $sta_service_area, PDO::PARAM_STR);
+                    $sth->bindParam(':distance', $distance, PDO::PARAM_STR);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':route_surface', $route_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning_strips', $tactile_warning_strips, PDO::PARAM_STR);
+                    $sth->bindParam(':curb_cuts', $curb_cuts, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':shelter_bench', $shelter_bench, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':park_id', $park_id, PDO::PARAM_INT);
+                    $sth->execute();
 
+                }
+
+                $sta_id = $this->db->lastInsertId();
+
+                /**
+                 * STA ROUTE INFO
+                 */
+                if ($parking['sectionB3']) {
+                    $staRoute = $parking['sectionB3'];
+                    if ($staRoute['STA_Route_InfoT']) {
+                        $route = $staRoute['STA_Route_InfoT'];
+                        foreach ($route as $item) {
+                            $route_num = $item["route_num"];
+                            $north_bound_stop = $item["north_bound_stop"];
+                            $south_bound_stop = $item["south_bound_stop"];
+                            $east_bound_stop = $item["east_bound_stop"];
+                            $west_bound_stop = $item["west_bound_stop"];
+
+                            $sth = $this->db->prepare("INSERT INTO STA_Route (route_num, north_bound_stop, south_bound_stop, east_bound_stop, west_bound_stop, sta_bus_id)
+                                                     VALUES (:route_num, :north_bound_stop, :south_bound_stop, :east_bound_stop, :west_bound_stop, :sta_bus_id)");
+
+                            $sth->bindParam(':route_num', $route_num, PDO::PARAM_INT);
+                            $sth->bindParam(':north_bound_stop', $north_bound_stop, PDO::PARAM_INT);
+                            $sth->bindParam(':south_bound_stop', $south_bound_stop, PDO::PARAM_INT);
+                            $sth->bindParam(':east_bound_stop', $east_bound_stop, PDO::PARAM_INT);
+                            $sth->bindParam(':west_bound_stop', $west_bound_stop, PDO::PARAM_INT);
+                            $sth->bindParam(':sta_bus_id', $sta_id, PDO::PARAM_INT);
+                            $sth->execute();
+                        }
+                    }
+                }
             }
 
-            $sta_id = $this->db->lastInsertId();
+            if ($data['sectionC']) {
+                $exterior = $data['sectionC'];
+                /**
+                 *  EXTERIOR PATHWAYS
+                 */
+                if ($exterior['sectionC0']) {
+                    $sectionC0 = $exterior['sectionC0'];
+                    $service_animal = $sectionC0["service_animal"];
+                    $service_animal_location = $sectionC0["service_animal_location"];
+                    $has_exterior_path = $sectionC0["has_exterior_path"];
+                    $min_width = $sectionC0["min_width"];
+                    $pathway_surface = $sectionC0["pathway_surface"];
+                    $pathway_curbs = $sectionC0["pathway_curbs"];
+                    $tactile_warning = $sectionC0["tactile_warning"];
+                    $slope = $sectionC0["slope"];
+                    $lighting = $sectionC0["lighting"];
+                    $lighting_option = $sectionC0["lighting_option"];
+                    $lighting_type = $sectionC0["lighting_type"];
+                    $comment = $sectionC0["comment"];
+                    $recommendations = $sectionC0["recommendations"];
 
-            /**
-             * STA ROUTE INFO
-             */
-
-
-            /**
-             *  EXTERIOR PATHWAYS
-             */
-            if ($data['section C0']) {
-                $sectionC0 = $data['section C0'];
-                $service_animal = $sectionC0["service_animal"];
-                $service_animal_location = $sectionC0["service_animal_location"];
-                $has_exterior_path = $sectionC0["has_exterior_path"];
-                $min_width = $sectionC0["min_width"];
-                $pathway_surface = $sectionC0["pathway_surface"];
-                $pathway_curbs = $sectionC0["pathway_curbs"];
-                $tactile_warning = $sectionC0["tactile_warning"];
-                $slope = $sectionC0["slope"];
-                $lighting = $sectionC0["lighting"];
-                $lighting_option = $sectionC0["lighting_option"];
-                $lighting_type = $sectionC0["lighting_type"];
-                $comment = $sectionC0["comment"];
-                $recommendations = $sectionC0["recommendations"];
-
-                $sth = $this->db->prepare("INSERT INTO Exterior_Pathways (service_animal, service_animal_location, has_exterior_path, min_width, pathway_surface, pathway_curbs, tactile_warning, slope, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
+                    $sth = $this->db->prepare("INSERT INTO Exterior_Pathways (service_animal, service_animal_location, has_exterior_path, min_width, pathway_surface, pathway_curbs, tactile_warning, slope, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
                                               VALUES (:service_animal, :service_animal_location, :has_exterior_path, :min_width, :pathway_surface, :pathway_curbs, :tactile_warning, :slope, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':service_animal', $service_animal, PDO::PARAM_STR);
-                $sth->bindParam(':service_animal_location', $service_animal_location, PDO::PARAM_STR);
-                $sth->bindParam(':has_exterior_path', $has_exterior_path, PDO::PARAM_STR);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':pathway_surface', $pathway_surface, PDO::PARAM_STR);
-                $sth->bindParam(':pathway_curbs', $pathway_curbs, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
-                $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':service_animal', $service_animal, PDO::PARAM_STR);
+                    $sth->bindParam(':service_animal_location', $service_animal_location, PDO::PARAM_STR);
+                    $sth->bindParam(':has_exterior_path', $has_exterior_path, PDO::PARAM_STR);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':pathway_surface', $pathway_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':pathway_curbs', $pathway_curbs, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
+                    $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $service_animal = "N/A";
-                $service_animal_location = "";
-                $has_exterior_path = "N/A";
-                $min_width = "N/A";
-                $pathway_surface = "N/A";
-                $pathway_curbs = "N/A";
-                $tactile_warning = "N/A";
-                $slope = "N/A";
-                $lighting = "N/A";
-                $lighting_option = "N/A";
-                $lighting_type = "N/A";
-                $comment = "";
-                $recommendations = "No exterior pathway associated with this establishment.";
+                } else {
+                    $service_animal = "N/A";
+                    $service_animal_location = "";
+                    $has_exterior_path = "N/A";
+                    $min_width = "N/A";
+                    $pathway_surface = "N/A";
+                    $pathway_curbs = "N/A";
+                    $tactile_warning = "N/A";
+                    $slope = "N/A";
+                    $lighting = "N/A";
+                    $lighting_option = "N/A";
+                    $lighting_type = "N/A";
+                    $comment = "";
+                    $recommendations = "No exterior pathway associated with this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Exterior_Pathways (service_animal, service_animal_location, has_exterior_path, min_width, pathway_surface, pathway_curbs, tactile_warning, slope, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
+                    $sth = $this->db->prepare("INSERT INTO Exterior_Pathways (service_animal, service_animal_location, has_exterior_path, min_width, pathway_surface, pathway_curbs, tactile_warning, slope, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
                                                          VALUES (:service_animal, :service_animal_location, :has_exterior_path, :min_width, :pathway_surface, :pathway_curbs, :tactile_warning, :slope, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':service_animal', $service_animal, PDO::PARAM_STR);
-                $sth->bindParam(':service_animal_location', $service_animal_location, PDO::PARAM_STR);
-                $sth->bindParam(':has_exterior_path', $has_exterior_path, PDO::PARAM_STR);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':pathway_surface', $pathway_surface, PDO::PARAM_STR);
-                $sth->bindParam(':pathway_curbs', $pathway_curbs, PDO::PARAM_STR);
-                $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
-                $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':service_animal', $service_animal, PDO::PARAM_STR);
+                    $sth->bindParam(':service_animal_location', $service_animal_location, PDO::PARAM_STR);
+                    $sth->bindParam(':has_exterior_path', $has_exterior_path, PDO::PARAM_STR);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':pathway_surface', $pathway_surface, PDO::PARAM_STR);
+                    $sth->bindParam(':pathway_curbs', $pathway_curbs, PDO::PARAM_STR);
+                    $sth->bindParam(':tactile_warning', $tactile_warning, PDO::PARAM_STR);
+                    $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            }
+                }
 
-            /**
-             *  EXTERIOR STAIRS
-             */
-            if ($data['section C1']) {
-                $sectionC1 = $data['section C1'];
-                $stairs_required = $sectionC1["stairs_required"];
-                $stairs_available = $sectionC1["stairs_available"];
-                $num_stairs = $sectionC1["num_stairs"];
-                $handrail_both_sides = $sectionC1["handrail_both_sides"];
-                $handrail_side = $sectionC1["handrail_side"];
-                $handrail_regulation_height = $sectionC1["handrail_regulation_height"];
-                $handrail_height = $sectionC1["handrail_height"];
-                $obstacles = $sectionC1["obstacles"];
-                $clearly_marked = $sectionC1["clearly_marked"];
-                $lighting = $sectionC1["lighting"];
-                $lighting_option = $sectionC1["lighting_option"];
-                $lighting_type = $sectionC1["lighting_type"];
-                $comment = $sectionC1["comment"];
-                $recommendations = $sectionC1["recommendations"];
+                /**
+                 *  EXTERIOR STAIRS
+                 */
+                if ($exterior['sectionC1']) {
+                    $sectionC1 = $exterior['sectionC1'];
+                    $stairs_required = $sectionC1["stairs_required"];
+                    $stairs_available = $sectionC1["stairs_available"];
+                    $num_stairs = $sectionC1["num_stairs"];
+                    $handrail_both_sides = $sectionC1["handrail_both_sides"];
+                    $handrail_side = $sectionC1["handrail_side"];
+                    $handrail_regulation_height = $sectionC1["handrail_regulation_height"];
+                    $handrail_height = $sectionC1["handrail_height"];
+                    $obstacles = $sectionC1["obstacles"];
+                    $clearly_marked = $sectionC1["clearly_marked"];
+                    $lighting = $sectionC1["lighting"];
+                    $lighting_option = $sectionC1["lighting_option"];
+                    $lighting_type = $sectionC1["lighting_type"];
+                    $comment = $sectionC1["comment"];
+                    $recommendations = $sectionC1["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO Exterior_Stairs (stairs_required, stairs_available, num_stairs, handrail_both_sides, handrail_side, handrail_regulation_height, handrail_height, obstacles, clearly_marked, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
+                    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs (stairs_required, stairs_available, num_stairs, handrail_both_sides, handrail_side, handrail_regulation_height, handrail_height, obstacles, clearly_marked, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
                                          VALUES (:stairs_required, :stairs_available, :num_stairs, :handrail_both_sides, :handrail_side, :handrail_regulation_height, :handrail_height, :obstacles, :clearly_marked, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':stairs_required', $stairs_required, PDO::PARAM_STR);
-                $sth->bindParam(':stairs_available', $stairs_available, PDO::PARAM_STR);
-                $sth->bindParam(':num_stairs', $num_stairs, PDO::PARAM_INT);
-                $sth->bindParam(':handrail_both_sides', $handrail_both_sides, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_side', $handrail_side, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
-                $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
-                $sth->bindParam(':clearly_marked', $clearly_marked, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':stairs_required', $stairs_required, PDO::PARAM_STR);
+                    $sth->bindParam(':stairs_available', $stairs_available, PDO::PARAM_STR);
+                    $sth->bindParam(':num_stairs', $num_stairs, PDO::PARAM_INT);
+                    $sth->bindParam(':handrail_both_sides', $handrail_both_sides, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_side', $handrail_side, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
+                    $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
+                    $sth->bindParam(':clearly_marked', $clearly_marked, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $stairs_required = "No";
-                $stairs_available = "";
-                $num_stairs = 0;
-                $handrail_both_sides = "";
-                $handrail_side = "";
-                $handrail_regulation_height = "";
-                $handrail_height = "";
-                $obstacles = "";
-                $clearly_marked = "";
-                $lighting = "";
-                $lighting_option = "";
-                $lighting_type = "";
-                $comment = "";
-                $recommendations = "Stairs not required for this establishment.";
+                } else {
+                    $stairs_required = "No";
+                    $stairs_available = "";
+                    $num_stairs = 0;
+                    $handrail_both_sides = "";
+                    $handrail_side = "";
+                    $handrail_regulation_height = "";
+                    $handrail_height = "";
+                    $obstacles = "";
+                    $clearly_marked = "";
+                    $lighting = "";
+                    $lighting_option = "";
+                    $lighting_type = "";
+                    $comment = "";
+                    $recommendations = "Stairs not required for this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Exterior_Stairs (stairs_required, stairs_available, num_stairs, handrail_both_sides, handrail_side, handrail_regulation_height, handrail_height, obstacles, clearly_marked, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
+                    $sth = $this->db->prepare("INSERT INTO Exterior_Stairs (stairs_required, stairs_available, num_stairs, handrail_both_sides, handrail_side, handrail_regulation_height, handrail_height, obstacles, clearly_marked, lighting, lighting_option, lighting_type, comment, recommendations, est_id)
                                          VALUES (:stairs_required, :stairs_available, :num_stairs, :handrail_both_sides, :handrail_side, :handrail_regulation_height, :handrail_height, :obstacles, :clearly_marked, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':stairs_required', $stairs_required, PDO::PARAM_STR);
-                $sth->bindParam(':stairs_available', $stairs_available, PDO::PARAM_STR);
-                $sth->bindParam(':num_stairs', $num_stairs, PDO::PARAM_INT);
-                $sth->bindParam(':handrail_both_sides', $handrail_both_sides, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_side', $handrail_side, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
-                $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
-                $sth->bindParam(':clearly_marked', $clearly_marked, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':stairs_required', $stairs_required, PDO::PARAM_STR);
+                    $sth->bindParam(':stairs_available', $stairs_available, PDO::PARAM_STR);
+                    $sth->bindParam(':num_stairs', $num_stairs, PDO::PARAM_INT);
+                    $sth->bindParam(':handrail_both_sides', $handrail_both_sides, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_side', $handrail_side, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
+                    $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
+                    $sth->bindParam(':clearly_marked', $clearly_marked, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            }
+                }
 
-            /**
-             *  EXTERIOR RAMPS
-             */
-            if ($data['section C2']) {
-                $sectionC2 = $data['section C2'];
-                $ramp_required = $sectionC2["ramp_required"];
-                $ramp_available = $sectionC2["ramp_available"];
-                $min_width = $sectionC2["min_width"];
-                $width_between_handrails = $sectionC2["width_between_handrails"];
-                $min_slope = $sectionC2["min_slope"];
-                $slope = $sectionC2["slope"];
-                $level_landing_both = $sectionC2["level_landing_both"];
-                $level_landing_location = $sectionC2["level_landing_location"];
-                $obstacles = $sectionC2["obstacles"];
-                $handrails_both_sides = $sectionC2["handrails_both_sides"];
-                $handrail_sides = $sectionC2["handrail_sides"];
-                $handrail_regulation_height = $sectionC2["handrail_regulation_height"];
-                $handrail_height = $sectionC2["handrail_height"];
-                $side_guards = $sectionC2["side_guards"];
-                $lighting = $sectionC2["lighting"];
-                $lighting_option = $sectionC2["lighting_option"];
-                $lighting_type = $sectionC2["lighting_type"];
-                $comment = $sectionC2["comment"];
-                $recommendations = $sectionC2["recommendations"];
+                /**
+                 *  EXTERIOR RAMPS
+                 */
+                if ($exterior['sectionC2']) {
+                    $sectionC2 = $exterior['sectionC2'];
+                    $ramp_required = $sectionC2["ramp_required"];
+                    $ramp_available = $sectionC2["ramp_available"];
+                    $min_width = $sectionC2["min_width"];
+                    $width_between_handrails = $sectionC2["width_between_handrails"];
+                    $min_slope = $sectionC2["min_slope"];
+                    $slope = $sectionC2["slope"];
+                    $level_landing_both = $sectionC2["level_landing_both"];
+                    $level_landing_location = $sectionC2["level_landing_location"];
+                    $obstacles = $sectionC2["obstacles"];
+                    $handrails_both_sides = $sectionC2["handrails_both_sides"];
+                    $handrail_sides = $sectionC2["handrail_sides"];
+                    $handrail_regulation_height = $sectionC2["handrail_regulation_height"];
+                    $handrail_height = $sectionC2["handrail_height"];
+                    $side_guards = $sectionC2["side_guards"];
+                    $lighting = $sectionC2["lighting"];
+                    $lighting_option = $sectionC2["lighting_option"];
+                    $lighting_type = $sectionC2["lighting_type"];
+                    $comment = $sectionC2["comment"];
+                    $recommendations = $sectionC2["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO Exterior_Ramps (ramp_required, ramp_available, min_width, width_between_handrails, min_slope, slope, level_landing_both, level_landing_location, obstacles, handrails_both_sides, handrail_sides, handrail_regulation_height, handrail_height, side_guards, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
+                    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps (ramp_required, ramp_available, min_width, width_between_handrails, min_slope, slope, level_landing_both, level_landing_location, obstacles, handrails_both_sides, handrail_sides, handrail_regulation_height, handrail_height, side_guards, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
                                         VALUES (:ramp_required, :ramp_available, :min_width, :width_between_handrails, :min_slope, :slope, :level_landing_both, :level_landing_location, :obstacles, :handrails_both_sides, :handrail_sides, :handrail_regulation_height, :handrail_height, :side_guards, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':ramp_required', $ramp_required, PDO::PARAM_STR);
-                $sth->bindParam(':ramp_available', $ramp_available, PDO::PARAM_STR);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':width_between_handrails', $width_between_handrails, PDO::PARAM_STR);
-                $sth->bindParam(':min_slope', $min_slope, PDO::PARAM_STR);
-                $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
-                $sth->bindParam(':level_landing_both', $level_landing_both, PDO::PARAM_STR);
-                $sth->bindParam(':level_landing_location', $level_landing_location, PDO::PARAM_STR);
-                $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
-                $sth->bindParam(':handrails_both_sides', $handrails_both_sides, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_sides', $handrail_sides, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
-                $sth->bindParam(':side_guards', $side_guards, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':ramp_required', $ramp_required, PDO::PARAM_STR);
+                    $sth->bindParam(':ramp_available', $ramp_available, PDO::PARAM_STR);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':width_between_handrails', $width_between_handrails, PDO::PARAM_STR);
+                    $sth->bindParam(':min_slope', $min_slope, PDO::PARAM_STR);
+                    $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
+                    $sth->bindParam(':level_landing_both', $level_landing_both, PDO::PARAM_STR);
+                    $sth->bindParam(':level_landing_location', $level_landing_location, PDO::PARAM_STR);
+                    $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
+                    $sth->bindParam(':handrails_both_sides', $handrails_both_sides, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_sides', $handrail_sides, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
+                    $sth->bindParam(':side_guards', $side_guards, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $ramp_required = "No";
-                $ramp_available = "";
-                $min_width = "";
-                $width_between_handrails = "";
-                $min_slope = "";
-                $slope = "";
-                $level_landing_both = "";
-                $level_landing_location = "";
-                $obstacles = "";
-                $handrails_both_sides = "";
-                $handrail_sides = "";
-                $handrail_regulation_height = "";
-                $handrail_height = "";
-                $side_guards = "";
-                $lighting = "";
-                $lighting_option = "";
-                $lighting_type = "";
-                $comment = "";
-                $recommendations = "Ramps not required for this establishment.";
+                } else {
+                    $ramp_required = "No";
+                    $ramp_available = "";
+                    $min_width = "";
+                    $width_between_handrails = "";
+                    $min_slope = "";
+                    $slope = "";
+                    $level_landing_both = "";
+                    $level_landing_location = "";
+                    $obstacles = "";
+                    $handrails_both_sides = "";
+                    $handrail_sides = "";
+                    $handrail_regulation_height = "";
+                    $handrail_height = "";
+                    $side_guards = "";
+                    $lighting = "";
+                    $lighting_option = "";
+                    $lighting_type = "";
+                    $comment = "";
+                    $recommendations = "Ramps not required for this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Exterior_Ramps (ramp_required, ramp_available, min_width, width_between_handrails, min_slope, slope, level_landing_both, level_landing_location, obstacles, handrails_both_sides, handrail_sides, handrail_regulation_height, handrail_height, side_guards, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
+                    $sth = $this->db->prepare("INSERT INTO Exterior_Ramps (ramp_required, ramp_available, min_width, width_between_handrails, min_slope, slope, level_landing_both, level_landing_location, obstacles, handrails_both_sides, handrail_sides, handrail_regulation_height, handrail_height, side_guards, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
                                         VALUES (:ramp_required, :ramp_available, :min_width, :width_between_handrails, :min_slope, :slope, :level_landing_both, :level_landing_location, :obstacles, :handrails_both_sides, :handrail_sides, :handrail_regulation_height, :handrail_height, :side_guards, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id)");
 
-                $sth->bindParam(':ramp_required', $ramp_required, PDO::PARAM_STR);
-                $sth->bindParam(':ramp_available', $ramp_available, PDO::PARAM_STR);
-                $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
-                $sth->bindParam(':width_between_handrails', $width_between_handrails, PDO::PARAM_STR);
-                $sth->bindParam(':min_slope', $min_slope, PDO::PARAM_STR);
-                $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
-                $sth->bindParam(':level_landing_both', $level_landing_both, PDO::PARAM_STR);
-                $sth->bindParam(':level_landing_location', $level_landing_location, PDO::PARAM_STR);
-                $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
-                $sth->bindParam(':handrails_both_sides', $handrails_both_sides, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_sides', $handrail_sides, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
-                $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
-                $sth->bindParam(':side_guards', $side_guards, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':ramp_required', $ramp_required, PDO::PARAM_STR);
+                    $sth->bindParam(':ramp_available', $ramp_available, PDO::PARAM_STR);
+                    $sth->bindParam(':min_width', $min_width, PDO::PARAM_STR);
+                    $sth->bindParam(':width_between_handrails', $width_between_handrails, PDO::PARAM_STR);
+                    $sth->bindParam(':min_slope', $min_slope, PDO::PARAM_STR);
+                    $sth->bindParam(':slope', $slope, PDO::PARAM_STR);
+                    $sth->bindParam(':level_landing_both', $level_landing_both, PDO::PARAM_STR);
+                    $sth->bindParam(':level_landing_location', $level_landing_location, PDO::PARAM_STR);
+                    $sth->bindParam(':obstacles', $obstacles, PDO::PARAM_STR);
+                    $sth->bindParam(':handrails_both_sides', $handrails_both_sides, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_sides', $handrail_sides, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_regulation_height', $handrail_regulation_height, PDO::PARAM_STR);
+                    $sth->bindParam(':handrail_height', $handrail_height, PDO::PARAM_STR);
+                    $sth->bindParam(':side_guards', $side_guards, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            }
+                }
 
-            /**
-             *  MAIN ENTRANCE
-             */
-            if ($data['section C3']) {
-                $sectionC3 = $data['section C3'];
-                $total_num_public_entrances = $sectionC3["total_num_public_entrances"];
-                $main_ent_accessible = $sectionC3["main_ent_accessible"];
-                $alt_ent_accessible = $sectionC3["alt_ent_accessible"];
-                $accessable_signage = $sectionC3["accessable_signage"];
-                $ground_level = $sectionC3["ground_level"];
-                $threshold_level = $sectionC3["threshold_level"];
-                $threshold_beveled = $sectionC3["threshold_beveled"];
-                $beveled_height = $sectionC3["beveled_height"];
-                $door_action = $sectionC3["door_action"];
-                $door_open_clearance = $sectionC3["door_open_clearance"];
-                $opening_measurement = $sectionC3["opening_measurement"];
-                $door_easy_open = $sectionC3["door_easy_open"];
-                $door_open_force = $sectionC3["door_open_force"];
-                $door_use_with_fist = $sectionC3["door_use_with_fist"];
-                $door_auto_open = $sectionC3["door_auto_open"];
-                $second_door_inside = $sectionC3["second_door_inside"];
-                $min_dist_between_doors = $sectionC3["min_dist_between_doors"];
-                $lighting = $sectionC3["lighting"];
-                $lighting_option = $sectionC3["lighting_option"];
-                $lighting_type = $sectionC3["lighting_type"];
-                $comment = $sectionC3["comment"];
-                $recommendations = $sectionC3["recommendations"];
+                /**
+                 *  MAIN ENTRANCE
+                 */
+                if ($exterior['sectionC3']) {
+                    $sectionC3 = $exterior['sectionC3'];
+                    $total_num_public_entrances = $sectionC3["total_num_public_entrances"];
+                    $main_ent_accessible = $sectionC3["main_ent_accessible"];
+                    $alt_ent_accessible = $sectionC3["alt_ent_accessible"];
+                    $accessable_signage = $sectionC3["accessable_signage"];
+                    $ground_level = $sectionC3["ground_level"];
+                    $threshold_level = $sectionC3["threshold_level"];
+                    $threshold_beveled = $sectionC3["threshold_beveled"];
+                    $beveled_height = $sectionC3["beveled_height"];
+                    $door_action = $sectionC3["door_action"];
+                    $door_open_clearance = $sectionC3["door_open_clearance"];
+                    $opening_measurement = $sectionC3["opening_measurement"];
+                    $door_easy_open = $sectionC3["door_easy_open"];
+                    $door_open_force = $sectionC3["door_open_force"];
+                    $door_use_with_fist = $sectionC3["door_use_with_fist"];
+                    $door_auto_open = $sectionC3["door_auto_open"];
+                    $second_door_inside = $sectionC3["second_door_inside"];
+                    $min_dist_between_doors = $sectionC3["min_dist_between_doors"];
+                    $lighting = $sectionC3["lighting"];
+                    $lighting_option = $sectionC3["lighting_option"];
+                    $lighting_type = $sectionC3["lighting_type"];
+                    $comment = $sectionC3["comment"];
+                    $recommendations = $sectionC3["recommendations"];
 
-                $sth = $this->db->prepare("INSERT INTO Main_Entrance (total_num_public_entrances, main_ent_accessible, alt_ent_accessible, accessable_signage, ground_level, threshold_level, threshold_beveled, beveled_height, door_action, door_open_clearance, opening_measurement, door_easy_open, door_open_force, door_use_with_fist, door_auto_open, second_door_inside, min_dist_between_doors, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
+                    $sth = $this->db->prepare("INSERT INTO Main_Entrance (total_num_public_entrances, main_ent_accessible, alt_ent_accessible, accessable_signage, ground_level, threshold_level, threshold_beveled, beveled_height, door_action, door_open_clearance, opening_measurement, door_easy_open, door_open_force, door_use_with_fist, door_auto_open, second_door_inside, min_dist_between_doors, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
                                     VALUES (:total_num_public_entrances, :main_ent_accessible, :alt_ent_accessible, :accessable_signage, :ground_level, :threshold_level, :threshold_beveled, :beveled_height, :door_action, :door_open_clearance, :opening_measurement, :door_easy_open, :door_open_force, :door_use_with_fist, :door_auto_open, :second_door_inside, :min_dist_between_doors, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id) ");
 
-                $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_INT);
-                $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
-                $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
-                $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
-                $sth->bindParam(':ground_level', $ground_level, PDO::PARAM_STR);
-                $sth->bindParam(':threshold_level', $threshold_level, PDO::PARAM_STR);
-                $sth->bindParam(':threshold_beveled', $threshold_beveled, PDO::PARAM_STR);
-                $sth->bindParam(':beveled_height', $beveled_height, PDO::PARAM_STR);
-                $sth->bindParam(':door_action', $door_action, PDO::PARAM_STR);
-                $sth->bindParam(':door_open_clearance', $door_open_clearance, PDO::PARAM_STR);
-                $sth->bindParam(':opening_measurement', $opening_measurement, PDO::PARAM_STR);
-                $sth->bindParam(':door_easy_open', $door_easy_open, PDO::PARAM_STR);
-                $sth->bindParam(':door_open_force', $door_open_force, PDO::PARAM_STR);
-                $sth->bindParam(':door_use_with_fist', $door_use_with_fist, PDO::PARAM_STR);
-                $sth->bindParam(':door_auto_open', $door_auto_open, PDO::PARAM_STR);
-                $sth->bindParam(':second_door_inside', $second_door_inside, PDO::PARAM_STR);
-                $sth->bindParam(':min_dist_between_doors', $min_dist_between_doors, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_INT);
+                    $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
+                    $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
+                    $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
+                    $sth->bindParam(':ground_level', $ground_level, PDO::PARAM_STR);
+                    $sth->bindParam(':threshold_level', $threshold_level, PDO::PARAM_STR);
+                    $sth->bindParam(':threshold_beveled', $threshold_beveled, PDO::PARAM_STR);
+                    $sth->bindParam(':beveled_height', $beveled_height, PDO::PARAM_STR);
+                    $sth->bindParam(':door_action', $door_action, PDO::PARAM_STR);
+                    $sth->bindParam(':door_open_clearance', $door_open_clearance, PDO::PARAM_STR);
+                    $sth->bindParam(':opening_measurement', $opening_measurement, PDO::PARAM_STR);
+                    $sth->bindParam(':door_easy_open', $door_easy_open, PDO::PARAM_STR);
+                    $sth->bindParam(':door_open_force', $door_open_force, PDO::PARAM_STR);
+                    $sth->bindParam(':door_use_with_fist', $door_use_with_fist, PDO::PARAM_STR);
+                    $sth->bindParam(':door_auto_open', $door_auto_open, PDO::PARAM_STR);
+                    $sth->bindParam(':second_door_inside', $second_door_inside, PDO::PARAM_STR);
+                    $sth->bindParam(':min_dist_between_doors', $min_dist_between_doors, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
-            } else {
-                $total_num_public_entrances = 0;
-                $main_ent_accessible = "N/A";
-                $alt_ent_accessible = "N/A";
-                $accessable_signage = "N/A";
-                $ground_level = "N/A";
-                $threshold_level = "N/A";
-                $threshold_beveled = "N/A";
-                $beveled_height = 0;
-                $door_action = "N/A";
-                $door_open_clearance = "N/A";
-                $opening_measurement = 0;
-                $door_easy_open = "N/A";
-                $door_open_force = 0;
-                $door_use_with_fist = "N/A";
-                $door_auto_open = "N/A";
-                $second_door_inside = "N/A";
-                $min_dist_between_doors = "N/A";
-                $lighting = "N/A";
-                $lighting_option = "N/A";
-                $lighting_type = "N/A";
-                $comment = "";
-                $recommendations = "No Main Entrance information associated with this establishment.";
+                } else {
+                    $total_num_public_entrances = 0;
+                    $main_ent_accessible = "N/A";
+                    $alt_ent_accessible = "N/A";
+                    $accessable_signage = "N/A";
+                    $ground_level = "N/A";
+                    $threshold_level = "N/A";
+                    $threshold_beveled = "N/A";
+                    $beveled_height = 0;
+                    $door_action = "N/A";
+                    $door_open_clearance = "N/A";
+                    $opening_measurement = 0;
+                    $door_easy_open = "N/A";
+                    $door_open_force = 0;
+                    $door_use_with_fist = "N/A";
+                    $door_auto_open = "N/A";
+                    $second_door_inside = "N/A";
+                    $min_dist_between_doors = "N/A";
+                    $lighting = "N/A";
+                    $lighting_option = "N/A";
+                    $lighting_type = "N/A";
+                    $comment = "";
+                    $recommendations = "No Main Entrance information associated with this establishment.";
 
-                $sth = $this->db->prepare("INSERT INTO Main_Entrance (total_num_public_entrances, main_ent_accessible, alt_ent_accessible, accessable_signage, ground_level, threshold_level, threshold_beveled, beveled_height, door_action, door_open_clearance, opening_measurement, door_easy_open, door_open_force, door_use_with_fist, door_auto_open, second_door_inside, min_dist_between_doors, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
+                    $sth = $this->db->prepare("INSERT INTO Main_Entrance (total_num_public_entrances, main_ent_accessible, alt_ent_accessible, accessable_signage, ground_level, threshold_level, threshold_beveled, beveled_height, door_action, door_open_clearance, opening_measurement, door_easy_open, door_open_force, door_use_with_fist, door_auto_open, second_door_inside, min_dist_between_doors, lighting, lighting_option, lighting_type, comment, recommendations, est_id) 
                                     VALUES (:total_num_public_entrances, :main_ent_accessible, :alt_ent_accessible, :accessable_signage, :ground_level, :threshold_level, :threshold_beveled, :beveled_height, :door_action, :door_open_clearance, :opening_measurement, :door_easy_open, :door_open_force, :door_use_with_fist, :door_auto_open, :second_door_inside, :min_dist_between_doors, :lighting, :lighting_option, :lighting_type, :comment, :recommendations, :est_id) ");
 
-                $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_INT);
-                $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
-                $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
-                $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
-                $sth->bindParam(':ground_level', $ground_level, PDO::PARAM_STR);
-                $sth->bindParam(':threshold_level', $threshold_level, PDO::PARAM_STR);
-                $sth->bindParam(':threshold_beveled', $threshold_beveled, PDO::PARAM_STR);
-                $sth->bindParam(':beveled_height', $beveled_height, PDO::PARAM_STR);
-                $sth->bindParam(':door_action', $door_action, PDO::PARAM_STR);
-                $sth->bindParam(':door_open_clearance', $door_open_clearance, PDO::PARAM_STR);
-                $sth->bindParam(':opening_measurement', $opening_measurement, PDO::PARAM_STR);
-                $sth->bindParam(':door_easy_open', $door_easy_open, PDO::PARAM_STR);
-                $sth->bindParam(':door_open_force', $door_open_force, PDO::PARAM_STR);
-                $sth->bindParam(':door_use_with_fist', $door_use_with_fist, PDO::PARAM_STR);
-                $sth->bindParam(':door_auto_open', $door_auto_open, PDO::PARAM_STR);
-                $sth->bindParam(':second_door_inside', $second_door_inside, PDO::PARAM_STR);
-                $sth->bindParam(':min_dist_between_doors', $min_dist_between_doors, PDO::PARAM_STR);
-                $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
-                $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
-                $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
-                $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
-                $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
-                $sth->execute();
+                    $sth->bindParam(':total_num_public_entrances', $total_num_public_entrances, PDO::PARAM_INT);
+                    $sth->bindParam(':main_ent_accessible', $main_ent_accessible, PDO::PARAM_STR);
+                    $sth->bindParam(':alt_ent_accessible', $alt_ent_accessible, PDO::PARAM_STR);
+                    $sth->bindParam(':accessable_signage', $accessable_signage, PDO::PARAM_STR);
+                    $sth->bindParam(':ground_level', $ground_level, PDO::PARAM_STR);
+                    $sth->bindParam(':threshold_level', $threshold_level, PDO::PARAM_STR);
+                    $sth->bindParam(':threshold_beveled', $threshold_beveled, PDO::PARAM_STR);
+                    $sth->bindParam(':beveled_height', $beveled_height, PDO::PARAM_STR);
+                    $sth->bindParam(':door_action', $door_action, PDO::PARAM_STR);
+                    $sth->bindParam(':door_open_clearance', $door_open_clearance, PDO::PARAM_STR);
+                    $sth->bindParam(':opening_measurement', $opening_measurement, PDO::PARAM_STR);
+                    $sth->bindParam(':door_easy_open', $door_easy_open, PDO::PARAM_STR);
+                    $sth->bindParam(':door_open_force', $door_open_force, PDO::PARAM_STR);
+                    $sth->bindParam(':door_use_with_fist', $door_use_with_fist, PDO::PARAM_STR);
+                    $sth->bindParam(':door_auto_open', $door_auto_open, PDO::PARAM_STR);
+                    $sth->bindParam(':second_door_inside', $second_door_inside, PDO::PARAM_STR);
+                    $sth->bindParam(':min_dist_between_doors', $min_dist_between_doors, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting', $lighting, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_option', $lighting_option, PDO::PARAM_STR);
+                    $sth->bindParam(':lighting_type', $lighting_type, PDO::PARAM_STR);
+                    $sth->bindParam(':comment', $comment, PDO::PARAM_STR);
+                    $sth->bindParam(':recommendations', $recommendations, PDO::PARAM_STR);
+                    $sth->bindParam(':est_id', $est_id, PDO::PARAM_INT);
+                    $sth->execute();
 
+                }
             }
 
             /**
              *  INTERIOR
              */
-            if ($data['section D']) {
-                $sectionD = $data['section D'];
+            if ($data['sectionD']) {
+                $sectionD = $data['sectionD'];
                 $int_door_open_clearance = $sectionD["int_door_open_clearance"];
                 $int_opening_measurement = $sectionD["int_opening_measurement"];
                 $int_door_easy_open = $sectionD["int_door_easy_open"];
@@ -5573,8 +5602,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  ELEVATOR
              */
-            if ($data['section E']) {
-                $sectionE = $data['section E'];
+            if ($data['sectionE']) {
+                $sectionE = $data['sectionE'];
                 $is_elevator = $sectionE["is_elevator"];
                 $location = $sectionE["location"];
                 $works = $sectionE["works"];
@@ -5655,8 +5684,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  SIGNAGE
              */
-            if ($data['section F']) {
-                $sectionF = $data['section F'];
+            if ($data['sectionF']) {
+                $sectionF = $data['sectionF'];
                 $is_directory = $sectionF["is_directory"];
                 $door_signs = $sectionF["door_signs"];
                 $sign_height = $sectionF["sign_height"];
@@ -5725,8 +5754,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  EMERGENCY
              */
-            if ($data['section G']) {
-                $sectionG = $data['section G'];
+            if ($data['sectionG']) {
+                $sectionG = $data['sectionG'];
                 $evac_info = $sectionG["evac_info"];
                 $alt_evac_info = $sectionG["alt_evac_info"];
                 $evac_info_format = $sectionG["evac_info_format"];
@@ -5799,8 +5828,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  SEATING
              */
-            if ($data['section H']) {
-                $sectionH = $data['section H'];
+            if ($data['sectionH']) {
+                $sectionH = $data['sectionH'];
                 $seating_no_step = $sectionH["seating_no_step"];
                 $table_aisles = $sectionH["table_aisles"];
                 $legroom = $sectionH["legroom"];
@@ -5905,8 +5934,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  RESTROOM
              */
-            if ($data['section I']) {
-                $sectionI0 = $data['section I0'];
+            if ($data['sectionI']) {
+                $sectionI0 = $data['sectionI0'];
                 $public_restroom = $sectionI0["public_restroom"];
                 $total_num = $sectionI0["total_num"];
                 $designated_number = $sectionI0["designated_number"];
@@ -5965,8 +5994,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              * RESTROOM INFO
              */
-            if ($data['section I']) {
-                $restroom = $data['section I'];
+            if ($data['sectionI']) {
+                $restroom = $data['sectionI'];
                 if($restroom['Restroom_InfoT']) {
                     $restInfo = $restroom['Restroom_InfoT'];
                     foreach($restInfo as $item) {
@@ -6083,8 +6112,8 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             /**
              *  COMMUNICATION
              */
-            if ($data['section J']) {
-                $sectionJ = $data['section J'];
+            if ($data['sectionJ']) {
+                $sectionJ = $data['sectionJ'];
                 $public_phone = $sectionJ["public_phone"];
                 $phone_clearance = $sectionJ["phone_clearance"];
                 $num_phone = $sectionJ["num_phone"];
@@ -6262,7 +6291,7 @@ $app->post('/post/survey/mobile', function (Request $request, Response $response
             $stat = 200;
 
         } else {
-            $res = "Error, no section A data found.";
+            $res = "Error, no sectionA data found.";
             $stat = 412;
         }
 
