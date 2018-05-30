@@ -178,29 +178,22 @@ a:hover {
 .box-section {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     align-content: space-around;
     align-items: flex-start;
-    flex-wrap: wrap;
     justify-content: center;
-}
-
-.dropdown-margin {
-    margin-top: 1.43em;
-}
-.dropdown-margin-report {
-    margin-top: 1.83em;
 }
 
 .box-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     margin: 0;
     padding: 0;
     align-content: space-around;
     align-items: flex-start;
-    flex-wrap: wrap;
     justify-content: flex-start;
 }
 
@@ -214,7 +207,7 @@ a:hover {
     color: #ffffff;
     align-content: space-around;
     align-self: flex-start;
-    flex-grow: 0;
+    flex: 1 1 calc(50% - 20px);
 }
 
 .box-blank {
@@ -485,6 +478,14 @@ a:hover {
 .dropdown-menu-right {
     right: 0;
     left: auto;
+}
+
+.dropdown-margin {
+    margin-top: 1.43em;
+}
+
+.dropdown-margin-report {
+    margin-top: 1.83em;
 }
 
 .edit-text {
