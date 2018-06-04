@@ -60,6 +60,7 @@ include_once('user.cfg.php');
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="user_account.php"><i class="fas fa-user-circle"></i> My Account</a>
                 <div class="dropdown-divider"></div>
+                <div id="download"></div>
                 <div class="dropdown-item pointer" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Log Out</div>
             </div>
         </nav>
