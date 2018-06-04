@@ -6,7 +6,7 @@ function start() {
     ko.applyBindings(EVM.viewModel, document.getElementById('establishment-list-wrapper'));
     if (getMobileOperatingSystem() === "Android") {
         $("#download").html('' +
-            '<a class="dropdown-item" href="./mobile_app/com.companyname.A4AA_Application.apk"><i class="fas fa-download"></i> Download Mobile App</a>\n' +
+            '<a class="dropdown-item" href="./mobile_app/com.companyname.A4AA_Application.apk" download><i class="fas fa-download"></i> Download Mobile App</a>\n' +
             '<div class="dropdown-divider"></div>');
     }
 
