@@ -18,10 +18,10 @@ return [
 
         // Database connection settings
         'db' => [
-            'host' => '66.147.244.98',
-            'dbname' => 'mizesolu_a4aa',
-            'user' => 'mizesolu_a4aaB',
-            'pass' => 'QxUP=r@JE10P'
+            'host' => 'localhost',
+            'dbname' => 'a4as_db',
+            'user' => 'user',
+            'pass' => 'password'
         ],
 
     ],
