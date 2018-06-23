@@ -35,7 +35,6 @@ function addEstablishmentCardView() {
                     '<div class="box-blank col-1"></div>';
 
                 $('#delete-view').html(htmlBody);
-
             }
         },
         error: function(data) {
