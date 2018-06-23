@@ -9,7 +9,6 @@ function start() {
             '<a class="dropdown-item" href="./mobile_app/com.companyname.A4AA_Application.apk" download><i class="fas fa-download"></i> Download Mobile App</a>\n' +
             '<div class="dropdown-divider"></div>');
     }
-
 }
 
 function EstablishmentModel(data) {
@@ -43,11 +42,9 @@ function EstablishmentViewModel() {
             self.establishmentList(mappedObjects);
         })
     };
-
     self.onLoad = function () {
         self.getEstablishmentList("establishment/");
     };
-
     self.onLoad();
 }
 
@@ -73,7 +70,6 @@ function getMobileOperatingSystem() {
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         return "iOS";
     }
-
     return "unknown";
 }
 
